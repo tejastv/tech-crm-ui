@@ -1,6 +1,5 @@
 Sure! Here's the complete README.md file with all the commands for a tech-crm-ui, including development, testing, building, folder structure, contributing, and license information:
 
-```markdown
 ## tech-crm-ui
 
 This is a starter project for building web applications using tech-crm-ui, TypeScript, and React.
@@ -24,7 +23,7 @@ cd tech-crm-ui
 npm install
 
 # If you use yarn:
-yarn
+yarn install
 ```
 
 ## Development
