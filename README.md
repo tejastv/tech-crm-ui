@@ -1,20 +1,20 @@
 Sure! Here's the complete README.md file with all the commands for a tech-crm-ui, including development, testing, building, folder structure, contributing, and license information:
 
 ```markdown
-# tech-crm-ui
+## tech-crm-ui
 
 This is a starter project for building web applications using tech-crm-ui, TypeScript, and React.
 
 ## Getting Started
 
-### Prerequisites
+## Prerequisites
 
 Make sure you have the following tools installed on your system:
 
 - Node.js (v14 or higher)
 - npm (v6 or higher) or yarn (v1 or higher)
 
-### Installation
+## Installation
 
 ```bash
 git clone https://gitlab.com/technosys4/mirainform/tech-crm-ui.git
