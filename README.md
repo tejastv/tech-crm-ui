@@ -2,7 +2,7 @@ Sure! Here's the complete README.md file with all the commands for a tech-crm-ui
 
 ## tech-crm-ui
 
-This is a starter project for building web applications using tech-crm-ui, TypeScript, and React..
+This is a starter project for building web applications using tech-crm-ui, TypeScript, and React.
 
 ## Getting Started
 
