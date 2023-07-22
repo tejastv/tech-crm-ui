@@ -1,11 +1,9 @@
-import './App.scss'
+import AppRoutes from "./router/AppRoutes";
+
+import "./assets/css/global.scss";
 
 function App() {
-  return (
-    <>
-      <h1>Welcome to Mira</h1>
-    </>
-  )
+  return <AppRoutes />;
 }
 
-export default App
+export default App;
