@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode, useContext } from "react";
+import { createContext, useState, ReactNode } from "react";
 
 // Define the type for the context value and state
 type AuthContextValue = {
@@ -7,7 +7,12 @@ type AuthContextValue = {
 };
 
 const initialAuthContextValue: AuthContextValue = {
-  auth: {},
+  auth: {
+    user: {
+      userName: "Tejas",
+      password: "tejsa",
+    },
+  },
   setAuth: () => {},
 };
 

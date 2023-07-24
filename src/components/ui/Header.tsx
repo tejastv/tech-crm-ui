@@ -6,12 +6,12 @@ import logoImage from "../../assets/images/logo.png";
 const Header: React.FC = () => {
   return (
     <>
-      <header className="topbar">
+      <header className="topbar" data-navbarbg="skin1">
         <nav className="navbar top-navbar navbar-expand-md navbar-dark">
-          <div className="navbar-header">
+          <div className="navbar-header" data-logobg="skin1">
             <a
               className="nav-toggler waves-effect waves-light d-block d-md-none"
-              href="javascript:void(0)"
+              href="#"
             >
               <i className="ti-menu ti-close"></i>
             </a>
@@ -28,7 +28,7 @@ const Header: React.FC = () => {
             </a>
             <a
               className="topbartoggler d-block d-md-none waves-effect waves-light nav-toggler"
-              href="javascript:void(0)"
+              href="#"
               data-toggle="collapse"
               data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
@@ -38,7 +38,7 @@ const Header: React.FC = () => {
               <i className="ti-more"></i>
             </a>
           </div>
-          <aside className="left-sidebar">
+          <aside className="left-sidebar" data-sidebarbg="skin6">
             <div className="scroll-sidebar">
               <nav className="sidebar-nav">
                 <ul id="sidebarnav">
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
                     {" "}
                     <a
                       className="sidebar-link has-arrow waves-effect waves-dark"
-                      href="javascript:void(0)"
+                      href="#"
                       aria-expanded="false"
                     >
                       <i className="fa fa-asterisk"></i>
@@ -63,7 +63,7 @@ const Header: React.FC = () => {
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-collage"></i>
@@ -100,7 +100,7 @@ const Header: React.FC = () => {
                       <li className="sidebar-item">
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-collage"></i>
@@ -164,7 +164,7 @@ const Header: React.FC = () => {
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-collage"></i>
@@ -208,7 +208,7 @@ const Header: React.FC = () => {
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-collage"></i>
@@ -255,7 +255,7 @@ const Header: React.FC = () => {
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-collage"></i>
@@ -333,7 +333,7 @@ const Header: React.FC = () => {
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-collage"></i>
@@ -410,7 +410,7 @@ const Header: React.FC = () => {
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-collage"></i>
@@ -546,7 +546,7 @@ const Header: React.FC = () => {
                     {" "}
                     <a
                       className="sidebar-link has-arrow waves-effect waves-dark"
-                      href="javascript:void(0)"
+                      href="#"
                       aria-expanded="false"
                     >
                       <i className="fa fa-list"></i>
@@ -635,7 +635,7 @@ const Header: React.FC = () => {
                     {" "}
                     <a
                       className="sidebar-link has-arrow waves-effect waves-dark"
-                      href="javascript:void(0)"
+                      href="#"
                       aria-expanded="false"
                     >
                       <i className="fa fa-folder-open"></i>
@@ -665,7 +665,7 @@ const Header: React.FC = () => {
                     {" "}
                     <a
                       className="sidebar-link has-arrow waves-effect waves-dark"
-                      href="javascript:void(0)"
+                      href="#"
                       aria-expanded="false"
                     >
                       <i className="fa fa-bar-chart"></i>
@@ -676,7 +676,7 @@ const Header: React.FC = () => {
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-collage"></i>
@@ -917,7 +917,7 @@ const Header: React.FC = () => {
                     {" "}
                     <a
                       className="sidebar-link has-arrow waves-effect waves-dark"
-                      href="javascript:void(0)"
+                      href="#"
                       aria-expanded="false"
                     >
                       <i className="fa fa-file-text"></i>
@@ -929,7 +929,7 @@ const Header: React.FC = () => {
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-receipt"></i>
@@ -983,7 +983,7 @@ const Header: React.FC = () => {
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-receipt"></i>
@@ -1104,7 +1104,7 @@ const Header: React.FC = () => {
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-receipt"></i>
@@ -1241,7 +1241,7 @@ const Header: React.FC = () => {
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-receipt"></i>
@@ -1279,7 +1279,7 @@ const Header: React.FC = () => {
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
-                          href="javascript:void(0)"
+                          href="#"
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-receipt"></i>
@@ -1309,7 +1309,7 @@ const Header: React.FC = () => {
                     {" "}
                     <a
                       className="sidebar-link has-arrow waves-effect waves-dark"
-                      href="javascript:void(0)"
+                      href="#"
                       aria-expanded="false"
                     >
                       <i className="fa fa-money"></i>
@@ -1400,7 +1400,7 @@ const Header: React.FC = () => {
                     {" "}
                     <a
                       className="sidebar-link has-arrow waves-effect waves-dark"
-                      href="javascript:void(0)"
+                      href="#"
                       aria-expanded="false"
                     >
                       <i className="fa fa-cogs"></i>

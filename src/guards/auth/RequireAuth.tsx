@@ -1,5 +1,6 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import MainLayout from "../../layout/MainLayout";
 
 // type RequireAuthProps = {
 //   allowedRoles: string[]; // Replace 'string[]' with the actual type of allowed roles
@@ -23,7 +24,11 @@ const RequireAuth: React.FC = () => {
   //   }
 
   // Render the nested routes if the user is authenticated and has the required role
-  return <Outlet />;
+  return (
+    <MainLayout>
+      <Outlet />
+    </MainLayout>
+  );
 };
 
 export default RequireAuth;

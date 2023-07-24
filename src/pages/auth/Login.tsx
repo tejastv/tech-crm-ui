@@ -2,17 +2,17 @@
 import React from "react";
 import logoImage from "../../assets/images/logo.png";
 import useAuth from "../../hooks/useAuth";
-
+import { User } from "./features";
 
 const Login: React.FC = () => {
-
   const { setAuth } = useAuth();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    const user = {
-      
-    }
+    const user: User = {
+      userName: "Tejas",
+      password: "tejastv",
+    };
     setAuth({ user });
   };
 
