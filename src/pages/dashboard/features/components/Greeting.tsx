@@ -4,7 +4,7 @@ import React from "react";
 //Assets
 import profilepic from "../../../../assets/images/2.jpg";
 
-const Greeting: React.FC = () => {
+export const Greeting: React.FC = () => {
   return (
     <>
       <div className="row">
@@ -32,5 +32,3 @@ const Greeting: React.FC = () => {
     </>
   );
 };
-
-export default Greeting;

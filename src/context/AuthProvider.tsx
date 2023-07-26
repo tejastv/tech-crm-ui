@@ -17,7 +17,9 @@ const initialAuthContextValue: AuthContextValue = {
 };
 
 // Create the AuthContext
-const AuthContext = createContext<AuthContextValue>(initialAuthContextValue);
+export const AuthContext = createContext<AuthContextValue>(
+  initialAuthContextValue
+);
 
 // Create the AuthProvider component
 type AuthProviderProps = {
@@ -33,5 +35,3 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     </AuthContext.Provider>
   );
 };
-
-export default AuthContext;

@@ -1,3 +1,3 @@
 //Components
-export * from './components/Greeting';
-export * from './components/Stats';
+export { Greeting } from "./components/Greeting";
+export { Stats } from "./components/Stats";

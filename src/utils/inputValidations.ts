@@ -6,7 +6,7 @@
 |  🐸 Returns:  -
 *-------------------------------------------------------------------*/
 
-import { InputType } from "../components";
+import { InputType } from "../shared";
 
 export const name_validation: InputType = {
   name: "name",

@@ -2,7 +2,7 @@
 import React from "react";
 
 //Hooks
-import useAuth from "../../hooks/useAuth";
+import { useAuth } from "../../hooks";
 
 //Types
 import { UserType } from "./features";

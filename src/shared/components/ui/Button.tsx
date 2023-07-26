@@ -1,9 +1,9 @@
 import React, { PropsWithChildren } from "react";
+import { ButtonType } from "../..";
 
 //Types
-import { ButtonType } from "..";
 
-const Button: React.FC<PropsWithChildren<ButtonType>> = (props) => {
+export const Button: React.FC<PropsWithChildren<ButtonType>> = (props) => {
   return (
     <button
       className="btn btn-danger btn-sm"
@@ -14,5 +14,3 @@ const Button: React.FC<PropsWithChildren<ButtonType>> = (props) => {
     </button>
   );
 };
-
-export default Button;

@@ -1,12 +1,12 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import MainLayout from "../../layout/MainLayout";
+import { MainLayout } from "../../layout";
+import { useAuth } from "../../hooks";
 
 // type RequireAuthProps = {
 //   allowedRoles: string[]; // Replace 'string[]' with the actual type of allowed roles
 // };
 
-const RequireAuth: React.FC = () => {
+export const RequireAuth: React.FC = () => {
   const { auth } = useAuth();
   const location = useLocation();
 
@@ -30,5 +30,3 @@ const RequireAuth: React.FC = () => {
     </MainLayout>
   );
 };
-
-export default RequireAuth;

@@ -1,8 +1,10 @@
-import { Routes, Route } from "react-router-dom";
-import NotFound from "../components/error/404";
-import AuthRoutes from "../pages/auth/Authroutes";
-import RequireAuth from "../guards/auth/RequireAuth";
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+
+import { RequireAuth } from "../guards";
+import AuthRoutes from "../pages/auth/Authroutes";
+
+import { NotFound } from "../shared";
 
 const Dashboard = React.lazy(() => import("../pages/dashboard/Dashboard"));
 
@@ -19,7 +21,7 @@ const AppRoutes = () => {
 
       {/* Protected Admin Module */}
       {/* Fallback route for unknown paths */}
-      <Route path="/*" element={<NotFound />}/>
+      <Route path="/*" element={<NotFound />} />
     </Routes>
   );
 };

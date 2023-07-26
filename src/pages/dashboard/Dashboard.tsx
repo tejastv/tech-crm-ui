@@ -2,8 +2,7 @@
 import React from "react";
 
 //Components
-import Greeting from "./features/components/Greeting";
-import Stats from "./features/components/Stats";
+import { Greeting, Stats } from "./features";
 
 const Dashboard: React.FC = () => {
   return (

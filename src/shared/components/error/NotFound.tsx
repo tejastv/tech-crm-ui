@@ -1,7 +1,7 @@
 // NotFound.tsx
-import React from 'react';
+import React from "react";
 
-const NotFound: React.FC = () => {
+export const NotFound: React.FC = () => {
   return (
     <div>
       <h2>404 - Page Not Found</h2>
@@ -9,5 +9,3 @@ const NotFound: React.FC = () => {
     </div>
   );
 };
-
-export default NotFound;

@@ -1,7 +1,7 @@
 // Stats.tsx
 import React from "react";
 
-const Stats: React.FC = () => {
+export const Stats: React.FC = () => {
   return (
     <>
       <div className="col-lg-3 col-md-6 col-sm-12">
@@ -28,5 +28,3 @@ const Stats: React.FC = () => {
     </>
   );
 };
-
-export default Stats;

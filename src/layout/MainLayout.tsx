@@ -2,9 +2,9 @@
 import React, { PropsWithChildren } from "react";
 
 //Components
-import Header from "../components/ui/Header";
+import { Header } from "../shared";
 
-const MainLayout: React.FC<PropsWithChildren> = (props) => {
+export const MainLayout: React.FC<PropsWithChildren> = (props) => {
   return (
     <>
       <div
@@ -22,5 +22,3 @@ const MainLayout: React.FC<PropsWithChildren> = (props) => {
     </>
   );
 };
-
-export default MainLayout;

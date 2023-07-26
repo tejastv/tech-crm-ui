@@ -1,12 +1,11 @@
 import React, { PropsWithChildren } from "react";
 
 //Components
-import BorderLayout from "./Border-layout";
 
 //Types
-import { CardType } from "..";
+import { BorderLayout, CardType } from "../..";
 
-const Card: React.FC<PropsWithChildren<CardType>> = (props) => {
+export const Card: React.FC<PropsWithChildren<CardType>> = (props) => {
   return (
     <>
       <div className="card card-default">
@@ -26,5 +25,3 @@ const Card: React.FC<PropsWithChildren<CardType>> = (props) => {
     </>
   );
 };
-
-export default Card;

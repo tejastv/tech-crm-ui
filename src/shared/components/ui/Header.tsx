@@ -2,9 +2,9 @@
 import React from "react";
 
 //Assets
-import logoImage from "../../assets/images/logo.png";
+import logoImage from "../../../assets/images/logo.png";
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   return (
     <>
       <header className="topbar" data-navbarbg="skin1">
@@ -1451,5 +1451,3 @@ const Header: React.FC = () => {
     </>
   );
 };
-
-export default Header;

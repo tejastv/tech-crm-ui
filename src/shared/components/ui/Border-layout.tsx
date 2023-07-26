@@ -1,9 +1,11 @@
 import React, { PropsWithChildren } from "react";
+import { BorderLayoutType } from "../..";
 
 //Types
-import { BorderLayoutType } from "..";
 
-const BorderLayout: React.FC<PropsWithChildren<BorderLayoutType>> = (props) => {
+export const BorderLayout: React.FC<PropsWithChildren<BorderLayoutType>> = (
+  props
+) => {
   return (
     <>
       <fieldset className="scheduler-border">
@@ -13,5 +15,3 @@ const BorderLayout: React.FC<PropsWithChildren<BorderLayoutType>> = (props) => {
     </>
   );
 };
-
-export default BorderLayout;
