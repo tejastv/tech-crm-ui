@@ -1,10 +1,17 @@
 // Dashboard.tsx
 import React from "react";
 
+//Components
+import Greeting from "./features/components/Greeting";
+import Stats from "./features/components/Stats";
+
 const Dashboard: React.FC = () => {
   return (
     <>
-      <h1>Dashboard</h1>
+      <Greeting />
+      <div className="row">
+        <Stats />
+      </div>
     </>
   );
 };

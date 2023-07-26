@@ -1,12 +1,10 @@
 // MainLayout.tsx
-import React from "react";
+import React, { PropsWithChildren } from "react";
+
+//Components
 import Header from "../components/ui/Header";
 
-type Props = {
-  children: string | JSX.Element | JSX.Element[];
-};
-
-const MainLayout: React.FC<Props> = (props) => {
+const MainLayout: React.FC<PropsWithChildren> = (props) => {
   return (
     <>
       <div
@@ -17,7 +15,7 @@ const MainLayout: React.FC<Props> = (props) => {
         data-boxed-layout="boxed"
       >
         <Header />
-        <div className="page-wrapper">
+        <div className="page-wrapper d-block">
           <div className="container-fluid">{props.children}</div>
         </div>
       </div>

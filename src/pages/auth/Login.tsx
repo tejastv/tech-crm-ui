@@ -1,15 +1,21 @@
 // Login.tsx
 import React from "react";
-import logoImage from "../../assets/images/logo.png";
+
+//Hooks
 import useAuth from "../../hooks/useAuth";
-import { User } from "./features";
+
+//Types
+import { UserType } from "./features";
+
+//Assets
+import logoImage from "../../assets/images/logo.png";
 
 const Login: React.FC = () => {
   const { setAuth } = useAuth();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    const user: User = {
+    const user: UserType = {
       userName: "Tejas",
       password: "tejastv",
     };
