@@ -77,19 +77,105 @@ yarn test
 Here's a brief overview of the project's folder structure:
 
 ```
-tech-crm-ui-typescript-react/
-  ├── src/
-  │   ├── components/       # React components
-  │   ├── styles/           # CSS styles or other styling files
-  │   ├── utils/            # Utility functions or modules
-  │   └── App.tsx           # Main application component
-  ├── public/
-  │   └── index.html        # HTML template
-  ├── tests/                # Test files
-  ├── .gitignore            # Git ignore file
-  ├── package.json          # Project metadata and dependencies
-  ├── tsconfig.json         # TypeScript configuration
-  └── tech-crm-ui.config.js        # tech-crm-ui configuration
+
+tech-crm-ui
+├─ .vite
+│ └─ deps_temp_2095e6ac
+│ └─ package.json
+├─ index.html
+├─ package-lock.json
+├─ package.json
+├─ public
+│ └─ vite.svg
+├─ README.md
+├─ src
+│ ├─ App.tsx
+│ ├─ assets
+│ │ ├─ css
+│ │ │ ├─ custom-style.scss
+│ │ │ └─ global.scss
+│ │ ├─ icons
+│ │ │ ├─ font-awesome
+│ │ │ │ └─ webfonts
+│ │ │ │ ├─ fa-brands-400.eot
+│ │ │ │ ├─ fa-brands-400.svg
+│ │ │ │ ├─ fa-brands-400.woff
+│ │ │ │ ├─ fa-brands-400.woff2
+│ │ │ │ ├─ fa-regular-400.eot
+│ │ │ │ ├─ fa-regular-400.svg
+│ │ │ │ ├─ fa-regular-400.ttf
+│ │ │ │ ├─ fa-regular-400.woff
+│ │ │ │ ├─ fa-regular-400.woff2
+│ │ │ │ ├─ fa-solid-900.eot
+│ │ │ │ ├─ fa-solid-900.svg
+│ │ │ │ ├─ fa-solid-900.ttf
+│ │ │ │ ├─ fa-solid-900.woff
+│ │ │ │ └─ fa-solid-900.woff2
+│ │ │ ├─ global.woff
+│ │ │ ├─ themify.eot
+│ │ │ ├─ themify.svg
+│ │ │ ├─ themify.ttf
+│ │ │ └─ themify.woff
+│ │ └─ images
+│ │ ├─ 2.jpg
+│ │ ├─ auth-bg.jpg
+│ │ ├─ favicon.png
+│ │ └─ logo.png
+│ ├─ context
+│ │ ├─ AuthProvider.tsx
+│ │ └─ index.ts
+│ ├─ guards
+│ │ ├─ auth
+│ │ │ └─ RequireAuth.tsx
+│ │ └─ index.ts
+│ ├─ hooks
+│ │ ├─ index.ts
+│ │ └─ useAuth.tsx
+│ ├─ layout
+│ │ ├─ index.ts
+│ │ └─ MainLayout.tsx
+│ ├─ main.tsx
+│ ├─ pages
+│ │ ├─ auth
+│ │ │ ├─ Authroutes.tsx
+│ │ │ ├─ features
+│ │ │ │ ├─ index.ts
+│ │ │ │ └─ types
+│ │ │ │ └─ user-type.ts
+│ │ │ └─ Login.tsx
+│ │ └─ dashboard
+│ │ ├─ Dashboard.tsx
+│ │ └─ features
+│ │ ├─ components
+│ │ │ ├─ Greeting.tsx
+│ │ │ └─ Stats.tsx
+│ │ └─ index.ts
+│ ├─ router
+│ │ └─ AppRoutes.tsx
+│ ├─ shared
+│ │ ├─ components
+│ │ │ ├─ error
+│ │ │ │ └─ NotFound.tsx
+│ │ │ └─ ui
+│ │ │ ├─ Border-layout.tsx
+│ │ │ ├─ Button.tsx
+│ │ │ ├─ Card.tsx
+│ │ │ └─ Header.tsx
+│ │ ├─ index.ts
+│ │ └─ types
+│ │ ├─ border-layout-types.ts
+│ │ ├─ button-type.ts
+│ │ ├─ card-type.ts
+│ │ └─ input-type.ts
+│ ├─ utils
+│ │ ├─ findInputError.ts
+│ │ ├─ index.ts
+│ │ └─ inputValidations.ts
+│ └─ vite-env.d.ts
+├─ tsconfig.json
+├─ tsconfig.node.json
+└─ vite.config.ts
+
 ```
 
 Feel free to customize this folder structure based on your specific needs.
@@ -101,6 +187,8 @@ If you'd like to contribute to this project, please follow the guidelines in [CO
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
 ```
 
 Replace "your-username" in the repository URL with your actual GitHub username if you plan to publish this project to your GitHub account. This README.md file provides a comprehensive overview of the project, including installation instructions, development, testing, building, folder structure, how to contribute, and the license information.
+```
