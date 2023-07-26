@@ -3,7 +3,7 @@ import React from "react";
 
 export const Stats: React.FC = () => {
   return (
-    <>
+    <React.Fragment>
       <div className="col-lg-3 col-md-6 col-sm-12">
         <div className="card border-left border-orange">
           <div className="card-body">
@@ -25,6 +25,6 @@ export const Stats: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };

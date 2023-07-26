@@ -7,7 +7,7 @@ import { BorderLayout, CardType } from "../..";
 
 export const Card: React.FC<PropsWithChildren<CardType>> = (props) => {
   return (
-    <>
+    <React.Fragment>
       <div className="card card-default">
         <div className="card-header bg-danger">
           <h4 className="card-title">
@@ -22,6 +22,6 @@ export const Card: React.FC<PropsWithChildren<CardType>> = (props) => {
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };

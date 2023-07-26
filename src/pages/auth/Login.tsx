@@ -1,5 +1,6 @@
 // Login.tsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 //Hooks
 import { useAuth } from "../../hooks";
@@ -7,19 +8,26 @@ import { useAuth } from "../../hooks";
 //Types
 import { UserType } from "./features";
 
+//Constants
+import { DASHBOARD } from "../../constants";
+
 //Assets
 import logoImage from "../../assets/images/logo.png";
+import { setLocalStorageData } from "../../utils";
 
 const Login: React.FC = () => {
   const { setAuth } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
     const user: UserType = {
       userName: "Tejas",
       password: "tejastv",
     };
     setAuth({ user });
+    setLocalStorageData("auth", "user", user);
+    navigate(DASHBOARD, { replace: true });
   };
 
   return (

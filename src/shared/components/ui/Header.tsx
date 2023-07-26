@@ -6,7 +6,7 @@ import logoImage from "../../../assets/images/logo.png";
 
 export const Header: React.FC = () => {
   return (
-    <>
+    <React.Fragment>
       <header className="topbar" data-navbarbg="skin1">
         <nav className="navbar top-navbar navbar-expand-md navbar-dark">
           <div className="navbar-header" data-logobg="skin1">
@@ -1448,6 +1448,6 @@ export const Header: React.FC = () => {
           </aside>
         </nav>
       </header>
-    </>
+    </React.Fragment>
   );
 };

@@ -1,4 +1,8 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, useEffect } from "react";
+import { getLocalStorageData } from "../utils";
+import { useNavigate } from "react-router-dom";
+import { DASHBOARD } from "../constants";
+import { UserType } from "../pages/auth/features";
 
 // Define the type for the context value and state
 type AuthContextValue = {
@@ -7,12 +11,7 @@ type AuthContextValue = {
 };
 
 const initialAuthContextValue: AuthContextValue = {
-  auth: {
-    user: {
-      userName: "Tejas",
-      password: "tejsa",
-    },
-  },
+  auth: {},
   setAuth: () => {},
 };
 
@@ -28,7 +27,15 @@ type AuthProviderProps = {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [auth, setAuth] = useState(initialAuthContextValue.auth);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const user: UserType = getLocalStorageData("auth", "user");
+    if (user) {
+      navigate(DASHBOARD, { replace: true });
+      setAuth({ user });
+    }
+  }, []);
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
       {children}

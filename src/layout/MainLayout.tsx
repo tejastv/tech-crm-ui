@@ -1,24 +1,10 @@
-// MainLayout.tsx
-import React, { PropsWithChildren } from "react";
+import React from "react";
+import { Outlet } from "react-router-dom";
 
-//Components
-import { Header } from "../shared";
-
-export const MainLayout: React.FC<PropsWithChildren> = (props) => {
+export const MainLayout: React.FC = () => {
   return (
-    <>
-      <div
-        id="main-wrapper"
-        data-layout="horizontal"
-        data-navbarbg="skin1"
-        data-sidebartype="mini-sidebar"
-        data-boxed-layout="boxed"
-      >
-        <Header />
-        <div className="page-wrapper d-block">
-          <div className="container-fluid">{props.children}</div>
-        </div>
-      </div>
-    </>
+    <main className="App">
+      <Outlet />
+    </main>
   );
 };
