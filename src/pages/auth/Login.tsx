@@ -15,7 +15,7 @@ import { DASHBOARD } from "../../constants";
 import logoImage from "../../assets/images/logo.png";
 import { setLocalStorageData } from "../../utils";
 
-const Login: React.FC = () => {
+export const Login: React.FC = () => {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
 
@@ -114,5 +114,3 @@ const Login: React.FC = () => {
     </div>
   );
 };
-
-export default Login;

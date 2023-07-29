@@ -6,12 +6,12 @@ import { Greeting, Stats } from "./features";
 
 const Dashboard: React.FC = () => {
   return (
-    <React.Fragment>
+    <>
       <Greeting />
       <div className="row">
         <Stats />
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ import profilepic from "../../../../assets/images/2.jpg";
 
 export const Greeting: React.FC = () => {
   return (
-    <React.Fragment>
+    <>
       <div className="row">
         <div className="col-lg-12">
           <div className="card  bg-light no-card-border">
@@ -29,6 +29,6 @@ export const Greeting: React.FC = () => {
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };

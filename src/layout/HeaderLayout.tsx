@@ -6,7 +6,7 @@ import { Header } from "../shared";
 
 export const HeaderLayout: React.FC<PropsWithChildren> = (props) => {
   return (
-    <React.Fragment>
+    <>
       <div
         id="main-wrapper"
         data-layout="horizontal"
@@ -19,6 +19,6 @@ export const HeaderLayout: React.FC<PropsWithChildren> = (props) => {
           <div className="container-fluid">{props.children}</div>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };

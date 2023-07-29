@@ -1,12 +1,31 @@
 // Header.tsx
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 //Assets
 import logoImage from "../../../assets/images/logo.png";
+import { removeLocalStorageData } from "../../../utils";
+import { LOGIN, MASTER } from "../../../constants";
+import { useAuth } from "../../../hooks";
+import {
+  CLIENT,
+  CLIENT_GROUP,
+  CLIENT_MASTER,
+  COMPANY_MASTER,
+  SEGMENT,
+} from "../../../pages/master/features";
 
 export const Header: React.FC = () => {
+  const navigate = useNavigate();
+  const { setAuth } = useAuth();
+
+  const logoutHandler = (): void => {
+    removeLocalStorageData("auth", "user");
+    setAuth("");
+    navigate(LOGIN);
+  };
   return (
-    <React.Fragment>
+    <>
       <header className="topbar" data-navbarbg="skin1">
         <nav className="navbar top-navbar navbar-expand-md navbar-dark">
           <div className="navbar-header" data-logobg="skin1">
@@ -16,7 +35,7 @@ export const Header: React.FC = () => {
             >
               <i className="ti-menu ti-close"></i>
             </a>
-            <a className="navbar-brand" href="dashboard.php">
+            <a className="navbar-brand">
               <span className="logo-text">
                 <img src={logoImage} alt="homepage" className="dark-logo" />
                 <img
@@ -47,7 +66,6 @@ export const Header: React.FC = () => {
                     {" "}
                     <a
                       className="sidebar-link has-arrow waves-effect waves-dark"
-                      href="#"
                       aria-expanded="false"
                     >
                       <i className="fa fa-asterisk"></i>
@@ -55,10 +73,13 @@ export const Header: React.FC = () => {
                     </a>
                     <ul aria-expanded="false" className="collapse first-level">
                       <li className="sidebar-item">
-                        <a className="sidebar-link" href="company_master.php">
+                        <Link
+                          className="sidebar-link"
+                          to={`${MASTER}${COMPANY_MASTER}`}
+                        >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Company</span>
-                        </a>
+                        </Link>
                       </li>
                       <li className="sidebar-item">
                         {" "}
@@ -75,26 +96,32 @@ export const Header: React.FC = () => {
                           className="collapse second-level"
                         >
                           <li className="sidebar-item">
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="client_master.php"
+                              to={`${MASTER}${CLIENT_MASTER}${CLIENT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Client</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
-                            <a className="sidebar-link" href="group.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER}${CLIENT_MASTER}${CLIENT_GROUP}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Client Group</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="segment.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER}${CLIENT_MASTER}${SEGMENT}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Segment</span>
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </li>
@@ -1436,8 +1463,8 @@ export const Header: React.FC = () => {
                       </li>
                     </ul>
                   </li>
-                  <li className="sidebar-item">
-                    <a className="sidebar-link" href="logout.php">
+                  <li className="sidebar-item c-pointer">
+                    <a className="sidebar-link" onClick={logoutHandler}>
                       <i className="fas fa-sign-out-alt"></i>
                       <span className="hide-menu ">Exit</span>
                     </a>
@@ -1448,6 +1475,6 @@ export const Header: React.FC = () => {
           </aside>
         </nav>
       </header>
-    </React.Fragment>
+    </>
   );
 };
