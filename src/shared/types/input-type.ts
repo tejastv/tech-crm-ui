@@ -1,20 +1,27 @@
 export interface InputType {
   name: string;
   label: string;
-  type: string;
+  type?: string;
   id: string;
   placeholder: string;
-  validation?: validation;
+  validation?: Validation;
   multiline?: boolean;
+  className?: string;
 }
 
-interface validation {
+interface Validation {
   required: {
     value: true;
     message: string;
   };
+  pattern?: Pattern;
   maxLength?: MaxLeangth;
   minLength?: MinLeangth;
+}
+
+interface Pattern {
+  value: RegExp;
+  message: string;
 }
 
 interface MaxLeangth {

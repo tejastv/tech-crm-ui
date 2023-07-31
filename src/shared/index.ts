@@ -12,3 +12,6 @@ export * from "./types/button-type";
 export * from "./types/border-layout-types";
 export * from "./types/card-type";
 export * from "./types/input-type";
+export * from "./types/error-type";
+export * from "./types/CheckboxGroup-type";
+export * from "./types/radio-type";

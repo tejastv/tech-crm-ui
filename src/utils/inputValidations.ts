@@ -26,7 +26,7 @@ export const name_validation: InputType = {
   },
 };
 
-export const desc_validation = {
+export const desc_validation: InputType = {
   name: "description",
   label: "description",
   multiline: true,
@@ -44,7 +44,7 @@ export const desc_validation = {
   },
 };
 
-export const password_validation = {
+export const password_validation: InputType = {
   name: "password",
   label: "password",
   type: "password",
@@ -62,7 +62,7 @@ export const password_validation = {
   },
 };
 
-export const num_validation = {
+export const num_validation: InputType = {
   name: "num",
   label: "number",
   type: "number",
@@ -76,7 +76,7 @@ export const num_validation = {
   },
 };
 
-export const email_validation = {
+export const email_validation: InputType = {
   name: "email",
   label: "email address",
   type: "email",
