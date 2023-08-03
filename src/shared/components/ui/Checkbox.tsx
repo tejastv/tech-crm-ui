@@ -9,17 +9,15 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { MdError } from "react-icons/md";
 import { findInputError, isFormInvalid } from "../../../utils";
-import { InputType } from "../..";
+import { CheckboxType } from "../..";
 import Form from "react-bootstrap/Form";
 
-export const Input: React.FC<InputType> = ({
+export const CheckboxGroup: React.FC<CheckboxType> = ({
   name,
   label,
+  options,
   type,
-  id,
-  placeholder,
   validation,
-  multiline,
 }) => {
   const {
     register,
@@ -40,20 +38,18 @@ export const Input: React.FC<InputType> = ({
             {label}
           </Form.Label>
           <div className="col-sm-9">
-            {multiline ? (
-              <Form.Group
-                placeholder={placeholder}
-                id={id}
-                {...register(name, validation)}
-              />
-            ) : (
-              <Form.Control
-                id={id}
-                type={type}
-                placeholder={placeholder}
-                {...register(name, validation)}
-              />
-            )}
+            {options.map((option) => {
+              return (
+                <Form.Check
+                  type={type}
+                  value={option.value}
+                  name={option.name}
+                  {...register(name, validation)}
+                >
+                  {option.name}
+                </Form.Check>
+              );
+            })}
             {isInvalid && (
               <Form.Control.Feedback type="invalid">
                 <MdError />

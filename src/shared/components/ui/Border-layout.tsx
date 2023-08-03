@@ -8,10 +8,14 @@ export const BorderLayout: React.FC<PropsWithChildren<BorderLayoutType>> = (
 ) => {
   return (
     <>
-      <fieldset className="scheduler-border">
-        <legend className="scheduler-border">{props.heading}</legend>
-        {props.children}
-      </fieldset>
+      <div className="row">
+        <div className="col-12">
+          <fieldset className="scheduler-border">
+            <legend className="scheduler-border">{props.heading}</legend>
+            {props.children}
+          </fieldset>
+        </div>
+      </div>
     </>
   );
 };

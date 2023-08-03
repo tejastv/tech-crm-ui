@@ -6,7 +6,7 @@ import {
 } from "../../features/constants/route-constants";
 import { Client, ClientGroup, Segment } from "..";
 
-const ClientMasterRoutes = () => {
+const ClientMasterIndex = () => {
   return (
     <Routes>
       <Route path={CLIENT} element={<Client />}></Route>
@@ -16,4 +16,4 @@ const ClientMasterRoutes = () => {
   );
 };
 
-export default ClientMasterRoutes;
+export default ClientMasterIndex;

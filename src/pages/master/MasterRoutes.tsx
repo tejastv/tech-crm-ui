@@ -1,22 +1,28 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { CompanyMaster } from "./pages";
-import { CLIENT_MASTER_PARENT_ROUTE, COMPANY_MASTER } from "./features";
+import {
+  CLIENT_MASTER_PARENT_ROUTE,
+  COMPANY_MASTER_PARENT_ROUTE,
+} from "./features";
+import CompanyMasterIndex from "./pages/company-master/CompanyMasterIndex";
 
-const ClientMasterRoutes = React.lazy(
-  () => import("./pages/client-master/ClientMasterRoutes")
+const ClientMasterIndex = React.lazy(
+  () => import("./pages/client-master/ClientMasterIndex")
 );
 
 const MasterRoutes = () => {
   return (
     <Routes>
-      <Route path={COMPANY_MASTER} element={<CompanyMaster />}></Route>
+      <Route
+        path={COMPANY_MASTER_PARENT_ROUTE}
+        element={<CompanyMasterIndex />}
+      ></Route>
       <Route
         path={CLIENT_MASTER_PARENT_ROUTE}
         element={
           <React.Suspense>
-            <ClientMasterRoutes />
+            <ClientMasterIndex />
           </React.Suspense>
         }
       ></Route>

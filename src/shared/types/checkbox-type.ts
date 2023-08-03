@@ -1,7 +1,8 @@
-export interface CheckboxGroupType {
+export interface CheckboxType {
   name: string;
   label: string;
   id: string;
+  type: "radio" | "checkbox" | "switch";
   validation?: Validation;
   options: Array<Options>;
   className?: string;
@@ -9,7 +10,7 @@ export interface CheckboxGroupType {
 
 interface Options {
   name: string;
-  value: string | number | boolean;
+  value: string | number;
 }
 
 interface Validation {

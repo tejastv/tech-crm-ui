@@ -3,14 +3,17 @@ import React from "react";
 
 //Components
 import { Greeting, Stats } from "./features";
+import { PageWrapper } from "../../shared";
 
 const Dashboard: React.FC = () => {
   return (
     <>
-      <Greeting />
-      <div className="row">
-        <Stats />
-      </div>
+      <PageWrapper>
+        <Greeting />
+        <div className="row">
+          <Stats />
+        </div>
+      </PageWrapper>
     </>
   );
 };
