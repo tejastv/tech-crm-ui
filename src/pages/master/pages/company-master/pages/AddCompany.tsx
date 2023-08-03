@@ -5,9 +5,11 @@ import {
   BorderLayout,
   Card,
   InputType,
+  Select,
 } from "../../../../../shared";
 import { FormProvider, useForm } from "react-hook-form";
 import { Input } from "../../../../../shared";
+import { selectOptionsMaker } from "../../../../../utils";
 
 type PersonScore = {
   name: string;
@@ -15,7 +17,6 @@ type PersonScore = {
 };
 
 export const AddCompany: React.FC = () => {
-  const { handleSubmit } = useForm<PersonScore>();
   const methods = useForm();
 
   const cardConfig = {
@@ -29,17 +30,8 @@ export const AddCompany: React.FC = () => {
   };
 
   const onSubmit = methods.handleSubmit((data) => {
-    // console.log(data)
-    // methods.reset()
     console.log("value", data);
-    // setSuccess(true)
   });
-
-  // const onSubmit = (values: PersonScore) => {
-  //   console.log("value", values);
-  //   console.log("name", values.name);
-  //   console.log("email", values.email);
-  // };
 
   const name_validation: InputType = {
     config: {
@@ -96,6 +88,28 @@ export const AddCompany: React.FC = () => {
     },
   };
 
+  const options = [
+    { value: "chocolate33", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
+
+  const select_validation: InputType = {
+    config: {
+      name: "chocolate",
+      label: "Select Box",
+      id: "chocolate",
+      options: selectOptionsMaker(options, "value", "label"),
+      placeholder: "write a random Select Box",
+      validation: {
+        required: {
+          value: true,
+          message: "required",
+        },
+      },
+    },
+  };
+
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
@@ -109,9 +123,10 @@ export const AddCompany: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={name_validation.config}></Input>
-                  <Input config={email_validation.config}></Input>
-                  <Input config={address_validation.config}></Input>
+                  <Input config={name_validation.config} />
+                  <Input config={email_validation.config} />
+                  <Input config={address_validation.config} />
+                  <Select config={select_validation.config} />
                 </div>
               </div>
             </BorderLayout>

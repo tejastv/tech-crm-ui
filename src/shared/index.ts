@@ -11,6 +11,7 @@ export { PageWrapper } from "./components/ui/PageWrapper";
 export { Table } from "./components/ui/Table";
 export { Input } from "./components/ui/Input";
 export { ActionButtons } from "./components/ui/ActionButtons";
+export { Select } from "./components/ui/Select";
 
 // Types
 export * from "./types/button-type";

@@ -8,7 +8,13 @@ export interface InputType {
     validation?: Validation;
     multiline?: boolean;
     className?: string;
+    options?: Array<Options>;
   };
+}
+
+interface Options {
+  label: string;
+  value: string | number;
 }
 
 interface Validation {
