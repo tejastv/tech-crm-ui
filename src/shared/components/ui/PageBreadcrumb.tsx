@@ -9,7 +9,7 @@ export const PageBreadcrumb: React.FC<PageBreadcrumbType> = (props) => {
   const navigate = useNavigate();
 
   const routeHandler = () => {
-    navigate(props.btnRoute);
+    navigate(props.config.btnRoute);
   };
 
   return (
@@ -17,7 +17,7 @@ export const PageBreadcrumb: React.FC<PageBreadcrumbType> = (props) => {
       <div className="page-breadcrumb pb-4">
         <div className="row">
           <div className="col-5 align-self-center">
-            <h4 className="page-title">{props.pageHeading}</h4>
+            <h4 className="page-title">{props.config.pageHeading}</h4>
           </div>
           <div className="col-7 align-self-center">
             <div className="d-flex no-block justify-content-end align-items-center">
@@ -26,7 +26,7 @@ export const PageBreadcrumb: React.FC<PageBreadcrumbType> = (props) => {
                 className="btn waves-effect waves-light btn-danger btn-sm"
                 onClick={routeHandler}
               >
-                {props.btnTitle}
+                {props.config.btnTitle}
               </Button>
             </div>
           </div>

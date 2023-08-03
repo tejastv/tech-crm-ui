@@ -1,10 +1,10 @@
 // HeaderLayout.tsx
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
 //Components
 import { Header } from "../shared";
 
-export const HeaderLayout: React.FC<PropsWithChildren> = (props) => {
+export const HeaderLayout = (props: PropsWithChildren) => {
   return (
     <>
       <div

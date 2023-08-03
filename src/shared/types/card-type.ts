@@ -1,4 +1,7 @@
 export interface CardType {
-  mainHeading: string;
-  heading: string;
+  config: {
+    mainHeading: string;
+    heading: string;
+    isActionIsVisible?: boolean;
+  };
 }

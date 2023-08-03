@@ -1,11 +1,9 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { BorderLayoutType } from "../..";
 
 //Types
 
-export const BorderLayout: React.FC<PropsWithChildren<BorderLayoutType>> = (
-  props
-) => {
+export const BorderLayout = (props: PropsWithChildren<BorderLayoutType>) => {
   return (
     <>
       <div className="row">

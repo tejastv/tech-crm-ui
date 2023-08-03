@@ -1,5 +1,7 @@
 export interface PageBreadcrumbType {
-    pageHeading: string,
-    btnTitle: string,
-    btnRoute: string
+  config: {
+    pageHeading: string;
+    btnTitle: string;
+    btnRoute: string;
+  };
 }

@@ -1,12 +1,14 @@
 export interface InputType {
-  name: string;
-  label: string;
-  type?: string;
-  id: string;
-  placeholder: string;
-  validation?: Validation;
-  multiline?: boolean;
-  className?: string;
+  config: {
+    name: string;
+    label: string;
+    type?: string;
+    id: string;
+    placeholder: string;
+    validation?: Validation;
+    multiline?: boolean;
+    className?: string;
+  };
 }
 
 interface Validation {

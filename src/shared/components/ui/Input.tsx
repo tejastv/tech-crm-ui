@@ -5,30 +5,19 @@
 |
 |  🐸 Returns:  JSX
 *-------------------------------------------------------------------*/
-import React from "react";
 import { useFormContext } from "react-hook-form";
 import { MdError } from "react-icons/md";
 import { findInputError, isFormInvalid } from "../../../utils";
 import { InputType } from "../..";
 import Form from "react-bootstrap/Form";
 
-export const Input: React.FC<InputType> = ({
-  name,
-  label,
-  type,
-  id,
-  placeholder,
-  validation,
-  multiline,
-}) => {
+export const Input = (props: InputType) => {
   const {
     register,
     formState: { errors },
   } = useFormContext();
-
-  const inputErrors = findInputError(errors, name);
+  const inputErrors = findInputError(errors, props.config.name);
   const isInvalid = isFormInvalid(inputErrors);
-
   return (
     <div className="row">
       <div className="col-12">
@@ -37,28 +26,30 @@ export const Input: React.FC<InputType> = ({
             className="col-sm-3 control-label col-form-label"
             htmlFor="name"
           >
-            {label}
+            {props.config.label}
           </Form.Label>
           <div className="col-sm-9">
-            {multiline ? (
-              <Form.Group
-                placeholder={placeholder}
-                id={id}
-                {...register(name, validation)}
+            {props.config.multiline ? (
+              <Form.Control
+                as="textarea"
+                rows={2}
+                placeholder={props.config.placeholder}
+                id={props.config.id}
+                {...register(props.config.name, props.config.validation)}
               />
             ) : (
               <Form.Control
-                id={id}
-                type={type}
-                placeholder={placeholder}
-                {...register(name, validation)}
+                id={props.config.id}
+                type={props.config.type}
+                placeholder={props.config.placeholder}
+                {...register(props.config.name, props.config.validation)}
               />
             )}
             {isInvalid && (
-              <Form.Control.Feedback type="invalid">
+              <Form.Text className="text-danger">
                 <MdError />
                 {inputErrors.error.message}
-              </Form.Control.Feedback>
+              </Form.Text>
             )}
           </div>
         </div>

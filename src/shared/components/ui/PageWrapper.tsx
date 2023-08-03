@@ -1,6 +1,6 @@
 // CompanyMaster.tsx
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
-export const PageWrapper: React.FC<PropsWithChildren> = (props) => {
+export const PageWrapper = (props: PropsWithChildren) => {
   return <>{<div className="page-wrapper d-block">{props.children}</div>}</>;
 };

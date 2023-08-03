@@ -1,6 +1,6 @@
 // CompanyMaster.tsx
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
-export const Table: React.FC<PropsWithChildren> = (props) => {
+export const Table = (props: PropsWithChildren) => {
   return <>{<div className="table-responsive">{props.children}</div>}</>;
 };

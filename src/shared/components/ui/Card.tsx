@@ -1,25 +1,20 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
 //Components
 
 //Types
-import { BorderLayout, CardType } from "../..";
+import { CardType } from "../..";
 
-export const Card: React.FC<PropsWithChildren<CardType>> = (props) => {
+export const Card = (props: PropsWithChildren<CardType>) => {
   return (
     <>
       <div className="card card-default">
         <div className="card-header bg-danger">
-          <h4 className="card-title">
-            <h6 className="m-b-0 text-white">{props.mainHeading}</h6>
-          </h4>
+          <h4 className="card-title"></h4>
+          <h6 className="m-b-0 text-white">{props.config.mainHeading}</h6>
         </div>
         <div className="collapse show">
-          <div className="card-body">
-            <BorderLayout heading={props.heading}>
-              {props.children}
-            </BorderLayout>
-          </div>
+          <div className="card-body">{props.children}</div>
         </div>
       </div>
     </>
