@@ -14,6 +14,7 @@ export { ActionButtons } from "./components/ui/ActionButtons";
 export { Select } from "./components/ui/Select";
 export { Checkbox } from "./components/ui/Checkbox";
 export { Radio } from "./components/ui/Radio";
+export { DatePicker } from "./components/ui/DatePicker";
 
 // Types
 export * from "./types/button-type";

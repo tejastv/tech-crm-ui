@@ -22,6 +22,6 @@ export const MASTER_ROUTES = {
 
 export const COMMON_ROUTES = {
   ADD: "add",
-  EDIT: "edit",
+  EDIT: "edit/:id",
   LIST: "list",
 };

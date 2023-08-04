@@ -7,6 +7,7 @@ import {
   BorderLayout,
   Card,
   Checkbox,
+  DatePicker,
   Input,
   Radio,
   Select,
@@ -18,6 +19,7 @@ import {
   selectField,
   genderField,
   checkBoxField,
+  datePickerField,
 } from "..";
 
 export const AddCompany: React.FC = () => {
@@ -56,6 +58,7 @@ export const AddCompany: React.FC = () => {
                   <Select config={selectField.config} />
                   <Checkbox config={checkBoxField.config} />
                   <Radio config={genderField.config} />
+                  <DatePicker config={datePickerField.config} />
                 </div>
               </div>
             </BorderLayout>

@@ -115,3 +115,18 @@ export const genderField: FormFieldType = {
     },
   },
 };
+
+export const datePickerField: FormFieldType = {
+  config: {
+    name: "datepick",
+    label: "Date picker",
+    id: "datepick",
+    placeholder: "write a random Select Box",
+    validation: {
+      required: {
+        value: true,
+        message: "required",
+      },
+    },
+  },
+};
