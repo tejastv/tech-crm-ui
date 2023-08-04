@@ -1,5 +1,4 @@
-import { Options } from "./options-type";
-import { ValidationType } from "./validations-type";
+import { Options, ValidationType } from "@shared/index";
 
 export interface FormFieldType {
   config: {

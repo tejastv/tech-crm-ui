@@ -12,7 +12,7 @@ import {
   MASTER_ROUTES,
   ROOT,
   UNKNOWN,
-} from "../constants";
+} from "constants";
 
 const Dashboard = React.lazy(() => import("../pages/dashboard/Dashboard"));
 const MasterRoutes = React.lazy(() => import("../pages/master/MasterRoutes"));
