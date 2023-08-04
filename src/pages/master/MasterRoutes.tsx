@@ -4,11 +4,14 @@ import { Route, Routes } from "react-router-dom";
 import {
   CLIENT_MASTER_PARENT_ROUTE,
   COMPANY_MASTER_PARENT_ROUTE,
-} from "./features";
-import CompanyMasterIndex from "./pages/company-master/CompanyMasterIndex";
+} from "@master/index";
+
+const CompanyMasterIndex = React.lazy(
+  () => import("./company-master/CompanyMasterIndex")
+);
 
 const ClientMasterIndex = React.lazy(
-  () => import("./pages/client-master/ClientMasterIndex")
+  () => import("./client-master/ClientMasterIndex")
 );
 
 const MasterRoutes = () => {

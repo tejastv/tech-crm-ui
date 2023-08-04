@@ -1,7 +1,0 @@
-export { AddCompany } from "./company-master/pages/AddCompany";
-export { CompanyMaster } from "./company-master/pages/CompanyMaster";
-
-// CHILD PAGES
-export { Client } from "./client-master/pages/Client";
-export { ClientGroup } from "./client-master/pages/ClientGroup";
-export { Segment } from "./client-master/pages/Segment";

@@ -1,9 +1,9 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 //Types
-import { PageBreadcrumbType } from "../..";
-import { useNavigate } from "react-router-dom";
+import { PageBreadcrumbType } from "@shared/index";
 
 export const PageBreadcrumb: React.FC<PageBreadcrumbType> = (props) => {
   const navigate = useNavigate();

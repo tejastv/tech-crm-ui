@@ -1,8 +1,7 @@
 // Greeting.tsx
 import React from "react";
 
-//Assets
-import profilepic from "../../../../assets/images/2.jpg";
+import profilepic from "@assets/images/2.jpg";
 
 export const Greeting: React.FC = () => {
   return (

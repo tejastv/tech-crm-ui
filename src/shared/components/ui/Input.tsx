@@ -7,9 +7,10 @@
 *-------------------------------------------------------------------*/
 import { useFormContext } from "react-hook-form";
 import { MdError } from "react-icons/md";
-import { findInputError, isFormInvalid } from "../../../utils";
-import { InputType } from "../..";
 import Form from "react-bootstrap/Form";
+
+import { InputType } from "@shared/index";
+import { findInputError, isFormInvalid } from "@utils/index";
 
 export const Input = (props: InputType) => {
   const {

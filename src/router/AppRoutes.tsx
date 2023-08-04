@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { RequireAuth } from "../guards";
-
-import { NotFound } from "../shared";
-
+import { RequireAuth } from "@guards/index";
+import { Login } from "@auth/index";
+import { NotFound } from "@shared/index";
+import { MainLayout } from "@layout/index";
 import {
   DASHBOARD,
   LOGIN,
@@ -13,8 +13,6 @@ import {
   UNKNOWN,
 } from "../constants";
 
-import { MainLayout } from "../layout";
-import { Login } from "../pages/auth";
 
 const Dashboard = React.lazy(() => import("../pages/dashboard/Dashboard"));
 const MasterRoutes = React.lazy(() => import("../pages/master/MasterRoutes"));

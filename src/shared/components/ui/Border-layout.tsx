@@ -1,7 +1,6 @@
 import { PropsWithChildren } from "react";
-import { BorderLayoutType } from "../..";
 
-//Types
+import { BorderLayoutType } from "@shared/index";
 
 export const BorderLayout = (props: PropsWithChildren<BorderLayoutType>) => {
   return (

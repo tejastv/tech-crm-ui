@@ -7,10 +7,11 @@
 *-------------------------------------------------------------------*/
 import { Controller, useFormContext } from "react-hook-form";
 import { MdError } from "react-icons/md";
-import { findInputError, isFormInvalid } from "../../../utils";
-import { InputType } from "../..";
 import Form from "react-bootstrap/Form";
 import { default as AliceSelect } from "react-select";
+
+import { findInputError, isFormInvalid } from "@utils/index";
+import { InputType } from "@shared/index";
 
 export const Select = (props: InputType) => {
   const {

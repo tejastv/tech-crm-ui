@@ -1,15 +1,16 @@
 // AddCompany.tsx
 import React from "react";
+import { FormProvider, useForm } from "react-hook-form";
+
 import {
   ActionButtons,
   BorderLayout,
   Card,
   InputType,
+  Input,
   Select,
-} from "../../../../../shared";
-import { FormProvider, useForm } from "react-hook-form";
-import { Input } from "../../../../../shared";
-import { selectOptionsMaker } from "../../../../../utils";
+} from "@shared/index";
+import { selectOptionsMaker } from "@utils/index";
 
 type PersonScore = {
   name: string;
