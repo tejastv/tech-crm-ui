@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import {} from "@master/index";
 import { MASTER_ROUTES } from "constants";
 
 const CompanyMasterIndex = React.lazy(

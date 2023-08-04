@@ -23,6 +23,7 @@
       "@shared/*": ["shared/*"],
       "@guards/*": ["guards/*"],
       "@layout/*": ["layout/*"],
+      "@constants/*": ["constants/*"],
       "@context/*": ["context/*"],
       "@hooks/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
