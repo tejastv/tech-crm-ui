@@ -5,7 +5,7 @@ import { RequireAuth } from "@guards/index";
 import { Login } from "@auth/index";
 import { NotFound } from "@shared/index";
 import { MainLayout } from "@layout/index";
-import { DASHBOARD, LOGIN, MASTER_ROUTES, ROOT, UNKNOWN } from "../constants";
+import { DASHBOARD, LOGIN, MASTER_ROUTES, ROOT, UNKNOWN } from "constants";
 
 const Dashboard = React.lazy(() => import("../pages/dashboard/Dashboard"));
 const MasterRoutes = React.lazy(() => import("../pages/master/MasterRoutes"));

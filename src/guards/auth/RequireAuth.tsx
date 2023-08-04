@@ -1,8 +1,9 @@
 import React from "react";
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../../hooks";
-import { LOGIN } from "../../constants";
-import { HeaderLayout } from "../../layout";
+
+import { useAuth } from "@hooks/index";
+import { LOGIN } from "@constants/index";
+import { HeaderLayout } from "@layout/index";
 
 export const RequireAuth: React.FC = () => {
   const { auth } = useAuth();
