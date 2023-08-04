@@ -9,10 +9,10 @@ import { useFormContext } from "react-hook-form";
 import { MdError } from "react-icons/md";
 import Form from "react-bootstrap/Form";
 
-import { InputType } from "@shared/index";
+import { FormFieldType } from "@shared/index";
 import { findInputError, isFormInvalid } from "@utils/index";
 
-export const Input = (props: InputType) => {
+export const Input = (props: FormFieldType) => {
   const {
     register,
     formState: { errors },
@@ -25,7 +25,7 @@ export const Input = (props: InputType) => {
         <div className="form-group row">
           <Form.Label
             className="col-sm-3 control-label col-form-label"
-            htmlFor="name"
+            htmlFor={props.config.name}
           >
             {props.config.label}
           </Form.Label>

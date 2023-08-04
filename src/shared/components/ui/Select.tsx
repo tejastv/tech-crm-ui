@@ -11,9 +11,9 @@ import Form from "react-bootstrap/Form";
 import { default as AliceSelect } from "react-select";
 
 import { findInputError, isFormInvalid } from "@utils/index";
-import { InputType } from "@shared/index";
+import { FormFieldType } from "@shared/index";
 
-export const Select = (props: InputType) => {
+export const Select = (props: FormFieldType) => {
   const {
     control,
     formState: { errors },
@@ -26,7 +26,7 @@ export const Select = (props: InputType) => {
         <div className="form-group row">
           <Form.Label
             className="col-sm-3 control-label col-form-label"
-            htmlFor="name"
+            htmlFor={props.config.name}
           >
             {props.config.label}
           </Form.Label>

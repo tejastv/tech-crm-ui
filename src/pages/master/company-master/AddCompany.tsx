@@ -6,16 +6,19 @@ import {
   ActionButtons,
   BorderLayout,
   Card,
-  InputType,
+  Checkbox,
   Input,
+  Radio,
   Select,
 } from "@shared/index";
-import { selectOptionsMaker } from "@utils/index";
-
-// type PersonScore = {
-//   name: string;
-//   email: string;
-// };
+import {
+  nameField,
+  emailField,
+  addressField,
+  selectField,
+  genderField,
+  checkBoxField,
+} from "..";
 
 export const AddCompany: React.FC = () => {
   const methods = useForm();
@@ -34,83 +37,6 @@ export const AddCompany: React.FC = () => {
     console.log("value", data);
   });
 
-  const name_validation: InputType = {
-    config: {
-      name: "name",
-      label: "Name",
-      type: "text",
-      id: "name",
-      placeholder: "write your name ...",
-      validation: {
-        required: {
-          value: true,
-          message: "required",
-        },
-        maxLength: {
-          value: 30,
-          message: "30 characters max",
-        },
-      },
-    },
-  };
-  const address_validation: InputType = {
-    config: {
-      name: "address",
-      label: "Address",
-      id: "Address",
-      multiline: true,
-      placeholder: "write your Address ...",
-      validation: {
-        required: {
-          value: true,
-          message: "required",
-        },
-      },
-    },
-  };
-  const email_validation: InputType = {
-    config: {
-      name: "email",
-      label: "Email Address",
-      type: "email",
-      id: "email",
-      placeholder: "write a random email address",
-      validation: {
-        required: {
-          value: true,
-          message: "required",
-        },
-        pattern: {
-          value:
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          message: "not valid",
-        },
-      },
-    },
-  };
-
-  const options = [
-    { value: "chocolate33", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-
-  const select_validation: InputType = {
-    config: {
-      name: "chocolate",
-      label: "Select Box",
-      id: "chocolate",
-      options: selectOptionsMaker(options, "value", "label"),
-      placeholder: "write a random Select Box",
-      validation: {
-        required: {
-          value: true,
-          message: "required",
-        },
-      },
-    },
-  };
-
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
@@ -124,10 +50,12 @@ export const AddCompany: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={name_validation.config} />
-                  <Input config={email_validation.config} />
-                  <Input config={address_validation.config} />
-                  <Select config={select_validation.config} />
+                  <Input config={nameField.config} />
+                  <Input config={emailField.config} />
+                  <Input config={addressField.config} />
+                  <Select config={selectField.config} />
+                  <Checkbox config={checkBoxField.config} />
+                  <Radio config={genderField.config} />
                 </div>
               </div>
             </BorderLayout>
