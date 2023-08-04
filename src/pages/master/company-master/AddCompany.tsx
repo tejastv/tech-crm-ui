@@ -12,10 +12,10 @@ import {
 } from "@shared/index";
 import { selectOptionsMaker } from "@utils/index";
 
-type PersonScore = {
-  name: string;
-  email: string;
-};
+// type PersonScore = {
+//   name: string;
+//   email: string;
+// };
 
 export const AddCompany: React.FC = () => {
   const methods = useForm();

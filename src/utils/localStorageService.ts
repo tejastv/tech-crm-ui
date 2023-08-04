@@ -30,6 +30,20 @@ export function getLocalStorageData(module: string, key: string) {
   return modObj;
 }
 /**
+ * Retrive module from localStorage
+ * @param  {string} module
+ * @param  {string} key
+ */
+export function getWholeStorageData(module: string) {
+  const moduleData: string | null = localStorage.getItem(module);
+  let modObj = moduleData ? JSON.parse(moduleData) : {};
+  if (modObj == undefined) {
+    modObj = {};
+    localStorage.setItem(module, JSON.stringify(modObj));
+  }
+  return modObj;
+}
+/**
  * Remove module from localStorage
  * @param  {string} module
  * @param  {string} key

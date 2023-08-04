@@ -7,6 +7,3 @@ export { AddCompany } from "./company-master/AddCompany";
 export { CompanyMaster } from "./company-master/CompanyMaster";
 // Models
 // Service
-
-//Constants
-export * from "../master/constants/route-constants";

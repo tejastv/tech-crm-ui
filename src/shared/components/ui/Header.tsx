@@ -4,14 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logoImage from "@assets/images/logo.png";
 import { removeLocalStorageData } from "@utils/index";
 import { useAuth } from "@hooks/index";
-import {
-  CLIENT,
-  CLIENT_GROUP,
-  CLIENT_MASTER,
-  COMPANY_MASTER,
-  SEGMENT,
-} from "@master/index";
-import { LOGIN, MASTER } from "../../../constants";
+import { LOGIN, MASTER_ROUTES } from "constants";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -73,7 +66,7 @@ export const Header: React.FC = () => {
                       <li className="sidebar-item">
                         <Link
                           className="sidebar-link"
-                          to={`${MASTER}${COMPANY_MASTER}`}
+                          to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.COMPANY_ROUTES.COMPANY}`}
                         >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Company</span>
@@ -96,7 +89,7 @@ export const Header: React.FC = () => {
                           <li className="sidebar-item">
                             <Link
                               className="sidebar-link"
-                              to={`${MASTER}${CLIENT_MASTER}${CLIENT}`}
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Client</span>
@@ -105,7 +98,7 @@ export const Header: React.FC = () => {
                           <li className="sidebar-item">
                             <Link
                               className="sidebar-link"
-                              to={`${MASTER}${CLIENT_MASTER}${CLIENT_GROUP}`}
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_GROUP}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Client Group</span>
@@ -115,7 +108,7 @@ export const Header: React.FC = () => {
                             {" "}
                             <Link
                               className="sidebar-link"
-                              to={`${MASTER}${CLIENT_MASTER}${SEGMENT}`}
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.SEGMENT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Segment</span>
