@@ -1,8 +1,9 @@
 import { createContext, useState, ReactNode, useEffect } from "react";
 import { getLocalStorageData } from "../utils";
 import { useNavigate } from "react-router-dom";
+
 import { DASHBOARD } from "../constants";
-import { UserType } from "../pages/auth/features";
+import { LoginRequest } from "@auth/index";
 
 // Define the type for the context value and state
 type AuthContextValue = {
@@ -30,7 +31,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user: UserType = getLocalStorageData("auth", "user");
+    const user: LoginRequest = getLocalStorageData("auth", "user");
     if (user) {
       navigate(DASHBOARD, { replace: true });
       setAuth({ user });

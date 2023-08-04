@@ -3,17 +3,17 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 //Hooks
-import { useAuth } from "../../hooks";
+import { useAuth } from "@hooks/index";
 
 //Types
-import { UserType } from "./features";
+import { LoginRequest } from "@auth/index";
 
 //Constants
 import { DASHBOARD } from "../../constants";
 
 //Assets
-import logoImage from "../../assets/images/logo.png";
-import { setLocalStorageData } from "../../utils";
+import logoImage from "@assets/images/logo.png";
+import { setLocalStorageData } from "@utils/index";
 
 export const Login: React.FC = () => {
   const { setAuth } = useAuth();
@@ -21,7 +21,7 @@ export const Login: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
-    const user: UserType = {
+    const user: LoginRequest = {
       userName: "Tejas",
       password: "tejastv",
     };

@@ -1,7 +1,8 @@
 // CompanyMaster.tsx
 import React from "react";
-import { BorderLayout, PageBreadcrumb, Table } from "../../../../../shared";
-import { ADD_COMPANY } from "../../..";
+
+import { BorderLayout, PageBreadcrumb, Table } from "@shared/index";
+import { ADD_COMPANY } from "@master/index";
 
 export const CompanyMaster: React.FC = () => {
   const config = {

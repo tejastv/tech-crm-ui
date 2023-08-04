@@ -1,9 +1,6 @@
 import { PropsWithChildren } from "react";
 
-//Components
-
-//Types
-import { CardType } from "../..";
+import { CardType } from "@shared/index";
 
 export const Card = (props: PropsWithChildren<CardType>) => {
   return (

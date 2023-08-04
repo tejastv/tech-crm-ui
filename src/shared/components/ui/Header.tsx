@@ -1,19 +1,17 @@
-// Header.tsx
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-//Assets
-import logoImage from "../../../assets/images/logo.png";
-import { removeLocalStorageData } from "../../../utils";
-import { LOGIN, MASTER } from "../../../constants";
-import { useAuth } from "../../../hooks";
+import logoImage from "@assets/images/logo.png";
+import { removeLocalStorageData } from "@utils/index";
+import { useAuth } from "@hooks/index";
 import {
   CLIENT,
   CLIENT_GROUP,
   CLIENT_MASTER,
   COMPANY_MASTER,
   SEGMENT,
-} from "../../../pages/master/features";
+} from "@master/index";
+import { LOGIN, MASTER } from "../../../constants";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();

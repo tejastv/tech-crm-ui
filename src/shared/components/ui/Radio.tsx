@@ -8,9 +8,10 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { MdError } from "react-icons/md";
-import { findInputError, isFormInvalid } from "../../../utils";
-import { RadioType } from "../..";
 import Form from "react-bootstrap/Form";
+
+import { findInputError, isFormInvalid } from "@utils/index";
+import { RadioType } from "@shared/index";
 
 export const CheckboxGroup: React.FC<RadioType> = ({
   name,

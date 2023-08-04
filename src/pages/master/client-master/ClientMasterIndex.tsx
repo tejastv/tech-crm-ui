@@ -3,8 +3,10 @@ import {
   CLIENT_GROUP,
   CLIENT,
   SEGMENT,
-} from "../../features/constants/route-constants";
-import { Client, ClientGroup, Segment } from "..";
+  Client,
+  ClientGroup,
+  Segment,
+} from "@master/index";
 
 const ClientMasterIndex = () => {
   return (

@@ -1,7 +1,6 @@
 import { PropsWithChildren } from "react";
-import { ButtonType } from "../..";
 
-//Types
+import { ButtonType } from "@shared/index";
 
 export const Button = (props: PropsWithChildren<ButtonType>) => {
   return (

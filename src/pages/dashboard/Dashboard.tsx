@@ -1,9 +1,8 @@
 // Dashboard.tsx
 import React from "react";
 
-//Components
-import { Greeting, Stats } from "./features";
-import { PageWrapper } from "../../shared";
+import { Greeting, Stats } from "@dashboard/index";
+import { PageWrapper } from "@shared/index";
 
 const Dashboard: React.FC = () => {
   return (
