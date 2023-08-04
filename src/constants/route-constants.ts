@@ -2,6 +2,7 @@ export const ROOT = "/";
 export const UNKNOWN = "*";
 
 export const LOGIN = "login";
+export const COMPONENTS = "/components";
 export const DASHBOARD = "/dashboard";
 
 export const MASTER_ROUTES = {
