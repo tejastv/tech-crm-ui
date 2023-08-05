@@ -33,7 +33,7 @@ export const Input = (props: FormFieldType) => {
             {props.config.multiline ? (
               <Form.Control
                 as="textarea"
-                rows={2}
+                rows={1}
                 placeholder={props.config.placeholder}
                 id={props.config.id}
                 {...register(props.config.name, props.config.validation)}

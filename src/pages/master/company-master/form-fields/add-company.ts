@@ -58,6 +58,23 @@ export const addressField: FormFieldType = {
   },
 };
 
+export const officeAddressField: FormFieldType = {
+  config: {
+    name: "officeAddress",
+    label: "Regd. Office Address",
+    id: "officeAddress",
+    multiline: true,
+    placeholder: "write your Regd. Office Address Address ...",
+    validation: {
+      required: {
+        value: true,
+        message: "required",
+      
+      },
+    },
+  },
+};
+
 export const options = [
   { value: "chocolate33", label: "Chocolate" },
   { value: "strawberry", label: "Strawberry" },

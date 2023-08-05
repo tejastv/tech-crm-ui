@@ -1,29 +1,23 @@
-// AddCompany.tsx
-import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-
 import {
-  ActionButtons,
   BorderLayout,
   Card,
-  Checkbox,
-  DatePicker,
   Input,
-  Radio,
   Select,
-} from "@shared/index";
-import {
-  nameField,
-  emailField,
+  Checkbox,
+  Radio,
+  DatePicker,
+  ActionButtons,
   addressField,
-  selectField,
-  genderField,
   checkBoxField,
   datePickerField,
-  officeAddressField,
-} from "..";
+  emailField,
+  genderField,
+  nameField,
+  selectField,
+} from "@shared/index";
 
-export const AddCompany: React.FC = () => {
+export const Components = () => {
   const methods = useForm();
 
   const cardConfig = {
@@ -56,7 +50,6 @@ export const AddCompany: React.FC = () => {
                   <Input config={nameField.config} />
                   <Input config={emailField.config} />
                   <Input config={addressField.config} />
-                  <Input config={officeAddressField.config} />
                   <Select config={selectField.config} />
                   <Checkbox config={checkBoxField.config} />
                   <Radio config={genderField.config} />
