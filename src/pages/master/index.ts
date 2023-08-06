@@ -11,6 +11,6 @@ export { AddCity } from "./location-master/city/AddCity";
 export { City } from "./location-master/city/City";
 //Form Fields
 export * from "./company-master/form-fields/add-company";
-export * from "./location-master/form/add-city";
+export * from "./location-master/form-fields/add-city";
 // Models
 // Service

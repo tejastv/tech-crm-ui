@@ -3,6 +3,7 @@ import React from "react";
 
 import profilepic from "@assets/images/2.jpg";
 import { useAuth } from "@hooks/useAuth";
+import { Image } from "@shared/index";
 
 export const Greeting: React.FC = () => {
   const { user } = useAuth();
@@ -14,7 +15,7 @@ export const Greeting: React.FC = () => {
             <div className="card-body">
               <div className="d-flex align-items-center">
                 <div className="m-r-10">
-                  <img
+                  <Image
                     src={profilepic}
                     alt="user"
                     width="60"
