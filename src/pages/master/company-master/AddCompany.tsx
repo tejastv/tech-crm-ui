@@ -16,10 +16,29 @@ import {
   nameField,
   emailField,
   addressField,
-  selectField,
-  genderField,
-  checkBoxField,
-  datePickerField,
+  officeAddressField,
+  telNo,
+  faxNo,
+  website,
+  city,
+  country,
+  state,
+  contactPerson,
+  designation,
+  zip,
+  companyType,
+  incorporationDate,
+  hscode,
+  givenName,
+  referenceno,
+  financialyear,
+  regno,
+  bankers,
+  notes,
+  cmie,
+  rocStatus,
+  recodes,
+  recfin,
 } from "..";
 
 export const AddCompany: React.FC = () => {
@@ -53,13 +72,36 @@ export const AddCompany: React.FC = () => {
               <div className="row">
                 <div className="col-md-6 col-xs-12">
                   <Input config={nameField.config} />
-                  <Input config={emailField.config} />
                   <Input config={addressField.config} />
-                  <Select config={selectField.config} />
-                  <Checkbox config={checkBoxField.config} />
-                  <Radio config={genderField.config} />
-                  <DatePicker config={datePickerField.config} />
+                  <Input config={officeAddressField.config} />
+                  <Input config={telNo.config} />
+                  <Input config={faxNo.config} />
+                  <Input config={emailField.config} />
+                  <Input config={website.config} />
+                  <Input config={contactPerson.config} />
+                  <Input config={designation.config} />
+                  <Select config={zip.config} />
+                  <Select config={city.config} />
+                  <Select config={state.config} />
+                  <Select config={country.config} />
                 </div>
+                <div className="col-md-6 col-xs-12">
+                  <Input config={hscode.config} />
+                  <Input config={givenName.config} />
+                  <Input config={financialyear.config} />
+                  <Input config={regno.config} />
+                  <Radio config={companyType.config} />
+                  <DatePicker config={incorporationDate.config} />
+                  <Input config={bankers.config} />
+                  <Input config={notes.config} />
+                  <Input config={cmie.config} />
+                  <Input config={rocStatus.config} />
+                  <Input config={recodes.config} />
+                  <Input config={recfin.config} />
+                  {/* <Checkbox config={checkBoxField.config} /> */}
+                  
+                </div>
+
               </div>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
