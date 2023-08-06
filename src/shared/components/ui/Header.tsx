@@ -193,10 +193,13 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="city.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_ROUTE}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.CITY}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">City</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
