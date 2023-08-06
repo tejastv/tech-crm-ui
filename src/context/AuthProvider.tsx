@@ -9,9 +9,8 @@ interface AuthContext {
 
 export const AuthContext = createContext<AuthContext>({
   user: null,
-  setUser: () => { },
+  setUser: () => {},
 });
-
 
 // Create the AuthProvider component
 type AuthProviderProps = {
@@ -20,7 +19,7 @@ type AuthProviderProps = {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const { getItem } = useLocalStorage();
-  const [user, setUser] = useState<User | null>(JSON.parse(getItem('user') || '') as User);
+  const [user, setUser] = useState<User | null>(getItem("user") as User | null);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
