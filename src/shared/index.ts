@@ -23,6 +23,7 @@ export * from "./types/card-type";
 export * from "./types/error-type";
 export * from "./types/radio-type";
 export * from "./types/page-breadcrumb-type";
+export * from "./types/generic-type";
 
 export * from "./types/forms-type/form-field";
 export * from "./types/forms-type/options-type";
