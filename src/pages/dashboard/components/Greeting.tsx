@@ -2,8 +2,10 @@
 import React from "react";
 
 import profilepic from "@assets/images/2.jpg";
+import { useAuth } from "@hooks/useAuth";
 
 export const Greeting: React.FC = () => {
+  const { user } = useAuth();
   return (
     <>
       <div className="row">
@@ -20,7 +22,7 @@ export const Greeting: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <h4 className="m-b-0">Welcome back - Hiren Bagadia</h4>
+                  <h4 className="m-b-0">Welcome back - {user?.name}</h4>
                   <span>Tuesday, 25 July 2023</span>
                 </div>
               </div>
