@@ -1,21 +1,16 @@
-import { createContext, useState, ReactNode } from "react";
-import { getWholeStorageData } from "../utils";
+import { User } from "@hooks/useUser";
+import { ReactNode, createContext,useState } from "react";
 
-// Define the type for the context value and state
-type AuthContextValue = {
-  auth: any; // Replace 'any' with the actual type of your authentication data
-  setAuth: React.Dispatch<React.SetStateAction<any>>; // Replace 'any' with the actual type of the state
-};
+interface AuthContext {
+  user: User | null;
+  setUser: (user: User | null) => void;
+}
 
-const initialAuthContextValue: AuthContextValue = {
-  auth: {},
-  setAuth: () => {},
-};
+export const AuthContext = createContext<AuthContext>({
+  user: null,
+  setUser: () => {},
+});
 
-// Create the AuthContext
-export const AuthContext = createContext<AuthContextValue>(
-  initialAuthContextValue
-);
 
 // Create the AuthProvider component
 type AuthProviderProps = {
@@ -23,10 +18,10 @@ type AuthProviderProps = {
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [auth, setAuth] = useState(getWholeStorageData("auth"));
+  const [user, setUser] = useState<User | null>(null);
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider value={{ user, setUser }}>
       {children}
     </AuthContext.Provider>
   );
