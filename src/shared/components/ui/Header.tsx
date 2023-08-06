@@ -2,17 +2,15 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import logoImage from "@assets/images/logo.png";
-import { removeLocalStorageData } from "@utils/index";
 import { useAuth } from "@hooks/index";
 import { LOGIN, MASTER_ROUTES } from "constants";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { logout } = useAuth();
 
   const logoutHandler = (): void => {
-    removeLocalStorageData("auth", "user");
-    setAuth("");
+    logout();
     navigate(LOGIN);
   };
   return (
