@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import { RequireAuth } from "@guards/index";
 import { Login } from "@auth/index";
@@ -25,7 +25,7 @@ const AppRoutes = () => {
         <Route path={LOGIN} element={<Login />} />
         <Route path={COMPONENTS} element={<Components />} />
         <Route element={<RequireAuth />}>
-          <Route path={ROOT} element={<Login />} />
+          <Route index element={<Navigate to={DASHBOARD} />} />
           <Route
             path={DASHBOARD}
             element={
