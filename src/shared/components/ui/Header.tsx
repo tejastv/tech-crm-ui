@@ -205,10 +205,13 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="state.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_ROUTE}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.STATE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">State</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
