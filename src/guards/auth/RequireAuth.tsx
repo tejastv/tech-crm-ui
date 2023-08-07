@@ -6,10 +6,10 @@ import { LOGIN } from "@constants/index";
 import { HeaderLayout } from "@layout/index";
 
 export const RequireAuth: React.FC = () => {
-  const { auth } = useAuth();
+  const { user } = useAuth();
   const location = useLocation();
 
-  return !auth?.user ? (
+  return !user ? (
     <Navigate to={LOGIN} state={{ from: location }} replace />
   ) : (
     <HeaderLayout>

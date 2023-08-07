@@ -15,7 +15,7 @@ export { AddState } from "./location-master/state/AddState";
 export { State } from "./location-master/state/State";
 //Form Fields
 export * from "./company-master/form-fields/add-company";
-export * from "./location-master/form/add-city";
-export * from "./location-master/form/add-state";
+export * from "./location-master/form-fields/add-state";
+export * from "./location-master/form-fields/add-city";
 // Models
 // Service

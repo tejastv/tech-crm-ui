@@ -2,7 +2,7 @@ import { MaxLeangthType, MinLeangthType, PatternType } from "@shared/index";
 
 export interface ValidationType {
   required: {
-    value: true;
+    value: boolean;
     message: string;
   };
   pattern?: PatternType;
