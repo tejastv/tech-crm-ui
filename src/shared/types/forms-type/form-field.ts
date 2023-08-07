@@ -11,5 +11,6 @@ export interface FormFieldType {
     multiline?: boolean;
     className?: string;
     options?: Array<Options>;
+    
   };
 }
