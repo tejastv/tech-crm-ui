@@ -32,6 +32,7 @@ export const Radio = (props: FormFieldType) => {
             {props.config.label}
           </Form.Label>
           <div className="col-sm-9">
+            <div className="input-group">
             {props.config.options &&
               props.config.options.map((option) => {
                 return (
@@ -51,6 +52,8 @@ export const Radio = (props: FormFieldType) => {
                 {inputErrors.error.message}
               </Form.Text>
             )}
+            
+            </div>
           </div>
         </div>
       </div>

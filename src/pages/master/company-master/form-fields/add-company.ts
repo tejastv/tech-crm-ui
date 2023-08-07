@@ -7,11 +7,11 @@ export const nameField: FormFieldType = {
     label: "Name",
     type: "text",
     id: "name",
-    placeholder: "write your name ...",
+    placeholder: "Enter name ...",
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Name",
       },
       maxLength: {
         value: 30,
@@ -27,12 +27,16 @@ export const addressField: FormFieldType = {
     label: "Address",
     id: "Address",
     multiline: true,
-    placeholder: "write your Address ...",
+    placeholder: "Wnter Address ...",
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Address",
       },
+      pattern: {
+        value: /^[\w\s\d#.,\-\/]+$/,
+        message: "Invalid address",
+      },      
     },
   },
 };
@@ -43,11 +47,11 @@ export const officeAddressField: FormFieldType = {
     label: "Regd. Office Address",
     id: "officeAddress",
     multiline: true,
-    placeholder: "write your Regd. Office Address Address ...",
+    placeholder: " Enter Regd. Office Address...",
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Regd Office Address",
       
       },
     },
@@ -64,7 +68,7 @@ export const telNo: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Telephone Number",
       },
       pattern: {
         value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
@@ -80,11 +84,11 @@ export const faxNo: FormFieldType = {
     label: "Fax No.",
     type: "number",
     id: "name",
-    placeholder: "write your Fax no ...",
+    placeholder: "Enter Fax no ...",
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Fax number",
       },
       pattern: {
         value: /^\+?[0-9\s\-()+.]*$/,
@@ -100,16 +104,16 @@ export const emailField: FormFieldType = {
     label: "Email Address",
     type: "email",
     id: "email",
-    placeholder: "write a random email address",
+    placeholder: "Enter email address",
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Email ",
       },
       pattern: {
         value:
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        message: "not valid",
+        message: "not valid ",
       },
     },
   },
@@ -124,7 +128,7 @@ export const website: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Website",
       },
       pattern: {
         value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
@@ -144,7 +148,7 @@ export const contactPerson: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Contect person",
       },
       maxLength: {
         value: 30,
@@ -164,7 +168,7 @@ export const designation: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Designation",
       },
       maxLength: {
         value: 30,
@@ -184,10 +188,10 @@ export const zip: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Zip",
       },
       pattern: {
-        value: /^\d{5}$/,
+        value: /^\d{6}$/,
         message: "Invalid ZIP code",
       },     
     },
@@ -210,8 +214,12 @@ export const city: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Select city",
       },
+      pattern: {
+        value: /^[a-zA-Z0-9\-]+$/,
+        message: "Invalid City",
+      } ,
     },
   },
 };
@@ -232,8 +240,12 @@ export const state: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Select State",
       },
+      pattern: {
+        value: /^[a-zA-Z0-9\-]+$/,
+        message: "Invalid State",
+      },   
     },
   },
 };
@@ -254,8 +266,13 @@ export const country: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Select Country",
       },
+      pattern: {
+        value: /^[a-zA-Z0-9\-]+$/,
+        message: "Invalid Country ",
+      }
+      
     },
   },
 };
@@ -270,8 +287,13 @@ export const hscode: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
-      },     
+        message: "Please Enter HS Code",
+      },    
+      pattern: {
+        value: /^\d{6}$/,
+        message: "Invalid HS Code",
+      }
+      
     },
   },
 };
@@ -286,7 +308,7 @@ export const givenName: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Given Name",
       },
       maxLength: {
         value: 30,
@@ -306,8 +328,12 @@ export const referenceno: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Enter Ref Number",
       },
+      pattern: {
+        value: /^[a-zA-Z0-9\-]+$/,
+        message: "Invalid reference number",
+      },      
     },
   },
 };
@@ -322,11 +348,16 @@ export const financialyear: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Year",
       },
+      pattern: {
+        value: /^\d{4}-\d{4}$/,
+        message: "Invalid financial year",
+      },     
     },
   },
 };
+
 export const regno: FormFieldType = {
   config: {
     name: "regno",
@@ -337,7 +368,11 @@ export const regno: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Reg no",
+      },
+      pattern: {
+        value: /^[a-zA-Z0-9\-]+$/,
+        message: "Invalid register number",
       },
     },
   },
@@ -370,13 +405,15 @@ export const companyType: FormFieldType = {
     name: "companyType",
     label: "Company Type",
     id: "companyType",
+    className:"custom-control-input",
     options: selectOptionsMaker(companyOptions, "value", "label"),
     placeholder: "write a random Select Box",
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Company name",
       },
+      
     },
   },
 };
@@ -390,8 +427,12 @@ export const incorporationDate: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Select Date",
       },
+      pattern: {
+        value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+        message: "Invalid date",
+      },      
     },
   },
 };
@@ -407,8 +448,12 @@ export const bankers: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Bankers",
       },
+      maxLength: {
+        value: 30,
+        message: "30 characters max",
+      }, 
     },
   },
 };
@@ -423,7 +468,7 @@ export const notes: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Notes",
       },
     },
   },
@@ -438,8 +483,12 @@ export const cmie: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter CMIE",
       },
+      maxLength: {
+        value: 30,
+        message: "Enter CMIE",
+      }, 
     },
   },
 };
@@ -453,8 +502,12 @@ export const rocStatus: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter ROC",
       },
+      maxLength: {
+        value: 30,
+        message: "Enter ROC",
+      }, 
     },
   },
 };
@@ -465,12 +518,16 @@ export const recodes: FormFieldType = {
     label: "Recodes",
     type: "text",
     id: "recodes",
-    placeholder: "Enter ROC Status",
+    placeholder: "Enter Records",
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Records",
       },
+      maxLength: {
+        value: 30,
+        message: "Enetr Records  ",
+      }, 
     },
   },
 };
@@ -485,8 +542,12 @@ export const recfin: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "required",
+        message: "Please Enter Rec",
       },
+      maxLength: {
+        value: 30,
+        message: "Enter Rec",
+      }, 
     },
   },
 };
