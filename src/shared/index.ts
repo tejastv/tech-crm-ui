@@ -15,14 +15,17 @@ export { Select } from "./components/ui/Select";
 export { Checkbox } from "./components/ui/Checkbox";
 export { Radio } from "./components/ui/Radio";
 export { DatePicker } from "./components/ui/DatePicker";
+export { Image } from "./components/ui/Image";
 
 // Types
 export * from "./types/button-type";
 export * from "./types/border-layout-types";
 export * from "./types/card-type";
 export * from "./types/error-type";
-export * from "./types/radio-type";
+
 export * from "./types/page-breadcrumb-type";
+export * from "./types/generic-type";
+export * from "./types/image-type";
 
 export * from "./types/forms-type/form-field";
 export * from "./types/forms-type/options-type";

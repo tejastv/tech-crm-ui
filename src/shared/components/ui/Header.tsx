@@ -2,17 +2,15 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import logoImage from "@assets/images/logo.png";
-import { removeLocalStorageData } from "@utils/index";
 import { useAuth } from "@hooks/index";
 import { LOGIN, MASTER_ROUTES } from "constants";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { logout } = useAuth();
 
   const logoutHandler = (): void => {
-    removeLocalStorageData("auth", "user");
-    setAuth("");
+    logout();
     navigate(LOGIN);
   };
   return (
@@ -195,10 +193,13 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="city.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_ROUTE}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.CITY}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">City</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}

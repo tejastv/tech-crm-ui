@@ -19,6 +19,15 @@ export const MASTER_ROUTES = {
     CLIENT_GROUP: "client-group",
     SEGMENT: "segment",
   },
+  LOCATION_MASTER_ROUTES: {
+    LOCATION_MASTER_PARENT_ROUTE: "/location/*",
+    LOCATION_MASTER_ROUTE: "location/",
+    CITY_PARENT_ROUTE: "/city/*",
+    CITY: "city",
+    STATE: "state",
+    COUNTRY: "country",
+    CONTINENT: "cntinent",
+  },
 };
 
 export const COMMON_ROUTES = {
