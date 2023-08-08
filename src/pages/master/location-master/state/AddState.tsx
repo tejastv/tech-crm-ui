@@ -2,13 +2,13 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { cityField, osPrintField } from "@master/index";
+import { stateField, stateCodeField, numbericCodeField } from "@master/index";
 
-export const AddCity: React.FC = () => {
+export const AddState: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add City",
+      mainHeading: "Add State",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -33,10 +33,11 @@ export const AddCity: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={cityField.config} />
+                  <Input config={stateField.config} />
+                  <Input config={numbericCodeField.config} />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input config={osPrintField.config} />
+                  <Input config={stateCodeField.config} />
                 </div>
               </div>
             </BorderLayout>

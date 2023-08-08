@@ -6,11 +6,16 @@ export { Segment } from "./client-master/Segment";
 export { AddCompany } from "./company-master/AddCompany";
 export { CompanyMaster } from "./company-master/CompanyMaster";
 
+// Location
 // City master child pages
 export { AddCity } from "./location-master/city/AddCity";
 export { City } from "./location-master/city/City";
+// State master child pages
+export { AddState } from "./location-master/state/AddState";
+export { State } from "./location-master/state/State";
 //Form Fields
 export * from "./company-master/form-fields/add-company";
+export * from "./location-master/form-fields/add-state";
 export * from "./location-master/form-fields/add-city";
 // Models
 // Service

@@ -23,6 +23,7 @@ export const MASTER_ROUTES = {
     LOCATION_MASTER_PARENT_ROUTE: "/location/*",
     LOCATION_MASTER_ROUTE: "location/",
     CITY_PARENT_ROUTE: "/city/*",
+    STATE_PARENT_ROUTE: "/state/*",
     CITY: "city",
     STATE: "state",
     COUNTRY: "country",
