@@ -9,6 +9,12 @@ const CityMasterIndex = React.lazy(
 const StateMasterIndex = React.lazy(
   () => import("./state/StateMasterIndex")
 );
+const CountryMasterIndex = React.lazy(
+  () => import("./country/CountryMasterIndex")
+);
+const ContinentMasterIndex = React.lazy(
+  () => import("./continent/ContinentMasterIndex")
+);
 
 const LocationMasterIndex = () => {
   return (
@@ -21,14 +27,14 @@ const LocationMasterIndex = () => {
         path={MASTER_ROUTES.LOCATION_MASTER_ROUTES.STATE_PARENT_ROUTE}
         element={<StateMasterIndex />}
       ></Route>
-      {/* <Route
-        path={MASTER_ROUTES.LOCATION_MASTER_ROUTES.STATE}
-        element={<Segment />}
+      <Route
+        path={MASTER_ROUTES.LOCATION_MASTER_ROUTES.COUNTRY_PARENT_ROUTE}
+        element={<CountryMasterIndex />}
       ></Route>
        <Route
-        path={MASTER_ROUTES.LOCATION_MASTER_ROUTES.CONTINENT}
-        element={<Segment />}
-      ></Route> */}
+        path={MASTER_ROUTES.LOCATION_MASTER_ROUTES.CONTINENT_PARENT_ROUTE}
+        element={<ContinentMasterIndex />}
+      ></Route>
     </Routes>
   );
 };
