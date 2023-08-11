@@ -31,6 +31,16 @@ export const MASTER_ROUTES = {
     COUNTRY: "country",
     CONTINENT: "continent",
   },
+  LOCALSOURCEM_MASTER_ROUTES: {
+    LOCALSOURCEM_MASTER_PARENT_ROUTE: "/local-source-master/*",
+    LOCALSOURCEM_MASTER_ROUTE: "local-source-master/",
+    LOCALSOURCE_PARENT_ROUTE: "/local-source/*",
+    PRICE_PARENT_ROUTE: "/price/*",
+    STDPRICE_PARENT_ROUTE: "/stdprice/*",
+    LOCALSOURCE: "local-source",
+    PRICE: "price",
+    STDPRICE: "stdprice",
+  },
 };
 
 export const COMMON_ROUTES = {

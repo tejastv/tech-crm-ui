@@ -14,6 +14,9 @@ const ClientMasterIndex = React.lazy(
 const LocationMasterIndex = React.lazy(
   () => import("./location-master/LocationMasterIndex")
 );
+const LocalSourceMasterIndex = React.lazy(
+  () => import("./local-source-master/LocalSourceMasterIndex")
+);
 
 const MasterRoutes = () => {
   return (
@@ -35,6 +38,14 @@ const MasterRoutes = () => {
         element={
           <React.Suspense>
             <LocationMasterIndex />
+          </React.Suspense>
+        }
+      ></Route>
+       <Route
+        path={MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_PARENT_ROUTE}
+        element={
+          <React.Suspense>
+            <LocalSourceMasterIndex />
           </React.Suspense>
         }
       ></Route>

@@ -271,8 +271,7 @@ export const country: FormFieldType = {
       pattern: {
         value: /^[a-zA-Z0-9\-]+$/,
         message: "Invalid Country ",
-      }
-      
+      },
     },
   },
 };

@@ -34,6 +34,6 @@ const numbericCodeFieldValidation = {
     },
 } as ValidationType;
 
-export const stateField: FormFieldType = createFormConfig('state', 'State', 'text', stateFieldValidation);
-export const stateCodeField: FormFieldType = createFormConfig('stateCode', 'State Code (eg: MH, GJ, etc)', 'text', stateCodeFieldValidation);
-export const numbericCodeField: FormFieldType = createFormConfig('stateCode', 'Numeric Code (eg: 09, 19, etc)', 'text', numbericCodeFieldValidation);
+export const stateField: FormFieldType = createFormConfig('state', 'State', 'text', stateFieldValidation,'');
+export const stateCodeField: FormFieldType = createFormConfig('stateCode', 'State Code (eg: MH, GJ, etc)', 'text', stateCodeFieldValidation,'');
+export const numbericCodeField: FormFieldType = createFormConfig('stateCode', 'Numeric Code (eg: 09, 19, etc)', 'text', numbericCodeFieldValidation,'');
