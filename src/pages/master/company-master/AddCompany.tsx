@@ -6,7 +6,6 @@ import {
   ActionButtons,
   BorderLayout,
   Card,
-  Checkbox,
   DatePicker,
   Input,
   Radio,
@@ -103,8 +102,6 @@ export const AddCompany: React.FC = () => {
                   <Input config={rocStatus.config} />
                   <Input config={recodes.config} />
                   <Input config={recfin.config} />
-                  {/* <Checkbox config={checkBoxField.config} /> */}
-                  
                   </div>
                 </div>
 

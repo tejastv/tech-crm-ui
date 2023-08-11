@@ -1,4 +1,4 @@
-import { FormFieldType, gender } from "@shared/index";
+import { FormFieldType } from "@shared/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
 export const nameField: FormFieldType = {
