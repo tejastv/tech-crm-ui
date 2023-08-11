@@ -227,6 +227,7 @@ export const Header: React.FC = () => {
                           </li>
                         </ul>
                       </li>
+                      {/* Working */}
                       <li className="sidebar-item">
                         {" "}
                         <a
@@ -235,7 +236,7 @@ export const Header: React.FC = () => {
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-collage"></i>
-                          <span className="hide-menu">Local Source Master</span>
+                          <span className="hide-menu">LocalSource Master</span>
                         </a>
                         <ul
                           aria-expanded="false"
@@ -243,34 +244,33 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="local_source.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Local Source</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="price_list_local_source.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.PRICE}`}
                             >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">
-                                Price list(for local source){" "}
-                              </span>
-                            </a>
+                              <span className="hide-menu ">Price List(for local source)</span>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="std_price_list_local_source.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.STDPRICE}`}
                             >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">
-                                Std. Price List(for Local Source)
-                              </span>
-                            </a>
+                              <span className="hide-menu ">Std Price List(for local source)</span>
+                            </Link>
                           </li>
                         </ul>
                       </li>

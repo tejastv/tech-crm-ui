@@ -1,0 +1,86 @@
+import { FormFieldType, ValidationType } from "@shared/index";
+import { createFormConfig } from "@utils/index";
+
+const PriceLocalsourceValidation = {
+    required: {
+        value: true,
+        message: "{label} field is rquired",
+    },
+    maxLength: {
+        value: 20,
+        message: "30 characters max",
+    },
+} as ValidationType;
+const PurchesExchanegRateValidation = {
+    required: {
+        value: true,
+        message: "{label} field is rquired",
+    },
+    maxLength: {
+        value: 30,
+        message: "30 characters max",
+    },
+} as ValidationType;
+const SellExchanegRateValidation = {
+    required: {
+        value: true,
+        message: "{label} field is rquired",
+    },
+    maxLength: {
+        value: 30,
+        message: "30 characters max",
+    },
+} as ValidationType;
+
+
+// const EmailValidationCC = {
+//     required: {
+//         value: true,
+//         message: "{label} field is rquired",
+//     },
+//     pattern: {
+//         value:
+//           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+//         message: "not valid ",
+//       },
+// } as ValidationType;
+const PriceCurrencyValidation = {
+
+    required: {
+        value: true,
+        message: "{label} field is rquired",
+    },
+    pattern: {
+      value: /^[a-zA-Z0-9\-]+$/,
+      message: "Invalid Country ",
+    },
+} as ValidationType;
+const PriceDateValidation = {
+
+    required: {
+        value: true,
+        message: "{label} field is rquired",
+    },
+    pattern: {
+        value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+        message: "Invalid date",
+      },
+} as ValidationType;
+
+export const priceLocalSourceOptions = [
+    { value: "Mumbai", label: "200" },
+    { value: "strawberry", label: "300" },
+    { value: "vanilla", label: "400" },
+  ];
+export const priceCurrencyOptions = [
+    { value: "Mumbai", label: "200" },
+    { value: "strawberry", label: "300" },
+    { value: "vanilla", label: "400" },
+  ];
+
+export const priceLocalSource: FormFieldType = createFormConfig('source', 'Local Source', 'slelect', PriceLocalsourceValidation,'Enter localSource',priceLocalSourceOptions);
+export const priceCurrency: FormFieldType = createFormConfig('PriceCurrencey', 'Currency', 'select', PriceCurrencyValidation,'Select Currency',priceCurrencyOptions);
+export const purchesExchanegRate: FormFieldType = createFormConfig('emailCC', 'Exchg. Rate(Rs.)', 'text', PurchesExchanegRateValidation,'Enter Exchg. Rate(Rs.)');
+export const sellExchanegRate: FormFieldType = createFormConfig('currencey', 'Exchg. Rate(Rs.)', 'text', SellExchanegRateValidation,'Enter Exchg. Rate(Rs.) ');
+export const purchesDate: FormFieldType = createFormConfig('purchesDate', 'Date', 'date', PriceDateValidation,'',);
+export const sellDate: FormFieldType = createFormConfig('sellDate', 'Date', 'date', PriceDateValidation,'',);

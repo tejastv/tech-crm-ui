@@ -16,10 +16,12 @@ export { Checkbox } from "./components/ui/Checkbox";
 export { Radio } from "./components/ui/Radio";
 export { DatePicker } from "./components/ui/DatePicker";
 export { Image } from "./components/ui/Image";
+export { DivLayout } from "./components/ui/Div-layout";
 
 // Types
 export * from "./types/button-type";
 export * from "./types/border-layout-types";
+export * from "./types/div-layout-type"
 export * from "./types/card-type";
 export * from "./types/error-type";
 
