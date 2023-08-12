@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import logoImage from "@assets/images/logo.png";
 import { useAuth } from "@hooks/index";
-import { LOGIN, MASTER_ROUTES } from "constants";
+import { DASHBOARD, LOGIN, MASTER_ROUTES } from "constants";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const Header: React.FC = () => {
             >
               <i className="ti-menu ti-close"></i>
             </a>
-            <a className="navbar-brand">
+            <Link to={DASHBOARD} className="navbar-brand">
               <span className="logo-text">
                 <img src={logoImage} alt="homepage" className="dark-logo" />
                 <img
@@ -34,7 +34,7 @@ export const Header: React.FC = () => {
                   alt="homepage"
                 />
               </span>
-            </a>
+            </Link>
             <a
               className="topbartoggler d-block d-md-none waves-effect waves-light nav-toggler"
               href="#"
