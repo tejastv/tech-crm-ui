@@ -17,7 +17,9 @@ export const MASTER_ROUTES = {
     CLIENT_MASTER_ROUTE: "client-master/",
     CLIENT: "client",
     CLIENT_GROUP: "client-group",
+    SEGMENT_PARENT_ROUTE: "/sengment/*",
     SEGMENT: "segment",
+
   },
   LOCATION_MASTER_ROUTES: {
     LOCATION_MASTER_PARENT_ROUTE: "/location/*",

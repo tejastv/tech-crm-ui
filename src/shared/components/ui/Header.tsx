@@ -107,6 +107,7 @@ export const Header: React.FC = () => {
                             <Link
                               className="sidebar-link"
                               to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.SEGMENT}`}
+                              // to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.SEGMENT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Segment</span>
@@ -213,13 +214,10 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <Link
-                              className="sidebar-link"
-                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_ROUTE}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.COUNTRY}`}
-                            >
+                            <a className="sidebar-link" href="country.php">
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Country</span>
-                            </Link>
+                            {/* </Link> */}</a>
                           </li>
                           <li className="sidebar-item">
                             {" "}

@@ -8,7 +8,7 @@ export const AddSource: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add LocalSource",
+      mainHeading: "Add Local Source",
       heading: "Entry",
     },
     formActionsConfig: {
