@@ -1,8 +1,8 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Select ,Table} from "@shared/index";
-import { stdcurrencey} from "@master/index";
+import { BorderLayout, Card, Select, Table } from "@shared/index";
+import { stdcurrencey } from "@master/index";
 
 export const AddStdPrice: React.FC = () => {
   const methods = useForm();
@@ -36,18 +36,15 @@ export const AddStdPrice: React.FC = () => {
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
               <div className="row">
                 <div className="col-3 pull-right">
-                  {/* <div className="card-body"> */}
                   <Select config={stdcurrencey.config} />
-              {/* </div> */}
-              </div>
+                </div>
               </div>
             </BorderLayout>
-            
           </form>
         </FormProvider>
         <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-        <Table></Table>
-      </BorderLayout>
+          <Table></Table>
+        </BorderLayout>
       </Card>
     </>
   );

@@ -9,7 +9,7 @@ const LocalSMasterIndex = React.lazy(
 const PriceMasterIndex = React.lazy(
   () => import("./price-list/PriceMasterIndex")
 );
-const  StdPriceMasterIndex= React.lazy(
+const StdPriceMasterIndex = React.lazy(
   () => import("./std-price-list/StdPriceMasterIndex")
 );
 
@@ -28,14 +28,6 @@ const LocalSourceMasterIndex = () => {
         path={MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.STDPRICE_PARENT_ROUTE}
         element={<StdPriceMasterIndex />}
       ></Route>
-      {/* <Route
-        path={MASTER_ROUTES.LOCATION_MASTER_ROUTES.STATE}
-        element={<Segment />}
-      ></Route>
-       <Route
-        path={MASTER_ROUTES.LOCATION_MASTER_ROUTES.CONTINENT}
-        element={<Segment />}
-      ></Route> */}
     </Routes>
   );
 };

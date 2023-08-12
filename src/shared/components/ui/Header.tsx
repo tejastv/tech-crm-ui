@@ -217,7 +217,8 @@ export const Header: React.FC = () => {
                             <a className="sidebar-link" href="country.php">
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Country</span>
-                            {/* </Link> */}</a>
+                              {/* </Link> */}
+                            </a>
                           </li>
                           <li className="sidebar-item">
                             {" "}
@@ -263,7 +264,9 @@ export const Header: React.FC = () => {
                               to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.PRICE}`}
                             >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">Price List(for local source)</span>
+                              <span className="hide-menu ">
+                                Price List(for local source)
+                              </span>
                             </Link>
                           </li>
                           <li className="sidebar-item">
@@ -273,7 +276,9 @@ export const Header: React.FC = () => {
                               to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.STDPRICE}`}
                             >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">Std Price List(for local source)</span>
+                              <span className="hide-menu ">
+                                Std Price List(for local source)
+                              </span>
                             </Link>
                           </li>
                         </ul>
