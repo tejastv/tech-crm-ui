@@ -9,7 +9,7 @@ export const AddPrice: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Price List (Local Source)",
+      mainHeading: "Price List (Local Source)",
       heading: "Action Buttons",
     },
     formPurchesConfig: {

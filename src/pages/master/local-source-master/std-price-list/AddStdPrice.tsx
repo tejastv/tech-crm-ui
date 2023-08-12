@@ -8,7 +8,7 @@ export const AddStdPrice: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Std. Price List (Local Source)",
+      mainHeading: "Std. Price List (Local Source)",
       heading: "Entry",
     },
     formActionsConfig: {
