@@ -26,10 +26,12 @@ export const MASTER_ROUTES = {
     LOCATION_MASTER_ROUTE: "location/",
     CITY_PARENT_ROUTE: "/city/*",
     STATE_PARENT_ROUTE: "/state/*",
+    COUNTRY_PARENT_ROUTE: "/country/*",
+    CONTINENT_PARENT_ROUTE: "/continent/*",
     CITY: "city",
     STATE: "state",
     COUNTRY: "country",
-    CONTINENT: "cntinent",
+    CONTINENT: "continent",
   },
   LOCALSOURCEM_MASTER_ROUTES: {
     LOCALSOURCEM_MASTER_PARENT_ROUTE: "/local-source-master/*",
