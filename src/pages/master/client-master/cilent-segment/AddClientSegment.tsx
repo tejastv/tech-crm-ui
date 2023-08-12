@@ -1,21 +1,19 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Select ,Table} from "@shared/index";
-import { stdcurrencey} from "@master/index";
+import { ActionButtons, BorderLayout, Card, Input, Select } from "@shared/index";
 
-export const AddStdPrice: React.FC = () => {
+import { clientSegment } from "@master/index";
+
+export const AddClientSegment: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Std. Price List (Local Source)",
-      heading: "Entry",
+      mainHeading: "Add Segment",
+      heading: "Segment Details",
     },
     formActionsConfig: {
       heading: "Action Buttons",
-    },
-    borderLayoutConfig: {
-      heading: "Table",
     },
   };
 
@@ -37,7 +35,7 @@ export const AddStdPrice: React.FC = () => {
               <div className="row">
                 <div className="col-3 pull-right">
                   {/* <div className="card-body"> */}
-                  <Select config={stdcurrencey.config} />
+                  <Input config={clientSegment.config} />
               {/* </div> */}
               </div>
               </div>
@@ -45,9 +43,6 @@ export const AddStdPrice: React.FC = () => {
             
           </form>
         </FormProvider>
-        <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-        <Table></Table>
-      </BorderLayout>
       </Card>
     </>
   );

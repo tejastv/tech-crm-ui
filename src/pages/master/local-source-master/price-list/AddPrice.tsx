@@ -1,7 +1,7 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input, Select ,DivLayout, Button} from "@shared/index";
+import { ActionButtons, BorderLayout, Card, Input, Select ,DivLayout, Button, Table} from "@shared/index";
 import { priceLocalSource,priceCurrency,purchesExchanegRate,sellExchanegRate,purchesDate,sellDate, localSource } from "@master/index";
 
 
@@ -9,7 +9,7 @@ export const AddPrice: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Price List (Local Source)",
+      mainHeading: "Price List (Local Source)",
       heading: "Action Buttons",
     },
     formPurchesConfig: {
@@ -17,6 +17,9 @@ export const AddPrice: React.FC = () => {
     },
     formSellConfig: {
       heading: "Sell",
+    },
+    borderLayoutConfig: {
+      heading: "Table",
     },
   };
 
@@ -72,6 +75,9 @@ export const AddPrice: React.FC = () => {
             
           </form>
         </FormProvider>
+        <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
+        <Table></Table>
+      </BorderLayout>
       </Card>
     </>
   );
