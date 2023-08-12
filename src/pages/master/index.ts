@@ -1,7 +1,10 @@
 // Client master child pages
-export { Client } from "./client-master/Client";
-export { ClientGroup } from "./client-master/ClientGroup";
-export { Segment } from "./client-master/Segment";
+export { Client } from "./client-master/client/Client";
+export { ClientGroup } from "./client-master/client-group/ClientGroup";
+
+// Client Segment master child pages
+export { ClientSegment } from "./client-master/cilent-segment/ClientSegment";
+export { AddClientSegment } from "./client-master/cilent-segment/AddClientSegment";
 // Company master child pages
 export { AddCompany } from "./company-master/AddCompany";
 export { CompanyMaster } from "./company-master/CompanyMaster";
@@ -30,8 +33,9 @@ export * from "./company-master/form-fields/add-company";
 export * from "./location-master/form-fields/add-state";
 export * from "./location-master/form-fields/add-city";
 export * from "./local-source-master/form-fields/add-localSource"
-export * from "./local-source-master/form-fields/add-std-price"
 export * from "./local-source-master/form-fields/add-price"
+export * from "./local-source-master/form-fields/add-std-price"
+export * from "./client-master/form-fields/add-segment"
 // export * from "./local-source-master/form-fields/add-price";
 // export * from "./local-source-master/form-fields/add-std-price";
 

@@ -7,8 +7,9 @@ import { COMMON_ROUTES } from "constants";
 const PriceMasterIndex: React.FC = () => {
   return (
     <Routes>
-      <Route index element={<Price />}></Route>
-      <Route path={COMMON_ROUTES.ADD} element={<AddPrice />}></Route>
+      {/* Form Page Added Here */}
+      <Route index element={<AddPrice />}></Route>
+      {/* <Route path={COMMON_ROUTES.ADD} element={<AddPrice />}></Route> */}
     </Routes>
   );
 };
