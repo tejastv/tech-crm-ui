@@ -1,3 +1,7 @@
 .c-pointer {
   cursor: pointer;
 }
+
+.table > :not(caption) > * > * {
+  color: inherit;
+}
