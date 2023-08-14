@@ -12,15 +12,27 @@ export const MASTER_ROUTES = {
     COMPANY_PARENT_ROUTE: "/company/*",
     COMPANY: "company",
   },
-  CLIENT_MASTER_ROUTES: {
-    CLIENT_MASTER_PARENT_ROUTE: "/client-master/*",
-    CLIENT_MASTER_ROUTE: "client-master/",
-    CLIENT: "client",
-    CLIENT_GROUP: "client-group",
-    SEGMENT_PARENT_ROUTE: "/sengment/*",
-    SEGMENT: "segment",
+  // CLIENT_MASTER_ROUTES: {
+  //   CLIENT_MASTER_PARENT_ROUTE: "/client-master/*",
+  //   CLIENT_MASTER_ROUTE: "client-master/",
+  //   CLIENT: "client",
+  //   CLIENT_GROUP: "client-group",
+  //   SEGMENT_PARENT_ROUTE: "/sengment/*",
+  //   SEGMENT: "segment",
+    
+  // },
 
+  CLIENTM_MASTER_ROUTES: {
+    CLIENTM_MASTER_PARENT_ROUTE: "/client-master/*",
+    CLIENTM_MASTER_ROUTE: "client-master/",
+    CLIENT_PARENT_ROUTE: "/client/*",
+    CLIENTGROUP_PARENT_ROUTE: "/group/*",
+    SEGMENT_PARENT_ROUTE: "/segment/*",
+    CLIENT: "client",
+    CLIENTGROUP: "group",
+    SEGMENT: "segment",
   },
+
   LOCATION_MASTER_ROUTES: {
     LOCATION_MASTER_PARENT_ROUTE: "/location/*",
     LOCATION_MASTER_ROUTE: "location/",

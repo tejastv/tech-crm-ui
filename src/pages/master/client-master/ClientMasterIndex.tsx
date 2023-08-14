@@ -1,36 +1,35 @@
-import { Route, Routes } from "react-router-dom";
-// import { Client, ClientGroup, ClientSegment } from "@master/index";
-import { MASTER_ROUTES } from "constants";
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 
-// const ClientMasterIndex = React.lazy(
-//   () => import("./client/")
-// );
-// const ClientGroupMasterIndex = React.lazy(
-//   () => import("./client-group/")
-// );
-const  ClientSegmentMasterIndex= React.lazy(
-  () => import("./cilent-segment/ClientSegmentMasterIndex")
+import { MASTER_ROUTES } from "constants";
+
+const ClientMIndex = React.lazy(
+  () => import("./client/ClientMIndex")
+);
+const ClientGroupMasterIndex = React.lazy(
+  () => import("./client-group/ClientGroupMasterIndex")
+);
+const SegmentMasterIndex = React.lazy(
+  () => import("./segment/SegmentMasterIndex")
 );
 
-
-const ClientMasterIndex = () => {
+const LocationMasterIndex = () => {
   return (
     <Routes>
       <Route
-        path={MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT}
-        // element={<Client />}
+        path={MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENT_PARENT_ROUTE}
+        element={<ClientMIndex />}
       ></Route>
       <Route
-        path={MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_GROUP}
-        // element={<ClientGroup />}
+        path={MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENTGROUP_PARENT_ROUTE}
+        element={<ClientGroupMasterIndex />}
       ></Route>
-      <Route
-        path={MASTER_ROUTES.CLIENT_MASTER_ROUTES.SEGMENT_PARENT_ROUTE}
-        element={<ClientSegmentMasterIndex />}
+       <Route
+        path={MASTER_ROUTES.CLIENTM_MASTER_ROUTES.SEGMENT_PARENT_ROUTE}
+        element={<SegmentMasterIndex />}
       ></Route>
     </Routes>
   );
 };
 
-export default ClientMasterIndex;
+export default LocationMasterIndex;

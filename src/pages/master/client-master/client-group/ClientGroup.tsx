@@ -1,10 +1,26 @@
-// ClientGroup.tsx
 import React from "react";
 
-export const ClientGroup: React.FC = () => {
+import { BorderLayout, PageBreadcrumb, Table } from "@shared/index";
+import { COMMON_ROUTES } from "constants";
+
+export const GroupMaster: React.FC = () => {
+  const config = {
+    breadcrumbConfig: {
+      pageHeading: "Group Master",
+      btnTitle: "Add Group Master",
+      btnRoute: COMMON_ROUTES.ADD,
+    },
+    borderLayoutConfig: {
+      heading: "List",
+    },
+  };
+
   return (
-    <div>
-      <h2>Client Group</h2>
-    </div>
+    <>
+      <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
+      <BorderLayout heading={config.borderLayoutConfig.heading}>
+        <Table></Table>
+      </BorderLayout>
+    </>
   );
 };

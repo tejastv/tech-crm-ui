@@ -35,17 +35,6 @@ const EmailValidationCC = {
   },
 } as ValidationType;
 
-// const EmailValidationCC = {
-//     required: {
-//         value: true,
-//         message: "{label} field is rquired",
-//     },
-//     pattern: {
-//         value:
-//           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-//         message: "not valid ",
-//       },
-// } as ValidationType;
 const CurrencyValidation = {
 
     required: {
@@ -54,7 +43,7 @@ const CurrencyValidation = {
     },
     pattern: {
       value: /^[a-zA-Z0-9\-]+$/,
-      message: "Invalid Country ",
+      message:  "Invalid currency format",
     },
 } as ValidationType;
 const CountryValidation = {
@@ -65,7 +54,7 @@ const CountryValidation = {
     },
     pattern: {
       value: /^\d+(\.\d{1,2})?$/,
-      message: "Invalid currency format",
+      message:"Invalid Country ",
     },
 } as ValidationType;
 

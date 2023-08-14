@@ -12,7 +12,7 @@ import Form from "react-bootstrap/Form";
 import { FormFieldType } from "@shared/index";
 import { findInputError, isFormInvalid } from "@utils/index";
 
-export const Input = (props: FormFieldType) => {
+export const InputSmall = (props: FormFieldType) => {
   const {
     register,
     formState: { errors },
@@ -29,7 +29,7 @@ export const Input = (props: FormFieldType) => {
           >
             {props.config.label}
           </Form.Label>
-          <div className="col-sm-9">
+          <div className="col-sm-2">
             {props.config.multiline ? (
               <Form.Control
                 as="textarea"

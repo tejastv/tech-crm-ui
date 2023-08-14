@@ -12,7 +12,7 @@ import Form from "react-bootstrap/Form";
 import { FormFieldType } from "@shared/index";
 import { findInputError, isFormInvalid } from "@utils/index";
 
-export const Input = (props: FormFieldType) => {
+export const InputWithText = (props: FormFieldType) => {
   const {
     register,
     formState: { errors },
@@ -54,6 +54,8 @@ export const Input = (props: FormFieldType) => {
               </Form.Text>
             )}
             
+            <p className="text-center m-b-0">
+                    <small id="name45" className="badge badge-default badge-primary form-text text-white">Note: When you are Creating New Group, Client <br/>for which group is NOT DEFINED will appear</small></p>
           </div>
         </div>
       </div>

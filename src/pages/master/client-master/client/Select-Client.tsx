@@ -5,16 +5,17 @@
 |
 |  🐸 Returns:  JSX
 *-------------------------------------------------------------------*/
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { MdError } from "react-icons/md";
 import Form from "react-bootstrap/Form";
+import { default as AliceSelect } from "react-select";
 
-import { FormFieldType } from "@shared/index";
 import { findInputError, isFormInvalid } from "@utils/index";
+import { FormFieldType } from "@shared/index";
 
-export const Input = (props: FormFieldType) => {
+export const SelectClient = (props: FormFieldType) => {
   const {
-    register,
+    control,
     formState: { errors },
   } = useFormContext();
   const inputErrors = findInputError(errors, props.config.name);
@@ -29,32 +30,27 @@ export const Input = (props: FormFieldType) => {
           >
             {props.config.label}
           </Form.Label>
-          <div className="col-sm-9">
-            {props.config.multiline ? (
-              <Form.Control
-                as="textarea"
-                rows={1}
-                placeholder={props.config.placeholder}
-                id={props.config.id}
-                {...register(props.config.name, props.config.validation)}
-              />
-            ) : (
-              <Form.Control
-                id={props.config.id}
-                type={props.config.type}
-                placeholder={props.config.placeholder}
-                {...register(props.config.name, props.config.validation)}
-                
-              />
-            )}
+          <div className="col-sm-5">
+            <Controller
+              name={props.config.name}
+              control={control}
+              rules={props.config.validation}
+              render={({ field }) => (
+                <AliceSelect
+                  {...field}
+                  options={props.config.options}
+                  placeholder={props.config.placeholder}
+                />
+              )}
+            />
             {isInvalid && (
               <Form.Text className="text-danger">
                 <MdError />
                 {inputErrors.error.message}
               </Form.Text>
             )}
-            
           </div>
+            
         </div>
       </div>
     </div>

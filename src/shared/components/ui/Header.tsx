@@ -87,7 +87,7 @@ export const Header: React.FC = () => {
                           <li className="sidebar-item">
                             <Link
                               className="sidebar-link"
-                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT}`}
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENTM_MASTER_ROUTE}${MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Client</span>
@@ -96,7 +96,7 @@ export const Header: React.FC = () => {
                           <li className="sidebar-item">
                             <Link
                               className="sidebar-link"
-                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_GROUP}`}
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENTM_MASTER_ROUTE}${MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENTGROUP}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Client Group</span>
@@ -106,9 +106,10 @@ export const Header: React.FC = () => {
                             {" "}
                             <Link
                               className="sidebar-link"
-                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.SEGMENT}`}
-                              // to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.SEGMENT}`}
+                              
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENTM_MASTER_ROUTE}${MASTER_ROUTES.CLIENTM_MASTER_ROUTES.SEGMENT}`}
                             >
+
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Segment</span>
                             </Link>
