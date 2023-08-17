@@ -3,31 +3,26 @@ import { Route, Routes } from "react-router-dom";
 import { MASTER_ROUTES } from "constants";
 import React from "react";
 
-// const ClientMasterIndex = React.lazy(
-//   () => import("./client/")
-// );
-// const ClientGroupMasterIndex = React.lazy(
-//   () => import("./client-group/")
-// );
-const  ClientSegmentMasterIndex= React.lazy(
+const ClientIndex = React.lazy(() => import("./client/Client"));
+const ClientGroupIndex = React.lazy(() => import("./client-group/ClientGroup"));
+const ClientSegmentIndex = React.lazy(
   () => import("./cilent-segment/ClientSegmentMasterIndex")
 );
-
 
 const ClientMasterIndex = () => {
   return (
     <Routes>
       <Route
         path={MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT}
-        // element={<Client />}
+        element={<ClientIndex />}
       ></Route>
       <Route
         path={MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_GROUP}
-        // element={<ClientGroup />}
+        element={<ClientGroupIndex />}
       ></Route>
       <Route
         path={MASTER_ROUTES.CLIENT_MASTER_ROUTES.SEGMENT_PARENT_ROUTE}
-        element={<ClientSegmentMasterIndex />}
+        element={<ClientSegmentIndex />}
       ></Route>
     </Routes>
   );

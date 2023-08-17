@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { COMMON_ROUTES } from "@constants/route-constants";
 import { BorderLayout, PageBreadcrumb, Table, TableType } from "@shared/index";
 import { ColumnDef } from "@tanstack/react-table";
-import { makeData } from "./makeData";
-import { ClientType } from "..";
+import { makeData } from "../makeData";
+import { ClientType } from "@pages/master";
 
-export const Client: React.FC = () => {
+const Client: React.FC = () => {
   const [tableData, setData] = useState(() => makeData(50));
 
   const config = {
@@ -286,3 +286,5 @@ export const Client: React.FC = () => {
     </>
   );
 };
+
+export default Client;
