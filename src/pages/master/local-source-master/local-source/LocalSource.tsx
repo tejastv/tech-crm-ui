@@ -6,8 +6,8 @@ import { COMMON_ROUTES } from "constants";
 export const LocalSource: React.FC = () => {
   const config = {
     breadcrumbConfig: {
-      pageHeading: "LocalSource Master",
-      btnTitle: "Add LocalSource",
+      pageHeading: "Local Source",
+      btnTitle: "Add Local Source",
       btnRoute: COMMON_ROUTES.ADD,
     },
     borderLayoutConfig: {
@@ -19,7 +19,7 @@ export const LocalSource: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table></Table>
+        {/* <Table></Table> */}
       </BorderLayout>
     </>
   );
