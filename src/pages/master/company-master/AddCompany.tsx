@@ -6,7 +6,6 @@ import {
   ActionButtons,
   BorderLayout,
   Card,
-  Checkbox,
   DatePicker,
   Input,
   Radio,
@@ -71,6 +70,8 @@ export const AddCompany: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
+                  <div className="card-body">
+
                   <Input config={nameField.config} />
                   <Input config={addressField.config} />
                   <Input config={officeAddressField.config} />
@@ -80,14 +81,17 @@ export const AddCompany: React.FC = () => {
                   <Input config={website.config} />
                   <Input config={contactPerson.config} />
                   <Input config={designation.config} />
-                  <Select config={zip.config} />
+                  <Input config={zip.config} />
                   <Select config={city.config} />
                   <Select config={state.config} />
                   <Select config={country.config} />
+                  </div>
                 </div>
                 <div className="col-md-6 col-xs-12">
+                  <div className="card-body">
                   <Input config={hscode.config} />
                   <Input config={givenName.config} />
+                  <Input config={referenceno.config} />
                   <Input config={financialyear.config} />
                   <Input config={regno.config} />
                   <Radio config={companyType.config} />
@@ -98,8 +102,7 @@ export const AddCompany: React.FC = () => {
                   <Input config={rocStatus.config} />
                   <Input config={recodes.config} />
                   <Input config={recfin.config} />
-                  {/* <Checkbox config={checkBoxField.config} /> */}
-                  
+                  </div>
                 </div>
 
               </div>

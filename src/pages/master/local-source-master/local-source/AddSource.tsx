@@ -1,14 +1,14 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { cityField, osPrintField } from "@master/index";
+import { ActionButtons, BorderLayout, Card, Input, Select } from "@shared/index";
+import { localSource, email,emailCC,currencey,sourcecountry} from "@master/index";
 
-export const AddCity: React.FC = () => {
+export const AddSource: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add City",
+      mainHeading: "Add Local Source",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -32,17 +32,28 @@ export const AddCity: React.FC = () => {
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <Input config={cityField.config} />
+              <div className="col-md-6 col-xs-12">
+                  <div className="card-body">
+                
+                  <Input config={localSource.config} />
+                  <Input config={email.config} />
+                  <Input config={emailCC.config} />
+                
+                </div>
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input config={osPrintField.config} />
-                </div>
+                  <div className="card-body">
+                  <Select config={currencey.config} />
+                  <Select config={sourcecountry.config} />
+              </div>
+              </div>
               </div>
             </BorderLayout>
+            <div className="card-body">
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
               <ActionButtons/>
             </BorderLayout>
+            </div>
           </form>
         </FormProvider>
       </Card>

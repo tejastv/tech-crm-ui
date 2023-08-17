@@ -1,14 +1,25 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { cityField, osPrintField } from "@master/index";
+import {
+  ActionButtons,
+  BorderLayout,
+  Card,
+  Input,
+  Select,
+} from "@shared/index";
+import {
+  countryField,
+  continentField,
+  continentCountryField,
+  localSourceField,
+} from "@master/index";
 
-export const AddCity: React.FC = () => {
+export const AddCountry: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add City",
+      mainHeading: "Add Country",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -33,15 +44,17 @@ export const AddCity: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={cityField.config} />
+                  <Input config={countryField.config} />
+                  <Select config={continentField.config} />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input config={osPrintField.config} />
+                  <Input config={continentCountryField.config} />
+                  <Input config={localSourceField.config} />
                 </div>
               </div>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons/>
+              <ActionButtons />
             </BorderLayout>
           </form>
         </FormProvider>

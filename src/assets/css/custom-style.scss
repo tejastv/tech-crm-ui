@@ -5,3 +5,8 @@
 .table > :not(caption) > * > * {
   color: inherit;
 }
+.card-title {
+  color: #ef6e6e;
+  font-weight: bold;
+  text-decoration: underline;
+}

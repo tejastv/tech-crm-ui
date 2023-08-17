@@ -5,8 +5,9 @@ export function createFormConfig(
   lable: string,
   type: string,
   validationConfig: ValidationType,
-  multiline: boolean = false,
-  options?: Array<Options>
+  placeholder:string,
+  options?: Array<Options>,
+  multiline: boolean = false
 ): FormFieldType {
   let formField: FormFieldType = { config: {} } as FormFieldType;
   const replaceLabel = "{label}";
@@ -14,6 +15,7 @@ export function createFormConfig(
   formField.config['id'] = idName;
   formField.config['name'] = idName;
   formField.config['type'] = type;
+  formField.config['placeholder'] = placeholder;
   formField.config['label'] = lable;
   if (multiline) formField.config['multiline'] = multiline;
   if (options && options.length > 0) formField.config['options'] = options;

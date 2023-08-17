@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import logoImage from "@assets/images/logo.png";
 import { useAuth } from "@hooks/index";
-import { LOGIN, MASTER_ROUTES } from "constants";
+import { DASHBOARD, LOGIN, MASTER_ROUTES } from "constants";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const Header: React.FC = () => {
             >
               <i className="ti-menu ti-close"></i>
             </a>
-            <a className="navbar-brand">
+            <Link to={DASHBOARD} className="navbar-brand">
               <span className="logo-text">
                 <img src={logoImage} alt="homepage" className="dark-logo" />
                 <img
@@ -34,7 +34,7 @@ export const Header: React.FC = () => {
                   alt="homepage"
                 />
               </span>
-            </a>
+            </Link>
             <a
               className="topbartoggler d-block d-md-none waves-effect waves-light nav-toggler"
               href="#"
@@ -107,6 +107,7 @@ export const Header: React.FC = () => {
                             <Link
                               className="sidebar-link"
                               to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.SEGMENT}`}
+                              // to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.SEGMENT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Segment</span>
@@ -203,27 +204,35 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="state.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_ROUTE}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.STATE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">State</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
                             <a className="sidebar-link" href="country.php">
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Country</span>
+                              {/* </Link> */}
                             </a>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="continent.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_ROUTE}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.CONTINENT}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Continent</span>
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </li>
+                      {/* Working */}
                       <li className="sidebar-item">
                         {" "}
                         <a
@@ -232,7 +241,7 @@ export const Header: React.FC = () => {
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-collage"></i>
-                          <span className="hide-menu">Local Source Master</span>
+                          <span className="hide-menu">LocalSource Master</span>
                         </a>
                         <ul
                           aria-expanded="false"
@@ -240,34 +249,37 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="local_source.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Local Source</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="price_list_local_source.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.PRICE}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
-                                Price list(for local source){" "}
+                                Price List(for local source)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="std_price_list_local_source.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.STDPRICE}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
-                                Std. Price List(for Local Source)
+                                Std Price List(for local source)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </li>
