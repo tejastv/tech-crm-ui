@@ -6,7 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { makeData } from "../makeData";
 import { ClientType } from "@pages/master";
 
-const Client: React.FC = () => {
+export const Client: React.FC = () => {
   const [tableData, setData] = useState(() => makeData(50));
 
   const config = {
@@ -286,5 +286,3 @@ const Client: React.FC = () => {
     </>
   );
 };
-
-export default Client;
