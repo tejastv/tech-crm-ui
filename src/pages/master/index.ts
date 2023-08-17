@@ -13,4 +13,5 @@ export { City } from "./location-master/city/City";
 export * from "./company-master/form-fields/add-company";
 export * from "./location-master/form-fields/add-city";
 // Models
+export * from "./features/types/client-type";
 // Service

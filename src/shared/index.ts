@@ -33,6 +33,7 @@ export * from "./types/forms-type/pattern-type";
 export * from "./types/forms-type/validations-type";
 export * from "./types/forms-type/max-leangth-type";
 export * from "./types/forms-type/min-length-type";
+export * from "./types/table-type";
 
 ///////////////////////////////////////////////////////////////
 //DEV
