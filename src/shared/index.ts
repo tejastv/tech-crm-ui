@@ -11,7 +11,8 @@ export { PageWrapper } from "./components/ui/PageWrapper";
 export { Table } from "./components/ui/Table";
 export { Input } from "./components/ui/Input";
 export { InputSmall } from "../pages/master/client-master/client/input-small";
-export { InputWithText } from "../pages/master/client-master/client-group/input-Client-group-with-text";
+export { InputWithText } from "./components/ui/note"
+
 export { ActionButtons } from "./components/ui/ActionButtons";
 export { Select } from "./components/ui/Select";
 export { SelectClient } from "../pages/master/client-master/client/Select-Client";
@@ -40,6 +41,7 @@ export * from "./types/forms-type/pattern-type";
 export * from "./types/forms-type/validations-type";
 export * from "./types/forms-type/max-leangth-type";
 export * from "./types/forms-type/min-length-type";
+export * from "./types/note-type";
 
 ///////////////////////////////////////////////////////////////
 //DEV

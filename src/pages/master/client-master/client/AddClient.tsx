@@ -1,8 +1,8 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { ActionButtons, BorderLayout, Card, Checkbox, Input, InputSmall, Radio, Select , SelectClient,CheckboxClient, DivLayoutClient  } from "@shared/index";
+import { ActionButtons, BorderLayout, Card, Checkbox, Input, Radio, Select ,  DivLayout  } from "@shared/index";
 import { clientName,clientGst, gstn, addressClient, cityClient, contactClient, designationClient, emailClient, faxnoClient, stateClient, telnoClient, websiteClient, countryClient, statecodeClient, zipClient, crDay, billonactual, clientCurrencey, executive, instuction, id, clientIdSelect, groupClient, segmentClient, remarks, monthlyIvoice, osemail, toAdjust, baltoAdjust, adjustenquiry, toAdjustproforma, baltoAdjustproformaproforma, adjustenquiryproforma, discount, discountBlank } from "@master/index";
-import { CheckboxClientRight } from "./CheckBox-ClientRight";
+
 
 
 export const AddClient: React.FC = () => {
@@ -41,7 +41,7 @@ export const AddClient: React.FC = () => {
             className="p-t-20"
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-                 <div className="row">
+                <div className="row">
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
                   <Input config={clientName.config} />
@@ -56,18 +56,25 @@ export const AddClient: React.FC = () => {
                   <Input config={designationClient.config} />
                   <Select config={cityClient.config} />
                   <Input config={zipClient.config} />
-                  <SelectClient config={stateClient.config} />
-                  <InputSmall config={statecodeClient.config} />
+                  <div className="row ">
+                <div className="col-md-5">
+
+                  <Select config={stateClient.config} />
+                </div>
+                </div>
+                  <Input config={statecodeClient.config} />
                   <Select config={countryClient.config} />
-                  <DivLayoutClient heading={cardConfig.formclieckUpdateConfig.heading}/>
-                  <SelectClient config={crDay.config} />
-                  <CheckboxClient config={billonactual.config} />
+                  <h6 className="card-title m-t-20 md-2">
+                  <DivLayout heading={cardConfig.formclieckUpdateConfig.heading}/>
+                  </h6>
+                  <Select config={crDay.config} />
+                  <Checkbox config={billonactual.config} />
                   </div>
                 </div>
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
-                  <InputSmall config={id.config} />
-                  <SelectClient config={clientIdSelect.config} />
+                  <Input config={id.config} />
+                  <Select config={clientIdSelect.config} />
                   <Select config={clientCurrencey.config} />
                   <Select config={executive.config} />
                   <Input config={instuction.config} />
@@ -75,14 +82,18 @@ export const AddClient: React.FC = () => {
                   <Select config={segmentClient.config} />
                   <Input config={remarks.config} />
                   <Radio config={monthlyIvoice.config} />
-                  <CheckboxClientRight config={osemail.config} />
-                  <DivLayoutClient heading={cardConfig.formAdjustConfig.heading}/>
+                  <Checkbox config={osemail.config} />
+                  <h6 className="card-title m-t-20">
+                  <DivLayout heading={cardConfig.formAdjustConfig.heading}/>
+                  </h6>
                   <Radio config={discount.config} />
-                  <InputSmall config={discountBlank.config} />
+                  <Input config={discountBlank.config} />
                   <Input config={toAdjust.config} />
                   <Input config={baltoAdjust.config} />
                   <Input config={adjustenquiry.config} />
-                  <DivLayoutClient heading={cardConfig.formAdjustProformaConfig.heading}/>
+                  <h6 className="card-title m-t-20">
+                  <DivLayout heading={cardConfig.formAdjustProformaConfig.heading}/>
+                  </h6>
                   <Input config={toAdjustproforma.config} />
                   <Input config={baltoAdjustproformaproforma.config} />
                   <Input config={adjustenquiryproforma.config} />

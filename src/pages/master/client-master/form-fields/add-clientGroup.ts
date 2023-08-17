@@ -1,5 +1,5 @@
-import { FormFieldType, ValidationType } from "@shared/index";
-import { createFormConfig } from "@utils/index";
+import { FormFieldType, ValidationType,Note } from "@shared/index";
+import { createFormConfig,createNoteConfig } from "@utils/index";
 
 const ClientGroup = {
     required: {
@@ -51,3 +51,4 @@ export const SearchClientOptions = [
 export const clientGroupName: FormFieldType = createFormConfig('ClientName', 'Group Name', 'text', ClientGroup,'Enter Client Name');
 export const clientGroupName2: FormFieldType = createFormConfig('clientGroupName2', 'Group Name', 'checkbox', ClientGroup2,'',Groupoptions);
 export const searchClient: FormFieldType = createFormConfig('selectClient','Select Client', 'select', GSTNClient,'Select Client',SearchClientOptions);
+export const namenote:Note  = createNoteConfig("Note: When you are Creating New Group, Clientfor which group is NOT DEFINED will appear")

@@ -1,4 +1,4 @@
-import { FormFieldType, Options, ValidationType } from "@shared/index";
+import { FormFieldType, Note, Options, ValidationType } from "@shared/index";
 
 export function createFormConfig(
   idName: string,
@@ -22,4 +22,12 @@ export function createFormConfig(
   formField.config['validation'] = validationConfig;
   formField.config['validation'].required.message = formField.config['validation'].required.message.replace(replaceLabel, lable);
   return formField;
+}
+// import { Note } from "@shared/index";
+
+export function createNoteConfig(noteName: string): Note {
+  let noteField: Note = { config: {} } as Note;
+  noteField.config['name'] = noteName;
+  
+  return noteField; // You need to return the created note field config
 }

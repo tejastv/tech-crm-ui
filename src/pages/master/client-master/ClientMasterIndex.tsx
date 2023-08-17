@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { MASTER_ROUTES } from "constants";
 
 const ClientMIndex = React.lazy(
-  () => import("./client/ClientMIndex")
+  () => import("./client/ClientIndex")
 );
 const ClientGroupMasterIndex = React.lazy(
   () => import("./client-group/ClientGroupMasterIndex")
