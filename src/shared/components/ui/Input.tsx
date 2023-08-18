@@ -46,6 +46,7 @@ export const Input = (props: FormFieldType) => {
                 type={props.config.type}
                 placeholder={props.config.placeholder}
                 {...register(props.config.name, props.config.validation)}
+                
               />
             )}
             {isInvalid && (
@@ -54,6 +55,7 @@ export const Input = (props: FormFieldType) => {
                 {inputErrors.error.message}
               </Form.Text>
             )}
+            
           </div>
         </div>
       </div>

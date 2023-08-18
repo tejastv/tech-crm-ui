@@ -3,11 +3,11 @@ import React from "react";
 import { BorderLayout, PageBreadcrumb, Table } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 
-export const Client: React.FC = () => {
+export const PaymentMode: React.FC = () => {
   const config = {
     breadcrumbConfig: {
-      pageHeading: "Client",
-      btnTitle: "Add Client",
+      pageHeading: "Payment Mode",
+      btnTitle: "Add Payment Mode",
       btnRoute: COMMON_ROUTES.ADD,
     },
     borderLayoutConfig: {
@@ -19,19 +19,7 @@ export const Client: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={{
-          columns: [],
-          data: [],
-          sorting: undefined,
-          copyBtn: undefined,
-          csvBtn: undefined,
-          excelBtn: undefined,
-          pdfBtn: undefined,
-          printBtn: undefined,
-          globalSearchBox: undefined,
-          pagination: undefined,
-          showItemCountDropdown: undefined
-        }}></Table>
+        {/* <Table></Table> */}
       </BorderLayout>
     </>
   );
