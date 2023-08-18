@@ -5,9 +5,10 @@ import { COMMON_ROUTES } from "constants";
 import { ColumnDef } from "@tanstack/react-table";
 import { CityType } from "@pages/master";
 import { useHttp } from "@hooks/useHttp";
+import { useRequestProcessor } from "@hooks/useRequestProcessor";
+import { useAxios } from "@hooks/useAxios";
 
 export const City: React.FC = () => {
-  const { getData } = useHttp();
   const [tableData, setData] = useState([]);
 
   const config = {
@@ -50,17 +51,16 @@ export const City: React.FC = () => {
     },
   ];
 
-  const {
-    data: cities,
-    isLoading,
-    isError,
-  } = getData("city-data", "location/city");
-  console.log(cities, isLoading, isError);
+  const { query } = useRequestProcessor();
+  const { getData } = useHttp();
+
+  const { data, isLoading, isError } = query<CityType>("city-data", getData);
+  console.log(data, isLoading, isError);
 
   const tableConfig: TableType<CityType> = {
     config: {
       columns: columns,
-      data: tableData,
+      tableData: data,
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

@@ -17,7 +17,7 @@ import { Button, TableType } from "@shared/index";
 export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
 
-  const data = props.config.data;
+  const data = props.config.tableData;
   const columns = props.config.columns;
   const table = useReactTable({
     data,

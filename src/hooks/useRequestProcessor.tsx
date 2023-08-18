@@ -4,6 +4,7 @@ import {
   useQueryClient,
   UseMutationOptions,
 } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 
 // interface RequestProcessorOptions {
 //     queryKey: any;
@@ -17,7 +18,7 @@ interface MutateOptions {
   options?: UseMutationOptions<any, unknown, any, any>;
 }
 
-export function useRequestProcessor() {
+export const useRequestProcessor = () => {
   const queryClient = useQueryClient();
 
   function query<TData>(key: any, queryFunction: any) {
@@ -27,13 +28,9 @@ export function useRequestProcessor() {
     });
   }
 
-  function mutate<TData>(
-    key: any,
-    mutationFunction: any,
-    options: MutateOptions
-  ) {
+  const mutate = (key: any, mutationFunction: any, options: MutateOptions) => {
     const { mutationKey, ...mutationOptions } = options;
-    return useMutation<TData, unknown, any, any>(
+    return useMutation(
       (mutationVariables) => mutationFunction(mutationVariables),
       {
         ...mutationOptions,
@@ -43,7 +40,7 @@ export function useRequestProcessor() {
         ...options,
       }
     );
-  }
+  };
 
   return { query, mutate };
-}
+};

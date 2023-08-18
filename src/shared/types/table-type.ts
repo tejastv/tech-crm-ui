@@ -3,7 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 export interface TableType<T> {
   config: {
     columns: ColumnDef<T>[];
-    data: T[];
+    tableData: T[];
     sorting?: boolean;
     copyBtn?: boolean;
     csvBtn?: boolean;
