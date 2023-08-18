@@ -10,6 +10,8 @@ export { PageBreadcrumb } from "./components/ui/PageBreadcrumb";
 export { PageWrapper } from "./components/ui/PageWrapper";
 export { Table } from "./components/ui/Table";
 export { Input } from "./components/ui/Input";
+export { InputWithText } from "./components/ui/Note"
+
 export { ActionButtons } from "./components/ui/ActionButtons";
 export { Select } from "./components/ui/Select";
 export { Checkbox } from "./components/ui/Checkbox";
@@ -34,6 +36,8 @@ export * from "./types/forms-type/options-type";
 export * from "./types/forms-type/pattern-type";
 export * from "./types/forms-type/validations-type";
 export * from "./types/forms-type/max-leangth-type";
+export * from "./types/table-type";
+export * from "./types/note-type";
 export * from "./types/forms-type/min-length-type";
 export * from "./types/table-type";
 

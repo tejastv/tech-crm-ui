@@ -3,11 +3,11 @@ import React from "react";
 import { BorderLayout, PageBreadcrumb, Table } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 
-export const Client: React.FC = () => {
+export const BankMasterDrawn: React.FC = () => {
   const config = {
     breadcrumbConfig: {
-      pageHeading: "Client",
-      btnTitle: "Add Client",
+      pageHeading: "Bank Master(Drawn)",
+      btnTitle: "Add Bank Master(Drawn)",
       btnRoute: COMMON_ROUTES.ADD,
     },
     borderLayoutConfig: {

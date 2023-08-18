@@ -133,7 +133,7 @@ export const website: FormFieldType = {
       pattern: {
         value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
         message: "Invalid website URL",
-      }      
+      },      
     },
   },
 };

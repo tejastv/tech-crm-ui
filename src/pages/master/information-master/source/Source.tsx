@@ -3,11 +3,11 @@ import React from "react";
 import { BorderLayout, PageBreadcrumb, Table } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 
-export const ClientSegment: React.FC = () => {
+export const Source: React.FC = () => {
   const config = {
     breadcrumbConfig: {
-      pageHeading: "Segment Master",
-      btnTitle: "Add Segment",
+      pageHeading: "Source",
+      btnTitle: "Add Source",
       btnRoute: COMMON_ROUTES.ADD,
     },
     borderLayoutConfig: {
