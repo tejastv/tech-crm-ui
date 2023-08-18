@@ -23,12 +23,14 @@ export const DatePicker = (props: FormFieldType) => {
     <div className="row">
       <div className="col-12">
         <div className="form-group row">
-          <Form.Label
-            className="col-sm-3 control-label col-form-label"
-            htmlFor={props.config.name}
-          >
-            {props.config.label}
-          </Form.Label>
+          {props.config.label && (
+            <Form.Label
+              className="col-sm-3 control-label col-form-label"
+              htmlFor={props.config.name}
+            >
+              {props.config.label}
+            </Form.Label>
+          )}
           <div className="col-sm-9">
             <Form.Control
               id={props.config.id}

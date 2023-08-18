@@ -1,9 +1,7 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { ActionButtons, BorderLayout, Card, Checkbox, Input, Radio, Select ,  DivLayout  } from "@shared/index";
-import { clientName,clientGst, gstn, addressClient, cityClient, contactClient, designationClient, emailClient, faxnoClient, stateClient, telnoClient, websiteClient, countryClient, statecodeClient, zipClient, crDay, billonactual, clientCurrencey, executive, instuction, id, clientIdSelect, groupClient, segmentClient, remarks, monthlyIvoice, osemail, toAdjust, baltoAdjust, adjustenquiry, toAdjustproforma, baltoAdjustproformaproforma, adjustenquiryproforma, discount, discountBlank } from "@master/index";
-
-
+import * as formField from "@master/index";
 
 export const AddClient: React.FC = () => {
   const methods = useForm();
@@ -44,64 +42,62 @@ export const AddClient: React.FC = () => {
                 <div className="row">
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
-                  <Input config={clientName.config} />
-                  <Radio config={clientGst.config} />
-                  <Input config={gstn.config} />
-                  <Input config={addressClient.config} />
-                  <Input config={telnoClient.config} />
-                  <Input config={faxnoClient.config} />
-                  <Input config={emailClient.config} />
-                  <Input config={websiteClient.config} />
-                  <Input config={contactClient.config} />
-                  <Input config={designationClient.config} />
-                  <Select config={cityClient.config} />
-                  <Input config={zipClient.config} />
+                  <Input config={formField.clientName.config} />
+                  <Radio config={formField.clientGst.config} />
+                  <Input config={formField.gstn.config} />
+                  <Input config={formField.addressClient.config} />
+                  <Input config={formField.telnoClient.config} />
+                  <Input config={formField.faxnoClient.config} />
+                  <Input config={formField.emailClient.config} />
+                  <Input config={formField.websiteClient.config} />
+                  <Input config={formField.contactClient.config} />
+                  <Input config={formField.designationClient.config} />
+                  <Select config={formField.cityClient.config} />
+                  <Input config={formField.zipClient.config} />
                   <div className="row ">
                 <div className="col-md-5">
 
-                  <Select config={stateClient.config} />
+                  <Select config={formField.stateClient.config} />
                 </div>
                 </div>
-                  <Input config={statecodeClient.config} />
-                  <Select config={countryClient.config} />
+                  <Input config={formField.statecodeClient.config} />
+                  <Select config={formField.countryClient.config} />
                   <h6 className="card-title m-t-20 md-2">
                   <DivLayout heading={cardConfig.formclieckUpdateConfig.heading}/>
                   </h6>
-                  <Select config={crDay.config} />
-                  <Checkbox config={billonactual.config} />
+                  <Select config={formField.crDay.config} />
+                  <Checkbox config={formField.billonactual.config} />
                   </div>
                 </div>
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
-                  <Input config={id.config} />
-                  <Select config={clientIdSelect.config} />
-                  <Select config={clientCurrencey.config} />
-                  <Select config={executive.config} />
-                  <Input config={instuction.config} />
-                  <Select config={groupClient.config} />
-                  <Select config={segmentClient.config} />
-                  <Input config={remarks.config} />
-                  <Radio config={monthlyIvoice.config} />
-                  <Checkbox config={osemail.config} />
+                  <Input config={formField.id.config} />
+                  <Select config={formField.clientIdSelect.config} />
+                  <Select config={formField.clientCurrencey.config} />
+                  <Select config={formField.executive.config} />
+                  <Input config={formField.instuction.config} />
+                  <Select config={formField.groupClient.config} />
+                  <Select config={formField.segmentClient.config} />
+                  <Input config={formField.remarks.config} />
+                  <Radio config={formField.monthlyIvoice.config} />
+                  <Checkbox  config={formField.osemail.config} />
                   <h6 className="card-title m-t-20">
                   <DivLayout heading={cardConfig.formAdjustConfig.heading}/>
                   </h6>
-                  <Radio config={discount.config} />
-                  <Input config={discountBlank.config} />
-                  <Input config={toAdjust.config} />
-                  <Input config={baltoAdjust.config} />
-                  <Input config={adjustenquiry.config} />
+                  <Radio config={formField.discount.config} />
+                  <Input config={formField.discountBlank.config} />
+                  <Input config={formField.toAdjust.config} />
+                  <Input config={formField.baltoAdjust.config} />
+                  <Input config={formField.adjustenquiry.config} />
                   <h6 className="card-title m-t-20">
                   <DivLayout heading={cardConfig.formAdjustProformaConfig.heading}/>
                   </h6>
-                  <Input config={toAdjustproforma.config} />
-                  <Input config={baltoAdjustproformaproforma.config} />
-                  <Input config={adjustenquiryproforma.config} />
+                  <Input config={formField.toAdjustproforma.config} />
+                  <Input config={formField.baltoAdjustproformaproforma.config} />
+                  <Input config={formField.adjustenquiryproforma.config} />
                   </div>
                 </div>
                 </div>
-               
-         
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
               <ActionButtons/>

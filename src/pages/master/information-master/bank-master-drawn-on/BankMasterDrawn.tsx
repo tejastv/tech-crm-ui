@@ -19,7 +19,19 @@ export const BankMasterDrawn: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table></Table>
+        <Table config={{
+          columns: [],
+          data: [],
+          sorting: undefined,
+          copyBtn: undefined,
+          csvBtn: undefined,
+          excelBtn: undefined,
+          pdfBtn: undefined,
+          printBtn: undefined,
+          globalSearchBox: undefined,
+          pagination: undefined,
+          showItemCountDropdown: undefined
+        }}></Table>
       </BorderLayout>
     </>
   );

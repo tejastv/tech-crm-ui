@@ -21,8 +21,7 @@ export { City } from "./location-master/city/City";
 export { AddState } from "./location-master/state/AddState";
 export { State } from "./location-master/state/State";
 
-
-//Local Source 
+//Local Source
 // LocalSource Child Page
 export { AddSource } from "./local-source-master/local-source/AddSource";
 export { LocalSource } from "./local-source-master/local-source/LocalSource";
@@ -30,7 +29,6 @@ export { LocalSource } from "./local-source-master/local-source/LocalSource";
 export { AddPrice } from "./local-source-master/price-list/AddPrice";
 // Std Price List Child Page
 export { AddStdPrice } from "./local-source-master/std-price-list/AddStdPrice";
-
 
 // Country master child pages
 export { AddCountry } from "./location-master/country/AddCountry";
@@ -63,12 +61,19 @@ export * from "./company-master/form-fields/add-company";
 export * from "./location-master/form-fields/add-state";
 export * from "./location-master/form-fields/add-city";
 
+export * from "./client-master/form-fields/add-client";
+export * from "./client-master/form-fields/add-clientGroup";
+export * from "./client-master/form-fields/add-segment";
+
+
+
 export * from "./local-source-master/form-fields/add-localSource"
 export * from "./local-source-master/form-fields/add-price"
 export * from "./local-source-master/form-fields/add-std-price"
-export * from "./client-master/form-fields/add-client"
-export * from "./client-master/form-fields/add-clientGroup"
 export * from "./client-master/form-fields/add-segment"
+// export * from "./local-source-master/form-fields/add-price";
+// export * from "./local-source-master/form-fields/add-std-price";
+
 
 export * from "./location-master/form-fields/add-country";
 export * from "./location-master/form-fields/add-continent";
@@ -83,4 +88,6 @@ export * from "./information-master/form-fields/add-suppliermaster";
 
 
 // Models
+export * from "./features/types/client-type";
+export * from "./features/types/city-type";
 // Service

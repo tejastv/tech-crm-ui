@@ -22,9 +22,9 @@ export const MASTER_ROUTES = {
     
   // },
 
-  CLIENTM_MASTER_ROUTES: {
-    CLIENTM_MASTER_PARENT_ROUTE: "/client-master/*",
-    CLIENTM_MASTER_ROUTE: "client-master/",
+  CLIENT_MASTER_ROUTES: {
+    CLIENT_MASTER_PARENT_ROUTE: "/client-master/*",
+    CLIENT_MASTER_ROUTE: "client-master/",
     CLIENT_PARENT_ROUTE: "/client/*",
     CLIENTGROUP_PARENT_ROUTE: "/group/*",
     SEGMENT_PARENT_ROUTE: "/segment/*",

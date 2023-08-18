@@ -87,7 +87,7 @@ export const Header: React.FC = () => {
                           <li className="sidebar-item">
                             <Link
                               className="sidebar-link"
-                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENTM_MASTER_ROUTE}${MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENT}`}
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Client</span>
@@ -96,7 +96,7 @@ export const Header: React.FC = () => {
                           <li className="sidebar-item">
                             <Link
                               className="sidebar-link"
-                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENTM_MASTER_ROUTE}${MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENTGROUP}`}
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENTGROUP}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Client Group</span>
@@ -107,7 +107,7 @@ export const Header: React.FC = () => {
                             <Link
                               className="sidebar-link"
                               
-                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENTM_MASTER_ROUTE}${MASTER_ROUTES.CLIENTM_MASTER_ROUTES.SEGMENT}`}
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.SEGMENT}`}
                             >
 
                               <i className="mdi mdi-creation"></i>
@@ -215,11 +215,14 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="country.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_ROUTE}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.COUNTRY}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Country</span>
                               {/* </Link> */}
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}

@@ -10,19 +10,15 @@ export { PageBreadcrumb } from "./components/ui/PageBreadcrumb";
 export { PageWrapper } from "./components/ui/PageWrapper";
 export { Table } from "./components/ui/Table";
 export { Input } from "./components/ui/Input";
-export { InputSmall } from "../pages/master/client-master/client/input-small";
-export { InputWithText } from "./components/ui/note"
+export { InputWithText } from "./components/ui/Note"
 
 export { ActionButtons } from "./components/ui/ActionButtons";
 export { Select } from "./components/ui/Select";
-export { SelectClient } from "../pages/master/client-master/client/Select-Client";
 export { Checkbox } from "./components/ui/Checkbox";
 export { Radio } from "./components/ui/Radio";
 export { DatePicker } from "./components/ui/DatePicker";
 export { Image } from "./components/ui/Image";
 export { DivLayout } from "./components/ui/Div-layout";
-export { DivLayoutClient } from "../pages/master/client-master/client/Div-layoutClient";
-export { CheckboxClient } from "../pages/master/client-master/client/Checkbox-Client";
 
 // Types
 export * from "./types/button-type";
@@ -40,8 +36,10 @@ export * from "./types/forms-type/options-type";
 export * from "./types/forms-type/pattern-type";
 export * from "./types/forms-type/validations-type";
 export * from "./types/forms-type/max-leangth-type";
-export * from "./types/forms-type/min-length-type";
+export * from "./types/table-type";
 export * from "./types/note-type";
+export * from "./types/forms-type/min-length-type";
+export * from "./types/table-type";
 
 ///////////////////////////////////////////////////////////////
 //DEV

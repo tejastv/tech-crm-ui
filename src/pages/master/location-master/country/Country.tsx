@@ -19,7 +19,7 @@ export const Country: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table></Table>
+        {/* <Table></Table> */}
       </BorderLayout>
     </>
   );

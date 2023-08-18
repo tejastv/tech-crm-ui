@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.32.6",
+    "@tanstack/react-table": "^8.9.3",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "react": "^18.2.0",
@@ -20,9 +21,11 @@
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.2",
     "react-select": "^5.7.4",
+    "react-tabulator": "^0.18.1",
     "vite-tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
@@ -31,6 +34,7 @@
     "eslint": "^8.44.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
+    "namor": "^3.0.1",
     "sass": "^1.63.6",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"

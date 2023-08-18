@@ -6,8 +6,8 @@ import { COMMON_ROUTES } from "constants";
 export const Client: React.FC = () => {
   const config = {
     breadcrumbConfig: {
-      pageHeading: "Client Master",
-      btnTitle: "Add Client Master",
+      pageHeading: "Client",
+      btnTitle: "Add Client",
       btnRoute: COMMON_ROUTES.ADD,
     },
     borderLayoutConfig: {
@@ -19,7 +19,19 @@ export const Client: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table></Table>
+        <Table config={{
+          columns: [],
+          data: [],
+          sorting: undefined,
+          copyBtn: undefined,
+          csvBtn: undefined,
+          excelBtn: undefined,
+          pdfBtn: undefined,
+          printBtn: undefined,
+          globalSearchBox: undefined,
+          pagination: undefined,
+          showItemCountDropdown: undefined
+        }}></Table>
       </BorderLayout>
     </>
   );

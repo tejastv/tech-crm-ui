@@ -30,7 +30,7 @@ const MasterRoutes = () => {
       ></Route>
       
        <Route
-        path={MASTER_ROUTES.CLIENTM_MASTER_ROUTES.CLIENTM_MASTER_PARENT_ROUTE}
+        path={MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_PARENT_ROUTE}
         element={
           <React.Suspense>
             <ClientMasterIndex />
