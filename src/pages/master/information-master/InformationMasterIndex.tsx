@@ -4,22 +4,22 @@ import { Route, Routes } from "react-router-dom";
 import { MASTER_ROUTES } from "constants";
 
 const BankDepositMasterIndex = React.lazy(
-  () => import("./bank-master-deposit/BankMasterDepositIndex")
+  () => import("./bank-master-deposit/BankDepositIndex")
 );
 const BankDrawnMasterIndex = React.lazy(
-  () => import("./bank-master-drawn-on/BankMasterDrawnIndex")
+  () => import("./bank-master-drawn-on/BankDrawnIndex")
 );
 const PaymentModeMasterIndex = React.lazy(
-  () => import("./payment-mode/PaymentModeMasterIndex")
+  () => import("./payment-mode/PaymentModeIndex")
 );
 const SupplierMasterIndex = React.lazy(
-  () => import("./supplier-master/SupplierMasterIndex")
+  () => import("./supplier-master/SupplierIndex")
 );
 const SourceMasterIndex = React.lazy(
-  () => import("./source/SourceMasterIndex")
+  () => import("./source/SourceIndex")
 );
 const CurrencyMasterIndex = React.lazy(
-  () => import("./currency/CurrencyMasterIndex")
+  () => import("./currency/CurrencyIndex")
 );
 const InformationMasterIndex = () => {
   return (

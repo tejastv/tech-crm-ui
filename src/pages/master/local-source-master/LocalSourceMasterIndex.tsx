@@ -4,13 +4,13 @@ import { Route, Routes } from "react-router-dom";
 import { MASTER_ROUTES } from "constants";
 
 const LocalSMasterIndex = React.lazy(
-  () => import("./local-source/LocalSMasterIndex")
+  () => import("./local-source/LocalSourceIndex")
 );
 const PriceMasterIndex = React.lazy(
-  () => import("./price-list/PriceMasterIndex")
+  () => import("./price-list/PriceIndex")
 );
 const StdPriceMasterIndex = React.lazy(
-  () => import("./std-price-list/StdPriceMasterIndex")
+  () => import("./std-price-list/StdPriceIndex")
 );
 
 const LocalSourceMasterIndex = () => {
