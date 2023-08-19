@@ -84,6 +84,7 @@ export * from "./information-master/form-fields/add-paymentmode";
 export * from "./information-master/form-fields/add-source";
 export * from "./information-master/form-fields/add-bankdrawnon";
 export * from "./information-master/form-fields/add-supplier";
+export * from "./information-master/form-fields/add-currency";
 
 
 

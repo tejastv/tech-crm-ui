@@ -66,7 +66,9 @@ export const AddPrice: React.FC = () => {
                     <i className="far fa-save"></i>Get Std. Price
                   </Button>
                 </div>
+                <div className="col-md-2 col-xs-12">
                 <DivLayout heading={cardConfig.formPurchesConfig.heading} />
+                </div>
                 <div className="col-md-4 col-xs-12">
                   <Input config={purchesExchanegRate.config} />
                 </div>
@@ -74,7 +76,9 @@ export const AddPrice: React.FC = () => {
                   <Input config={purchesDate.config} />
                 </div>
                 <div className="col-md-2 col-xs-12"></div>
+                <div className="col-md-2 col-xs-12">
                 <DivLayout heading={cardConfig.formSellConfig.heading} />
+                </div>
                 <div className="col-md-4 col-xs-12">
                   <Input config={sellExchanegRate.config} />
                 </div>
