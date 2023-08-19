@@ -22,15 +22,23 @@ const osPrintFieldValidation = {
     message: "30 characters max",
   },
 } as ValidationType;
-export const cityField: FormFieldType = createFormConfig(
+
+const cityField: FormFieldType = createFormConfig(
   "city",
   "City",
   "text",
-  cityFieldValidation,''
+  cityFieldValidation,
+  ""
 );
-export const osPrintField: FormFieldType = createFormConfig(
+const osPrintField: FormFieldType = createFormConfig(
   "osPrint",
   "Copy of O/s. to Print",
   "text",
-  osPrintFieldValidation,''
+  osPrintFieldValidation,
+  ""
 );
+
+export const addCityFormFields = {
+  cityField,
+  osPrintField,
+};

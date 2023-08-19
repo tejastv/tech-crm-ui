@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router-dom";
 
 import { MASTER_ROUTES } from "constants";
 
-const CompanyMasterIndex = React.lazy(
-  () => import("./company-master/CompanyMasterIndex")
+const Company = React.lazy(
+  () => import("./company/CompanyIndex")
 );
 const ClientMasterIndex = React.lazy(
   () => import("./client-master/ClientMasterIndex")
@@ -26,7 +26,7 @@ const MasterRoutes = () => {
     <Routes>
       <Route
         path={MASTER_ROUTES.COMPANY_ROUTES.COMPANY_PARENT_ROUTE}
-        element={<CompanyMasterIndex />}
+        element={<Company />}
       ></Route>
       
        <Route

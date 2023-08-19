@@ -1,6 +1,6 @@
 // Company master child pages
-export { AddCompany } from "./company-master/AddCompany";
-export { CompanyMaster } from "./company-master/CompanyMaster";
+export { AddCompany } from "./company/AddCompany";
+export { CompanyMaster } from "./company/Company";
 
 // Client master child pages
 export { Client } from "./client-master/client/Client";
@@ -11,7 +11,6 @@ export { GroupMaster } from "./client-master/client-group/ClientGroup";
 export { AddClientGroup } from "./client-master/client-group/AddClientGroup";
 export { Segment } from "./client-master/segment/Segment";
 export { AddSegment } from "./client-master/segment/AddSegment";
-
 
 // Location
 // City master child pages
@@ -38,54 +37,51 @@ export { AddContinent } from "./location-master/continent/AddContinent";
 export { Continent } from "./location-master/continent/Continent";
 
 //BankMasterDeposit master child pages
-export { AddBankMasterDeposit } from "./information-master/bank-master-deposit/AddBankMasterDeposit";
-export { BankMasterDeposit } from "./information-master/bank-master-deposit/BankMasterDeposit";
+export { AddBankMasterDeposit } from "./information-master/bank-master-deposit/AddBankDeposit";
+export { BankMasterDeposit } from "./information-master/bank-master-deposit/BankDeposit";
 
-export { AddPaymentMode } from "./information-master/payment-mode/AddPayment-Mode";
+export { AddPaymentMode } from "./information-master/payment-mode/AddPaymentMode";
 export { PaymentMode } from "./information-master/payment-mode/PaymentMode";
 
 export { AddCurrency } from "./information-master/currency/AddCurrency";
 export { Currency } from "./information-master/currency/Currency";
 export { AddInfoSource } from "./information-master/source/AddSource";
 export { Source } from "./information-master/source/Source";
-export { AddSupplier } from "./information-master/supplier-master/AddSupplierMaster";
+export { AddSupplier } from "./information-master/supplier-master/AddSupplier";
 export { Supplier } from "./information-master/supplier-master/Supplier";
-export { AddBankMasterDrawn } from "./information-master/bank-master-drawn-on/AddBankMasterDrawn";
-export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankMasterDrawn";
+export { AddBankMasterDrawn } from "./information-master/bank-master-drawn-on/AddBankDrawn";
+export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankDrawn";
 // Continent master child pages
 // export { AddBankMasterDrawn } from "./information-master/bank-master(drawn-on)/AddBank-Master-Drawn";
 // export { BankMasterDrawn } from "./information-master/bank-master(drawn-on)/Bank-Master-Drawn";
 
 //Form Fields
-export * from "./company-master/form-fields/add-company";
-export * from "./location-master/form-fields/add-state";
+export { addClientFormFields } from "./client-master/form-fields/add-client";
+
+export { addStateFormFields } from "./location-master/form-fields/add-state";
+export { addCityFormFields } from "./location-master/form-fields/add-city";
 export * from "./location-master/form-fields/add-city";
 
-export * from "./client-master/form-fields/add-client";
 export * from "./client-master/form-fields/add-clientGroup";
 export * from "./client-master/form-fields/add-segment";
 
+export { addCompanyFormFields } from "./company/form-fields/add-company";
 
-
-export * from "./local-source-master/form-fields/add-localSource"
-export * from "./local-source-master/form-fields/add-price"
-export * from "./local-source-master/form-fields/add-std-price"
-export * from "./client-master/form-fields/add-segment"
-// export * from "./local-source-master/form-fields/add-price";
-// export * from "./local-source-master/form-fields/add-std-price";
-
+export * from "./local-source-master/form-fields/add-localSource";
+export * from "./local-source-master/form-fields/add-price";
+export * from "./local-source-master/form-fields/add-std-price";
+export * from "./client-master/form-fields/add-segment";
+export * from "./local-source-master/form-fields/add-price";
+export * from "./local-source-master/form-fields/add-std-price";
 
 export * from "./location-master/form-fields/add-country";
 export * from "./location-master/form-fields/add-continent";
 
-
-export * from "./information-master/form-fields/add-bankmaster-deposit";
-export * from "./information-master/form-fields/add-payment-mode";
+export * from "./information-master/form-fields/add-bankdeposit";
+export * from "./information-master/form-fields/add-paymentmode";
 export * from "./information-master/form-fields/add-source";
-export * from "./information-master/form-fields/add-bankmaster-drawnon";
-export * from "./information-master/form-fields/add-suppliermaster";
-
-
+export * from "./information-master/form-fields/add-bankdrawnon";
+export * from "./information-master/form-fields/add-supplier";
 
 // Models
 export * from "./features/types/client-type";

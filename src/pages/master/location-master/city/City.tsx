@@ -60,7 +60,7 @@ export const City: React.FC = () => {
   const tableConfig: TableType<CityType> = {
     config: {
       columns: columns,
-      tableData: data,
+      tableData: [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

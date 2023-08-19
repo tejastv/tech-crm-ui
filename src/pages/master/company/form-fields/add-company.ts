@@ -1,7 +1,7 @@
 import { FormFieldType } from "@shared/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
-export const nameField: FormFieldType = {
+const nameField: FormFieldType = {
   config: {
     name: "name",
     label: "Name",
@@ -21,7 +21,7 @@ export const nameField: FormFieldType = {
   },
 };
 
-export const addressField: FormFieldType = {
+const addressField: FormFieldType = {
   config: {
     name: "address",
     label: "Address",
@@ -36,12 +36,12 @@ export const addressField: FormFieldType = {
       pattern: {
         value: /^[\w\s\d#.,\-\/]+$/,
         message: "Invalid address",
-      },      
+      },
     },
   },
 };
 
-export const officeAddressField: FormFieldType = {
+const officeAddressField: FormFieldType = {
   config: {
     name: "officeAddress",
     label: "Regd. Office Address",
@@ -52,13 +52,12 @@ export const officeAddressField: FormFieldType = {
       required: {
         value: true,
         message: "Please Enter Regd Office Address",
-      
       },
     },
   },
 };
 
-export const telNo: FormFieldType = {
+const telNo: FormFieldType = {
   config: {
     name: "telNo",
     label: "Tel no.",
@@ -73,12 +72,12 @@ export const telNo: FormFieldType = {
       pattern: {
         value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
         message: "Invalid telephone number",
-      },    
+      },
     },
   },
 };
 
-export const faxNo: FormFieldType = {
+const faxNo: FormFieldType = {
   config: {
     name: "faxNo",
     label: "Fax No.",
@@ -98,7 +97,7 @@ export const faxNo: FormFieldType = {
   },
 };
 
-export const emailField: FormFieldType = {
+const emailField: FormFieldType = {
   config: {
     name: "email",
     label: "Email Address",
@@ -118,7 +117,7 @@ export const emailField: FormFieldType = {
     },
   },
 };
-export const website: FormFieldType = {
+const website: FormFieldType = {
   config: {
     name: "website",
     label: "Website",
@@ -133,12 +132,12 @@ export const website: FormFieldType = {
       pattern: {
         value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
         message: "Invalid website URL",
-      },      
+      },
     },
   },
 };
 
-export const contactPerson: FormFieldType = {
+const contactPerson: FormFieldType = {
   config: {
     name: "contectPerson",
     label: "Contect Person",
@@ -153,12 +152,12 @@ export const contactPerson: FormFieldType = {
       maxLength: {
         value: 30,
         message: "30 characters max",
-      },     
+      },
     },
   },
 };
 
-export const designation: FormFieldType = {
+const designation: FormFieldType = {
   config: {
     name: "designation",
     label: "Designation",
@@ -173,12 +172,12 @@ export const designation: FormFieldType = {
       maxLength: {
         value: 30,
         message: "30 characters max",
-      },     
+      },
     },
   },
 };
 
-export const zip: FormFieldType = {
+const zip: FormFieldType = {
   config: {
     name: "zip",
     label: "ZIP",
@@ -193,18 +192,18 @@ export const zip: FormFieldType = {
       pattern: {
         value: /^\d{6}$/,
         message: "Invalid ZIP code",
-      },     
+      },
     },
   },
 };
 
-export const cityOptions = [
+const cityOptions = [
   { value: "Mumbai", label: "Mumbai" },
   { value: "strawberry", label: "Strawberry" },
   { value: "vanilla", label: "Vanilla" },
 ];
 
-export const city: FormFieldType = {
+const city: FormFieldType = {
   config: {
     name: "city",
     label: "City",
@@ -219,18 +218,18 @@ export const city: FormFieldType = {
       pattern: {
         value: /^[a-zA-Z0-9\-]+$/,
         message: "Invalid City",
-      } ,
+      },
     },
   },
 };
 
-export const stateOptions = [
+const stateOptions = [
   { value: "Maharashtra", label: "Maharashtra" },
   { value: "strawberry", label: "Strawberry" },
   { value: "vanilla", label: "Vanilla" },
 ];
 
-export const state: FormFieldType = {
+const state: FormFieldType = {
   config: {
     name: "state",
     label: "State",
@@ -245,18 +244,18 @@ export const state: FormFieldType = {
       pattern: {
         value: /^[a-zA-Z0-9\-]+$/,
         message: "Invalid State",
-      },   
+      },
     },
   },
 };
 
-export const countryOptions = [
+const countryOptions = [
   { value: "India", label: "India" },
   { value: "strawberry", label: "Strawberry" },
   { value: "vanilla", label: "Vanilla" },
 ];
 
-export const country: FormFieldType = {
+const country: FormFieldType = {
   config: {
     name: "country",
     label: "Country",
@@ -276,7 +275,7 @@ export const country: FormFieldType = {
   },
 };
 
-export const hscode: FormFieldType = {
+const hscode: FormFieldType = {
   config: {
     name: "hscode",
     label: "HS Code",
@@ -287,17 +286,16 @@ export const hscode: FormFieldType = {
       required: {
         value: true,
         message: "Please Enter HS Code",
-      },    
+      },
       pattern: {
         value: /^\d{6}$/,
         message: "Invalid HS Code",
-      }
-      
+      },
     },
   },
 };
 
-export const givenName: FormFieldType = {
+const givenName: FormFieldType = {
   config: {
     name: "givenName",
     label: "GivenName",
@@ -317,7 +315,7 @@ export const givenName: FormFieldType = {
   },
 };
 
-export const referenceno: FormFieldType = {
+const referenceno: FormFieldType = {
   config: {
     name: "referenceNo",
     label: "Reference no.",
@@ -332,12 +330,12 @@ export const referenceno: FormFieldType = {
       pattern: {
         value: /^[a-zA-Z0-9\-]+$/,
         message: "Invalid reference number",
-      },      
+      },
     },
   },
 };
 
-export const financialyear: FormFieldType = {
+const financialyear: FormFieldType = {
   config: {
     name: "fincialyear",
     label: "Financial Year",
@@ -352,12 +350,12 @@ export const financialyear: FormFieldType = {
       pattern: {
         value: /^\d{4}-\d{4}$/,
         message: "Invalid financial year",
-      },     
+      },
     },
   },
 };
 
-export const regno: FormFieldType = {
+const regno: FormFieldType = {
   config: {
     name: "regno",
     label: "Reg. no.",
@@ -377,34 +375,34 @@ export const regno: FormFieldType = {
   },
 };
 
+const checkBoxField: FormFieldType = {
+  config: {
+    name: "companyype",
+    label: "Company ype",
+    id: "companyype",
+    options: selectOptionsMaker([], "value", "label"),
+    validation: {
+      required: {
+        value: true,
+        message: "required",
+      },
+    },
+  },
+};
 
-// export const checkBoxField: FormFieldType = {
-//   config: {
-//     name: "companyype",
-//     label: "Company ype",
-//     id: "companyype",
-//     options: selectOptionsMaker(gender, "value", "label"),
-//     validation: {
-//       required: {
-//         value: true,
-//         message: "required",
-//       },
-//     },
-//   },
-// };
-
-export const companyOptions = [
+const companyOptions = [
   { value: "Prpritership", label: "Prpritership" },
   { value: "Partnership", label: "Partnership" },
   { value: "Pvt Ltd", label: "Pvt Ldt" },
   { value: "public Ltd", label: "public Ldt" },
 ];
-export const companyType: FormFieldType = {
+
+const companyType: FormFieldType = {
   config: {
     name: "companyType",
     label: "Company Type",
     id: "companyType",
-    className:"custom-control-input",
+    className: "custom-control-input",
     options: selectOptionsMaker(companyOptions, "value", "label"),
     placeholder: "write a random Select Box",
     validation: {
@@ -412,12 +410,11 @@ export const companyType: FormFieldType = {
         value: true,
         message: "Please Enter Company name",
       },
-      
     },
   },
 };
 
-export const incorporationDate: FormFieldType = {
+const incorporationDate: FormFieldType = {
   config: {
     name: "incorporationDate",
     label: "Incorporation Date",
@@ -431,12 +428,12 @@ export const incorporationDate: FormFieldType = {
       pattern: {
         value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
         message: "Invalid date",
-      },      
+      },
     },
   },
 };
 
-export const bankers: FormFieldType = {
+const bankers: FormFieldType = {
   config: {
     name: "bankers",
     label: "Bankers",
@@ -452,11 +449,11 @@ export const bankers: FormFieldType = {
       maxLength: {
         value: 30,
         message: "30 characters max",
-      }, 
+      },
     },
   },
 };
-export const notes: FormFieldType = {
+const notes: FormFieldType = {
   config: {
     name: "notes",
     label: "Notes",
@@ -472,7 +469,7 @@ export const notes: FormFieldType = {
     },
   },
 };
-export const cmie: FormFieldType = {
+const cmie: FormFieldType = {
   config: {
     name: "cmie",
     label: "CMIE",
@@ -487,11 +484,11 @@ export const cmie: FormFieldType = {
       maxLength: {
         value: 30,
         message: "Enter CMIE",
-      }, 
+      },
     },
   },
 };
-export const rocStatus: FormFieldType = {
+const rocStatus: FormFieldType = {
   config: {
     name: "rocStatus",
     label: "ROC Status",
@@ -506,12 +503,12 @@ export const rocStatus: FormFieldType = {
       maxLength: {
         value: 30,
         message: "Enter ROC",
-      }, 
+      },
     },
   },
 };
 
-export const recodes: FormFieldType = {
+const recodes: FormFieldType = {
   config: {
     name: "recodes",
     label: "Recodes",
@@ -526,12 +523,12 @@ export const recodes: FormFieldType = {
       maxLength: {
         value: 30,
         message: "Enetr Records  ",
-      }, 
+      },
     },
   },
 };
 
-export const recfin: FormFieldType = {
+const recfin: FormFieldType = {
   config: {
     name: "reffin",
     label: "Rec Fin",
@@ -546,7 +543,41 @@ export const recfin: FormFieldType = {
       maxLength: {
         value: 30,
         message: "Enter Rec",
-      }, 
+      },
     },
   },
+};
+
+export const addCompanyFormFields = {
+  nameField,
+  addressField,
+  officeAddressField,
+  telNo,
+  faxNo,
+  emailField,
+  website,
+  contactPerson,
+  designation,
+  zip,
+  cityOptions,
+  city,
+  stateOptions,
+  state,
+  countryOptions,
+  country,
+  hscode,
+  givenName,
+  referenceno,
+  financialyear,
+  regno,
+  checkBoxField,
+  companyOptions,
+  companyType,
+  incorporationDate,
+  bankers,
+  notes,
+  cmie,
+  rocStatus,
+  recodes,
+  recfin,
 };
