@@ -1,24 +1,6 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-
-import {
-  BorderLayout,
-  Card,
-  Input,
-  Select,
-  DivLayout,
-  Button,
-  Table,
-  ActionButtons,
-} from "@shared/index";
-// import {
-//   priceLocalSource,
-//   priceCurrency,
-//   purchesExchanegRate,
-//   sellExchanegRate,
-//   purchesDate,
-//   sellDate,
-// } from "@master/index";
+import {BorderLayout,Card,Input,DivLayout,ActionButtons,} from "@shared/index";
 import * as formField from "@master/index";
 
 export const AddCurrency: React.FC = () => {
