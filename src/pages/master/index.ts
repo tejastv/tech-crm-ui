@@ -38,20 +38,20 @@ export { AddContinent } from "./location-master/continent/AddContinent";
 export { Continent } from "./location-master/continent/Continent";
 
 //BankMasterDeposit master child pages
-export { AddBankMasterDeposit } from "./information-master/bank-master-deposit/AddBankMasterDeposit";
-export { BankMasterDeposit } from "./information-master/bank-master-deposit/BankMasterDeposit";
+export { AddBankMasterDeposit } from "./information-master/bank-master-deposit/AddBankDeposit";
+export { BankMasterDeposit } from "./information-master/bank-master-deposit/BankDeposit";
 
-export { AddPaymentMode } from "./information-master/payment-mode/AddPayment-Mode";
+export { AddPaymentMode } from "./information-master/payment-mode/AddPaymentMode";
 export { PaymentMode } from "./information-master/payment-mode/PaymentMode";
 
 export { AddCurrency } from "./information-master/currency/AddCurrency";
 export { Currency } from "./information-master/currency/Currency";
 export { AddInfoSource } from "./information-master/source/AddSource";
 export { Source } from "./information-master/source/Source";
-export { AddSupplier } from "./information-master/supplier-master/AddSupplierMaster";
+export { AddSupplier } from "./information-master/supplier-master/AddSupplier";
 export { Supplier } from "./information-master/supplier-master/Supplier";
-export { AddBankMasterDrawn } from "./information-master/bank-master-drawn-on/AddBankMasterDrawn";
-export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankMasterDrawn";
+export { AddBankMasterDrawn } from "./information-master/bank-master-drawn-on/AddBankDrawn";
+export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankDrawn";
 // Continent master child pages
 // export { AddBankMasterDrawn } from "./information-master/bank-master(drawn-on)/AddBank-Master-Drawn";
 // export { BankMasterDrawn } from "./information-master/bank-master(drawn-on)/Bank-Master-Drawn";
@@ -79,11 +79,11 @@ export * from "./location-master/form-fields/add-country";
 export * from "./location-master/form-fields/add-continent";
 
 
-export * from "./information-master/form-fields/add-bankmaster-deposit";
-export * from "./information-master/form-fields/add-payment-mode";
+export * from "./information-master/form-fields/add-bankdeposit";
+export * from "./information-master/form-fields/add-paymentmode";
 export * from "./information-master/form-fields/add-source";
-export * from "./information-master/form-fields/add-bankmaster-drawnon";
-export * from "./information-master/form-fields/add-suppliermaster";
+export * from "./information-master/form-fields/add-bankdrawnon";
+export * from "./information-master/form-fields/add-supplier";
 
 
 
