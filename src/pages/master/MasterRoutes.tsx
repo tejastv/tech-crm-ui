@@ -19,6 +19,9 @@ const LocalSourceMasterIndex = React.lazy(
 const InformationMasterIndex = React.lazy(
   () => import("./information-master/InformationMasterIndex")
 );
+const InformationMaster2MasterIndex = React.lazy(
+  () => import("./information-master-2/InformationMasterIndex_2")
+);
 
 
 const MasterRoutes = () => {
@@ -61,7 +64,16 @@ const MasterRoutes = () => {
           </React.Suspense>
         }
       ></Route>
+      <Route
+        path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_PARENT_ROUTE}
+        element={
+         <React.Suspense>
+          <InformationMaster2MasterIndex />
+        </React.Suspense>
+        }
+      ></Route>
     </Routes>
+
   );
 };
 
