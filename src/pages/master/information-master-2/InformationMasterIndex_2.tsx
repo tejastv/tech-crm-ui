@@ -9,6 +9,9 @@ const IndustryIndex = React.lazy(
 const CallTypeIndex = React.lazy(
   () => import("./call-type/CallTypeIndex")
 );
+const PurposeMasterIndex = React.lazy(
+  () => import("./purpose-master/PurposeIndex")
+);
 
 
 const LocationMasterIndex = () => {
@@ -22,11 +25,11 @@ const LocationMasterIndex = () => {
         path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.CALLTYPE_PARENT_ROUTE}
         element={<CallTypeIndex />}
       ></Route>
-     {/* <Route
-        path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INDUSTRY_PARENT_ROUTE}
-        element={<CountryMasterIndex />}
+      <Route
+        path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.PURPOSE_PARENT_ROUTE}
+        element={<PurposeMasterIndex />}
       ></Route>
-       <Route
+      {/* <Route
         path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INDUSTRY_PARENT_ROUTE}
         element={<ContinentMasterIndex />}
       ></Route> */}
