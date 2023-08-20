@@ -40,7 +40,7 @@ const LocationMasterIndex = () => {
         element={<CreditDaysIndex />}
       ></Route>
       <Route
-        path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.CREDITDAYS_PARENT_ROUTE}
+        path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.SITESTATUS_PARENT_ROUTE}
         element={<SiteStatusIndex />}
       ></Route>
     </Routes>
