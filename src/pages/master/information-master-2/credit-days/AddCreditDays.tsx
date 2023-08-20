@@ -4,11 +4,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import * as formField from "@master/index";
 
-export const AddPurpose: React.FC = () => {
+export const AddCreditDays: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Purpose Master",
+      mainHeading: "Add Credit Period",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -33,7 +33,7 @@ export const AddPurpose: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={formField.purpose.config} />
+                  <Input config={formField.creditdays.config} />
                 </div>
                 
               </div>

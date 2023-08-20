@@ -12,6 +12,12 @@ const CallTypeIndex = React.lazy(
 const PurposeMasterIndex = React.lazy(
   () => import("./purpose-master/PurposeIndex")
 );
+const CreditDaysIndex = React.lazy(
+  () => import("./credit-days/CreditDaysIndex")
+);
+const SiteStatusIndex = React.lazy(
+  () => import("./site-status/SiteStatusIndex")
+);
 
 
 const LocationMasterIndex = () => {
@@ -29,10 +35,14 @@ const LocationMasterIndex = () => {
         path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.PURPOSE_PARENT_ROUTE}
         element={<PurposeMasterIndex />}
       ></Route>
-      {/* <Route
-        path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INDUSTRY_PARENT_ROUTE}
-        element={<ContinentMasterIndex />}
-      ></Route> */}
+      <Route
+        path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.CREDITDAYS_PARENT_ROUTE}
+        element={<CreditDaysIndex />}
+      ></Route>
+      <Route
+        path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.CREDITDAYS_PARENT_ROUTE}
+        element={<SiteStatusIndex />}
+      ></Route>
     </Routes>
   );
 };

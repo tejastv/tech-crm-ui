@@ -63,6 +63,12 @@ export { CallType } from "./information-master-2/call-type/CallType";
 export { AddPurpose } from "./information-master-2/purpose-master/AddPurpose";
 export { Purpose } from "./information-master-2/purpose-master/Purpose";
 
+export { AddCreditDays } from "./information-master-2/credit-days/AddCreditDays";
+export { CreditDays } from "./information-master-2/credit-days/CreditDays";
+
+export { AddSiteStatus} from "./information-master-2/site-status/AddSiteStatus";
+export { SiteStatus } from "./information-master-2/site-status/SiteStatus";
+
 
 //Form Fields
 export * from "./company-master/form-fields/add-company";
@@ -97,6 +103,8 @@ export * from "./information-master/form-fields/add-currency";
 export * from "./information-master-2/form-fields/add-industry";
 export * from "./information-master-2/form-fields/add-calltype";
 export * from "./information-master-2/form-fields/add-purpose";
+export * from "./information-master-2/form-fields/add-creditdays";
+export * from "./information-master-2/form-fields/add-sitestatus";
 
 
 
