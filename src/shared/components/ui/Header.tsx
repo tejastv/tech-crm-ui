@@ -419,10 +419,13 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="calltype.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.CALLTYPE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">Call type</span>
-                            </a>
+                              <span className="hide-menu ">Call Type</span>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}

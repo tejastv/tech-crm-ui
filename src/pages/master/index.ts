@@ -57,6 +57,9 @@ export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankD
 export { AddIndustry } from "./information-master-2/industry/AddIndustry";
 export { Industry } from "./information-master-2/industry/Industry";
 
+export { AddCallType } from "./information-master-2/call-type/AddCalltype";
+export { CallType } from "./information-master-2/call-type/CallType";
+
 
 //Form Fields
 export * from "./company-master/form-fields/add-company";
@@ -89,6 +92,7 @@ export * from "./information-master/form-fields/add-supplier";
 export * from "./information-master/form-fields/add-currency";
 
 export * from "./information-master-2/form-fields/add-industry";
+export * from "./information-master-2/form-fields/add-calltype";
 
 
 

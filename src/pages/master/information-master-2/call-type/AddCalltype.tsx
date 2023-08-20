@@ -4,11 +4,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import * as formField from "@master/index";
 
-export const AddIndustry: React.FC = () => {
+export const AddCallType: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Industry",
+      mainHeading: "Add Call Type",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -33,7 +33,7 @@ export const AddIndustry: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={formField.industry.config} />
+                  <Input config={formField.calltype.config} />
                 </div>
                 
               </div>
