@@ -72,6 +72,9 @@ export { SiteStatus } from "./information-master-2/site-status/SiteStatus";
 export { AddExecutive} from "./information-master-2/executive/AddExecutive";
 export { Executive } from "./information-master-2/executive/Executive";
 
+export { AddFinYear} from "./information-master-2/fin. year/AddFinyear";
+export { FinYear } from "./information-master-2/fin. year/FinYear";
+
 //Form Fields
 export * from "./company-master/form-fields/add-company";
 export * from "./location-master/form-fields/add-state";
@@ -107,7 +110,8 @@ export * from "./information-master-2/form-fields/add-calltype";
 export * from "./information-master-2/form-fields/add-purpose";
 export * from "./information-master-2/form-fields/add-creditdays";
 export * from "./information-master-2/form-fields/add-sitestatus";
-export * from "./information-master-2/form-fields/add-executive";
+export * from "./information-master-2/form-fields/add-executive"; 
+export * from "./information-master-2/form-fields/add-finyear"; 
 
 
 

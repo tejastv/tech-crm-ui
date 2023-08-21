@@ -21,6 +21,9 @@ const SiteStatusIndex = React.lazy(
 const ExecutiveIndex = React.lazy(
   () => import("./executive/ExecutiveIndex")
 );
+const FinYearIndex = React.lazy(
+  () => import("./fin. year/FinYearIndex")
+);
 
 
 const LocationMasterIndex = () => {
@@ -49,6 +52,10 @@ const LocationMasterIndex = () => {
       <Route
         path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.EXECUTIVE_PARENT_ROUTE}
         element={<ExecutiveIndex />}
+      ></Route>
+      <Route
+        path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.FINYEAR_PARENT_ROUTE}
+        element={<FinYearIndex />}
       ></Route>
     </Routes>
   );
