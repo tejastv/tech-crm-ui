@@ -14,6 +14,9 @@ export const AddUser: React.FC = () => {
     formActionsConfig: {
       heading: "Action Buttons",
     },
+    formTableConfig: {
+      heading: "Set User Rights",
+    },
   };
 
   const onSubmit = methods.handleSubmit((data) => {
@@ -40,9 +43,11 @@ export const AddUser: React.FC = () => {
                 <div className="col-md-6 col-xs-12">
                   <Input config={formField.username.config} />
                   <Input config={formField.usertype.config} />
+                </div> 
                 </div>
-                
-              </div>
+                <BorderLayout heading={cardConfig.formTableConfig.heading}>
+              <ActionButtons/>
+            </BorderLayout>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
               <ActionButtons/>
