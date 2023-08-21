@@ -69,6 +69,8 @@ export { CreditDays } from "./information-master-2/credit-days/CreditDays";
 export { AddSiteStatus} from "./information-master-2/site-status/AddSiteStatus";
 export { SiteStatus } from "./information-master-2/site-status/SiteStatus";
 
+export { AddExecutive} from "./information-master-2/executive/AddExecutive";
+export { Executive } from "./information-master-2/executive/Executive";
 
 //Form Fields
 export * from "./company-master/form-fields/add-company";
@@ -105,6 +107,7 @@ export * from "./information-master-2/form-fields/add-calltype";
 export * from "./information-master-2/form-fields/add-purpose";
 export * from "./information-master-2/form-fields/add-creditdays";
 export * from "./information-master-2/form-fields/add-sitestatus";
+export * from "./information-master-2/form-fields/add-executive";
 
 
 

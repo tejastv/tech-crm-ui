@@ -18,6 +18,9 @@ const CreditDaysIndex = React.lazy(
 const SiteStatusIndex = React.lazy(
   () => import("./site-status/SiteStatusIndex")
 );
+const ExecutiveIndex = React.lazy(
+  () => import("./executive/ExecutiveIndex")
+);
 
 
 const LocationMasterIndex = () => {
@@ -42,6 +45,10 @@ const LocationMasterIndex = () => {
       <Route
         path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.SITESTATUS_PARENT_ROUTE}
         element={<SiteStatusIndex />}
+      ></Route>
+      <Route
+        path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.EXECUTIVE_PARENT_ROUTE}
+        element={<ExecutiveIndex />}
       ></Route>
     </Routes>
   );

@@ -393,12 +393,15 @@ export const Header: React.FC = () => {
                           aria-expanded="false"
                           className="collapse second-level"
                         >
-                          <li className="sidebar-item">
+                        <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="executive.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.EXECUTIVE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Executive</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
