@@ -409,41 +409,53 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="industry.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INDUSTRY}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Industry</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="calltype.php">
-                              <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">Call type</span>
-                            </a>
-                          </li>
-                          <li className="sidebar-item">
-                            {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="purpose_master.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.CALLTYPE}`}
+                            >
+                              <i className="mdi mdi-creation"></i>
+                              <span className="hide-menu ">Call Type</span>
+                            </Link>
+                          </li>
+                          <li className="sidebar-item">
+                            {" "}
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.PURPOSE}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Purpose Master</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="creditdays.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.CREDITDAYS}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Credit Days</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="site_status.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.SITESTATUS}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Site Status</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
