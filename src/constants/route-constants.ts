@@ -82,6 +82,7 @@ export const MASTER_ROUTES = {
     CALLTYPE_PARENT_ROUTE: "/calltype/*",
     INDUSTRY_PARENT_ROUTE: "/industry/*",
     FINYEAR_PARENT_ROUTE: "/finyear/*",
+    USER_PARENT_ROUTE: "/user/*",
     EXECUTIVE: "executive",
     SITESTATUS: "site-status",
     CREDITDAYS: "credit-days",
@@ -89,6 +90,7 @@ export const MASTER_ROUTES = {
     CALLTYPE: "calltype",
     INDUSTRY: "industry",
     FINYEAR: "finyear",
+    USER: "user",
   },
   // INFORMATION_MASTER_ROUTES: {
   //   INFORMATION_MASTER_PARENT_ROUTE: "/local-source-master/*",

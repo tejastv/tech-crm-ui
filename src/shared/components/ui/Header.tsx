@@ -465,10 +465,13 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="user_rights.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.USER}`}
+                            >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">Users Master</span>
-                            </a>
+                              <span className="hide-menu ">User Master</span>
+                            </Link>
                           </li>
                         </ul>
                       </li>
