@@ -393,19 +393,25 @@ export const Header: React.FC = () => {
                           aria-expanded="false"
                           className="collapse second-level"
                         >
-                          <li className="sidebar-item">
+                        <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="executive.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.EXECUTIVE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Executive</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="fin_year.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.FINYEAR}`}
+                            >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">Fin. year</span>
-                            </a>
+                              <span className="hide-menu ">Fin. Year</span>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
@@ -459,10 +465,13 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="user_rights.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.USER}`}
+                            >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">Users Master</span>
-                            </a>
+                              <span className="hide-menu ">User Master</span>
+                            </Link>
                           </li>
                         </ul>
                       </li>

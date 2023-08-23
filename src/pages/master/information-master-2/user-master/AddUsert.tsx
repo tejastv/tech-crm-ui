@@ -1,18 +1,21 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Checkbox, Input, Select } from "@shared/index";
+import { ActionButtons, BorderLayout, Card, Input, Select } from "@shared/index";
 import * as formField from "@master/index";
 
-export const AddExecutive: React.FC = () => {
+export const AddUser: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Sales Executive",
+      mainHeading: "Add User",
       heading: "Entry",
     },
     formActionsConfig: {
       heading: "Action Buttons",
+    },
+    formTableConfig: {
+      heading: "Set User Rights",
     },
   };
 
@@ -31,24 +34,20 @@ export const AddExecutive: React.FC = () => {
             className="p-t-20"
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-            <div className="row">
+              <div className="row">
                 <div className="col-md-6 col-xs-12">
-                <div className="card-body">
-                  <Input config={formField.executiveInfomation2.config} />
-                  <Input config={formField.emailInformation2.config} />
-                  <Input config={formField.cityInformation2.config} />
-                  </div>
+                  <Input config={formField.username.config} />
+                  <Select config={formField.usertype.config} />
                 </div>
+                
                 <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                   <Checkbox config={formField.checkboxInformation2.config} />
-                  <Select config={formField.stateInformation2.config} />
-                  {/*<Input config={stateSupplier.config} />
-                  <Input config={countrySupplier.config} />
-                  <Input config={CurrenceySupplier.config} /> */}
-                  </div>
+                  <Input config={formField.username.config} />
+                  <Input config={formField.usertype.config} />
+                </div> 
                 </div>
-              </div>
+                <BorderLayout heading={cardConfig.formTableConfig.heading}>
+              <ActionButtons/>
+            </BorderLayout>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
               <ActionButtons/>

@@ -4,14 +4,14 @@ import { BorderLayout, PageBreadcrumb, Table, TableType } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 import { useHttp } from "@hooks/useHttp";
 
-export const Executive: React.FC = () => {
+export const FinYear: React.FC = () => {
   const { getData } = useHttp();
   const [tableData, setData] = useState([]);
 
   const config = {
     breadcrumbConfig: {
-      pageHeading: "Sales Executive",
-      btnTitle: "Add Sales Executive",
+      pageHeading: "Fin. Year",
+      btnTitle: "Add Fin. Year",
       btnRoute: COMMON_ROUTES.ADD,
     },
     borderLayoutConfig: {
