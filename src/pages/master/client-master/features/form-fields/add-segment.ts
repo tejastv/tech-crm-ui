@@ -13,7 +13,7 @@ const segmentValid = {
 } as ValidationType;
 
 const clientSegment: FormFieldType = createFormConfig(
-  "SegmentName",
+  "segmentName",
   "Segment Name",
   "text",
   segmentValid,

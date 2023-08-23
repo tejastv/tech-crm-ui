@@ -6,9 +6,7 @@ import { MASTER_ROUTES } from "constants";
 const LocalSMasterIndex = React.lazy(
   () => import("./local-source/LocalSourceIndex")
 );
-const PriceMasterIndex = React.lazy(
-  () => import("./price-list/PriceIndex")
-);
+const PriceMasterIndex = React.lazy(() => import("./price-list/PriceIndex"));
 const StdPriceMasterIndex = React.lazy(
   () => import("./std-price-list/StdPriceIndex")
 );

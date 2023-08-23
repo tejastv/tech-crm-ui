@@ -32,7 +32,7 @@ export { ActualBuyer } from "./price-list-master/actual-buyer/ActualBuyer";
 
 //Local Source
 // LocalSource Child Page
-export { AddSource } from "./local-source-master/local-source/AddSource";
+export { AddSource } from "./local-source-master/local-source/AddLocalSource";
 export { LocalSource } from "./local-source-master/local-source/LocalSource";
 // Price List Child Page
 export { AddPrice } from "./local-source-master/price-list/AddPrice";

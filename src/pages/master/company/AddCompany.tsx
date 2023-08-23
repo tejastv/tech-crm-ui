@@ -12,7 +12,7 @@ import {
   Select,
 } from "@shared/index";
 
-import { addCompanyFormFields } from "..";
+import { addCompanyFormFields } from "@master/index";
 
 export const AddCompany: React.FC = () => {
   const methods = useForm();

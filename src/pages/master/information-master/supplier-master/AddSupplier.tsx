@@ -2,7 +2,7 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { CurrenceySupplier, addressSupplier, citySupplier, contactSupplier, countrySupplier, designationSupplier, emailSupplier, faxnoSupplier, letterfile, nameSupplier, nickname, stateSupplier, telnoSupplier, websiteSupplier, zipSupplier } from "@master/index";
+import { addSupplierFormFields } from "@master/index";
 
 export const AddSupplier: React.FC = () => {
   const methods = useForm();
@@ -33,28 +33,39 @@ export const AddSupplier: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={nameSupplier.config} />
-                  <Input config={nickname.config} />
-                  <Input config={addressSupplier.config} />
-                  <Input config={telnoSupplier.config} />
-                  <Input config={faxnoSupplier.config} />
-                  <Input config={emailSupplier.config} />
-                  <Input config={websiteSupplier.config} />
-                  <Input config={contactSupplier.config} />
-                  <Input config={designationSupplier.config} />
-                  
+                  <Input config={addSupplierFormFields.nameSupplier.config} />
+                  <Input config={addSupplierFormFields.nickname.config} />
+                  <Input
+                    config={addSupplierFormFields.addressSupplier.config}
+                  />
+                  <Input config={addSupplierFormFields.telnoSupplier.config} />
+                  <Input config={addSupplierFormFields.faxnoSupplier.config} />
+                  <Input config={addSupplierFormFields.emailSupplier.config} />
+                  <Input
+                    config={addSupplierFormFields.websiteSupplier.config}
+                  />
+                  <Input
+                    config={addSupplierFormFields.contactSupplier.config}
+                  />
+                  <Input
+                    config={addSupplierFormFields.designationSupplier.config}
+                  />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input config={citySupplier.config} />
-                  <Input config={zipSupplier.config} />
-                  <Input config={stateSupplier.config} />
-                  <Input config={countrySupplier.config} />
-                  <Input config={CurrenceySupplier.config} />
+                  <Input config={addSupplierFormFields.citySupplier.config} />
+                  <Input config={addSupplierFormFields.zipSupplier.config} />
+                  <Input config={addSupplierFormFields.stateSupplier.config} />
+                  <Input
+                    config={addSupplierFormFields.countrySupplier.config}
+                  />
+                  <Input
+                    config={addSupplierFormFields.CurrenceySupplier.config}
+                  />
                 </div>
               </div>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons/>
+              <ActionButtons />
             </BorderLayout>
           </form>
         </FormProvider>

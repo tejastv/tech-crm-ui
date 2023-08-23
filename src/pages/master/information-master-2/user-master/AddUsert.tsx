@@ -1,8 +1,14 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input, Select } from "@shared/index";
-import * as formField from "@master/index";
+import {
+  ActionButtons,
+  BorderLayout,
+  Card,
+  Input,
+  Select,
+} from "@shared/index";
+import { addUserFormFields } from "@master/index";
 
 export const AddUser: React.FC = () => {
   const methods = useForm();
@@ -36,21 +42,21 @@ export const AddUser: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={formField.username.config} />
-                  <Select config={formField.usertype.config} />
+                  <Input config={addUserFormFields.username.config} />
+                  <Select config={addUserFormFields.usertype.config} />
                 </div>
-                
+
                 <div className="col-md-6 col-xs-12">
-                  <Input config={formField.username.config} />
-                  <Input config={formField.usertype.config} />
-                </div> 
+                  <Input config={addUserFormFields.username.config} />
+                  <Input config={addUserFormFields.usertype.config} />
                 </div>
-                <BorderLayout heading={cardConfig.formTableConfig.heading}>
-              {/* <Table/> */}
-            </BorderLayout>
+              </div>
+              <BorderLayout heading={cardConfig.formTableConfig.heading}>
+                {/* <Table/> */}
+              </BorderLayout>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons/>
+              <ActionButtons />
             </BorderLayout>
           </form>
         </FormProvider>

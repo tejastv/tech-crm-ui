@@ -1,7 +1,7 @@
 // CompanyMaster.tsx
 import React from "react";
 
-import { BorderLayout, PageBreadcrumb, Table } from "@shared/index";
+import { BorderLayout, PageBreadcrumb } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 
 export const ActualBuyer: React.FC = () => {

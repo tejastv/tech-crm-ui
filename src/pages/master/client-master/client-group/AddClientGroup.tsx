@@ -47,13 +47,13 @@ export const AddClientGroup: React.FC = () => {
                 </div>
 
                 <div className="col-md-8  col-xs-12">
-                  <p className="text-center m-b-0 ">
-                    <small className="text-center  badge badge-default badge-primary form-text text-white">
-                      <InputWithText
-                        config={addClientGroupFormFields.namenote.config}
-                      />
-                    </small>
-                  </p>
+                  {/* <p className="text-center m-b-0 "> */}
+                  <small className="text-center  badge badge-default badge-primary form-text text-white">
+                    <InputWithText
+                      config={addClientGroupFormFields.namenote.config}
+                    />
+                  </small>
+                  {/* </p> */}
                 </div>
               </div>
 

@@ -8,12 +8,7 @@ import {
   Input,
   Select,
 } from "@shared/index";
-import {
-  countryField,
-  continentField,
-  continentCountryField,
-  localSourceField,
-} from "@master/index";
+import { addCoutryFormFields } from "@master/index";
 
 export const AddCountry: React.FC = () => {
   const methods = useForm();
@@ -44,12 +39,16 @@ export const AddCountry: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={countryField.config} />
-                  <Select config={continentField.config} />
+                  <Input config={addCoutryFormFields.countryField.config} />
+                  <Select
+                    config={addCoutryFormFields.countryCodeField.config}
+                  />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input config={continentCountryField.config} />
-                  <Input config={localSourceField.config} />
+                  <Input
+                    config={addCoutryFormFields.continentCountryField.config}
+                  />
+                  <Input config={addCoutryFormFields.localSourceField.config} />
                 </div>
               </div>
             </BorderLayout>

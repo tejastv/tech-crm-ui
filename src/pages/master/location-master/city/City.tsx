@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { BorderLayout, PageBreadcrumb, Table, TableType } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
@@ -6,11 +6,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { CityType } from "@pages/master";
 import { useHttp } from "@hooks/useHttp";
 import { useRequestProcessor } from "@hooks/useRequestProcessor";
-import { useAxios } from "@hooks/useAxios";
 
 export const City: React.FC = () => {
-  const [tableData, setData] = useState([]);
-
   const config = {
     breadcrumbConfig: {
       pageHeading: "City",

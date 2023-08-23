@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { FinYear, AddFinYear} from "@master/index";
+import { FinYear, AddFinYear } from "@master/index";
 import { COMMON_ROUTES } from "constants";
 
 const FinYearIndex: React.FC = () => {

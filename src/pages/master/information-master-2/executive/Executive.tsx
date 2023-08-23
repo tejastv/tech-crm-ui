@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { BorderLayout, PageBreadcrumb, Table, TableType } from "@shared/index";
+import { BorderLayout, PageBreadcrumb } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
-import { useHttp } from "@hooks/useHttp";
 
 export const Executive: React.FC = () => {
-  const { getData } = useHttp();
-  const [tableData, setData] = useState([]);
-
   const config = {
     breadcrumbConfig: {
       pageHeading: "Sales Executive",
@@ -18,8 +14,6 @@ export const Executive: React.FC = () => {
       heading: "List",
     },
   };
-
-
 
   return (
     <>

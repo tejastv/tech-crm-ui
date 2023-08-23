@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { Continent, AddContinent} from "@master/index";
+import { Continent, AddContinent } from "@master/index";
 import { COMMON_ROUTES } from "constants";
 
 const ContinentMasterIndex: React.FC = () => {

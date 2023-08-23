@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BorderLayout, PageBreadcrumb, Table } from "@shared/index";
+import { BorderLayout, PageBreadcrumb } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 
 export const Client: React.FC = () => {
@@ -19,7 +19,7 @@ export const Client: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={{
+        {/* <Table config={{
           columns: [],
           data: [],
           sorting: undefined,
@@ -31,7 +31,7 @@ export const Client: React.FC = () => {
           globalSearchBox: undefined,
           pagination: undefined,
           showItemCountDropdown: undefined
-        }}></Table>
+        }}></Table> */}
       </BorderLayout>
     </>
   );

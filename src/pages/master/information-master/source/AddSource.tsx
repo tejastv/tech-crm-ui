@@ -2,7 +2,7 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { letterfile, source } from "@master/index";
+import { addSourceFormFields } from "@master/index";
 
 export const AddInfoSource: React.FC = () => {
   const methods = useForm();
@@ -33,15 +33,15 @@ export const AddInfoSource: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={source.config} />
+                  <Input config={addSourceFormFields.source.config} />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input config={letterfile.config} />
+                  <Input config={addSourceFormFields.letterfile.config} />
                 </div>
               </div>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons/>
+              <ActionButtons />
             </BorderLayout>
           </form>
         </FormProvider>

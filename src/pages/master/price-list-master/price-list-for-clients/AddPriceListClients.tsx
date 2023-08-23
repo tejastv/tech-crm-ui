@@ -1,16 +1,8 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import {
-  BorderLayout,
-  Card,
-  Input,
-  Select,
-  DivLayout,
-  Button,
-  Table,
-} from "@shared/index";
-import * as formField from "@master/index";
+import { BorderLayout, Card, Select, Button } from "@shared/index";
+import { addPriceClientFormFields } from "@master/index";
 
 export const AddPriceClients: React.FC = () => {
   const methods = useForm();
@@ -47,17 +39,21 @@ export const AddPriceClients: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.pricecity.config} />
+                  <Select config={addPriceClientFormFields.pricecity.config} />
                 </div>
 
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceClient.config} />
+                  <Select
+                    config={addPriceClientFormFields.priceClient.config}
+                  />
                 </div>
                 <div className="col-md-2 col-xs-12">
-                  <Select config={formField.priceClientCurrency.config} />
+                  <Select
+                    config={addPriceClientFormFields.priceClientCurrency.config}
+                  />
                 </div>
                 <div className="col-md-2 col-xs-12">
-                  <Select config={formField.priceGroup.config} />
+                  <Select config={addPriceClientFormFields.priceGroup.config} />
                 </div>
 
                 <div className="col-md-1 col-xs-12 text-right">
@@ -73,33 +69,41 @@ export const AddPriceClients: React.FC = () => {
                 </div>
                 <div className="pt-lg-3"></div>
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceGroup2.config} />
+                  <Select
+                    config={addPriceClientFormFields.priceGroup2.config}
+                  />
                 </div>
 
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceCurrencyClient.config} />
+                  <Select
+                    config={addPriceClientFormFields.priceCurrencyClient.config}
+                  />
                 </div>
                 {/* <div className="pt-lg-1"></div> */}
                 <div className="col-md-6 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                     <i className="far fa-save"></i>Get Price(From Other Group)
                   </Button>
-                </div> 
+                </div>
                 {/* <div className="pt-lg-3"></div> */}
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceClient2.config} />
+                  <Select
+                    config={addPriceClientFormFields.priceClient2.config}
+                  />
                 </div>
 
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceCurrencyGroup.config} />
+                  <Select
+                    config={addPriceClientFormFields.priceCurrencyGroup.config}
+                  />
                 </div>
                 {/* <div className="pt-lg-1"></div> */}
                 <div className="col-md-6 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                     <i className="far fa-save"></i>Get Price
                   </Button>
-                </div> 
-              
+                </div>
+
                 <div className="col-md-12 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                     <i className="far fa-save"></i>Save All

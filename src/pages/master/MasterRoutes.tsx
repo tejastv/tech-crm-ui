@@ -3,9 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import { MASTER_ROUTES } from "constants";
 
-const Company = React.lazy(
-  () => import("./company/CompanyIndex")
-);
+const Company = React.lazy(() => import("./company/CompanyIndex"));
 const ClientMasterIndex = React.lazy(
   () => import("./client-master/ClientMasterIndex")
 );
@@ -25,7 +23,6 @@ const PriceListMasterIndex = React.lazy(
   () => import("./price-list-master/PriceListMasterIndex")
 );
 
-
 const MasterRoutes = () => {
   return (
     <Routes>
@@ -33,8 +30,8 @@ const MasterRoutes = () => {
         path={MASTER_ROUTES.COMPANY_ROUTES.COMPANY_PARENT_ROUTE}
         element={<Company />}
       ></Route>
-      
-       <Route
+
+      <Route
         path={MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_PARENT_ROUTE}
         element={
           <React.Suspense>
@@ -43,14 +40,16 @@ const MasterRoutes = () => {
         }
       ></Route>
       <Route
-        path={MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_PARENT_ROUTE}
+        path={
+          MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_PARENT_ROUTE
+        }
         element={
-         <React.Suspense>
-          <PriceListMasterIndex />
-        </React.Suspense>
+          <React.Suspense>
+            <PriceListMasterIndex />
+          </React.Suspense>
         }
       ></Route>
-       <Route
+      <Route
         path={MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_PARENT_ROUTE}
         element={
           <React.Suspense>
@@ -58,16 +57,22 @@ const MasterRoutes = () => {
           </React.Suspense>
         }
       ></Route>
-       <Route
-        path={MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_PARENT_ROUTE}
+      <Route
+        path={
+          MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES
+            .LOCALSOURCEM_MASTER_PARENT_ROUTE
+        }
         element={
           <React.Suspense>
             <LocalSourceMasterIndex />
           </React.Suspense>
         }
       ></Route>
-       <Route
-        path={MASTER_ROUTES.INFORMATION_MASTER_ROUTES.INFORMATION_MASTER_PARENT_ROUTE}
+      <Route
+        path={
+          MASTER_ROUTES.INFORMATION_MASTER_ROUTES
+            .INFORMATION_MASTER_PARENT_ROUTE
+        }
         element={
           <React.Suspense>
             <InformationMasterIndex />
@@ -75,16 +80,17 @@ const MasterRoutes = () => {
         }
       ></Route>
       <Route
-        path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_PARENT_ROUTE}
+        path={
+          MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES
+            .INFORMATION_2_MASTER_PARENT_ROUTE
+        }
         element={
-         <React.Suspense>
-          <InformationMaster2MasterIndex />
-        </React.Suspense>
+          <React.Suspense>
+            <InformationMaster2MasterIndex />
+          </React.Suspense>
         }
       ></Route>
-      
     </Routes>
-
   );
 };
 

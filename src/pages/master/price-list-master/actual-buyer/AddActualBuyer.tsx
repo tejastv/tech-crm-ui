@@ -6,13 +6,11 @@ import {
   ActionButtons,
   BorderLayout,
   Card,
-  DatePicker,
   Input,
   InputWithText,
-  Radio,
   Select,
 } from "@shared/index";
-import * as formField from "@master/index";
+import { addActualBuyersFormFields } from "@master/index";
 
 export const AddActualBuyer: React.FC = () => {
   const methods = useForm();
@@ -45,37 +43,80 @@ export const AddActualBuyer: React.FC = () => {
               <div className="row">
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
-
-                  <Select config={formField.clientactualbuyer.config} />
-                  <Input config={formField.nameactualbuyer.config} />
-                  <Input config={formField.addressactualbuyer.config} />
-                  <Input config={formField.telnoactualbuyer.config} />
-                  <Input config={formField.emailactualbuyer.config} />
-                  <Input config={formField.contactactualbuyer.config} />
-                  <Input config={formField.designationactualbuyer.config} />
-                  
+                    <Select
+                      config={
+                        addActualBuyersFormFields.clientactualbuyer.config
+                      }
+                    />
+                    <Input
+                      config={addActualBuyersFormFields.nameactualbuyer.config}
+                    />
+                    <Input
+                      config={
+                        addActualBuyersFormFields.addressactualbuyer.config
+                      }
+                    />
+                    <Input
+                      config={addActualBuyersFormFields.telnoactualbuyer.config}
+                    />
+                    <Input
+                      config={addActualBuyersFormFields.emailactualbuyer.config}
+                    />
+                    <Input
+                      config={
+                        addActualBuyersFormFields.contactactualbuyer.config
+                      }
+                    />
+                    <Input
+                      config={
+                        addActualBuyersFormFields.designationactualbuyer.config
+                      }
+                    />
                   </div>
                 </div>
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
-                  <Select config={formField.cityactualbuyer.config} />
-                  <Select config={formField.stateactualbuyer.config} />
-                  <Input config={formField.PIN.config} />
-                  <Select config={formField.faxnoactualbuyer.config} />
-                  <Input config={formField.websiteactualbuyer.config} />
-                  <Input config={formField.contactactualbuyer.config} />
-                  <Input config={formField.cstactualbuyer.config} />
-                  <Input config={formField.gstnactualbuyer.config} />
-                  {/* <div className="col-md-12"> */}
+                    <Select
+                      config={addActualBuyersFormFields.cityactualbuyer.config}
+                    />
+                    <Select
+                      config={addActualBuyersFormFields.stateactualbuyer.config}
+                    />
+                    <Input config={addActualBuyersFormFields.PIN.config} />
+                    <Select
+                      config={addActualBuyersFormFields.faxnoactualbuyer.config}
+                    />
+                    <Input
+                      config={
+                        addActualBuyersFormFields.websiteactualbuyer.config
+                      }
+                    />
+                    <Input
+                      config={
+                        addActualBuyersFormFields.contactactualbuyer.config
+                      }
+                    />
+                    <Input
+                      config={addActualBuyersFormFields.cstactualbuyer.config}
+                    />
+                    <Input
+                      config={addActualBuyersFormFields.gstnactualbuyer.config}
+                    />
+                    {/* <div className="col-md-12"> */}
 
-                  <p id="name45" className="form-text text-red text-red-custom">
-                    
-                  <InputWithText config={formField.actualbuyergstnote.config} />
-                  </p>
-                  {/* </div> */}
+                    {/* <p
+                      id="name45"
+                      className="form-text text-red text-red-custom"
+                    > */}
+                    <InputWithText
+                      config={
+                        addActualBuyersFormFields.actualbuyergstnote.config
+                      }
+                    />
+                    {/* </p> */}
+                    {/* </div> */}
                   </div>
                 </div>
-
               </div>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>

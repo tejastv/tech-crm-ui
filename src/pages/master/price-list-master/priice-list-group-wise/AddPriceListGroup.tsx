@@ -1,16 +1,8 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import {
-  BorderLayout,
-  Card,
-  Input,
-  Select,
-  DivLayout,
-  Button,
-  Table,
-} from "@shared/index";
-import * as formField from "@master/index";
+import { BorderLayout, Card, Select, Button } from "@shared/index";
+import { addPriceGroupFormFields } from "@master/index";
 
 export const AddPriceGroup: React.FC = () => {
   const methods = useForm();
@@ -47,37 +39,47 @@ export const AddPriceGroup: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.pricegroupcity.config} />
-                </div>
-                
-                <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceGroupSelect.config} />
+                  <Select
+                    config={addPriceGroupFormFields.pricegroupcity.config}
+                  />
                 </div>
 
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceGroupCurrency.config} />
+                  <Select
+                    config={addPriceGroupFormFields.priceGroupSelect.config}
+                  />
                 </div>
-                
+
+                <div className="col-md-3 col-xs-12">
+                  <Select
+                    config={addPriceGroupFormFields.priceGroupCurrency.config}
+                  />
+                </div>
+
                 <div className="col-md-3 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                     <i className="far fa-save"></i>Get Std. Price
                   </Button>
-                </div> 
+                </div>
                 {/* <div className="pt-lg-3"></div> */}
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceGroupSelect2.config} />
+                  <Select
+                    config={addPriceGroupFormFields.priceGroupSelect2.config}
+                  />
                 </div>
 
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceGroupCurrency2.config} />
+                  <Select
+                    config={addPriceGroupFormFields.priceGroupCurrency2.config}
+                  />
                 </div>
                 {/* <div className="pt-lg-1"></div> */}
                 <div className="col-md-6 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                     <i className="far fa-save"></i>Get Price
                   </Button>
-                </div> 
-              
+                </div>
+
                 <div className="col-md-12 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                     <i className="far fa-save"></i>Save All

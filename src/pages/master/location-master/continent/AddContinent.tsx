@@ -2,7 +2,7 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { continentField } from "@master/index";
+import { addContinentFormFields } from "@master/index";
 
 export const AddContinent: React.FC = () => {
   const methods = useForm();
@@ -33,7 +33,9 @@ export const AddContinent: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={continentField.config} />
+                  <Input
+                    config={addContinentFormFields.continentField.config}
+                  />
                 </div>
               </div>
             </BorderLayout>

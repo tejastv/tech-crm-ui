@@ -8,16 +8,8 @@ import {
   Select,
   DivLayout,
   Button,
-  Table,
 } from "@shared/index";
-import {
-  priceLocalSource,
-  priceCurrency,
-  purchesExchanegRate,
-  sellExchanegRate,
-  purchesDate,
-  sellDate,
-} from "@master/index";
+import { addPriceFormFields } from "@master/index";
 
 export const AddPrice: React.FC = () => {
   const methods = useForm();
@@ -54,11 +46,11 @@ export const AddPrice: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-4 col-xs-12">
-                  <Select config={priceLocalSource.config} />
+                  <Select config={addPriceFormFields.priceLocalSource.config} />
                 </div>
 
                 <div className="col-md-4 col-xs-12">
-                  <Select config={priceCurrency.config} />
+                  <Select config={addPriceFormFields.priceCurrency.config} />
                 </div>
 
                 <div className="col-md-4 col-xs-12 text-right">
@@ -67,23 +59,25 @@ export const AddPrice: React.FC = () => {
                   </Button>
                 </div>
                 <div className="col-md-2 col-xs-12">
-                <DivLayout heading={cardConfig.formPurchesConfig.heading} />
+                  <DivLayout heading={cardConfig.formPurchesConfig.heading} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Input config={purchesExchanegRate.config} />
+                  <Input
+                    config={addPriceFormFields.purchesExchanegRate.config}
+                  />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Input config={purchesDate.config} />
+                  <Input config={addPriceFormFields.purchesDate.config} />
                 </div>
                 <div className="col-md-2 col-xs-12"></div>
                 <div className="col-md-2 col-xs-12">
-                <DivLayout heading={cardConfig.formSellConfig.heading} />
+                  <DivLayout heading={cardConfig.formSellConfig.heading} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Input config={sellExchanegRate.config} />
+                  <Input config={addPriceFormFields.sellExchanegRate.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Input config={sellDate.config} />
+                  <Input config={addPriceFormFields.sellDate.config} />
                 </div>
                 <div className="col-md-2 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>

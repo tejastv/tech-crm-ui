@@ -1,16 +1,8 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import {
-  BorderLayout,
-  Card,
-  Input,
-  Select,
-  DivLayout,
-  Button,
-  Table,
-} from "@shared/index";
-import * as formField from "@master/index";
+import { BorderLayout, Card, Select } from "@shared/index";
+import { addStdPriceClientsFormFields } from "@master/index";
 
 export const AddStdPriceClients: React.FC = () => {
   const methods = useForm();
@@ -47,9 +39,13 @@ export const AddStdPriceClients: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.stdPriceClientCurrency.config} />
+                  <Select
+                    config={
+                      addStdPriceClientsFormFields.stdPriceClientCurrency.config
+                    }
+                  />
                 </div>
-                </div>
+              </div>
             </BorderLayout>
           </form>
         </FormProvider>

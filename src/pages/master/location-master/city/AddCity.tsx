@@ -2,7 +2,7 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { cityField, osPrintField } from "@master/index";
+import { addCityFormFields } from "@master/index";
 
 export const AddCity: React.FC = () => {
   const methods = useForm();
@@ -33,15 +33,15 @@ export const AddCity: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={cityField.config} />
+                  <Input config={addCityFormFields.cityField.config} />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input config={osPrintField.config} />
+                  <Input config={addCityFormFields.osPrintField.config} />
                 </div>
               </div>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons/>
+              <ActionButtons />
             </BorderLayout>
           </form>
         </FormProvider>

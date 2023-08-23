@@ -2,7 +2,7 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { stateField, stateCodeField, numbericCodeField } from "@master/index";
+import { addStateFormFields } from "@master/index";
 
 export const AddState: React.FC = () => {
   const methods = useForm();
@@ -33,16 +33,16 @@ export const AddState: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={stateField.config} />
-                  <Input config={numbericCodeField.config} />
+                  <Input config={addStateFormFields.stateField.config} />
+                  <Input config={addStateFormFields.numbericCodeField.config} />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input config={stateCodeField.config} />
+                  <Input config={addStateFormFields.stateCodeField.config} />
                 </div>
               </div>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons/>
+              <ActionButtons />
             </BorderLayout>
           </form>
         </FormProvider>

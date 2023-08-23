@@ -2,7 +2,7 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { bankDepositAc, bankdeposit } from "@master/index";
+import { addBankDepositeFormFields } from "@master/index";
 
 export const AddBankMasterDeposit: React.FC = () => {
   const methods = useForm();
@@ -33,15 +33,19 @@ export const AddBankMasterDeposit: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={bankdeposit.config} />
+                  <Input
+                    config={addBankDepositeFormFields.bankdeposit.config}
+                  />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input config={bankDepositAc.config} />
+                  <Input
+                    config={addBankDepositeFormFields.bankDepositAc.config}
+                  />
                 </div>
               </div>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons/>
+              <ActionButtons />
             </BorderLayout>
           </form>
         </FormProvider>

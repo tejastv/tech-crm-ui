@@ -1,9 +1,9 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input, Select } from "@shared/index";
+import { BorderLayout, Card, Input } from "@shared/index";
 
-import { clientSegment } from "@master/index";
+import { addSegmentFormFields } from "@master/index";
 
 export const AddSegment: React.FC = () => {
   const methods = useForm();
@@ -35,12 +35,11 @@ export const AddSegment: React.FC = () => {
               <div className="row">
                 <div className="col-3 pull-right">
                   {/* <div className="card-body"> */}
-                  <Input config={clientSegment.config} />
-              {/* </div> */}
-              </div>
+                  <Input config={addSegmentFormFields.clientSegment.config} />
+                  {/* </div> */}
+                </div>
               </div>
             </BorderLayout>
-            
           </form>
         </FormProvider>
       </Card>

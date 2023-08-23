@@ -76,11 +76,11 @@ export const AddClient: React.FC = () => {
                       config={addClientFormFields.statecodeClient.config}
                     />
                     <Select config={addClientFormFields.countryClient.config} />
-                    <h6 className="card-title m-t-20 md-2">
-                      <DivLayout
-                        heading={cardConfig.formclieckUpdateConfig.heading}
-                      />
-                    </h6>
+                    {/* <h6 className="card-title m-t-20 md-2"> */}
+                    <DivLayout
+                      heading={cardConfig.formclieckUpdateConfig.heading}
+                    />
+                    {/* </h6> */}
                     <Select config={addClientFormFields.crDay.config} />
                     <Checkbox
                       config={addClientFormFields.billonactual.config}
@@ -103,21 +103,19 @@ export const AddClient: React.FC = () => {
                     <Input config={addClientFormFields.remarks.config} />
                     <Radio config={addClientFormFields.monthlyIvoice.config} />
                     <Checkbox config={addClientFormFields.osemail.config} />
-                    <h6 className="card-title m-t-20">
-                      <DivLayout
-                        heading={cardConfig.formAdjustConfig.heading}
-                      />
-                    </h6>
+                    {/* <h6 className="card-title m-t-20"> */}
+                    <DivLayout heading={cardConfig.formAdjustConfig.heading} />
+                    {/* </h6> */}
                     <Radio config={addClientFormFields.discount.config} />
                     <Input config={addClientFormFields.discountBlank.config} />
                     <Input config={addClientFormFields.toAdjust.config} />
                     <Input config={addClientFormFields.baltoAdjust.config} />
                     <Input config={addClientFormFields.adjustenquiry.config} />
-                    <h6 className="card-title m-t-20">
-                      <DivLayout
-                        heading={cardConfig.formAdjustProformaConfig.heading}
-                      />
-                    </h6>
+                    {/* <h6 className="card-title m-t-20"> */}
+                    <DivLayout
+                      heading={cardConfig.formAdjustProformaConfig.heading}
+                    />
+                    {/* </h6> */}
                     <Input
                       config={addClientFormFields.toAdjustproforma.config}
                     />

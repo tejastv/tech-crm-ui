@@ -1,8 +1,14 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input, Select } from "@shared/index";
-import { localSource, email,emailCC,currencey,sourcecountry} from "@master/index";
+import {
+  ActionButtons,
+  BorderLayout,
+  Card,
+  Input,
+  Select,
+} from "@shared/index";
+import { addLocalSrouceFormFields } from "@master/index";
 
 export const AddSource: React.FC = () => {
   const methods = useForm();
@@ -32,27 +38,31 @@ export const AddSource: React.FC = () => {
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
-              <div className="col-md-6 col-xs-12">
+                <div className="col-md-6 col-xs-12">
                   <div className="card-body">
-                
-                  <Input config={localSource.config} />
-                  <Input config={email.config} />
-                  <Input config={emailCC.config} />
-                
-                </div>
+                    <Input
+                      config={addLocalSrouceFormFields.localSource.config}
+                    />
+                    <Input config={addLocalSrouceFormFields.email.config} />
+                    <Input config={addLocalSrouceFormFields.emailCC.config} />
+                  </div>
                 </div>
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
-                  <Select config={currencey.config} />
-                  <Select config={sourcecountry.config} />
-              </div>
-              </div>
+                    <Select
+                      config={addLocalSrouceFormFields.currencey.config}
+                    />
+                    <Select
+                      config={addLocalSrouceFormFields.sourcecountry.config}
+                    />
+                  </div>
+                </div>
               </div>
             </BorderLayout>
             <div className="card-body">
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons/>
-            </BorderLayout>
+              <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+                <ActionButtons />
+              </BorderLayout>
             </div>
           </form>
         </FormProvider>

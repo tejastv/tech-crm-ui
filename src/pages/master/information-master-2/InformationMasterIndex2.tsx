@@ -3,12 +3,8 @@ import { Route, Routes } from "react-router-dom";
 
 import { MASTER_ROUTES } from "constants";
 
-const IndustryIndex = React.lazy(
-  () => import("./industry/IndustryIndex")
-);
-const CallTypeIndex = React.lazy(
-  () => import("./call-type/CallTypeIndex")
-);
+const IndustryIndex = React.lazy(() => import("./industry/IndustryIndex"));
+const CallTypeIndex = React.lazy(() => import("./call-type/CallTypeIndex"));
 const PurposeMasterIndex = React.lazy(
   () => import("./purpose-master/PurposeIndex")
 );
@@ -18,16 +14,9 @@ const CreditDaysIndex = React.lazy(
 const SiteStatusIndex = React.lazy(
   () => import("./site-status/SiteStatusIndex")
 );
-const ExecutiveIndex = React.lazy(
-  () => import("./executive/ExecutiveIndex")
-);
-const FinYearIndex = React.lazy(
-  () => import("./fin-year/FinYearIndex")
-);
-const UserIndex = React.lazy(
-  () => import("./user-master/UserIndex")
-);
-
+const ExecutiveIndex = React.lazy(() => import("./executive/ExecutiveIndex"));
+const FinYearIndex = React.lazy(() => import("./fin-year/FinYearIndex"));
+const UserIndex = React.lazy(() => import("./user-master/UserIndex"));
 
 const Information_2MasterIndex = () => {
   return (
@@ -36,7 +25,7 @@ const Information_2MasterIndex = () => {
         path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INDUSTRY_PARENT_ROUTE}
         element={<IndustryIndex />}
       ></Route>
-       <Route
+      <Route
         path={MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.CALLTYPE_PARENT_ROUTE}
         element={<CallTypeIndex />}
       ></Route>

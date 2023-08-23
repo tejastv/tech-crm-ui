@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { Country, AddCountry} from "@master/index";
+import { Country, AddCountry } from "@master/index";
 import { COMMON_ROUTES } from "constants";
 
 const CountryMasterIndex: React.FC = () => {

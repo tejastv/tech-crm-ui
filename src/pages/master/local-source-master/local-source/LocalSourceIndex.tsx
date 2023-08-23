@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { LocalSource, AddSource} from "@master/index";
+import { LocalSource, AddSource } from "@master/index";
 import { COMMON_ROUTES } from "constants";
 
 const LocalSMasterIndex: React.FC = () => {

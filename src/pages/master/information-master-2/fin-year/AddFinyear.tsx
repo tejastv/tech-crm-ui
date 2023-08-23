@@ -2,7 +2,7 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import * as formField from "@master/index";
+import { addFinYearFormFields } from "@master/index";
 
 export const AddFinYear: React.FC = () => {
   const methods = useForm();
@@ -31,30 +31,29 @@ export const AddFinYear: React.FC = () => {
             className="p-t-20"
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-            <div className="row">
+              <div className="row">
                 <div className="col-md-6 col-xs-12">
-                <div className="card-body">
-                  <Input config={formField.finyear.config} />
-                  <Input config={formField.totaltax.config} />
-                  <Input config={formField.stax.config} />
-                  <Input config={formField.edcess.config} />
+                  <div className="card-body">
+                    <Input config={addFinYearFormFields.finyear.config} />
+                    <Input config={addFinYearFormFields.totaltax.config} />
+                    <Input config={addFinYearFormFields.stax.config} />
+                    <Input config={addFinYearFormFields.edcess.config} />
+                  </div>
                 </div>
-                </div>
-              
+
                 <div className="col-md-6 col-xs-12">
-                <div className="card-body">
-                  <Input config={formField.cgst.config} />
-                  <Input config={formField.sgst.config} />
-                  <Input config={formField.igst.config} />
-                  <Input config={formField.startinvno.config} />
-                  <Input config={formField.startrefno.config} />
+                  <div className="card-body">
+                    <Input config={addFinYearFormFields.cgst.config} />
+                    <Input config={addFinYearFormFields.sgst.config} />
+                    <Input config={addFinYearFormFields.igst.config} />
+                    <Input config={addFinYearFormFields.startinvno.config} />
+                    <Input config={addFinYearFormFields.startrefno.config} />
+                  </div>
                 </div>
-                </div>
-                
               </div>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons/>
+              <ActionButtons />
             </BorderLayout>
           </form>
         </FormProvider>

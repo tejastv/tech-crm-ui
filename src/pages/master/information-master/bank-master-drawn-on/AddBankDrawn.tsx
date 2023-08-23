@@ -2,7 +2,7 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { bankdrawn } from "@master/index";
+import { addBankdrawnonFormFields } from "@master/index";
 
 export const AddBankMasterDrawn: React.FC = () => {
   const methods = useForm();
@@ -33,12 +33,12 @@ export const AddBankMasterDrawn: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={bankdrawn.config} />
+                  <Input config={addBankdrawnonFormFields.bankdrawn.config} />
                 </div>
               </div>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons/>
+              <ActionButtons />
             </BorderLayout>
           </form>
         </FormProvider>

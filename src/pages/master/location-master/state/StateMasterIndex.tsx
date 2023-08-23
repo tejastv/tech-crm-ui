@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { State, AddState} from "@master/index";
+import { State, AddState } from "@master/index";
 import { COMMON_ROUTES } from "constants";
 
 const StateMasterIndex: React.FC = () => {

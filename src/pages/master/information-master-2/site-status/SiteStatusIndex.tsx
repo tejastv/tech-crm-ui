@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import {  SiteStatus,AddSiteStatus} from "@master/index";
+import { SiteStatus, AddSiteStatus } from "@master/index";
 import { COMMON_ROUTES } from "constants";
 
 const CityMasterIndex: React.FC = () => {
