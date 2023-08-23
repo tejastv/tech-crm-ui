@@ -21,6 +21,16 @@ export { City } from "./location-master/city/City";
 export { AddState } from "./location-master/state/AddState";
 export { State } from "./location-master/state/State";
 
+//Price List Master 
+//Price List Clients
+export { AddPriceClients } from "./price-list-master/price-list-for-clients/AddPriceListClients";
+export { AddStdPriceClients } from "./price-list-master/std-price-list-client/AddStdPriceListClient";
+
+export { AddPriceGroup } from "./price-list-master/priice-list-group-wise/AddPriceListGroup";
+// Actual Buyer
+export { AddActualBuyer } from "./price-list-master/actual-buyer/AddActualBuyer";
+export { ActualBuyer } from "./price-list-master/actual-buyer/ActualBuyer";
+
 //Local Source
 // LocalSource Child Page
 export { AddSource } from "./local-source-master/local-source/AddSource";
@@ -72,8 +82,8 @@ export { SiteStatus } from "./information-master-2/site-status/SiteStatus";
 export { AddExecutive} from "./information-master-2/executive/AddExecutive";
 export { Executive } from "./information-master-2/executive/Executive";
 
-export { AddFinYear} from "./information-master-2/fin. year/AddFinyear";
-export { FinYear } from "./information-master-2/fin. year/FinYear";
+export { AddFinYear} from "./information-master-2/fin-year/AddFinyear";
+export { FinYear } from "./information-master-2/fin-year/FinYear";
 
 export { AddUser} from "./information-master-2/user-master/AddUsert";
 export { User } from "./information-master-2/user-master/User";
@@ -88,6 +98,10 @@ export * from "./client-master/form-fields/add-clientGroup";
 export * from "./client-master/form-fields/add-segment";
 
 
+export * from "./price-list-master/form-field/add-price-client";
+export * from "./price-list-master/form-field/add-std-price-client";
+export * from "./price-list-master/form-field/add-actual-buyer";
+export * from "./price-list-master/form-field/add-price-group";
 
 export * from "./local-source-master/form-fields/add-localSource"
 export * from "./local-source-master/form-fields/add-price"

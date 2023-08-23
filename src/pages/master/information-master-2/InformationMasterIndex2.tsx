@@ -29,7 +29,7 @@ const UserIndex = React.lazy(
 );
 
 
-const LocationMasterIndex = () => {
+const Information_2MasterIndex = () => {
   return (
     <Routes>
       <Route
@@ -68,4 +68,4 @@ const LocationMasterIndex = () => {
   );
 };
 
-export default LocationMasterIndex;
+export default Information_2MasterIndex;
