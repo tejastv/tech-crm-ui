@@ -32,7 +32,18 @@ export const MASTER_ROUTES = {
     CLIENTGROUP: "group",
     SEGMENT: "segment",
   },
-
+  
+  // PRICE_LIST_MASTER_ROUTES: {
+  //   PRICE_LIST_MASTER_PARENT_ROUTE: "/price-list-master/*",
+  //   PRICE_LIST_MASTER_ROUTE: "price-list-master/",
+  //   PRICE_CLIENT_PARENT_ROUTE: "/price-list-client/*",
+  //   // LOCALSOURCE_PARENT_ROUTE: "/local-source/*",
+  //   // STDPRICE_PARENT_ROUTE: "/stdprice/*",
+  //   // LOCALSOURCE: "local-source",
+  //   PRICE_CLIENT: "price-list-clients",
+  //   // STDPRICE: "stdprice",
+    
+  // },
   LOCATION_MASTER_ROUTES: {
     LOCATION_MASTER_PARENT_ROUTE: "/location/*",
     LOCATION_MASTER_ROUTE: "location/",
@@ -53,6 +64,17 @@ export const MASTER_ROUTES = {
     STDPRICE_PARENT_ROUTE: "/stdprice/*",
     LOCALSOURCE: "local-source",
     PRICE: "price",
+    STDPRICE: "stdprice",
+    
+  },
+  PRICE_LIST_MASTER_ROUTES: {
+    PRICE_LIST_MASTER_PARENT_ROUTE: "/price-list-master/*",
+    PRICE_LIST_MASTER_ROUTE: "price-list-master/",
+    STD_PRICE_LIST_CLIENT_PARENT_ROUTE: "/std-price-client/*",
+    PRICE_LIST_CLIENT_PARENT_ROUTE: "/price-list-client/*",
+    STD_PRICE_LIST_CLIENT_ROUTE: "/std-price-client/*",
+    STD_PRICE_CLIENT: "std-price-client",
+    PRICE_CLIENT: "price-list-client",
     STDPRICE: "stdprice",
     
   },
@@ -92,16 +114,6 @@ export const MASTER_ROUTES = {
     FINYEAR: "finyear",
     USER: "user",
   },
-  // INFORMATION_MASTER_ROUTES: {
-  //   INFORMATION_MASTER_PARENT_ROUTE: "/local-source-master/*",
-  //   INFORMATION_MASTER_ROUTE: 'information-master/',
-  //   BANKMASTERDEPOSIT_PARENT_ROUTE: "/bank-master-Deposit/*",
-  //   BANKMASTER_dRAWN_PARENT_ROUTE: "/bank-master-drawn/*",
-  //   PAYMENTMODE_PARENT_ROUTE: "/payment-mode/*",
-  //   BANKMASTERDRAWN: "bank-master-drawn",
-  //   BANKMASTERDEPOSIT: "bank-master-deposit",
-  //   PAYMENTMODE: "paymentmode",
-  // },
 };
 
 export const COMMON_ROUTES = {

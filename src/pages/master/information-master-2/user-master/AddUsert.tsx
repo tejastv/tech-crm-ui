@@ -46,7 +46,7 @@ export const AddUser: React.FC = () => {
                 </div> 
                 </div>
                 <BorderLayout heading={cardConfig.formTableConfig.heading}>
-              <ActionButtons/>
+              {/* <Table/> */}
             </BorderLayout>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>

@@ -22,6 +22,9 @@ const InformationMasterIndex = React.lazy(
 const InformationMaster2MasterIndex = React.lazy(
   () => import("./information-master-2/InformationMasterIndex_2")
 );
+const PriceListMasterIndex = React.lazy(
+  () => import("./price-list-master/PriceListMasterIndex")
+);
 
 
 const MasterRoutes = () => {
@@ -69,6 +72,14 @@ const MasterRoutes = () => {
         element={
          <React.Suspense>
           <InformationMaster2MasterIndex />
+        </React.Suspense>
+        }
+      ></Route>
+      <Route
+        path={MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_PARENT_ROUTE}
+        element={
+         <React.Suspense>
+          <PriceListMasterIndex />
         </React.Suspense>
         }
       ></Route>

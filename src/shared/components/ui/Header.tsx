@@ -131,27 +131,28 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="price_list_for_clients.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_ROUTE}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_CLIENT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Price List(for Clients)
                               </span>
-                            </a>
+                            </Link>
                           </li>
+                                
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="price_list_group_wise.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_ROUTE}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.STD_PRICE_CLIENT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
-                                Price List(Group wise)
+                                Std.Price List(for Clients)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
