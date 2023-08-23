@@ -32,18 +32,6 @@ const SellExchanegRateValidation = {
     },
 } as ValidationType;
 
-
-// const EmailValidationCC = {
-//     required: {
-//         value: true,
-//         message: "{label} field is rquired",
-//     },
-//     pattern: {
-//         value:
-//           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-//         message: "not valid ",
-//       },
-// } as ValidationType;
 const PriceCurrencyValidation = {
 
     required: {
@@ -55,7 +43,18 @@ const PriceCurrencyValidation = {
       message: "Invalid Country ",
     },
 } as ValidationType;
-const PriceDateValidation = {
+const PurchesDateValidation = {
+
+    required: {
+        value: true,
+        message: "{label} field is rquired",
+    },
+    pattern: {
+        value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+        message: "Invalid date",
+      },
+} as ValidationType;
+const SellDateValidation = {
 
     required: {
         value: true,
@@ -82,5 +81,5 @@ export const priceLocalSource: FormFieldType = createFormConfig('source', 'Local
 export const priceCurrency: FormFieldType = createFormConfig('PriceCurrencey', 'Currency', 'select', PriceCurrencyValidation,'Select Currency',priceCurrencyOptions);
 export const purchesExchanegRate: FormFieldType = createFormConfig('emailCC', 'Exchg. Rate(Rs.)', 'text', PurchesExchanegRateValidation,'Enter Exchg. Rate(Rs.)');
 export const sellExchanegRate: FormFieldType = createFormConfig('currencey', 'Exchg. Rate(Rs.)', 'text', SellExchanegRateValidation,'Enter Exchg. Rate(Rs.) ');
-export const purchesDate: FormFieldType = createFormConfig('purchesDate', 'Date', 'date', PriceDateValidation,'',);
-export const sellDate: FormFieldType = createFormConfig('sellDate', 'Date', 'date', PriceDateValidation,'',);
+export const purchesDate: FormFieldType = createFormConfig('purchesDate', 'Date', 'date', PurchesDateValidation,'',);
+export const sellDate: FormFieldType = createFormConfig('sellDate', 'Date', 'date', SellDateValidation,'',);
