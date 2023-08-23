@@ -32,7 +32,18 @@ export const MASTER_ROUTES = {
     CLIENTGROUP: "group",
     SEGMENT: "segment",
   },
-
+  
+  // PRICE_LIST_MASTER_ROUTES: {
+  //   PRICE_LIST_MASTER_PARENT_ROUTE: "/price-list-master/*",
+  //   PRICE_LIST_MASTER_ROUTE: "price-list-master/",
+  //   PRICE_CLIENT_PARENT_ROUTE: "/price-list-client/*",
+  //   // LOCALSOURCE_PARENT_ROUTE: "/local-source/*",
+  //   // STDPRICE_PARENT_ROUTE: "/stdprice/*",
+  //   // LOCALSOURCE: "local-source",
+  //   PRICE_CLIENT: "price-list-clients",
+  //   // STDPRICE: "stdprice",
+    
+  // },
   LOCATION_MASTER_ROUTES: {
     LOCATION_MASTER_PARENT_ROUTE: "/location/*",
     LOCATION_MASTER_ROUTE: "location/",
@@ -56,6 +67,21 @@ export const MASTER_ROUTES = {
     STDPRICE: "stdprice",
     
   },
+  PRICE_LIST_MASTER_ROUTES: {
+    PRICE_LIST_MASTER_PARENT_ROUTE: "/price-list-master/*",
+    PRICE_LIST_MASTER_ROUTE: "price-list-master/",
+    STD_PRICE_LIST_CLIENT_PARENT_ROUTE: "/std-price-client/*",
+    PRICE_LIST_CLIENT_PARENT_ROUTE: "/price-list-client/*",
+    PRICE_GROUP_PARENT_ROUTE: "/price-list-group/*",
+    ACTUAL_BUYER_CLIENT_PARENT_ROUTE: "/actual-buyer/*",
+    STD_PRICE_LIST_CLIENT_ROUTE: "/std-price-client/*",
+    STD_PRICE_CLIENT: "std-price-client",
+    PRICE_CLIENT: "price-list-client",
+    PRICE_GROUP: "price-list-group",
+    STDPRICE: "stdprice",
+    ACTUALBUYER: "actual-buyer",
+    
+  },
   INFORMATION_MASTER_ROUTES: {
     INFORMATION_MASTER_PARENT_ROUTE: "/information-master/*",
     INFORMATION_MASTER_ROUTE: "information-master/",
@@ -75,29 +101,23 @@ export const MASTER_ROUTES = {
   INFORMATION_2_MASTER_ROUTES: {
     INFORMATION_2_MASTER_PARENT_ROUTE: "/information-master-2/*",
     INFORMATION_2_MASTER_ROUTE: "information-master-2/",
-    // SUPPLIER_PARENT_ROUTE: "/supplier/*",
+    EXECUTIVE_PARENT_ROUTE: "/executive/*",
     SITESTATUS_PARENT_ROUTE: "/site-status/*",
     CREDITDAYS_PARENT_ROUTE: "/credit-days/*",
     PURPOSE_PARENT_ROUTE: "/purpose-master/*",
     CALLTYPE_PARENT_ROUTE: "/calltype/*",
     INDUSTRY_PARENT_ROUTE: "/industry/*",
-    // SUPPLIER: "supplier",
+    FINYEAR_PARENT_ROUTE: "/finyear/*",
+    USER_PARENT_ROUTE: "/user/*",
+    EXECUTIVE: "executive",
     SITESTATUS: "site-status",
     CREDITDAYS: "credit-days",
     PURPOSE: "purpose-master",
     CALLTYPE: "calltype",
     INDUSTRY: "industry",
+    FINYEAR: "finyear",
+    USER: "user",
   },
-  // INFORMATION_MASTER_ROUTES: {
-  //   INFORMATION_MASTER_PARENT_ROUTE: "/local-source-master/*",
-  //   INFORMATION_MASTER_ROUTE: 'information-master/',
-  //   BANKMASTERDEPOSIT_PARENT_ROUTE: "/bank-master-Deposit/*",
-  //   BANKMASTER_dRAWN_PARENT_ROUTE: "/bank-master-drawn/*",
-  //   PAYMENTMODE_PARENT_ROUTE: "/payment-mode/*",
-  //   BANKMASTERDRAWN: "bank-master-drawn",
-  //   BANKMASTERDEPOSIT: "bank-master-deposit",
-  //   PAYMENTMODE: "paymentmode",
-  // },
 };
 
 export const COMMON_ROUTES = {

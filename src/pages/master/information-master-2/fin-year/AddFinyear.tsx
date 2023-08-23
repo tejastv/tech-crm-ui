@@ -1,14 +1,14 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Checkbox, Input, Select } from "@shared/index";
+import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import * as formField from "@master/index";
 
-export const AddExecutive: React.FC = () => {
+export const AddFinYear: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Sales Executive",
+      mainHeading: "Add Industry",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -34,20 +34,23 @@ export const AddExecutive: React.FC = () => {
             <div className="row">
                 <div className="col-md-6 col-xs-12">
                 <div className="card-body">
-                  <Input config={formField.executiveInfomation2.config} />
-                  <Input config={formField.emailInformation2.config} />
-                  <Input config={formField.cityInformation2.config} />
-                  </div>
+                  <Input config={formField.finyear.config} />
+                  <Input config={formField.totaltax.config} />
+                  <Input config={formField.stax.config} />
+                  <Input config={formField.edcess.config} />
                 </div>
+                </div>
+              
                 <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                   <Checkbox config={formField.checkboxInformation2.config} />
-                  <Select config={formField.stateInformation2.config} />
-                  {/*<Input config={stateSupplier.config} />
-                  <Input config={countrySupplier.config} />
-                  <Input config={CurrenceySupplier.config} /> */}
-                  </div>
+                <div className="card-body">
+                  <Input config={formField.cgst.config} />
+                  <Input config={formField.sgst.config} />
+                  <Input config={formField.igst.config} />
+                  <Input config={formField.startinvno.config} />
+                  <Input config={formField.startrefno.config} />
                 </div>
+                </div>
+                
               </div>
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>

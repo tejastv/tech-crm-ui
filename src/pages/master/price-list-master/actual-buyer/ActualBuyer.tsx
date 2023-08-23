@@ -1,25 +1,20 @@
-import React, { useState } from "react";
+// CompanyMaster.tsx
+import React from "react";
 
-import { BorderLayout, PageBreadcrumb, Table, TableType } from "@shared/index";
+import { BorderLayout, PageBreadcrumb, Table } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
-import { useHttp } from "@hooks/useHttp";
 
-export const Executive: React.FC = () => {
-  const { getData } = useHttp();
-  const [tableData, setData] = useState([]);
-
+export const ActualBuyer: React.FC = () => {
   const config = {
     breadcrumbConfig: {
-      pageHeading: "Sales Executive",
-      btnTitle: "Add Sales Executive",
+      pageHeading: "Actual Buyer Master",
+      btnTitle: "Add Actual Buyer Master",
       btnRoute: COMMON_ROUTES.ADD,
     },
     borderLayoutConfig: {
       heading: "List",
     },
   };
-
-
 
   return (
     <>

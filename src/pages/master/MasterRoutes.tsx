@@ -9,7 +9,6 @@ const Company = React.lazy(
 const ClientMasterIndex = React.lazy(
   () => import("./client-master/ClientMasterIndex")
 );
-
 const LocationMasterIndex = React.lazy(
   () => import("./location-master/LocationMasterIndex")
 );
@@ -20,7 +19,10 @@ const InformationMasterIndex = React.lazy(
   () => import("./information-master/InformationMasterIndex")
 );
 const InformationMaster2MasterIndex = React.lazy(
-  () => import("./information-master-2/InformationMasterIndex_2")
+  () => import("./information-master-2/InformationMasterIndex2")
+);
+const PriceListMasterIndex = React.lazy(
+  () => import("./price-list-master/PriceListMasterIndex")
 );
 
 
@@ -38,6 +40,14 @@ const MasterRoutes = () => {
           <React.Suspense>
             <ClientMasterIndex />
           </React.Suspense>
+        }
+      ></Route>
+      <Route
+        path={MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_PARENT_ROUTE}
+        element={
+         <React.Suspense>
+          <PriceListMasterIndex />
+        </React.Suspense>
         }
       ></Route>
        <Route
@@ -72,6 +82,7 @@ const MasterRoutes = () => {
         </React.Suspense>
         }
       ></Route>
+      
     </Routes>
 
   );
