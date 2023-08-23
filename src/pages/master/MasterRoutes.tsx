@@ -42,6 +42,14 @@ const MasterRoutes = () => {
           </React.Suspense>
         }
       ></Route>
+      <Route
+        path={MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_PARENT_ROUTE}
+        element={
+         <React.Suspense>
+          <PriceListMasterIndex />
+        </React.Suspense>
+        }
+      ></Route>
        <Route
         path={MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_PARENT_ROUTE}
         element={
@@ -74,14 +82,7 @@ const MasterRoutes = () => {
         </React.Suspense>
         }
       ></Route>
-      <Route
-        path={MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_PARENT_ROUTE}
-        element={
-         <React.Suspense>
-          <PriceListMasterIndex />
-        </React.Suspense>
-        }
-      ></Route>
+      
     </Routes>
 
   );

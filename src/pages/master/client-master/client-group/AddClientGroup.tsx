@@ -34,10 +34,23 @@ export const AddClientGroup: React.FC = () => {
               <div className="row">
                 <div className="col-md-6 col-xs-12">
                   <Input config={clientGroupName.config} />
+                  </div>
+                  
+            
+           <div className="col-md-8  col-xs-12">
+           <p className="text-center m-b-0 ">
+           <small className="text-center  badge badge-default badge-primary form-text text-white">
                   <InputWithText config={namenote.config} />
+           </small>
+           </p>
+           
+          </div>
+           </div>
 
-                </div>
-                </div>
+{/* </small>
+</p> */}
+                
+                
                 <div className="row">
                 <div className="col-md-6 col-xs-12">
                   <Checkbox config={clientGroupName2.config} />

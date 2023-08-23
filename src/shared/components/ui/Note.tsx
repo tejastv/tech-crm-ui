@@ -16,15 +16,18 @@ export const InputWithText = (props:Note) => {
     <div className="row">
       <div className="col-12">
         <div className="form-group row">
-          <Form.Label
-            className="col-sm-3 control-label col-form-label">
-          </Form.Label>
+          {/* <Form.Label
+            className="col-sm-6 control-label col-form-label">
+          </Form.Label> */}
           <div className="col-sm-9">
           <Form.Text className="text-danger">
                 
               </Form.Text>
-            <p className="text-center m-b-0">
-           <small id="name45" className="badge badge-default badge-primary form-text text-white">{props.config.name}</small></p>
+            {/* <p className="text-center m-b-0"> */}
+           {/* <small id="name45" className="badge badge-default badge-primary form-text text-white"> */}
+            {props.config.name}
+            {/* </small> */}
+            {/* </p> */}
           </div>
         </div>
       </div>

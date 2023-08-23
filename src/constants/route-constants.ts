@@ -72,10 +72,14 @@ export const MASTER_ROUTES = {
     PRICE_LIST_MASTER_ROUTE: "price-list-master/",
     STD_PRICE_LIST_CLIENT_PARENT_ROUTE: "/std-price-client/*",
     PRICE_LIST_CLIENT_PARENT_ROUTE: "/price-list-client/*",
+    PRICE_GROUP_PARENT_ROUTE: "/price-list-group/*",
+    ACTUAL_BUYER_CLIENT_PARENT_ROUTE: "/actual-buyer/*",
     STD_PRICE_LIST_CLIENT_ROUTE: "/std-price-client/*",
     STD_PRICE_CLIENT: "std-price-client",
     PRICE_CLIENT: "price-list-client",
+    PRICE_GROUP: "price-list-group",
     STDPRICE: "stdprice",
+    ACTUALBUYER: "actual-buyer",
     
   },
   INFORMATION_MASTER_ROUTES: {

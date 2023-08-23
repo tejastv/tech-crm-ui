@@ -12,11 +12,11 @@ import {
 } from "@shared/index";
 import * as formField from "@master/index";
 
-export const AddPriceClients: React.FC = () => {
+export const AddPriceGroup: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Price List (Client)",
+      mainHeading: "Price List (Group)",
       heading: "Action Buttons",
     },
     formPurchesConfig: {
@@ -47,51 +47,29 @@ export const AddPriceClients: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.pricecity.config} />
+                  <Select config={formField.pricegroupcity.config} />
+                </div>
+                
+                <div className="col-md-3 col-xs-12">
+                  <Select config={formField.priceGroupSelect.config} />
                 </div>
 
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceClient.config} />
+                  <Select config={formField.priceGroupCurrency.config} />
                 </div>
-                <div className="col-md-2 col-xs-12">
-                  <Select config={formField.priceClientCurrency.config} />
-                </div>
-                <div className="col-md-2 col-xs-12">
-                  <Select config={formField.priceGroup.config} />
-                </div>
-
-                <div className="col-md-1 col-xs-12 text-right">
-                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>Get Price(From Group)
-                  </Button>
-                  <div className="pt-lg-5"></div>
-                </div>
-                <div className="col-md-12 col-xs-12 text-right">
+                
+                <div className="col-md-3 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                     <i className="far fa-save"></i>Get Std. Price
-                  </Button>
-                </div>
-                <div className="pt-lg-3"></div>
-                <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceGroup2.config} />
-                </div>
-
-                <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceCurrencyClient.config} />
-                </div>
-                {/* <div className="pt-lg-1"></div> */}
-                <div className="col-md-6 col-xs-12 text-right">
-                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>Get Price(From Other Group)
                   </Button>
                 </div> 
                 {/* <div className="pt-lg-3"></div> */}
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceClient2.config} />
+                  <Select config={formField.priceGroupSelect2.config} />
                 </div>
 
                 <div className="col-md-3 col-xs-12">
-                  <Select config={formField.priceCurrencyGroup.config} />
+                  <Select config={formField.priceGroupCurrency2.config} />
                 </div>
                 {/* <div className="pt-lg-1"></div> */}
                 <div className="col-md-6 col-xs-12 text-right">

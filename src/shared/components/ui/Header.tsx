@@ -141,6 +141,18 @@ export const Header: React.FC = () => {
                               </span>
                             </Link>
                           </li>
+                          <li className="sidebar-item">
+                            {" "}
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_ROUTE}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_GROUP}`}
+                            >
+                              <i className="mdi mdi-creation"></i>
+                              <span className="hide-menu ">
+                                Price List(Group Wise)
+                              </span>
+                            </Link>
+                          </li>
                                 
                           <li className="sidebar-item">
                             {" "}
@@ -156,28 +168,18 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="std_price_list_for_clients.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_ROUTE}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.ACTUALBUYER}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
-                                Std.Price List(for Clients)
+                              Actual Buyer Master
                               </span>
-                            </a>
+                            </Link>
                           </li>
-                          <li className="sidebar-item">
-                            {" "}
-                            <a
-                              className="sidebar-link"
-                              href="actual_buyer_master.php"
-                            >
-                              <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">
-                                Actual Buyer Master
-                              </span>
-                            </a>
-                          </li>
+                          
+                          
                         </ul>
                       </li>
                       <li className="sidebar-item">

@@ -16,7 +16,7 @@ export const AddStdPriceClients: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Std. Price List (Local Source)",
+      mainHeading: "Std. Price List",
       heading: "Action Buttons",
     },
     formPurchesConfig: {
