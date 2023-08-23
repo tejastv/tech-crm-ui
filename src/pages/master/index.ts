@@ -89,47 +89,47 @@ export { AddUser} from "./information-master-2/user-master/AddUsert";
 export { User } from "./information-master-2/user-master/User";
 
 //Form Fields
-export * from "./company-master/form-fields/add-company";
-export * from "./location-master/form-fields/add-state";
-export * from "./location-master/form-fields/add-city";
+export * from "./company-master/features/form-fields/add-company";
+export * from "./location-master/features/form-fields/add-state";
+export * from "./location-master/features/form-fields/add-city";
 
-export * from "./client-master/form-fields/add-client";
-export * from "./client-master/form-fields/add-clientGroup";
-export * from "./client-master/form-fields/add-segment";
+export * from "./client-master/features/form-fields/add-client";
+export * from "./client-master/features/form-fields/add-clientGroup";
+export * from "./client-master/features/form-fields/add-segment";
 
 
-export * from "./price-list-master/form-field/add-price-client";
-export * from "./price-list-master/form-field/add-std-price-client";
-export * from "./price-list-master/form-field/add-actual-buyer";
-export * from "./price-list-master/form-field/add-price-group";
+export * from "./price-list-master/features/form-field/add-price-client";
+export * from "./price-list-master/features/form-field/add-std-price-client";
+export * from "./price-list-master/features/form-field/add-actual-buyer";
+export * from "./price-list-master/features/form-field/add-price-group";
 
-export * from "./local-source-master/form-fields/add-localSource"
-export * from "./local-source-master/form-fields/add-price"
-export * from "./local-source-master/form-fields/add-std-price"
-export * from "./client-master/form-fields/add-segment"
+export * from "./local-source-master/features/form-fields/add-localSource"
+export * from "./local-source-master/features/form-fields/add-price"
+export * from "./local-source-master/features/form-fields/add-std-price"
+export * from "./client-master/features/form-fields/add-segment"
 // export * from "./local-source-master/form-fields/add-price";
 // export * from "./local-source-master/form-fields/add-std-price";
 
 
-export * from "./location-master/form-fields/add-country";
-export * from "./location-master/form-fields/add-continent";
+export * from "./location-master/features/form-fields/add-country";
+export * from "./location-master/features/form-fields/add-continent";
 
 
-export * from "./information-master/form-fields/add-bankdeposit";
-export * from "./information-master/form-fields/add-paymentmode";
-export * from "./information-master/form-fields/add-source";
-export * from "./information-master/form-fields/add-bankdrawnon";
-export * from "./information-master/form-fields/add-supplier";
-export * from "./information-master/form-fields/add-currency";
+export * from "./information-master/features/form-fields/add-bankdeposit";
+export * from "./information-master/features/form-fields/add-paymentmode";
+export * from "./information-master/features/form-fields/add-source";
+export * from "./information-master/features/form-fields/add-bankdrawnon";
+export * from "./information-master/features/form-fields/add-supplier";
+export * from "./information-master/features/form-fields/add-currency";
 
-export * from "./information-master-2/form-fields/add-industry";
-export * from "./information-master-2/form-fields/add-calltype";
-export * from "./information-master-2/form-fields/add-purpose";
-export * from "./information-master-2/form-fields/add-creditdays";
-export * from "./information-master-2/form-fields/add-sitestatus";
-export * from "./information-master-2/form-fields/add-executive"; 
-export * from "./information-master-2/form-fields/add-finyear"; 
-export * from "./information-master-2/form-fields/add-user"; 
+export * from "./information-master-2/features/form-fields/add-industry";
+export * from "./information-master-2/features/form-fields/add-calltype";
+export * from "./information-master-2/features/form-fields/add-purpose";
+export * from "./information-master-2/features/form-fields/add-creditdays";
+export * from "./information-master-2/features/form-fields/add-sitestatus";
+export * from "./information-master-2/features/form-fields/add-executive"; 
+export * from "./information-master-2/features/form-fields/add-finyear"; 
+export * from "./information-master-2/features/form-fields/add-user"; 
 
 
 
