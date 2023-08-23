@@ -9,7 +9,6 @@ const CompanyMasterIndex = React.lazy(
 const ClientMasterIndex = React.lazy(
   () => import("./client-master/ClientMasterIndex")
 );
-
 const LocationMasterIndex = React.lazy(
   () => import("./location-master/LocationMasterIndex")
 );
@@ -20,7 +19,7 @@ const InformationMasterIndex = React.lazy(
   () => import("./information-master/InformationMasterIndex")
 );
 const InformationMaster2MasterIndex = React.lazy(
-  () => import("./information-master-2/InformationMasterIndex_2")
+  () => import("./information-master-2/InformationMasterIndex2")
 );
 
 
