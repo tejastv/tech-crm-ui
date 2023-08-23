@@ -1,15 +1,10 @@
 // CompanyMaster.tsx
 import React, { PropsWithChildren } from "react";
 import {
-  Column,
-  Table as ReactTable,
-  PaginationState,
   useReactTable,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
-  ColumnDef,
-  OnChangeFn,
   flexRender,
 } from "@tanstack/react-table";
 import { Button, TableType } from "@shared/index";

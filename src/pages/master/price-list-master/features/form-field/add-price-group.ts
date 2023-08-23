@@ -54,11 +54,11 @@ const PriceGroupCurrency2Validation = {
   },
 } as ValidationType;
 
-const priceCityGroupOptions = [
-  { value: "Mumbai", label: "200" },
-  { value: "strawberry", label: "300" },
-  { value: "vanilla", label: "400" },
-];
+// const priceCityGroupOptions = [
+//   { value: "Mumbai", label: "200" },
+//   { value: "strawberry", label: "300" },
+//   { value: "vanilla", label: "400" },
+// ];
 
 const priceGroupCityOptions = [
   { value: "Mumbai", label: "200" },

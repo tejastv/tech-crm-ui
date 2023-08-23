@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import { useAxios } from ".";
 import { CityType } from "@pages/master";
 
