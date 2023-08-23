@@ -22,7 +22,7 @@ const ExecutiveIndex = React.lazy(
   () => import("./executive/ExecutiveIndex")
 );
 const FinYearIndex = React.lazy(
-  () => import("./fin. year/FinYearIndex")
+  () => import("./fin-year/FinYearIndex")
 );
 const UserIndex = React.lazy(
   () => import("./user-master/UserIndex")
