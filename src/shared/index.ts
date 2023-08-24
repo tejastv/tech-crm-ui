@@ -10,7 +10,7 @@ export { PageBreadcrumb } from "./components/ui/PageBreadcrumb";
 export { PageWrapper } from "./components/ui/PageWrapper";
 export { Table } from "./components/ui/Table";
 export { Input } from "./components/ui/Input";
-export { InputWithText } from "./components/ui/Note"
+export { InputWithText } from "./components/ui/Note";
 
 export { ActionButtons } from "./components/ui/ActionButtons";
 export { Select } from "./components/ui/Select";
@@ -19,11 +19,12 @@ export { Radio } from "./components/ui/Radio";
 export { DatePicker } from "./components/ui/DatePicker";
 export { Image } from "./components/ui/Image";
 export { DivLayout } from "./components/ui/Div-layout";
+export { Loader } from "./components/ui/Loader";
 
 // Types
 export * from "./types/button-type";
 export * from "./types/border-layout-types";
-export * from "./types/div-layout-type"
+export * from "./types/div-layout-type";
 export * from "./types/card-type";
 export * from "./types/error-type";
 

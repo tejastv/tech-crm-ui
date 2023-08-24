@@ -1,11 +1,17 @@
 import React from "react";
 
-import { BorderLayout, PageBreadcrumb, Table, TableType } from "@shared/index";
+import {
+  BorderLayout,
+  Loader,
+  PageBreadcrumb,
+  Table,
+  TableType,
+} from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 import { ColumnDef } from "@tanstack/react-table";
-import { CityType } from "@pages/master";
-import { useHttp } from "@hooks/useHttp";
-import { useRequestProcessor } from "@hooks/useRequestProcessor";
+import { CityType, useLocationMasterApiCall } from "@pages/master";
+import { useQuery } from "@tanstack/react-query";
+import { Puff } from "react-loader-spinner";
 
 export const City: React.FC = () => {
   const config = {
@@ -48,16 +54,23 @@ export const City: React.FC = () => {
     },
   ];
 
-  const { query } = useRequestProcessor();
-  const { getData } = useHttp();
+  const cityData = "city-data";
 
-  const { data, isLoading, isError } = query<CityType>("city-data", getData);
-  console.log(data, isLoading, isError);
+  const { getCityData } = useLocationMasterApiCall();
+
+  const { data, isLoading, isError } = useQuery<CityType[]>({
+    queryKey: [cityData],
+    queryFn: getCityData,
+  });
+
+  if (isLoading) {
+    console.log(isLoading);
+  }
 
   const tableConfig: TableType<CityType> = {
     config: {
       columns: columns,
-      tableData: [],
+      tableData: data ? data : [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -72,7 +85,8 @@ export const City: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}></Table>
+        {/* <Loader /> */}
+        {isLoading ? <Loader /> : <Table config={tableConfig.config}></Table>}
       </BorderLayout>
     </>
   );

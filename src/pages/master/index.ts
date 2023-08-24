@@ -130,4 +130,10 @@ export { addUserFormFields } from "./information-master-2/features/form-fields/a
 // Models
 export * from "./features/types/client-type";
 export * from "./features/types/city-type";
-// Service
+
+//Constants
+export { locationMasterApiUrls } from "./location-master/features/constants/api-urls";
+
+//Services
+// export * from "./location-master/features/services/http";
+export { useLocationMasterApiCall } from "./location-master/features/hooks/useLocationMasterApiCall";
