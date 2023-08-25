@@ -20,6 +20,7 @@ export { DatePicker } from "./components/ui/DatePicker";
 export { Image } from "./components/ui/Image";
 export { DivLayout } from "./components/ui/Div-layout";
 export { Loader } from "./components/ui/Loader";
+export { DebouncedInput } from "./components/ui/DebouncedInput";
 
 // Types
 export * from "./types/button-type";
