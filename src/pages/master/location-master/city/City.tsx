@@ -11,7 +11,6 @@ import { COMMON_ROUTES } from "constants";
 import { ColumnDef } from "@tanstack/react-table";
 import { CityType, useLocationMasterApiCall } from "@pages/master";
 import { useQuery } from "@tanstack/react-query";
-import { Puff } from "react-loader-spinner";
 
 export const City: React.FC = () => {
   const config = {
@@ -58,7 +57,7 @@ export const City: React.FC = () => {
 
   const { getCityData } = useLocationMasterApiCall();
 
-  const { data, isLoading, isError } = useQuery<CityType[]>({
+  const { data, isLoading } = useQuery<CityType[]>({
     queryKey: [cityData],
     queryFn: getCityData,
   });
