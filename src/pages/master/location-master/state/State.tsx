@@ -9,7 +9,7 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
-import { StateType, useLocationMasterApiCall } from "@pages/master";
+import { StateType, queryKeys, useLocationMasterApiCall } from "@pages/master";
 import { useQuery } from "@tanstack/react-query";
 
 export const State: React.FC = () => {
@@ -58,10 +58,8 @@ export const State: React.FC = () => {
     },
   ];
 
-  const stateDataKey = "state-data";
-
   const { data: stateData, isLoading } = useQuery<StateType[]>({
-    queryKey: [stateDataKey],
+    queryKey: [queryKeys.STATE_DATA],
     queryFn: getStateData,
     staleTime: Infinity,
   });

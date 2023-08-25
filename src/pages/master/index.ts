@@ -134,6 +134,8 @@ export * from "./location-master/features/types/state-type";
 export * from "./location-master/features/types/continent-type";
 export * from "./location-master/features/types/country-type";
 export * from "./location-master/features/types/add-city-type";
+export * from "./location-master/features/types/add-state-type";
+export * from "./location-master/features/types/add-continent-type";
 
 //Constants
 export { locationMasterApiUrls } from "./location-master/features/constants/api-urls";

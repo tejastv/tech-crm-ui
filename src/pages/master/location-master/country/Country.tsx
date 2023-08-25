@@ -8,7 +8,11 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
-import { CountryType, useLocationMasterApiCall } from "@master/index";
+import {
+  CountryType,
+  queryKeys,
+  useLocationMasterApiCall,
+} from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { useQuery } from "@tanstack/react-query";
 
@@ -64,10 +68,8 @@ export const Country: React.FC = () => {
     },
   ];
 
-  const countryDataKey = "country-data";
-
   const { data: stateData, isLoading } = useQuery<CountryType[]>({
-    queryKey: [countryDataKey],
+    queryKey: [queryKeys.COUNTRY_DATA],
     queryFn: getCountryData,
     staleTime: Infinity,
   });

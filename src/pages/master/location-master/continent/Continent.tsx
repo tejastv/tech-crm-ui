@@ -8,7 +8,11 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
-import { ContinentType, useLocationMasterApiCall } from "@master/index";
+import {
+  ContinentType,
+  queryKeys,
+  useLocationMasterApiCall,
+} from "@master/index";
 import { useQuery } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -46,10 +50,8 @@ export const Continent: React.FC = () => {
     },
   ];
 
-  const continentDataKey = "continent-data";
-
   const { data: continentData, isLoading } = useQuery<ContinentType[]>({
-    queryKey: [continentDataKey],
+    queryKey: [queryKeys.CONTINENT_DATA],
     queryFn: getContinentData,
     staleTime: Infinity,
   });

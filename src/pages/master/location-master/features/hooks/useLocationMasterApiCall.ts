@@ -1,6 +1,8 @@
 import { useAxios } from "@hooks/useAxios";
 import {
   AddCityType,
+  AddContinentType,
+  AddStateType,
   CityType,
   ContinentType,
   CountryType,
@@ -25,17 +27,37 @@ export const useLocationMasterApiCall = () => {
   };
 
   const getStateData = async (): Promise<StateType[]> => {
-    const response = await instance.get(locationMasterApiUrls.GET_STATE);
+    const response = await instance.get(locationMasterApiUrls.GET_ADD_STATE);
+    return response.data.data;
+  };
+
+  const addState = async (stateData: AddStateType): Promise<CityType[]> => {
+    const response = await instance.post(
+      locationMasterApiUrls.GET_ADD_STATE,
+      stateData
+    );
     return response.data.data;
   };
 
   const getContinentData = async (): Promise<ContinentType[]> => {
-    const response = await instance.get(locationMasterApiUrls.GET_CONTINENT);
+    const response = await instance.get(
+      locationMasterApiUrls.GET_ADD_CONTINENT
+    );
+    return response.data.data;
+  };
+
+  const addContinent = async (
+    continentData: AddContinentType
+  ): Promise<CityType[]> => {
+    const response = await instance.post(
+      locationMasterApiUrls.GET_ADD_CONTINENT,
+      continentData
+    );
     return response.data.data;
   };
 
   const getCountryData = async (): Promise<CountryType[]> => {
-    const response = await instance.get(locationMasterApiUrls.GET_COUNTRY);
+    const response = await instance.get(locationMasterApiUrls.GET_ADD_COUNTRY);
     return response.data.data;
   };
 
@@ -45,5 +67,7 @@ export const useLocationMasterApiCall = () => {
     getContinentData,
     getCountryData,
     addCity,
+    addState,
+    addContinent,
   };
 };
