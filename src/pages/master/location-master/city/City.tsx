@@ -9,7 +9,7 @@ import {
 } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 import { ColumnDef } from "@tanstack/react-table";
-import { CityType, useLocationMasterApiCall } from "@pages/master";
+import { CityType, queryKeys, useLocationMasterApiCall } from "@pages/master";
 import { useQuery } from "@tanstack/react-query";
 
 export const City: React.FC = () => {
@@ -52,10 +52,8 @@ export const City: React.FC = () => {
     },
   ];
 
-  const cityDataKey = "city-data";
-
   const { data: cityData, isLoading } = useQuery<CityType[]>({
-    queryKey: [cityDataKey],
+    queryKey: [queryKeys.CITY_DATA],
     queryFn: getCityData,
     staleTime: Infinity,
   });

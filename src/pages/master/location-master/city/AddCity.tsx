@@ -2,10 +2,19 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { addCityFormFields } from "@master/index";
+import {
+  AddCityType,
+  addCityFormFields,
+  queryKeys,
+  useLocationMasterApiCall,
+} from "@master/index";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const AddCity: React.FC = () => {
-  const methods = useForm();
+  const methods = useForm<AddCityType>();
+  const { addCity } = useLocationMasterApiCall();
+  const queryClient = useQueryClient();
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add City",
@@ -16,8 +25,19 @@ export const AddCity: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log("value", data);
+  const addCityMutation = useMutation({
+    mutationFn: addCity,
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
+    },
+    onError: () => {
+      console.log("Error");
+    },
+  });
+
+  const onSubmit = methods.handleSubmit((cityData) => {
+    addCityMutation.mutate(cityData);
   });
 
   return (
