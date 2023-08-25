@@ -13,6 +13,8 @@ import { CityType, useLocationMasterApiCall } from "@pages/master";
 import { useQuery } from "@tanstack/react-query";
 
 export const City: React.FC = () => {
+  const { getCityData } = useLocationMasterApiCall();
+
   const config = {
     breadcrumbConfig: {
       pageHeading: "City",
@@ -30,21 +32,18 @@ export const City: React.FC = () => {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
-      footer: (props) => props.column.id,
     },
     {
       accessorFn: (row) => row.cityName,
-      id: "clientName",
+      id: "cityName",
       cell: (info) => info.getValue(),
       header: () => <>City Name</>,
-      footer: (props) => props.column.id,
     },
     {
       accessorFn: (row) => row.oscopies,
-      id: "address",
+      id: "oscopies",
       cell: (info) => info.getValue(),
       header: () => <>OSCopies</>,
-      footer: (props) => props.column.id,
     },
     {
       id: "action",
@@ -53,23 +52,18 @@ export const City: React.FC = () => {
     },
   ];
 
-  const cityData = "city-data";
+  const cityDataKey = "city-data";
 
-  const { getCityData } = useLocationMasterApiCall();
-
-  const { data, isLoading } = useQuery<CityType[]>({
-    queryKey: [cityData],
+  const { data: cityData, isLoading } = useQuery<CityType[]>({
+    queryKey: [cityDataKey],
     queryFn: getCityData,
+    staleTime: Infinity,
   });
-
-  if (isLoading) {
-    console.log(isLoading);
-  }
 
   const tableConfig: TableType<CityType> = {
     config: {
       columns: columns,
-      tableData: data ? data : [],
+      tableData: cityData ? cityData : [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -84,8 +78,9 @@ export const City: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {/* <Loader /> */}
-        {isLoading ? <Loader /> : <Table config={tableConfig.config}></Table>}
+        <Table config={tableConfig.config}>
+          {isLoading ? <Loader /> : null}
+        </Table>
       </BorderLayout>
     </>
   );

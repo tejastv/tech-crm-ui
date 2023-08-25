@@ -1,4 +1,3 @@
-// CompanyMaster.tsx
 import React, { PropsWithChildren } from "react";
 import {
   useReactTable,
@@ -6,11 +5,14 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   flexRender,
+  SortingState,
+  getSortedRowModel,
 } from "@tanstack/react-table";
-import { Button, TableType } from "@shared/index";
+import { Button, DebouncedInput, TableType } from "@shared/index";
 
 export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
+  const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const data = props.config.tableData;
   const columns = props.config.columns;
@@ -27,7 +29,10 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     debugTable: true,
     state: {
       globalFilter,
+      sorting,
     },
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
   });
   return (
     <>
@@ -114,7 +119,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
               </div>
             )}
             <table
-              id="company-master-grid-data"
+              id="file_export"
               border={0}
               className="table table-striped table-bordered display dataTable no-footer mt-2 mb-2"
               width="100%"
@@ -132,19 +137,28 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                           key={header.id}
                           colSpan={header.colSpan}
                         >
-                          {header.isPlaceholder ? null : (
-                            <>
-                              {flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
-                              {/* {header.column.getCanFilter() ? (
-                      <div>
-                        <Filter column={header.column} table={table} />
-                      </div>
-                    ) : null} */}
-                            </>
-                          )}
+                          <div
+                            {...{
+                              className: header.column.getCanSort()
+                                ? "cursor-pointer select-none"
+                                : "",
+                              onClick: header.column.getToggleSortingHandler(),
+                            }}
+                          >
+                            {header.isPlaceholder ? null : (
+                              <>
+                                {flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
+                                {{
+                                  asc: " 🔼",
+                                  desc: " 🔽",
+                                }[header.column.getIsSorted() as string] ??
+                                  null}
+                              </>
+                            )}
+                          </div>
                         </th>
                       );
                     })}
@@ -158,12 +172,38 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                       <tr key={row.id}>
                         {row.getVisibleCells().map((cell) => {
                           return (
-                            <td key={cell.id}>
-                              {flexRender(
-                                cell.column.columnDef.cell,
-                                cell.getContext()
+                            <>
+                              {cell.column.id !== "action" ? (
+                                <td key={cell.id}>
+                                  {flexRender(
+                                    cell.column.columnDef.cell,
+                                    cell.getContext()
+                                  )}
+                                </td>
+                              ) : (
+                                <td>
+                                  <a
+                                    className="icon"
+                                    href="edit_continent.php?ContinentId=5"
+                                    data-toggle="tooltip"
+                                    data-original-title="Edit"
+                                  >
+                                    <span className="badge badge-danger m-r-10">
+                                      <i className="ti-pencil"></i>
+                                    </span>
+                                  </a>
+                                  <a
+                                    className="icon"
+                                    data-toggle="tooltip"
+                                    data-original-title="Delete"
+                                  >
+                                    <span className="badge badge-danger m-r-10">
+                                      <i className="ti-trash"></i>
+                                    </span>
+                                  </a>
+                                </td>
                               )}
-                            </td>
+                            </>
                           );
                         })}
                       </tr>
@@ -178,7 +218,9 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                       colSpan={columns.length}
                       className="dataTables_empty text-left"
                     >
-                      No data available in table
+                      {props.children
+                        ? props.children
+                        : "No data available in table"}
                     </td>
                   </tr>
                 </tbody>
@@ -201,8 +243,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                 >
                   Showing {table.getState().pagination.pageIndex + 1} to
                   {table.getState().pagination.pageSize} of{" "}
-                  {table.getPageCount()}
-                  entries
+                  {table.getRowModel().rows.length} entries
                 </div>
               </div>
               <div className="col-sm-12 col-md-7">
@@ -257,36 +298,3 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     </>
   );
 };
-
-function DebouncedInput({
-  value: initialValue,
-  onChange,
-  debounce = 500,
-  ...props
-}: {
-  value: string | number;
-  onChange: (value: string | number) => void;
-  debounce?: number;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">) {
-  const [value, setValue] = React.useState(initialValue);
-
-  React.useEffect(() => {
-    setValue(initialValue);
-  }, [initialValue]);
-
-  React.useEffect(() => {
-    const timeout = setTimeout(() => {
-      onChange(value);
-    }, debounce);
-
-    return () => clearTimeout(timeout);
-  }, [value]);
-
-  return (
-    <input
-      {...props}
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    />
-  );
-}

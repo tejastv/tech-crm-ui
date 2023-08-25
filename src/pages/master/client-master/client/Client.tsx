@@ -18,21 +18,7 @@ export const Client: React.FC = () => {
   return (
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
-      <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {/* <Table config={{
-          columns: [],
-          data: [],
-          sorting: undefined,
-          copyBtn: undefined,
-          csvBtn: undefined,
-          excelBtn: undefined,
-          pdfBtn: undefined,
-          printBtn: undefined,
-          globalSearchBox: undefined,
-          pagination: undefined,
-          showItemCountDropdown: undefined
-        }}></Table> */}
-      </BorderLayout>
+      <BorderLayout heading={config.borderLayoutConfig.heading}></BorderLayout>
     </>
   );
 };

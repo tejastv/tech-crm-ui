@@ -1,12 +1,23 @@
 import React from "react";
 
-import { BorderLayout, PageBreadcrumb } from "@shared/index";
+import {
+  BorderLayout,
+  Loader,
+  PageBreadcrumb,
+  Table,
+  TableType,
+} from "@shared/index";
 import { COMMON_ROUTES } from "constants";
+import { CountryType, useLocationMasterApiCall } from "@master/index";
+import { ColumnDef } from "@tanstack/react-table";
+import { useQuery } from "@tanstack/react-query";
 
 export const Country: React.FC = () => {
+  const { getCountryData } = useLocationMasterApiCall();
+
   const config = {
     breadcrumbConfig: {
-      pageHeading: "Country Master",
+      pageHeading: "Country",
       btnTitle: "Add Country",
       btnRoute: COMMON_ROUTES.ADD,
     },
@@ -15,11 +26,73 @@ export const Country: React.FC = () => {
     },
   };
 
+  const columns: ColumnDef<CountryType>[] = [
+    {
+      accessorFn: (row) => row.countryId,
+      id: "countryId",
+      cell: (info) => info.getValue(),
+      header: () => <>Sr no</>,
+    },
+    {
+      accessorFn: (row) => row.countryName,
+      id: "countryName",
+      cell: (info) => info.getValue(),
+      header: () => <>Country Name</>,
+    },
+    {
+      accessorFn: (row) => row.countryCode,
+      id: "countryCode",
+      cell: (info) => info.getValue(),
+      header: () => <>Country Code</>,
+    },
+    {
+      accessorFn: (row) => row.continentId,
+      id: "continentId",
+      cell: (info) => info.getValue(),
+      header: () => <>Continent ID</>,
+    },
+    {
+      accessorFn: (row) => row.continent,
+      id: "continent",
+      cell: (info) => info.getValue(),
+      header: () => <>Continent</>,
+    },
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+  ];
+
+  const countryDataKey = "country-data";
+
+  const { data: stateData, isLoading } = useQuery<CountryType[]>({
+    queryKey: [countryDataKey],
+    queryFn: getCountryData,
+    staleTime: Infinity,
+  });
+
+  const tableConfig: TableType<CountryType> = {
+    config: {
+      columns: columns,
+      tableData: stateData ? stateData : [],
+      copyBtn: true,
+      csvBtn: true,
+      excelBtn: true,
+      pdfBtn: true,
+      printBtn: true,
+      globalSearchBox: true,
+      pagination: true,
+    },
+  };
+
   return (
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {/* <Table></Table> */}
+        <Table config={tableConfig.config}>
+          {isLoading ? <Loader /> : null}
+        </Table>
       </BorderLayout>
     </>
   );

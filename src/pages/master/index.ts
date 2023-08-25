@@ -128,8 +128,11 @@ export { addFinYearFormFields } from "./information-master-2/features/form-field
 export { addUserFormFields } from "./information-master-2/features/form-fields/add-user";
 
 // Models
-export * from "./features/types/client-type";
-export * from "./features/types/city-type";
+export * from "./client-master/features/types/client-type";
+export * from "./location-master/features/types/city-type";
+export * from "./location-master/features/types/state-type";
+export * from "./location-master/features/types/continent-type";
+export * from "./location-master/features/types/country-type";
 
 //Constants
 export { locationMasterApiUrls } from "./location-master/features/constants/api-urls";
