@@ -14,24 +14,20 @@ const cityFieldValidation = {
 
 const osPrintFieldValidation = {
   required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-  maxLength: {
-    value: 30,
-    message: "30 characters max",
+    value: false,
+    message: "",
   },
 } as ValidationType;
 
 const cityField: FormFieldType = createFormConfig(
-  "city",
+  "cityName",
   "City",
   "text",
   cityFieldValidation,
   ""
 );
 const osPrintField: FormFieldType = createFormConfig(
-  "osPrint",
+  "oscopies",
   "Copy of O/s. to Print",
   "text",
   osPrintFieldValidation,
