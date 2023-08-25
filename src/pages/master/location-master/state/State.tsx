@@ -28,8 +28,7 @@ export const State: React.FC = () => {
 
   const columns: ColumnDef<StateType>[] = [
     {
-      accessorFn: (row) => row.stateId,
-      id: "stateId",
+      id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
     },

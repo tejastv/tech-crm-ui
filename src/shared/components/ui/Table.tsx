@@ -128,13 +128,13 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
             >
               <thead>
                 {table.getHeaderGroups().map((headerGroup) => (
-                  <tr role="row" key={headerGroup.id}>
+                  <tr role="row" key={`thead_tr_${headerGroup.id}`}>
                     {headerGroup.headers.map((header) => {
                       return (
                         <th
                           className="sorting"
                           aria-controls="company-master-grid-data"
-                          key={header.id}
+                          key={`thead_th_${header.id}`}
                           colSpan={header.colSpan}
                         >
                           <div
@@ -167,20 +167,15 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
               </thead>
               {data && data.length ? (
                 <tbody>
-                  {table.getRowModel().rows.map((row) => {
+                  {table.getRowModel().rows.map((row, index) => {
                     return (
-                      <tr key={row.id}>
+                      <tr key={`tr_${row.id}`}>
                         {row.getVisibleCells().map((cell) => {
                           return (
                             <>
-                              {cell.column.id !== "action" ? (
-                                <td key={cell.id}>
-                                  {flexRender(
-                                    cell.column.columnDef.cell,
-                                    cell.getContext()
-                                  )}
-                                </td>
-                              ) : (
+                              {cell.column.id == "srNo" ? (
+                                <td key={`index_${cell.id}`}>{index + 1}</td>
+                              ) : cell.column.id == "action" ? (
                                 <td>
                                   <a
                                     className="icon"
@@ -201,6 +196,13 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                                       <i className="ti-trash"></i>
                                     </span>
                                   </a>
+                                </td>
+                              ) : (
+                                <td key={`data_${cell.id}`}>
+                                  {flexRender(
+                                    cell.column.columnDef.cell,
+                                    cell.getContext()
+                                  )}
                                 </td>
                               )}
                             </>

@@ -28,7 +28,6 @@ export const City: React.FC = () => {
 
   const columns: ColumnDef<CityType>[] = [
     {
-      accessorFn: (row) => row.id,
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,

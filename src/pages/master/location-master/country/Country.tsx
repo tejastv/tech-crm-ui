@@ -32,8 +32,7 @@ export const Country: React.FC = () => {
 
   const columns: ColumnDef<CountryType>[] = [
     {
-      accessorFn: (row) => row.countryId,
-      id: "countryId",
+      id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
     },

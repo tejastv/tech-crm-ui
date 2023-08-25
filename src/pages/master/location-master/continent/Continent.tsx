@@ -32,8 +32,7 @@ export const Continent: React.FC = () => {
 
   const columns: ColumnDef<ContinentType>[] = [
     {
-      accessorFn: (row) => row.id,
-      id: "id",
+      id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
     },
