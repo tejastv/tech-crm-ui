@@ -1,5 +1,6 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
@@ -8,12 +9,13 @@ import {
   queryKeys,
   useLocationMasterApiCall,
 } from "@master/index";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export const AddCity: React.FC = () => {
   const methods = useForm<AddCityType>();
   const { addCity } = useLocationMasterApiCall();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -27,9 +29,11 @@ export const AddCity: React.FC = () => {
 
   const addCityMutation = useMutation({
     mutationFn: addCity,
-    onSuccess: () => {
+    onSuccess: (data) => {
       // Invalidate and refetch
+      console.log(data);
       queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
+      navigate(-1);
     },
     onError: () => {
       console.log("Error");

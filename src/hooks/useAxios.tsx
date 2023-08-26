@@ -2,6 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useAuth } from ".";
+import { Toaster } from "@shared/index";
 
 export const useAxios = () => {
   const navigate = useNavigate();
@@ -26,6 +27,15 @@ export const useAxios = () => {
   instance.interceptors.response.use(
     (response) => response,
     (error) => {
+      console.log(error.response?.status);
+      if (error.response?.status === 400) {
+        console.log(error.response?.status);
+        <Toaster
+          type="Danger"
+          heading="Error"
+          description={error.response?.data.error}
+        />;
+      }
       if (error.response?.status === 401) {
         removeItem("user");
         navigate("/login");

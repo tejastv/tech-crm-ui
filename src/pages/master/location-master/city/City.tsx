@@ -13,7 +13,7 @@ import { CityType, queryKeys, useLocationMasterApiCall } from "@pages/master";
 import { useQuery } from "@tanstack/react-query";
 
 export const City: React.FC = () => {
-  const { getCityData } = useLocationMasterApiCall();
+  const { getCity } = useLocationMasterApiCall();
 
   const config = {
     breadcrumbConfig: {
@@ -53,7 +53,7 @@ export const City: React.FC = () => {
 
   const { data: cityData, isLoading } = useQuery<CityType[]>({
     queryKey: [queryKeys.CITY_DATA],
-    queryFn: getCityData,
+    queryFn: getCity,
     staleTime: Infinity,
   });
 

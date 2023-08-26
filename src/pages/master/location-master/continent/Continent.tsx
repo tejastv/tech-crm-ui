@@ -17,7 +17,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const Continent: React.FC = () => {
-  const { getContinentData } = useLocationMasterApiCall();
+  const { getContinent } = useLocationMasterApiCall();
 
   const config = {
     breadcrumbConfig: {
@@ -51,7 +51,7 @@ export const Continent: React.FC = () => {
 
   const { data: continentData, isLoading } = useQuery<ContinentType[]>({
     queryKey: [queryKeys.CONTINENT_DATA],
-    queryFn: getContinentData,
+    queryFn: getContinent,
     staleTime: Infinity,
   });
 
