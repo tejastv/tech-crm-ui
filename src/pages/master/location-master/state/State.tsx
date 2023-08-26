@@ -10,10 +10,11 @@ import {
 } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 import { StateType, queryKeys, useLocationMasterApiCall } from "@pages/master";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const State: React.FC = () => {
-  const { getState } = useLocationMasterApiCall();
+  const { getState, deleteState } = useLocationMasterApiCall();
+  const queryClient = useQueryClient();
 
   const config = {
     breadcrumbConfig: {
@@ -63,6 +64,23 @@ export const State: React.FC = () => {
     staleTime: Infinity,
   });
 
+  const deleteStateClick = (stateData: any) => {
+    var conformation = confirm("Are you sure to delete it?");
+    if (conformation) {
+      deleteStateMutation.mutate(stateData.id);
+    }
+  };
+
+  const deleteStateMutation = useMutation({
+    mutationFn: deleteState,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [queryKeys.STATE_DATA] });
+    },
+    onError: () => {
+      console.log("Error");
+    },
+  });
+
   const tableConfig: TableType<StateType> = {
     config: {
       columns: columns,
@@ -74,6 +92,7 @@ export const State: React.FC = () => {
       printBtn: true,
       globalSearchBox: true,
       pagination: true,
+      onDeleteClick: deleteStateClick,
     },
   };
 

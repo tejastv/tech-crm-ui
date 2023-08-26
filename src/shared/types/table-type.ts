@@ -13,5 +13,7 @@ export interface TableType<T> {
     globalSearchBox?: boolean;
     pagination?: boolean;
     showItemCountDropdown?: boolean;
+    onDeleteClick?: (data: any) => void;
+    onEditClick?: (data: any) => void;
   };
 }

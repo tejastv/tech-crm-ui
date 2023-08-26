@@ -34,6 +34,15 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
   });
+
+  const onTableDeleteBtnClick = (data: any) => {
+    props.config.onDeleteClick && props.config.onDeleteClick(data);
+  };
+
+  const onTableEditBtnClick = (data: any) => {
+    props.config.onEditClick && props.config.onEditClick(data);
+  };
+
   return (
     <>
       <div className="p-2">
@@ -179,9 +188,11 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                                 <td>
                                   <a
                                     className="icon"
-                                    href="edit_continent.php?ContinentId=5"
                                     data-toggle="tooltip"
                                     data-original-title="Edit"
+                                    onClick={() =>
+                                      onTableEditBtnClick(row.original)
+                                    }
                                   >
                                     <span className="badge badge-danger m-r-10">
                                       <i className="ti-pencil"></i>
@@ -191,6 +202,9 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                                     className="icon"
                                     data-toggle="tooltip"
                                     data-original-title="Delete"
+                                    onClick={() =>
+                                      onTableDeleteBtnClick(row.original)
+                                    }
                                   >
                                     <span className="badge badge-danger m-r-10">
                                       <i className="ti-trash"></i>

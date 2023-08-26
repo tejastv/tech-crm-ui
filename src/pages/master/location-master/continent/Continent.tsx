@@ -13,11 +13,12 @@ import {
   queryKeys,
   useLocationMasterApiCall,
 } from "@master/index";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const Continent: React.FC = () => {
-  const { getContinent } = useLocationMasterApiCall();
+  const { getContinent, deleteContinent } = useLocationMasterApiCall();
+  const queryClient = useQueryClient();
 
   const config = {
     breadcrumbConfig: {
@@ -55,6 +56,23 @@ export const Continent: React.FC = () => {
     staleTime: Infinity,
   });
 
+  const deleteContinentClick = (continentData: any) => {
+    var conformation = confirm("Are you sure to delete it?");
+    if (conformation) {
+      deleteContinentMutation.mutate(continentData.id);
+    }
+  };
+
+  const deleteContinentMutation = useMutation({
+    mutationFn: deleteContinent,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [queryKeys.CONTINENT_DATA] });
+    },
+    onError: () => {
+      console.log("Error");
+    },
+  });
+
   const tableConfig: TableType<ContinentType> = {
     config: {
       columns: columns,
@@ -66,6 +84,7 @@ export const Continent: React.FC = () => {
       printBtn: true,
       globalSearchBox: true,
       pagination: true,
+      onDeleteClick: deleteContinentClick,
     },
   };
 
