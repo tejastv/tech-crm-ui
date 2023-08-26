@@ -2,10 +2,21 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { addContinentFormFields } from "@master/index";
+import {
+  AddContinentType,
+  addContinentFormFields,
+  queryKeys,
+  useLocationMasterApiCall,
+} from "@master/index";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export const AddContinent: React.FC = () => {
-  const methods = useForm();
+  const methods = useForm<AddContinentType>();
+  const { addContinent } = useLocationMasterApiCall();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Continent",
@@ -16,8 +27,21 @@ export const AddContinent: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log("value", data);
+  const addContinentMutation = useMutation({
+    mutationFn: addContinent,
+    onSuccess: (data) => {
+      // Invalidate and refetch
+      console.log(data);
+      queryClient.invalidateQueries({ queryKey: [queryKeys.CONTINENT_DATA] });
+      navigate(-1);
+    },
+    onError: () => {
+      console.log("Error");
+    },
+  });
+
+  const onSubmit = methods.handleSubmit((continentData) => {
+    addContinentMutation.mutate(continentData);
   });
 
   return (

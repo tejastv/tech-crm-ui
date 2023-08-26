@@ -18,8 +18,8 @@ const stateCodeFieldValidation = {
     message: "{label} field is rquired",
   },
   maxLength: {
-    value: 30,
-    message: "30 characters max",
+    value: 2,
+    message: "2 characters max",
   },
 } as ValidationType;
 
@@ -29,8 +29,8 @@ const numbericCodeFieldValidation = {
     message: "{label} field is rquired",
   },
   maxLength: {
-    value: 30,
-    message: "30 characters max",
+    value: 2,
+    message: "2 characters max",
   },
 } as ValidationType;
 
@@ -42,16 +42,16 @@ const stateField: FormFieldType = createFormConfig(
   ""
 );
 const stateCodeField: FormFieldType = createFormConfig(
-  "stateCode",
+  "stateCodeA",
   "State Code (eg: MH, GJ, etc)",
-  "text",
+  "number",
   stateCodeFieldValidation,
   ""
 );
 const numbericCodeField: FormFieldType = createFormConfig(
-  "stateCode",
+  "stateCodeN",
   "Numeric Code (eg: 09, 19, etc)",
-  "text",
+  "number",
   numbericCodeFieldValidation,
   ""
 );

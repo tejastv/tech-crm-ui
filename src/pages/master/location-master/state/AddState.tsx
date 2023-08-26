@@ -2,10 +2,21 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { addStateFormFields } from "@master/index";
+import {
+  AddStateType,
+  addStateFormFields,
+  queryKeys,
+  useLocationMasterApiCall,
+} from "@master/index";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export const AddState: React.FC = () => {
-  const methods = useForm();
+  const methods = useForm<AddStateType>();
+  const { addState } = useLocationMasterApiCall();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add State",
@@ -16,8 +27,21 @@ export const AddState: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log("value", data);
+  const addStateMutation = useMutation({
+    mutationFn: addState,
+    onSuccess: (data) => {
+      // Invalidate and refetch
+      console.log(data);
+      queryClient.invalidateQueries({ queryKey: [queryKeys.STATE_DATA] });
+      navigate(-1);
+    },
+    onError: () => {
+      console.log("Error");
+    },
+  });
+
+  const onSubmit = methods.handleSubmit((stateData) => {
+    addStateMutation.mutate(stateData);
   });
 
   return (
