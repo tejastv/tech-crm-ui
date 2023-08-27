@@ -5,15 +5,15 @@ import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
   AddStateType,
   addStateFormFields,
-  queryKeys,
-  useLocationMasterApiCall,
+  useStateApiCallHook,
 } from "@master/index";
+import { queryKeys } from "@constants/index";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const AddState: React.FC = () => {
   const methods = useForm<AddStateType>();
-  const { addState } = useLocationMasterApiCall();
+  const { addState } = useStateApiCallHook();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 

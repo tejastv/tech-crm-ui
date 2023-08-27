@@ -9,11 +9,12 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
-import { StateType, queryKeys, useLocationMasterApiCall } from "@pages/master";
+import { StateType, useStateApiCallHook } from "@pages/master";
+import { queryKeys } from "@constants/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const State: React.FC = () => {
-  const { getState, deleteState } = useLocationMasterApiCall();
+  const { getState, deleteState } = useStateApiCallHook();
   const queryClient = useQueryClient();
 
   const config = {

@@ -6,14 +6,14 @@ import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
   AddCityType,
   addCityFormFields,
-  queryKeys,
-  useLocationMasterApiCall,
+  useCityApiCallHook,
 } from "@master/index";
+import { queryKeys } from "@constants/index";
 import { useNavigate } from "react-router-dom";
 
 export const AddCity: React.FC = () => {
   const methods = useForm<AddCityType>();
-  const { addCity } = useLocationMasterApiCall();
+  const { addCity } = useCityApiCallHook();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 

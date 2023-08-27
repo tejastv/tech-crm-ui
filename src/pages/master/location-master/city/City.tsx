@@ -9,11 +9,12 @@ import {
 } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 import { ColumnDef } from "@tanstack/react-table";
-import { CityType, queryKeys, useLocationMasterApiCall } from "@pages/master";
+import { CityType, useCityApiCallHook } from "@pages/master";
+import { queryKeys } from "@constants/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const City: React.FC = () => {
-  const { getCity, deleteCity } = useLocationMasterApiCall();
+  const { getCity, deleteCity } = useCityApiCallHook();
   const queryClient = useQueryClient();
 
   const config = {

@@ -12,16 +12,18 @@ import {
   AddCountryType,
   ContinentType,
   addCoutryFormFields,
-  queryKeys,
-  useLocationMasterApiCall,
+  useContinentApiCallHook,
+  useCountryApiCallHook,
 } from "@master/index";
+import { queryKeys } from "@constants/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useNavigate } from "react-router-dom";
 
 export const AddCountry: React.FC = () => {
   const methods = useForm<AddCountryType>();
-  const { getContinent, addCountry } = useLocationMasterApiCall();
+  const { addCountry } = useCountryApiCallHook();
+  const { getContinent } = useContinentApiCallHook();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 

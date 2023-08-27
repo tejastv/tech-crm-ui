@@ -5,15 +5,15 @@ import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
   AddContinentType,
   addContinentFormFields,
-  queryKeys,
-  useLocationMasterApiCall,
+  useContinentApiCallHook,
 } from "@master/index";
+import { queryKeys } from "@constants/index";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const AddContinent: React.FC = () => {
   const methods = useForm<AddContinentType>();
-  const { addContinent } = useLocationMasterApiCall();
+  const { addContinent } = useContinentApiCallHook();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 

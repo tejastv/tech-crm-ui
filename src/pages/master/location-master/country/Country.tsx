@@ -8,16 +8,13 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
-import {
-  CountryType,
-  queryKeys,
-  useLocationMasterApiCall,
-} from "@master/index";
+import { CountryType, useCountryApiCallHook } from "@master/index";
+import { queryKeys } from "@constants/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const Country: React.FC = () => {
-  const { getCountry, deleteCountry } = useLocationMasterApiCall();
+  const { getCountry, deleteCountry } = useCountryApiCallHook();
   const queryClient = useQueryClient();
 
   const config = {
