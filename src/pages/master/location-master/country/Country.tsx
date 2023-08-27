@@ -77,7 +77,7 @@ export const Country: React.FC = () => {
   const deleteCountryClick = (countryData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
-      deleteCountryMutation.mutate(countryData.id);
+      deleteCountryMutation.mutate(countryData.countryId);
     }
   };
 

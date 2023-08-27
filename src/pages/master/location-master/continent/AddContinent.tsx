@@ -29,9 +29,7 @@ export const AddContinent: React.FC = () => {
 
   const addContinentMutation = useMutation({
     mutationFn: addContinent,
-    onSuccess: (data) => {
-      // Invalidate and refetch
-      console.log(data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [queryKeys.CONTINENT_DATA] });
       navigate(-1);
     },

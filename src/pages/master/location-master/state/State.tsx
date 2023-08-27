@@ -67,7 +67,7 @@ export const State: React.FC = () => {
   const deleteStateClick = (stateData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
-      deleteStateMutation.mutate(stateData.id);
+      deleteStateMutation.mutate(stateData.stateId);
     }
   };
 
