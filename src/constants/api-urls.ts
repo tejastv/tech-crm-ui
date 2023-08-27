@@ -7,7 +7,7 @@ const DELETE_CONTINENT = "location/continent/{id}";
 const DELETE_COUNTRY = "location/country/{id}";
 const DELETE_STATE = "location/state/{id}";
 
-export const locationMasterApiUrls = {
+export const apiUrls = {
   GET_ADD_CONTINENT,
   GET_ADD_COUNTRY,
   GET_ADD_STATE,
