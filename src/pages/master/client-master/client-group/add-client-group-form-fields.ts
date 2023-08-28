@@ -19,18 +19,18 @@ const ClientGroup2 = {
   },
   maxLength: {
     value: 30,
-    message: "30 characters max",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
-const GSTNClient = {
+const SearchClient = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
   maxLength: {
     value: 30,
-    message: "30 characters max",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
@@ -67,7 +67,7 @@ const searchClient: FormFieldType = createFormConfig(
   "selectClient",
   "Select Client",
   "select",
-  GSTNClient,
+  SearchClient,
   "Select Client",
   SearchClientOptions
 );

@@ -15,7 +15,7 @@ const nameClientMaster = {
 const GSTClient = {
   required: {
     value: true,
-    message: "{label} field is rquired",
+    message: "Please check the {label} box",
   },
 } as ValidationType;
 
@@ -24,10 +24,10 @@ const GSTNClient = {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 characters max",
-  },
+    pattern: {
+      value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+      message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
+    },
 } as ValidationType;
 
 const addressValidation = {
@@ -37,7 +37,7 @@ const addressValidation = {
   },
   pattern: {
     value: /^[\w\s\d#.,\-\/]+$/,
-    message: "Invalid address",
+    message: "Please use alphanumeric characters",
   },
 } as ValidationType;
 
@@ -48,7 +48,7 @@ const telNoValidation = {
   },
   pattern: {
     value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
-    message: "Invalid telephone number",
+    message: "Invalid telephone number. Please use Number.",
   },
 } as ValidationType;
 
@@ -59,106 +59,106 @@ const FaxNoValidation = {
   },
   pattern: {
     value: /^\+?[0-9\s\-()+.]*$/,
-    message: "Invalid fax number",
+    message: "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
   },
 } as ValidationType;
 
 const EmailValidation = {
   required: {
     value: true,
-    message: "Please Enter E-mail ",
+    message: "{label} field is rquired",
   },
   pattern: {
     value:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    message: "not valid ",
+    message: "Please Include an '@' and .com/in in the email address.",
   },
 } as ValidationType;
 
 const WebsiteValidation = {
   required: {
     value: true,
-    message: "Please Enter Website",
+    message: "{label} field is rquired",
   },
   pattern: {
     value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
-    message: "Invalid website URL",
+    message: "website URL e.g., http://www.example.com",
   },
 } as ValidationType;
 
 const ContactValidation = {
   required: {
     value: true,
-    message: "Please Enter Contect person",
+    message: "{label} field is rquired",
   },
   maxLength: {
     value: 30,
-    message: "30 characters max",
+    message: "{label} should be up to 30 characters max",
   },
 } as ValidationType;
 
 const DesignationValidation = {
   required: {
     value: true,
-    message: "Please Enter Designation",
+    message: "{label} field is rquired",
   },
   maxLength: {
-    value: 30,
-    message: "30 characters max",
+    value: 50,
+    message: "Designation should be up to 50 characters long",
   },
 } as ValidationType;
 
 const ZipValidation = {
   required: {
     value: true,
-    message: "Please Enter Zip",
+    message: "{label} field is rquired",
   },
   pattern: {
     value: /^\d{6}$/,
-    message: "Invalid ZIP code",
+    message: "Invalid ZIP code,Please enter a 6-digit number.",
   },
 } as ValidationType;
 
 const CityValidation = {
   required: {
     value: true,
-    message: "Please Select city",
+    message: "{label} field is rquired",
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid City",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
 const StateValidation = {
   required: {
     value: true,
-    message: "Please Select State",
+    message: "{label} field is rquired",
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid State",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
 const CountryValidation = {
   required: {
     value: true,
-    message: "Please Select Country",
+    message: "{label} field is rquired",
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid Country ",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const CrDayValidation = {
   required: {
     value: true,
-    message: "Please Select Cr Days",
+    message: "{label} field is rquired",
   },
   pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid Cr Days ",
+    value: /^\d+$/,
+    message: "Credit Days must be a positive number"
   },
 } as ValidationType;
 
@@ -170,7 +170,7 @@ const ClientCurrencyValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid currency format",
+    message: "Invalid currency format. Please use a valid currency code (e.g., USD).",
   },
 } as ValidationType;
 const ExecutiveValidation = {
@@ -179,8 +179,8 @@ const ExecutiveValidation = {
     message: "{label} field is rquired",
   },
   maxLength: {
-    value: 50,
-    message: "Invalid Executive",
+    value: 30,
+    message: "Invalid Executive selection",
   },
 } as ValidationType;
 const InstructionValidation = {
@@ -196,7 +196,7 @@ const GroupValidation = {
   },
   maxLength: {
     value: 50,
-    message: "Invalid Group",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const SegmentValidation = {
@@ -206,7 +206,7 @@ const SegmentValidation = {
   },
   maxLength: {
     value: 50,
-    message: "Invalid Segment",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const RemarksValidation = {
@@ -240,7 +240,7 @@ const OsValidation = {
 const DiscountValidation = {
   required: {
     value: true,
-    message: "{label} field is rquired",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const AdjustValidation = {
@@ -250,7 +250,7 @@ const AdjustValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Adjust is invalid",
+    message: "{label} should be up to 30 characters max",
   },
 } as ValidationType;
 const BalAdjustValidation = {
@@ -407,7 +407,7 @@ const addressClient: FormFieldType = createFormConfig(
 const telnoClient: FormFieldType = createFormConfig(
   "telno",
   "Tel No.",
-  "number",
+  "text",
   telNoValidation,
   "Enter Tel No."
 );
@@ -622,10 +622,10 @@ const adjustenquiry: FormFieldType = createFormConfig(
 // Adjust From Proforma
 const toAdjustproforma: FormFieldType = createFormConfig(
   "toadjustproforma",
-  "To Adjust",
+  "To Adjusts",
   "text",
   AdjustPropfomaValidation,
-  "Adjust Proforma"
+  "Adjusts Proforma"
 );
 const baltoAdjustproformaproforma: FormFieldType = createFormConfig(
   "toadjustproforma",

@@ -1,4 +1,5 @@
 export interface ClientType {
+  id:number;
   srNo: string;
   clientName: string;
   address: string;

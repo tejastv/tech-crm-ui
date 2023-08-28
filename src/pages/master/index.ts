@@ -88,12 +88,12 @@ export { AddUser } from "./information-master-2/user-master/AddUsert";
 export { User } from "./information-master-2/user-master/User";
 
 //Form Fields
-export { addClientFormFields } from "./client-master/features/form-fields/add-client";
+export { addClientFormFields } from "./client-master/client/add-client-form-fields";
 export { addStateFormFields } from "./location-master/state/add-state-form-fields";
 export { addCityFormFields } from "./location-master/city/add-city-form-fields";
 
-export { addClientGroupFormFields } from "./client-master/features/form-fields/add-clientGroup";
-export { addSegmentFormFields } from "./client-master/features/form-fields/add-segment";
+export { addClientGroupFormFields } from "./client-master/client-group/add-client-group-form-fields";
+export { addSegmentFormFields } from "./client-master/segment/add-segment-form-fields";
 
 export { addCompanyFormFields } from "./company/features/form-fields/add-company";
 
@@ -128,7 +128,15 @@ export { addFinYearFormFields } from "./information-master-2/features/form-field
 export { addUserFormFields } from "./information-master-2/features/form-fields/add-user";
 
 // Models
-export * from "./client-master/features/types/client-type";
+export * from "./client-master/client/client-type";
+export * from "./client-master/client/add-client-type";
+
+export * from "./client-master/client-group/add-client-group-type";
+export * from "./client-master/client-group/client-group-type";
+
+export * from "./client-master/segment/add-segment.type";
+export * from "./client-master/segment/segment-type";
+
 export * from "./location-master/city/city-type";
 export * from "./location-master/state/state-type";
 export * from "./location-master/continent/continent-type";
