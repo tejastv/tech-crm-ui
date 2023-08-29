@@ -29,7 +29,7 @@ const addressValidation = {
   },
   pattern: {
     value: /^[\w\s\d#.,\-\/]+$/,
-    message: "Invalid address",
+    message: "Please use alphanumeric characters",
   },
 } as ValidationType;
 
@@ -40,7 +40,7 @@ const telNoValidation = {
   },
   pattern: {
     value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
-    message: "Invalid telephone number",
+    message: "Invalid telephone number. Please use Number.",
   },
 } as ValidationType;
 
@@ -51,7 +51,7 @@ const FaxNoValidation = {
   },
   pattern: {
     value: /^\+?[0-9\s\-()+.]*$/,
-    message: "Invalid fax number",
+    message: "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
   },
 } as ValidationType;
 
@@ -63,7 +63,7 @@ const EmailValidation = {
   pattern: {
     value:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    message: "not valid ",
+      message: "Please Include an '@' and .com/in in the email address.",
   },
 } as ValidationType;
 
@@ -74,7 +74,7 @@ const WebsiteValidation = {
   },
   pattern: {
     value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
-    message: "Invalid website URL",
+    message: "website URL e.g., http://www.example.com",
   },
 } as ValidationType;
 
@@ -85,7 +85,7 @@ const ContactValidation = {
   },
   maxLength: {
     value: 30,
-    message: "30 characters max",
+    message: "{label} should be up to 30 characters max",
   },
 } as ValidationType;
 
@@ -96,7 +96,7 @@ const DesignationValidation = {
   },
   maxLength: {
     value: 30,
-    message: "30 characters max",
+    message: "Designation should be up to 50 characters long",
   },
 } as ValidationType;
 
@@ -107,7 +107,7 @@ const ZipValidation = {
   },
   pattern: {
     value: /^\d{6}$/,
-    message: "Invalid ZIP code",
+    message: "Invalid ZIP code,Please enter a 6-digit number.",
   },
 } as ValidationType;
 
@@ -129,7 +129,7 @@ const StateValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid State",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
@@ -140,7 +140,7 @@ const CountryValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid Country ",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
@@ -151,7 +151,7 @@ const CurrencyValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid currency format",
+    message: "Invalid currency format. Please use a valid currency code (e.g., USD).",
   },
 } as ValidationType;
 

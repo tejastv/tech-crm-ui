@@ -112,8 +112,8 @@ export { addCoutryFormFields } from "./location-master/country/add-country-form-
 export { addContinentFormFields } from "./location-master/continent/add-continent-form-fields";
 
 export { addBankDepositeFormFields } from "./information-master/bank-master-deposit/add-bankdeposit-form-fields";
-export { addPaymentModeFormFields } from "./information-master/features/form-fields/add-paymentmode";
-export { addSourceFormFields } from "./information-master/features/form-fields/add-source";
+export { addPaymentModeFormFields } from "./information-master/payment-mode/add-paymentmode-form-fileds";
+export { addSourceFormFields } from "./information-master/source/add-source-form-fields";
 export { addBankdrawnonFormFields } from "./information-master/bank-master-drawn-on/add-bankdrawnon-form-fields";
 export { addSupplierFormFields } from "./information-master/features/form-fields/add-supplier";
 export { addCurrencyFormFields } from "./information-master/currency/add-currency-form-fields";
@@ -160,20 +160,26 @@ export * from "./price-list-master/std-price-list-client/std-price-client-type";
 export * from "./local-source-master/local-source/add-localSource-type";
 export * from "./local-source-master/local-source/localSource-type";
 
-export * from "./local-source-master/price-list/add-price-type"
+export * from "./local-source-master/price-list/add-price-type";
 export * from "./local-source-master/price-list/price-type";
 
-export * from "./local-source-master/std-price-list/add-std-price-type"
-export * from "./local-source-master/std-price-list/std-price-type"
+export * from "./local-source-master/std-price-list/add-std-price-type";
+export * from "./local-source-master/std-price-list/std-price-type";
 
-export * from "./information-master/bank-master-deposit/add-bankdeposit-type"
-export * from "./information-master/bank-master-deposit/bankdeposit-type"
+export * from "./information-master/bank-master-deposit/add-bankdeposit-type";
+export * from "./information-master/bank-master-deposit/bankdeposit-type";
 
-export * from "./information-master/bank-master-drawn-on/add-bankdrawnon-type"
-export * from "./information-master/bank-master-drawn-on/bankdrawnon-type"
+export * from "./information-master/bank-master-drawn-on/add-bankdrawnon-type";
+export * from "./information-master/bank-master-drawn-on/bankdrawnon-type";
 
-export * from "./information-master/currency/add-currency-type"
-export * from "./information-master/currency/currency-type"
+export * from "./information-master/currency/add-currency-type";
+export * from "./information-master/currency/currency-type";
+
+export * from "./information-master/payment-mode/add-paymentmode-type";
+export * from "./information-master/payment-mode/paymentmode-type";
+
+export * from "./information-master/source/add-source-type";
+export * from "./information-master/source/source-type";
 // location master
 export * from "./location-master/city/city-type";
 export * from "./location-master/state/state-type";

@@ -7,7 +7,7 @@ const SourceValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Bank Deposit ",
+    message: "30 characters max",
   },
 } as ValidationType;
 const SelectFileValidation = {

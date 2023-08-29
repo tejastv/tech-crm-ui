@@ -7,7 +7,7 @@ const PaymentModeValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Payment ",
+    message: "30 characters max",
   },
 } as ValidationType;
 

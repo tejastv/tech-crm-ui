@@ -7,7 +7,7 @@ const CurrencyValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Currency ",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const CurrencyWordValidation = {
@@ -17,7 +17,7 @@ const CurrencyWordValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Currency ",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const SymbolValidation = {
