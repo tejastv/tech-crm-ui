@@ -8,7 +8,7 @@ const PriceCityGroupValidation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
@@ -19,7 +19,7 @@ const PriceGroupValidation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const PriceGroup2Validation = {
@@ -29,7 +29,7 @@ const PriceGroup2Validation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
@@ -40,7 +40,7 @@ const PriceGroupCurrencyValidation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const PriceGroupCurrency2Validation = {
@@ -50,7 +50,7 @@ const PriceGroupCurrency2Validation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 

@@ -20,7 +20,7 @@ const EmailValidation = {
   pattern: {
     value:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    message: "not valid ",
+      message: "Please Include an '@' and .com/in in the email address.",
   },
 } as ValidationType;
 const EmailValidationCC = {
@@ -31,7 +31,7 @@ const EmailValidationCC = {
   pattern: {
     value:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    message: "not valid ",
+      message: "Please Include an '@' and .com/in in the emailCC address.",
   },
 } as ValidationType;
 
@@ -42,7 +42,7 @@ const CurrencyValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid currency format",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const CountryValidation = {
@@ -52,7 +52,7 @@ const CountryValidation = {
   },
   pattern: {
     value: /^\d+(\.\d{1,2})?$/,
-    message: "Invalid Country ",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 

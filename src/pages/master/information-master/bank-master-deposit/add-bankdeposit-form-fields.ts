@@ -7,7 +7,7 @@ const BankDepositValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Bank Deposit ",
+    message: "30 characters max",
   },
 } as ValidationType;
 const BankDepositACValidation = {
@@ -17,7 +17,7 @@ const BankDepositACValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Bank Deposit ",
+    message: "30 characters max",
   },
 } as ValidationType;
 

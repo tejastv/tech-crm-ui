@@ -8,7 +8,7 @@ const ClientActualBuyer = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid {label}",
+    message: "Select {label}",
   },
 } as ValidationType;
 const nameActualBuyer = {
@@ -18,7 +18,7 @@ const nameActualBuyer = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid {label}",
+    message: "30 characters max",
   },
 } as ValidationType;
 
@@ -37,9 +37,9 @@ const cst = {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Invalid {label}",
+  pattern: {
+    value: /^[a-zA-Z0-9\-]+$/,
+    message: "Invalid CST/TIN No. format. Please use a valid format.",
   },
 } as ValidationType;
 
@@ -50,7 +50,7 @@ const addressValidation = {
   },
   pattern: {
     value: /^[\w\s\d#.,\-\/]+$/,
-    message: "Invalid address",
+    message: "Please use alphanumeric characters",
   },
 } as ValidationType;
 
@@ -61,7 +61,7 @@ const telNoValidation = {
   },
   pattern: {
     value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
-    message: "Invalid telephone number",
+    message: "Invalid telephone number format. Please use a valid telephone number format, such as +1 (123) 456-7890.",
   },
 } as ValidationType;
 
@@ -72,7 +72,7 @@ const FaxNoValidation = {
   },
   pattern: {
     value: /^\+?[0-9\s\-()+.]*$/,
-    message: "Invalid fax number",
+    message: "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
   },
 } as ValidationType;
 
@@ -84,7 +84,7 @@ const EmailValidation = {
   pattern: {
     value:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    message: "Please Include an '@' in the email address.",
+      message: "Please Include an '@' and .com/in in the email address.",
   },
 } as ValidationType;
 
@@ -95,7 +95,7 @@ const WebsiteValidation = {
   },
   pattern: {
     value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
-    message: "Invalid website URL",
+    message: "website URL e.g., http://www.example.com",
   },
 } as ValidationType;
 
@@ -106,7 +106,7 @@ const ContactValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid {label}",
+    message: "{label} should be up to 30 characters max",
   },
 } as ValidationType;
 
@@ -117,7 +117,7 @@ const DesignationValidation = {
   },
   maxLength: {
     value: 30,
-    message: "{label} field is rquired",
+    message: "Designation should be up to 30 characters long",
   },
 } as ValidationType;
 
@@ -128,7 +128,7 @@ const PinValidation = {
   },
   pattern: {
     value: /^\d{6}$/,
-    message: "{label} field is rquired",
+    message: "Invalid PIN code,Please enter a 6-digit number.",
   },
 } as ValidationType;
 
@@ -139,7 +139,7 @@ const CityValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid City",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
@@ -150,7 +150,7 @@ const StateValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid State",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
@@ -161,7 +161,7 @@ const CountryValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid Country ",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
@@ -213,7 +213,7 @@ const addressactualbuyer: FormFieldType = createFormConfig(
 const telnoactualbuyer: FormFieldType = createFormConfig(
   "telnoactualbuyer",
   "Tel No.",
-  "number",
+  "text",
   telNoValidation,
   "Enter Tel No."
 );

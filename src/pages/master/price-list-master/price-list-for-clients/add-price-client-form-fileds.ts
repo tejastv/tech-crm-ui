@@ -8,7 +8,7 @@ const PriceCityValidation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
@@ -19,7 +19,7 @@ const PriceClientValidation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
@@ -30,7 +30,7 @@ const PriceClient2Validation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const PriceClientCurrencyValidation = {
@@ -40,7 +40,7 @@ const PriceClientCurrencyValidation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const PriceGroupValidation = {
@@ -50,7 +50,7 @@ const PriceGroupValidation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const PriceGroup2Validation = {
@@ -60,7 +60,7 @@ const PriceGroup2Validation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const PriceCurrencyGroupValidation = {
@@ -70,7 +70,7 @@ const PriceCurrencyGroupValidation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const PriceCurrencyClientValidation = {
@@ -80,7 +80,7 @@ const PriceCurrencyClientValidation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 

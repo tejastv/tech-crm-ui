@@ -7,7 +7,7 @@ const StdCurrencyValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid Country ",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 

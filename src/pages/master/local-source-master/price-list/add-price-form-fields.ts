@@ -39,7 +39,7 @@ const PriceCurrencyValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid Country ",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const PurchesDateValidation = {
@@ -49,7 +49,7 @@ const PurchesDateValidation = {
   },
   pattern: {
     value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message: "Invalid date",
+    message: "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
   },
 } as ValidationType;
 const SellDateValidation = {
@@ -59,7 +59,7 @@ const SellDateValidation = {
   },
   pattern: {
     value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message: "Invalid date",
+    message: "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
   },
 } as ValidationType;
 

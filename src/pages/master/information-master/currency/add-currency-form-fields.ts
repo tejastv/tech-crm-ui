@@ -25,9 +25,9 @@ const SymbolValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Invalid Symbol ",
+  pattern: {
+    value: /^[a-zA-Z0-9\-]+$/,
+    message: "Invalid symbol format. Please use alphanumeric characters or hyphens only.",
   },
 } as ValidationType;
 
@@ -36,19 +36,19 @@ const PurchesExchanegValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 characters max",
-  },
+  pattern: {
+    value: /^\d+(\.\d{1,2})?$/,
+    message: "Invalid exchange rate format. Please use a valid number format (e.g., 123.45).",
+  },  
 } as ValidationType;
 const SellExchanegValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 characters max",
+  pattern: {
+    value: /^\d+(\.\d{1,2})?$/,
+    message: "Invalid exchange rate format. Please use a valid number format (e.g., 123.45).",
   },
 } as ValidationType;
 const PurchesDateValidation = {
@@ -58,7 +58,7 @@ const PurchesDateValidation = {
   },
   pattern: {
     value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message: "Invalid date",
+    message: "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
   },
 } as ValidationType;
 const SellDateValidation = {
@@ -68,7 +68,7 @@ const SellDateValidation = {
   },
   pattern: {
     value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message: "Invalid date",
+    message: "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
   },
 } as ValidationType;
 

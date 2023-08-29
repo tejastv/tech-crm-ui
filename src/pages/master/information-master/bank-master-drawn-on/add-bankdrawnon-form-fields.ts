@@ -7,7 +7,7 @@ const BankDrawnValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Bank Drawn ",
+    message: "30 characters max",
   },
 } as ValidationType;
 

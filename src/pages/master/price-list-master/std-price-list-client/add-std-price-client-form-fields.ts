@@ -8,7 +8,7 @@ const StdPriceClientCurrencyValidation = {
   },
   maxLength: {
     value: 20,
-    message: "Select {label}",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
