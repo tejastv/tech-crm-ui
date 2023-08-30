@@ -1,4 +1,5 @@
-export interface AddCountryType {
+export interface AddUpdateCountryType {
+  id?: string;
   countryName: string;
   countryCode: string;
   continentId: number;

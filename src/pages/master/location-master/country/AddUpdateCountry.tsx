@@ -9,7 +9,7 @@ import {
   Select,
 } from "@shared/index";
 import {
-  AddCountryType,
+  AddUpdateCountryType,
   ContinentType,
   addCoutryFormFields,
   useContinentApiCallHook,
@@ -18,14 +18,16 @@ import {
 import { queryKeys } from "@constants/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export const AddCountry: React.FC = () => {
-  const methods = useForm<AddCountryType>();
-  const { addCountry } = useCountryApiCallHook();
+export const AddUpdateCountry: React.FC = () => {
+  const methods = useForm<AddUpdateCountryType>();
+  const { addCountryMutation, updateCountryMutation, getCountryData } =
+    useCountryApiCallHook();
   const { getContinent } = useContinentApiCallHook();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const params = useParams();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -37,32 +39,46 @@ export const AddCountry: React.FC = () => {
     },
   };
 
-  const { data: continentData } = useQuery<ContinentType[]>({
-    queryKey: [queryKeys.CONTINENT_DATA],
-    queryFn: getContinent,
-    staleTime: Infinity,
-  });
+  const { data: continentData, isSuccess: getContinentSuccess } =
+    getContinent();
 
   if (continentData) {
     addCoutryFormFields.continentCountryField.config.options =
       selectOptionsMaker(continentData, "id", "continent");
   }
 
-  const addCountryMutation = useMutation({
-    mutationFn: addCountry,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.COUNTRY_DATA] });
-      navigate(-1);
-    },
-    onError: () => {
-      console.log("Error");
-    },
-  });
+  if (params.id) {
+    const { data: countryData, isSuccess: countryDataSuccess } = getCountryData(
+      "" + params.id
+    );
+    const country = addCoutryFormFields.countryField.config.name;
+    if (getContinentSuccess && countryDataSuccess) {
+      const continentId = addCoutryFormFields.continentCountryField.config.name;
+      if (continentId === "continentId" && countryData?.continentId) {
+        methods.setValue(continentId, countryData?.continentId);
+      }
+    }
+    const countryField = addCoutryFormFields.countryCodeField.config.name;
+    if (country === "countryName" && countryData?.countryName) {
+      methods.setValue(country, countryData?.countryName);
+    }
+
+    if (countryField === "countryCode" && countryData?.countryCode) {
+      methods.setValue(countryField, countryData?.countryCode);
+    }
+  }
+
+  const { mutate: addCountry } = addCountryMutation();
+  const { mutate: updateCountry } = updateCountryMutation();
 
   const onSubmit = methods.handleSubmit((countryData) => {
     let data: any = { ...countryData };
     data.continentId = +data.continentId["value"];
-    addCountryMutation.mutate(data);
+    if (params.id && countryData) {
+      updateCountry({ id: params.id, ...countryData });
+    } else {
+      addCountry(countryData);
+    }
   });
 
   return (

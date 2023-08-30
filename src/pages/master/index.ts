@@ -40,7 +40,7 @@ export { AddPrice } from "./local-source-master/price-list/AddPrice";
 export { AddStdPrice } from "./local-source-master/std-price-list/AddStdPrice";
 
 // Country master child pages
-export { AddCountry } from "./location-master/country/AddCountry";
+export { AddUpdateCountry } from "./location-master/country/AddUpdateCountry";
 export { Country } from "./location-master/country/Country";
 // Continent master child pages
 export { AddContinent } from "./location-master/continent/AddContinent";
@@ -136,7 +136,7 @@ export * from "./location-master/country/country-type";
 export * from "./location-master/city/add-update-city-type";
 export * from "./location-master/state/add-state-type";
 export * from "./location-master/continent/add-update-continent-type";
-export * from "./location-master/country/add-country-type";
+export * from "./location-master/country/add-update-country-type";
 
 //Services/ Hooks
 export { useCityApiCallHook } from "./location-master/city/useCityApiCallHook";
