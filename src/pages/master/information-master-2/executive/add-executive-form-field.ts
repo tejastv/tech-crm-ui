@@ -7,7 +7,7 @@ const ExecutiveValidation = {
   },
   maxLength: {
     value: 50,
-    message: "Invalid Executive",
+    message: "50 characters max",
   },
 } as ValidationType;
 
@@ -19,7 +19,7 @@ const EmailValidation = {
   pattern: {
     value:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    message: "not valid ",
+      message: "Please Include an '@' and .com/in in the email address.",
   },
 } as ValidationType;
 
@@ -30,7 +30,7 @@ const CityValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid City",
+    message: "Please select a {label}",
   },
 } as ValidationType;
 const stateInfoValidation = {

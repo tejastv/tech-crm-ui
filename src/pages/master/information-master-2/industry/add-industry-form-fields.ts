@@ -7,7 +7,7 @@ const IndustryValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Industry ",
+    message: "30 characters max",
   },
 } as ValidationType;
 

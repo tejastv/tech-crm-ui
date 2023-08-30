@@ -7,7 +7,7 @@ const PurposeValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Purpose ",
+    message: "30 characters max",
   },
 } as ValidationType;
 

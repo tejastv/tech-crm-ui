@@ -7,7 +7,7 @@ const finyearValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Fin Year",
+    message: "30 characters max",
   },
 } as ValidationType;
 const totaltaxValidation = {
@@ -17,7 +17,7 @@ const totaltaxValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Fin Year",
+    message: "30 characters max",
   },
 } as ValidationType;
 const staxValidation = {
@@ -27,7 +27,7 @@ const staxValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid S Tax",
+    message: "30 characters max",
   },
 } as ValidationType;
 const edcessValidation = {
@@ -37,7 +37,7 @@ const edcessValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid E Cess",
+    message: "30 characters max",
   },
 } as ValidationType;
 const cgstValidation = {
@@ -45,9 +45,9 @@ const cgstValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Invalid CGST %",
+  pattern: {
+    value: /^\d+(\.\d{1,2})?$/,
+    message: "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
   },
 } as ValidationType;
 const sgstValidation = {

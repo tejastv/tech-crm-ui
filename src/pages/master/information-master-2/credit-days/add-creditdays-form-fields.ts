@@ -7,7 +7,7 @@ const CreditdayValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Credit Days",
+    message: "30 characters max",
   },
 } as ValidationType;
 

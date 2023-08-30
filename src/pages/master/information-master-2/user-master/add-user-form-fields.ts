@@ -7,7 +7,7 @@ const UserValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Industry ",
+    message: "30 characters max",
   },
 } as ValidationType;
 
@@ -18,7 +18,7 @@ const UserTypeValidation = {
   },
   maxLength: {
     value: 30,
-    message: "Invalid Industry ",
+    message: "30 characters max",
   },
 } as ValidationType;
 const LoginValidation = {
@@ -26,9 +26,9 @@ const LoginValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Invalid Industry ",
+  pattern: {
+    value: /^[a-zA-Z0-9_]+$/,
+    message: "Invalid username format. Please use only letters, numbers, and underscores.",
   },
 } as ValidationType;
 const PasswordValidation = {
@@ -36,10 +36,10 @@ const PasswordValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Invalid Password ",
-  },
+  pattern: {
+    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+    message: "Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character",
+  }
 } as ValidationType;
 
 const username: FormFieldType = createFormConfig(

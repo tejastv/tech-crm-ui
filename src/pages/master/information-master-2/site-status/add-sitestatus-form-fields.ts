@@ -1,25 +1,24 @@
 import { FormFieldType, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
-
-const CallTypeValidation = {
+const SiteStatusValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
   maxLength: {
     value: 30,
-    message: "Invalid Call Type ",
+    message: "30 characters max",
   },
 } as ValidationType;
 
-const calltype: FormFieldType = createFormConfig(
-  "calltype",
-  "Call Type",
+const sitestatus: FormFieldType = createFormConfig(
+  "sitestatus",
+  "Site Status",
   "text",
-  CallTypeValidation,
-  "Call Type"
+  SiteStatusValidation,
+  "Site Status"
 );
 
-export const addCallTypeFormFields = {
-  calltype,
+export const addSiteStatusFormFields = {
+  sitestatus,
 };

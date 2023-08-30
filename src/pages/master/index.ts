@@ -115,17 +115,17 @@ export { addBankDepositeFormFields } from "./information-master/bank-master-depo
 export { addPaymentModeFormFields } from "./information-master/payment-mode/add-paymentmode-form-fileds";
 export { addSourceFormFields } from "./information-master/source/add-source-form-fields";
 export { addBankdrawnonFormFields } from "./information-master/bank-master-drawn-on/add-bankdrawnon-form-fields";
-export { addSupplierFormFields } from "./information-master/features/form-fields/add-supplier";
+export { addSupplierFormFields } from "./information-master/supplier-master/add-supplier-form-fields";
 export { addCurrencyFormFields } from "./information-master/currency/add-currency-form-fields";
 
-export { addIndustryFormFields } from "./information-master-2/features/form-fields/add-industry";
-export { addCallTypeFormFields } from "./information-master-2/features/form-fields/add-calltype";
-export { addPurposeFormFields } from "./information-master-2/features/form-fields/add-purpose";
-export { addCreditDaysFormFields } from "./information-master-2/features/form-fields/add-creditdays";
-export { addSiteStatusFormFields } from "./information-master-2/features/form-fields/add-sitestatus";
-export { addExecutiveFormFields } from "./information-master-2/features/form-fields/add-executive";
-export { addFinYearFormFields } from "./information-master-2/features/form-fields/add-finyear";
-export { addUserFormFields } from "./information-master-2/features/form-fields/add-user";
+export { addIndustryFormFields } from "./information-master-2/industry/add-industry-form-fields";
+export { addCallTypeFormFields } from "./information-master-2/call-type/add-calltype-form-fields";
+export { addPurposeFormFields } from "./information-master-2/purpose-master/add-purpose-form-fields";
+export { addCreditDaysFormFields } from "./information-master-2/credit-days/add-creditdays-form-fields";
+export { addSiteStatusFormFields } from "./information-master-2/site-status/add-sitestatus-form-fields";
+export { addExecutiveFormFields } from "./information-master-2/executive/add-executive-form-field";
+export { addFinYearFormFields } from "./information-master-2/fin-year/add-finyear-form-fields";
+export { addUserFormFields } from "./information-master-2/user-master/add-user-form-fields";
 
 // Models
 
@@ -180,6 +180,35 @@ export * from "./information-master/payment-mode/paymentmode-type";
 
 export * from "./information-master/source/add-source-type";
 export * from "./information-master/source/source-type";
+
+export * from "./information-master/supplier-master/add-supplier-type";
+export * from "./information-master/supplier-master/supplier-type";
+
+// information master
+export * from "./information-master-2/call-type/add-calltype-type";
+export * from "./information-master-2/call-type/calltype-type";
+
+export * from "./information-master-2/credit-days/add-creditdays-type";
+export * from "./information-master-2/credit-days/creditdays-type";
+
+export * from "./information-master-2/executive/add-executive-type";
+export * from "./information-master-2/executive/executive-type";
+
+export * from "./information-master-2/fin-year/add-finyear-type";
+export * from "./information-master-2/fin-year/finyear-type";
+
+export * from "./information-master-2/industry/add-industry-type";
+export * from "./information-master-2/industry/industry-type";
+
+export * from "./information-master-2/purpose-master/add-purpose-type";
+export * from "./information-master-2/purpose-master/purpose-type";
+
+export * from "./information-master-2/site-status/add-sitestatus-type";
+export * from "./information-master-2/site-status/sitestatus-type";
+
+export * from "./information-master-2/user-master/add-user-type";
+export * from "./information-master-2/user-master/user-type";
+
 // location master
 export * from "./location-master/city/city-type";
 export * from "./location-master/state/state-type";
