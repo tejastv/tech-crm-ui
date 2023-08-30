@@ -3,19 +3,17 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
-  AddContinentType,
+  AddUpdateContinentType,
   addContinentFormFields,
   useContinentApiCallHook,
 } from "@master/index";
-import { queryKeys } from "@constants/index";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const AddContinent: React.FC = () => {
-  const methods = useForm<AddContinentType>();
-  const { addContinent } = useContinentApiCallHook();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  const methods = useForm<AddUpdateContinentType>();
+  const { addContinentMutation, getContinentData, updateContinentMutation } =
+    useContinentApiCallHook();
+  const params = useParams();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -27,19 +25,23 @@ export const AddContinent: React.FC = () => {
     },
   };
 
-  const addContinentMutation = useMutation({
-    mutationFn: addContinent,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.CONTINENT_DATA] });
-      navigate(-1);
-    },
-    onError: () => {
-      console.log("Error");
-    },
-  });
+  if (params.id) {
+    const { data: continentData } = getContinentData("" + params.id);
+    const continentName = addContinentFormFields.continentField.config.name;
+    if (continentName === "continent" && continentData?.continent) {
+      methods.setValue(continentName, continentData?.continent);
+    }
+  }
+
+  const { mutate: addContinent } = addContinentMutation();
+  const { mutate: updateContinent } = updateContinentMutation();
 
   const onSubmit = methods.handleSubmit((continentData) => {
-    addContinentMutation.mutate(continentData);
+    if (params.id && continentData) {
+      updateContinent({ id: params.id, ...continentData });
+    } else {
+      addContinent(continentData);
+    }
   });
 
   return (

@@ -82,7 +82,6 @@ export const useCityApiCallHook = () => {
     const response = await instance.delete(
       apiUrls.GET_UPDATE_DELETE_CITY.replace("{id}", id)
     );
-    queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
     return response.data.data;
   };
 
@@ -99,7 +98,7 @@ export const useCityApiCallHook = () => {
     getCity,
     getCityData,
     addCityMutation,
-    deleteCityMutation,
     updateCityMutation,
+    deleteCityMutation,
   };
 };

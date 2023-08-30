@@ -135,7 +135,7 @@ export * from "./location-master/continent/continent-type";
 export * from "./location-master/country/country-type";
 export * from "./location-master/city/add-update-city-type";
 export * from "./location-master/state/add-state-type";
-export * from "./location-master/continent/add-continent-type";
+export * from "./location-master/continent/add-update-continent-type";
 export * from "./location-master/country/add-country-type";
 
 //Services/ Hooks
