@@ -19,7 +19,7 @@ export const MASTER_ROUTES = {
   //   CLIENT_GROUP: "client-group",
   //   SEGMENT_PARENT_ROUTE: "/sengment/*",
   //   SEGMENT: "segment",
-    
+
   // },
 
   CLIENT_MASTER_ROUTES: {
@@ -32,7 +32,7 @@ export const MASTER_ROUTES = {
     CLIENTGROUP: "group",
     SEGMENT: "segment",
   },
-  
+
   // PRICE_LIST_MASTER_ROUTES: {
   //   PRICE_LIST_MASTER_PARENT_ROUTE: "/price-list-master/*",
   //   PRICE_LIST_MASTER_ROUTE: "price-list-master/",
@@ -42,7 +42,7 @@ export const MASTER_ROUTES = {
   //   // LOCALSOURCE: "local-source",
   //   PRICE_CLIENT: "price-list-clients",
   //   // STDPRICE: "stdprice",
-    
+
   // },
   LOCATION_MASTER_ROUTES: {
     LOCATION_MASTER_PARENT_ROUTE: "/location/*",
@@ -65,7 +65,6 @@ export const MASTER_ROUTES = {
     LOCALSOURCE: "local-source",
     PRICE: "price",
     STDPRICE: "stdprice",
-    
   },
   PRICE_LIST_MASTER_ROUTES: {
     PRICE_LIST_MASTER_PARENT_ROUTE: "/price-list-master/*",
@@ -80,7 +79,6 @@ export const MASTER_ROUTES = {
     PRICE_GROUP: "price-list-group",
     STDPRICE: "stdprice",
     ACTUALBUYER: "actual-buyer",
-    
   },
   INFORMATION_MASTER_ROUTES: {
     INFORMATION_MASTER_PARENT_ROUTE: "/information-master/*",

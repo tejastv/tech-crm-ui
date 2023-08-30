@@ -14,7 +14,7 @@ export { AddSegment } from "./client-master/segment/AddSegment";
 
 // Location
 // City master child pages
-export { AddCity } from "./location-master/city/AddCity";
+export { AddUpdateCity } from "./location-master/city/AddUpdateCity";
 export { City } from "./location-master/city/City";
 // State master child pages
 export { AddState } from "./location-master/state/AddState";
@@ -133,7 +133,7 @@ export * from "./location-master/city/city-type";
 export * from "./location-master/state/state-type";
 export * from "./location-master/continent/continent-type";
 export * from "./location-master/country/country-type";
-export * from "./location-master/city/add-city-type";
+export * from "./location-master/city/add-update-city-type";
 export * from "./location-master/state/add-state-type";
 export * from "./location-master/continent/add-continent-type";
 export * from "./location-master/country/add-country-type";

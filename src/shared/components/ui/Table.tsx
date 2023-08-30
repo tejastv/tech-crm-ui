@@ -62,7 +62,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                   }}
                 >
                   {[10, 20, 30, 40, 50].map((pageSize) => (
-                    <option key={pageSize} value={pageSize}>
+                    <option key={`pageSize_${pageSize}`} value={pageSize}>
                       {pageSize}
                     </option>
                   ))}
@@ -72,6 +72,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
             <div className="dt-buttons">
               {props.config.copyBtn && (
                 <Button
+                  key="buttons-copy"
                   className="dt-button buttons-copy buttons-html5 btn btn-danger btn-sm mr-1"
                   aria-controls="file_export"
                   type="button"
@@ -81,6 +82,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
               )}
               {props.config.csvBtn && (
                 <Button
+                  key="buttons-csv"
                   className="dt-button buttons-csv buttons-html5 btn btn-danger btn-sm mr-1"
                   aria-controls="file_export"
                   type="button"
@@ -90,6 +92,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
               )}
               {props.config.excelBtn && (
                 <Button
+                  key="buttons-excel"
                   className="dt-button buttons-excel buttons-html5 btn btn-danger btn-sm mr-1"
                   aria-controls="file_export"
                   type="button"
@@ -99,6 +102,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
               )}
               {props.config.pdfBtn && (
                 <Button
+                  key="buttons-pdf"
                   className="dt-button buttons-pdf buttons-html5 btn btn-danger btn-sm mr-1"
                   aria-controls="file_export"
                   type="button"
@@ -108,6 +112,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
               )}
               {props.config.printBtn && (
                 <Button
+                  key="buttons-print"
                   className="dt-button buttons-print btn btn-danger btn-sm mr-1"
                   aria-controls="file_export"
                   type="button"
@@ -121,6 +126,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                 <label>
                   Search:
                   <DebouncedInput
+                    key="DebouncedInput"
                     value={globalFilter ?? ""}
                     onChange={(value) => setGlobalFilter(String(value))}
                   />
@@ -134,10 +140,15 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
               width="100%"
               role="grid"
               aria-describedby="company-master-grid-data_info"
+              key="data-table"
             >
               <thead>
                 {table.getHeaderGroups().map((headerGroup) => (
-                  <tr role="row" key={`thead_tr_${headerGroup.id}`}>
+                  <tr
+                    role="row"
+                    key={`thead_tr_${headerGroup.id}`}
+                    id={`thead_tr_${headerGroup.id}`}
+                  >
                     {headerGroup.headers.map((header) => {
                       return (
                         <th
@@ -178,12 +189,14 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                 <tbody>
                   {table.getRowModel().rows.map((row, index) => {
                     return (
-                      <tr key={`tr_${row.id}`}>
+                      <tr key={`${Math.random().toFixed(5)}`}>
                         {row.getVisibleCells().map((cell) => {
                           return (
                             <>
                               {cell.column.id == "srNo" ? (
-                                <td key={`index_${cell.id}`}>{index + 1}</td>
+                                <td key={`${Math.random().toFixed(5)}`}>
+                                  {index + 1}
+                                </td>
                               ) : cell.column.id == "action" ? (
                                 <td>
                                   <a
@@ -212,7 +225,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                                   </a>
                                 </td>
                               ) : (
-                                <td key={`data_${cell.id}`}>
+                                <td key={`data_${cell.id}${index}`}>
                                   {flexRender(
                                     cell.column.columnDef.cell,
                                     cell.getContext()
@@ -273,6 +286,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                       id="zero_config_previous"
                     >
                       <Button
+                        key="zero_config-pri"
                         onClick={() => table.previousPage()}
                         type="button"
                         disabled={!table.getCanPreviousPage()}
@@ -290,6 +304,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                       id="zero_config_next"
                     >
                       <Button
+                        key="zero_config-next"
                         aria-controls="zero_config"
                         data-dt-idx="1"
                         type="button"

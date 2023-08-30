@@ -5,7 +5,7 @@ export const ActionButtons = () => {
   const navigate = useNavigate();
 
   const routeHandler = () => {
-    return navigate(-1);
+    return navigate("..");
   };
 
   return (

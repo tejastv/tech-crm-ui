@@ -19,13 +19,28 @@ const osPrintFieldValidation = {
   },
 } as ValidationType;
 
-const cityField: FormFieldType = createFormConfig(
-  "cityName",
-  "City",
-  "text",
-  cityFieldValidation,
-  ""
-);
+const cityField = {
+  config: {
+    ...createFormConfig(
+      "cityName",
+      "City",
+      "text",
+      cityFieldValidation,
+      ""
+    ).config,
+    name: 'cityName',
+  },
+  
+
+};
+
+// ...createFormConfig(
+//   "cityName",
+//   "City",
+//   "text",
+//   cityFieldValidation,
+//   ""
+// )
 const osPrintField: FormFieldType = createFormConfig(
   "oscopies",
   "Copy of O/s. to Print",

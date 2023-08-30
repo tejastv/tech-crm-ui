@@ -1,21 +1,19 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
-  AddCityType,
+  AddUpdateCityType,
   addCityFormFields,
   useCityApiCallHook,
 } from "@master/index";
-import { queryKeys } from "@constants/index";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-export const AddCity: React.FC = () => {
-  const methods = useForm<AddCityType>();
-  const { addCity } = useCityApiCallHook();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
+export const AddUpdateCity: React.FC = () => {
+  const methods = useForm<AddUpdateCityType>();
+  const { addCityMutation, getCityData, updateCityMutation } =
+    useCityApiCallHook();
+  const params = useParams();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -27,21 +25,27 @@ export const AddCity: React.FC = () => {
     },
   };
 
-  const addCityMutation = useMutation({
-    mutationFn: addCity,
-    onSuccess: (data) => {
-      // Invalidate and refetch
-      console.log(data);
-      queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
-      navigate(-1);
-    },
-    onError: () => {
-      console.log("Error");
-    },
-  });
+  if (params.id) {
+    const { data: cityData } = getCityData("" + params.id);
+    const cityName = addCityFormFields.cityField.config.name;
+    const osPrintField = addCityFormFields.osPrintField.config.name;
+    if (cityName === "cityName" && cityData?.cityName) {
+      methods.setValue(cityName, cityData?.cityName);
+    }
+    if (osPrintField === "oscopies" && cityData?.oscopies) {
+      methods.setValue(osPrintField, cityData?.oscopies);
+    }
+  }
+
+  const { mutate: addCity } = addCityMutation();
+  const { mutate: updateCity } = updateCityMutation();
 
   const onSubmit = methods.handleSubmit((cityData) => {
-    addCityMutation.mutate(cityData);
+    if (params.id && cityData) {
+      updateCity({ id: params.id, ...cityData });
+    } else {
+      addCity(cityData);
+    }
   });
 
   return (
