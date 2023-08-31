@@ -92,11 +92,6 @@ export const AddActualBuyer: React.FC = () => {
                       }
                     />
                     <Input
-                      config={
-                        addActualBuyersFormFields.contactactualbuyer.config
-                      }
-                    />
-                    <Input
                       config={addActualBuyersFormFields.cstactualbuyer.config}
                     />
                     <Input

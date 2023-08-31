@@ -11,11 +11,11 @@ const nameField: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Name",
+        message: "Name field is rquired",
       },
       maxLength: {
         value: 30,
-        message: "30 characters max",
+        message: "Name should not exceed 30 characters",
       },
     },
   },
@@ -31,11 +31,11 @@ const addressField: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Address",
+        message: "Address field is rquired",
       },
       pattern: {
         value: /^[\w\s\d#.,\-\/]+$/,
-        message: "Invalid address",
+        message: "Invalid address format. Please use a valid format.",
       },
     },
   },
@@ -51,7 +51,10 @@ const officeAddressField: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Regd Office Address",
+        message: "Regd Office Address field is rquired",
+      },pattern: {
+        value: /^[\w\s\d#.,\-\/]+$/,
+        message: "Invalid address format. Please use a valid format.",
       },
     },
   },
@@ -67,11 +70,11 @@ const telNo: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Telephone Number",
+        message: "Telephone Number field is rquired",
       },
       pattern: {
         value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
-        message: "Invalid telephone number",
+        message: "Invalid telephone number format. Please use a valid format (e.g., +1 (123) 456-7890).",
       },
     },
   },
@@ -87,11 +90,11 @@ const faxNo: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Fax number",
+        message: "Fax number field is rquired",
       },
       pattern: {
         value: /^\+?[0-9\s\-()+.]*$/,
-        message: "Invalid fax number",
+        message: "Invalid fax number,Please use a valid format (e.g., +1234567890).",
       },
     },
   },
@@ -107,12 +110,12 @@ const emailField: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Email ",
+        message: "Email field is rquired",
       },
       pattern: {
         value:
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        message: "not valid ",
+        message: "Invalid email format. Please use a valid email address.",
       },
     },
   },
@@ -127,11 +130,11 @@ const website: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Website",
+        message: "Website field is rquired",
       },
       pattern: {
         value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
-        message: "Invalid website URL",
+        message: "Please use a valid URL format (e.g., https://www.example.com).",
       },
     },
   },
@@ -147,11 +150,11 @@ const contactPerson: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Contect person",
+        message: "Contect person field is rquired",
       },
       maxLength: {
         value: 30,
-        message: "30 characters max",
+        message: "Contact Person should not exceed 30 characters",
       },
     },
   },
@@ -167,11 +170,11 @@ const designation: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Designation",
+        message: "Designation field is rquired",
       },
       maxLength: {
         value: 30,
-        message: "30 characters max",
+        message: "Designation should not exceed 30 characters",
       },
     },
   },
@@ -187,11 +190,11 @@ const zip: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Zip",
+        message: "Zip field is rquired",
       },
       pattern: {
         value: /^\d{6}$/,
-        message: "Invalid ZIP code",
+        message: "Invalid ZIP code, Please use a 6-digit numeric code.",
       },
     },
   },
@@ -213,11 +216,11 @@ const city: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Select city",
+        message: "Select city field is rquired",
       },
       pattern: {
         value: /^[a-zA-Z0-9\-]+$/,
-        message: "Invalid City",
+        message: "Select City",
       },
     },
   },
@@ -239,11 +242,11 @@ const state: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Select State",
+        message: "State field is rquired",
       },
       pattern: {
         value: /^[a-zA-Z0-9\-]+$/,
-        message: "Invalid State",
+        message: "Select State",
       },
     },
   },
@@ -261,15 +264,15 @@ const country: FormFieldType = {
     label: "Country",
     id: "country",
     options: selectOptionsMaker(countryOptions, "value", "label"),
-    placeholder: "Select Country",
+    placeholder: "Country field is rquired",
     validation: {
       required: {
         value: true,
-        message: "Please Select Country",
+        message: "Country field is rquired",
       },
       pattern: {
         value: /^[a-zA-Z0-9\-]+$/,
-        message: "Invalid Country ",
+        message: "Select Country ",
       },
     },
   },
@@ -285,11 +288,11 @@ const hscode: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter HS Code",
+        message: "HS Code field is rquired",
       },
       pattern: {
         value: /^\d{6}$/,
-        message: "Invalid HS Code",
+        message: "Invalid HS Code,Please use a 6-digit numeric code.",
       },
     },
   },
@@ -305,11 +308,11 @@ const givenName: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Given Name",
+        message: "Given Name field is rquired",
       },
       maxLength: {
         value: 30,
-        message: "30 characters max",
+        message: "Given Name should not exceed 30 characters",
       },
     },
   },
@@ -325,7 +328,7 @@ const referenceno: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Enter Ref Number",
+        message: "Number field is rquired",
       },
       pattern: {
         value: /^[a-zA-Z0-9\-]+$/,
@@ -345,11 +348,11 @@ const financialyear: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Year",
+        message: "Year field is rquired",
       },
       pattern: {
         value: /^\d{4}-\d{4}$/,
-        message: "Invalid financial year",
+        message: "Invalid financial year,Please use YYYY-YYYY format.",
       },
     },
   },
@@ -365,11 +368,11 @@ const regno: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Reg no",
+        message: "Reg no field is rquired",
       },
       pattern: {
         value: /^[a-zA-Z0-9\-]+$/,
-        message: "Invalid register number",
+        message:"Invalid register number. Please use alphanumeric characters and hyphens"
       },
     },
   },
@@ -408,7 +411,11 @@ const companyType: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Company name",
+        message: "Company Type field is rquired",
+      },
+      maxLength: {
+        value: 30,
+        message: "Bankers should be up to 30 characters long",
       },
     },
   },
@@ -423,11 +430,11 @@ const incorporationDate: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Select Date",
+        message: "Date field is rquired",
       },
       pattern: {
         value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-        message: "Invalid date",
+        message: "Invalid date format. Please use DD/MM/YYYY format.",
       },
     },
   },
@@ -444,11 +451,11 @@ const bankers: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Bankers",
+        message: "Bankers field is rquired",
       },
       maxLength: {
-        value: 30,
-        message: "30 characters max",
+        value: 60,
+        message: "Bankers should be up to 60 characters long",
       },
     },
   },
@@ -464,7 +471,11 @@ const notes: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Notes",
+        message: "Notes field is rquired",
+      },
+      maxLength: {
+        value: 50,
+        message: "Note should be up to 50 characters long",
       },
     },
   },
@@ -479,11 +490,11 @@ const cmie: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter CMIE",
+        message: "CMIE field is rquired",
       },
       maxLength: {
         value: 30,
-        message: "Enter CMIE",
+        message: "CMIE should be up to 30 characters long",
       },
     },
   },
@@ -498,11 +509,11 @@ const rocStatus: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter ROC",
+        message: "ROC Status field is rquired",
       },
       maxLength: {
         value: 30,
-        message: "Enter ROC",
+        message: "ROC status should be up to 30 characters long",
       },
     },
   },
@@ -518,11 +529,11 @@ const recodes: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Records",
+        message: "Records field is rquired",
       },
       maxLength: {
         value: 30,
-        message: "Enetr Records  ",
+        message: "Records should be up to 30 characters long ",
       },
     },
   },
@@ -538,11 +549,11 @@ const recfin: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Please Enter Rec",
+        message: "Rec field is rquired",
       },
       maxLength: {
         value: 30,
-        message: "Enter Rec",
+        message: "Rec Fin should be up to 30 characters long",
       },
     },
   },

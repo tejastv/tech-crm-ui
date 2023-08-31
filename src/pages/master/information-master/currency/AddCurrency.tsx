@@ -63,9 +63,9 @@ export const AddCurrency: React.FC = () => {
                       <Input
                         config={addCurrencyFormFields.purchesExchaneg.config}
                       />
-                      {/* <Input
-                        config={addCurrencyFormFields.purchesDate.config}
-                      /> */}
+                      <Input
+                        config={addCurrencyFormFields.pDate.config}
+                      />
                     </div>
                   </div>
                 </div>
@@ -84,7 +84,7 @@ export const AddCurrency: React.FC = () => {
                       <Input
                         config={addCurrencyFormFields.sellExchaneg.config}
                       />
-                      {/* <Input config={addCurrencyFormFields.sellDate.config} /> */}
+                      <Input config={addCurrencyFormFields.sDate.config} />
                     </div>
                   </div>
                 </div>
