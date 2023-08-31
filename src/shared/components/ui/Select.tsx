@@ -12,7 +12,7 @@ import { default as AliceSelect } from "react-select";
 
 import { findInputError, isFormInvalid } from "@utils/index";
 import { FormFieldType } from "@shared/index";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const Select = (props: FormFieldType) => {
   const {
@@ -24,10 +24,9 @@ export const Select = (props: FormFieldType) => {
   const isInvalid = isFormInvalid(inputErrors);
   useEffect(() => {
     if (props.config.selectedValue) {
-      console.log(props.config.name, props.config.selectedValue);
       setValue(props.config.name, props.config.selectedValue);
     }
-  }, [props.config.name, props.config.selectedValue, setValue]);
+  }, [props.config.selectedValue]);
   return (
     <div className="row">
       <div className="col-12">
@@ -49,10 +48,6 @@ export const Select = (props: FormFieldType) => {
                 <AliceSelect
                   {...field}
                   options={props.config.options}
-                  // value={
-                  //   props.config.options &&
-                  //   props.config.options.map((option) => option.value)
-                  // }
                   placeholder={props.config.placeholder}
                 />
               )}

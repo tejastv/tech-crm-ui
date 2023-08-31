@@ -10,7 +10,7 @@ export interface FormFieldType {
     validation?: ValidationType;
     multiline?: boolean;
     className?: string;
-    selectedValue?: string | number;
+    selectedValue?: Object;
     options?: Array<Options>;
   };
 }
