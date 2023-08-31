@@ -10,23 +10,17 @@ import {
 } from "@shared/index";
 import {
   AddUpdateCountryType,
-  ContinentType,
   addCoutryFormFields,
   useContinentApiCallHook,
   useCountryApiCallHook,
 } from "@master/index";
-import { queryKeys } from "@constants/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const AddUpdateCountry: React.FC = () => {
   const methods = useForm<AddUpdateCountryType>();
-  const { addCountryMutation, updateCountryMutation, getCountryData } =
-    useCountryApiCallHook();
+  const { addCountryMutation, updateCountryMutation } = useCountryApiCallHook();
   const { getContinent } = useContinentApiCallHook();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const params = useParams();
 
   const cardConfig = {
@@ -39,8 +33,7 @@ export const AddUpdateCountry: React.FC = () => {
     },
   };
 
-  const { data: continentData, isSuccess: getContinentSuccess } =
-    getContinent();
+  const { data: continentData } = getContinent();
 
   if (continentData) {
     addCoutryFormFields.continentCountryField.config.options =
@@ -48,24 +41,24 @@ export const AddUpdateCountry: React.FC = () => {
   }
 
   if (params.id) {
-    const { data: countryData, isSuccess: countryDataSuccess } = getCountryData(
-      "" + params.id
-    );
-    const country = addCoutryFormFields.countryField.config.name;
-    if (getContinentSuccess && countryDataSuccess) {
-      const continentId = addCoutryFormFields.continentCountryField.config.name;
-      if (continentId === "continentId" && countryData?.continentId) {
-        methods.setValue(continentId, countryData?.continentId);
-      }
-    }
-    const countryField = addCoutryFormFields.countryCodeField.config.name;
-    if (country === "countryName" && countryData?.countryName) {
-      methods.setValue(country, countryData?.countryName);
-    }
-
-    if (countryField === "countryCode" && countryData?.countryCode) {
-      methods.setValue(countryField, countryData?.countryCode);
-    }
+    // const { data: countryData, isSuccess: countryDataSuccess } = getCountryData(
+    //   "" + params.id
+    // );
+    // const country = addCoutryFormFields.countryField.config.name;
+    // if (getContinentSuccess && countryDataSuccess) {
+    //   const continentId = addCoutryFormFields.continentCountryField.config.name;
+    //   if (continentId === "continentId" && countryData?.continentId) {
+    //     addCoutryFormFields.continentCountryField.config.selectedValue =
+    //       countryData?.continentId;
+    //   }
+    // }
+    // const countryField = addCoutryFormFields.countryCodeField.config.name;
+    // if (country === "countryName" && countryData?.countryName) {
+    //   methods.setValue(country, countryData?.countryName);
+    // }
+    // if (countryField === "countryCode" && countryData?.countryCode) {
+    //   methods.setValue(countryField, countryData?.countryCode);
+    // }
   }
 
   const { mutate: addCountry } = addCountryMutation();
@@ -73,11 +66,12 @@ export const AddUpdateCountry: React.FC = () => {
 
   const onSubmit = methods.handleSubmit((countryData) => {
     let data: any = { ...countryData };
+    console.log(data);
     data.continentId = +data.continentId["value"];
     if (params.id && countryData) {
-      updateCountry({ id: params.id, ...countryData });
+      updateCountry({ id: params.id, ...data });
     } else {
-      addCountry(countryData);
+      addCountry(data);
     }
   });
 
