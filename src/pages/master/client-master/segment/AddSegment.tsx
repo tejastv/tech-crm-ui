@@ -33,7 +33,7 @@ export const AddSegment: React.FC = () => {
           >
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
               <div className="row">
-                <div className="col-3 pull-right">
+                <div className="col-6 pull-right">
                   {/* <div className="card-body"> */}
                   <Input config={addSegmentFormFields.clientSegment.config} />
                   {/* </div> */}
