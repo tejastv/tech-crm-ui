@@ -31,6 +31,8 @@
       "@auth/*": ["pages/auth/*"],
       "@dashboard/*": ["pages/dashboard/*"],
       "@master/*": ["pages/master/*"],
+      "@transaction-search/*": ["pages/transaction-search/*"],
+      
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx", "tests/**/*.ts", "tests/**/*.tsx",".eslintrc.cjs"],

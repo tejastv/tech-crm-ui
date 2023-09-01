@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { COMMON_ROUTES } from "constants";
 import { AddClient,Client} from "@master/index";
 
-const CityMasterIndex: React.FC = () => {
+const ClientMasterIndex: React.FC = () => {
   return (
     <Routes>
       <Route index element={<Client />}></Route>
@@ -12,4 +12,4 @@ const CityMasterIndex: React.FC = () => {
   );
 };
 
-export default CityMasterIndex;
+export default ClientMasterIndex;
