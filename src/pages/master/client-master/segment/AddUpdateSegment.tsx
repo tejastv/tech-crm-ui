@@ -1,11 +1,11 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { BorderLayout, Card, Input } from "@shared/index";
+import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 
 import { addSegmentFormFields } from "@master/index";
 
-export const AddSegment: React.FC = () => {
+export const AddUpdateSegment: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
@@ -34,11 +34,12 @@ export const AddSegment: React.FC = () => {
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
               <div className="row">
                 <div className="col-6 pull-right">
-                  {/* <div className="card-body"> */}
                   <Input config={addSegmentFormFields.clientSegment.config} />
-                  {/* </div> */}
                 </div>
               </div>
+            </BorderLayout>
+            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+              <ActionButtons />
             </BorderLayout>
           </form>
         </FormProvider>

@@ -7,6 +7,8 @@ const GET_UPDATE_DELETE_CONTINENT = "location/continent/{id}";
 const GET_UPDATE_DELETE_COUNTRY = "location/country/{id}";
 const GET_UPDATE_DELETE_STATE = "location/state/{id}";
 
+const GET_ADD_SEGMENT = "entity/segment";
+
 export const apiUrls = {
   GET_ADD_CONTINENT,
   GET_ADD_COUNTRY,
@@ -16,4 +18,5 @@ export const apiUrls = {
   GET_UPDATE_DELETE_CONTINENT,
   GET_UPDATE_DELETE_COUNTRY,
   GET_UPDATE_DELETE_STATE,
+  GET_ADD_SEGMENT,
 };

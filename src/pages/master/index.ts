@@ -10,7 +10,7 @@ export { AddClient } from "./client-master/client/AddClient";
 export { GroupMaster } from "./client-master/client-group/ClientGroup";
 export { AddClientGroup } from "./client-master/client-group/AddClientGroup";
 export { Segment } from "./client-master/segment/Segment";
-export { AddSegment } from "./client-master/segment/AddSegment";
+export { AddUpdateSegment } from "./client-master/segment/AddUpdateSegment";
 
 // Location
 // City master child pages
@@ -224,3 +224,5 @@ export { useCityApiCallHook } from "./location-master/city/useCityApiCallHook";
 export { useContinentApiCallHook } from "./location-master/continent/useContinentApiCallHook";
 export { useCountryApiCallHook } from "./location-master/country/useCountryApiCallHook";
 export { useStateApiCallHook } from "./location-master/state/useStateApiCallHook";
+
+export { useSegmentApiCallHook } from "./client-master/segment/useSegmentApiCallHook";
