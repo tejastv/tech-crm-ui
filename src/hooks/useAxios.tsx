@@ -2,7 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useAuth } from ".";
-import { Toaster } from "@shared/index";
+import { Loader, Toaster } from "@shared/index";
 
 export const useAxios = () => {
   const navigate = useNavigate();
@@ -15,21 +15,28 @@ export const useAxios = () => {
 
   instance.interceptors.request.use(
     async (config) => {
+      <Loader isVisible={true} />;
       if (user && user.authToken) {
         config.headers["Authorization"] = "Bearer " + user.authToken;
       }
       config.headers["Content-Type"] = "application/json";
       return config;
     },
-    (error) => Promise.reject(error)
+    (error) => {
+      <Loader isVisible={false} />;
+      return Promise.reject(error);
+    }
   );
 
   instance.interceptors.response.use(
-    (response) => response,
+    (response) => {
+      <Loader isVisible={false} />;
+      return response;
+    },
     (error) => {
+      <Loader isVisible={false} />;
       console.log(error.response?.status);
       if (error.response?.status === 400) {
-        console.log(error.response?.status);
         <Toaster
           type="Danger"
           heading="Error"

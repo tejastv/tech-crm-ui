@@ -11,6 +11,7 @@ import {
 import {
   AddUpdateCountryType,
   ContinentType,
+  CountryType,
   addCoutryFormFields,
   useContinentApiCallHook,
   useCountryApiCallHook,
@@ -62,30 +63,21 @@ export const AddUpdateCountry: React.FC = () => {
     const { data: countryData, isSuccess: countryDataSuccess } = getCountryData(
       "" + params.id
     );
-    // const country = addCoutryFormFields.countryField.config.name;
-
-    if (getContinentSuccess && countryDataSuccess) {
-      useEffect(() => {
-        methods.reset(countryData);
-      }, [countryData]);
-      //   methods.reset(countryData);
-      //   const continentId = addCoutryFormFields.continentCountryField.config.name;
-      //   if (continentId === "continentId" && countryData?.continentId) {
-      //     let id = countryData?.continentId;
-      //     let data = valueFromId(continentData, id);
-      //     addCoutryFormFields.continentCountryField.config.selectedValue = {
-      //       label: data?.continent,
-      //       value: data?.id,
-      //     };
-      //   }
+    if (countryDataSuccess) {
+      if (getContinentSuccess) {
+        let id = countryData?.continentId;
+        let data = valueFromId(continentData, id);
+        addCoutryFormFields.continentCountryField.config.setData = data
+          ? {
+              label: data?.continent,
+              value: data?.id,
+            }
+          : [];
+      }
+      addCoutryFormFields.countryField.config.setData = countryData.countryName;
+      addCoutryFormFields.countryCodeField.config.setData =
+        countryData.countryCode;
     }
-    // const countryField = addCoutryFormFields.countryCodeField.config.name;
-    // if (country === "countryName" && countryData?.countryName) {
-    //   methods.setValue(country, countryData?.countryName);
-    // }
-    // if (countryField === "countryCode" && countryData?.countryCode) {
-    //   methods.setValue(countryField, countryData?.countryCode);
-    // }
   }
 
   return (

@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 
 export const Country: React.FC = () => {
   const { getCountry, deleteCountryMutation } = useCountryApiCallHook();
+  const { data: stateData, isLoading } = getCountry();
+  const { mutateAsync: deleteCountry } = deleteCountryMutation();
   const navigate = useNavigate();
 
   const config = {
@@ -64,9 +66,6 @@ export const Country: React.FC = () => {
     },
   ];
 
-  const { data: stateData, isLoading } = getCountry();
-  const { mutateAsync: deleteCountry } = deleteCountryMutation();
-
   const deleteCountryClick = (countryData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
@@ -99,9 +98,7 @@ export const Country: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+        <Table config={tableConfig.config} />
       </BorderLayout>
     </>
   );

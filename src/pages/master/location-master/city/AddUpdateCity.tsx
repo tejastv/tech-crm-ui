@@ -13,6 +13,8 @@ export const AddUpdateCity: React.FC = () => {
   const methods = useForm<AddUpdateCityType>();
   const { addCityMutation, getCityData, updateCityMutation } =
     useCityApiCallHook();
+  const { mutate: addCity } = addCityMutation();
+  const { mutate: updateCity } = updateCityMutation();
   const params = useParams();
 
   const cardConfig = {
@@ -26,19 +28,14 @@ export const AddUpdateCity: React.FC = () => {
   };
 
   if (params.id) {
-    const { data: cityData } = getCityData("" + params.id);
-    const cityName = addCityFormFields.cityField.config.name;
-    const osPrintField = addCityFormFields.osPrintField.config.name;
-    if (cityName === "cityName" && cityData?.cityName) {
-      methods.setValue(cityName, cityData?.cityName);
-    }
-    if (osPrintField === "oscopies" && cityData?.oscopies) {
-      methods.setValue(osPrintField, cityData?.oscopies);
+    const { data: cityData, isSuccess: cityDataSuccess } = getCityData(
+      "" + params.id
+    );
+    if (cityDataSuccess) {
+      addCityFormFields.cityField.config.setData = cityData?.cityName;
+      addCityFormFields.osPrintField.config.setData = cityData?.oscopies;
     }
   }
-
-  const { mutate: addCity } = addCityMutation();
-  const { mutate: updateCity } = updateCityMutation();
 
   const onSubmit = methods.handleSubmit((cityData) => {
     if (params.id && cityData) {

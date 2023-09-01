@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-table";
 import { Button, DebouncedInput, TableType } from "@shared/index";
 
-export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
+export const Table = <T extends {}>(props: TableType<T>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
@@ -246,11 +246,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                       valign="top"
                       colSpan={columns.length}
                       className="dataTables_empty text-left"
-                    >
-                      {props.children
-                        ? props.children
-                        : "No data available in table"}
-                    </td>
+                    ></td>
                   </tr>
                 </tbody>
               )}
