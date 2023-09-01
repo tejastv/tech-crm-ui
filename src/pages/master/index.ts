@@ -17,7 +17,7 @@ export { AddSegment } from "./client-master/segment/AddSegment";
 export { AddUpdateCity } from "./location-master/city/AddUpdateCity";
 export { City } from "./location-master/city/City";
 // State master child pages
-export { AddState } from "./location-master/state/AddState";
+export { AddUpdateState } from "./location-master/state/AddUpdateState";
 export { State } from "./location-master/state/State";
 
 //Price List Master
@@ -43,7 +43,7 @@ export { AddStdPrice } from "./local-source-master/std-price-list/AddStdPrice";
 export { AddUpdateCountry } from "./location-master/country/AddUpdateCountry";
 export { Country } from "./location-master/country/Country";
 // Continent master child pages
-export { AddContinent } from "./location-master/continent/AddContinent";
+export { AddUpdateContinent } from "./location-master/continent/AddUpdateContinent";
 export { Continent } from "./location-master/continent/Continent";
 
 //BankMasterDeposit master child pages
@@ -215,7 +215,7 @@ export * from "./location-master/state/state-type";
 export * from "./location-master/continent/continent-type";
 export * from "./location-master/country/country-type";
 export * from "./location-master/city/add-update-city-type";
-export * from "./location-master/state/add-state-type";
+export * from "./location-master/state/add-update-state-type";
 export * from "./location-master/continent/add-update-continent-type";
 export * from "./location-master/country/add-update-country-type";
 

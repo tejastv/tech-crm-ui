@@ -10,12 +10,12 @@ import {
 } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 import { StateType, useStateApiCallHook } from "@pages/master";
-import { queryKeys } from "@constants/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export const State: React.FC = () => {
-  const { getState, deleteState } = useStateApiCallHook();
-  const queryClient = useQueryClient();
+  const { getState, deleteContinentMutation } = useStateApiCallHook();
+  const { mutateAsync: deleteState } = deleteContinentMutation();
+  const navigate = useNavigate();
 
   const config = {
     breadcrumbConfig: {
@@ -59,28 +59,18 @@ export const State: React.FC = () => {
     },
   ];
 
-  const { data: stateData, isLoading } = useQuery<StateType[]>({
-    queryKey: [queryKeys.STATE_DATA],
-    queryFn: getState,
-    staleTime: Infinity,
-  });
+  const { data: stateData, isLoading } = getState();
 
   const deleteStateClick = (stateData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
-      deleteStateMutation.mutate(stateData.stateId);
+      deleteState(stateData.stateId);
     }
   };
 
-  const deleteStateMutation = useMutation({
-    mutationFn: deleteState,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.STATE_DATA] });
-    },
-    onError: () => {
-      console.log("Error");
-    },
-  });
+  const editStateClick = (continentData: any) => {
+    navigate(COMMON_ROUTES.EDIT.replace(":id", continentData.stateId));
+  };
 
   const tableConfig: TableType<StateType> = {
     config: {
@@ -94,6 +84,7 @@ export const State: React.FC = () => {
       globalSearchBox: true,
       pagination: true,
       onDeleteClick: deleteStateClick,
+      onEditClick: editStateClick,
     },
   };
 

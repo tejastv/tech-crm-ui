@@ -9,10 +9,12 @@ import {
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-export const AddContinent: React.FC = () => {
+export const AddUpdateContinent: React.FC = () => {
   const methods = useForm<AddUpdateContinentType>();
   const { addContinentMutation, getContinentData, updateContinentMutation } =
     useContinentApiCallHook();
+  const { mutate: addContinent } = addContinentMutation();
+  const { mutate: updateContinent } = updateContinentMutation();
   const params = useParams();
 
   const cardConfig = {
@@ -26,15 +28,13 @@ export const AddContinent: React.FC = () => {
   };
 
   if (params.id) {
-    const { data: continentData } = getContinentData("" + params.id);
-    const continentName = addContinentFormFields.continentField.config.name;
-    if (continentName === "continent" && continentData?.continent) {
-      methods.setValue(continentName, continentData?.continent);
+    const { data: continentData, isSuccess: continentDataSuccess } =
+      getContinentData("" + params.id);
+    if (continentDataSuccess) {
+      addContinentFormFields.continentField.config.setData =
+        continentData?.continent;
     }
   }
-
-  const { mutate: addContinent } = addContinentMutation();
-  const { mutate: updateContinent } = updateContinentMutation();
 
   const onSubmit = methods.handleSubmit((continentData) => {
     if (params.id && continentData) {

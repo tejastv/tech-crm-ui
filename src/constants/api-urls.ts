@@ -5,7 +5,7 @@ const GET_ADD_CITY = "location/city";
 const GET_UPDATE_DELETE_CITY = "location/city/{id}";
 const GET_UPDATE_DELETE_CONTINENT = "location/continent/{id}";
 const GET_UPDATE_DELETE_COUNTRY = "location/country/{id}";
-const DELETE_STATE = "location/state/{id}";
+const GET_UPDATE_DELETE_STATE = "location/state/{id}";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -15,5 +15,5 @@ export const apiUrls = {
   GET_UPDATE_DELETE_CITY,
   GET_UPDATE_DELETE_CONTINENT,
   GET_UPDATE_DELETE_COUNTRY,
-  DELETE_STATE,
+  GET_UPDATE_DELETE_STATE,
 };

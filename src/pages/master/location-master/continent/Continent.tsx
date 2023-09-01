@@ -10,9 +10,13 @@ import {
 import { COMMON_ROUTES } from "constants";
 import { ContinentType, useContinentApiCallHook } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
+import { useNavigate } from "react-router-dom";
 
 export const Continent: React.FC = () => {
   const { getContinent, deleteContinentMutation } = useContinentApiCallHook();
+  const { data: continentData, isLoading } = getContinent();
+  const { mutateAsync: deleteContinent } = deleteContinentMutation();
+  const navigate = useNavigate();
 
   const config = {
     breadcrumbConfig: {
@@ -44,14 +48,15 @@ export const Continent: React.FC = () => {
     },
   ];
 
-  const { data: continentData, isLoading } = getContinent();
-  const { mutateAsync: deleteContinent } = deleteContinentMutation();
-
   const deleteContinentClick = (continentData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
       deleteContinent(continentData.id);
     }
+  };
+
+  const editContinentClick = (continentData: any) => {
+    navigate(COMMON_ROUTES.EDIT.replace(":id", continentData.id));
   };
 
   const tableConfig: TableType<ContinentType> = {
@@ -66,6 +71,7 @@ export const Continent: React.FC = () => {
       globalSearchBox: true,
       pagination: true,
       onDeleteClick: deleteContinentClick,
+      onEditClick: editContinentClick,
     },
   };
 
