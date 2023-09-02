@@ -11,7 +11,7 @@ import {
 } from "@shared/index";
 import { addExecutiveFormFields } from "@master/index";
 
-export const AddExecutive: React.FC = () => {
+export const AddUpdateExecutive: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {

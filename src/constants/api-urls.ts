@@ -10,6 +10,9 @@ const GET_UPDATE_DELETE_STATE = "location/state/{id}";
 const GET_ADD_SEGMENT = "entity/segment";
 const GET_UPDATE_DELETE_SEGMENT = "entity/segment/{id}";
 
+const GET_ADD_EXECUTIVE = "utility/executive";
+const GET_UPDATE_DELETE_EXECUTIVE = "utility/executive/{id}";
+
 export const apiUrls = {
   GET_ADD_CONTINENT,
   GET_ADD_COUNTRY,
@@ -21,4 +24,6 @@ export const apiUrls = {
   GET_UPDATE_DELETE_STATE,
   GET_ADD_SEGMENT,
   GET_UPDATE_DELETE_SEGMENT,
+  GET_ADD_EXECUTIVE,
+  GET_UPDATE_DELETE_EXECUTIVE,
 };
