@@ -55,8 +55,8 @@ export const City: React.FC = () => {
   const { mutateAsync: deleteCity } = deleteCityMutation();
 
   const deleteCityClick = async (cityData: any) => {
-    var continent = confirm("Are you sure to delete it?");
-    if (continent) {
+    var confirmation = confirm("Are you sure to delete it?");
+    if (confirmation) {
       await deleteCity(cityData.id);
     }
   };

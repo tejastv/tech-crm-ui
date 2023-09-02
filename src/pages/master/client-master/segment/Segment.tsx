@@ -10,9 +10,13 @@ import {
 import { COMMON_ROUTES } from "constants";
 import { SegmentType, useSegmentApiCallHook } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
+import { useNavigate } from "react-router-dom";
 
 export const Segment: React.FC = () => {
-  const { getSegment } = useSegmentApiCallHook();
+  const { getSegment, deleteSegmentMutation } = useSegmentApiCallHook();
+  const { data: segmentData, isLoading } = getSegment();
+  const { mutateAsync: deleteSegment } = deleteSegmentMutation();
+  const navigate = useNavigate();
 
   const config = {
     breadcrumbConfig: {
@@ -44,7 +48,16 @@ export const Segment: React.FC = () => {
     },
   ];
 
-  const { data: segmentData, isLoading } = getSegment();
+  const deleteSegmentClick = async (segmentData: any) => {
+    var confirmation = confirm("Are you sure to delete it?");
+    if (confirmation) {
+      await deleteSegment(segmentData.segmentId);
+    }
+  };
+
+  const editSegmentClick = (segmentData: any) => {
+    navigate(COMMON_ROUTES.EDIT.replace(":id", segmentData.segmentId));
+  };
 
   const tableConfig: TableType<SegmentType> = {
     config: {
@@ -57,8 +70,8 @@ export const Segment: React.FC = () => {
       printBtn: true,
       globalSearchBox: true,
       pagination: true,
-      // onDeleteClick: deleteCityClick,
-      // onEditClick: editCityClick,
+      onDeleteClick: deleteSegmentClick,
+      onEditClick: editSegmentClick,
     },
   };
 

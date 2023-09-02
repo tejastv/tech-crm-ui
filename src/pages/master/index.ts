@@ -136,7 +136,7 @@ export * from "./client-master/client/add-client-type";
 export * from "./client-master/client-group/add-client-group-type";
 export * from "./client-master/client-group/client-group-type";
 
-export * from "./client-master/segment/add-segment.type";
+export * from "./client-master/segment/add-update-segment.type";
 export * from "./client-master/segment/segment-type";
 
 // price master

@@ -3,10 +3,21 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 
-import { addSegmentFormFields } from "@master/index";
+import {
+  AddUpdateSegmentType,
+  addSegmentFormFields,
+  useSegmentApiCallHook,
+} from "@master/index";
+import { useParams } from "react-router-dom";
 
 export const AddUpdateSegment: React.FC = () => {
-  const methods = useForm();
+  const methods = useForm<AddUpdateSegmentType>();
+  const { addSegmentMutation, updateSegmentMutation, getSegmentData } =
+    useSegmentApiCallHook();
+  const { mutate: addSegment } = addSegmentMutation();
+  const { mutate: updateSegment } = updateSegmentMutation();
+  const params = useParams();
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Segment",
@@ -17,8 +28,22 @@ export const AddUpdateSegment: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log("value", data);
+  if (params.id) {
+    const { data: segmentData, isSuccess: segmentDataSuccess } = getSegmentData(
+      "" + params.id
+    );
+    if (segmentDataSuccess) {
+      addSegmentFormFields.clientSegment.config.setData =
+        segmentData?.segmentName;
+    }
+  }
+
+  const onSubmit = methods.handleSubmit((segmentData) => {
+    if (params.id && segmentData) {
+      updateSegment({ id: params.id, ...segmentData });
+    } else {
+      addSegment(segmentData);
+    }
   });
 
   return (
