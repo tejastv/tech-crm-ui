@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -11,7 +11,6 @@ import {
 import {
   AddUpdateCountryType,
   ContinentType,
-  CountryType,
   addCoutryFormFields,
   useContinentApiCallHook,
   useCountryApiCallHook,
@@ -30,7 +29,7 @@ export const AddUpdateCountry: React.FC = () => {
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Country",
+      mainHeading: params.id ? "Update Country" : "Add Country",
       heading: "Entry",
     },
     formActionsConfig: {

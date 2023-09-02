@@ -19,7 +19,7 @@ export const AddUpdateCity: React.FC = () => {
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add City",
+      mainHeading: params.id ? "Update City" : "Add City",
       heading: "Entry",
     },
     formActionsConfig: {

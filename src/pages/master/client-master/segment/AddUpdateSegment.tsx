@@ -20,7 +20,7 @@ export const AddUpdateSegment: React.FC = () => {
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Segment",
+      mainHeading: params.id ? "Update Segment" : "Add Segment",
       heading: "Segment Details",
     },
     formActionsConfig: {
