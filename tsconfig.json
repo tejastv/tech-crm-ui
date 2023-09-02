@@ -30,10 +30,18 @@
       "@pages/*": ["pages/*"],
       "@auth/*": ["pages/auth/*"],
       "@dashboard/*": ["pages/dashboard/*"],
-      "@master/*": ["pages/master/*"],
+      "@master/*": ["pages/master/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx", "tests/**/*.ts", "tests/**/*.tsx",".eslintrc.cjs"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    ".eslintrc.cjs"
+  ],
   "exclude": ["node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
