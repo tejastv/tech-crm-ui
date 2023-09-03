@@ -9,6 +9,9 @@ const GET_UPDATE_DELETE_STATE = "location/state/{id}";
 
 const GET_ADD_SEGMENT = "entity/segment";
 
+const GET_ADD_PAYMENTMODE = "utility/paymentMode";
+const GET_UPDATE_DELETE_PAYMENTMODE = "utility/paymentMode/{id}"
+
 export const apiUrls = {
   GET_ADD_CONTINENT,
   GET_ADD_COUNTRY,
@@ -19,4 +22,6 @@ export const apiUrls = {
   GET_UPDATE_DELETE_COUNTRY,
   GET_UPDATE_DELETE_STATE,
   GET_ADD_SEGMENT,
+  GET_ADD_PAYMENTMODE,
+  GET_UPDATE_DELETE_PAYMENTMODE,
 };

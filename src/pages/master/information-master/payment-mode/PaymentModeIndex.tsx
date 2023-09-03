@@ -9,6 +9,7 @@ const PaymentModeMasterIndex: React.FC = () => {
     <Routes>
       <Route index element={<PaymentMode />}></Route>
       <Route path={COMMON_ROUTES.ADD} element={<AddPaymentMode />}></Route>
+      <Route path={COMMON_ROUTES.EDIT} element={<AddPaymentMode />}></Route>
     </Routes>
   );
 };

@@ -1,3 +1,4 @@
-export interface AddPaymentMode {
-    paymentmode:string,
-  };
+export interface AddPaymentModeType {
+  id?: string,
+  paymentMode: string,
+};
