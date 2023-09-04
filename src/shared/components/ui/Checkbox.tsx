@@ -5,7 +5,7 @@
 |
 |  🐸 Returns:  JSX
 *-------------------------------------------------------------------*/
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { MdError } from "react-icons/md";
 import Form from "react-bootstrap/Form";
 
@@ -16,6 +16,7 @@ export const Checkbox = (props: FormFieldType) => {
   const {
     register,
     formState: { errors },
+    control,
   } = useFormContext();
 
   const inputErrors = findInputError(errors, props.config.name);
@@ -35,14 +36,28 @@ export const Checkbox = (props: FormFieldType) => {
             {props.config.options &&
               props.config.options.map((option) => {
                 return (
-                  <Form.Check
-                    value={option.value}
-                    id={"" + option.value}
-                    type="checkbox"
+                  <Controller
+                    name={props.config.name}
+                    control={control}
+                    defaultValue={option.value}
                     key={option.value}
-                    label={option.label}
-                    {...register(props.config.name, props.config.validation)}
-                  />
+                    render={({ field }) => (
+                      <Form.Check
+                        id={"" + option.value}
+                        type="checkbox"
+                        label={option.label}
+                        checked={field.value}
+                        {...field}
+                        {...register(
+                          props.config.name,
+                          props.config.validation
+                        )}
+                        onChange={(e: any) => {
+                          field.onChange(!JSON.parse(e.target.checked)); // Toggle the field value
+                        }}
+                      />
+                    )}
+                  ></Controller>
                 );
               })}
             {isInvalid && (

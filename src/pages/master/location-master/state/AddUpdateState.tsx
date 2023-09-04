@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
@@ -19,7 +19,7 @@ export const AddUpdateState: React.FC = () => {
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add State",
+      mainHeading: params.id ? "Update State" : "Add State",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -37,6 +37,10 @@ export const AddUpdateState: React.FC = () => {
         stateData?.stateCodeN;
       addStateFormFields.stateCodeField.config.setData = stateData?.stateCodeA;
     }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
   }
 
   const onSubmit = methods.handleSubmit((stateData) => {

@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Country: React.FC = () => {
   const { getCountry, deleteCountryMutation } = useCountryApiCallHook();
-  const { data: stateData, isLoading } = getCountry();
+  const { data: countryData, isLoading } = getCountry();
   const { mutateAsync: deleteCountry } = deleteCountryMutation();
   const navigate = useNavigate();
 
@@ -81,7 +81,7 @@ export const Country: React.FC = () => {
   const tableConfig: TableType<CountryType> = {
     config: {
       columns: columns,
-      tableData: stateData ? stateData : [],
+      tableData: countryData ? countryData : [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

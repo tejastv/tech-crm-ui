@@ -4,6 +4,7 @@ const COUNTRY_DATA = "country-data";
 const CONTINENT_DATA = "continent-data";
 
 const SEGMENT_DATA = "continent-data";
+const EXECUTIVE_DATA = "continent-data";
 
 const PAYMENTMODE_DATA = "paymentmode-data";
 
@@ -14,4 +15,5 @@ export const queryKeys = {
   CONTINENT_DATA,
   SEGMENT_DATA,
   PAYMENTMODE_DATA,
+  EXECUTIVE_DATA,
 };

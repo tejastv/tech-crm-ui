@@ -10,14 +10,13 @@ import {
 } from "@shared/index";
 import {
   AddUpdateCountryType,
-  ContinentType,
-  CountryType,
   addCoutryFormFields,
   useContinentApiCallHook,
   useCountryApiCallHook,
 } from "@master/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
+import { returnObjectBasedOnID } from "@utils/returnObjectBasedOnID";
 
 export const AddUpdateCountry: React.FC = () => {
   const methods = useForm<AddUpdateCountryType>();
@@ -30,7 +29,7 @@ export const AddUpdateCountry: React.FC = () => {
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Country",
+      mainHeading: params.id ? "Update Country" : "Add Country",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -45,9 +44,6 @@ export const AddUpdateCountry: React.FC = () => {
     addCoutryFormFields.continentCountryField.config.options =
       selectOptionsMaker(continentData, "id", "continent");
   }
-
-  const valueFromId = (continentData: ContinentType[], id: number) =>
-    continentData.find((continent) => continent.id === id);
 
   const onSubmit = methods.handleSubmit((countryData) => {
     let data: any = { ...countryData };
@@ -66,11 +62,17 @@ export const AddUpdateCountry: React.FC = () => {
     if (countryDataSuccess) {
       if (getContinentSuccess) {
         let id = countryData?.continentId;
-        let data = valueFromId(continentData, id);
+        let data: any = returnObjectBasedOnID(
+          continentData,
+          "id",
+          id,
+          "id",
+          "continent"
+        );
         addCoutryFormFields.continentCountryField.config.setData = data
           ? {
-              label: data?.continent,
-              value: data?.id,
+              label: data.label,
+              value: data.value,
             }
           : [];
       }
@@ -78,6 +80,10 @@ export const AddUpdateCountry: React.FC = () => {
       addCoutryFormFields.countryCodeField.config.setData =
         countryData.countryCode;
     }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
   }
 
   return (

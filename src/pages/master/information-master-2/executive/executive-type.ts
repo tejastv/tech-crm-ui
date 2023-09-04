@@ -1,7 +1,10 @@
-export interface Executive {
-    executiveInfomation2 :string,
-    emailInformation2 :string,
-    cityInformation2 :string,
-    checkboxInformation2 :string,
-    stateInformation2 :string,
-  };
+export interface ExecutiveType {
+  cityId: number;
+  stateId: number;
+  email: string;
+  cityName: string;
+  executiveID: number;
+  executive: string;
+  invoiceRequired: boolean;
+  stateName: string;
+}

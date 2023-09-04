@@ -22,6 +22,8 @@ export const useCityApiCallHook = () => {
   };
 
   const getCityData = (id: string) => {
+    console.log(id);
+    // if (!id) queryClient.removeQueries({ queryKey: [queryKeys.CITY_DATA, id] });
     return useQuery<CityType>({
       queryKey: [queryKeys.CITY_DATA, id],
       queryFn: async () => {

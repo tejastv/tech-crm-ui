@@ -1,9 +1,10 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateCityType, CityType, SegmentType } from "@master/index";
+import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+import { AddUpdateSegmentType, SegmentType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 
 export const useSegmentApiCallHook = () => {
   const { instance } = useAxios();
@@ -21,84 +22,89 @@ export const useSegmentApiCallHook = () => {
     });
   };
 
-  // const getCityData = (id: string) => {
-  //   return useQuery<CityType>({
-  //     queryKey: [queryKeys.CITY_DATA, id],
-  //     queryFn: async () => {
-  //       const response = await instance.get(
-  //         apiUrls.GET_UPDATE_DELETE_CITY.replace("{id}", id)
-  //       );
-  //       return response.data.data;
-  //     },
-  //     enabled: true, // Query is initially enabled
-  //     refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
-  //   });
-  // };
+  const getSegmentData = (id: string) => {
+    return useQuery<SegmentType>({
+      queryKey: [queryKeys.SEGMENT_DATA, id],
+      queryFn: async () => {
+        const response = await instance.get(
+          apiUrls.GET_UPDATE_DELETE_SEGMENT.replace("{id}", id)
+        );
+        return response.data.data;
+      },
+      enabled: true, // Query is initially enabled
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+    });
+  };
 
-  // const addCity = async (
-  //   cityData: AddUpdateCityType
-  // ): Promise<ApiResponseType<CityType>> => {
-  //   const response = await instance.post(apiUrls.GET_ADD_CITY, cityData);
-  //   return response.data.data;
-  // };
+  const addSegment = async (
+    segmentData: AddUpdateSegmentType
+  ): Promise<ApiResponseType<SegmentType>> => {
+    const response = await instance.post(apiUrls.GET_ADD_SEGMENT, segmentData);
+    return response.data.data;
+  };
 
-  // const addCityMutation = () => {
-  //   const mutation = useMutation(
-  //     (updatedItem: AddUpdateCityType) => addCity(updatedItem),
-  //     {
-  //       onSuccess: () => {
-  //         queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
-  //         navigate("..");
-  //       },
-  //     }
-  //   );
-  //   return mutation;
-  // };
+  const addSegmentMutation = () => {
+    const mutation = useMutation(
+      (updatedItem: AddUpdateSegmentType) => addSegment(updatedItem),
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: [queryKeys.SEGMENT_DATA] });
+          navigate("..");
+        },
+      }
+    );
+    return mutation;
+  };
 
-  // const updateCityData = async (
-  //   updateCityData: AddUpdateCityType
-  // ): Promise<ApiResponseType<CityType>> => {
-  //   const response = await instance.put(
-  //     apiUrls.GET_UPDATE_DELETE_CITY.replace("{id}", "" + updateCityData.id),
-  //     updateCityData
-  //   );
-  //   return response.data.data;
-  // };
+  const updateSegmentData = async (
+    updateSegmentData: AddUpdateSegmentType
+  ): Promise<ApiResponseType<SegmentType>> => {
+    const response = await instance.put(
+      apiUrls.GET_UPDATE_DELETE_SEGMENT.replace(
+        "{id}",
+        "" + updateSegmentData.id
+      ),
+      updateSegmentData
+    );
+    return response.data.data;
+  };
 
-  // const updateCityMutation = () => {
-  //   const mutation = useMutation(
-  //     (updatedItem: AddUpdateCityType) => updateCityData(updatedItem),
-  //     {
-  //       onSuccess: () => {
-  //         queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
-  //         navigate("..");
-  //       },
-  //     }
-  //   );
-  //   return mutation;
-  // };
+  const updateSegmentMutation = () => {
+    const mutation = useMutation(
+      (updatedItem: AddUpdateSegmentType) => updateSegmentData(updatedItem),
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: [queryKeys.SEGMENT_DATA] });
+          navigate("..");
+        },
+      }
+    );
+    return mutation;
+  };
 
-  // const deleteCity = async (id: string): Promise<ApiResponseType<CityType>> => {
-  //   const response = await instance.delete(
-  //     apiUrls.GET_UPDATE_DELETE_CITY.replace("{id}", id)
-  //   );
-  //   return response.data.data;
-  // };
+  const deleteSegment = async (
+    id: string
+  ): Promise<ApiResponseType<SegmentType>> => {
+    const response = await instance.delete(
+      apiUrls.GET_UPDATE_DELETE_SEGMENT.replace("{id}", id)
+    );
+    return response.data.data;
+  };
 
-  // const deleteCityMutation = () => {
-  //   const mutation = useMutation((id: string) => deleteCity(id), {
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
-  //     },
-  //   });
-  //   return mutation;
-  // };
+  const deleteSegmentMutation = () => {
+    const mutation = useMutation((id: string) => deleteSegment(id), {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [queryKeys.SEGMENT_DATA] });
+      },
+    });
+    return mutation;
+  };
 
   return {
     getSegment,
-    // getCityData,
-    // addCityMutation,
-    // updateCityMutation,
-    // deleteCityMutation,
+    getSegmentData,
+    addSegmentMutation,
+    updateSegmentMutation,
+    deleteSegmentMutation,
   };
 };

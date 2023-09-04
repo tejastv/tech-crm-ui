@@ -78,7 +78,7 @@ export { CreditDays } from "./information-master-2/credit-days/CreditDays";
 export { AddSiteStatus } from "./information-master-2/site-status/AddSiteStatus";
 export { SiteStatus } from "./information-master-2/site-status/SiteStatus";
 
-export { AddExecutive } from "./information-master-2/executive/AddExecutive";
+export { AddUpdateExecutive } from "./information-master-2/executive/AddUpdateExecutive";
 export { Executive } from "./information-master-2/executive/Executive";
 
 export { AddFinYear } from "./information-master-2/fin-year/AddFinyear";
@@ -136,7 +136,7 @@ export * from "./client-master/client/add-client-type";
 export * from "./client-master/client-group/add-client-group-type";
 export * from "./client-master/client-group/client-group-type";
 
-export * from "./client-master/segment/add-segment.type";
+export * from "./client-master/segment/add-update-segment.type";
 export * from "./client-master/segment/segment-type";
 
 // price master
@@ -191,7 +191,7 @@ export * from "./information-master-2/call-type/calltype-type";
 export * from "./information-master-2/credit-days/add-creditdays-type";
 export * from "./information-master-2/credit-days/creditdays-type";
 
-export * from "./information-master-2/executive/add-executive-type";
+export * from "./information-master-2/executive/add-update-executive-type";
 export * from "./information-master-2/executive/executive-type";
 
 export * from "./information-master-2/fin-year/add-finyear-type";
@@ -228,3 +228,4 @@ export { useStateApiCallHook } from "./location-master/state/useStateApiCallHook
 export { usePaymentModeApiCallHook } from "./information-master/payment-mode/usePaymentModeApiCallHook"
 
 export { useSegmentApiCallHook } from "./client-master/segment/useSegmentApiCallHook";
+export { useExecutiveApiCallHook } from "./information-master-2/executive/useExecutiveApiCallHook";
