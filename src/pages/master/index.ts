@@ -225,5 +225,7 @@ export { useContinentApiCallHook } from "./location-master/continent/useContinen
 export { useCountryApiCallHook } from "./location-master/country/useCountryApiCallHook";
 export { useStateApiCallHook } from "./location-master/state/useStateApiCallHook";
 
+export { usePaymentModeApiCallHook } from "./information-master/payment-mode/usePaymentModeApiCallHook"
+
 export { useSegmentApiCallHook } from "./client-master/segment/useSegmentApiCallHook";
 export { useExecutiveApiCallHook } from "./information-master-2/executive/useExecutiveApiCallHook";

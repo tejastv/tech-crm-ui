@@ -13,6 +13,9 @@ const GET_UPDATE_DELETE_SEGMENT = "entity/segment/{id}";
 const GET_ADD_EXECUTIVE = "utility/executive";
 const GET_UPDATE_DELETE_EXECUTIVE = "utility/executive/{id}";
 
+const GET_ADD_PAYMENTMODE = "utility/paymentMode";
+const GET_UPDATE_DELETE_PAYMENTMODE = "utility/paymentMode/{id}"
+
 export const apiUrls = {
   GET_ADD_CONTINENT,
   GET_ADD_COUNTRY,
@@ -24,6 +27,8 @@ export const apiUrls = {
   GET_UPDATE_DELETE_STATE,
   GET_ADD_SEGMENT,
   GET_UPDATE_DELETE_SEGMENT,
+  GET_ADD_PAYMENTMODE,
+  GET_UPDATE_DELETE_PAYMENTMODE,
   GET_ADD_EXECUTIVE,
   GET_UPDATE_DELETE_EXECUTIVE,
 };
