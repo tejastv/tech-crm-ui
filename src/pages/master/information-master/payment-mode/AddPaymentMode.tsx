@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
@@ -11,11 +11,11 @@ import { useParams } from "react-router-dom";
 
 export const AddPaymentMode: React.FC = () => {
   const methods = useForm<AddPaymentModeType>();
-  const { addPaymentModeMutation, getPaymentModeData, updatePaymentModeMutation} =  usePaymentModeApiCallHook();
+  const { addPaymentModeMutation, getPaymentModeData, updatePaymentModeMutation } = usePaymentModeApiCallHook();
   const { mutate: addPaymentMode } = addPaymentModeMutation();
   const { mutate: updatePaymentMode } = updatePaymentModeMutation();
   const params = useParams();
-  
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Payment Mode",
@@ -26,15 +26,28 @@ export const AddPaymentMode: React.FC = () => {
     },
   };
 
+  useEffect(() => {
+    // This code will run when the component is about to unmount
+    return () => {
+      methods.reset();
+      // Place your cleanup code here
+      console.log("Component is unmounting. Cleanup can be performed here.");
+    };
+  }, []);
+
   if (params.id) {
     const { data: paymentModeData, isSuccess: paymentModeDataSuccess } = getPaymentModeData(
       "" + params.id
     );
     console.log(params.id);
-    
+
     if (paymentModeDataSuccess) {
       addPaymentModeFormFields.paymentmode.config.setData = paymentModeData?.paymentMode;
     }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
   }
 
   const onSubmit = methods.handleSubmit((paymentModeData) => {
