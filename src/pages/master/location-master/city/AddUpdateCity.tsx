@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
@@ -27,6 +27,18 @@ export const AddUpdateCity: React.FC = () => {
     },
   };
 
+  // useEffect(() => {
+  //   methods.reset();
+  // }, []);
+  useEffect(() => {
+    // This code will run when the component is about to unmount
+    return () => {
+      methods.reset();
+      // Place your cleanup code here
+      console.log("Component is unmounting. Cleanup can be performed here.");
+    };
+  }, []);
+
   if (params.id) {
     const { data: cityData, isSuccess: cityDataSuccess } = getCityData(
       "" + params.id
@@ -35,6 +47,10 @@ export const AddUpdateCity: React.FC = () => {
       addCityFormFields.cityField.config.setData = cityData?.cityName;
       addCityFormFields.osPrintField.config.setData = cityData?.oscopies;
     }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
   }
 
   const onSubmit = methods.handleSubmit((cityData) => {

@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 export const State: React.FC = () => {
   const { getState, deleteContinentMutation } = useStateApiCallHook();
   const { mutateAsync: deleteState } = deleteContinentMutation();
+  const { data: stateData, isLoading } = getState();
   const navigate = useNavigate();
 
   const config = {
@@ -58,8 +59,6 @@ export const State: React.FC = () => {
       header: () => <>Action</>,
     },
   ];
-
-  const { data: stateData, isLoading } = getState();
 
   const deleteStateClick = (stateData: any) => {
     var conformation = confirm("Are you sure to delete it?");

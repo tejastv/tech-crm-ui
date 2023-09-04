@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
@@ -36,6 +36,10 @@ export const AddUpdateSegment: React.FC = () => {
       addSegmentFormFields.clientSegment.config.setData =
         segmentData?.segmentName;
     }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
   }
 
   const onSubmit = methods.handleSubmit((segmentData) => {

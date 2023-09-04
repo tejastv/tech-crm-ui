@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BorderLayout, PageBreadcrumb } from "@shared/index";
+import { BorderLayout, PageBreadcrumb, Table, TableType } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 import { ExecutiveType, useExecutiveApiCallHook } from "@master/index";
 import { useNavigate } from "react-router-dom";
@@ -29,21 +29,33 @@ export const Executive: React.FC = () => {
     },
     {
       accessorFn: (row) => row.executive,
-      id: "cityName",
+      id: "executive",
       cell: (info) => info.getValue(),
-      header: () => <>City Name</>,
+      header: () => <>Executive</>,
     },
     {
       accessorFn: (row) => row.email,
-      id: "oscopies",
+      id: "email",
       cell: (info) => info.getValue(),
-      header: () => <>OSCopies</>,
+      header: () => <>Email</>,
     },
     {
       accessorFn: (row) => row.cityId,
-      id: "oscopies",
+      id: "cityId",
       cell: (info) => info.getValue(),
-      header: () => <>OSCopies</>,
+      header: () => <>CityId</>,
+    },
+    {
+      accessorFn: (row) => row.invoiceRequired,
+      id: "invoiceRequired",
+      cell: (info) => info.getValue(),
+      header: () => <>InvoiceRequired</>,
+    },
+    {
+      accessorFn: (row) => row.stateId,
+      id: "stateId",
+      cell: (info) => info.getValue(),
+      header: () => <>StateId</>,
     },
     {
       id: "action",
@@ -52,24 +64,24 @@ export const Executive: React.FC = () => {
     },
   ];
 
-  const { data: cityData, isLoading } = getExecutive();
-  const { mutateAsync: deleteCity } = deleteExecutiveMutation();
+  const { data: executiveData, isLoading } = getExecutive();
+  const { mutateAsync: deleteExecutive } = deleteExecutiveMutation();
 
-  const deleteCityClick = async (cityData: any) => {
+  const deleteExecutiveClick = async (executiveData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deleteCity(cityData.id);
+      await deleteExecutive(executiveData.executiveID);
     }
   };
 
-  const editCityClick = (cityData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", cityData.id));
+  const editExecutiveClick = (executiveData: any) => {
+    navigate(COMMON_ROUTES.EDIT.replace(":id", executiveData.executiveID));
   };
 
   const tableConfig: TableType<ExecutiveType> = {
     config: {
       columns: columns,
-      tableData: cityData ? cityData : [],
+      tableData: executiveData ? executiveData : [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -77,8 +89,8 @@ export const Executive: React.FC = () => {
       printBtn: true,
       globalSearchBox: true,
       pagination: true,
-      onDeleteClick: deleteCityClick,
-      onEditClick: editCityClick,
+      onDeleteClick: deleteExecutiveClick,
+      onEditClick: editExecutiveClick,
     },
   };
 
@@ -86,7 +98,7 @@ export const Executive: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {/* <Table></Table> */}
+        <Table config={tableConfig.config}></Table>
       </BorderLayout>
     </>
   );

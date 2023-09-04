@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
@@ -37,6 +37,10 @@ export const AddUpdateState: React.FC = () => {
         stateData?.stateCodeN;
       addStateFormFields.stateCodeField.config.setData = stateData?.stateCodeA;
     }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
   }
 
   const onSubmit = methods.handleSubmit((stateData) => {

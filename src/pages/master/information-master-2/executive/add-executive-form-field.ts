@@ -19,7 +19,7 @@ const EmailValidation = {
   pattern: {
     value:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      message: "Please Include an '@' and .com/in in the email address.",
+    message: "Please Include an '@' and .com/in in the email address.",
   },
 } as ValidationType;
 
@@ -45,29 +45,12 @@ const stateInfoValidation = {
 } as ValidationType;
 const checkboxInfoValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
-  },
-  maxLength: {
-    value: 30,
-    message: "30 characters max",
   },
 } as ValidationType;
 
-const cityInformation2Options = [
-  { value: "Mumbai", label: "Mumbai" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const stateInfoOptions = [
-  { value: "Mumbai", label: "Mumbai" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const checkInfoOptions = [
-  { value: "chocolate33", label: "Required Invoice Copy" },
-];
+const checkInfoOptions = [{ value: false, label: "Required Invoice Copy" }];
 
 const executiveInfomation2: FormFieldType = createFormConfig(
   "executive",
@@ -84,15 +67,15 @@ const emailInformation2: FormFieldType = createFormConfig(
   "Enter E-mail"
 );
 const cityInformation2: FormFieldType = createFormConfig(
-  "city",
+  "cityId",
   "City",
   "select",
   CityValidation,
   "Select City",
-  cityInformation2Options
+  []
 );
 const checkboxInformation2: FormFieldType = createFormConfig(
-  "invoicecopy",
+  "invoiceRequired",
   "",
   "checkbox",
   checkboxInfoValidation,
@@ -100,12 +83,12 @@ const checkboxInformation2: FormFieldType = createFormConfig(
   checkInfoOptions
 );
 const stateInformation2: FormFieldType = createFormConfig(
-  "stateInfo",
+  "stateId",
   "State",
   "checkbox",
   stateInfoValidation,
   "",
-  stateInfoOptions
+  []
 );
 
 export const addExecutiveFormFields = {
