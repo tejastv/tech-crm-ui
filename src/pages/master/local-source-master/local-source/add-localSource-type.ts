@@ -1,7 +1,8 @@
-export interface AddLocalSrouce {
+export interface AddLocalSourceType {
     localSource : string,
     email : string,
-    emailCC : string,
-    currencey : string,
-    sourcecountry : string,
+    emailCc : string,
+    currencyId : string,
+    countryId : string,
+    continentId: number;
   };

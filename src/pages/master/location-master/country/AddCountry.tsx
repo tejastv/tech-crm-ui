@@ -85,9 +85,9 @@ export const AddCountry: React.FC = () => {
                 </div>
                 <div className="col-md-6 col-xs-12">
                   <Input config={addCoutryFormFields.countryCodeField.config} />
-                  {/* <Select
+                  <Input
                     config={addCoutryFormFields.localSourceField.config}
-                  /> */}
+                  />
                 </div>
               </div>
             </BorderLayout>

@@ -8,10 +8,15 @@ import {
   Input,
   Select,
 } from "@shared/index";
-import { addLocalSrouceFormFields } from "@master/index";
+import { ContinentType, addCoutryFormFields, addLocalSrouceFormFields, useContinentApiCallHook } from "@master/index";
+import { queryKeys } from "@constants/query-keys";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
 export const AddSource: React.FC = () => {
   const methods = useForm();
+  const { getContinent } = useContinentApiCallHook();
+  const queryClient = useQueryClient();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Local Source",
@@ -22,8 +27,32 @@ export const AddSource: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log("value", data);
+  const { data: continentData } = useQuery<ContinentType[]>({
+    queryKey: [queryKeys.CONTINENT_DATA],
+    queryFn: getContinent,
+    staleTime: Infinity,
+  });
+
+  if (continentData) {
+    addLocalSrouceFormFields.continentLocalSourceField.config.options =
+      selectOptionsMaker(continentData, "id", "continent");
+  }
+
+  // const addCountryMutation = useMutation({
+  //   mutationFn: addCountry,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({ queryKey: [queryKeys.COUNTRY_DATA] });
+  //     navigate(-1);
+  //   },
+  //   onError: () => {
+  //     console.log("Error");
+  //   },
+  // });
+
+  const onSubmit = methods.handleSubmit((countryData) => {
+    let data: any = { ...countryData };
+    data.continentId = +data.continentId["value"];
+    // addCountryMutation.mutate(data);
   });
 
   return (
@@ -53,7 +82,7 @@ export const AddSource: React.FC = () => {
                       config={addLocalSrouceFormFields.currencey.config}
                     />
                     <Select
-                      config={addLocalSrouceFormFields.sourcecountry.config}
+                      config={addLocalSrouceFormFields.continentLocalSourceField.config}
                     />
                   </div>
                 </div>
@@ -70,3 +99,4 @@ export const AddSource: React.FC = () => {
     </>
   );
 };
+
