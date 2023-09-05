@@ -1,25 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
-  AddStateType,
+  AddUpdateStateType,
   addStateFormFields,
   useStateApiCallHook,
 } from "@master/index";
-import { queryKeys } from "@constants/index";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-export const AddState: React.FC = () => {
-  const methods = useForm<AddStateType>();
-  const { addState } = useStateApiCallHook();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
+export const AddUpdateState: React.FC = () => {
+  const methods = useForm<AddUpdateStateType>();
+  const { addStateMutation, updateStateMutation, getStateData } =
+    useStateApiCallHook();
+  const params = useParams();
+  const { mutate: addState } = addStateMutation();
+  const { mutate: updateState } = updateStateMutation();
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add State",
+      mainHeading: params.id ? "Update State" : "Add State",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -27,21 +27,28 @@ export const AddState: React.FC = () => {
     },
   };
 
-  const addStateMutation = useMutation({
-    mutationFn: addState,
-    onSuccess: (data) => {
-      // Invalidate and refetch
-      console.log(data);
-      queryClient.invalidateQueries({ queryKey: [queryKeys.STATE_DATA] });
-      navigate(-1);
-    },
-    onError: () => {
-      console.log("Error");
-    },
-  });
+  if (params.id) {
+    const { data: stateData, isSuccess: stateDataSuccess } = getStateData(
+      "" + params.id
+    );
+    if (stateDataSuccess) {
+      addStateFormFields.stateField.config.setData = stateData?.state;
+      addStateFormFields.numbericCodeField.config.setData =
+        stateData?.stateCodeN;
+      addStateFormFields.stateCodeField.config.setData = stateData?.stateCodeA;
+    }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
+  }
 
   const onSubmit = methods.handleSubmit((stateData) => {
-    addStateMutation.mutate(stateData);
+    if (params.id && stateData) {
+      updateState({ id: params.id, ...stateData });
+    } else {
+      addState(stateData);
+    }
   });
 
   return (

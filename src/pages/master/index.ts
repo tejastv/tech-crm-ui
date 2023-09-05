@@ -10,14 +10,14 @@ export { AddClient } from "./client-master/client/AddClient";
 export { GroupMaster } from "./client-master/client-group/ClientGroup";
 export { AddClientGroup } from "./client-master/client-group/AddClientGroup";
 export { Segment } from "./client-master/segment/Segment";
-export { AddSegment } from "./client-master/segment/AddSegment";
+export { AddUpdateSegment } from "./client-master/segment/AddUpdateSegment";
 
 // Location
 // City master child pages
-export { AddCity } from "./location-master/city/AddCity";
+export { AddUpdateCity } from "./location-master/city/AddUpdateCity";
 export { City } from "./location-master/city/City";
 // State master child pages
-export { AddState } from "./location-master/state/AddState";
+export { AddUpdateState } from "./location-master/state/AddUpdateState";
 export { State } from "./location-master/state/State";
 
 //Price List Master
@@ -32,7 +32,7 @@ export { ActualBuyer } from "./price-list-master/actual-buyer/ActualBuyer";
 
 //Local Source
 // LocalSource Child Page
-export { AddSource } from "./local-source-master/local-source/AddLocalSource";
+export { AddUpdateSource } from "./local-source-master/local-source/AddUpdateLocalSource";
 export { LocalSource } from "./local-source-master/local-source/LocalSource";
 // Price List Child Page
 export { AddPrice } from "./local-source-master/price-list/AddPrice";
@@ -40,10 +40,10 @@ export { AddPrice } from "./local-source-master/price-list/AddPrice";
 export { AddStdPrice } from "./local-source-master/std-price-list/AddStdPrice";
 
 // Country master child pages
-export { AddCountry } from "./location-master/country/AddCountry";
+export { AddUpdateCountry } from "./location-master/country/AddUpdateCountry";
 export { Country } from "./location-master/country/Country";
 // Continent master child pages
-export { AddContinent } from "./location-master/continent/AddContinent";
+export { AddUpdateContinent } from "./location-master/continent/AddUpdateContinent";
 export { Continent } from "./location-master/continent/Continent";
 
 //BankMasterDeposit master child pages
@@ -78,7 +78,7 @@ export { CreditDays } from "./information-master-2/credit-days/CreditDays";
 export { AddSiteStatus } from "./information-master-2/site-status/AddSiteStatus";
 export { SiteStatus } from "./information-master-2/site-status/SiteStatus";
 
-export { AddExecutive } from "./information-master-2/executive/AddExecutive";
+export { AddUpdateExecutive } from "./information-master-2/executive/AddUpdateExecutive";
 export { Executive } from "./information-master-2/executive/Executive";
 
 export { AddFinYear } from "./information-master-2/fin-year/AddFinyear";
@@ -137,7 +137,7 @@ export * from "./client-master/client/add-client-type";
 export * from "./client-master/client-group/add-client-group-type";
 export * from "./client-master/client-group/client-group-type";
 
-export * from "./client-master/segment/add-segment.type";
+export * from "./client-master/segment/add-update-segment.type";
 export * from "./client-master/segment/segment-type";
 
 // price master
@@ -158,7 +158,7 @@ export * from "./price-list-master/std-price-list-client/std-price-client-type";
 
 // Local Source
 
-export * from "./local-source-master/local-source/add-localSource-type";
+export * from "./local-source-master/local-source/add-update-localSource-type";
 export * from "./local-source-master/local-source/localSource-type";
 
 export * from "./local-source-master/price-list/add-price-type";
@@ -192,7 +192,7 @@ export * from "./information-master-2/call-type/calltype-type";
 export * from "./information-master-2/credit-days/add-creditdays-type";
 export * from "./information-master-2/credit-days/creditdays-type";
 
-export * from "./information-master-2/executive/add-executive-type";
+export * from "./information-master-2/executive/add-update-executive-type";
 export * from "./information-master-2/executive/executive-type";
 
 export * from "./information-master-2/fin-year/add-finyear-type";
@@ -215,10 +215,10 @@ export * from "./location-master/city/city-type";
 export * from "./location-master/state/state-type";
 export * from "./location-master/continent/continent-type";
 export * from "./location-master/country/country-type";
-export * from "./location-master/city/add-city-type";
-export * from "./location-master/state/add-state-type";
-export * from "./location-master/continent/add-continent-type";
-export * from "./location-master/country/add-country-type";
+export * from "./location-master/city/add-update-city-type";
+export * from "./location-master/state/add-update-state-type";
+export * from "./location-master/continent/add-update-continent-type";
+export * from "./location-master/country/add-update-country-type";
 
 //Services/ Hooks
 
@@ -230,3 +230,5 @@ export { useStateApiCallHook } from "./location-master/state/useStateApiCallHook
 
 // Local Source
 export { useLocalSourceApiCallHook } from "./local-source-master/local-source/useLocalSourceApiCallHook";
+export { useSegmentApiCallHook } from "./client-master/segment/useSegmentApiCallHook";
+export { useExecutiveApiCallHook } from "./information-master-2/executive/useExecutiveApiCallHook";

@@ -9,13 +9,14 @@ import {
 } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 import { CountryType, useCountryApiCallHook } from "@master/index";
-import { queryKeys } from "@constants/index";
 import { ColumnDef } from "@tanstack/react-table";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export const Country: React.FC = () => {
-  const { getCountry, deleteCountry } = useCountryApiCallHook();
-  const queryClient = useQueryClient();
+  const { getCountry, deleteCountryMutation } = useCountryApiCallHook();
+  const { data: countryData, isLoading } = getCountry();
+  const { mutateAsync: deleteCountry } = deleteCountryMutation();
+  const navigate = useNavigate();
 
   const config = {
     breadcrumbConfig: {
@@ -65,33 +66,22 @@ export const Country: React.FC = () => {
     },
   ];
 
-  const { data: stateData, isLoading } = useQuery<CountryType[]>({
-    queryKey: [queryKeys.COUNTRY_DATA],
-    queryFn: getCountry,
-    staleTime: Infinity,
-  });
-
   const deleteCountryClick = (countryData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
-      deleteCountryMutation.mutate(countryData.countryId);
+      deleteCountry(countryData.countryId);
     }
   };
 
-  const deleteCountryMutation = useMutation({
-    mutationFn: deleteCountry,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.COUNTRY_DATA] });
-    },
-    onError: () => {
-      console.log("Error");
-    },
-  });
+  const editCountryClick = (countryData: any) => {
+    console.log(countryData);
+    navigate(COMMON_ROUTES.EDIT.replace(":id", countryData.countryId));
+  };
 
   const tableConfig: TableType<CountryType> = {
     config: {
       columns: columns,
-      tableData: stateData ? stateData : [],
+      tableData: countryData ? countryData : [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -100,6 +90,7 @@ export const Country: React.FC = () => {
       globalSearchBox: true,
       pagination: true,
       onDeleteClick: deleteCountryClick,
+      onEditClick: editCountryClick,
     },
   };
 
@@ -107,9 +98,7 @@ export const Country: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+        <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
       </BorderLayout>
     </>
   );

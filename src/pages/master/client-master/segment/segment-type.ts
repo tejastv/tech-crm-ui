@@ -1,4 +1,4 @@
 export interface SegmentType {
-    id:number,
-    clientSegment:string,
+  id: number;
+  segmentName: string;
 }

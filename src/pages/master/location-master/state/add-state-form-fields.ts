@@ -44,7 +44,7 @@ const stateField: FormFieldType = createFormConfig(
 const stateCodeField: FormFieldType = createFormConfig(
   "stateCodeA",
   "State Code (eg: MH, GJ, etc)",
-  "number",
+  "text",
   stateCodeFieldValidation,
   ""
 );

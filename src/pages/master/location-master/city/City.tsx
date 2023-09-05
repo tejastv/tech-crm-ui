@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   BorderLayout,
   Loader,
@@ -10,12 +9,11 @@ import {
 import { COMMON_ROUTES } from "constants";
 import { ColumnDef } from "@tanstack/react-table";
 import { CityType, useCityApiCallHook } from "@pages/master";
-import { queryKeys } from "@constants/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export const City: React.FC = () => {
-  const { getCity, deleteCity } = useCityApiCallHook();
-  const queryClient = useQueryClient();
+  const { getCity, deleteCityMutation } = useCityApiCallHook();
+  const navigate = useNavigate();
 
   const config = {
     breadcrumbConfig: {
@@ -53,28 +51,19 @@ export const City: React.FC = () => {
     },
   ];
 
-  const { data: cityData, isLoading } = useQuery<CityType[]>({
-    queryKey: [queryKeys.CITY_DATA],
-    queryFn: getCity,
-    staleTime: Infinity,
-  });
+  const { data: cityData, isLoading } = getCity();
+  const { mutateAsync: deleteCity } = deleteCityMutation();
 
-  const deleteCityClick = (cityData: any) => {
-    var continent = confirm("Are you sure to delete it?");
-    if (continent == true) {
-      deleteCityMutation.mutate(cityData.id);
+  const deleteCityClick = async (cityData: any) => {
+    var confirmation = confirm("Are you sure to delete it?");
+    if (confirmation) {
+      await deleteCity(cityData.id);
     }
   };
 
-  const deleteCityMutation = useMutation({
-    mutationFn: deleteCity,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
-    },
-    onError: () => {
-      console.log("Error");
-    },
-  });
+  const editCityClick = (cityData: any) => {
+    navigate(COMMON_ROUTES.EDIT.replace(":id", cityData.id));
+  };
 
   const tableConfig: TableType<CityType> = {
     config: {
@@ -88,6 +77,7 @@ export const City: React.FC = () => {
       globalSearchBox: true,
       pagination: true,
       onDeleteClick: deleteCityClick,
+      onEditClick: editCityClick,
     },
   };
 

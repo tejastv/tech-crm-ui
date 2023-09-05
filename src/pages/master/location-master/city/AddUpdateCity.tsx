@@ -1,25 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
-  AddCityType,
+  AddUpdateCityType,
   addCityFormFields,
   useCityApiCallHook,
 } from "@master/index";
-import { queryKeys } from "@constants/index";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-export const AddCity: React.FC = () => {
-  const methods = useForm<AddCityType>();
-  const { addCity } = useCityApiCallHook();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
+export const AddUpdateCity: React.FC = () => {
+  const methods = useForm<AddUpdateCityType>();
+  const { addCityMutation, getCityData, updateCityMutation } =
+    useCityApiCallHook();
+  const { mutate: addCity } = addCityMutation();
+  const { mutate: updateCity } = updateCityMutation();
+  const params = useParams();
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add City",
+      mainHeading: params.id ? "Update City" : "Add City",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -27,21 +27,38 @@ export const AddCity: React.FC = () => {
     },
   };
 
-  const addCityMutation = useMutation({
-    mutationFn: addCity,
-    onSuccess: (data) => {
-      // Invalidate and refetch
-      console.log(data);
-      queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
-      navigate(-1);
-    },
-    onError: () => {
-      console.log("Error");
-    },
-  });
+  // useEffect(() => {
+  //   methods.reset();
+  // }, []);
+  useEffect(() => {
+    // This code will run when the component is about to unmount
+    return () => {
+      methods.reset();
+      // Place your cleanup code here
+      console.log("Component is unmounting. Cleanup can be performed here.");
+    };
+  }, []);
+
+  if (params.id) {
+    const { data: cityData, isSuccess: cityDataSuccess } = getCityData(
+      "" + params.id
+    );
+    if (cityDataSuccess) {
+      addCityFormFields.cityField.config.setData = cityData?.cityName;
+      addCityFormFields.osPrintField.config.setData = cityData?.oscopies;
+    }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
+  }
 
   const onSubmit = methods.handleSubmit((cityData) => {
-    addCityMutation.mutate(cityData);
+    if (params.id && cityData) {
+      updateCity({ id: params.id, ...cityData });
+    } else {
+      addCity(cityData);
+    }
   });
 
   return (

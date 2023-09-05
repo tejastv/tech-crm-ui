@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -9,27 +9,27 @@ import {
   Select,
 } from "@shared/index";
 import {
-  AddCountryType,
-  ContinentType,
+  AddUpdateCountryType,
   addCoutryFormFields,
   useContinentApiCallHook,
   useCountryApiCallHook,
 } from "@master/index";
-import { queryKeys } from "@constants/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { returnObjectBasedOnID } from "@utils/returnObjectBasedOnID";
 
-export const AddCountry: React.FC = () => {
-  const methods = useForm<AddCountryType>();
-  const { addCountry } = useCountryApiCallHook();
+export const AddUpdateCountry: React.FC = () => {
+  const methods = useForm<AddUpdateCountryType>();
+  const params = useParams();
+  const { addCountryMutation, updateCountryMutation, getCountryData } =
+    useCountryApiCallHook();
+  const { mutate: addCountry } = addCountryMutation();
+  const { mutate: updateCountry } = updateCountryMutation();
   const { getContinent } = useContinentApiCallHook();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Country",
+      mainHeading: params.id ? "Update Country" : "Add Country",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -37,33 +37,54 @@ export const AddCountry: React.FC = () => {
     },
   };
 
-  const { data: continentData } = useQuery<ContinentType[]>({
-    queryKey: [queryKeys.CONTINENT_DATA],
-    queryFn: getContinent,
-    staleTime: Infinity,
-  });
+  const { data: continentData, isSuccess: getContinentSuccess } =
+    getContinent();
 
   if (continentData) {
     addCoutryFormFields.continentCountryField.config.options =
       selectOptionsMaker(continentData, "id", "continent");
   }
 
-  const addCountryMutation = useMutation({
-    mutationFn: addCountry,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.COUNTRY_DATA] });
-      navigate(-1);
-    },
-    onError: () => {
-      console.log("Error");
-    },
-  });
-
   const onSubmit = methods.handleSubmit((countryData) => {
     let data: any = { ...countryData };
     data.continentId = +data.continentId["value"];
-    addCountryMutation.mutate(data);
+    if (params.id && countryData) {
+      updateCountry({ id: params.id, ...data });
+    } else {
+      addCountry(data);
+    }
   });
+
+  if (params.id) {
+    const { data: countryData, isSuccess: countryDataSuccess } = getCountryData(
+      "" + params.id
+    );
+    if (countryDataSuccess) {
+      if (getContinentSuccess) {
+        let id = countryData?.continentId;
+        let data: any = returnObjectBasedOnID(
+          continentData,
+          "id",
+          id,
+          "id",
+          "continent"
+        );
+        addCoutryFormFields.continentCountryField.config.setData = data
+          ? {
+              label: data.label,
+              value: data.value,
+            }
+          : [];
+      }
+      addCoutryFormFields.countryField.config.setData = countryData.countryName;
+      addCoutryFormFields.countryCodeField.config.setData =countryData.countryCode;
+      addCoutryFormFields.countrylocalSourceField.config.setData =countryData.countrylocalSource;
+    }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
+  }
 
   return (
     <>
@@ -86,7 +107,7 @@ export const AddCountry: React.FC = () => {
                 <div className="col-md-6 col-xs-12">
                   <Input config={addCoutryFormFields.countryCodeField.config} />
                   <Input
-                    config={addCoutryFormFields.localSourceField.config}
+                    config={addCoutryFormFields.countrylocalSourceField.config}
                   />
                 </div>
               </div>

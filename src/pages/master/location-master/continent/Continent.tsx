@@ -9,13 +9,14 @@ import {
 } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 import { ContinentType, useContinentApiCallHook } from "@master/index";
-import { queryKeys } from "@constants/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
+import { useNavigate } from "react-router-dom";
 
 export const Continent: React.FC = () => {
-  const { getContinent, deleteContinent } = useContinentApiCallHook();
-  const queryClient = useQueryClient();
+  const { getContinent, deleteContinentMutation } = useContinentApiCallHook();
+  const { data: continentData, isLoading } = getContinent();
+  const { mutateAsync: deleteContinent } = deleteContinentMutation();
+  const navigate = useNavigate();
 
   const config = {
     breadcrumbConfig: {
@@ -47,28 +48,16 @@ export const Continent: React.FC = () => {
     },
   ];
 
-  const { data: continentData, isLoading } = useQuery<ContinentType[]>({
-    queryKey: [queryKeys.CONTINENT_DATA],
-    queryFn: getContinent,
-    staleTime: Infinity,
-  });
-
   const deleteContinentClick = (continentData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
-      deleteContinentMutation.mutate(continentData.id);
+      deleteContinent(continentData.id);
     }
   };
 
-  const deleteContinentMutation = useMutation({
-    mutationFn: deleteContinent,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.CONTINENT_DATA] });
-    },
-    onError: () => {
-      console.log("Error");
-    },
-  });
+  const editContinentClick = (continentData: any) => {
+    navigate(COMMON_ROUTES.EDIT.replace(":id", continentData.id));
+  };
 
   const tableConfig: TableType<ContinentType> = {
     config: {
@@ -82,6 +71,7 @@ export const Continent: React.FC = () => {
       globalSearchBox: true,
       pagination: true,
       onDeleteClick: deleteContinentClick,
+      onEditClick: editContinentClick,
     },
   };
 

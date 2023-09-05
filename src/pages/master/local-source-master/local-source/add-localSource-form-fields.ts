@@ -67,28 +67,28 @@ const sourcecountryOptions = [
   { value: "vanilla", label: "Vanilla" },
 ];
 
-const localSource: FormFieldType = createFormConfig(
+const localSourceField: FormFieldType = createFormConfig(
   "source",
   "Source",
   "text",
   localSourceFieldValidation,
   "Enter localSource"
 );
-const email: FormFieldType = createFormConfig(
+const emailField: FormFieldType = createFormConfig(
   "email",
   "E-Mail",
   "email",
   EmailValidation,
   "Enter Email"
 );
-const emailCC: FormFieldType = createFormConfig(
+const emailCCField: FormFieldType = createFormConfig(
   "emailCC",
   "E-MailCC",
   "email",
   EmailValidationCC,
   "Enter E-mailCC"
 );
-const currencey: FormFieldType = createFormConfig(
+const currenceyField: FormFieldType = createFormConfig(
   "currencey",
   "Currency",
   "select",
@@ -119,26 +119,26 @@ const continentLocalSourceField: FormFieldType = {
     },
   },
 };
-const sourcecountry: FormFieldType = {
+const sourcecountryField: FormFieldType = {
   config: {
-    name: "continentId",
-    label: "Continent",
-    id: "continent",
+    name: "country",
+    label: "Country",
+    id: "country",
     options: [],
-    placeholder: "Select Continent",
+    placeholder: "Select Country",
     validation: {
       required: {
         value: true,
-        message: "Select Continent",
+        message: "Select Country",
       },
     },
   },
 };
 export const addLocalSrouceFormFields = {
-  localSource,
-  email,
-  emailCC,
-  currencey,
-  // sourcecountry,
-  continentLocalSourceField
+  localSourceField,
+  emailField,
+  emailCCField,
+  currenceyField,
+  sourcecountryField,
+  // continentLocalSourceField
 };

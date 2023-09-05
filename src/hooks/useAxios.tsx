@@ -21,15 +21,18 @@ export const useAxios = () => {
       config.headers["Content-Type"] = "application/json";
       return config;
     },
-    (error) => Promise.reject(error)
+    (error) => {
+      return Promise.reject(error);
+    }
   );
 
   instance.interceptors.response.use(
-    (response) => response,
+    (response) => {
+      return response;
+    },
     (error) => {
       console.log(error.response?.status);
       if (error.response?.status === 400) {
-        console.log(error.response?.status);
         <Toaster
           type="Danger"
           heading="Error"
