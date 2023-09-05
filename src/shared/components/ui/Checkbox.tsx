@@ -11,17 +11,23 @@ import Form from "react-bootstrap/Form";
 
 import { findInputError, isFormInvalid } from "@utils/index";
 import { FormFieldType } from "@shared/index";
+import { useEffect } from "react";
 
 export const Checkbox = (props: FormFieldType) => {
   const {
     register,
     formState: { errors },
     control,
+    setValue,
   } = useFormContext();
 
   const inputErrors = findInputError(errors, props.config.name);
   const isInvalid = isFormInvalid(inputErrors);
-
+  useEffect(() => {
+    if (props.config.setData) {
+      setValue(props.config.name, eval(props.config.setData));
+    }
+  }, [props.config.setData]);
   return (
     <div className="row">
       <div className="col-12">
@@ -46,14 +52,13 @@ export const Checkbox = (props: FormFieldType) => {
                         id={"" + option.value}
                         type="checkbox"
                         label={option.label}
-                        checked={field.value}
                         {...field}
                         {...register(
                           props.config.name,
                           props.config.validation
                         )}
                         onChange={(e: any) => {
-                          field.onChange(!JSON.parse(e.target.checked)); // Toggle the field value
+                          field.onChange(e.target.checked); // Toggle the field value
                         }}
                       />
                     )}

@@ -1,6 +1,12 @@
 import React from "react";
 
-import { BorderLayout, PageBreadcrumb, Table, TableType } from "@shared/index";
+import {
+  BorderLayout,
+  Loader,
+  PageBreadcrumb,
+  Table,
+  TableType,
+} from "@shared/index";
 import { COMMON_ROUTES } from "constants";
 import { ExecutiveType, useExecutiveApiCallHook } from "@master/index";
 import { useNavigate } from "react-router-dom";
@@ -98,7 +104,9 @@ export const Executive: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}></Table>
+        <Table config={tableConfig.config}>
+          {isLoading ? <Loader /> : null}
+        </Table>
       </BorderLayout>
     </>
   );
