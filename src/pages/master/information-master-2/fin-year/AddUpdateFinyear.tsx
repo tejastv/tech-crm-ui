@@ -18,7 +18,7 @@ export const AddUpdateFinYear: React.FC = () => {
   const params = useParams();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Industry",
+      mainHeading: params.id ? "Update Fin Year" : "Add Fin Year",
       heading: "Entry",
     },
     formActionsConfig: {

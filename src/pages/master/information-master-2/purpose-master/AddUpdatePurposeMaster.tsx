@@ -10,9 +10,11 @@ import {
 import { useParams } from "react-router-dom";
 
 export const AddUpdatePurposeMaster: React.FC = () => {
+  const params = useParams();
+
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Purpose Master",
+      mainHeading: params.id ? "Update Purpose Master" : "Add Purpose Master",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -28,7 +30,6 @@ export const AddUpdatePurposeMaster: React.FC = () => {
   } = usePurposeMasterApiCallHook();
   const { mutate: addPurposeMaster } = addPurposeMasterMutation();
   const { mutate: updatePurposeMaster } = updatePurposeMasterMutation();
-  const params = useParams();
 
   if (params.id) {
     const { data: purposeMasterData, isSuccess: purposeMasterDataSuccess } =

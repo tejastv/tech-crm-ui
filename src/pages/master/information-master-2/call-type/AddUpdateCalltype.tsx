@@ -19,7 +19,7 @@ export const AddUpdateCalltype: React.FC = () => {
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Call Type",
+      mainHeading: params.id ? "Update Call Type" : "Add Call Type",
       heading: "Entry",
     },
     formActionsConfig: {

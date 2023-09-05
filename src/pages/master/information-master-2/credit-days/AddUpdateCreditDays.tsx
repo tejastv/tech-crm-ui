@@ -10,9 +10,10 @@ import {
 import { useParams } from "react-router-dom";
 
 export const AddUpdateCreditDays: React.FC = () => {
+  const params = useParams();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Credit Period",
+      mainHeading: params.id ? "Update Credit Period" : "Add Credit Period",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -25,7 +26,6 @@ export const AddUpdateCreditDays: React.FC = () => {
     useCreditDaysApiCallHook();
   const { mutate: addCreditDays } = addCreditDaysMutation();
   const { mutate: updateCreditDays } = updateCreditDaysMutation();
-  const params = useParams();
 
   if (params.id) {
     const { data: creditDays, isSuccess: creditDaysSuccess } =

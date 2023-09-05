@@ -11,14 +11,18 @@ import { useParams } from "react-router-dom";
 
 export const AddPaymentMode: React.FC = () => {
   const methods = useForm<AddPaymentModeType>();
-  const { addPaymentModeMutation, getPaymentModeData, updatePaymentModeMutation } = usePaymentModeApiCallHook();
+  const {
+    addPaymentModeMutation,
+    getPaymentModeData,
+    updatePaymentModeMutation,
+  } = usePaymentModeApiCallHook();
   const { mutate: addPaymentMode } = addPaymentModeMutation();
   const { mutate: updatePaymentMode } = updatePaymentModeMutation();
   const params = useParams();
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Payment Mode",
+      mainHeading: params.id ? "Update Payment Mode" : "Add Payment Mode",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -36,13 +40,13 @@ export const AddPaymentMode: React.FC = () => {
   }, []);
 
   if (params.id) {
-    const { data: paymentModeData, isSuccess: paymentModeDataSuccess } = getPaymentModeData(
-      "" + params.id
-    );
+    const { data: paymentModeData, isSuccess: paymentModeDataSuccess } =
+      getPaymentModeData("" + params.id);
     console.log(params.id);
 
     if (paymentModeDataSuccess) {
-      addPaymentModeFormFields.paymentmode.config.setData = paymentModeData?.paymentMode;
+      addPaymentModeFormFields.paymentmode.config.setData =
+        paymentModeData?.paymentMode;
     }
   } else {
     useEffect(() => {

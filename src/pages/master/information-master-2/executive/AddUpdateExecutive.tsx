@@ -31,7 +31,7 @@ export const AddUpdateExecutive: React.FC = () => {
   const params = useParams();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Sales Executive",
+      mainHeading: params.id ? "Update Sales Executive" : "Add Sales Executive",
       heading: "Entry",
     },
     formActionsConfig: {
