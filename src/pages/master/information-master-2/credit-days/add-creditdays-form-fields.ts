@@ -12,9 +12,9 @@ const CreditdayValidation = {
 } as ValidationType;
 
 const creditdays: FormFieldType = createFormConfig(
-  "creditdays",
+  "creditPeriod",
   "Credit Days",
-  "text",
+  "number",
   CreditdayValidation,
   "Credit Days"
 );

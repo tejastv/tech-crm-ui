@@ -1,4 +1,4 @@
-export interface Industry {
-    industryId:number,
-    industry:string,
-  };
+export interface IndustryType {
+  industryId: number;
+  industryName: string;
+}

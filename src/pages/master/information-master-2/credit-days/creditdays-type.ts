@@ -1,3 +1,4 @@
-export interface CreditDays {
-    creditdays:string,
-  };
+export interface CreditDaysType {
+  creditPeriodId: number;
+  creditPeriod: number;
+}

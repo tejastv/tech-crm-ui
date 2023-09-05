@@ -47,7 +47,8 @@ const cgstValidation = {
   },
   pattern: {
     value: /^\d+(\.\d{1,2})?$/,
-    message: "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+    message:
+      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
   },
 } as ValidationType;
 const sgstValidation = {
@@ -94,49 +95,49 @@ const startrefnoValidation = {
 const finyear: FormFieldType = createFormConfig(
   "finyear",
   "Fin. Year",
-  "text",
+  "number",
   finyearValidation,
   "FIn Year"
 );
 const totaltax: FormFieldType = createFormConfig(
   "totaltax",
   "Total Tax",
-  "text",
+  "number",
   totaltaxValidation,
   "Total Tax"
 );
 const stax: FormFieldType = createFormConfig(
   "stax",
   "S. Tax",
-  "text",
+  "number",
   staxValidation,
   "Total Tax"
 );
 const edcess: FormFieldType = createFormConfig(
   "edcess",
   "Ed.Cess",
-  "text",
+  "number",
   edcessValidation,
   "Ed. Cess"
 );
 const cgst: FormFieldType = createFormConfig(
   "cgst",
   "CGST %",
-  "text",
+  "number",
   cgstValidation,
   "CGST %"
 );
 const sgst: FormFieldType = createFormConfig(
   "sgst",
   "SGST %",
-  "text",
+  "number",
   sgstValidation,
   "SGST %"
 );
 const igst: FormFieldType = createFormConfig(
   "igst",
   "IGST %",
-  "text",
+  "number",
   igstValidation,
   "IGST %"
 );

@@ -6,7 +6,7 @@ import { MASTER_ROUTES } from "constants";
 const IndustryIndex = React.lazy(() => import("./industry/IndustryIndex"));
 const CallTypeIndex = React.lazy(() => import("./call-type/CallTypeIndex"));
 const PurposeMasterIndex = React.lazy(
-  () => import("./purpose-master/PurposeIndex")
+  () => import("./purpose-master/PurposeMasterIndex")
 );
 const CreditDaysIndex = React.lazy(
   () => import("./credit-days/CreditDaysIndex")

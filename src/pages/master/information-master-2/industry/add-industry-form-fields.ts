@@ -12,7 +12,7 @@ const IndustryValidation = {
 } as ValidationType;
 
 const industry: FormFieldType = createFormConfig(
-  "industry",
+  "industryName",
   "Industry",
   "text",
   IndustryValidation,

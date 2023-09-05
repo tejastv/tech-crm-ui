@@ -8,18 +8,15 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "constants";
-import { IndustryType, useIndustryApiCallHook } from "@master/index";
 import { useNavigate } from "react-router-dom";
+import { PurposeMasterType, usePurposeMasterApiCallHook } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const Industry: React.FC = () => {
-  const { getIndustry, deleteIndustryMutation } = useIndustryApiCallHook();
-  const navigate = useNavigate();
-
+export const PurposeMaster: React.FC = () => {
   const config = {
     breadcrumbConfig: {
-      pageHeading: "Industry",
-      btnTitle: "Add Industry",
+      pageHeading: "Purpose",
+      btnTitle: "Add Purpose",
       btnRoute: COMMON_ROUTES.ADD,
     },
     borderLayoutConfig: {
@@ -27,17 +24,20 @@ export const Industry: React.FC = () => {
     },
   };
 
-  const columns: ColumnDef<IndustryType>[] = [
+  const { getPurposeMaster, deletePurposeMasterMutation } =
+    usePurposeMasterApiCallHook();
+  const navigate = useNavigate();
+  const columns: ColumnDef<PurposeMasterType>[] = [
     {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
     },
     {
-      accessorFn: (row) => row.industryName,
-      id: "industryName",
+      accessorFn: (row) => row.purpose,
+      id: "purpose",
       cell: (info) => info.getValue(),
-      header: () => <>Industry Name</>,
+      header: () => <>Type Name</>,
     },
     {
       id: "action",
@@ -46,24 +46,24 @@ export const Industry: React.FC = () => {
     },
   ];
 
-  const { data: industryData, isLoading } = getIndustry();
-  const { mutateAsync: deleteIndustry } = deleteIndustryMutation();
+  const { data: purposeMasterData, isLoading } = getPurposeMaster();
+  const { mutateAsync: deletePurposeMaster } = deletePurposeMasterMutation();
 
-  const deleteIndustryClick = async (industryData: any) => {
+  const deletePurposeMasterClick = async (purposeMasterData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deleteIndustry(industryData.industryId);
+      await deletePurposeMaster(purposeMasterData.purposeID);
     }
   };
 
-  const editIndustryClick = (industryData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", industryData.industryId));
+  const editPurposeMasterClick = (purposeMasterData: any) => {
+    navigate(COMMON_ROUTES.EDIT.replace(":id", purposeMasterData.purposeID));
   };
 
-  const tableConfig: TableType<IndustryType> = {
+  const tableConfig: TableType<PurposeMasterType> = {
     config: {
       columns: columns,
-      tableData: industryData ? industryData : [],
+      tableData: purposeMasterData ? purposeMasterData : [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -71,8 +71,8 @@ export const Industry: React.FC = () => {
       printBtn: true,
       globalSearchBox: true,
       pagination: true,
-      onDeleteClick: deleteIndustryClick,
-      onEditClick: editIndustryClick,
+      onDeleteClick: deletePurposeMasterClick,
+      onEditClick: editPurposeMasterClick,
     },
   };
 
