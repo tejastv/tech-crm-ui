@@ -13,6 +13,9 @@ const GET_UPDATE_DELETE_SEGMENT = "entity/segment/{id}";
 const GET_ADD_EXECUTIVE = "utility/executive";
 const GET_UPDATE_DELETE_EXECUTIVE = "utility/executive/{id}";
 
+const GET_ADD_COMPANY_MASTER = "entity/companyMaster";
+const GET_UPDATE_DELETE_COMPANY_MASTER = "entity/companyMaster/{id}";
+
 export const apiUrls = {
   GET_ADD_CONTINENT,
   GET_ADD_COUNTRY,
@@ -26,4 +29,6 @@ export const apiUrls = {
   GET_UPDATE_DELETE_SEGMENT,
   GET_ADD_EXECUTIVE,
   GET_UPDATE_DELETE_EXECUTIVE,
+  GET_ADD_COMPANY_MASTER,
+  GET_UPDATE_DELETE_COMPANY_MASTER,
 };

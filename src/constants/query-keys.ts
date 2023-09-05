@@ -5,6 +5,7 @@ const CONTINENT_DATA = "continent-data";
 
 const SEGMENT_DATA = "continent-data";
 const EXECUTIVE_DATA = "continent-data";
+const COMPANY_MASTER_DATA = "companyMaster-data";
 
 export const queryKeys = {
   CITY_DATA,
@@ -13,4 +14,5 @@ export const queryKeys = {
   CONTINENT_DATA,
   SEGMENT_DATA,
   EXECUTIVE_DATA,
+  COMPANY_MASTER_DATA,
 };
