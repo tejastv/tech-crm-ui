@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
@@ -33,6 +33,10 @@ export const AddUpdateCalltype: React.FC = () => {
     if (callTypeDataSuccess) {
       addCallTypeFormFields.calltype.config.setData = callTypeData.typeName;
     }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
   }
 
   const onSubmit = methods.handleSubmit((callTypeData) => {

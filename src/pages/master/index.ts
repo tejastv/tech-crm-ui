@@ -75,7 +75,7 @@ export { PurposeMaster } from "./information-master-2/purpose-master/PurposeMast
 export { AddUpdateCreditDays } from "./information-master-2/credit-days/AddUpdateCreditDays";
 export { CreditDays } from "./information-master-2/credit-days/CreditDays";
 
-export { AddSiteStatus } from "./information-master-2/site-status/AddSiteStatus";
+export { AddUpdateSiteStatus } from "./information-master-2/site-status/AddUpdateSiteStatus";
 export { SiteStatus } from "./information-master-2/site-status/SiteStatus";
 
 export { AddUpdateExecutive } from "./information-master-2/executive/AddUpdateExecutive";
@@ -203,7 +203,7 @@ export * from "./information-master-2/industry/industry-type";
 export * from "./information-master-2/purpose-master/add-update-purpose-master-type";
 export * from "./information-master-2/purpose-master/purpose-master-type";
 
-export * from "./information-master-2/site-status/add-sitestatus-type";
+export * from "./information-master-2/site-status/add-update-sitestatus-type";
 export * from "./information-master-2/site-status/sitestatus-type";
 
 export * from "./information-master-2/user-master/add-user-type";
@@ -234,3 +234,4 @@ export { useIndustryApiCallHook } from "./information-master-2/industry/useIndus
 export { useCallTypeApiCallHook } from "./information-master-2/call-type/useCallTypeApiCallHook";
 export { usePurposeMasterApiCallHook } from "./information-master-2/purpose-master/usePurposeMasterApiCallHook";
 export { useCreditDaysApiCallHook } from "./information-master-2/credit-days/useCreditDaysApiCallHook";
+export { useSiteStatusApiCallHook } from "./information-master-2/site-status/useSiteStatusApiCallHook";

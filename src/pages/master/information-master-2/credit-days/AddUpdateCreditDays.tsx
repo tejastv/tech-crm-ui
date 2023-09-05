@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
@@ -34,6 +34,10 @@ export const AddUpdateCreditDays: React.FC = () => {
       addCreditDaysFormFields.creditdays.config.setData =
         creditDays.creditPeriod;
     }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
   }
 
   const onSubmit = methods.handleSubmit((creditDays): void => {
@@ -44,6 +48,7 @@ export const AddUpdateCreditDays: React.FC = () => {
       addCreditDays(data);
     }
   });
+
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>

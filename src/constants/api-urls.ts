@@ -28,6 +28,9 @@ const GET_UPDATE_DELETE_PURPOSE_MASTER = "utility/purposeMaster/{id}";
 const GET_ADD_CREDIT_DAYS = "utility/creditPeriod";
 const GET_UPDATE_DELETE_CREDIT_DAYS = "utility/creditPeriod/{id}";
 
+const GET_ADD_SITE_STATUS = "utility/siteStatus";
+const GET_UPDATE_DELETE_SITE_STATUS = "utility/siteStatus/{id}";
+
 const GET_ADD_PAYMENTMODE = "utility/paymentMode";
 const GET_UPDATE_DELETE_PAYMENTMODE = "utility/paymentMode/{id}";
 
@@ -56,4 +59,6 @@ export const apiUrls = {
   GET_UPDATE_DELETE_PURPOSE_MASTER,
   GET_ADD_CREDIT_DAYS,
   GET_UPDATE_DELETE_CREDIT_DAYS,
+  GET_ADD_SITE_STATUS,
+  GET_UPDATE_DELETE_SITE_STATUS,
 };

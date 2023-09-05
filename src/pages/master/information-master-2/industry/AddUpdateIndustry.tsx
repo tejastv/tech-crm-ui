@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
@@ -33,6 +33,10 @@ export const AddUpdateIndustry: React.FC = () => {
     if (industryDataSuccess) {
       addIndustryFormFields.industry.config.setData = industryData.industryName;
     }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
   }
 
   const onSubmit = methods.handleSubmit((industryData) => {
