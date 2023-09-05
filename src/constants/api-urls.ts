@@ -25,6 +25,9 @@ const GET_UPDATE_DELETE_CALL_TYPE = "utility/callType/{id}";
 const GET_ADD_PURPOSE_MASTER = "utility/purposeMaster";
 const GET_UPDATE_DELETE_PURPOSE_MASTER = "utility/purposeMaster/{id}";
 
+const GET_ADD_CREDIT_DAYS = "utility/creditPeriod";
+const GET_UPDATE_DELETE_CREDIT_DAYS = "utility/creditPeriod/{id}";
+
 const GET_ADD_PAYMENTMODE = "utility/paymentMode";
 const GET_UPDATE_DELETE_PAYMENTMODE = "utility/paymentMode/{id}";
 
@@ -51,4 +54,6 @@ export const apiUrls = {
   GET_UPDATE_DELETE_CALL_TYPE,
   GET_ADD_PURPOSE_MASTER,
   GET_UPDATE_DELETE_PURPOSE_MASTER,
+  GET_ADD_CREDIT_DAYS,
+  GET_UPDATE_DELETE_CREDIT_DAYS,
 };

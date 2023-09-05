@@ -35,9 +35,9 @@ export const CallType: React.FC = () => {
     },
     {
       accessorFn: (row) => row.typeName,
-      id: "industryName",
+      id: "typeName",
       cell: (info) => info.getValue(),
-      header: () => <>CallType Name</>,
+      header: () => <>Type Name</>,
     },
     {
       id: "action",

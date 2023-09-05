@@ -72,7 +72,7 @@ export { CallType } from "./information-master-2/call-type/CallType";
 export { AddUpdatePurposeMaster } from "./information-master-2/purpose-master/AddUpdatePurposeMaster";
 export { PurposeMaster } from "./information-master-2/purpose-master/PurposeMaster";
 
-export { AddCreditDays } from "./information-master-2/credit-days/AddCreditDays";
+export { AddUpdateCreditDays } from "./information-master-2/credit-days/AddUpdateCreditDays";
 export { CreditDays } from "./information-master-2/credit-days/CreditDays";
 
 export { AddSiteStatus } from "./information-master-2/site-status/AddSiteStatus";
@@ -188,7 +188,7 @@ export * from "./information-master/supplier-master/supplier-type";
 export * from "./information-master-2/call-type/add-update-calltype-type";
 export * from "./information-master-2/call-type/calltype-type";
 
-export * from "./information-master-2/credit-days/add-creditdays-type";
+export * from "./information-master-2/credit-days/add-update-creditdays-type";
 export * from "./information-master-2/credit-days/creditdays-type";
 
 export * from "./information-master-2/executive/add-update-executive-type";
@@ -233,3 +233,4 @@ export { useFinYearApiCallHook } from "./information-master-2/fin-year/useFinYea
 export { useIndustryApiCallHook } from "./information-master-2/industry/useIndustryApiCallHook";
 export { useCallTypeApiCallHook } from "./information-master-2/call-type/useCallTypeApiCallHook";
 export { usePurposeMasterApiCallHook } from "./information-master-2/purpose-master/usePurposeMasterApiCallHook";
+export { useCreditDaysApiCallHook } from "./information-master-2/credit-days/useCreditDaysApiCallHook";

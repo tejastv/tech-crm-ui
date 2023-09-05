@@ -9,6 +9,7 @@ const FIN_YEAR_DATA = "fin-year-data";
 const INDUSTRY_DATA = "industry-data";
 const CALL_TYPE_DATA = "call-type-data";
 const PURPOSE_MASTER_DATA = "purpose-master-data";
+const CREDIT_DAYS_DATA = "credit-days-data";
 
 const PAYMENTMODE_DATA = "paymentmode-data";
 
@@ -24,4 +25,5 @@ export const queryKeys = {
   INDUSTRY_DATA,
   CALL_TYPE_DATA,
   PURPOSE_MASTER_DATA,
+  CREDIT_DAYS_DATA,
 };

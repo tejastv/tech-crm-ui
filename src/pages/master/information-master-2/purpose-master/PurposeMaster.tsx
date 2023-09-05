@@ -35,9 +35,9 @@ export const PurposeMaster: React.FC = () => {
     },
     {
       accessorFn: (row) => row.purpose,
-      id: "industryName",
+      id: "purpose",
       cell: (info) => info.getValue(),
-      header: () => <>PurposeMaster Name</>,
+      header: () => <>Type Name</>,
     },
     {
       id: "action",
