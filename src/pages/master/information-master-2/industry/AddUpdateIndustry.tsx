@@ -2,10 +2,21 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { addIndustryFormFields } from "@master/index";
+import {
+  AddUpdateIndustryType,
+  addIndustryFormFields,
+  useIndustryApiCallHook,
+} from "@master/index";
+import { useParams } from "react-router-dom";
 
-export const AddIndustry: React.FC = () => {
-  const methods = useForm();
+export const AddUpdateIndustry: React.FC = () => {
+  const methods = useForm<AddUpdateIndustryType>();
+  const { addIndustryMutation, getIndustryData, updateIndustryMutation } =
+    useIndustryApiCallHook();
+  const { mutate: addIndustry } = addIndustryMutation();
+  const { mutate: updateIndustry } = updateIndustryMutation();
+  const params = useParams();
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Industry",
@@ -16,8 +27,21 @@ export const AddIndustry: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log("value", data);
+  if (params.id) {
+    const { data: industryData, isSuccess: industryDataSuccess } =
+      getIndustryData("" + params.id);
+    if (industryDataSuccess) {
+      addIndustryFormFields.industry.config.setData = industryData.industryName;
+    }
+  }
+
+  const onSubmit = methods.handleSubmit((industryData) => {
+    let data: any = { ...industryData };
+    if (params.id && industryData) {
+      updateIndustry({ id: +params.id, ...data });
+    } else {
+      addIndustry(data);
+    }
   });
 
   return (

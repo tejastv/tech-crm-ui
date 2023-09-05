@@ -2,10 +2,21 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { addCallTypeFormFields } from "@master/index";
+import {
+  AddUpdateCallTypeType,
+  addCallTypeFormFields,
+  useCallTypeApiCallHook,
+} from "@master/index";
+import { useParams } from "react-router-dom";
 
-export const AddCallType: React.FC = () => {
-  const methods = useForm();
+export const AddUpdateCalltype: React.FC = () => {
+  const methods = useForm<AddUpdateCallTypeType>();
+  const { addCallTypeMutation, getCallTypeData, updateCallTypeMutation } =
+    useCallTypeApiCallHook();
+  const { mutate: addCallType } = addCallTypeMutation();
+  const { mutate: updateCallType } = updateCallTypeMutation();
+  const params = useParams();
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Call Type",
@@ -16,8 +27,21 @@ export const AddCallType: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log("value", data);
+  if (params.id) {
+    const { data: callTypeData, isSuccess: callTypeDataSuccess } =
+      getCallTypeData("" + params.id);
+    if (callTypeDataSuccess) {
+      addCallTypeFormFields.calltype.config.setData = callTypeData.typeName;
+    }
+  }
+
+  const onSubmit = methods.handleSubmit((callTypeData) => {
+    let data: any = { ...callTypeData };
+    if (params.id && callTypeData) {
+      updateCallType({ id: +params.id, ...data });
+    } else {
+      addCallType(data);
+    }
   });
 
   return (

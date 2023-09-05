@@ -1,4 +1,5 @@
-export interface FinYearType {
+export interface AddUpdateFinYearType {
+  id?: number;
   finYear: number;
   eduCess: number;
   cgstper: number;
