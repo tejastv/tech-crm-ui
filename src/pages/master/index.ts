@@ -84,7 +84,7 @@ export { Executive } from "./information-master-2/executive/Executive";
 export { AddUpdateFinYear } from "./information-master-2/fin-year/AddUpdateFinyear";
 export { FinYear } from "./information-master-2/fin-year/FinYear";
 
-export { AddUser } from "./information-master-2/user-master/AddUsert";
+export { AddUpdateUser } from "./information-master-2/user-master/AddUpdateUser";
 export { User } from "./information-master-2/user-master/User";
 
 //Form Fields
@@ -206,7 +206,7 @@ export * from "./information-master-2/purpose-master/purpose-master-type";
 export * from "./information-master-2/site-status/add-update-sitestatus-type";
 export * from "./information-master-2/site-status/sitestatus-type";
 
-export * from "./information-master-2/user-master/add-user-type";
+export * from "./information-master-2/user-master/add-update-user-type";
 export * from "./information-master-2/user-master/user-type";
 
 // location master
@@ -235,3 +235,4 @@ export { useCallTypeApiCallHook } from "./information-master-2/call-type/useCall
 export { usePurposeMasterApiCallHook } from "./information-master-2/purpose-master/usePurposeMasterApiCallHook";
 export { useCreditDaysApiCallHook } from "./information-master-2/credit-days/useCreditDaysApiCallHook";
 export { useSiteStatusApiCallHook } from "./information-master-2/site-status/useSiteStatusApiCallHook";
+export { useUserApiCallHook } from "./information-master-2/user-master/useUserApiCallHook";

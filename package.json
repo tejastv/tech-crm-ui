@@ -24,7 +24,8 @@
     "react-router-dom": "^6.14.2",
     "react-select": "^5.7.4",
     "react-tabulator": "^0.18.1",
-    "vite-tsconfig-paths": "^4.2.0"
+    "vite-tsconfig-paths": "^4.2.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",

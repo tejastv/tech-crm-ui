@@ -23,7 +23,7 @@ export const useSiteStatusApiCallHook = () => {
 
   const getSiteStatusData = (id: string) => {
     return useQuery<SiteStatusType>({
-      queryKey: [queryKeys.SITE_STATUS_DATA, , id],
+      queryKey: [queryKeys.SITE_STATUS_DATA, id],
       queryFn: async () => {
         const response = await instance.get(
           apiUrls.GET_UPDATE_DELETE_SITE_STATUS.replace("{id}", id)

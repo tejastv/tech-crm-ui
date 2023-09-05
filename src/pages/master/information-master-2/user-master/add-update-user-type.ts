@@ -1,4 +1,4 @@
-export interface UserType {
+export interface AddUpdateUserType {
   id?: number;
   usertype: string;
   username: string;

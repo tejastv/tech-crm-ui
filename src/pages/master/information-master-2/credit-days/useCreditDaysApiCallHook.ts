@@ -23,7 +23,7 @@ export const useCreditDaysApiCallHook = () => {
 
   const getCreditDaysData = (id: string) => {
     return useQuery<CreditDaysType>({
-      queryKey: [queryKeys.CREDIT_DAYS_DATA, , id],
+      queryKey: [queryKeys.CREDIT_DAYS_DATA, id],
       queryFn: async () => {
         const response = await instance.get(
           apiUrls.GET_UPDATE_DELETE_CREDIT_DAYS.replace("{id}", id)
