@@ -2,10 +2,14 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { addPurposeFormFields } from "@master/index";
+import {
+  AddUpdatePurposeMasterType,
+  addPurposeFormFields,
+  usePurposeMasterApiCallHook,
+} from "@master/index";
+import { useParams } from "react-router-dom";
 
-export const AddPurpose: React.FC = () => {
-  const methods = useForm();
+export const AddUpdatePurposeMaster: React.FC = () => {
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Purpose Master",
@@ -16,8 +20,31 @@ export const AddPurpose: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log("value", data);
+  const methods = useForm<AddUpdatePurposeMasterType>();
+  const {
+    addPurposeMasterMutation,
+    getPurposeMasterData,
+    updatePurposeMasterMutation,
+  } = usePurposeMasterApiCallHook();
+  const { mutate: addPurposeMaster } = addPurposeMasterMutation();
+  const { mutate: updatePurposeMaster } = updatePurposeMasterMutation();
+  const params = useParams();
+
+  if (params.id) {
+    const { data: purposeMasterData, isSuccess: purposeMasterDataSuccess } =
+      getPurposeMasterData("" + params.id);
+    if (purposeMasterDataSuccess) {
+      addPurposeFormFields.purpose.config.setData = purposeMasterData.purpose;
+    }
+  }
+
+  const onSubmit = methods.handleSubmit((purposeMasterData): void => {
+    let data: any = { ...purposeMasterData };
+    if (params.id && purposeMasterData) {
+      updatePurposeMaster({ id: +params.id, ...data });
+    } else {
+      addPurposeMaster(data);
+    }
   });
 
   return (

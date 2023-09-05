@@ -10,13 +10,6 @@ import {
 import { useParams } from "react-router-dom";
 
 export const AddUpdateIndustry: React.FC = () => {
-  const methods = useForm<AddUpdateIndustryType>();
-  const { addIndustryMutation, getIndustryData, updateIndustryMutation } =
-    useIndustryApiCallHook();
-  const { mutate: addIndustry } = addIndustryMutation();
-  const { mutate: updateIndustry } = updateIndustryMutation();
-  const params = useParams();
-
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Industry",
@@ -26,6 +19,13 @@ export const AddUpdateIndustry: React.FC = () => {
       heading: "Action Buttons",
     },
   };
+
+  const methods = useForm<AddUpdateIndustryType>();
+  const { addIndustryMutation, getIndustryData, updateIndustryMutation } =
+    useIndustryApiCallHook();
+  const { mutate: addIndustry } = addIndustryMutation();
+  const { mutate: updateIndustry } = updateIndustryMutation();
+  const params = useParams();
 
   if (params.id) {
     const { data: industryData, isSuccess: industryDataSuccess } =

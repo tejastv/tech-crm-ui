@@ -7,7 +7,8 @@ const SEGMENT_DATA = "continent-data";
 const EXECUTIVE_DATA = "continent-data";
 const FIN_YEAR_DATA = "fin-year-data";
 const INDUSTRY_DATA = "industry-data";
-const CALL_TYPE_DATA = "industry-data";
+const CALL_TYPE_DATA = "call-type-data";
+const PURPOSE_MASTER_DATA = "purpose-master-data";
 
 const PAYMENTMODE_DATA = "paymentmode-data";
 
@@ -22,4 +23,5 @@ export const queryKeys = {
   FIN_YEAR_DATA,
   INDUSTRY_DATA,
   CALL_TYPE_DATA,
+  PURPOSE_MASTER_DATA,
 };

@@ -46,10 +46,14 @@ export const AddUpdateFinYear: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log("value", data);
+  const onSubmit = methods.handleSubmit((executiveData) => {
+    let data: any = { ...executiveData };
+    if (params.id && executiveData) {
+      updateFinYear({ id: params.id, ...data });
+    } else {
+      addFinYear(data);
+    }
   });
-
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>

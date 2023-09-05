@@ -22,6 +22,9 @@ const GET_UPDATE_DELETE_INDUSTRY = "utility/industry/{id}";
 const GET_ADD_CALL_TYPE = "utility/callType";
 const GET_UPDATE_DELETE_CALL_TYPE = "utility/callType/{id}";
 
+const GET_ADD_PURPOSE_MASTER = "utility/purposeMaster";
+const GET_UPDATE_DELETE_PURPOSE_MASTER = "utility/purposeMaster/{id}";
+
 const GET_ADD_PAYMENTMODE = "utility/paymentMode";
 const GET_UPDATE_DELETE_PAYMENTMODE = "utility/paymentMode/{id}";
 
@@ -46,4 +49,6 @@ export const apiUrls = {
   GET_UPDATE_DELETE_INDUSTRY,
   GET_ADD_CALL_TYPE,
   GET_UPDATE_DELETE_CALL_TYPE,
+  GET_ADD_PURPOSE_MASTER,
+  GET_UPDATE_DELETE_PURPOSE_MASTER,
 };

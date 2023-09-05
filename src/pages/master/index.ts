@@ -69,8 +69,8 @@ export { Industry } from "./information-master-2/industry/Industry";
 export { AddUpdateCalltype } from "./information-master-2/call-type/AddUpdateCalltype";
 export { CallType } from "./information-master-2/call-type/CallType";
 
-export { AddPurpose } from "./information-master-2/purpose-master/AddPurpose";
-export { Purpose } from "./information-master-2/purpose-master/Purpose";
+export { AddUpdatePurposeMaster } from "./information-master-2/purpose-master/AddUpdatePurposeMaster";
+export { PurposeMaster } from "./information-master-2/purpose-master/PurposeMaster";
 
 export { AddCreditDays } from "./information-master-2/credit-days/AddCreditDays";
 export { CreditDays } from "./information-master-2/credit-days/CreditDays";
@@ -200,8 +200,8 @@ export * from "./information-master-2/fin-year/finyear-type";
 export * from "./information-master-2/industry/add-update-industry-type";
 export * from "./information-master-2/industry/industry-type";
 
-export * from "./information-master-2/purpose-master/add-purpose-type";
-export * from "./information-master-2/purpose-master/purpose-type";
+export * from "./information-master-2/purpose-master/add-update-purpose-master-type";
+export * from "./information-master-2/purpose-master/purpose-master-type";
 
 export * from "./information-master-2/site-status/add-sitestatus-type";
 export * from "./information-master-2/site-status/sitestatus-type";
@@ -232,3 +232,4 @@ export { useExecutiveApiCallHook } from "./information-master-2/executive/useExe
 export { useFinYearApiCallHook } from "./information-master-2/fin-year/useFinYearApiCallHook";
 export { useIndustryApiCallHook } from "./information-master-2/industry/useIndustryApiCallHook";
 export { useCallTypeApiCallHook } from "./information-master-2/call-type/useCallTypeApiCallHook";
+export { usePurposeMasterApiCallHook } from "./information-master-2/purpose-master/usePurposeMasterApiCallHook";
