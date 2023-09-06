@@ -32,7 +32,7 @@ export { ActualBuyer } from "./price-list-master/actual-buyer/ActualBuyer";
 
 //Local Source
 // LocalSource Child Page
-export { AddUpdateSource } from "./local-source-master/local-source/AddUpdateLocalSource";
+export { AddUpdateLocalSource } from "./local-source-master/local-source/AddUpdateLocalSource";
 export { LocalSource } from "./local-source-master/local-source/LocalSource";
 // Price List Child Page
 export { AddPrice } from "./local-source-master/price-list/AddPrice";
@@ -53,7 +53,7 @@ export { BankMasterDeposit } from "./information-master/bank-master-deposit/Bank
 export { AddPaymentMode } from "./information-master/payment-mode/AddPaymentMode";
 export { PaymentMode } from "./information-master/payment-mode/PaymentMode";
 
-export { AddCurrency } from "./information-master/currency/AddCurrency";
+export { AddUpdateCurrency } from "./information-master/currency/AddUpdateCurrency";
 export { Currency } from "./information-master/currency/Currency";
 export { AddInfoSource } from "./information-master/source/AddSource";
 export { Source } from "./information-master/source/Source";
@@ -173,7 +173,7 @@ export * from "./information-master/bank-master-deposit/bankdeposit-type";
 export * from "./information-master/bank-master-drawn-on/add-bankdrawnon-type";
 export * from "./information-master/bank-master-drawn-on/bankdrawnon-type";
 
-export * from "./information-master/currency/add-currency-type";
+export * from "./information-master/currency/add-update-currency-type";
 export * from "./information-master/currency/currency-type";
 
 export * from "./information-master/payment-mode/add-paymentmode-type";
@@ -232,3 +232,7 @@ export { useStateApiCallHook } from "./location-master/state/useStateApiCallHook
 export { useLocalSourceApiCallHook } from "./local-source-master/local-source/useLocalSourceApiCallHook";
 export { useSegmentApiCallHook } from "./client-master/segment/useSegmentApiCallHook";
 export { useExecutiveApiCallHook } from "./information-master-2/executive/useExecutiveApiCallHook";
+
+
+// information
+export { useCurrencyApiCallHook } from "./information-master/currency/useCurrencyApiCallHook";

@@ -11,6 +11,7 @@ const EXECUTIVE_DATA = "continent-data";
 
 // Information master
 const CURRENCY_DATA = "currency-data";
+
 export const queryKeys = {
   // Location Master
   CITY_DATA,

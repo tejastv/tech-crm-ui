@@ -4,11 +4,14 @@ import { BorderLayout, Loader, PageBreadcrumb, Table, TableType } from "@shared/
 import { COMMON_ROUTES } from "constants";
 import { LocalSourceType, useLocalSourceApiCallHook } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
+import { useNavigate } from "react-router-dom";
 
 export const LocalSource: React.FC = () => {
-  const { getLocalSource } = useLocalSourceApiCallHook();
+  const { getLocalSource, deleteLocalSourceMutation } = useLocalSourceApiCallHook();
   const { data: localsourceData, isLoading } = getLocalSource();
 
+  const { mutateAsync: deleteLocalSource } = deleteLocalSourceMutation();
+  const navigate = useNavigate();
 
   const config = {
     breadcrumbConfig: {
@@ -34,7 +37,7 @@ export const LocalSource: React.FC = () => {
         header: () => <>Local Source</>,
       },
       {
-        accessorFn: (row) => row.currencyId,
+        accessorFn: (row) => row.currency,
         id: "currency",
         cell: (info) => info.getValue(),
         header: () => <>Currency Type</>,
@@ -52,7 +55,7 @@ export const LocalSource: React.FC = () => {
         header: () => <>EmailCC</>,
       },
       {
-        accessorFn: (row) => row.countryName,
+        accessorFn: (row) => row.country,
         id: "country",
         cell: (info) => info.getValue(),
         header: () => <>Country Name</>,
@@ -63,17 +66,17 @@ export const LocalSource: React.FC = () => {
         header: () => <>Action</>,
       },
     ];
-    // const deleteCountryClick = (countryData: any) => {
-    //   var conformation = confirm("Are you sure to delete it?");
-    //   if (conformation) {
-    //     deleteCountry(countryData.countryId);
-    //   }
-    // };
+    const deleteLocalSourceClick = (localsourceData: any) => {
+      var conformation = confirm("Are you sure to delete it?");
+      if (conformation) {
+        deleteLocalSource(localsourceData.localSourceId);
+      }
+    };
   
-    // const editCountryClick = (countryData: any) => {
-    //   console.log(countryData);
-    //   navigate(COMMON_ROUTES.EDIT.replace(":id", countryData.countryId));
-    // };
+    const editLocalSourceClick = (localsourceData: any) => {
+      console.log(localsourceData);
+      navigate(COMMON_ROUTES.EDIT.replace(":id", localsourceData.localSourceId));
+    };
   
     const tableConfig: TableType<LocalSourceType> = {
       config: {
@@ -86,8 +89,8 @@ export const LocalSource: React.FC = () => {
         printBtn: true,
         globalSearchBox: true,
         pagination: true,
-        // onDeleteClick: deleteCountryClick,
-        // onEditClick: editCountryClick,
+        onDeleteClick: deleteLocalSourceClick,
+        onEditClick: editLocalSourceClick,
       },
     };
   

@@ -1,10 +1,11 @@
-export interface AddCurrency {
-    currencyId :number,
-    currency :string,
-    symbol :string,
-    currencyWord :string,
-    purchesExchaneg :string,
-    sellExchaneg :string,
-    pDate :string,
-    sDate :string,
+export interface CurrencyType {
+  id :number,
+  currencyId:number,
+  currencyType :string,
+  currencySymbol :string,
+  currencyInWord :string,
+  exchangeRateRs :string,
+  exchangeRateRsSell :string,
+  entryDate :string,
+  entryDateSell :string,
   };

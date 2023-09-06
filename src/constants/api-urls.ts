@@ -20,8 +20,8 @@ const GET_ADD_LOCALSOURCE = "entity/localSource";
 const GET_UPDATE_DELETE_LOCALSOURCE = "entity/localSource/{id}";
 
 // Information Master 
-const GET_ADD_CURRENCY = "entity/currency";
-const GET_UPDATE_DELETE_CURRENCY = "entity/currency/{id}";
+const GET_ADD_CURRENCY = "utility/currency";
+const GET_UPDATE_DELETE_CURRENCY = "utility/currency/{id}";
 
 export const apiUrls = {
 
@@ -43,5 +43,11 @@ export const apiUrls = {
   // Local Source Master 
   GET_ADD_LOCALSOURCE,
   GET_UPDATE_DELETE_LOCALSOURCE,
+
+  // Information Master 
+  // Currency
+  GET_ADD_CURRENCY,
+  GET_UPDATE_DELETE_CURRENCY
+
 };
 
