@@ -73,21 +73,21 @@ const SellDateValidation = {
 } as ValidationType;
 
 const currencyField: FormFieldType = createFormConfig(
-  "currency",
+  "currencyType",
   "Currency ",
   "text",
   CurrencyValidation,
   "Currency"
 );
 const symbolField: FormFieldType = createFormConfig(
-  "symbol",
+  "currencySymbol",
   "Symbol ",
   "text",
   SymbolValidation,
   "Symbol"
 );
 const currencyWordField: FormFieldType = createFormConfig(
-  "currecnyword",
+  "currencyInWord",
   "Currency in Word ",
   "text",
   CurrencyWordValidation,
@@ -96,28 +96,28 @@ const currencyWordField: FormFieldType = createFormConfig(
 
 // Purchase
 const purchesExchanegField: FormFieldType = createFormConfig(
-  "emailCC",
+  "exchangeRateRs",
   "Exchg. Rate(Rs.)",
   "text",
   PurchesExchanegValidation,
   "Enter Exchg. Rate(Rs.)"
 );
 const sellExchanegField: FormFieldType = createFormConfig(
-  "currencey",
+  "exchangeRateRsSell",
   "Exchg. Rate(Rs.)",
   "text",
   SellExchanegValidation,
   "Enter Exchg. Rate(Rs.) "
 );
 const pDateField: FormFieldType = createFormConfig(
-  "purchesDate",
+  "entryDate",
   "Date",
   "date",
   PurchesDateValidation,
   ""
 );
 const sDateField: FormFieldType = createFormConfig(
-  "sellDate",
+  "entryDateSell",
   "Date",
   "date",
   SellDateValidation,

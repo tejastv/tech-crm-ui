@@ -61,7 +61,7 @@ export const useCurrencyApiCallHook = () => {
     updateCurrencyData: AddUpdateCurrencyType
   ): Promise<ApiResponseType<CurrencyType>> => {
     const response = await instance.put(
-      apiUrls.GET_UPDATE_DELETE_CITY.replace("{id}", "" + updateCurrencyData.id),
+      apiUrls.GET_UPDATE_DELETE_CURRENCY.replace("{id}", "" + updateCurrencyData.id),
       updateCurrencyData
     );
     return response.data.data;
@@ -82,7 +82,7 @@ export const useCurrencyApiCallHook = () => {
 
   const deleteCity = async (id: string): Promise<ApiResponseType<CurrencyType>> => {
     const response = await instance.delete(
-      apiUrls.GET_ADD_CURRENCY.replace("{id}", id)
+      apiUrls.GET_UPDATE_DELETE_CURRENCY.replace("{id}", id)
     );
     return response.data.data;
   };

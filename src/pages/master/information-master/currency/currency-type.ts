@@ -1,5 +1,4 @@
 export interface CurrencyType {
-  id :number,
   currencyId:number,
   currencyType :string,
   currencySymbol :string,

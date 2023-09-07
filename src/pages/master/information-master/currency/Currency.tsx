@@ -86,12 +86,12 @@ export const Currency: React.FC = () => {
   const deleteCurrencyClick = async (currencyData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deleteCurrency(currencyData.id);
+      await deleteCurrency(currencyData.currencyId);
     }
   };
 
   const editCurrencyClick = (currencyData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", currencyData.id));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", currencyData.currencyId));
   };
 
   const tableConfig: TableType<CurrencyType> = {

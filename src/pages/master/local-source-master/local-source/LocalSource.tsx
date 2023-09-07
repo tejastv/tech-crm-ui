@@ -55,7 +55,7 @@ export const LocalSource: React.FC = () => {
         header: () => <>EmailCC</>,
       },
       {
-        accessorFn: (row) => row.country,
+        accessorFn: (row) => row.countryName,
         id: "country",
         cell: (info) => info.getValue(),
         header: () => <>Country Name</>,

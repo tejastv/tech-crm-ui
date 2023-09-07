@@ -4,7 +4,7 @@ export interface LocalSourceType {
     localSource : string,
     email : string,
     emailCc : string,
-    country : string,
+    countryName : string,
     currency : string,
     currencyId : number,
     countryId: number;

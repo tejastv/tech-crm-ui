@@ -75,16 +75,16 @@ export const AddUpdateLocalSource: React.FC = () => {
         let currencyId = localsourceData?.currencyId;
         let countrynamedata: any = returnObjectBasedOnID(
           countryData,
-          "id",
+          "countryId",
           id,
-          "id",
+          "countryId",
           "countryName"
         );
         let currencydata: any = returnObjectBasedOnID(
           currencyData,
-          "id",
+          "currencyId",
           currencyId,
-          "id",
+          "currencyId",
           "currencyType"
         );
         addLocalSrouceFormFields.sourcecountryField.config.setData = countrynamedata
