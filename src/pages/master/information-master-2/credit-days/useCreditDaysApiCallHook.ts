@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { AddUpdateCreditDaysType, CreditDaysType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useCreditDaysApiCallHook = () => {
@@ -10,7 +15,7 @@ export const useCreditDaysApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getCreditDays = () => {
+  const getCreditDays = (): UseQueryResult<CreditDaysType[]> => {
     return useQuery<CreditDaysType[]>({
       queryKey: [queryKeys.CREDIT_DAYS_DATA],
       queryFn: async () => {
@@ -21,7 +26,7 @@ export const useCreditDaysApiCallHook = () => {
     });
   };
 
-  const getCreditDaysData = (id: string) => {
+  const getCreditDaysData = (id: string): UseQueryResult<CreditDaysType> => {
     return useQuery<CreditDaysType>({
       queryKey: [queryKeys.CREDIT_DAYS_DATA, id],
       queryFn: async () => {

@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { AddPaymentModeType, PaymentModeType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const usePaymentModeApiCallHook = () => {
@@ -10,7 +15,7 @@ export const usePaymentModeApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getPaymentMode = () => {
+  const getPaymentMode = (): UseQueryResult<PaymentModeType[]> => {
     return useQuery<PaymentModeType[]>({
       queryKey: [queryKeys.PAYMENTMODE_DATA],
       queryFn: async () => {
@@ -18,10 +23,10 @@ export const usePaymentModeApiCallHook = () => {
         return response.data.data;
       },
       staleTime: Infinity,
-    })
-  }
+    });
+  };
 
-  const getPaymentModeData = (id: string) => {
+  const getPaymentModeData = (id: string): UseQueryResult<PaymentModeType> => {
     return useQuery<PaymentModeType>({
       queryKey: [queryKeys.PAYMENTMODE_DATA, id],
       queryFn: async () => {
@@ -38,7 +43,10 @@ export const usePaymentModeApiCallHook = () => {
   const addPaymentMode = async (
     paymentModeData: AddPaymentModeType
   ): Promise<ApiResponseType<PaymentModeType>> => {
-    const response = await instance.post(apiUrls.GET_ADD_PAYMENTMODE, paymentModeData);
+    const response = await instance.post(
+      apiUrls.GET_ADD_PAYMENTMODE,
+      paymentModeData
+    );
     return response.data.data;
   };
 
@@ -47,7 +55,9 @@ export const usePaymentModeApiCallHook = () => {
       (updatedItem: AddPaymentModeType) => addPaymentMode(updatedItem),
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: [queryKeys.PAYMENTMODE_DATA] });
+          queryClient.invalidateQueries({
+            queryKey: [queryKeys.PAYMENTMODE_DATA],
+          });
           navigate("..");
         },
       }
@@ -59,7 +69,10 @@ export const usePaymentModeApiCallHook = () => {
     updatePaymentModeData: AddPaymentModeType
   ): Promise<ApiResponseType<PaymentModeType>> => {
     const response = await instance.put(
-      apiUrls.GET_UPDATE_DELETE_PAYMENTMODE.replace("{id}", "" + updatePaymentModeData.id),
+      apiUrls.GET_UPDATE_DELETE_PAYMENTMODE.replace(
+        "{id}",
+        "" + updatePaymentModeData.id
+      ),
       updatePaymentModeData
     );
     return response.data.data;
@@ -70,7 +83,9 @@ export const usePaymentModeApiCallHook = () => {
       (updatedItem: AddPaymentModeType) => updatePaymentModeData(updatedItem),
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: [queryKeys.PAYMENTMODE_DATA] });
+          queryClient.invalidateQueries({
+            queryKey: [queryKeys.PAYMENTMODE_DATA],
+          });
           navigate("..");
         },
       }
@@ -78,7 +93,9 @@ export const usePaymentModeApiCallHook = () => {
     return mutation;
   };
 
-  const deletePaymentMode = async (id: string): Promise<ApiResponseType<PaymentModeType>> => {
+  const deletePaymentMode = async (
+    id: string
+  ): Promise<ApiResponseType<PaymentModeType>> => {
     const response = await instance.delete(
       apiUrls.GET_UPDATE_DELETE_PAYMENTMODE.replace("{id}", id)
     );
@@ -88,7 +105,9 @@ export const usePaymentModeApiCallHook = () => {
   const deletePaymentModeMutation = () => {
     const mutation = useMutation((id: string) => deletePaymentMode(id), {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.PAYMENTMODE_DATA] });
+        queryClient.invalidateQueries({
+          queryKey: [queryKeys.PAYMENTMODE_DATA],
+        });
       },
     });
     return mutation;

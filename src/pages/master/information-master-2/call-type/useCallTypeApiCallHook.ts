@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { AddUpdateCallTypeType, CallTypeType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useCallTypeApiCallHook = () => {
@@ -10,7 +15,7 @@ export const useCallTypeApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getCallType = () => {
+  const getCallType = (): UseQueryResult<CallTypeType[]> => {
     return useQuery<CallTypeType[]>({
       queryKey: [queryKeys.CALL_TYPE_DATA],
       queryFn: async () => {
@@ -21,7 +26,7 @@ export const useCallTypeApiCallHook = () => {
     });
   };
 
-  const getCallTypeData = (id: string) => {
+  const getCallTypeData = (id: string): UseQueryResult<CallTypeType> => {
     return useQuery<CallTypeType>({
       queryKey: [queryKeys.CALL_TYPE_DATA, id],
       queryFn: async () => {

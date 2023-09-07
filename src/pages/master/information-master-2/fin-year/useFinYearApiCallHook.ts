@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { AddUpdateFinYearType, FinYearType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useFinYearApiCallHook = () => {
@@ -10,7 +15,7 @@ export const useFinYearApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getFinYear = () => {
+  const getFinYear = (): UseQueryResult<FinYearType[]> => {
     return useQuery<FinYearType[]>({
       queryKey: [queryKeys.FIN_YEAR_DATA],
       queryFn: async () => {
@@ -21,7 +26,7 @@ export const useFinYearApiCallHook = () => {
     });
   };
 
-  const getFinYearData = (id: string) => {
+  const getFinYearData = (id: string): UseQueryResult<FinYearType> => {
     return useQuery<FinYearType>({
       queryKey: [queryKeys.FIN_YEAR_DATA, id],
       queryFn: async () => {

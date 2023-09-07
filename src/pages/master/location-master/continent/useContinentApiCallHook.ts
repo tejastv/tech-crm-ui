@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { ContinentType, AddUpdateContinentType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useContinentApiCallHook = () => {
@@ -10,7 +15,7 @@ export const useContinentApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getContinent = () => {
+  const getContinent = (): UseQueryResult<ContinentType[]> => {
     return useQuery<ContinentType[]>({
       queryKey: [queryKeys.CONTINENT_DATA],
       queryFn: async () => {
@@ -21,7 +26,7 @@ export const useContinentApiCallHook = () => {
     });
   };
 
-  const getContinentData = (id: string) => {
+  const getContinentData = (id: string): UseQueryResult<ContinentType> => {
     return useQuery<ContinentType>({
       queryKey: [queryKeys.CONTINENT_DATA, id],
       queryFn: async () => {

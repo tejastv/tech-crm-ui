@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { AddUpdateIndustryType, IndustryType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useIndustryApiCallHook = () => {
@@ -10,7 +15,7 @@ export const useIndustryApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getIndustry = () => {
+  const getIndustry = (): UseQueryResult<IndustryType[]> => {
     return useQuery<IndustryType[]>({
       queryKey: [queryKeys.INDUSTRY_DATA],
       queryFn: async () => {
@@ -21,7 +26,7 @@ export const useIndustryApiCallHook = () => {
     });
   };
 
-  const getIndustryData = (id: string) => {
+  const getIndustryData = (id: string): UseQueryResult<IndustryType> => {
     return useQuery<IndustryType>({
       queryKey: [queryKeys.INDUSTRY_DATA, id],
       queryFn: async () => {

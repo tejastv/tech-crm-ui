@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { CountryType, AddUpdateCountryType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useCountryApiCallHook = () => {
@@ -10,9 +15,7 @@ export const useCountryApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getCountry = () => {
-    // const response = await instance.get(apiUrls.GET_ADD_COUNTRY);
-    // return response.data.data;
+  const getCountry = (): UseQueryResult<CountryType[]> => {
     return useQuery<CountryType[]>({
       queryKey: [queryKeys.COUNTRY_DATA],
       queryFn: async () => {
@@ -23,7 +26,7 @@ export const useCountryApiCallHook = () => {
     });
   };
 
-  const getCountryData = (id: string) => {
+  const getCountryData = (id: string): UseQueryResult<CountryType> => {
     return useQuery<CountryType>({
       queryKey: [queryKeys.COUNTRY_DATA, id],
       queryFn: async () => {

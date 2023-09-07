@@ -1,6 +1,11 @@
 import { useAxios } from "@hooks/useAxios";
 import { useNavigate } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 import { AddUpdateSegmentType, SegmentType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
@@ -11,7 +16,7 @@ export const useSegmentApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getSegment = () => {
+  const getSegment = (): UseQueryResult<SegmentType[]> => {
     return useQuery<SegmentType[]>({
       queryKey: [queryKeys.SEGMENT_DATA],
       queryFn: async () => {
@@ -22,7 +27,7 @@ export const useSegmentApiCallHook = () => {
     });
   };
 
-  const getSegmentData = (id: string) => {
+  const getSegmentData = (id: string): UseQueryResult<SegmentType> => {
     return useQuery<SegmentType>({
       queryKey: [queryKeys.SEGMENT_DATA, id],
       queryFn: async () => {

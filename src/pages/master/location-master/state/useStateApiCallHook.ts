@@ -3,7 +3,12 @@ import { StateType, AddUpdateStateType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useStateApiCallHook = () => {
@@ -11,7 +16,7 @@ export const useStateApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getState = () => {
+  const getState = (): UseQueryResult<StateType[]> => {
     return useQuery<StateType[]>({
       queryKey: [queryKeys.STATE_DATA],
       queryFn: async () => {
@@ -22,7 +27,7 @@ export const useStateApiCallHook = () => {
     });
   };
 
-  const getStateData = (id: string) => {
+  const getStateData = (id: string): UseQueryResult<StateType> => {
     return useQuery<StateType>({
       queryKey: [queryKeys.STATE_DATA, id],
       queryFn: async () => {
