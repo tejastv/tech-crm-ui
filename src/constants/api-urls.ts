@@ -37,6 +37,9 @@ const GET_UPDATE_DELETE_USER = "user/{id}";
 const GET_ADD_PAYMENTMODE = "utility/paymentMode";
 const GET_UPDATE_DELETE_PAYMENTMODE = "utility/paymentMode/{id}";
 
+const GET_ADD_SUPPLIER_MASTER = "entity/supplierMaster";
+const GET_UPDATE_DELETE_SUPPLIER_MASTER = "entity/supplierMaster/{id}";
+
 const GET_ADD_BANKMASTER_DRAWN = "utility/bankMaster";
 const GET_UPDATE_DELETE_BANKMASTER_DRAWN = "utility/bankMaster/{id}";
 
@@ -76,4 +79,6 @@ export const apiUrls = {
   GET_UPDATE_DELETE_BANKMASTER_DRAWN,
   GET_ADD_BANKMASTER_DEPOSIT,
   GET_UPDATE_DELETE_BANKMASTER_DEPOSIT,
+  GET_ADD_SUPPLIER_MASTER,
+  GET_UPDATE_DELETE_SUPPLIER_MASTER,
 };

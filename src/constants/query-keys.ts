@@ -15,6 +15,7 @@ const USER_DATA = "user-data";
 const BANKMASTER_DRAWN_DATA = "bankmasterdrawn-data";
 const BANKMASTER_DEPOSIT_DATA = "bankmasterdeposit-data";
 const PAYMENTMODE_DATA = "paymentmode-data";
+const SUPPLIER_MASTER_DATA = "supplier-master-data";
 
 export const queryKeys = {
   CITY_DATA,
@@ -33,4 +34,5 @@ export const queryKeys = {
   USER_DATA,
   BANKMASTER_DRAWN_DATA,
   BANKMASTER_DEPOSIT_DATA,
+  SUPPLIER_MASTER_DATA,
 };

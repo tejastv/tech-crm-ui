@@ -9,7 +9,7 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 import { Button, DebouncedInput, TableType } from "@shared/index";
-import * as XLSX from "xlsx";
+// import * as XLSX from "xlsx";
 
 export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
@@ -89,40 +89,32 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   };
 
   const downloadExcel = () => {
-    const table: any = tableRef.current;
-
-    // Create a new Excel workbook
-    const wb = XLSX.utils.book_new();
-
-    // Extract table data
-    const wsData = [[]];
-
-    table.querySelectorAll("tr").forEach((row: any) => {
-      const rowData: any = [];
-      row.querySelectorAll("th, td").forEach((cell: any) => {
-        rowData.push(cell.textContent);
-      });
-      wsData.push(rowData);
-    });
-
-    // Create a new worksheet and add the data
-    const ws = XLSX.utils.aoa_to_sheet(wsData);
-    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-
-    // Create a Blob containing the Excel data
-    const blob = XLSX.write(wb, { bookType: "xlsx", type: "buffer" });
-
-    // Create a download link for the Blob
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "table_data.xlsx";
-
-    // Trigger a click on the link to initiate the download
-    a.click();
-
-    // Clean up by revoking the URL
-    URL.revokeObjectURL(url);
+    // const table: any = tableRef.current;
+    // // Create a new Excel workbook
+    // const wb = XLSX.utils.book_new();
+    // // Extract table data
+    // const wsData = [[]];
+    // table.querySelectorAll("tr").forEach((row: any) => {
+    //   const rowData: any = [];
+    //   row.querySelectorAll("th, td").forEach((cell: any) => {
+    //     rowData.push(cell.textContent);
+    //   });
+    //   wsData.push(rowData);
+    // });
+    // // Create a new worksheet and add the data
+    // const ws = XLSX.utils.aoa_to_sheet(wsData);
+    // XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+    // // Create a Blob containing the Excel data
+    // const blob = XLSX.write(wb, { bookType: "xlsx", type: "buffer" });
+    // // Create a download link for the Blob
+    // const url = URL.createObjectURL(blob);
+    // const a = document.createElement("a");
+    // a.href = url;
+    // a.download = "table_data.xlsx";
+    // // Trigger a click on the link to initiate the download
+    // a.click();
+    // // Clean up by revoking the URL
+    // URL.revokeObjectURL(url);
   };
 
   return (

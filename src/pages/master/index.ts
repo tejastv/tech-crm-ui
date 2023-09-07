@@ -181,7 +181,7 @@ export * from "./information-master/payment-mode/paymentmode-type";
 export * from "./information-master/source/add-source-type";
 export * from "./information-master/source/source-type";
 
-export * from "./information-master/supplier-master/add-supplier-type";
+export * from "./information-master/supplier-master/add-update-supplier-type";
 export * from "./information-master/supplier-master/supplier-type";
 
 // information master
@@ -236,3 +236,4 @@ export { usePurposeMasterApiCallHook } from "./information-master-2/purpose-mast
 export { useCreditDaysApiCallHook } from "./information-master-2/credit-days/useCreditDaysApiCallHook";
 export { useSiteStatusApiCallHook } from "./information-master-2/site-status/useSiteStatusApiCallHook";
 export { useUserApiCallHook } from "./information-master-2/user-master/useUserApiCallHook";
+export { useSupplierMasterApiCallHook } from "./information-master/supplier-master/useSupplierMasterApiCallHook";
