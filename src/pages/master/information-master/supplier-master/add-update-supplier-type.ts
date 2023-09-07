@@ -1,4 +1,5 @@
-export interface SupplierMasterType {
+export interface AddUpdateSupplierMasterType {
+  id?: number;
   address: string;
   zip: string;
   fax: string;
