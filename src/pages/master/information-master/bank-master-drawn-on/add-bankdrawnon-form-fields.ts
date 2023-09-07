@@ -12,11 +12,11 @@ const BankDrawnValidation = {
 } as ValidationType;
 
 const bankdrawn: FormFieldType = createFormConfig(
-  "bankdrawn",
+  "bankName",
   "Bank",
   "text",
   BankDrawnValidation,
-  "Bank Drwan"
+  "Bank Drawn"
 );
 
 export const addBankdrawnonFormFields = {
