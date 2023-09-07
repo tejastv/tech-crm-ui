@@ -37,6 +37,9 @@ const GET_UPDATE_DELETE_USER = "user/{id}";
 const GET_ADD_PAYMENTMODE = "utility/paymentMode";
 const GET_UPDATE_DELETE_PAYMENTMODE = "utility/paymentMode/{id}";
 
+const GET_ADD_BANKMASTER_DRAWN = "utility/bankMaster";
+const GET_UPDATE_DELETE_BANKMASTER_DRAWN = "utility/bankMaster/{id}";
+
 export const apiUrls = {
   GET_ADD_CONTINENT,
   GET_ADD_COUNTRY,
@@ -66,4 +69,6 @@ export const apiUrls = {
   GET_UPDATE_DELETE_SITE_STATUS,
   GET_ADD_USER,
   GET_UPDATE_DELETE_USER,
+  GET_ADD_BANKMASTER_DRAWN,
+  GET_UPDATE_DELETE_BANKMASTER_DRAWN,
 };
