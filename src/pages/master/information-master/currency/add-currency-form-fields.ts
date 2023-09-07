@@ -109,20 +109,31 @@ const sellExchanegField: FormFieldType = createFormConfig(
   SellExchanegValidation,
   "Enter Exchg. Rate(Rs.) "
 );
+const myDate = new Date(); // Replace this with your actual date
+
+// Extract year, month, and day components
+const year = myDate.getFullYear(); // Get the full year (e.g., 2023)
+const month = String(myDate.getMonth() + 1).padStart(2, '0'); // Get the month (e.g., 09 for September)
+const day = String(myDate.getDate()).padStart(2, '0'); // Get the day (e.g., 07)
+
+// Format the date as "year/mm/dd"
+const formattedDate = `${year}/${month}/${day}`;
 const pDateField: FormFieldType = createFormConfig(
   "entryDate",
   "Date",
   "date",
   PurchesDateValidation,
-  ""
+  formattedDate
 );
 const sDateField: FormFieldType = createFormConfig(
   "entryDateSell",
   "Date",
   "date",
   SellDateValidation,
-  ""
+  formattedDate
 );
+
+
 
 export const addCurrencyFormFields = {
   currencyField,
