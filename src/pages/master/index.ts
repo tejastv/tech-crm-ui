@@ -47,7 +47,7 @@ export { AddUpdateContinent } from "./location-master/continent/AddUpdateContine
 export { Continent } from "./location-master/continent/Continent";
 
 //BankMasterDeposit master child pages
-export { AddBankMasterDeposit } from "./information-master/bank-master-deposit/AddBankDeposit";
+export { AddBankMasterDeposit } from "./information-master/bank-master-deposit/AddUpdateBankDeposit";
 export { BankMasterDeposit } from "./information-master/bank-master-deposit/BankDeposit";
 
 export { AddPaymentMode } from "./information-master/payment-mode/AddPaymentMode";
@@ -166,7 +166,7 @@ export * from "./local-source-master/price-list/price-type";
 export * from "./local-source-master/std-price-list/add-std-price-type";
 export * from "./local-source-master/std-price-list/std-price-type";
 
-export * from "./information-master/bank-master-deposit/add-bankdeposit-type";
+export * from "./information-master/bank-master-deposit/add-update-bankdeposit-type";
 export * from "./information-master/bank-master-deposit/bankdeposit-type";
 
 export * from "./information-master/bank-master-drawn-on/add-update-bankdrawnon-type";
@@ -225,6 +225,7 @@ export { useContinentApiCallHook } from "./location-master/continent/useContinen
 export { useCountryApiCallHook } from "./location-master/country/useCountryApiCallHook";
 export { useStateApiCallHook } from "./location-master/state/useStateApiCallHook";
 export { usePaymentModeApiCallHook } from "./information-master/payment-mode/usePaymentModeApiCallHook";
+export { useBankMasterDepositApiCallHook } from "./information-master/bank-master-deposit/useBankMasterDepositApiCallHook";
 export { useBankMasterDrawnApiCallHook } from "./information-master/bank-master-drawn-on/useBankMasterDrawnApiCallHook";
 export { useSegmentApiCallHook } from "./client-master/segment/useSegmentApiCallHook";
 export { useExecutiveApiCallHook } from "./information-master-2/executive/useExecutiveApiCallHook";

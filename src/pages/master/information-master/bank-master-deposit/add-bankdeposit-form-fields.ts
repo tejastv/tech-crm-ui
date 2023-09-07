@@ -22,14 +22,14 @@ const BankDepositACValidation = {
 } as ValidationType;
 
 const bankdeposit: FormFieldType = createFormConfig(
-  "bankdeposit",
+  "bankName",
   "Bank",
   "text",
   BankDepositValidation,
   "Bank Deposit"
 );
 const bankDepositAc: FormFieldType = createFormConfig(
-  "bankDepositAc",
+  "accountNo",
   "A/c No.",
   "text",
   BankDepositACValidation,
