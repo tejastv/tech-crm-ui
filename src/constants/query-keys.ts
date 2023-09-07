@@ -13,6 +13,7 @@ const CREDIT_DAYS_DATA = "credit-days-data";
 const SITE_STATUS_DATA = "site-status-data";
 const USER_DATA = "user-data";
 const BANKMASTER_DRAWN_DATA = "bankmasterdrawn-data";
+const BANKMASTER_DEPOSIT_DATA = "bankmasterdeposit-data";
 const PAYMENTMODE_DATA = "paymentmode-data";
 
 export const queryKeys = {
@@ -31,4 +32,5 @@ export const queryKeys = {
   SITE_STATUS_DATA,
   USER_DATA,
   BANKMASTER_DRAWN_DATA,
+  BANKMASTER_DEPOSIT_DATA,
 };

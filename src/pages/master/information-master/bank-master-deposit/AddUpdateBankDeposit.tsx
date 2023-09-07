@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { addBankDepositeFormFields } from "@master/index";
+import {
+  AddBankDepositType,
+  addBankDepositeFormFields,
+  useBankMasterDepositApiCallHook,
+} from "@master/index";
+import { useParams } from "react-router-dom";
+
 
 export const AddBankMasterDeposit: React.FC = () => {
-  const methods = useForm();
+  const methods = useForm<AddBankDepositType>();
+
+  const {
+    addBankMasterDepositMutation,
+    getBankMasterDepositData,
+    updateBankMasterDepositOnMutation,
+  } = useBankMasterDepositApiCallHook();
+  const { mutate: AddBankMasterDeposit } = addBankMasterDepositMutation();
+  const { mutate: updateBankMasterDeposit } = updateBankMasterDepositOnMutation();
+  const params = useParams();
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Bank Master (Deposit On)",
@@ -16,8 +32,43 @@ export const AddBankMasterDeposit: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log("value", data);
+  useEffect(() => {
+    // This code will run when the component is about to unmount
+    return () => {
+      methods.reset();
+      // Place your cleanup code here
+      console.log("Component is unmounting. Cleanup can be performed here.");
+    };
+  }, []);
+
+  if (params.id) {
+    const { data: BankMasterDepositData, isSuccess: BankMasterDepositDataSuccess } =
+    getBankMasterDepositData("" + params.id);
+    console.log(params.id);
+
+    if (BankMasterDepositDataSuccess) {
+      addBankDepositeFormFields.bankdeposit.config.setData = BankMasterDepositData?.bankName;
+      addBankDepositeFormFields.bankDepositAc.config.setData = BankMasterDepositData?.accountNo;
+    }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
+  }
+
+  const onSubmit = methods.handleSubmit((BankMasterDepositData) => {
+    let data: any = { ...BankMasterDepositData };
+    data["ifscCode"] = "String";
+    data["branch"] = "String";
+    data["swiftCode"] = "String";
+    data["bankCode"] = "String";
+    data["status"] = "String";
+    data["groupId"] = "number";
+    if (params.id && BankMasterDepositData) {
+      updateBankMasterDeposit({ id: params.id, ...data });
+    } else {
+      AddBankMasterDeposit(data);
+    }
   });
 
   return (

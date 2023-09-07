@@ -1,5 +1,6 @@
-export interface AddBankDeposite {
-    bankdeposit :string,
-    bankDepositAc :string,
+export interface AddBankDepositType {
+    id? :string,
+    bankName: string,
+    accountNo: string,
   };
   
