@@ -21,11 +21,15 @@ type LoginForm = {
 };
 
 export const Login: React.FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginForm>();
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const onSubmit = (data: LoginForm) => {
+  const onSubmit = (data: LoginForm): void => {
     // event.preventDefault();
     // const user: LoginRequest = {
     //   userName: "Tejas",
@@ -34,9 +38,9 @@ export const Login: React.FC = () => {
     console.log(data);
     login({
       email: "tejastv@gmail.com",
-      id: '1',
+      id: "1",
       name: "Tejas",
-      authToken: "alskdniundi12uni1j2ndi1ndi12nd"
+      authToken: "alskdniundi12uni1j2ndi1ndi12nd",
     });
     // setLocalStorageData("auth", "user", user);
     navigate(DASHBOARD, { replace: true });
@@ -67,16 +71,19 @@ export const Login: React.FC = () => {
                     </span>
                   </div>
                   <input
-                    className={`form-control form-control-lg ${errors.username ? 'is-invalid' : ''}`}
+                    className={`form-control form-control-lg ${
+                      errors.username ? "is-invalid" : ""
+                    }`}
                     placeholder="Username"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                     type="email"
                     id="email"
-                    {...register('username', { required: false })}
+                    {...register("username", { required: false })}
                   />
-                  <div className="invalid-feedback">{errors.username?.message}</div>
-
+                  <div className="invalid-feedback">
+                    {errors.username?.message}
+                  </div>
                 </div>
                 <div className="input-group mb-3">
                   <div className="input-group-prepend">
@@ -85,15 +92,19 @@ export const Login: React.FC = () => {
                     </span>
                   </div>
                   <input
-                    className={`form-control form-control-lg ${errors.password ? 'is-invalid' : ''}`}
+                    className={`form-control form-control-lg ${
+                      errors.password ? "is-invalid" : ""
+                    }`}
                     placeholder="Password"
                     aria-label="Password"
                     aria-describedby="basic-addon1"
                     type="password"
                     id="password"
-                    {...register('password', { required: false })}
+                    {...register("password", { required: false })}
                   />
-                  <div className="invalid-feedback">{errors.password?.message}</div>
+                  <div className="invalid-feedback">
+                    {errors.password?.message}
+                  </div>
                 </div>
 
                 <div className="form-group row">
@@ -103,7 +114,7 @@ export const Login: React.FC = () => {
                         type="checkbox"
                         className="custom-control-input"
                         id="acceptTerms"
-                        {...register('rememberMe')}
+                        {...register("rememberMe")}
                       />
                       <label className="custom-control-label">
                         Remember me

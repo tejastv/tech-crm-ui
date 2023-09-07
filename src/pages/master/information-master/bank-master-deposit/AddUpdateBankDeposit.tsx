@@ -9,7 +9,6 @@ import {
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-
 export const AddBankMasterDeposit: React.FC = () => {
   const methods = useForm<AddBankDepositType>();
 
@@ -19,12 +18,15 @@ export const AddBankMasterDeposit: React.FC = () => {
     updateBankMasterDepositOnMutation,
   } = useBankMasterDepositApiCallHook();
   const { mutate: AddBankMasterDeposit } = addBankMasterDepositMutation();
-  const { mutate: updateBankMasterDeposit } = updateBankMasterDepositOnMutation();
+  const { mutate: updateBankMasterDeposit } =
+    updateBankMasterDepositOnMutation();
   const params = useParams();
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Bank Master (Deposit On)",
+      mainHeading: params.id
+        ? "Update Bank Master (Deposit On)"
+        : "Add Bank Master (Deposit On)",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -42,13 +44,17 @@ export const AddBankMasterDeposit: React.FC = () => {
   }, []);
 
   if (params.id) {
-    const { data: BankMasterDepositData, isSuccess: BankMasterDepositDataSuccess } =
-    getBankMasterDepositData("" + params.id);
+    const {
+      data: BankMasterDepositData,
+      isSuccess: BankMasterDepositDataSuccess,
+    } = getBankMasterDepositData("" + params.id);
     console.log(params.id);
 
     if (BankMasterDepositDataSuccess) {
-      addBankDepositeFormFields.bankdeposit.config.setData = BankMasterDepositData?.bankName;
-      addBankDepositeFormFields.bankDepositAc.config.setData = BankMasterDepositData?.accountNo;
+      addBankDepositeFormFields.bankdeposit.config.setData =
+        BankMasterDepositData?.bankName;
+      addBankDepositeFormFields.bankDepositAc.config.setData =
+        BankMasterDepositData?.accountNo;
     }
   } else {
     useEffect(() => {
@@ -56,7 +62,7 @@ export const AddBankMasterDeposit: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((BankMasterDepositData) => {
+  const onSubmit = methods.handleSubmit((BankMasterDepositData): void => {
     let data: any = { ...BankMasterDepositData };
     data["ifscCode"] = "String";
     data["branch"] = "String";

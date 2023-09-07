@@ -23,7 +23,9 @@ export const AddBankMasterDrawn: React.FC = () => {
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Bank Master (Drawn On)",
+      mainHeading: params.id
+        ? "Update Bank Master (Drawn On)"
+        : "Add Bank Master (Drawn On)",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -40,10 +42,9 @@ export const AddBankMasterDrawn: React.FC = () => {
     };
   }, []);
 
-
   if (params.id) {
     const { data: BankMasterDrawnData, isSuccess: BankMasterDrawnDataSuccess } =
-    getBankMasterDrawnOnData("" + params.id);
+      getBankMasterDrawnOnData("" + params.id);
     console.log(params.id);
 
     if (BankMasterDrawnDataSuccess) {
@@ -56,7 +57,7 @@ export const AddBankMasterDrawn: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((BankMasterDrawnData) => {
+  const onSubmit = methods.handleSubmit((BankMasterDrawnData): void => {
     if (params.id && BankMasterDrawnData) {
       updateBankMasterDrawnOn({ id: params.id, ...BankMasterDrawnData });
     } else {

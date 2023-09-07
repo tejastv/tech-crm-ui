@@ -28,7 +28,7 @@ export const AddCurrency: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
+  const onSubmit = methods.handleSubmit((data): void => {
     console.log("value", data);
   });
 
@@ -63,9 +63,7 @@ export const AddCurrency: React.FC = () => {
                       <Input
                         config={addCurrencyFormFields.purchesExchaneg.config}
                       />
-                      <Input
-                        config={addCurrencyFormFields.pDate.config}
-                      />
+                      <Input config={addCurrencyFormFields.pDate.config} />
                     </div>
                   </div>
                 </div>

@@ -46,7 +46,7 @@ export const AddUpdateFinYear: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((executiveData) => {
+  const onSubmit = methods.handleSubmit((executiveData): void => {
     let data: any = { ...executiveData };
     if (params.id && executiveData) {
       updateFinYear({ id: params.id, ...data });

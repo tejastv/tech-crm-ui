@@ -39,7 +39,7 @@ export const AddUpdateIndustry: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((industryData) => {
+  const onSubmit = methods.handleSubmit((industryData): void => {
     let data: any = { ...industryData };
     if (params.id && industryData) {
       updateIndustry({ id: +params.id, ...data });

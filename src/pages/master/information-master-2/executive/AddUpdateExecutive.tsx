@@ -104,7 +104,7 @@ export const AddUpdateExecutive: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((executiveData) => {
+  const onSubmit = methods.handleSubmit((executiveData): void => {
     let data: any = { ...executiveData };
     data.cityId = +data.cityId["value"];
     data.stateId = +data.stateId["value"];

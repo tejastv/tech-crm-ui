@@ -29,7 +29,7 @@ export const AddPrice: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
+  const onSubmit = methods.handleSubmit((data): void => {
     console.log("value", data);
   });
 

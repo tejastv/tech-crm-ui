@@ -40,7 +40,7 @@ export const AddUpdateContinent: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((continentData) => {
+  const onSubmit = methods.handleSubmit((continentData): void => {
     if (params.id && continentData) {
       updateContinent({ id: params.id, ...continentData });
     } else {

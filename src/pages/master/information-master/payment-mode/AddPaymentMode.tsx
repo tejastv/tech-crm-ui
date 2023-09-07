@@ -54,7 +54,7 @@ export const AddPaymentMode: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((paymentModeData) => {
+  const onSubmit = methods.handleSubmit((paymentModeData): void => {
     if (params.id && paymentModeData) {
       updatePaymentMode({ id: params.id, ...paymentModeData });
     } else {

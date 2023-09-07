@@ -43,7 +43,7 @@ export const AddUpdateState: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((stateData) => {
+  const onSubmit = methods.handleSubmit((stateData): void => {
     if (params.id && stateData) {
       updateState({ id: params.id, ...stateData });
     } else {

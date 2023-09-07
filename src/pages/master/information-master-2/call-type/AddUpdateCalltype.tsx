@@ -39,7 +39,7 @@ export const AddUpdateCalltype: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((callTypeData) => {
+  const onSubmit = methods.handleSubmit((callTypeData): void => {
     let data: any = { ...callTypeData };
     if (params.id && callTypeData) {
       updateCallType({ typeID: +params.id, ...data });

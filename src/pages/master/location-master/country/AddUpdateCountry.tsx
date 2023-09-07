@@ -45,7 +45,7 @@ export const AddUpdateCountry: React.FC = () => {
       selectOptionsMaker(continentData, "id", "continent");
   }
 
-  const onSubmit = methods.handleSubmit((countryData) => {
+  const onSubmit = methods.handleSubmit((countryData): void => {
     let data: any = { ...countryData };
     data.continentId = +data.continentId["value"];
     if (params.id && countryData) {
