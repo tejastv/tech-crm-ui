@@ -9,7 +9,11 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 import { Button, DebouncedInput, TableType } from "@shared/index";
-// import * as XLSX from "xlsx";
+import * as XLSX from "xlsx";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import { Alignment, TDocumentDefinitions } from "pdfmake/interfaces";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
@@ -83,39 +87,106 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "table_data.csv";
+    a.download = "Mirainform - CRM Software.csv";
     a.click();
     URL.revokeObjectURL(url);
   };
 
-  const downloadExcel = () => {
-    // const table: any = tableRef.current;
-    // // Create a new Excel workbook
-    // const wb = XLSX.utils.book_new();
-    // // Extract table data
-    // const wsData = [[]];
-    // table.querySelectorAll("tr").forEach((row: any) => {
-    //   const rowData: any = [];
-    //   row.querySelectorAll("th, td").forEach((cell: any) => {
-    //     rowData.push(cell.textContent);
-    //   });
-    //   wsData.push(rowData);
-    // });
-    // // Create a new worksheet and add the data
-    // const ws = XLSX.utils.aoa_to_sheet(wsData);
-    // XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-    // // Create a Blob containing the Excel data
-    // const blob = XLSX.write(wb, { bookType: "xlsx", type: "buffer" });
-    // // Create a download link for the Blob
-    // const url = URL.createObjectURL(blob);
-    // const a = document.createElement("a");
-    // a.href = url;
-    // a.download = "table_data.xlsx";
-    // // Trigger a click on the link to initiate the download
-    // a.click();
-    // // Clean up by revoking the URL
-    // URL.revokeObjectURL(url);
+  const generateExcelData = () => {
+    const table = tableRef.current;
+    const ws = XLSX.utils.table_to_sheet(table);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+    return XLSX.write(wb, { bookType: "xlsx", type: "array" });
   };
+  const downloadExcel = () => {
+    const excelData = generateExcelData();
+    const blob = new Blob([excelData], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Mirainform - CRM Software.xlsx";
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
+  const downloadPDF = () => {
+    const companyName = "Mirainform - CRM Software";
+    const table: any = tableRef.current;
+    const rows: any = Array.from(table.querySelectorAll("tr"));
+    const headers: any = Array.from(rows[0].querySelectorAll("th")).map(
+      (header: any) => ({
+        text: header.textContent,
+        style: "headerStyle",
+      })
+    );
+    console.log(headers)
+    const tableData = rows
+      .slice(1) // Skip the header row
+      .map((row: any) =>
+        Array.from(row.querySelectorAll("td")).map(
+          (cell: any) => cell.textContent
+        )
+      );
+    const columnWidths = Array.from({ length: headers.length }, () => "auto");
+    const headerStyle = {
+      fillColor: "#2d4154", // background for headers
+      color: "#ffffff", // White font color for headers
+      border: "none", // No borders for headers
+      alignment: "center" as Alignment,
+    };
+    const bodyStyle = {
+      color: "#2d4154", // Font color for the table body
+      border: "none",
+    };
+    const docDefinition: TDocumentDefinitions = {
+      pageSize: "A4", // Adjust page size as needed
+      // pageOrientation: "landscape",   
+      content: [
+        { text: companyName, fontSize: 16, alignment: "center", margin: [0, 0, 0, 20] }, // Title
+        {
+          table: {
+            headerRows: 1,
+            widths: columnWidths, // Adjust column widths as needed
+            body: [headers, ...tableData],
+          },
+          layout: {
+            hLineWidth: function (i) {
+              return i === 0 ? 0 : 1; // Remove horizontal borders for headers
+            },
+            vLineWidth: function () {
+              return 0; // Remove vertical borders
+            },
+            hLineColor: function (i) {
+              return i === 0 ? "#3498db" : "#ffffff"; // Color for horizontal lines
+            },
+            fillColor: function (rowIndex) {
+              return rowIndex % 2 === 0 ? "#f2f2f2" : null; // Zebra-style background for data rows (excluding headers)
+            },
+          },
+        },
+      ],
+      styles: {
+        headerStyle: headerStyle,
+        bodyStyle: bodyStyle,
+      },
+
+    };
+    // Create a PDF document
+    const pdfDoc = pdfMake.createPdf(docDefinition);
+    // Download the PDF with a specific filename
+    pdfDoc.download("Mirainform - CRM Software.pdf");
+  };
+
+
+
+  const handlePrint = () => {
+    console.log("print")
+  };
+
+
 
   return (
     <>
@@ -183,6 +254,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                   className="dt-button buttons-pdf buttons-html5 btn btn-danger btn-sm mr-1"
                   aria-controls="file_export"
                   type="button"
+                  onClick={downloadPDF}
                 >
                   <span>PDF</span>
                 </Button>
@@ -193,6 +265,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                   className="dt-button buttons-print btn btn-danger btn-sm mr-1"
                   aria-controls="file_export"
                   type="button"
+                  onClick={handlePrint}
                 >
                   <span>Print</span>
                 </Button>
@@ -370,9 +443,8 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                         disabled={!table.getCanPreviousPage()}
                         aria-controls="zero_config"
                         data-dt-idx="0"
-                        className={`page-link ${
-                          !table.getCanPreviousPage() && "disabled"
-                        }`}
+                        className={`page-link ${!table.getCanPreviousPage() && "disabled"
+                          }`}
                       >
                         Previous
                       </Button>
@@ -386,9 +458,8 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                         aria-controls="zero_config"
                         data-dt-idx="1"
                         type="button"
-                        className={`page-link ${
-                          !table.getCanNextPage() && "disabled"
-                        }`}
+                        className={`page-link ${!table.getCanNextPage() && "disabled"
+                          }`}
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
                       >
