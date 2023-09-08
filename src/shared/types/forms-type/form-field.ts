@@ -7,6 +7,7 @@ export interface FormFieldType {
     type?: string;
     id: string;
     placeholder?: string;
+    inputTypeAccept?: string;
     validation?: ValidationType;
     multiline?: boolean;
     className?: string;
