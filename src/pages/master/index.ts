@@ -8,7 +8,7 @@ export { AddClient } from "./client-master/client/AddClient";
 
 // Client Segment master child pages
 export { GroupMaster } from "./client-master/client-group/ClientGroup";
-export { AddClientGroup } from "./client-master/client-group/AddClientGroup";
+export { AddUpdateClientGroup } from "./client-master/client-group/AddUpdateClientGroup";
 export { Segment } from "./client-master/segment/Segment";
 export { AddUpdateSegment } from "./client-master/segment/AddUpdateSegment";
 
@@ -129,12 +129,11 @@ export { addUserFormFields } from "./information-master-2/user-master/add-user-f
 
 // Models
 
-
 // client master
 export * from "./client-master/client/client-type";
 export * from "./client-master/client/add-client-type";
 
-export * from "./client-master/client-group/add-client-group-type";
+export * from "./client-master/client-group/add-update-client-group-type";
 export * from "./client-master/client-group/client-group-type";
 
 export * from "./client-master/segment/add-update-segment.type";
@@ -222,7 +221,7 @@ export * from "./location-master/country/add-update-country-type";
 
 //Services/ Hooks
 
-// Location Master 
+// Location Master
 export { useCityApiCallHook } from "./location-master/city/useCityApiCallHook";
 export { useContinentApiCallHook } from "./location-master/continent/useContinentApiCallHook";
 export { useCountryApiCallHook } from "./location-master/country/useCountryApiCallHook";
@@ -232,7 +231,6 @@ export { useStateApiCallHook } from "./location-master/state/useStateApiCallHook
 export { useLocalSourceApiCallHook } from "./local-source-master/local-source/useLocalSourceApiCallHook";
 // export { useSegmentApiCallHook } from "./client-master/segment/useSegmentApiCallHook";
 // export { useExecutiveApiCallHook } from "./information-master-2/executive/useExecutiveApiCallHook";
-
 
 // information
 export { useCurrencyApiCallHook } from "./information-master/currency/useCurrencyApiCallHook";
@@ -249,4 +247,4 @@ export { useCreditDaysApiCallHook } from "./information-master-2/credit-days/use
 export { useSiteStatusApiCallHook } from "./information-master-2/site-status/useSiteStatusApiCallHook";
 export { useUserApiCallHook } from "./information-master-2/user-master/useUserApiCallHook";
 export { useSupplierMasterApiCallHook } from "./information-master/supplier-master/useSupplierMasterApiCallHook";
-
+export { useClientGroupApiCallHook } from "./client-master/client-group/useClientGroupApiCallHook";
