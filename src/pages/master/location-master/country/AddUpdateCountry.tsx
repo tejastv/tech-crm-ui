@@ -77,8 +77,8 @@ export const AddUpdateCountry: React.FC = () => {
           : [];
       }
       addCoutryFormFields.countryField.config.setData = countryData.countryName;
-      addCoutryFormFields.countryCodeField.config.setData =
-        countryData.countryCode;
+      addCoutryFormFields.countryCodeField.config.setData =countryData.countryCode;
+      // addCoutryFormFields.countrylocalSourceField.config.setData =countryData.countrylocalSource;
     }
   } else {
     useEffect(() => {
@@ -106,9 +106,7 @@ export const AddUpdateCountry: React.FC = () => {
                 </div>
                 <div className="col-md-6 col-xs-12">
                   <Input config={addCoutryFormFields.countryCodeField.config} />
-                  {/* <Select
-                    config={addCoutryFormFields.localSourceField.config}
-                  /> */}
+                  {/* <Input config={addCoutryFormFields.countrylocalSourceField.config} /> */}
                 </div>
               </div>
             </BorderLayout>

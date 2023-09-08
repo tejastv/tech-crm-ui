@@ -22,6 +22,16 @@ const countryCodeFieldValidation = {
     message: "30 characters max",
   },
 } as ValidationType;
+const countrylocalSourceFieldValidation = {
+  required: {
+    value: true,
+    message: "{label} field is rquired",
+  },
+  maxLength: {
+    value: 30,
+    message: "30 characters max",
+  },
+} as ValidationType;
 
 const countryField: FormFieldType = createFormConfig(
   "countryName",
@@ -55,33 +65,33 @@ const continentCountryField: FormFieldType = {
   },
 };
 
-const localSourceField: FormFieldType = {
-  config: {
-    name: "localSource",
-    label: "Local Source",
-    id: "localSource",
-    options: [],
-    placeholder: "Select Local Source",
-    validation: {
-      required: {
-        value: true,
-        message: "Select Local Source",
-      },
-    },
-  },
-};
+// const localSourceField: FormFieldType = {
+//   config: {
+//     name: "localSource",
+//     label: "Local Source",
+//     id: "localSource",
+//     options: [],
+//     placeholder: "Select Local Source",
+//     validation: {
+//       required: {
+//         value: true,
+//         message: "Select Local Source",
+//       },
+//     },
+//   },
+// };
 
-// const localSourceField: FormFieldType = createFormConfig(
-//   "Local Source",
-//   "Local Source",
-//   "text",
-//   localSourceFieldValidation,
-//   ""
-// );
+const countrylocalSourceField: FormFieldType = createFormConfig(
+  "Local Source",
+  "Local Source",
+  "text",
+  countrylocalSourceFieldValidation,
+  ""
+);
 
 export const addCoutryFormFields = {
   countryField,
   countryCodeField,
   continentCountryField,
-  localSourceField,
+  countrylocalSourceField,
 };

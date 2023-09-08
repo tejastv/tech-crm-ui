@@ -67,48 +67,71 @@ const sourcecountryOptions = [
   { value: "vanilla", label: "Vanilla" },
 ];
 
-const localSource: FormFieldType = createFormConfig(
-  "source",
+const localSourceField: FormFieldType = createFormConfig(
+  "localSource",
   "Source",
   "text",
   localSourceFieldValidation,
   "Enter localSource"
 );
-const email: FormFieldType = createFormConfig(
+const emailField: FormFieldType = createFormConfig(
   "email",
   "E-Mail",
   "email",
   EmailValidation,
   "Enter Email"
 );
-const emailCC: FormFieldType = createFormConfig(
-  "emailCC",
+const emailCCField: FormFieldType = createFormConfig(
+  "emailCc",
   "E-MailCC",
   "email",
   EmailValidationCC,
   "Enter E-mailCC"
 );
-const currencey: FormFieldType = createFormConfig(
-  "currencey",
-  "Currency",
-  "select",
-  CurrencyValidation,
-  "Select Currency",
-  currencyOptions
-);
-const sourcecountry: FormFieldType = createFormConfig(
-  "country",
-  "Country",
-  "select",
-  CountryValidation,
-  "Select Country",
-  sourcecountryOptions
-);
-
+// const currenceyField: FormFieldType = createFormConfig(
+//   "currencey",
+//   "Currency",
+//   "select",
+//   CurrencyValidation,
+//   "Select Currency",
+//   currencyOptions
+// );
+const localsourcecurrenceyField: FormFieldType = {
+  config: {
+    name: "currencyId",
+    label: "Currency",
+    id: "currencyType",
+    options: [],
+    placeholder: "Select Currency",
+    validation: {
+      required: {
+        value: true,
+        message: "Select Currency",
+      },
+    },
+  },
+};
+const sourcecountryField: FormFieldType = {
+  config: {
+    name: "countryId",
+    label: "Country",
+    id: "countryName",
+    options: [],
+    placeholder: "Select Country",
+    validation: {
+      required: {
+        value: true,
+        message: "Select Country",
+      },
+    },
+  },
+};
 export const addLocalSrouceFormFields = {
-  localSource,
-  email,
-  emailCC,
-  currencey,
-  sourcecountry,
+  localSourceField,
+  emailField,
+  emailCCField,
+  localsourcecurrenceyField,
+  // currenceyField,
+  sourcecountryField,
+  // continentLocalSourceField
 };

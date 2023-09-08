@@ -1,9 +1,19 @@
 import React from "react";
-
-import { BorderLayout, PageBreadcrumb } from "@shared/index";
+import {
+  BorderLayout,
+  Loader,
+  PageBreadcrumb,
+  Table,
+  TableType,
+} from "@shared/index";
 import { COMMON_ROUTES } from "constants";
+import { ColumnDef } from "@tanstack/react-table";
+import { CurrencyType, useCurrencyApiCallHook } from "@pages/master";
+import { useNavigate } from "react-router-dom";
 
 export const Currency: React.FC = () => {
+  const { getCurrency, deleteCurrencyMutation } = useCurrencyApiCallHook();
+  const navigate = useNavigate();
   const config = {
     breadcrumbConfig: {
       pageHeading: "Currency",
@@ -15,12 +25,100 @@ export const Currency: React.FC = () => {
     },
   };
 
+  const columns: ColumnDef<CurrencyType>[] = [
+    {
+      id: "srNo",
+      cell: (info) => info.getValue(),
+      header: () => <>Sr no</>,
+    },
+    {
+      accessorFn: (row) => row.currencyType,
+      id: "currencytype",
+      cell: (info) => info.getValue(),
+      header: () => <>Currency Type</>,
+    },
+    {
+      accessorFn: (row) => row.currencySymbol,
+      id: "currencysymbol",
+      cell: (info) => info.getValue(),
+      header: () => <>Currency Symobol</>,
+    },
+    {
+      accessorFn: (row) => row.currencyInWord,
+      id: "currencyword",
+      cell: (info) => info.getValue(),
+      header: () => <>Currency in Word</>,
+    },
+    {
+      accessorFn: (row) => row.exchangeRateRs,
+      id: "prucheseexchg",
+      cell: (info) => info.getValue(),
+      header: () => <>Exchg.(Purchese)</>,
+    },
+    {
+      accessorFn: (row) => row.entryDate,
+      id: "purchesedate",
+      cell: (info) => info.getValue(),
+      header: () => <>Date.(Purchese)</>,
+    },
+    {
+      accessorFn: (row) => row.exchangeRateRsSell,
+      id: "sellexchg",
+      cell: (info) => info.getValue(),
+      header: () => <>Exchg(Sell)</>,
+    },
+    {
+      accessorFn: (row) => row.entryDateSell,
+      id: "selldate",
+      cell: (info) => info.getValue(),
+      header: () => <>Sell Date</>,
+    },
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+  ];
+
+  const { data: currencyData, isLoading } = getCurrency();
+  const { mutateAsync: deleteCurrency } = deleteCurrencyMutation();
+
+  const deleteCurrencyClick = async (currencyData: any) => {
+    var confirmation = confirm("Are you sure to delete it?");
+    if (confirmation) {
+      await deleteCurrency(currencyData.currencyId);
+    }
+  };
+
+  const editCurrencyClick = (currencyData: any) => {
+    navigate(COMMON_ROUTES.EDIT.replace(":id", currencyData.currencyId));
+  };
+
+  const tableConfig: TableType<CurrencyType> = {
+    config: {
+      columns: columns,
+      tableData: currencyData ? currencyData : [],
+      copyBtn: true,
+      csvBtn: true,
+      excelBtn: true,
+      pdfBtn: true,
+      printBtn: true,
+      globalSearchBox: true,
+      pagination: true,
+      onDeleteClick: deleteCurrencyClick,
+      onEditClick: editCurrencyClick,
+    },
+  };
+
   return (
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {/* <Table></Table> */}
+        <Table config={tableConfig.config}>
+          {isLoading ? <Loader /> : null}
+        </Table>
       </BorderLayout>
     </>
   );
 };
+

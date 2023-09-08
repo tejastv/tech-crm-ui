@@ -11,11 +11,13 @@ import {
   LOGIN,
   MASTER_ROUTES,
   ROOT,
+  TRANSACTION_ROUTES,
   UNKNOWN,
 } from "constants";
 
 const Dashboard = React.lazy(() => import("../pages/dashboard/Dashboard"));
 const MasterRoutes = React.lazy(() => import("../pages/master/MasterRoutes"));
+const TransactionRoutes = React.lazy(() => import("../pages/transaction-search/TrasactionRoutes"));
 
 const AppRoutes = () => {
   return (
@@ -39,6 +41,14 @@ const AppRoutes = () => {
             element={
               <React.Suspense>
                 <MasterRoutes />
+              </React.Suspense>
+            }
+          ></Route>
+          <Route
+            path={TRANSACTION_ROUTES.TRANSACTION_PARENT_ROUTE}
+            element={
+              <React.Suspense>
+                <TransactionRoutes />
               </React.Suspense>
             }
           ></Route>

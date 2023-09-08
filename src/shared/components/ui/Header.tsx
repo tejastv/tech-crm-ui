@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import logoImage from "@assets/images/logo.png";
 import { useAuth } from "@hooks/index";
-import { DASHBOARD, LOGIN, MASTER_ROUTES } from "constants";
+import { DASHBOARD, LOGIN, MASTER_ROUTES, TRANSACTION_ROUTES } from "constants";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -625,15 +625,14 @@ export const Header: React.FC = () => {
                       <span className="hide-menu ">Transaction / Search</span>
                     </a>
                     <ul className="collapse first-level">
-                      <li className="sidebar-item">
-                        {" "}
-                        <a
+                    <li className="sidebar-item">
+                        <Link
                           className="sidebar-link"
-                          href="add_enquiry_detail.php"
+                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.NEWENQUIRY_TRANSACTION_ROUTES.NEWENQUIRY}`}
                         >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Add New Enquiry</span>
-                        </a>
+                        </Link>
                       </li>
                       <li className="sidebar-item">
                         {" "}

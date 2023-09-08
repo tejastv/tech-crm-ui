@@ -117,6 +117,16 @@ export const MASTER_ROUTES = {
     USER: "user",
   },
 };
+export const TRANSACTION_ROUTES = {
+  TRANSACTION_PARENT_ROUTE: "/transaction/*",
+  TRANSACTION: "/transaction/",
+
+  NEWENQUIRY_TRANSACTION_ROUTES: {
+    NEWENQUIRY_TRANSACTION_PARENT_ROUTE: "/add-new-enquiry/*",
+    NEWENQUIRY: "add-new-enquiry/",
+    
+  },
+}
 
 export const COMMON_ROUTES = {
   ADD: "add",

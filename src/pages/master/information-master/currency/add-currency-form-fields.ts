@@ -56,38 +56,38 @@ const PurchesDateValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message: "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
-  },
+  // pattern: {
+  //   value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+  //   message: "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
+  // },
 } as ValidationType;
 const SellDateValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message: "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
-  },
+  // pattern: {
+  //   value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+  //   message: "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
+  // },
 } as ValidationType;
 
-const currency: FormFieldType = createFormConfig(
-  "currency",
+const currencyField: FormFieldType = createFormConfig(
+  "currencyType",
   "Currency ",
   "text",
   CurrencyValidation,
   "Currency"
 );
-const symbol: FormFieldType = createFormConfig(
-  "symbol",
+const symbolField: FormFieldType = createFormConfig(
+  "currencySymbol",
   "Symbol ",
   "text",
   SymbolValidation,
   "Symbol"
 );
-const currencyWord: FormFieldType = createFormConfig(
-  "currecnyword",
+const currencyWordField: FormFieldType = createFormConfig(
+  "currencyInWord",
   "Currency in Word ",
   "text",
   CurrencyWordValidation,
@@ -95,41 +95,52 @@ const currencyWord: FormFieldType = createFormConfig(
 );
 
 // Purchase
-const purchesExchaneg: FormFieldType = createFormConfig(
-  "emailCC",
+const purchesExchanegField: FormFieldType = createFormConfig(
+  "exchangeRateRs",
   "Exchg. Rate(Rs.)",
   "text",
   PurchesExchanegValidation,
   "Enter Exchg. Rate(Rs.)"
 );
-const sellExchaneg: FormFieldType = createFormConfig(
-  "currencey",
+const sellExchanegField: FormFieldType = createFormConfig(
+  "exchangeRateRsSell",
   "Exchg. Rate(Rs.)",
   "text",
   SellExchanegValidation,
   "Enter Exchg. Rate(Rs.) "
 );
-const pDate: FormFieldType = createFormConfig(
-  "purchesDate",
+const myDate = new Date(); // Replace this with your actual date
+
+// Extract year, month, and day components
+const year = myDate.getFullYear(); 
+const month = String(myDate.getMonth() + 1).padStart(2, '0'); 
+const day = String(myDate.getDate()).padStart(2, '0'); // Get the day (e.g., 07)
+
+// Format the date as "year/mm/dd"
+const formattedDate = `${year}/${month}/${day}`;
+const pDateField: FormFieldType = createFormConfig(
+  "entryDate",
   "Date",
   "date",
   PurchesDateValidation,
-  ""
+  formattedDate
 );
-const sDate: FormFieldType = createFormConfig(
-  "sellDate",
+const sDateField: FormFieldType = createFormConfig(
+  "entryDateSell",
   "Date",
   "date",
   SellDateValidation,
-  ""
+  formattedDate
 );
 
+
+
 export const addCurrencyFormFields = {
-  currency,
-  symbol,
-  currencyWord,
-  purchesExchaneg,
-  sellExchaneg,
-  pDate,
-  sDate,
+  currencyField,
+  symbolField,
+  currencyWordField,
+  purchesExchanegField,
+  sellExchanegField,
+  pDateField,
+  sDateField,
 };

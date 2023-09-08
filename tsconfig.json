@@ -30,7 +30,9 @@
       "@pages/*": ["pages/*"],
       "@auth/*": ["pages/auth/*"],
       "@dashboard/*": ["pages/dashboard/*"],
-      "@master/*": ["pages/master/*"]
+      "@master/*": ["pages/master/*"],
+      "@transaction-search/*": ["pages/transaction-search/*"],
+      
     }
   },
   "include": [

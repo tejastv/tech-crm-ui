@@ -6,9 +6,11 @@
   color: inherit;
 }
 .card-title {
-  color: #ef6e6e;
-  font-weight: bold;
-  text-decoration: underline;
+  // color: #ef6e6e;
+  // font-weight: bold;
+  // text-decoration: underline;
+  color:#b50000; font-weight:bold; text-decoration: underline,
+
 }
 hr {
   box-sizing: content-box;
@@ -35,4 +37,8 @@ hr {
   justify-content: center;
   align-items: center;
   margin: 0;
+}
+
+.enquirynote{
+  background-color: #000;
 }

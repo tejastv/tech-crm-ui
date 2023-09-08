@@ -1,8 +1,13 @@
-export interface LocalSrouce {
-    localSourceId:number,
+export interface LocalSourceType {
+
+  localSourceId:number,
     localSource : string,
     email : string,
-    emailCC : string,
-    currencey : string,
-    sourcecountry : string,
+    emailCc : string,
+    countryName : string,
+    currency : string,
+    currencyId : number,
+    countryId: number;
   };
+
+
