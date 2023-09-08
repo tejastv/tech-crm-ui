@@ -93,7 +93,7 @@ const startrefnoValidation = {
 } as ValidationType;
 
 const finyear: FormFieldType = createFormConfig(
-  "finyear",
+  "finYear",
   "Fin. Year",
   "number",
   finyearValidation,
@@ -114,28 +114,28 @@ const stax: FormFieldType = createFormConfig(
   "Total Tax"
 );
 const edcess: FormFieldType = createFormConfig(
-  "edcess",
+  "eduCess",
   "Ed.Cess",
   "number",
   edcessValidation,
   "Ed. Cess"
 );
 const cgst: FormFieldType = createFormConfig(
-  "cgst",
+  "cgstper",
   "CGST %",
   "number",
   cgstValidation,
   "CGST %"
 );
 const sgst: FormFieldType = createFormConfig(
-  "sgst",
+  "sgstper",
   "SGST %",
   "number",
   sgstValidation,
   "SGST %"
 );
 const igst: FormFieldType = createFormConfig(
-  "igst",
+  "igstper",
   "IGST %",
   "number",
   igstValidation,

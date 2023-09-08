@@ -31,6 +31,8 @@ export const AddUpdateFinYear: React.FC = () => {
       "" + params.id
     );
     if (finYearDataSuccess) {
+      console.log(finYearData);
+
       addFinYearFormFields.finyear.config.setData = finYearData.finYear;
       // addFinYearFormFields.totaltax.config.setData = finYearData.;
       addFinYearFormFields.stax.config.setData = finYearData.stax;
@@ -38,7 +40,6 @@ export const AddUpdateFinYear: React.FC = () => {
       addFinYearFormFields.cgst.config.setData = finYearData.cgstper;
       addFinYearFormFields.sgst.config.setData = finYearData.sgstper;
       addFinYearFormFields.igst.config.setData = finYearData.igstper;
-      // addFinYearFormFields.startinvno.config.setData = finYearData.;
     }
   } else {
     useEffect(() => {
@@ -80,8 +81,8 @@ export const AddUpdateFinYear: React.FC = () => {
                     <Input config={addFinYearFormFields.cgst.config} />
                     <Input config={addFinYearFormFields.sgst.config} />
                     <Input config={addFinYearFormFields.igst.config} />
-                    <Input config={addFinYearFormFields.startinvno.config} />
-                    <Input config={addFinYearFormFields.startrefno.config} />
+                    {/* <Input config={addFinYearFormFields.startinvno.config} /> */}
+                    {/* <Input config={addFinYearFormFields.startrefno.config} /> */}
                   </div>
                 </div>
               </div>

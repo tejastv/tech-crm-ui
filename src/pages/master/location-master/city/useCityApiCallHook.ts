@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { AddUpdateCityType, CityType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useCityApiCallHook = () => {
@@ -10,7 +15,7 @@ export const useCityApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getCity = () => {
+  const getCity = (): UseQueryResult<CityType[]> => {
     return useQuery<CityType[]>({
       queryKey: [queryKeys.CITY_DATA],
       queryFn: async () => {
@@ -21,9 +26,7 @@ export const useCityApiCallHook = () => {
     });
   };
 
-  const getCityData = (id: string) => {
-    console.log(id);
-    // if (!id) queryClient.removeQueries({ queryKey: [queryKeys.CITY_DATA, id] });
+  const getCityData = (id: string): UseQueryResult<CityType> => {
     return useQuery<CityType>({
       queryKey: [queryKeys.CITY_DATA, id],
       queryFn: async () => {

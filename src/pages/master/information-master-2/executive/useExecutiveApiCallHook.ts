@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { AddUpdateExecutiveType, ExecutiveType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useExecutiveApiCallHook = () => {
@@ -10,7 +15,7 @@ export const useExecutiveApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getExecutive = () => {
+  const getExecutive = (): UseQueryResult<ExecutiveType[]> => {
     return useQuery<ExecutiveType[]>({
       queryKey: [queryKeys.EXECUTIVE_DATA],
       queryFn: async () => {
@@ -21,7 +26,7 @@ export const useExecutiveApiCallHook = () => {
     });
   };
 
-  const getExecutiveData = (id: string) => {
+  const getExecutiveData = (id: string): UseQueryResult<ExecutiveType> => {
     return useQuery<ExecutiveType>({
       queryKey: [queryKeys.EXECUTIVE_DATA, id],
       queryFn: async () => {

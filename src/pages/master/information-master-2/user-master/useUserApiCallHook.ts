@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { AddUpdateUserType, UserType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useUserApiCallHook = () => {
@@ -10,7 +15,7 @@ export const useUserApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getUser = () => {
+  const getUser = (): UseQueryResult<UserType[]> => {
     return useQuery<UserType[]>({
       queryKey: [queryKeys.USER_DATA],
       queryFn: async () => {
@@ -21,7 +26,7 @@ export const useUserApiCallHook = () => {
     });
   };
 
-  const getUserData = (id: string) => {
+  const getUserData = (id: string): UseQueryResult<UserType> => {
     return useQuery<UserType>({
       queryKey: [queryKeys.USER_DATA, id],
       queryFn: async () => {

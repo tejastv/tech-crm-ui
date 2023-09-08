@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { AddUpdateSupplierMasterType, SupplierMasterType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useSupplierMasterApiCallHook = () => {
@@ -10,7 +15,7 @@ export const useSupplierMasterApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getSupplierMaster = () => {
+  const getSupplierMaster = (): UseQueryResult<SupplierMasterType[]> => {
     return useQuery<SupplierMasterType[]>({
       queryKey: [queryKeys.SUPPLIER_MASTER_DATA],
       queryFn: async () => {
@@ -21,7 +26,9 @@ export const useSupplierMasterApiCallHook = () => {
     });
   };
 
-  const getSupplierMasterData = (id: string) => {
+  const getSupplierMasterData = (
+    id: string
+  ): UseQueryResult<SupplierMasterType> => {
     return useQuery<SupplierMasterType>({
       queryKey: [queryKeys.SUPPLIER_MASTER_DATA, id],
       queryFn: async () => {

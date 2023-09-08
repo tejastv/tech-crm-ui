@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { AddUpdateSiteStatusType, SiteStatusType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useSiteStatusApiCallHook = () => {
@@ -10,7 +15,7 @@ export const useSiteStatusApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getSiteStatus = () => {
+  const getSiteStatus = (): UseQueryResult<SiteStatusType[]> => {
     return useQuery<SiteStatusType[]>({
       queryKey: [queryKeys.SITE_STATUS_DATA],
       queryFn: async () => {
@@ -21,7 +26,7 @@ export const useSiteStatusApiCallHook = () => {
     });
   };
 
-  const getSiteStatusData = (id: string) => {
+  const getSiteStatusData = (id: string): UseQueryResult<SiteStatusType> => {
     return useQuery<SiteStatusType>({
       queryKey: [queryKeys.SITE_STATUS_DATA, id],
       queryFn: async () => {

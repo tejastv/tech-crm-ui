@@ -2,7 +2,12 @@ import { useAxios } from "@hooks/useAxios";
 import { AddUpdatePurposeMasterType, PurposeMasterType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const usePurposeMasterApiCallHook = () => {
@@ -10,7 +15,7 @@ export const usePurposeMasterApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getPurposeMaster = () => {
+  const getPurposeMaster = (): UseQueryResult<PurposeMasterType[]> => {
     return useQuery<PurposeMasterType[]>({
       queryKey: [queryKeys.PURPOSE_MASTER_DATA],
       queryFn: async () => {
@@ -21,7 +26,9 @@ export const usePurposeMasterApiCallHook = () => {
     });
   };
 
-  const getPurposeMasterData = (id: string) => {
+  const getPurposeMasterData = (
+    id: string
+  ): UseQueryResult<PurposeMasterType> => {
     return useQuery<PurposeMasterType>({
       queryKey: [queryKeys.PURPOSE_MASTER_DATA, id],
       queryFn: async () => {

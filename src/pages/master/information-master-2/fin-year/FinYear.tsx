@@ -88,12 +88,12 @@ export const FinYear: React.FC = () => {
   const deleteFinYearClick = async (finYearData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deleteFinYear(finYearData.finYearID);
+      await deleteFinYear(finYearData.finYear);
     }
   };
 
   const editFinYearClick = (finYearData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", finYearData.finYearID));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", finYearData.finYear));
   };
 
   const tableConfig: TableType<FinYearType> = {
