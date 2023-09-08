@@ -51,6 +51,12 @@ const GET_UPDATE_DELETE_BANKMASTER_DRAWN = "utility/bankMaster/{id}";
 const GET_ADD_BANKMASTER_DEPOSIT = "utility/bankDetails";
 const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 
+const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
+const GET_UPDATE_DELETE_CLIENT_GROUP = "entity/clientGroup/{id}";
+
+const GET_ADD_SOURCE = "utility/sourceMaster";
+const GET_UPDATE_DELETE_SOURCE = "utility/sourceMaster/{id}";
+
 export const apiUrls = {
   GET_ADD_CONTINENT,
   GET_ADD_COUNTRY,
@@ -90,5 +96,8 @@ export const apiUrls = {
   GET_UPDATE_DELETE_BANKMASTER_DEPOSIT,
   GET_ADD_SUPPLIER_MASTER,
   GET_UPDATE_DELETE_SUPPLIER_MASTER,
+  GET_ADD_CLIENT_GROUP,
+  GET_UPDATE_DELETE_CLIENT_GROUP,
+  GET_ADD_SOURCE,
+  GET_UPDATE_DELETE_SOURCE,
 };
-

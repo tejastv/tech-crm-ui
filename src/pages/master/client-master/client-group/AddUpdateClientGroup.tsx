@@ -12,7 +12,7 @@ import {
 } from "@shared/index";
 import { addClientGroupFormFields } from "@master/index";
 
-export const AddClientGroup: React.FC = () => {
+export const AddUpdateClientGroup: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {

@@ -4,7 +4,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import { addSourceFormFields } from "@master/index";
 
-export const AddInfoSource: React.FC = () => {
+export const AddUpdateSource: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
