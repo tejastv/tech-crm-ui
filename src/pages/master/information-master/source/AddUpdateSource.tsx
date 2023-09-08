@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { addSourceFormFields } from "@master/index";
+import { AddUpdateSourceType, addSourceFormFields, useSourceApiCallHook } from "@master/index";
+import { useParams } from "react-router-dom";
 
 export const AddUpdateSource: React.FC = () => {
-  const methods = useForm();
+  const params = useParams();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Source",
+      mainHeading: params.id ? "Update Source" : "Add Source",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -16,8 +17,61 @@ export const AddUpdateSource: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data): void => {
-    console.log("value", data);
+  const methods = useForm<AddUpdateSourceType>();
+  const { addSourceMutation, getSourceData, updateSourceMutation } =
+    useSourceApiCallHook();
+  const { mutateAsync: addSource } = addSourceMutation();
+  const { mutateAsync: updateSource } = updateSourceMutation();
+
+  if (params.id) {
+    const { data: surceData, isSuccess: surceDataSuccess } =
+      getSourceData("" + params.id);
+    if (surceDataSuccess) {
+      addSourceFormFields.source.config.setData = surceData.source;
+    }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
+  }
+
+  // function fileToBase64(file: any, callback: any) {
+  //   if (!file) {
+  //     return callback(new Error("No file provided"));
+  //   }
+  
+  //   const reader: any = new FileReader();
+  //   reader.onload = function () {
+  //     const base64String = reader.result.split(',')[1];
+  //     callback(null, base64String);
+  //   };
+  
+  //   reader.onerror = function (error: any) {
+  //     callback(error);
+  //   };
+  
+  //   reader.readAsDataURL(file);
+  // }
+  
+  // // Example usage:
+  // const fileToBase64 = (selectedFile: any, fileToBase64) => {
+  //     if (error) {
+  //       console.error(error);
+  //     } else {
+  //       console.log("Base64:", base64String);
+  //       // Do something with the base64String, like sending it to a server or displaying it in an image element.
+  //     }
+  //   }
+
+  const onSubmit = methods.handleSubmit((surceData): void => {
+    let data: any = { ...surceData };
+    console.log(data);
+    
+    // if (params.id && surceData) {
+    //   updateSource({ id: +params.id, ...data });
+    // } else {
+    //   addSource(data);
+    // }
   });
 
   return (

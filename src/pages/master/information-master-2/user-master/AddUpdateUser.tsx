@@ -34,8 +34,8 @@ export const AddUpdateUser: React.FC = () => {
   const { addUserMutation, updateUserMutation } =
     useUserApiCallHook();
     // getUserData
-  const { mutate: addUser } = addUserMutation();
-  const { mutate: updateUser } = updateUserMutation();
+  const { mutateAsync: addUser } = addUserMutation();
+  const { mutateAsync: updateUser } = updateUserMutation();
 
   if (params.id) {
     // const { data: userData, isSuccess: userDataSuccess } = getUserData(

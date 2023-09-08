@@ -14,8 +14,8 @@ export const AddUpdateState: React.FC = () => {
   const { addStateMutation, updateStateMutation, getStateData } =
     useStateApiCallHook();
   const params = useParams();
-  const { mutate: addState } = addStateMutation();
-  const { mutate: updateState } = updateStateMutation();
+  const { mutateAsync: addState } = addStateMutation();
+  const { mutateAsync: updateState } = updateStateMutation();
 
   const cardConfig = {
     formLayoutConfig: {

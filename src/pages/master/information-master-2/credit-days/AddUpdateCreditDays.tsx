@@ -24,8 +24,8 @@ export const AddUpdateCreditDays: React.FC = () => {
   const methods = useForm<AddUpdateCreditDaysType>();
   const { addCreditDaysMutation, getCreditDaysData, updateCreditDaysMutation } =
     useCreditDaysApiCallHook();
-  const { mutate: addCreditDays } = addCreditDaysMutation();
-  const { mutate: updateCreditDays } = updateCreditDaysMutation();
+  const { mutateAsync: addCreditDays } = addCreditDaysMutation();
+  const { mutateAsync: updateCreditDays } = updateCreditDaysMutation();
 
   if (params.id) {
     const { data: creditDays, isSuccess: creditDaysSuccess } =

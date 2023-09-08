@@ -23,8 +23,8 @@ export const AddUpdateCountry: React.FC = () => {
   const params = useParams();
   const { addCountryMutation, updateCountryMutation, getCountryData } =
     useCountryApiCallHook();
-  const { mutate: addCountry } = addCountryMutation();
-  const { mutate: updateCountry } = updateCountryMutation();
+  const { mutateAsync: addCountry } = addCountryMutation();
+  const { mutateAsync: updateCountry } = updateCountryMutation();
   const { getContinent } = useContinentApiCallHook();
 
   const cardConfig = {

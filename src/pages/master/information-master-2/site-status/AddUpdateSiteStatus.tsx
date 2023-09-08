@@ -25,8 +25,8 @@ export const AddUpdateSiteStatus: React.FC = () => {
   const methods = useForm<AddUpdateSiteStatusType>();
   const { addSiteStatusMutation, getSiteStatusData, updateSiteStatusMutation } =
     useSiteStatusApiCallHook();
-  const { mutate: addSiteStatus } = addSiteStatusMutation();
-  const { mutate: updateSiteStatus } = updateSiteStatusMutation();
+  const { mutateAsync: addSiteStatus } = addSiteStatusMutation();
+  const { mutateAsync: updateSiteStatus } = updateSiteStatusMutation();
 
   if (params.id) {
     const { data: siteStatus, isSuccess: siteStatusSuccess } =

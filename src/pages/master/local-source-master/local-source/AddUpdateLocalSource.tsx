@@ -24,8 +24,8 @@ export const AddUpdateLocalSource: React.FC = () => {
   const params = useParams();
   const { addLocalSourceMutation, updateLocalSourceMutation, getLocalSourceData } =
     useLocalSourceApiCallHook();
-  const { mutate: addLocalSource } = addLocalSourceMutation();
-  const { mutate: updateLocalSource } = updateLocalSourceMutation();
+  const { mutateAsync: addLocalSource } = addLocalSourceMutation();
+  const { mutateAsync: updateLocalSource } = updateLocalSourceMutation();
   const { getCountry } = useCountryApiCallHook();
   const { getCurrency } = useCurrencyApiCallHook();
 

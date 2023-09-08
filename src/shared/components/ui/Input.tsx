@@ -59,7 +59,7 @@ export const Input = (props: FormFieldType) => {
                 accept={
                   props.config.type && props.config.type.startsWith("file")
                     ? props.config.type.split(":")[1]
-                    : props.config.type
+                    : ''
                 }
                 {...register(props.config.name, props.config.validation)}
               />
