@@ -31,18 +31,19 @@ export const AddUpdateUser: React.FC = () => {
   };
 
   const methods = useForm<AddUpdateUserType>();
-  const { addUserMutation, getUserData, updateUserMutation } =
+  const { addUserMutation, updateUserMutation } =
     useUserApiCallHook();
+    // getUserData
   const { mutate: addUser } = addUserMutation();
   const { mutate: updateUser } = updateUserMutation();
 
   if (params.id) {
-    const { data: userData, isSuccess: userDataSuccess } = getUserData(
-      "" + params.id
-    );
-    if (userDataSuccess) {
-      // addUserFormFields.creditdays.config.setData = userData.creditPeriod;
-    }
+    // const { data: userData, isSuccess: userDataSuccess } = getUserData(
+    //   "" + params.id
+    // );
+    // if (userDataSuccess) {
+    //   // addUserFormFields.creditdays.config.setData = userData.creditPeriod;
+    // }
   } else {
     useEffect(() => {
       methods.reset();
