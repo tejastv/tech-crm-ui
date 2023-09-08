@@ -14,7 +14,7 @@ import {
 
 import { addCompanyFormFields } from "@master/index";
 
-export const AddCompany: React.FC = () => {
+export const AddUpdateCompany: React.FC = () => {
   const methods = useForm();
 
   const cardConfig = {

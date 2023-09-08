@@ -1,5 +1,5 @@
 // Company master child pages
-export { AddCompany } from "./company/AddCompany";
+export { AddUpdateCompany } from "./company/AddUpdateCompany";
 export { CompanyMaster } from "./company/Company";
 
 // Client master child pages
@@ -95,7 +95,7 @@ export { addCityFormFields } from "./location-master/city/add-city-form-fields";
 export { addClientGroupFormFields } from "./client-master/client-group/add-client-group-form-fields";
 export { addSegmentFormFields } from "./client-master/segment/add-segment-form-fields";
 
-export { addCompanyFormFields } from "./company/features/form-fields/add-company";
+export { addCompanyFormFields } from "./company/add-update-company";
 
 export { addPriceClientFormFields } from "./price-list-master/price-list-for-clients/add-price-client-form-fileds";
 export { addStdPriceClientsFormFields } from "./price-list-master/std-price-list-client/add-std-price-client-form-fields";
