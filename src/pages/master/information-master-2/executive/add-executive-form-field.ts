@@ -85,7 +85,7 @@ const checkboxInformation2: FormFieldType = createFormConfig(
 const stateInformation2: FormFieldType = createFormConfig(
   "stateId",
   "State",
-  "checkbox",
+  "select",
   stateInfoValidation,
   "",
   []

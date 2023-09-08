@@ -12,7 +12,7 @@ const SiteStatusValidation = {
 } as ValidationType;
 
 const sitestatus: FormFieldType = createFormConfig(
-  "sitestatus",
+  "siteStatus",
   "Site Status",
   "text",
   SiteStatusValidation,

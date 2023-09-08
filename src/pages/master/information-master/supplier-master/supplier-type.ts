@@ -1,18 +1,18 @@
-export interface Supplier {
-    SupplierId :number,
-    nameSupplier :string,
-    nickname :string,
-    addressSupplier :string,
-    telnoSupplier :number,
-    faxnoSupplier :string,
-    emailSupplier :string,
-    websiteSupplier :string,
-    contactSupplier :string,
-    designationSupplier :string,
-    citySupplier :string,
-    zipSupplier :string,
-    stateSupplier :string,
-    countrySupplier :string,
-    CurrenceySupplier :string,
-  };
-  
+export interface SupplierMasterType {
+  address: string;
+  zip: string;
+  fax: string;
+  supplierId: number;
+  supplierName: string;
+  cityID: number;
+  stateID: number;
+  countryID: number;
+  email: string;
+  currencyID: number;
+  nickName: string;
+  website: string;
+  phone: string;
+  contactPerson: string;
+  designation: string;
+  ourRefNo: string;
+}

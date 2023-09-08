@@ -1,12 +1,9 @@
-export interface FinYear {
-    finyearId :number,
-    finyear :string,
-    totaltax :string,
-    stax :string,
-    edcess :string,
-    cgst :string,
-    sgst :string,
-    igst :string,
-    startinvno :string,
-    startrefno :string,
-  };
+export interface FinYearType {
+  finYear: number;
+  eduCess: number;
+  cgstper: number;
+  igstper: number;
+  sgstper: number;
+  stax: number;
+  serviceTax: number;
+}

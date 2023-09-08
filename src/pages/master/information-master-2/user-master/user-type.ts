@@ -1,7 +1,8 @@
-export interface User {
-    usernameId:number,
-    username:string,
-    usertype:string,
-    login:string,
-    password:string,
-  };
+export interface UserType {
+  id?: number;
+  usertype: string;
+  username: string;
+  password: string;
+  rights: string;
+  user: string;
+}

@@ -1,4 +1,5 @@
-export interface SiteStatus {
-    sitestatusId: number,
-    sitestatus: string,
-  };
+export interface SiteStatusType {
+  id?: number;
+  sitestatusId: number;
+  siteStatus: string;
+}

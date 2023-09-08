@@ -42,7 +42,7 @@ export const AddUpdateSegment: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((segmentData) => {
+  const onSubmit = methods.handleSubmit((segmentData): void => {
     if (params.id && segmentData) {
       updateSegment({ id: params.id, ...segmentData });
     } else {

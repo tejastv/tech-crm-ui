@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -8,13 +8,18 @@ import {
   Input,
   Select,
 } from "@shared/index";
-import { addUserFormFields } from "@master/index";
+import {
+  AddUpdateUserType,
+  addUserFormFields,
+  useUserApiCallHook,
+} from "@master/index";
+import { useParams } from "react-router-dom";
 
-export const AddUser: React.FC = () => {
-  const methods = useForm();
+export const AddUpdateUser: React.FC = () => {
+  const params = useParams();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add User",
+      mainHeading: params.id ? "Update User" : "Add User",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -25,8 +30,32 @@ export const AddUser: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log("value", data);
+  const methods = useForm<AddUpdateUserType>();
+  const { addUserMutation, getUserData, updateUserMutation } =
+    useUserApiCallHook();
+  const { mutate: addUser } = addUserMutation();
+  const { mutate: updateUser } = updateUserMutation();
+
+  if (params.id) {
+    const { data: userData, isSuccess: userDataSuccess } = getUserData(
+      "" + params.id
+    );
+    if (userDataSuccess) {
+      // addUserFormFields.creditdays.config.setData = userData.creditPeriod;
+    }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
+  }
+
+  const onSubmit = methods.handleSubmit((userData): void => {
+    let data: any = { ...userData };
+    if (params.id && userData) {
+      updateUser({ id: +params.id, ...data });
+    } else {
+      addUser(data);
+    }
   });
 
   return (

@@ -1,7 +1,13 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
+import {
+  ActionButtons,
+  BorderLayout,
+  Card,
+  Input,
+  Select,
+} from "@shared/index";
 import { addSupplierFormFields } from "@master/index";
 
 export const AddSupplier: React.FC = () => {
@@ -16,7 +22,7 @@ export const AddSupplier: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
+  const onSubmit = methods.handleSubmit((data): void => {
     console.log("value", data);
   });
 
@@ -52,13 +58,13 @@ export const AddSupplier: React.FC = () => {
                   />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input config={addSupplierFormFields.citySupplier.config} />
+                  <Select config={addSupplierFormFields.citySupplier.config} />
                   <Input config={addSupplierFormFields.zipSupplier.config} />
-                  <Input config={addSupplierFormFields.stateSupplier.config} />
-                  <Input
+                  <Select config={addSupplierFormFields.stateSupplier.config} />
+                  <Select
                     config={addSupplierFormFields.countrySupplier.config}
                   />
-                  <Input
+                  <Select
                     config={addSupplierFormFields.CurrenceySupplier.config}
                   />
                 </div>

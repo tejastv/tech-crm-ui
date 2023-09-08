@@ -31,7 +31,7 @@ export const AddUpdateExecutive: React.FC = () => {
   const params = useParams();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Sales Executive",
+      mainHeading: params.id ? "Update Sales Executive" : "Add Sales Executive",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -39,7 +39,7 @@ export const AddUpdateExecutive: React.FC = () => {
     },
   };
 
-  const { data: cityData, isLoading: cityDataSuccess } = getCity();
+  const { data: cityData } = getCity();
   if (cityData) {
     addExecutiveFormFields.cityInformation2.config.options = selectOptionsMaker(
       cityData,
@@ -48,7 +48,7 @@ export const AddUpdateExecutive: React.FC = () => {
     );
   }
 
-  const { data: stateData, isLoading: stateDataSuccess } = getState();
+  const { data: stateData } = getState();
   if (stateData) {
     addExecutiveFormFields.stateInformation2.config.options =
       selectOptionsMaker(stateData, "stateId", "state");
@@ -65,8 +65,6 @@ export const AddUpdateExecutive: React.FC = () => {
         executiveData?.email;
       if (cityData) {
         let id = executiveData?.cityId;
-        console.log(cityData);
-
         let data: any = returnObjectBasedOnID(
           cityData,
           "id",
@@ -74,16 +72,14 @@ export const AddUpdateExecutive: React.FC = () => {
           "id",
           "cityName"
         );
-        console.log(data);
-
         addExecutiveFormFields.cityInformation2.config.setData = data
           ? {
-              label: data?.cityName,
-              value: data?.id,
+              label: data?.label,
+              value: data?.value,
             }
           : [];
       }
-      if (stateData && stateDataSuccess) {
+      if (stateData) {
         let id = executiveData?.stateId;
         let data: any = returnObjectBasedOnID(
           stateData,
@@ -94,11 +90,13 @@ export const AddUpdateExecutive: React.FC = () => {
         );
         addExecutiveFormFields.stateInformation2.config.setData = data
           ? {
-              label: data?.continent,
-              value: data?.id,
+              label: data?.label,
+              value: data?.value,
             }
           : [];
       }
+      addExecutiveFormFields.checkboxInformation2.config.setData =
+        executiveData?.invoiceRequired;
     }
   } else {
     useEffect(() => {
@@ -106,17 +104,16 @@ export const AddUpdateExecutive: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((executiveData) => {
+  const onSubmit = methods.handleSubmit((executiveData): void => {
     let data: any = { ...executiveData };
     data.cityId = +data.cityId["value"];
     data.stateId = +data.stateId["value"];
-    console.log(data);
-
-    // if (params.id && executiveData) {
-    //   updateExecutive({ id: params.id, ...data });
-    // } else {
-    //   addExecutive(data);
-    // }
+    data.invoiceRequired = eval(data.invoiceRequired);
+    if (params.id && executiveData) {
+      updateExecutive({ id: params.id, ...data });
+    } else {
+      addExecutive(data);
+    }
   });
 
   return (

@@ -1,4 +1,4 @@
-export interface Bankdrawnon {
-    bankdrawnId:number,
-    bankdrawn:string,
-  };
+export interface BankdrawnonType {
+  bankId: number,
+  bankName: string,
+};

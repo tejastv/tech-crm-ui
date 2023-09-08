@@ -53,7 +53,7 @@ export const AddUpdateCity: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((cityData) => {
+  const onSubmit = methods.handleSubmit((cityData): void => {
     if (params.id && cityData) {
       updateCity({ id: params.id, ...cityData });
     } else {

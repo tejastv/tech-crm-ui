@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useRef } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -9,13 +9,18 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 import { Button, DebouncedInput, TableType } from "@shared/index";
+// import * as XLSX from "xlsx";
 
 export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const data = props.config.tableData;
+  console.log(data);
+
   const columns = props.config.columns;
+  console.log(columns);
+
   const table = useReactTable({
     data,
     columns,
@@ -41,6 +46,75 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
 
   const onTableEditBtnClick = (data: any) => {
     props.config.onEditClick && props.config.onEditClick(data);
+  };
+
+  const tableRef = useRef(null);
+
+  const copyTableToClipboard = async (): Promise<void> => {
+    const table: any = tableRef.current;
+
+    try {
+      const tableText = table.innerText;
+      const copiedText = `Mirainform - CRM Software\n\n${tableText}`;
+      await navigator.clipboard.writeText(copiedText);
+      console.log("Table data copied to clipboard!");
+    } catch (err) {
+      console.error("Unable to copy to clipboard: ", err);
+    }
+  };
+
+  const downloadCSV = (): void => {
+    const table: any = tableRef.current;
+    const rows: any = Array.from(table.querySelectorAll("tr"));
+    const headers: any = Array.from(rows[0].querySelectorAll("th")).map(
+      (header: any) => header.textContent
+    );
+    const data = rows
+      .slice(1) // Skip the header row
+      .map((row: any) =>
+        Array.from(row.querySelectorAll("td")).map(
+          (cell: any) => cell.textContent
+        )
+      );
+    const csvContent = [headers, ...data]
+      .map((row) => row.join(","))
+      .join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "table_data.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const downloadExcel = () => {
+    // const table: any = tableRef.current;
+    // // Create a new Excel workbook
+    // const wb = XLSX.utils.book_new();
+    // // Extract table data
+    // const wsData = [[]];
+    // table.querySelectorAll("tr").forEach((row: any) => {
+    //   const rowData: any = [];
+    //   row.querySelectorAll("th, td").forEach((cell: any) => {
+    //     rowData.push(cell.textContent);
+    //   });
+    //   wsData.push(rowData);
+    // });
+    // // Create a new worksheet and add the data
+    // const ws = XLSX.utils.aoa_to_sheet(wsData);
+    // XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+    // // Create a Blob containing the Excel data
+    // const blob = XLSX.write(wb, { bookType: "xlsx", type: "buffer" });
+    // // Create a download link for the Blob
+    // const url = URL.createObjectURL(blob);
+    // const a = document.createElement("a");
+    // a.href = url;
+    // a.download = "table_data.xlsx";
+    // // Trigger a click on the link to initiate the download
+    // a.click();
+    // // Clean up by revoking the URL
+    // URL.revokeObjectURL(url);
   };
 
   return (
@@ -76,6 +150,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                   className="dt-button buttons-copy buttons-html5 btn btn-danger btn-sm mr-1"
                   aria-controls="file_export"
                   type="button"
+                  onClick={copyTableToClipboard}
                 >
                   <span>Copy</span>
                 </Button>
@@ -86,6 +161,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                   className="dt-button buttons-csv buttons-html5 btn btn-danger btn-sm mr-1"
                   aria-controls="file_export"
                   type="button"
+                  onClick={downloadCSV}
                 >
                   <span>CSV</span>
                 </Button>
@@ -96,6 +172,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                   className="dt-button buttons-excel buttons-html5 btn btn-danger btn-sm mr-1"
                   aria-controls="file_export"
                   type="button"
+                  onClick={downloadExcel}
                 >
                   <span>Excel</span>
                 </Button>
@@ -141,6 +218,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
               role="grid"
               aria-describedby="company-master-grid-data_info"
               key="data-table"
+              ref={tableRef}
             >
               <thead>
                 {table.getHeaderGroups().map((headerGroup) => (

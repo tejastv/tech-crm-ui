@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
-import { addFinYearFormFields } from "@master/index";
+import {
+  AddUpdateFinYearType,
+  addFinYearFormFields,
+  useFinYearApiCallHook,
+} from "@master/index";
+import { useParams } from "react-router-dom";
 
-export const AddFinYear: React.FC = () => {
-  const methods = useForm();
+export const AddUpdateFinYear: React.FC = () => {
+  const methods = useForm<AddUpdateFinYearType>();
+  const { addFinYearMutation, getFinYearData, updateFinYearMutation } =
+    useFinYearApiCallHook();
+  const { mutate: addFinYear } = addFinYearMutation();
+  const { mutate: updateFinYear } = updateFinYearMutation();
+  const params = useParams();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Industry",
+      mainHeading: params.id ? "Update Fin Year" : "Add Fin Year",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -16,10 +26,34 @@ export const AddFinYear: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log("value", data);
-  });
+  if (params.id) {
+    const { data: finYearData, isSuccess: finYearDataSuccess } = getFinYearData(
+      "" + params.id
+    );
+    if (finYearDataSuccess) {
+      addFinYearFormFields.finyear.config.setData = finYearData.finYear;
+      // addFinYearFormFields.totaltax.config.setData = finYearData.;
+      addFinYearFormFields.stax.config.setData = finYearData.stax;
+      addFinYearFormFields.edcess.config.setData = finYearData.eduCess;
+      addFinYearFormFields.cgst.config.setData = finYearData.cgstper;
+      addFinYearFormFields.sgst.config.setData = finYearData.sgstper;
+      addFinYearFormFields.igst.config.setData = finYearData.igstper;
+      // addFinYearFormFields.startinvno.config.setData = finYearData.;
+    }
+  } else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
+  }
 
+  const onSubmit = methods.handleSubmit((executiveData): void => {
+    let data: any = { ...executiveData };
+    if (params.id && executiveData) {
+      updateFinYear({ id: params.id, ...data });
+    } else {
+      addFinYear(data);
+    }
+  });
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>

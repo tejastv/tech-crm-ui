@@ -9,6 +9,8 @@ const BankDepositMasterIndex: React.FC = () => {
     <Routes>
       <Route index element={<BankMasterDeposit />}></Route>
       <Route path={COMMON_ROUTES.ADD} element={<AddBankMasterDeposit />}></Route>
+      <Route path={COMMON_ROUTES.EDIT} element={<AddBankMasterDeposit />}></Route>
+
     </Routes>
   );
 };

@@ -47,7 +47,7 @@ export { AddUpdateContinent } from "./location-master/continent/AddUpdateContine
 export { Continent } from "./location-master/continent/Continent";
 
 //BankMasterDeposit master child pages
-export { AddBankMasterDeposit } from "./information-master/bank-master-deposit/AddBankDeposit";
+export { AddBankMasterDeposit } from "./information-master/bank-master-deposit/AddUpdateBankDeposit";
 export { BankMasterDeposit } from "./information-master/bank-master-deposit/BankDeposit";
 
 export { AddPaymentMode } from "./information-master/payment-mode/AddPaymentMode";
@@ -59,32 +59,32 @@ export { AddInfoSource } from "./information-master/source/AddSource";
 export { Source } from "./information-master/source/Source";
 export { AddSupplier } from "./information-master/supplier-master/AddSupplier";
 export { Supplier } from "./information-master/supplier-master/Supplier";
-export { AddBankMasterDrawn } from "./information-master/bank-master-drawn-on/AddBankDrawn";
+export { AddBankMasterDrawn } from "./information-master/bank-master-drawn-on/AddUpdateBankDrawn";
 export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankDrawn";
 
 // Information Master 2
-export { AddIndustry } from "./information-master-2/industry/AddIndustry";
+export { AddUpdateIndustry } from "./information-master-2/industry/AddUpdateIndustry";
 export { Industry } from "./information-master-2/industry/Industry";
 
-export { AddCallType } from "./information-master-2/call-type/AddCalltype";
+export { AddUpdateCalltype } from "./information-master-2/call-type/AddUpdateCalltype";
 export { CallType } from "./information-master-2/call-type/CallType";
 
-export { AddPurpose } from "./information-master-2/purpose-master/AddPurpose";
-export { Purpose } from "./information-master-2/purpose-master/Purpose";
+export { AddUpdatePurposeMaster } from "./information-master-2/purpose-master/AddUpdatePurposeMaster";
+export { PurposeMaster } from "./information-master-2/purpose-master/PurposeMaster";
 
-export { AddCreditDays } from "./information-master-2/credit-days/AddCreditDays";
+export { AddUpdateCreditDays } from "./information-master-2/credit-days/AddUpdateCreditDays";
 export { CreditDays } from "./information-master-2/credit-days/CreditDays";
 
-export { AddSiteStatus } from "./information-master-2/site-status/AddSiteStatus";
+export { AddUpdateSiteStatus } from "./information-master-2/site-status/AddUpdateSiteStatus";
 export { SiteStatus } from "./information-master-2/site-status/SiteStatus";
 
 export { AddUpdateExecutive } from "./information-master-2/executive/AddUpdateExecutive";
 export { Executive } from "./information-master-2/executive/Executive";
 
-export { AddFinYear } from "./information-master-2/fin-year/AddFinyear";
+export { AddUpdateFinYear } from "./information-master-2/fin-year/AddUpdateFinyear";
 export { FinYear } from "./information-master-2/fin-year/FinYear";
 
-export { AddUser } from "./information-master-2/user-master/AddUsert";
+export { AddUpdateUser } from "./information-master-2/user-master/AddUpdateUser";
 export { User } from "./information-master-2/user-master/User";
 
 //Form Fields
@@ -167,10 +167,10 @@ export * from "./local-source-master/price-list/price-type";
 export * from "./local-source-master/std-price-list/add-std-price-type";
 export * from "./local-source-master/std-price-list/std-price-type";
 
-export * from "./information-master/bank-master-deposit/add-bankdeposit-type";
+export * from "./information-master/bank-master-deposit/add-update-bankdeposit-type";
 export * from "./information-master/bank-master-deposit/bankdeposit-type";
 
-export * from "./information-master/bank-master-drawn-on/add-bankdrawnon-type";
+export * from "./information-master/bank-master-drawn-on/add-update-bankdrawnon-type";
 export * from "./information-master/bank-master-drawn-on/bankdrawnon-type";
 
 export * from "./information-master/currency/add-update-currency-type";
@@ -182,32 +182,32 @@ export * from "./information-master/payment-mode/paymentmode-type";
 export * from "./information-master/source/add-source-type";
 export * from "./information-master/source/source-type";
 
-export * from "./information-master/supplier-master/add-supplier-type";
+export * from "./information-master/supplier-master/add-update-supplier-type";
 export * from "./information-master/supplier-master/supplier-type";
 
 // information master
-export * from "./information-master-2/call-type/add-calltype-type";
+export * from "./information-master-2/call-type/add-update-calltype-type";
 export * from "./information-master-2/call-type/calltype-type";
 
-export * from "./information-master-2/credit-days/add-creditdays-type";
+export * from "./information-master-2/credit-days/add-update-creditdays-type";
 export * from "./information-master-2/credit-days/creditdays-type";
 
 export * from "./information-master-2/executive/add-update-executive-type";
 export * from "./information-master-2/executive/executive-type";
 
-export * from "./information-master-2/fin-year/add-finyear-type";
+export * from "./information-master-2/fin-year/add-update-finyear-type";
 export * from "./information-master-2/fin-year/finyear-type";
 
-export * from "./information-master-2/industry/add-industry-type";
+export * from "./information-master-2/industry/add-update-industry-type";
 export * from "./information-master-2/industry/industry-type";
 
-export * from "./information-master-2/purpose-master/add-purpose-type";
-export * from "./information-master-2/purpose-master/purpose-type";
+export * from "./information-master-2/purpose-master/add-update-purpose-master-type";
+export * from "./information-master-2/purpose-master/purpose-master-type";
 
-export * from "./information-master-2/site-status/add-sitestatus-type";
+export * from "./information-master-2/site-status/add-update-sitestatus-type";
 export * from "./information-master-2/site-status/sitestatus-type";
 
-export * from "./information-master-2/user-master/add-user-type";
+export * from "./information-master-2/user-master/add-update-user-type";
 export * from "./information-master-2/user-master/user-type";
 
 // location master
@@ -230,9 +230,23 @@ export { useStateApiCallHook } from "./location-master/state/useStateApiCallHook
 
 // Local Source
 export { useLocalSourceApiCallHook } from "./local-source-master/local-source/useLocalSourceApiCallHook";
-export { useSegmentApiCallHook } from "./client-master/segment/useSegmentApiCallHook";
-export { useExecutiveApiCallHook } from "./information-master-2/executive/useExecutiveApiCallHook";
+// export { useSegmentApiCallHook } from "./client-master/segment/useSegmentApiCallHook";
+// export { useExecutiveApiCallHook } from "./information-master-2/executive/useExecutiveApiCallHook";
 
 
 // information
 export { useCurrencyApiCallHook } from "./information-master/currency/useCurrencyApiCallHook";
+export { usePaymentModeApiCallHook } from "./information-master/payment-mode/usePaymentModeApiCallHook";
+export { useBankMasterDepositApiCallHook } from "./information-master/bank-master-deposit/useBankMasterDepositApiCallHook";
+export { useBankMasterDrawnApiCallHook } from "./information-master/bank-master-drawn-on/useBankMasterDrawnApiCallHook";
+export { useSegmentApiCallHook } from "./client-master/segment/useSegmentApiCallHook";
+export { useExecutiveApiCallHook } from "./information-master-2/executive/useExecutiveApiCallHook";
+export { useFinYearApiCallHook } from "./information-master-2/fin-year/useFinYearApiCallHook";
+export { useIndustryApiCallHook } from "./information-master-2/industry/useIndustryApiCallHook";
+export { useCallTypeApiCallHook } from "./information-master-2/call-type/useCallTypeApiCallHook";
+export { usePurposeMasterApiCallHook } from "./information-master-2/purpose-master/usePurposeMasterApiCallHook";
+export { useCreditDaysApiCallHook } from "./information-master-2/credit-days/useCreditDaysApiCallHook";
+export { useSiteStatusApiCallHook } from "./information-master-2/site-status/useSiteStatusApiCallHook";
+export { useUserApiCallHook } from "./information-master-2/user-master/useUserApiCallHook";
+export { useSupplierMasterApiCallHook } from "./information-master/supplier-master/useSupplierMasterApiCallHook";
+

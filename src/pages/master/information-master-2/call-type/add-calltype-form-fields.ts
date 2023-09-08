@@ -13,7 +13,7 @@ const CallTypeValidation = {
 } as ValidationType;
 
 const calltype: FormFieldType = createFormConfig(
-  "calltype",
+  "typeName",
   "Call Type",
   "text",
   CallTypeValidation,
