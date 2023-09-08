@@ -55,7 +55,7 @@ export { PaymentMode } from "./information-master/payment-mode/PaymentMode";
 
 export { AddUpdateCurrency } from "./information-master/currency/AddUpdateCurrency";
 export { Currency } from "./information-master/currency/Currency";
-export { AddInfoSource } from "./information-master/source/AddSource";
+export { AddUpdateSource } from "./information-master/source/AddUpdateSource";
 export { Source } from "./information-master/source/Source";
 export { AddSupplier } from "./information-master/supplier-master/AddSupplier";
 export { Supplier } from "./information-master/supplier-master/Supplier";
@@ -178,7 +178,7 @@ export * from "./information-master/currency/currency-type";
 export * from "./information-master/payment-mode/add-paymentmode-type";
 export * from "./information-master/payment-mode/paymentmode-type";
 
-export * from "./information-master/source/add-source-type";
+export * from "./information-master/source/add-update-source-type";
 export * from "./information-master/source/source-type";
 
 export * from "./information-master/supplier-master/add-update-supplier-type";
@@ -248,3 +248,4 @@ export { useSiteStatusApiCallHook } from "./information-master-2/site-status/use
 export { useUserApiCallHook } from "./information-master-2/user-master/useUserApiCallHook";
 export { useSupplierMasterApiCallHook } from "./information-master/supplier-master/useSupplierMasterApiCallHook";
 export { useClientGroupApiCallHook } from "./client-master/client-group/useClientGroupApiCallHook";
+export { useSourceApiCallHook } from "./information-master/source/useSourceApiCallHook";

@@ -18,6 +18,7 @@ const PAYMENTMODE_DATA = "paymentmode-data";
 const SUPPLIER_MASTER_DATA = "supplier-master-data";
 const CURRENCY_DATA = "currency-data";
 const CLIENT_GROUP_DATA = "client-group-data";
+const SOURCE_DATA = "source-data";
 
 export const queryKeys = {
   CITY_DATA,
@@ -40,4 +41,5 @@ export const queryKeys = {
   BANKMASTER_DEPOSIT_DATA,
   SUPPLIER_MASTER_DATA,
   CLIENT_GROUP_DATA,
+  SOURCE_DATA,
 };
