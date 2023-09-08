@@ -16,8 +16,8 @@ export const AddPaymentMode: React.FC = () => {
     getPaymentModeData,
     updatePaymentModeMutation,
   } = usePaymentModeApiCallHook();
-  const { mutate: addPaymentMode } = addPaymentModeMutation();
-  const { mutate: updatePaymentMode } = updatePaymentModeMutation();
+  const { mutateAsync: addPaymentMode } = addPaymentModeMutation();
+  const { mutateAsync: updatePaymentMode } = updatePaymentModeMutation();
   const params = useParams();
 
   const cardConfig = {

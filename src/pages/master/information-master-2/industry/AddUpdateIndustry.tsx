@@ -24,8 +24,8 @@ export const AddUpdateIndustry: React.FC = () => {
   const methods = useForm<AddUpdateIndustryType>();
   const { addIndustryMutation, getIndustryData, updateIndustryMutation } =
     useIndustryApiCallHook();
-  const { mutate: addIndustry } = addIndustryMutation();
-  const { mutate: updateIndustry } = updateIndustryMutation();
+  const { mutateAsync: addIndustry } = addIndustryMutation();
+  const { mutateAsync: updateIndustry } = updateIndustryMutation();
 
   if (params.id) {
     const { data: industryData, isSuccess: industryDataSuccess } =

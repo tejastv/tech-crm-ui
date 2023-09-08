@@ -14,8 +14,8 @@ export const AddUpdateSegment: React.FC = () => {
   const methods = useForm<AddUpdateSegmentType>();
   const { addSegmentMutation, updateSegmentMutation, getSegmentData } =
     useSegmentApiCallHook();
-  const { mutate: addSegment } = addSegmentMutation();
-  const { mutate: updateSegment } = updateSegmentMutation();
+  const { mutateAsync: addSegment } = addSegmentMutation();
+  const { mutateAsync: updateSegment } = updateSegmentMutation();
   const params = useParams();
 
   const cardConfig = {

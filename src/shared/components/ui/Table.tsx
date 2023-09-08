@@ -20,11 +20,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const data = props.config.tableData;
-  console.log(data);
-
   const columns = props.config.columns;
-  console.log(columns);
-
   const table = useReactTable({
     data,
     columns,
