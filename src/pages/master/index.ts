@@ -129,6 +129,10 @@ export { addUserFormFields } from "./information-master-2/user-master/add-user-f
 
 // Models
 
+// company master
+export * from "./company/add-update-company-type";
+export * from "./company/company-type";
+
 // client master
 export * from "./client-master/client/client-type";
 export * from "./client-master/client/add-client-type";
@@ -222,6 +226,7 @@ export * from "./location-master/country/add-update-country-type";
 //Services/ Hooks
 
 // Location Master
+export { useCompanyApiCallHook } from "./company/useCompanyApiCallHook";
 export { useCityApiCallHook } from "./location-master/city/useCityApiCallHook";
 export { useContinentApiCallHook } from "./location-master/continent/useContinentApiCallHook";
 export { useCountryApiCallHook } from "./location-master/country/useCountryApiCallHook";

@@ -18,6 +18,9 @@ const GET_UPDATE_DELETE_LOCALSOURCE = "entity/localSource/{id}";
 
 const GET_ADD_CURRENCY = "utility/currency";
 const GET_UPDATE_DELETE_CURRENCY = "utility/currency/{id}";
+const GET_ADD_COMPANY_MASTER = "entity/companyMaster";
+const GET_UPDATE_DELETE_COMPANY_MASTER = "entity/companyMaster/{id}";
+
 const GET_ADD_FIN_YEAR = "utility/finYear";
 const GET_UPDATE_DELETE_FIN_YEAR = "utility/finYear/{id}";
 
@@ -76,6 +79,8 @@ export const apiUrls = {
   GET_UPDATE_DELETE_LOCALSOURCE,
   GET_ADD_CURRENCY,
   GET_UPDATE_DELETE_CURRENCY,
+  GET_ADD_COMPANY_MASTER,
+  GET_UPDATE_DELETE_COMPANY_MASTER,
   GET_ADD_FIN_YEAR,
   GET_UPDATE_DELETE_FIN_YEAR,
   GET_ADD_INDUSTRY,
