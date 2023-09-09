@@ -37,7 +37,7 @@ export { LocalSource } from "./local-source-master/local-source/LocalSource";
 // Price List Child Page
 export { AddPrice } from "./local-source-master/price-list/AddPrice";
 // Std Price List Child Page
-export { AddStdPrice } from "./local-source-master/std-price-list/AddStdPrice";
+export { AddStdPrice } from "./local-source-master/std-price-list/AddUpdateStdPrice";
 
 // Country master child pages
 export { AddUpdateCountry } from "./location-master/country/AddUpdateCountry";
@@ -164,7 +164,7 @@ export * from "./local-source-master/local-source/localSource-type";
 export * from "./local-source-master/price-list/add-price-type";
 export * from "./local-source-master/price-list/price-type";
 
-export * from "./local-source-master/std-price-list/add-std-price-type";
+export * from "./local-source-master/std-price-list/add-update-std-price-type";
 export * from "./local-source-master/std-price-list/std-price-type";
 
 export * from "./information-master/bank-master-deposit/add-update-bankdeposit-type";
@@ -250,3 +250,4 @@ export { useSiteStatusApiCallHook } from "./information-master-2/site-status/use
 export { useUserApiCallHook } from "./information-master-2/user-master/useUserApiCallHook";
 export { useSupplierMasterApiCallHook } from "./information-master/supplier-master/useSupplierMasterApiCallHook";
 
+export { useStdPriceApiCallHook } from "./local-source-master/std-price-list/useStdPriceApiCallHook";

@@ -1,7 +1,6 @@
-export interface StdPriceType {
-    currencyID:number,
-    stdcurrencey:string,
+export interface AddUpdateStdPrice {
     countryName:string,
+    currencyID:number,
     price:number,
     priceHighDel:number,
     otherCharges:number,
@@ -9,5 +8,3 @@ export interface StdPriceType {
     priceSuperflash:number,
     countryID:number,
   };
-
-

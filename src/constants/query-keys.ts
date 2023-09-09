@@ -22,6 +22,7 @@ const SUPPLIER_MASTER_DATA = "supplier-master-data";
 
 // Information master
 const CURRENCY_DATA = "currency-data";
+const STDPRICE_DATA = "currency-data";
 
 export const queryKeys = {
   // Location Master
@@ -48,4 +49,5 @@ export const queryKeys = {
   BANKMASTER_DRAWN_DATA,
   BANKMASTER_DEPOSIT_DATA,
   SUPPLIER_MASTER_DATA,
+  STDPRICE_DATA,
 };

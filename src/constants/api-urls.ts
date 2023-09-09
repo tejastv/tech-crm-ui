@@ -55,6 +55,8 @@ const GET_UPDATE_DELETE_BANKMASTER_DRAWN = "utility/bankMaster/{id}";
 const GET_ADD_BANKMASTER_DEPOSIT = "utility/bankDetails";
 const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 
+// Std Price
+const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
 export const apiUrls = {
 
   // Location Master 
@@ -103,5 +105,8 @@ export const apiUrls = {
   GET_UPDATE_DELETE_BANKMASTER_DEPOSIT,
   GET_ADD_SUPPLIER_MASTER,
   GET_UPDATE_DELETE_SUPPLIER_MASTER,
+
+  // Std Price
+  GET_UPDATE_DELETE_STDPRICE,
 };
 

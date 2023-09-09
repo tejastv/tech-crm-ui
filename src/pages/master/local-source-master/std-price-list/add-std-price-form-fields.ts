@@ -22,7 +22,8 @@ const stdcurrencey: FormFieldType = createFormConfig(
   "select",
   StdCurrencyValidation,
   "Select Currency",
-  stdcurrencyOptions
+  stdcurrencyOptions,
+  
 );
 
 export const addStdPriceFormFields = {
