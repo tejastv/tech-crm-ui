@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -17,13 +17,13 @@ import {
   StdPriceType,
 } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
-import { returnObjectBasedOnID } from "@utils/returnObjectBasedOnID";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
 export const StdPrice: React.FC = () => {
   const methods = useForm<AddUpdateStdPrice>();
+  const [country, setCountry] = useState("0");
   const { getCountry } = useCountryApiCallHook();
-  const { data: countryData, isLoading } = getCountry();
+  const { data: countryData } = getCountry();
   const { getStdPriceData } = useStdPriceApiCallHook();
 
   const cardConfig = {
@@ -45,19 +45,6 @@ export const StdPrice: React.FC = () => {
       "countryId",
       "countryName"
     );
-    let data: any = returnObjectBasedOnID(
-      countryData,
-      "countryId",
-      1,
-      "countryId",
-      "countryName"
-    );
-    addStdPriceFormFields.stdcurrencey.config.setData = data
-      ? {
-          label: data.label,
-          value: data.value,
-        }
-      : [];
   }
 
   const columns: ColumnDef<StdPriceType>[] = [
@@ -104,9 +91,8 @@ export const StdPrice: React.FC = () => {
     },
   ];
 
-  const { data: stdPriceData } = getStdPriceData(
-    countryData ? "" + countryData[0].countryId : "1"
-  );
+  const { data: stdPriceData, isLoading: isStdPriceDataLoading } =
+    getStdPriceData(country);
 
   const tableConfig: TableType<StdPriceType> = {
     config: {
@@ -127,6 +113,12 @@ export const StdPrice: React.FC = () => {
     },
   };
 
+  const handleSelectChange = (selectedOption: any) => {
+    if (selectedOption) {
+      setCountry("" + selectedOption.value);
+    }
+  };
+
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
@@ -135,14 +127,19 @@ export const StdPrice: React.FC = () => {
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
               <div className="row">
                 <div className="col-3 pull-right">
-                  <Select config={addStdPriceFormFields.stdcurrencey.config} />
+                  <Select
+                    config={addStdPriceFormFields.stdcurrencey.config}
+                    onChangeHandler={handleSelectChange}
+                  />
                 </div>
               </div>
             </BorderLayout>
           </form>
         </FormProvider>
         <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-          <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
+          <Table config={tableConfig.config}>
+            {isStdPriceDataLoading && <Loader />}
+          </Table>
         </BorderLayout>
       </Card>
     </>

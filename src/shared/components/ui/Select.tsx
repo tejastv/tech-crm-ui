@@ -22,6 +22,12 @@ export const Select = (props: FormFieldType) => {
   } = useFormContext();
   const inputErrors = findInputError(errors, props.config.name);
   const isInvalid = isFormInvalid(inputErrors);
+  const handleSelectChange = (selectedOption: any) => {
+    // Update the form value with the selected data
+    if (props.onChangeHandler) {
+      props.onChangeHandler(selectedOption);
+    }
+  };
   useEffect(() => {
     if (props.config.setData) {
       setValue(props.config.name, props.config.setData);
@@ -47,6 +53,7 @@ export const Select = (props: FormFieldType) => {
               render={({ field }) => (
                 <AliceSelect
                   {...field}
+                  onChange={handleSelectChange} // Pass the onChange handler
                   options={props.config.options}
                   placeholder={props.config.placeholder}
                 />

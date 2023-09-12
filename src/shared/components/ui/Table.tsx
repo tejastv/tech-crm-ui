@@ -410,7 +410,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
 
         <div className="h-2" />
 
-        {props.config.pagination && (
+        {props.config.pagination?.tableMetaDataShow && (
           <div className="mt-3">
             <div className="row">
               <div className="col-sm-12 col-md-5">
@@ -425,51 +425,53 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                   {table.getRowModel().rows.length} entries
                 </div>
               </div>
-              <div className="col-sm-12 col-md-7">
-                <div
-                  className="dataTables_paginate paging_simple_numbers"
-                  id="zero_config_paginate"
-                >
-                  <ul className="pagination">
-                    <li
-                      className="paginate_button page-item previous"
-                      id="zero_config_previous"
-                    >
-                      <Button
-                        key="zero_config-pri"
-                        onClick={() => table.previousPage()}
-                        type="button"
-                        disabled={!table.getCanPreviousPage()}
-                        aria-controls="zero_config"
-                        data-dt-idx="0"
-                        className={`page-link ${
-                          !table.getCanPreviousPage() && "disabled"
-                        }`}
+              {props.config.pagination.nextPreviousBtnShow && (
+                <div className="col-sm-12 col-md-7">
+                  <div
+                    className="dataTables_paginate paging_simple_numbers"
+                    id="zero_config_paginate"
+                  >
+                    <ul className="pagination">
+                      <li
+                        className="paginate_button page-item previous"
+                        id="zero_config_previous"
                       >
-                        Previous
-                      </Button>
-                    </li>
-                    <li
-                      className="paginate_button page-item next"
-                      id="zero_config_next"
-                    >
-                      <Button
-                        key="zero_config-next"
-                        aria-controls="zero_config"
-                        data-dt-idx="1"
-                        type="button"
-                        className={`page-link ${
-                          !table.getCanNextPage() && "disabled"
-                        }`}
-                        onClick={() => table.nextPage()}
-                        disabled={!table.getCanNextPage()}
+                        <Button
+                          key="zero_config-pri"
+                          onClick={() => table.previousPage()}
+                          type="button"
+                          disabled={!table.getCanPreviousPage()}
+                          aria-controls="zero_config"
+                          data-dt-idx="0"
+                          className={`page-link ${
+                            !table.getCanPreviousPage() && "disabled"
+                          }`}
+                        >
+                          Previous
+                        </Button>
+                      </li>
+                      <li
+                        className="paginate_button page-item next"
+                        id="zero_config_next"
                       >
-                        Next
-                      </Button>
-                    </li>
-                  </ul>
+                        <Button
+                          key="zero_config-next"
+                          aria-controls="zero_config"
+                          data-dt-idx="1"
+                          type="button"
+                          className={`page-link ${
+                            !table.getCanNextPage() && "disabled"
+                          }`}
+                          onClick={() => table.nextPage()}
+                          disabled={!table.getCanNextPage()}
+                        >
+                          Next
+                        </Button>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         )}

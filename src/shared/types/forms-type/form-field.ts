@@ -13,4 +13,5 @@ export interface FormFieldType {
     setData?: any;
     options?: Array<Options>;
   };
+  onChangeHandler?: (selectedOption: any) => void;
 }
