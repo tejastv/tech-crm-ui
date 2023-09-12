@@ -10,17 +10,18 @@ import {
 } from "@tanstack/react-table";
 import { Button, DebouncedInput, TableType } from "@shared/index";
 import * as XLSX from "xlsx";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Alignment, TDocumentDefinitions } from "pdfmake/interfaces";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 
 export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
-
+  const tableRef = useRef(null);
   const data = props.config.tableData;
   const columns = props.config.columns;
+
   const table = useReactTable({
     data,
     columns,
@@ -48,11 +49,8 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     props.config.onEditClick && props.config.onEditClick(data);
   };
 
-  const tableRef = useRef(null);
-
   const copyTableToClipboard = async (): Promise<void> => {
     const table: any = tableRef.current;
-
     try {
       const tableText = table.innerText;
       const copiedText = `Mirainform - CRM Software\n\n${tableText}`;
@@ -95,6 +93,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
     return XLSX.write(wb, { bookType: "xlsx", type: "array" });
   };
+
   const downloadExcel = () => {
     const excelData = generateExcelData();
     const blob = new Blob([excelData], {
@@ -109,6 +108,9 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   };
 
   const downloadPDF = () => {
+    if (pdfMake) {
+      (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+    }
     const companyName = "Mirainform - CRM Software";
     const table: any = tableRef.current;
     const rows: any = Array.from(table.querySelectorAll("tr"));
@@ -118,7 +120,6 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
         style: "headerStyle",
       })
     );
-    console.log(headers)
     const tableData = rows
       .slice(1) // Skip the header row
       .map((row: any) =>
@@ -176,13 +177,9 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     pdfDoc.download("Mirainform - CRM Software.pdf");
   };
 
-
-
   const handlePrint = () => {
     console.log("print")
   };
-
-
 
   return (
     <>
