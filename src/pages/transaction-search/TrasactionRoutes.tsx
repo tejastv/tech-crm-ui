@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { TRANSACTION_ROUTES } from "constants";
+import { TRANSACTION_ROUTES } from "@constants/index";
 
 const AddEnquiryIndex = React.lazy(
   () => import("./add-new-enquiry/NewEnquiryIndex")

@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { Currency, AddUpdateCurrency} from "@master/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 
 const CurrencyMasterIndex: React.FC = () => {
   return (

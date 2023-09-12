@@ -419,30 +419,30 @@ const countryEnquiryOptions = [
   { value: "strawberry", label: "Strawberry" },
   { value: "vanilla", label: "Vanilla" },
 ];
-const crDayOptions = [
-  { value: "Bill on Actual Buyer", label: "Bill on Actual Buyer" },
-];
+// const crDayOptions = [
+//   { value: "Bill on Actual Buyer", label: "Bill on Actual Buyer" },
+// ];
 
 // Right Field start
 const enqTypeOption = [
   { value: "NEW", label: "NEW" },
   { value: "RENUAL", label: "RENUAL" },
 ];
-const executiveOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+// const executiveOptions = [
+//   { value: "India", label: "India" },
+//   { value: "strawberry", label: "Strawberry" },
+//   { value: "vanilla", label: "Vanilla" },
+// ];
 const localsourceenquiryOptions = [
   { value: "India", label: "India" },
   { value: "strawberry", label: "Strawberry" },
   { value: "vanilla", label: "Vanilla" },
 ];
-const clientIdOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+// const clientIdOptions = [
+//   { value: "India", label: "India" },
+//   { value: "strawberry", label: "Strawberry" },
+//   { value: "vanilla", label: "Vanilla" },
+// ];
 const ServiceOptions = [
   { value: "India", label: "India" },
   { value: "strawberry", label: "Strawberry" },

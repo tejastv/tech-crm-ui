@@ -1,7 +1,7 @@
 import React from "react";
 
 import { BorderLayout, PageBreadcrumb } from "@shared/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 
 export const Client: React.FC = () => {
   const config = {

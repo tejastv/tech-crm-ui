@@ -7,7 +7,7 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { useNavigate } from "react-router-dom";
 import { PurposeMasterType, usePurposeMasterApiCallHook } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";

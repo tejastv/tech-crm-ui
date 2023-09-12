@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import logoImage from "@assets/images/logo.png";
 import { useAuth } from "@hooks/index";
-import { DASHBOARD, LOGIN, MASTER_ROUTES, TRANSACTION_ROUTES } from "constants";
+import { DASHBOARD, LOGIN, MASTER_ROUTES, TRANSACTION_ROUTES } from "@constants/index";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();

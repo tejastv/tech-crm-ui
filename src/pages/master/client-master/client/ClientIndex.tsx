@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { AddClient,Client} from "@master/index";
 
 const ClientMasterIndex: React.FC = () => {

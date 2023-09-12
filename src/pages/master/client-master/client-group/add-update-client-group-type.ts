@@ -1,4 +1,5 @@
-export interface ClientGroupType {
+export interface AddUpdateClientGroupType {
+  id?: number;
   groupId: number;
   groupName: string;
   showBOBDetails: boolean;

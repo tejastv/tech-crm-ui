@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { MASTER_ROUTES } from "constants";
+import { MASTER_ROUTES } from "@constants/index";
 
 const IndustryIndex = React.lazy(() => import("./industry/IndustryIndex"));
 const CallTypeIndex = React.lazy(() => import("./call-type/CallTypeIndex"));

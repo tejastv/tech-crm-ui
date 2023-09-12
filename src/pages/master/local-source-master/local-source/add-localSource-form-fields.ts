@@ -35,37 +35,37 @@ const EmailValidationCC = {
   },
 } as ValidationType;
 
-const CurrencyValidation = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message: "Please select a {label}",
-  },
-} as ValidationType;
-const CountryValidation = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message: "Please select a {label}",
-  },
-} as ValidationType;
+// const CurrencyValidation = {
+//   required: {
+//     value: true,
+//     message: "{label} field is rquired",
+//   },
+//   pattern: {
+//     value: /^[a-zA-Z0-9\-]+$/,
+//     message: "Please select a {label}",
+//   },
+// } as ValidationType;
+// const CountryValidation = {
+//   required: {
+//     value: true,
+//     message: "{label} field is rquired",
+//   },
+//   pattern: {
+//     value: /^\d+(\.\d{1,2})?$/,
+//     message: "Please select a {label}",
+//   },
+// } as ValidationType;
 
-const currencyOptions = [
-  { value: "Mumbai", label: "200" },
-  { value: "strawberry", label: "300" },
-  { value: "vanilla", label: "400" },
-];
-const sourcecountryOptions = [
-  { value: "Mumbai", label: "Mumbai" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+// const currencyOptions = [
+//   { value: "Mumbai", label: "200" },
+//   { value: "strawberry", label: "300" },
+//   { value: "vanilla", label: "400" },
+// ];
+// const sourcecountryOptions = [
+//   { value: "Mumbai", label: "Mumbai" },
+//   { value: "strawberry", label: "Strawberry" },
+//   { value: "vanilla", label: "Vanilla" },
+// ];
 
 const localSourceField: FormFieldType = createFormConfig(
   "localSource",

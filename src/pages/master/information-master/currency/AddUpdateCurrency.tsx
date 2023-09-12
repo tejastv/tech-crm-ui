@@ -8,8 +8,8 @@ import { useParams } from "react-router-dom";
 export const AddUpdateCurrency: React.FC = () => {
   const methods = useForm<AddUpdateCurrencyType>();
   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
-  const { mutate: addCurrency } = addCurrencyMutation();
-  const { mutate: updateCurrency } = updateCurrencyMutation();
+  const { mutateAsync: addCurrency } = addCurrencyMutation();
+  const { mutateAsync: updateCurrency } = updateCurrencyMutation();
   const params = useParams();
 
   const cardConfig = {

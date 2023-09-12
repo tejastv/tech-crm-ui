@@ -9,7 +9,7 @@ import {
 } from "@shared/index";
 import { BankdrawnonType, useBankMasterDrawnApiCallHook } from "@pages/master";
 import { ColumnDef } from "@tanstack/react-table";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { useNavigate } from "react-router-dom";
 
 export const BankMasterDrawn: React.FC = () => {

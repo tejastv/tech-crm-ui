@@ -28,8 +28,8 @@ export const AddUpdatePurposeMaster: React.FC = () => {
     getPurposeMasterData,
     updatePurposeMasterMutation,
   } = usePurposeMasterApiCallHook();
-  const { mutate: addPurposeMaster } = addPurposeMasterMutation();
-  const { mutate: updatePurposeMaster } = updatePurposeMasterMutation();
+  const { mutateAsync: addPurposeMaster } = addPurposeMasterMutation();
+  const { mutateAsync: updatePurposeMaster } = updatePurposeMasterMutation();
 
   if (params.id) {
     const { data: purposeMasterData, isSuccess: purposeMasterDataSuccess } =

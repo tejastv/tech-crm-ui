@@ -17,8 +17,8 @@ export const AddBankMasterDeposit: React.FC = () => {
     getBankMasterDepositData,
     updateBankMasterDepositOnMutation,
   } = useBankMasterDepositApiCallHook();
-  const { mutate: AddBankMasterDeposit } = addBankMasterDepositMutation();
-  const { mutate: updateBankMasterDeposit } =
+  const { mutateAsync: AddBankMasterDeposit } = addBankMasterDepositMutation();
+  const { mutateAsync: updateBankMasterDeposit } =
     updateBankMasterDepositOnMutation();
   const params = useParams();
 

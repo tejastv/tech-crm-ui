@@ -2,7 +2,7 @@
 import React from "react";
 
 import { BorderLayout, PageBreadcrumb } from "@shared/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 
 export const ActualBuyer: React.FC = () => {
   const config = {

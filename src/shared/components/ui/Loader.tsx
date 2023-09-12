@@ -2,7 +2,6 @@ import React from "react";
 import { Puff } from "react-loader-spinner";
 
 export const Loader: React.FC = () => {
-  console.log("innn");
   return (
     <Puff
       height="50"
