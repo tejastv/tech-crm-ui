@@ -25,7 +25,7 @@ const source: FormFieldType = createFormConfig(
   "Source"
 );
 const letterfile: FormFieldType = createFormConfig(
-  "latterfile",
+  "firstLetterFile",
   "First Letter File",
   "file:.doc,.docx",
   SelectFileValidation,

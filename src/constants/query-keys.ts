@@ -5,6 +5,7 @@ const CONTINENT_DATA = "continent-data";
 const LOCALSOURCE_DATA = "localsource-data";
 const SEGMENT_DATA = "continent-data";
 const EXECUTIVE_DATA = "continent-data";
+const COMPANY_MASTER_DATA = "companyMaster-data";
 const FIN_YEAR_DATA = "fin-year-data";
 const INDUSTRY_DATA = "industry-data";
 const CALL_TYPE_DATA = "call-type-data";
@@ -30,6 +31,7 @@ export const queryKeys = {
   PAYMENTMODE_DATA,
   EXECUTIVE_DATA,
   CURRENCY_DATA,
+  COMPANY_MASTER_DATA,
   FIN_YEAR_DATA,
   INDUSTRY_DATA,
   CALL_TYPE_DATA,
