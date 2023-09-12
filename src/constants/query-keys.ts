@@ -18,6 +18,7 @@ const BANKMASTER_DEPOSIT_DATA = "bankmasterdeposit-data";
 const PAYMENTMODE_DATA = "paymentmode-data";
 const SUPPLIER_MASTER_DATA = "supplier-master-data";
 const CURRENCY_DATA = "currency-data";
+const STDPRICE_DATA = "currency-data";
 const CLIENT_GROUP_DATA = "client-group-data";
 const SOURCE_DATA = "source-data";
 
@@ -42,6 +43,7 @@ export const queryKeys = {
   BANKMASTER_DRAWN_DATA,
   BANKMASTER_DEPOSIT_DATA,
   SUPPLIER_MASTER_DATA,
+  STDPRICE_DATA,
   CLIENT_GROUP_DATA,
   SOURCE_DATA,
 };

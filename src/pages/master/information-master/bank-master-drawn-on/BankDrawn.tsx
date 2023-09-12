@@ -13,8 +13,8 @@ import { COMMON_ROUTES } from "@constants/index";
 import { useNavigate } from "react-router-dom";
 
 export const BankMasterDrawn: React.FC = () => {
-
-  const { getBankMasterDrawnOn, deleteBankMasterDrawnOnMutation } = useBankMasterDrawnApiCallHook();
+  const { getBankMasterDrawnOn, deleteBankMasterDrawnOnMutation } =
+    useBankMasterDrawnApiCallHook();
   const navigate = useNavigate();
 
   const config = {
@@ -47,9 +47,9 @@ export const BankMasterDrawn: React.FC = () => {
     },
   ];
 
-
   const { data: BankMasterDrawnData, isLoading } = getBankMasterDrawnOn();
-  const { mutateAsync: deleteBankMasterDrawn } = deleteBankMasterDrawnOnMutation();
+  const { mutateAsync: deleteBankMasterDrawn } =
+    deleteBankMasterDrawnOnMutation();
 
   const deleteBankMasterDrawnClick = async (BankMasterDrawnData: any) => {
     var paymentMode = confirm("Are you sure to delete it?");
@@ -72,7 +72,11 @@ export const BankMasterDrawn: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
-      pagination: true,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
       onDeleteClick: deleteBankMasterDrawnClick,
       onEditClick: editBankMasterDrawnClick,
     },

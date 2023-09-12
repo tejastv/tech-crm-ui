@@ -1,5 +1,6 @@
 import { FormFieldType, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
+
 const StdCurrencyValidation = {
   required: {
     value: true,
@@ -11,18 +12,13 @@ const StdCurrencyValidation = {
   },
 } as ValidationType;
 
-const stdcurrencyOptions = [
-  { value: "Mumbai", label: "200" },
-  { value: "strawberry", label: "300" },
-  { value: "vanilla", label: "400" },
-];
 const stdcurrencey: FormFieldType = createFormConfig(
   "currencey",
   "Currency",
   "select",
   StdCurrencyValidation,
   "Select Currency",
-  stdcurrencyOptions
+  []
 );
 
 export const addStdPriceFormFields = {

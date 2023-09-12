@@ -11,9 +11,8 @@ import {
 import { Button, DebouncedInput, TableType } from "@shared/index";
 import * as XLSX from "xlsx";
 import * as pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { Alignment, TDocumentDefinitions } from "pdfmake/interfaces";
-
 
 export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
@@ -21,7 +20,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const tableRef = useRef(null);
   const data = props.config.tableData;
   const columns = props.config.columns;
-
+  const pageSizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   const table = useReactTable({
     data,
     columns,
@@ -140,9 +139,14 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     };
     const docDefinition: TDocumentDefinitions = {
       pageSize: "A4", // Adjust page size as needed
-      // pageOrientation: "landscape",   
+      // pageOrientation: "landscape",
       content: [
-        { text: companyName, fontSize: 16, alignment: "center", margin: [0, 0, 0, 20] }, // Title
+        {
+          text: companyName,
+          fontSize: 16,
+          alignment: "center",
+          margin: [0, 0, 0, 20],
+        }, // Title
         {
           table: {
             headerRows: 1,
@@ -169,7 +173,6 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
         headerStyle: headerStyle,
         bodyStyle: bodyStyle,
       },
-
     };
     // Create a PDF document
     const pdfDoc = pdfMake.createPdf(docDefinition);
@@ -178,7 +181,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   };
 
   const handlePrint = () => {
-    console.log("print")
+    console.log("print");
   };
 
   return (
@@ -190,16 +193,19 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
             id="file_export_wrapper"
             className="dataTables_wrapper container-fluid dt-bootstrap4 no-footer"
           >
-            {props.config.showItemCountDropdown && (
+            {props.config.pagination?.showItemCountDropdown && (
               <div className="dataTables_length">
                 <label>Show </label>
                 <select
-                  value={table.getState().pagination.pageSize}
+                  value={
+                    props.config.pagination?.pageSize ||
+                    table.getState().pagination.pageSize
+                  }
                   onChange={(e) => {
                     table.setPageSize(Number(e.target.value));
                   }}
                 >
-                  {[10, 20, 30, 40, 50].map((pageSize) => (
+                  {pageSizes.map((pageSize) => (
                     <option key={`pageSize_${pageSize}`} value={pageSize}>
                       {pageSize}
                     </option>
@@ -436,8 +442,9 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                         disabled={!table.getCanPreviousPage()}
                         aria-controls="zero_config"
                         data-dt-idx="0"
-                        className={`page-link ${!table.getCanPreviousPage() && "disabled"
-                          }`}
+                        className={`page-link ${
+                          !table.getCanPreviousPage() && "disabled"
+                        }`}
                       >
                         Previous
                       </Button>
@@ -451,8 +458,9 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                         aria-controls="zero_config"
                         data-dt-idx="1"
                         type="button"
-                        className={`page-link ${!table.getCanNextPage() && "disabled"
-                          }`}
+                        className={`page-link ${
+                          !table.getCanNextPage() && "disabled"
+                        }`}
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
                       >

@@ -54,6 +54,9 @@ const GET_UPDATE_DELETE_BANKMASTER_DRAWN = "utility/bankMaster/{id}";
 const GET_ADD_BANKMASTER_DEPOSIT = "utility/bankDetails";
 const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 
+// Std Price
+const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
+
 const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
 const GET_UPDATE_DELETE_CLIENT_GROUP = "entity/clientGroup/{id}";
 
@@ -101,6 +104,7 @@ export const apiUrls = {
   GET_UPDATE_DELETE_BANKMASTER_DEPOSIT,
   GET_ADD_SUPPLIER_MASTER,
   GET_UPDATE_DELETE_SUPPLIER_MASTER,
+  GET_UPDATE_DELETE_STDPRICE,
   GET_ADD_CLIENT_GROUP,
   GET_UPDATE_DELETE_CLIENT_GROUP,
   GET_ADD_SOURCE,

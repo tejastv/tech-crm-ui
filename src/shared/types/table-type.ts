@@ -1,4 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
+import { PeginationConfigType } from "..";
 
 export interface TableType<T> {
   config: {
@@ -11,7 +12,7 @@ export interface TableType<T> {
     pdfBtn?: boolean;
     printBtn?: boolean;
     globalSearchBox?: boolean;
-    pagination?: boolean;
+    pagination?: PeginationConfigType;
     showItemCountDropdown?: boolean;
     onDeleteClick?: (data: any) => void;
     onEditClick?: (data: any) => void;
