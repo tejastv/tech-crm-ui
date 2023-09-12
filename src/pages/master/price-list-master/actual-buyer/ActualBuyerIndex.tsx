@@ -2,7 +2,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { ActualBuyer, AddActualBuyer } from "@master/index";
 
 const CompanyMasterIndex: React.FC = () => {

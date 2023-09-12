@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { AddUpdateCompany, CompanyMaster } from "..";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 
 const CompanyMasterIndex: React.FC = () => {
   return (

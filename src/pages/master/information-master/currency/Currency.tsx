@@ -6,7 +6,7 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { CurrencyType, useCurrencyApiCallHook } from "@pages/master";
 import { useNavigate } from "react-router-dom";

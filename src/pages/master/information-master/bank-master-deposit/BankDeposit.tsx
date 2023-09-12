@@ -9,7 +9,7 @@ import {
 } from "@shared/index";
 import { BankDepositType, useBankMasterDepositApiCallHook } from "@pages/master";
 import { ColumnDef } from "@tanstack/react-table";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { useNavigate } from "react-router-dom";
 
 export const BankMasterDeposit: React.FC = () => {

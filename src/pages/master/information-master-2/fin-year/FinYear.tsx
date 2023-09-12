@@ -8,7 +8,7 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { FinYearType, useFinYearApiCallHook } from "@master/index";
 import { useNavigate } from "react-router-dom";
 
