@@ -130,7 +130,11 @@ export const Supplier: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
-      pagination: true,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
       onDeleteClick: deleteSupplierMasterClick,
       onEditClick: editSupplierMasterClick,
     },

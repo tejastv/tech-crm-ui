@@ -37,7 +37,7 @@ export { LocalSource } from "./local-source-master/local-source/LocalSource";
 // Price List Child Page
 export { AddPrice } from "./local-source-master/price-list/AddPrice";
 // Std Price List Child Page
-export { AddStdPrice } from "./local-source-master/std-price-list/AddUpdateStdPrice";
+export { StdPrice } from "./local-source-master/std-price-list/StdPrice";
 
 // Country master child pages
 export { AddUpdateCountry } from "./location-master/country/AddUpdateCountry";

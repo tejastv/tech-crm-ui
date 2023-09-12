@@ -19,7 +19,6 @@ export const CompanyMaster: React.FC = () => {
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
 
-
   const config = {
     breadcrumbConfig: {
       pageHeading: "Company Master",
@@ -134,7 +133,6 @@ export const CompanyMaster: React.FC = () => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", companyData.companyId));
   };
 
-
   const tableConfig: TableType<CompanyType> = {
     config: {
       columns: columns,
@@ -145,7 +143,11 @@ export const CompanyMaster: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
-      pagination: true,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
       onDeleteClick: deleteCompanyClick,
       onEditClick: editCompanyClick,
     },
