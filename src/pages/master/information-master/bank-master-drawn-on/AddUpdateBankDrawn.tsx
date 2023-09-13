@@ -17,8 +17,8 @@ export const AddBankMasterDrawn: React.FC = () => {
     getBankMasterDrawnOnData,
     updateBankMasterDrawnOnMutation,
   } = useBankMasterDrawnApiCallHook();
-  const { mutate: addBankMasterDrawnOn } = addBankMasterDrawnOnMutation();
-  const { mutate: updateBankMasterDrawnOn } = updateBankMasterDrawnOnMutation();
+  const { mutateAsync: addBankMasterDrawnOn } = addBankMasterDrawnOnMutation();
+  const { mutateAsync: updateBankMasterDrawnOn } = updateBankMasterDrawnOnMutation();
   const params = useParams();
 
   const cardConfig = {

@@ -1,13 +1,11 @@
-// Location master
 const CITY_DATA = "city-data";
 const STATE_DATA = "state-data";
 const COUNTRY_DATA = "country-data";
 const CONTINENT_DATA = "continent-data";
-
-// Location Master
 const LOCALSOURCE_DATA = "localsource-data";
 const SEGMENT_DATA = "continent-data";
 const EXECUTIVE_DATA = "continent-data";
+const COMPANY_MASTER_DATA = "companyMaster-data";
 const FIN_YEAR_DATA = "fin-year-data";
 const INDUSTRY_DATA = "industry-data";
 const CALL_TYPE_DATA = "call-type-data";
@@ -19,26 +17,25 @@ const BANKMASTER_DRAWN_DATA = "bankmasterdrawn-data";
 const BANKMASTER_DEPOSIT_DATA = "bankmasterdeposit-data";
 const PAYMENTMODE_DATA = "paymentmode-data";
 const SUPPLIER_MASTER_DATA = "supplier-master-data";
-
-// Information master
 const CURRENCY_DATA = "currency-data";
+<<<<<<< HEAD
 const STDPRICE_DATA = "currency-data";
+=======
+const CLIENT_GROUP_DATA = "client-group-data";
+const SOURCE_DATA = "source-data";
+>>>>>>> 9662629bf52dee5e722f1051afcd133c0cb5de6c
 
 export const queryKeys = {
-  // Location Master
   CITY_DATA,
   STATE_DATA,
   COUNTRY_DATA,
   CONTINENT_DATA,
-
-  // LocalSource
   LOCALSOURCE_DATA,
   SEGMENT_DATA,
   PAYMENTMODE_DATA,
   EXECUTIVE_DATA,
-
-  // Information Master 
   CURRENCY_DATA,
+  COMPANY_MASTER_DATA,
   FIN_YEAR_DATA,
   INDUSTRY_DATA,
   CALL_TYPE_DATA,
@@ -49,5 +46,10 @@ export const queryKeys = {
   BANKMASTER_DRAWN_DATA,
   BANKMASTER_DEPOSIT_DATA,
   SUPPLIER_MASTER_DATA,
+<<<<<<< HEAD
   STDPRICE_DATA,
+=======
+  CLIENT_GROUP_DATA,
+  SOURCE_DATA,
+>>>>>>> 9662629bf52dee5e722f1051afcd133c0cb5de6c
 };

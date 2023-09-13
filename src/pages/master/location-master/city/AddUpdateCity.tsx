@@ -13,8 +13,8 @@ export const AddUpdateCity: React.FC = () => {
   const methods = useForm<AddUpdateCityType>();
   const { addCityMutation, getCityData, updateCityMutation } =
     useCityApiCallHook();
-  const { mutate: addCity } = addCityMutation();
-  const { mutate: updateCity } = updateCityMutation();
+  const { mutateAsync: addCity } = addCityMutation();
+  const { mutateAsync: updateCity } = updateCityMutation();
   const params = useParams();
 
   const cardConfig = {

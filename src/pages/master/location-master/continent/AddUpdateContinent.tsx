@@ -13,8 +13,8 @@ export const AddUpdateContinent: React.FC = () => {
   const methods = useForm<AddUpdateContinentType>();
   const { addContinentMutation, getContinentData, updateContinentMutation } =
     useContinentApiCallHook();
-  const { mutate: addContinent } = addContinentMutation();
-  const { mutate: updateContinent } = updateContinentMutation();
+  const { mutateAsync: addContinent } = addContinentMutation();
+  const { mutateAsync: updateContinent } = updateContinentMutation();
   const params = useParams();
 
   const cardConfig = {

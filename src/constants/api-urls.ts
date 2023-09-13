@@ -1,4 +1,3 @@
-// Location Master 
 const GET_ADD_CONTINENT = "location/continent";
 const GET_ADD_COUNTRY = "location/country";
 const GET_ADD_STATE = "location/state";
@@ -14,14 +13,14 @@ const GET_UPDATE_DELETE_SEGMENT = "entity/segment/{id}";
 const GET_ADD_EXECUTIVE = "utility/executive";
 const GET_UPDATE_DELETE_EXECUTIVE = "utility/executive/{id}";
 
-// Local Source Master
-
 const GET_ADD_LOCALSOURCE = "entity/localSource";
 const GET_UPDATE_DELETE_LOCALSOURCE = "entity/localSource/{id}";
 
-// Information Master 
 const GET_ADD_CURRENCY = "utility/currency";
 const GET_UPDATE_DELETE_CURRENCY = "utility/currency/{id}";
+const GET_ADD_COMPANY_MASTER = "entity/companyMaster";
+const GET_UPDATE_DELETE_COMPANY_MASTER = "entity/companyMaster/{id}";
+
 const GET_ADD_FIN_YEAR = "utility/finYear";
 const GET_UPDATE_DELETE_FIN_YEAR = "utility/finYear/{id}";
 
@@ -55,16 +54,23 @@ const GET_UPDATE_DELETE_BANKMASTER_DRAWN = "utility/bankMaster/{id}";
 const GET_ADD_BANKMASTER_DEPOSIT = "utility/bankDetails";
 const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 
+<<<<<<< HEAD
 // Std Price
 const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
 export const apiUrls = {
+=======
+const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
+const GET_UPDATE_DELETE_CLIENT_GROUP = "entity/clientGroup/{id}";
+>>>>>>> 9662629bf52dee5e722f1051afcd133c0cb5de6c
 
-  // Location Master 
+const GET_ADD_SOURCE = "utility/sourceMaster";
+const GET_UPDATE_DELETE_SOURCE = "utility/sourceMaster/{id}";
+
+export const apiUrls = {
   GET_ADD_CONTINENT,
   GET_ADD_COUNTRY,
   GET_ADD_STATE,
   GET_ADD_CITY,
-
   GET_UPDATE_DELETE_CITY,
   GET_UPDATE_DELETE_CONTINENT,
   GET_UPDATE_DELETE_COUNTRY,
@@ -75,16 +81,12 @@ export const apiUrls = {
   GET_UPDATE_DELETE_PAYMENTMODE,
   GET_ADD_EXECUTIVE,
   GET_UPDATE_DELETE_EXECUTIVE,
-
-  // Local Source Master 
   GET_ADD_LOCALSOURCE,
   GET_UPDATE_DELETE_LOCALSOURCE,
-
-  // Information Master 
-  // Currency
   GET_ADD_CURRENCY,
   GET_UPDATE_DELETE_CURRENCY,
-
+  GET_ADD_COMPANY_MASTER,
+  GET_UPDATE_DELETE_COMPANY_MASTER,
   GET_ADD_FIN_YEAR,
   GET_UPDATE_DELETE_FIN_YEAR,
   GET_ADD_INDUSTRY,
@@ -105,8 +107,14 @@ export const apiUrls = {
   GET_UPDATE_DELETE_BANKMASTER_DEPOSIT,
   GET_ADD_SUPPLIER_MASTER,
   GET_UPDATE_DELETE_SUPPLIER_MASTER,
+<<<<<<< HEAD
 
   // Std Price
   GET_UPDATE_DELETE_STDPRICE,
+=======
+  GET_ADD_CLIENT_GROUP,
+  GET_UPDATE_DELETE_CLIENT_GROUP,
+  GET_ADD_SOURCE,
+  GET_UPDATE_DELETE_SOURCE,
+>>>>>>> 9662629bf52dee5e722f1051afcd133c0cb5de6c
 };
-

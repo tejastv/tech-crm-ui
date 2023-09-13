@@ -26,8 +26,8 @@ export const AddUpdateExecutive: React.FC = () => {
     useExecutiveApiCallHook();
   const { getCity } = useCityApiCallHook();
   const { getState } = useStateApiCallHook();
-  const { mutate: addExecutive } = addExecutiveMutation();
-  const { mutate: updateExecutive } = updateExecutiveMutation();
+  const { mutateAsync: addExecutive } = addExecutiveMutation();
+  const { mutateAsync: updateExecutive } = updateExecutiveMutation();
   const params = useParams();
   const cardConfig = {
     formLayoutConfig: {

@@ -13,8 +13,8 @@ export const AddUpdateFinYear: React.FC = () => {
   const methods = useForm<AddUpdateFinYearType>();
   const { addFinYearMutation, getFinYearData, updateFinYearMutation } =
     useFinYearApiCallHook();
-  const { mutate: addFinYear } = addFinYearMutation();
-  const { mutate: updateFinYear } = updateFinYearMutation();
+  const { mutateAsync: addFinYear } = addFinYearMutation();
+  const { mutateAsync: updateFinYear } = updateFinYearMutation();
   const params = useParams();
   const cardConfig = {
     formLayoutConfig: {

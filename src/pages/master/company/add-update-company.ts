@@ -3,7 +3,7 @@ import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
 const nameField: FormFieldType = {
   config: {
-    name: "name",
+    name: "companyName",
     label: "Name",
     type: "text",
     id: "name",
@@ -27,7 +27,7 @@ const addressField: FormFieldType = {
     label: "Address",
     id: "Address",
     multiline: true,
-    placeholder: "Wnter Address ...",
+    placeholder: "Enter Address ...",
     validation: {
       required: {
         value: true,
@@ -43,7 +43,7 @@ const addressField: FormFieldType = {
 
 const officeAddressField: FormFieldType = {
   config: {
-    name: "officeAddress",
+    name: "regdOffice",
     label: "Regd. Office Address",
     id: "officeAddress",
     multiline: true,
@@ -62,7 +62,7 @@ const officeAddressField: FormFieldType = {
 
 const telNo: FormFieldType = {
   config: {
-    name: "telNo",
+    name: "phone",
     label: "Tel no.",
     type: "number",
     id: "telNo",
@@ -82,7 +82,7 @@ const telNo: FormFieldType = {
 
 const faxNo: FormFieldType = {
   config: {
-    name: "faxNo",
+    name: "fax",
     label: "Fax No.",
     type: "number",
     id: "name",
@@ -142,7 +142,7 @@ const website: FormFieldType = {
 
 const contactPerson: FormFieldType = {
   config: {
-    name: "contectPerson",
+    name: "contactPerson",
     label: "Contect Person",
     type: "text",
     id: "contectPerson",
@@ -208,7 +208,7 @@ const cityOptions = [
 
 const city: FormFieldType = {
   config: {
-    name: "city",
+    name: "cityId",
     label: "City",
     id: "city",
     options: selectOptionsMaker(cityOptions, "value", "label"),
@@ -234,7 +234,7 @@ const stateOptions = [
 
 const state: FormFieldType = {
   config: {
-    name: "state",
+    name: "stateId",
     label: "State",
     id: "state",
     options: selectOptionsMaker(stateOptions, "value", "label"),
@@ -260,7 +260,7 @@ const countryOptions = [
 
 const country: FormFieldType = {
   config: {
-    name: "country",
+    name: "countryId",
     label: "Country",
     id: "country",
     options: selectOptionsMaker(countryOptions, "value", "label"),
@@ -280,7 +280,7 @@ const country: FormFieldType = {
 
 const hscode: FormFieldType = {
   config: {
-    name: "hscode",
+    name: "hsCode",
     label: "HS Code",
     type: "text",
     id: "Hs Code",
@@ -320,7 +320,7 @@ const givenName: FormFieldType = {
 
 const referenceno: FormFieldType = {
   config: {
-    name: "referenceNo",
+    name: "ourRefNo",
     label: "Reference no.",
     type: "text",
     id: "referenceNo",
@@ -340,7 +340,7 @@ const referenceno: FormFieldType = {
 
 const financialyear: FormFieldType = {
   config: {
-    name: "fincialyear",
+    name: "financialYear",
     label: "Financial Year",
     type: "text",
     id: "fincialyear",
@@ -360,7 +360,7 @@ const financialyear: FormFieldType = {
 
 const regno: FormFieldType = {
   config: {
-    name: "regno",
+    name: "companyRegNo",
     label: "Reg. no.",
     type: "text",
     id: "regno",
@@ -394,10 +394,10 @@ const checkBoxField: FormFieldType = {
 };
 
 const companyOptions = [
-  { value: "Prpritership", label: "Prpritership" },
+  { value: "proprietorship", label: "proprietorship" },
   { value: "Partnership", label: "Partnership" },
-  { value: "Pvt Ltd", label: "Pvt Ldt" },
-  { value: "public Ltd", label: "public Ldt" },
+  { value: "Pvt Ltd", label: "Pvt Ltd" },
+  { value: "public Ltd", label: "public Ltd" },
 ];
 
 const companyType: FormFieldType = {
@@ -430,12 +430,12 @@ const incorporationDate: FormFieldType = {
     validation: {
       required: {
         value: true,
-        message: "Date field is rquired",
+        message: "Date field is required",
       },
-      pattern: {
-        value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-        message: "Invalid date format. Please use DD/MM/YYYY format.",
-      },
+      // pattern: {
+      //   value: /^(0[1-9]|1[0-2])\/(0[1-9]|1[0-9]|2[0-9]|3[01])\/\d{4}$/, // OLD DD-MM-YYYY patern/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+      //   message: "Invalid date format. Please use MM/DD/YYYY format.",
+      // },
     },
   },
 };
@@ -521,7 +521,7 @@ const rocStatus: FormFieldType = {
 
 const recodes: FormFieldType = {
   config: {
-    name: "recodes",
+    name: "records",
     label: "Recodes",
     type: "text",
     id: "recodes",
@@ -541,7 +541,7 @@ const recodes: FormFieldType = {
 
 const recfin: FormFieldType = {
   config: {
-    name: "reffin",
+    name: "recFin",
     label: "Rec Fin",
     type: "text",
     id: "recfin",

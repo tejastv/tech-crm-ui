@@ -13,8 +13,8 @@ export const AddUpdateCalltype: React.FC = () => {
   const methods = useForm<AddUpdateCallTypeType>();
   const { addCallTypeMutation, getCallTypeData, updateCallTypeMutation } =
     useCallTypeApiCallHook();
-  const { mutate: addCallType } = addCallTypeMutation();
-  const { mutate: updateCallType } = updateCallTypeMutation();
+  const { mutateAsync: addCallType } = addCallTypeMutation();
+  const { mutateAsync: updateCallType } = updateCallTypeMutation();
   const params = useParams();
 
   const cardConfig = {
