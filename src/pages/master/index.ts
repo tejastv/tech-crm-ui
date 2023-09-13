@@ -4,7 +4,7 @@ export { CompanyMaster } from "./company/Company";
 
 // Client master child pages
 export { Client } from "./client-master/client/Client";
-export { AddClient } from "./client-master/client/AddClient";
+export { AddUpdateClient } from "./client-master/client/AddUpdateClient";
 
 // Client Segment master child pages
 export { GroupMaster } from "./client-master/client-group/ClientGroup";
@@ -200,6 +200,7 @@ export * from "./information-master-2/executive/executive-type";
 
 export * from "./information-master-2/fin-year/add-update-finyear-type";
 export * from "./information-master-2/fin-year/finyear-type";
+export * from "./information-master-2/fin-year/last-fin-year-type";
 
 export * from "./information-master-2/industry/add-update-industry-type";
 export * from "./information-master-2/industry/industry-type";
@@ -256,3 +257,4 @@ export { useSupplierMasterApiCallHook } from "./information-master/supplier-mast
 export { useStdPriceApiCallHook } from "./local-source-master/std-price-list/useStdPriceApiCallHook";
 export { useClientGroupApiCallHook } from "./client-master/client-group/useClientGroupApiCallHook";
 export { useSourceApiCallHook } from "./information-master/source/useSourceApiCallHook";
+export { useClientApiCallHook } from "./client-master/client/useClientApiCallHook";

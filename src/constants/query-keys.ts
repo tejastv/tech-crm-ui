@@ -21,6 +21,8 @@ const CURRENCY_DATA = "currency-data";
 const STDPRICE_DATA = "currency-data";
 const CLIENT_GROUP_DATA = "client-group-data";
 const SOURCE_DATA = "source-data";
+const LAST_FIN_YEAR = "last-fin-year-data";
+const CLIENT_DATA = "client-data";
 
 export const queryKeys = {
   CITY_DATA,
@@ -46,4 +48,6 @@ export const queryKeys = {
   STDPRICE_DATA,
   CLIENT_GROUP_DATA,
   SOURCE_DATA,
+  LAST_FIN_YEAR,
+  CLIENT_DATA,
 };
