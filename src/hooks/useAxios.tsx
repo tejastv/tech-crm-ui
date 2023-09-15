@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { useAuth } from ".";
-import { Toaster } from "@shared/index";
+import { useAuth, useToaster } from ".";
+
+import { STATUS_CODES } from "@constants/util-constant";
 
 export const useAxios = () => {
   const navigate = useNavigate();
   const { removeItem } = useLocalStorage();
   const { user } = useAuth();
+  const { errorMessageToaster, successMessageToaster } = useToaster();
 
   const instance = axios.create({
     baseURL: `${import.meta.env.VITE_BASE_URL}`,
@@ -28,18 +30,28 @@ export const useAxios = () => {
 
   instance.interceptors.response.use(
     (response) => {
+      if (
+        response.status == STATUS_CODES.CODE_200 &&
+        response.config.method == "delete"
+      ) {
+        successMessageToaster("Deleted Successfully..!");
+      }
+      if (response.status == STATUS_CODES.CODE_201) {
+        successMessageToaster("Added Successfully..!");
+      }
       return response;
     },
     (error) => {
-      console.log(error.response?.status);
-      if (error.response?.status === 400) {
-        <Toaster
-          type="Danger"
-          heading="Error"
-          description={error.response?.data.error}
-        />;
+      if (error.response?.status === STATUS_CODES.CODE_302) {
+        errorMessageToaster(
+          error.response?.data.informationMessage,
+          "multiple"
+        );
       }
-      if (error.response?.status === 401) {
+      if (error.response?.status === STATUS_CODES.CODE_400) {
+        errorMessageToaster(error.response?.data.error, "single");
+      }
+      if (error.response?.status === STATUS_CODES.CODE_401) {
         removeItem("user");
         navigate("/login");
       }

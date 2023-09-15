@@ -9,8 +9,9 @@
   // color: #ef6e6e;
   // font-weight: bold;
   // text-decoration: underline;
-  color:#b50000; font-weight:bold; text-decoration: underline,
-
+  color: #b50000;
+  font-weight: bold;
+  text-decoration: underline;
 }
 hr {
   box-sizing: content-box;
@@ -27,7 +28,7 @@ hr {
 
 .loader-wrapper {
   display: flex;
-  position: fixed;
+  position: absolute;
   z-index: 99;
   background: #f8f9fa75;
   width: 100%;
@@ -39,6 +40,6 @@ hr {
   margin: 0;
 }
 
-.enquirynote{
+.enquirynote {
   background-color: #000;
 }

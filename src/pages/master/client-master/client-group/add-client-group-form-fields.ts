@@ -35,11 +35,11 @@ const SearchClient = {
 } as ValidationType;
 
 const Groupoptions = [
-  { value: "chocolate33", label: "Show Bank of Baroda Detail in Invoice" },
-  { value: "strawberry", label: "Show UNION Bank Detail in Invoice" },
-  { value: "1", label: "Show BOI Detail in Invoice" },
-  { value: "2", label: "Show South Indian Bank Detail in Invoice" },
-  { value: "3", label: "Show IOB Detail in Invoice" },
+  { value: false, label: "Show Bank of Baroda Detail in Invoice" },
+  { value: false, label: "Show UNION Bank Detail in Invoice" },
+  { value: false, label: "Show BOI Detail in Invoice" },
+  { value: false, label: "Show South Indian Bank Detail in Invoice" },
+  { value: false, label: "Show IOB Detail in Invoice" },
 ];
 
 const SearchClientOptions = [

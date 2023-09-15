@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
   ActionButtons,
   BorderLayout,
-  Button,
   Card,
   Input,
+  Button,
 } from "@shared/index";
 import {
   AddUpdateFinYearType,
@@ -26,6 +26,7 @@ export const AddUpdateFinYear: React.FC = () => {
   const { mutateAsync: addFinYear } = addFinYearMutation();
   const { mutateAsync: updateFinYear } = updateFinYearMutation();
   const params = useParams();
+  const [lastFinYear, setLastFinYear] = useState<number>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: params.id ? "Update Fin Year" : "Add Fin Year",
@@ -35,12 +36,6 @@ export const AddUpdateFinYear: React.FC = () => {
       heading: "Action Buttons",
     },
   };
-
-  // const { data: finYearData } = getLastFinYear();
-  // if (finYearData?.data) {
-  //   console.log(finYearData?.data);
-  //   addFinYearFormFields.finyear.config.setData = finYearData.data;
-  // }
 
   if (params.id) {
     const { data: finYearData, isSuccess: finYearDataSuccess } = getFinYearData(
@@ -60,12 +55,15 @@ export const AddUpdateFinYear: React.FC = () => {
     useEffect(() => {
       methods.reset();
     }, []);
-    const { data: finYearData } = getLastFinYear();
-    if (finYearData?.data) {
-      console.log(finYearData?.data);
-      addFinYearFormFields.finyear.config.setData = finYearData.data;
-    }
   }
+
+  // return () => {
+  //   getLastFinYear().then((finYear) => {
+  //     console.log("in else", finYear.data);
+  //     // setLastFinYear(finYear.data);
+  //     addFinYearFormFields.finyear.config.setData = finYear.data;
+  //   });
+  // };
 
   const onSubmit = methods.handleSubmit((executiveData): void => {
     let data: any = { ...executiveData };
@@ -95,6 +93,7 @@ export const AddUpdateFinYear: React.FC = () => {
                       <Button
                         type="button"
                         className="btn btn-danger waves-effect waves-light"
+                        onClick={getFinYear}
                       >
                         {" "}
                         Get Fin Year

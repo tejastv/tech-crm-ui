@@ -20,7 +20,6 @@ export { Image } from "./components/ui/Image";
 export { DivLayout } from "./components/ui/Div-layout";
 export { Loader } from "./components/ui/Loader";
 export { DebouncedInput } from "./components/ui/DebouncedInput";
-export { Toaster } from "./components/ui/Toast";
 
 // Types
 export * from "./types/button-type";

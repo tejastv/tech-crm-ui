@@ -40,16 +40,16 @@ export const Checkbox = (props: FormFieldType) => {
           </Form.Label>
           <div className="col-sm-9">
             {props.config.options &&
-              props.config.options.map((option) => {
+              props.config.options.map((option, index) => {
                 return (
                   <Controller
                     name={props.config.name}
                     control={control}
                     defaultValue={option.value}
-                    key={option.value}
+                    key={index + "" + option.value}
                     render={({ field }) => (
                       <Form.Check
-                        id={"" + option.value}
+                        id={index + "" + option.value}
                         type="checkbox"
                         label={option.label}
                         {...field}
