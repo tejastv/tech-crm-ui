@@ -181,7 +181,51 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   };
 
   const handlePrint = () => {
-    console.log("print");
+    console.log("print the table");
+    const companyName = "Mirainform - CRM Software";
+    const table: any = tableRef.current;
+    const rows: any = Array.from(table.querySelectorAll("tr"));
+    const headers: any = Array.from(rows[0].querySelectorAll("th")).map(
+      (header: any) => header.textContent
+    );
+    const tableData = rows
+      .slice(1) // Skip the header row
+      .map((row: any) =>
+        Array.from(row.querySelectorAll("td")).map(
+          (cell: any) => cell.textContent
+        )
+      );
+    const newWindow = window.open('', '_blank');
+    if (newWindow) {
+      newWindow.document.write('<html><head><title>'+ companyName +'</title></head><body style="font-family: Arial, sans-serif;">');
+      newWindow.document.write('<div style="font-size: 24px; margin-bottom: 10px;color:#42556f;">');
+      newWindow.document.write(companyName);
+      newWindow.document.write('</div>');
+      newWindow.document.write('<table style="border-collapse: collapse; width: 100%;">');
+      newWindow.document.write('<thead>');
+      newWindow.document.write('<tr>');
+      headers.forEach((headers: string) => {
+        newWindow.document.write('<th style="border: 1px solid #e3e7ea; color: #e3e7ea;text-align:left;font-size: 12px;">' + headers + '</th>');
+      });
+      newWindow.document.write('</tr>');
+      newWindow.document.write('</thead>');
+      newWindow.document.write('<tbody>');
+      for (let i = 0; i < tableData.length; i++) {
+        newWindow.document.write('<tr>');
+        tableData[i].forEach((cell: string) => {
+          newWindow.document.write('<td style="border: 1px solid #e3e7ea;font-size: 12px;color: #00000f;">' + cell + '</td>');
+        });
+        newWindow.document.write('</tr>');
+      }
+      newWindow.document.write('</tbody>');
+      newWindow.document.write('</table>');
+      newWindow.document.write('</body></html>');
+      newWindow.document.close();
+      newWindow.print();
+      newWindow.close();
+    } else {
+      alert('Your browser blocked opening a new window. Please allow pop-ups and try again.');
+    }
   };
 
   return (
