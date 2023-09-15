@@ -3,6 +3,7 @@ import { PeginationConfigType } from "..";
 
 export interface TableType<T> {
   config: {
+    tableName?: string;
     columns: ColumnDef<T>[];
     tableData: T[];
     sorting?: boolean;

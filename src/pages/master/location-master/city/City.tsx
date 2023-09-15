@@ -72,6 +72,7 @@ export const City: React.FC = () => {
 
   const tableConfig: TableType<CityType> = {
     config: {
+      tableName: "City",
       columns: columns,
       tableData: cityData ? cityData : [],
       copyBtn: true,

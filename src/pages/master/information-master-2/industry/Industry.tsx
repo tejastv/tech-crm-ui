@@ -62,6 +62,7 @@ export const Industry: React.FC = () => {
 
   const tableConfig: TableType<IndustryType> = {
     config: {
+      tableName: "Industry",
       columns: columns,
       tableData: industryData ? industryData : [],
       copyBtn: true,

@@ -123,6 +123,7 @@ export const GroupMaster: React.FC = () => {
 
   const tableConfig: TableType<ClientGroupType> = {
     config: {
+      tableName: "Group Master",
       columns: columns,
       tableData: clientGroupData ? clientGroupData : [],
       copyBtn: true,

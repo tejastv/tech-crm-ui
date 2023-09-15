@@ -79,6 +79,7 @@ export const User: React.FC = () => {
 
   const tableConfig: TableType<UserType> = {
     config: {
+      tableName: "User Master",
       columns: columns,
       tableData: userData ? userData : [],
       copyBtn: true,

@@ -96,6 +96,7 @@ export const StdPrice: React.FC = () => {
 
   const tableConfig: TableType<StdPriceType> = {
     config: {
+      tableName: "Std. Price List (Local Source)",
       columns: columns,
       tableData: stdPriceData ? stdPriceData : [],
       copyBtn: true,

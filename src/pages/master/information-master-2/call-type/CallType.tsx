@@ -62,6 +62,7 @@ export const CallType: React.FC = () => {
 
   const tableConfig: TableType<CallTypeType> = {
     config: {
+      tableName: "Call Type",
       columns: columns,
       tableData: callTypeData ? callTypeData : [],
       copyBtn: true,

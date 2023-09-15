@@ -120,6 +120,7 @@ export const Supplier: React.FC = () => {
 
   const tableConfig: TableType<SupplierMasterType> = {
     config: {
+      tableName: "Supplier Master",
       columns: columns,
       tableData: supplierMasterData ? supplierMasterData : [],
       copyBtn: true,

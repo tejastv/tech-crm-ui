@@ -62,6 +62,7 @@ export const PurposeMaster: React.FC = () => {
 
   const tableConfig: TableType<PurposeMasterType> = {
     config: {
+      tableName: "Purpose",
       columns: columns,
       tableData: purposeMasterData ? purposeMasterData : [],
       copyBtn: true,

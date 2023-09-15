@@ -52,7 +52,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     const table: any = tableRef.current;
     try {
       const tableText = table.innerText;
-      const copiedText = `Mirainform - CRM Software\n\n${tableText}`;
+      const copiedText = `Mirainform - CRM Software - ${props.config.tableName}\n\n${tableText}`;
       await navigator.clipboard.writeText(copiedText);
       console.log("Table data copied to clipboard!");
     } catch (err) {
@@ -80,7 +80,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "Mirainform - CRM Software.csv";
+    a.download = `Mirainform-CRM Software-${props.config.tableName}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -101,7 +101,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "Mirainform - CRM Software.xlsx";
+    a.download = `Mirainform-CRM Software-${props.config.tableName}.xlsx`;
     a.click();
     window.URL.revokeObjectURL(url);
   };
@@ -181,8 +181,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   };
 
   const handlePrint = () => {
-    console.log("print the table");
-    const companyName = "Mirainform - CRM Software";
+    const companyName = `Mirainform - CRM Software - ${props.config.tableName}`;
     const table: any = tableRef.current;
     const rows: any = Array.from(table.querySelectorAll("tr"));
     const headers: any = Array.from(rows[0].querySelectorAll("th")).map(
@@ -195,36 +194,61 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
           (cell: any) => cell.textContent
         )
       );
-    const newWindow = window.open('', '_blank');
+
+    const newWindow = window.open("", "_blank");
     if (newWindow) {
-      newWindow.document.write('<html><head><title>'+ companyName +'</title></head><body style="font-family: Arial, sans-serif;">');
-      newWindow.document.write('<div style="font-size: 24px; margin-bottom: 10px;color:#42556f;">');
+      newWindow.document.write(
+        "<html><head><title>" +
+          companyName +
+          '</title></head><body style="font-family: Arial, sans-serif;">'
+      );
+      newWindow.document.write(
+        '<div style="font-size: 24px; margin-bottom: 10px;color:#42556f;">'
+      );
       newWindow.document.write(companyName);
-      newWindow.document.write('</div>');
-      newWindow.document.write('<table style="border-collapse: collapse; width: 100%;">');
-      newWindow.document.write('<thead>');
-      newWindow.document.write('<tr>');
-      headers.forEach((headers: string) => {
-        newWindow.document.write('<th style="border: 1px solid #e3e7ea; color: #e3e7ea;text-align:left;font-size: 12px;">' + headers + '</th>');
+      newWindow.document.write("</div>");
+      newWindow.document.write(
+        '<table style="border-collapse: collapse; width: 100%;">'
+      );
+      newWindow.document.write("<thead>");
+      newWindow.document.write("<tr>");
+      headers.forEach((header: string) => {
+        newWindow.document.write(
+          '<th style="border: 1px solid #e3e7ea; background-color: #f0f0f0; text-align: left; font-size: 12px;">' +
+            header +
+            "</th>"
+        );
       });
-      newWindow.document.write('</tr>');
-      newWindow.document.write('</thead>');
-      newWindow.document.write('<tbody>');
+      newWindow.document.write("</tr>");
+      newWindow.document.write("</thead>");
+      newWindow.document.write("<tbody>");
       for (let i = 0; i < tableData.length; i++) {
-        newWindow.document.write('<tr>');
+        newWindow.document.write("<tr>");
         tableData[i].forEach((cell: string) => {
-          newWindow.document.write('<td style="border: 1px solid #e3e7ea;font-size: 12px;color: #00000f;">' + cell + '</td>');
+          newWindow.document.write(
+            '<td style="border: 1px solid #e3e7ea; font-size: 12px;">' +
+              cell +
+              "</td>"
+          );
         });
-        newWindow.document.write('</tr>');
+        newWindow.document.write("</tr>");
       }
-      newWindow.document.write('</tbody>');
-      newWindow.document.write('</table>');
-      newWindow.document.write('</body></html>');
+      newWindow.document.write("</tbody>");
+      newWindow.document.write("</table>");
+      newWindow.document.write("</body></html>");
       newWindow.document.close();
+
+      // Trigger the print operation
       newWindow.print();
-      newWindow.close();
+
+      // Close the window after a short delay (e.g., 1 second)
+      setTimeout(() => {
+        newWindow.close();
+      }, 1000);
     } else {
-      alert('Your browser blocked opening a new window. Please allow pop-ups and try again.');
+      alert(
+        "Your browser blocked opening a new window. Please allow pop-ups and try again."
+      );
     }
   };
 
