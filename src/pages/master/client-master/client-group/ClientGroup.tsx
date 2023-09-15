@@ -43,31 +43,61 @@ export const GroupMaster: React.FC = () => {
     {
       accessorFn: (row) => row.showBOBDetails,
       id: "showBOBDetails",
-      cell: (info) => info.getValue(),
+      cell: (info) => (
+        <input
+          type="checkbox"
+          checked={info.row.original.showBOBDetails}
+          disabled
+        />
+      ),
       header: () => <>Show BOB Details</>,
     },
     {
       accessorFn: (row) => row.showUnionBankDetails,
       id: "showUnionBankDetails",
-      cell: (info) => info.getValue(),
+      cell: (info) => (
+        <input
+          type="checkbox"
+          checked={info.row.original.showUnionBankDetails}
+          disabled
+        />
+      ),
       header: () => <>Show UnionBank Details</>,
     },
     {
       accessorFn: (row) => row.showBOIDetails,
       id: "showBOIDetails",
-      cell: (info) => info.getValue(),
+      cell: (info) => (
+        <input
+          type="checkbox"
+          checked={info.row.original.showBOIDetails}
+          disabled
+        />
+      ),
       header: () => <>Show BOI Details</>,
     },
     {
       accessorFn: (row) => row.showSouthIndianBankDetails,
       id: "showSouthIndianBankDetails",
-      cell: (info) => info.getValue(),
+      cell: (info) => (
+        <input
+          type="checkbox"
+          checked={info.row.original.showSouthIndianBankDetails}
+          disabled
+        />
+      ),
       header: () => <>Show SouthIndianBank Details</>,
     },
     {
       accessorFn: (row) => row.showIOBDetails,
       id: "showIOBDetails",
-      cell: (info) => info.getValue(),
+      cell: (info) => (
+        <input
+          type="checkbox"
+          checked={info.row.original.showIOBDetails}
+          disabled
+        />
+      ),
       header: () => <>Show IOB Details</>,
     },
     {

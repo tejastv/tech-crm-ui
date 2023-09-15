@@ -151,7 +151,6 @@ export const AddUpdateCompany: React.FC = () => {
           methods.reset();
         }, []);
       }
-
       addCompanyFormFields.nameField.config.setData =
         companyMasterData.companyName;
       addCompanyFormFields.addressField.config.setData =
