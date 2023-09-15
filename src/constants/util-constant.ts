@@ -10,9 +10,10 @@ export const toasterConfig = {
 };
 
 export const STATUS_CODES = {
-  CODE_201: 201,
   CODE_200: 200,
+  CODE_201: 201,
+  CODE_202: 202,
+  CODE_302: 302,
   CODE_400: 400,
   CODE_401: 401,
-  CODE_302: 302,
 };

@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import {
-  ActionButtons,
-  BorderLayout,
-  Card,
-  Input,
-  Button,
-} from "@shared/index";
+import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
   AddUpdateFinYearType,
   addFinYearFormFields,
@@ -21,12 +15,12 @@ export const AddUpdateFinYear: React.FC = () => {
     addFinYearMutation,
     getFinYearData,
     updateFinYearMutation,
-    getLastFinYear,
+    // getLastFinYear,
   } = useFinYearApiCallHook();
   const { mutateAsync: addFinYear } = addFinYearMutation();
   const { mutateAsync: updateFinYear } = updateFinYearMutation();
   const params = useParams();
-  const [lastFinYear, setLastFinYear] = useState<number>();
+  // const [lastFinYear, setLastFinYear] = useState<number>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: params.id ? "Update Fin Year" : "Add Fin Year",

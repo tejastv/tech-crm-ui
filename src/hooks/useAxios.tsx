@@ -39,6 +39,9 @@ export const useAxios = () => {
       if (response.status == STATUS_CODES.CODE_201) {
         successMessageToaster("Added Successfully..!");
       }
+      if (response.status == STATUS_CODES.CODE_202) {
+        successMessageToaster("Updated Successfully..!");
+      }
       return response;
     },
     (error) => {
