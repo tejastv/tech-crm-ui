@@ -55,6 +55,9 @@ export const useAxios = () => {
       if (error.response?.status === STATUS_CODES.CODE_400) {
         errorMessageToaster(error.response?.data.error, "single");
       }
+      if (error.response?.status === STATUS_CODES.CODE_500) {
+        errorMessageToaster(error.response?.data.error, "single");
+      }
       if (error.response?.status === STATUS_CODES.CODE_401) {
         removeItem("user");
         navigate("/login");
