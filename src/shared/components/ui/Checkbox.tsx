@@ -45,7 +45,6 @@ export const Checkbox = (props: FormFieldType) => {
                   <Controller
                     name={props.config.name}
                     control={control}
-                    defaultValue={option.value}
                     key={index + "" + option.value}
                     render={({ field }) => (
                       <Form.Check

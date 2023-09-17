@@ -61,13 +61,13 @@ export const AddUpdateClientGroup: React.FC = () => {
                   />
                 </div>
               </div>
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-md-6 col-xs-12">
                   <Select
                     config={addClientGroupFormFields.searchClient.config}
                   />
                 </div>
-              </div>
+              </div> */}
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
               <ActionButtons />

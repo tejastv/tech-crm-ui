@@ -108,7 +108,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
 
   const downloadPDF = () => {
     if (pdfMake) {
-      (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+      // (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
     }
     const companyName = "Mirainform - CRM Software";
     const table: any = tableRef.current;
