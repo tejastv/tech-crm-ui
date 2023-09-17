@@ -26,11 +26,12 @@ export const Input = (props: FormFieldType) => {
   useEffect(() => {
     if (props.config.setData) {
       setInputValue(props.config.setData);
+      setValue(props.config.name, props.config.setData);
     }
   }, [props.config.setData]);
 
   // Conditionally define the onChange handler based on input type
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const newValue = e.target.value;
     setInputValue(newValue);
     setValue(props.config.name, newValue); // Update the form's value
@@ -55,8 +56,8 @@ export const Input = (props: FormFieldType) => {
                 placeholder={props.config.placeholder}
                 id={props.config.id}
                 value={inputValue}
-                onChange={handleChange}
                 {...register(props.config.name, props.config.validation)}
+                onChange={handleChange}
               />
             ) : (
               <Form.Control
@@ -75,6 +76,7 @@ export const Input = (props: FormFieldType) => {
                 }
                 value={inputValue}
                 {...register(props.config.name, props.config.validation)}
+                onChange={handleChange}
               />
             )}
             {isInvalid && (

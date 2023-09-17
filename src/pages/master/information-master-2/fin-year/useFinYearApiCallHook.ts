@@ -2,6 +2,7 @@ import { useAxios } from "@hooks/useAxios";
 import {
   AddUpdateFinYearType,
   FinYearType,
+  LastFinYearType,
   // LastFinYearType,
 } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
@@ -30,20 +31,15 @@ export const useFinYearApiCallHook = () => {
     });
   };
 
-  // const getLastFinYear = (): UseQueryResult<LastFinYearType> => {
-  //   return useQuery<LastFinYearType>({
-  //     queryKey: [queryKeys.LAST_FIN_YEAR],
-  //     queryFn: async () => {
-  //       const response = await instance.get(apiUrls.GET_LAST_FIN_YEAR);
-  //       return response.data;
-  //     },
-  //     staleTime: Infinity,
-  //   });
-  // };
-
-  const getLastFinYear = async () => {
-    const response = await instance.get(apiUrls.GET_LAST_FIN_YEAR);
-    return response.data;
+  const getLastFinYear = (): UseQueryResult<LastFinYearType> => {
+    return useQuery<LastFinYearType>({
+      queryKey: [queryKeys.LAST_FIN_YEAR],
+      queryFn: async () => {
+        const response = await instance.get(apiUrls.GET_LAST_FIN_YEAR);
+        return response.data;
+      },
+      staleTime: Infinity,
+    });
   };
 
   const getFinYearData = (id: string): UseQueryResult<FinYearType> => {

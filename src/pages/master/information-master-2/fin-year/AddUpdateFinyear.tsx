@@ -15,12 +15,11 @@ export const AddUpdateFinYear: React.FC = () => {
     addFinYearMutation,
     getFinYearData,
     updateFinYearMutation,
-    // getLastFinYear,
+    getLastFinYear,
   } = useFinYearApiCallHook();
   const { mutateAsync: addFinYear } = addFinYearMutation();
   const { mutateAsync: updateFinYear } = updateFinYearMutation();
   const params = useParams();
-  // const [lastFinYear, setLastFinYear] = useState<number>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: params.id ? "Update Fin Year" : "Add Fin Year",
@@ -49,23 +48,22 @@ export const AddUpdateFinYear: React.FC = () => {
     useEffect(() => {
       methods.reset();
     }, []);
+    const { data: lastFinYearData, isSuccess: lastFinYearDataSuccess } =
+      getLastFinYear();
+    if (lastFinYearDataSuccess) {
+      addFinYearFormFields.finyear.config.setData = lastFinYearData.data;
+    }
   }
 
-  // return () => {
-  //   getLastFinYear().then((finYear) => {
-  //     console.log("in else", finYear.data);
-  //     // setLastFinYear(finYear.data);
-  //     addFinYearFormFields.finyear.config.setData = finYear.data;
-  //   });
-  // };
+  const onSubmit = methods.handleSubmit((finYearData): void => {
+    let data: any = { ...finYearData };
+    console.log(data);
 
-  const onSubmit = methods.handleSubmit((executiveData): void => {
-    let data: any = { ...executiveData };
-    if (params.id && executiveData) {
-      updateFinYear({ id: params.id, ...data });
-    } else {
-      addFinYear(data);
-    }
+    // if (params.id && finYearData) {
+    //   updateFinYear({ id: params.id, ...data });
+    // } else {
+    //   addFinYear(data);
+    // }
   });
 
   return (

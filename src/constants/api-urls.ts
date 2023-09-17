@@ -62,7 +62,7 @@ const GET_UPDATE_DELETE_CLIENT_GROUP = "entity/clientGroup/{id}";
 const GET_ADD_SOURCE = "utility/sourceMaster";
 const GET_UPDATE_DELETE_SOURCE = "utility/sourceMaster/{id}";
 
-const GET_LAST_FIN_YEAR = "utility/lastFinYear";
+const GET_LAST_FIN_YEAR = "utility/finYear/lastFinYear";
 
 const GET_ADD_CLIENT = "entity/client";
 const GET_UPDATE_DELETE_CLIENT = "entity/client/{id}";
