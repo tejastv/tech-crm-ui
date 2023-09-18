@@ -46,13 +46,14 @@ export const AddUpdateFinYear: React.FC = () => {
     }
   } else {
     useEffect(() => {
+      addFinYearFormFields.finyear.config.setData = 2024;
       methods.reset();
     }, []);
-    const { data: lastFinYearData, isSuccess: lastFinYearDataSuccess } =
-      getLastFinYear();
-    if (lastFinYearDataSuccess) {
-      addFinYearFormFields.finyear.config.setData = lastFinYearData.data;
-    }
+    // const { data: lastFinYearData, isSuccess: lastFinYearDataSuccess } =
+    //   getLastFinYear();
+    // if (lastFinYearDataSuccess) {
+
+    // }
   }
 
   const onSubmit = methods.handleSubmit((finYearData): void => {
@@ -92,7 +93,7 @@ export const AddUpdateFinYear: React.FC = () => {
                       </Button>
                     </div> */}
 
-                    <Input config={addFinYearFormFields.totaltax.config} />
+                    {/* <Input config={addFinYearFormFields.totaltax.config} /> */}
                     <Input config={addFinYearFormFields.stax.config} />
                     <Input config={addFinYearFormFields.edcess.config} />
                   </div>
