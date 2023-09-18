@@ -30,7 +30,7 @@ export const useAxios = () => {
 
   instance.interceptors.response.use(
     (response) => {
-      console.log(response);
+      // console.log(response);
       if (
         response.status == STATUS_CODES.CODE_200 &&
         response.config.method == "delete"
