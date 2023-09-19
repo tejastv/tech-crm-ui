@@ -52,6 +52,7 @@ export const Checkbox = (props: FormFieldType) => {
                         type="checkbox"
                         label={option.label}
                         {...field}
+                        value={option.value}
                         {...register(
                           props.config.name,
                           props.config.validation

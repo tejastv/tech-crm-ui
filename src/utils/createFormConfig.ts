@@ -6,9 +6,9 @@ export function createFormConfig(
   type: string,
   validationConfig: ValidationType,
   placeholder: string,
+  options?: Array<Options>,
   disabled: boolean = false,
-  multiline: boolean = false,
-  options?: Array<Options>
+  multiline: boolean = false
 ): FormFieldType {
   let formField: FormFieldType = { config: {} } as FormFieldType;
   const replaceLabel = "{label}";

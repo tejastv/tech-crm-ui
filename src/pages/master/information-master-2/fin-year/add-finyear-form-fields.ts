@@ -98,6 +98,7 @@ const finyear: FormFieldType = createFormConfig(
   "number",
   finyearValidation,
   "FIn Year",
+  [],
   true
 );
 const totaltax: FormFieldType = createFormConfig(

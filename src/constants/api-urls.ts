@@ -55,9 +55,12 @@ const GET_ADD_BANKMASTER_DEPOSIT = "utility/bankDetails";
 const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 
 const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
+const GET_UPDATE_DELETE_STDPRICE_CLIENTS = "entity/stdPriceListForClients/{id}";
 
 const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
 const GET_UPDATE_DELETE_CLIENT_GROUP = "entity/clientGroup/{id}";
+const UPDATE_CLIENT_GROUP =
+  "entity/clientGroup/{ClientGroupId}/clintGroupIdToMove/{clintGroupIdToMove}";
 
 const GET_ADD_SOURCE = "utility/sourceMaster";
 const GET_UPDATE_DELETE_SOURCE = "utility/sourceMaster/{id}";
@@ -66,6 +69,7 @@ const GET_LAST_FIN_YEAR = "utility/finYear/lastFinYear";
 
 const GET_ADD_CLIENT = "entity/client";
 const GET_UPDATE_DELETE_CLIENT = "entity/client/{id}";
+const GET_CLIENT_GROUP_BASED_ON_ID = "entity/client/clientGroup/{id}";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -109,6 +113,7 @@ export const apiUrls = {
   GET_ADD_SUPPLIER_MASTER,
   GET_UPDATE_DELETE_SUPPLIER_MASTER,
   GET_UPDATE_DELETE_STDPRICE,
+  GET_UPDATE_DELETE_STDPRICE_CLIENTS,
   GET_ADD_CLIENT_GROUP,
   GET_UPDATE_DELETE_CLIENT_GROUP,
   GET_ADD_SOURCE,
@@ -116,4 +121,6 @@ export const apiUrls = {
   GET_LAST_FIN_YEAR,
   GET_ADD_CLIENT,
   GET_UPDATE_DELETE_CLIENT,
+  GET_CLIENT_GROUP_BASED_ON_ID,
+  UPDATE_CLIENT_GROUP,
 };

@@ -23,7 +23,7 @@ export { State } from "./location-master/state/State";
 //Price List Master
 //Price List Clients
 export { AddPriceClients } from "./price-list-master/price-list-for-clients/AddPriceListClients";
-export { AddStdPriceClients } from "./price-list-master/std-price-list-client/AddStdPriceListClient";
+export { StdPriceListClient } from "./price-list-master/std-price-list-client/StdPriceListClient";
 
 export { AddPriceGroup } from "./price-list-master/priice-list-group-wise/AddPriceListGroup";
 // Actual Buyer
@@ -224,6 +224,7 @@ export * from "./location-master/state/add-update-state-type";
 export * from "./location-master/continent/add-update-continent-type";
 export * from "./location-master/country/add-update-country-type";
 
+export * from "./client-master/client-group/client-group-basedon-clientID-type";
 //Services/ Hooks
 
 // Location Master
@@ -258,3 +259,4 @@ export { useStdPriceApiCallHook } from "./local-source-master/std-price-list/use
 export { useClientGroupApiCallHook } from "./client-master/client-group/useClientGroupApiCallHook";
 export { useSourceApiCallHook } from "./information-master/source/useSourceApiCallHook";
 export { useClientApiCallHook } from "./client-master/client/useClientApiCallHook";
+export { useStdPriceClientsApiCallHook } from "./price-list-master/std-price-list-client/useStdPriceClientsApiCallHook";

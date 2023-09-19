@@ -14,6 +14,7 @@ export { InputWithText } from "./components/ui/Note";
 export { ActionButtons } from "./components/ui/ActionButtons";
 export { Select } from "./components/ui/Select";
 export { Checkbox } from "./components/ui/Checkbox";
+export { SingleCheckbox } from "./components/ui/Single-Checkbox";
 export { Radio } from "./components/ui/Radio";
 export { DatePicker } from "./components/ui/DatePicker";
 export { Image } from "./components/ui/Image";

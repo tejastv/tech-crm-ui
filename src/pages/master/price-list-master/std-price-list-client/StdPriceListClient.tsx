@@ -10,45 +10,45 @@ import {
   TableType,
 } from "@shared/index";
 import {
-  AddUpdateStdPriceType,
-  addStdPriceFormFields,
-  useStdPriceApiCallHook,
-  StdPriceType,
+  AddStdPriceClientsType,
+  StdPriceClientsType,
+  addStdPriceClientsFormFields,
   useCurrencyApiCallHook,
+  useStdPriceClientsApiCallHook,
 } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
-export const StdPrice: React.FC = () => {
-  const methods = useForm<AddUpdateStdPriceType>();
-  const [currency, setCurrency] = useState("0");
-  const { getCurrency } = useCurrencyApiCallHook();
-  const { data: currencyData } = getCurrency();
-  const { getStdPriceData } = useStdPriceApiCallHook();
-
+export const StdPriceListClient: React.FC = () => {
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Std. Price List (Local Source)",
-      heading: "Entry",
-    },
-    formActionsConfig: {
+      mainHeading: "Std. Price List",
       heading: "Action Buttons",
+    },
+    formPurchesConfig: {
+      heading: "Purchase",
+    },
+    formSellConfig: {
+      heading: "Sell",
     },
     borderLayoutConfig: {
       heading: "Table",
     },
   };
 
+  const methods = useForm<AddStdPriceClientsType>();
+  const [currency, setCurrency] = useState("0");
+  const { getCurrency } = useCurrencyApiCallHook();
+  const { data: currencyData } = getCurrency();
+  const { getStdPriceClientsData } = useStdPriceClientsApiCallHook();
+
   if (currencyData) {
     console.log(currencyData);
-    addStdPriceFormFields.stdcurrencey.config.options = selectOptionsMaker(
-      currencyData,
-      "currencyId",
-      "currencyInWord"
-    );
+    addStdPriceClientsFormFields.stdPriceClientCurrency.config.options =
+      selectOptionsMaker(currencyData, "currencyId", "currencyInWord");
   }
 
-  const columns: ColumnDef<StdPriceType>[] = [
+  const columns: ColumnDef<StdPriceClientsType>[] = [
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -93,11 +93,11 @@ export const StdPrice: React.FC = () => {
   ];
 
   const { data: stdPriceData, isLoading: isStdPriceDataLoading } =
-    getStdPriceData(currency);
+    getStdPriceClientsData(currency);
 
-  const tableConfig: TableType<StdPriceType> = {
+  const tableConfig: TableType<StdPriceClientsType> = {
     config: {
-      tableName: "Std. Price List (Local Source)",
+      tableName: "Std. Price List",
       columns: columns,
       tableData: stdPriceData ? stdPriceData : [],
       copyBtn: true,
@@ -126,11 +126,13 @@ export const StdPrice: React.FC = () => {
       <Card config={cardConfig.formLayoutConfig}>
         <FormProvider {...methods}>
           <form noValidate autoComplete="off" className="p-t-20">
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
-                <div className="col-3 pull-right">
+                <div className="col-md-3 col-xs-12">
                   <Select
-                    config={addStdPriceFormFields.stdcurrencey.config}
+                    config={
+                      addStdPriceClientsFormFields.stdPriceClientCurrency.config
+                    }
                     onChangeHandler={handleSelectChange}
                   />
                 </div>
