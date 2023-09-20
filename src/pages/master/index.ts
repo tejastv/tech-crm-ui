@@ -25,7 +25,7 @@ export { State } from "./location-master/state/State";
 export { AddPriceClients } from "./price-list-master/price-list-for-clients/AddPriceListClients";
 export { StdPriceListClient } from "./price-list-master/std-price-list-client/StdPriceListClient";
 
-export { AddPriceGroup } from "./price-list-master/priice-list-group-wise/AddPriceListGroup";
+export { PriceListGroup } from "./price-list-master/price-list-group-wise/PriceListGroup";
 // Actual Buyer
 export { AddActualBuyer } from "./price-list-master/actual-buyer/AddActualBuyer";
 export { ActualBuyer } from "./price-list-master/actual-buyer/ActualBuyer";
@@ -100,7 +100,7 @@ export { addCompanyFormFields } from "./company/add-update-company";
 export { addPriceClientFormFields } from "./price-list-master/price-list-for-clients/add-price-client-form-fileds";
 export { addStdPriceClientsFormFields } from "./price-list-master/std-price-list-client/add-std-price-client-form-fields";
 export { addActualBuyersFormFields } from "./price-list-master/actual-buyer/add-actual-buyer-form-fields";
-export { addPriceGroupFormFields } from "./price-list-master/priice-list-group-wise/add-price-group-form-fields";
+export { addPriceGroupFormFields } from "./price-list-master/price-list-group-wise/add-price-group-form-fields";
 
 export { addLocalSrouceFormFields } from "./local-source-master/local-source/add-localSource-form-fields";
 export { addPriceFormFields } from "./local-source-master/price-list/add-price-form-fields";
@@ -150,8 +150,7 @@ export * from "./price-list-master/actual-buyer/add-actusl-buyer-type";
 export * from "./price-list-master/price-list-for-clients/add-price-client-type";
 export * from "./price-list-master/price-list-for-clients/price-client-type";
 
-export * from "./price-list-master/priice-list-group-wise/add-price-group-type";
-export * from "./price-list-master/priice-list-group-wise/price-group-type";
+export * from "./price-list-master/price-list-group-wise/price-group-type";
 
 export * from "./price-list-master/std-price-list-client/add-std-price-client-type";
 export * from "./price-list-master/std-price-list-client/std-price-client-type";
@@ -223,8 +222,10 @@ export * from "./location-master/city/add-update-city-type";
 export * from "./location-master/state/add-update-state-type";
 export * from "./location-master/continent/add-update-continent-type";
 export * from "./location-master/country/add-update-country-type";
-
+export * from "./price-list-master/price-list-group-wise/city-wise-group-type";
+export * from "./price-list-master/price-list-group-wise/group-wise-currency-type";
 export * from "./client-master/client-group/client-group-basedon-clientID-type";
+
 //Services/ Hooks
 
 // Location Master
@@ -260,3 +261,4 @@ export { useClientGroupApiCallHook } from "./client-master/client-group/useClien
 export { useSourceApiCallHook } from "./information-master/source/useSourceApiCallHook";
 export { useClientApiCallHook } from "./client-master/client/useClientApiCallHook";
 export { useStdPriceClientsApiCallHook } from "./price-list-master/std-price-list-client/useStdPriceClientsApiCallHook";
+export { usePriceListGroupApiCallHook } from "./price-list-master/price-list-group-wise/usePriceListGroupApiCallHook";

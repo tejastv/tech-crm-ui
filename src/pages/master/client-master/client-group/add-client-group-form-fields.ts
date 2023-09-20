@@ -34,17 +34,6 @@ const SearchClient = {
   },
 } as ValidationType;
 
-const Groupoptions = [
-  { value: "showBOBDetails", label: "Show Bank of Baroda Detail in Invoice" },
-  { value: "showUnionBankDetails", label: "Show UNION Bank Detail in Invoice" },
-  { value: "showBOIDetails", label: "Show BOI Detail in Invoice" },
-  {
-    value: "showSouthIndianBankDetails",
-    label: "Show South Indian Bank Detail in Invoice",
-  },
-  { value: "showIOBDetails", label: "Show IOB Detail in Invoice" },
-];
-
 const clientGroupName: FormFieldType = createFormConfig(
   "groupName",
   "Group Name",

@@ -20,12 +20,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
 export const StdPrice: React.FC = () => {
-  const methods = useForm<AddUpdateStdPriceType>();
-  const [currency, setCurrency] = useState("0");
-  const { getCurrency } = useCurrencyApiCallHook();
-  const { data: currencyData } = getCurrency();
-  const { getStdPriceData } = useStdPriceApiCallHook();
-
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Std. Price List (Local Source)",
@@ -38,6 +32,12 @@ export const StdPrice: React.FC = () => {
       heading: "Table",
     },
   };
+
+  const methods = useForm<AddUpdateStdPriceType>();
+  const [currency, setCurrency] = useState("0");
+  const { getCurrency } = useCurrencyApiCallHook();
+  const { data: currencyData } = getCurrency();
+  const { getStdPriceData } = useStdPriceApiCallHook();
 
   if (currencyData) {
     console.log(currencyData);

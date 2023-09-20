@@ -60,11 +60,6 @@ const PriceGroupCurrency2Validation = {
 //   { value: "vanilla", label: "400" },
 // ];
 
-const priceGroupCityOptions = [
-  { value: "Mumbai", label: "200" },
-  { value: "strawberry", label: "300" },
-  { value: "vanilla", label: "400" },
-];
 const priceGroupMasterOptions = [
   { value: "Mumbai", label: "200" },
   { value: "strawberry", label: "300" },
@@ -92,7 +87,7 @@ const pricegroupcity: FormFieldType = createFormConfig(
   "slelect",
   PriceCityGroupValidation,
   "Select City",
-  priceGroupCityOptions
+  []
 );
 const priceGroupSelect: FormFieldType = createFormConfig(
   "priceGroup",

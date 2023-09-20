@@ -7,7 +7,7 @@ const PriceListClientIndex = React.lazy(
   () => import("./price-list-for-clients/PriceListClientsIndex")
 );
 const PriceGroupIndex = React.lazy(
-  () => import("./priice-list-group-wise/PriceListGroupIndex")
+  () => import("./price-list-group-wise/PriceListGroupIndex")
 );
 const StdPriceClientMasterIndex = React.lazy(
   () => import("./std-price-list-client/StdPriceListClientIndex")

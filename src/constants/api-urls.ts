@@ -27,6 +27,11 @@ const GET_UPDATE_DELETE_FIN_YEAR = "utility/finYear/{id}";
 const GET_ADD_INDUSTRY = "utility/industry";
 const GET_UPDATE_DELETE_INDUSTRY = "utility/industry/{id}";
 
+const GET_CITY_WISE_GROUP =
+  "entity/priceListGroupWise/getClientGroupByCity/{id}";
+const GET_GROUP_WISE_CURRENCY =
+  "entity/priceListGroupWise/getCurrencyByGroup/{id}";
+
 const GET_ADD_CALL_TYPE = "utility/callType";
 const GET_UPDATE_DELETE_CALL_TYPE = "utility/callType/{id}";
 
@@ -123,4 +128,6 @@ export const apiUrls = {
   GET_UPDATE_DELETE_CLIENT,
   GET_CLIENT_GROUP_BASED_ON_ID,
   UPDATE_CLIENT_GROUP,
+  GET_CITY_WISE_GROUP,
+  GET_GROUP_WISE_CURRENCY,
 };
