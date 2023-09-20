@@ -1,8 +1,10 @@
 export interface PriceGroupType {
-  pricegroupId: number;
-  pricegroupcity: string;
-  priceGroupSelect: string;
-  priceGroupSelect2: string;
-  priceGroupCurrency: string;
-  priceGroupCurrency2: string;
+  price: number;
+  countryID: number;
+  currencyID: number;
+  countryName: string;
+  otherCharges: number;
+  priceOnline: number;
+  priceSuperflash: number;
+  priceHighDel: number;
 }

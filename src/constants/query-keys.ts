@@ -10,6 +10,7 @@ const FIN_YEAR_DATA = "fin-year-data";
 const INDUSTRY_DATA = "industry-data";
 const CITY_WISE_GROUP_DATA = "city-wise-group-data";
 const GROUP_WISE_CURRENCY_DATA = "group-wise-currency-data";
+const STD_PRICE_DATA = "std-price-data";
 const CALL_TYPE_DATA = "call-type-data";
 const PURPOSE_MASTER_DATA = "purpose-master-data";
 const CREDIT_DAYS_DATA = "credit-days-data";
@@ -56,4 +57,5 @@ export const queryKeys = {
   CLIENT_GROUP_BASED_ON_ID_DATA,
   CITY_WISE_GROUP_DATA,
   GROUP_WISE_CURRENCY_DATA,
+  STD_PRICE_DATA,
 };

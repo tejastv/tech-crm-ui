@@ -5,4 +5,9 @@ export interface CountryType {
   // countrylocalSource: string;
   continentId: number;
   countryId: number;
+  countryID?: number;
+  otherCharges?: number;
+  priceOnline?: number;
+  priceSuperflash?: number;
+  priceHighDel?: number;
 }

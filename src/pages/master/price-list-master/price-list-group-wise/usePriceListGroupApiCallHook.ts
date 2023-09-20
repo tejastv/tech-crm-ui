@@ -1,20 +1,18 @@
 import { useAxios } from "@hooks/useAxios";
-import { CityWiseGroupType, GroupWiseCurrencyType } from "@master/index";
-import { apiUrls, queryKeys } from "@constants/index";
 import {
-  UseQueryResult,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+  CityWiseGroupType,
+  CountryType,
+  GroupWiseCurrencyType,
+} from "@master/index";
+import { apiUrls, queryKeys } from "@constants/index";
+import { UseQueryResult, useQuery } from "@tanstack/react-query";
 
 export const usePriceListGroupApiCallHook = () => {
   const { instance } = useAxios();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   const getCityWiseGroupData = (
-    id: number
+    id: number,
+    condition?: any
   ): UseQueryResult<CityWiseGroupType[]> => {
     return useQuery<CityWiseGroupType[]>({
       queryKey: [queryKeys.CITY_WISE_GROUP_DATA, id],
@@ -24,15 +22,16 @@ export const usePriceListGroupApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 
   const getGroupWiseCurrencyData = (
-    id: number
-  ): UseQueryResult<GroupWiseCurrencyType[]> => {
-    return useQuery<GroupWiseCurrencyType[]>({
+    id: number,
+    condition?: any
+  ): UseQueryResult<GroupWiseCurrencyType> => {
+    return useQuery<GroupWiseCurrencyType>({
       queryKey: [queryKeys.GROUP_WISE_CURRENCY_DATA, id],
       queryFn: async () => {
         const response = await instance.get(
@@ -40,7 +39,26 @@ export const usePriceListGroupApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+    });
+  };
+
+  const getStdPriceData = (
+    id: number,
+    condition?: any
+  ): UseQueryResult<CountryType[]> => {
+    console.log(condition);
+
+    return useQuery<CountryType[]>({
+      queryKey: [queryKeys.GROUP_WISE_CURRENCY_DATA, id],
+      queryFn: async () => {
+        const response = await instance.get(
+          apiUrls.GET_PRICE_LIST_STD_PRICE.replace("{id}", "" + id)
+        );
+        return response.data.data;
+      },
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
@@ -48,5 +66,6 @@ export const usePriceListGroupApiCallHook = () => {
   return {
     getCityWiseGroupData,
     getGroupWiseCurrencyData,
+    getStdPriceData,
   };
 };
