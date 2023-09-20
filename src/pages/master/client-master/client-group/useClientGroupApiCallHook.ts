@@ -76,11 +76,11 @@ export const useClientGroupApiCallHook = () => {
       apiUrls.UPDATE_CLIENT_GROUP.replace(
         "{ClientGroupId}",
         "" + updateClientGroupData.id
-      ).replace("{clintGroupIdToMove}", "" + updateClientGroupData.clintId[0]),
-      {
-        clintId: updateClientGroupData.clintId,
-        ClientGroupDto: updateClientGroupData.ClientGroupDto,
-      }
+      ).replace(
+        "{clintGroupIdToMove}",
+        "" + updateClientGroupData.clintGroupIdToMove
+      ),
+      updateClientGroupData
     );
     return response.data.data;
   };

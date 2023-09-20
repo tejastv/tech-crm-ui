@@ -47,19 +47,36 @@ export const Select = (props: FormFieldType) => {
             </Form.Label>
           )}
           <div className="col-sm-9">
-            <Controller
-              name={props.config.name}
-              control={control}
-              rules={props.config.validation}
-              render={({ field }) => (
-                <AliceSelect
-                  {...field}
-                  onChange={handleSelectChange} // Pass the onChange handler
-                  options={props.config.options}
-                  placeholder={props.config.placeholder}
-                />
-              )}
-            />
+            {props.config.type?.split(":")[1] === "isMulti" ? (
+              <Controller
+                name={props.config.name}
+                control={control}
+                rules={props.config.validation}
+                render={({ field }) => (
+                  <AliceSelect
+                    {...field}
+                    isMulti
+                    onChange={handleSelectChange} // Pass the onChange handler
+                    options={props.config.options}
+                    placeholder={props.config.placeholder}
+                  />
+                )}
+              />
+            ) : (
+              <Controller
+                name={props.config.name}
+                control={control}
+                rules={props.config.validation}
+                render={({ field }) => (
+                  <AliceSelect
+                    {...field}
+                    onChange={handleSelectChange} // Pass the onChange handler
+                    options={props.config.options}
+                    placeholder={props.config.placeholder}
+                  />
+                )}
+              />
+            )}
             {isInvalid && (
               <Form.Text className="text-danger">
                 <MdError />

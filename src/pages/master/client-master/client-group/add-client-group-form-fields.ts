@@ -89,13 +89,23 @@ const showIOBDetails: FormFieldType = createFormConfig(
 );
 
 const searchClient: FormFieldType = createFormConfig(
-  "clintGroupIdToMove",
-  "Select Client",
-  "select",
+  "clientIds",
+  "Client Name",
+  "select:isMulti",
   SearchClient,
-  "Select Client",
+  "Client Name",
   []
 );
+
+const moveToClient: FormFieldType = createFormConfig(
+  "clintGroupIdToMove",
+  "Move to",
+  "select",
+  SearchClient,
+  "Move to",
+  []
+);
+
 const namenote: Note = createNoteConfig(
   "Note: When you are Creating New Group, Clientfor which group is NOT DEFINED will appear"
 );
@@ -109,4 +119,5 @@ export const addClientGroupFormFields = {
   showIOBDetails,
   searchClient,
   namenote,
+  moveToClient,
 };

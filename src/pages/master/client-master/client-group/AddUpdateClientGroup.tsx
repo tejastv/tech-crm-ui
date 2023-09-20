@@ -36,6 +36,7 @@ export const AddUpdateClientGroup: React.FC = () => {
     getClientGroupData,
     updateClientGroupMutation,
     getClientGroupBasedOnIdData,
+    getClientGroup,
   } = useClientGroupApiCallHook();
   const { mutateAsync: addClientGroup } = addClientGroupMutation();
   const { mutateAsync: updateClientGroup } = updateClientGroupMutation();
@@ -46,12 +47,22 @@ export const AddUpdateClientGroup: React.FC = () => {
     const { data: clientGroupBasedOnIdData } = getClientGroupBasedOnIdData(
       "" + params.id
     );
+    const { data: clientGroupListData } = getClientGroup();
     getClientGroupBasedOnIdData("" + params.id);
     if (clientGroupBasedOnIdData) {
-      addClientGroupFormFields.searchClient.config.options = selectOptionsMaker(
-        clientGroupBasedOnIdData,
-        "clientID",
-        "clientName"
+      addClientGroupFormFields.searchClient.config.options,
+        (addClientGroupFormFields.searchClient.config.setData =
+          selectOptionsMaker(
+            clientGroupBasedOnIdData,
+            "clientID",
+            "clientName"
+          ));
+    }
+    if (clientGroupListData) {
+      addClientGroupFormFields.moveToClient.config.options = selectOptionsMaker(
+        clientGroupListData,
+        "groupId",
+        "groupName"
       );
     }
     if (clientGroupDataSuccess) {
@@ -77,15 +88,19 @@ export const AddUpdateClientGroup: React.FC = () => {
   const onSubmit = methods.handleSubmit((clientGroupData): void => {
     let data: any = { ...clientGroupData };
     if (params.id && clientGroupData) {
-      console.log(data);
+      let ids = [];
       let updateClientGroupObj = {
-        clintId: [data.clintGroupIdToMove.value],
-        ClientGroupDto: {
-          ...data,
-        },
+        ...data,
       };
-      delete updateClientGroupObj.ClientGroupDto.clintGroupIdToMove;
-      updateClientGroup({ id: +params.id, ...updateClientGroupObj });
+      if (data.clientIds.length > 0) {
+        ids = data.clientIds.map((data: any) => data.value);
+        updateClientGroupObj["clientIds"] = ids;
+      }
+      updateClientGroup({
+        id: +params.id,
+        ...updateClientGroupObj,
+        clintGroupIdToMove: data.clintGroupIdToMove.value,
+      });
     } else {
       addClientGroup(data);
     }
@@ -149,13 +164,22 @@ export const AddUpdateClientGroup: React.FC = () => {
                 </div>
               </div>
               {params.id && (
-                <div className="row">
-                  <div className="col-md-6 col-xs-12">
-                    <Select
-                      config={addClientGroupFormFields.searchClient.config}
-                    />
+                <>
+                  <div className="row">
+                    <div className="col-md-6 col-xs-12">
+                      <Select
+                        config={addClientGroupFormFields.searchClient.config}
+                      />
+                    </div>
                   </div>
-                </div>
+                  <div className="row">
+                    <div className="col-md-6 col-xs-12">
+                      <Select
+                        config={addClientGroupFormFields.moveToClient.config}
+                      />
+                    </div>
+                  </div>
+                </>
               )}
             </BorderLayout>
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
