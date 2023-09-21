@@ -49,7 +49,6 @@ export const usePriceListGroupApiCallHook = () => {
     condition?: any
   ): UseQueryResult<CountryType[]> => {
     console.log(condition);
-
     return useQuery<CountryType[]>({
       queryKey: [queryKeys.GROUP_WISE_CURRENCY_DATA, id],
       queryFn: async () => {

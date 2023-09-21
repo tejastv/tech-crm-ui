@@ -1,7 +1,6 @@
 import { useAxios } from "@hooks/useAxios";
 import {
   AddUpdateClientType,
-  ClientBasedOnClientId,
   ClientType,
 } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";

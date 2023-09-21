@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -43,8 +43,18 @@ export const PriceListGroup: React.FC = () => {
     usePriceListGroupApiCallHook();
   const [city, setCity] = useState<number>(-2);
   const [group, setGroup] = useState<number>(-2);
+
   const [currency, setCurrency] = useState<number>(0);
-  const [isBtnClicked, setIsBtnClicked] = useState<boolean>(false);
+  const [stdPriceReqObj, setStdPriceReqObj] = useState<{ currency: any }>();
+  const [isStdPriceBtnClicked, setIsStdPriceBtnClicked] =
+    useState<boolean>(false);
+
+  const [priceListGroup, setPriceListGroup] = useState<number>(-2);
+  const [priceListReqObj, setPriceListReqObj] = useState<{
+    priceListGroup: any;
+  }>();
+  const [isPriecListBtnClicked, setIsPriecListBtnClicked] =
+    useState<boolean>(false);
 
   if (cityData) {
     let cityArray = selectOptionsMaker(cityData, "id", "cityName");
@@ -58,6 +68,7 @@ export const PriceListGroup: React.FC = () => {
   const cityChangeHandler = (selectedOption: any) => {
     if (selectedOption) {
       setCity(selectedOption.value);
+      setIsStdPriceBtnClicked(false);
     }
   };
 
@@ -75,6 +86,7 @@ export const PriceListGroup: React.FC = () => {
   const groupChangeHandler = (selectedOption: any) => {
     if (selectedOption) {
       setGroup(selectedOption.value);
+      setIsStdPriceBtnClicked(false);
     }
   };
 
@@ -94,19 +106,44 @@ export const PriceListGroup: React.FC = () => {
   const currencyChangeHandler = (selectedOption: any) => {
     if (selectedOption) {
       setCurrency(selectedOption.value);
+      setIsStdPriceBtnClicked(false);
     }
   };
 
   const { data: stdPriceData, isLoading: stdPriceDataLoading } =
-    getStdPriceData(currency, currency == 0 || isBtnClicked);
+    getStdPriceData(stdPriceReqObj?.currency || 0, isStdPriceBtnClicked);
 
   const getStdPrice = () => {
     if (city != -2 && group != -2 && currency != 0) {
-      setIsBtnClicked(true);
+      setStdPriceReqObj({ currency });
+      setIsStdPriceBtnClicked(true);
     } else {
-      setIsBtnClicked(false);
+      setIsStdPriceBtnClicked(false);
     }
   };
+
+  const priceListGroupChangeHandler = (selectedOption: any) => {
+    if (selectedOption) {
+      setPriceListGroup(selectedOption.value);
+      setIsPriecListBtnClicked(false);
+    }
+  };
+
+  const { data: priceListData, isLoading: priceListDataLoading } =
+    getStdPriceData(priceListReqObj?.priceListGroup, isPriecListBtnClicked);
+
+  const getPriceList = () => {
+    if (priceListGroup != -2) {
+      setPriceListReqObj({ priceListGroup });
+      setIsPriecListBtnClicked(true);
+    } else {
+      setIsPriecListBtnClicked(false);
+    }
+  };
+
+  useEffect(() => {
+    setIsStdPriceBtnClicked(true);
+  }, []);
 
   const columns: ColumnDef<CountryType>[] = [
     {
@@ -213,17 +250,22 @@ export const PriceListGroup: React.FC = () => {
                 <div className="col-md-3 col-xs-12">
                   <Select
                     config={addPriceGroupFormFields.priceGroupSelect2.config}
+                    onChangeHandler={priceListGroupChangeHandler}
                   />
                 </div>
 
                 <div className="col-md-3 col-xs-12">
-                  <Select
+                  {/* <Select
                     config={addPriceGroupFormFields.priceGroupCurrency2.config}
-                  />
+                  /> */}
                 </div>
                 {/* <div className="pt-lg-1"></div> */}
                 <div className="col-md-6 col-xs-12 text-right">
-                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+                  <Button
+                    type="button"
+                    onClick={getPriceList}
+                    className={"btn btn-danger btn-sm"}
+                  >
                     <i className="far fa-save"></i>Get Price
                   </Button>
                 </div>
