@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { SiteStatus, AddUpdateSiteStatus } from "@master/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 
 const SiteMasterIndex: React.FC = () => {
   return (

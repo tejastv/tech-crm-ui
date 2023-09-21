@@ -7,7 +7,7 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import {
   AddUpdateSupplierMasterType,
   SupplierMasterType,
@@ -130,7 +130,11 @@ export const Supplier: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
-      pagination: true,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
       onDeleteClick: deleteSupplierMasterClick,
       onEditClick: editSupplierMasterClick,
     },

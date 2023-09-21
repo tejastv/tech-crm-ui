@@ -8,7 +8,7 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { FinYearType, useFinYearApiCallHook } from "@master/index";
 import { useNavigate } from "react-router-dom";
 
@@ -106,7 +106,11 @@ export const FinYear: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
-      pagination: true,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
       onDeleteClick: deleteFinYearClick,
       onEditClick: editFinYearClick,
     },

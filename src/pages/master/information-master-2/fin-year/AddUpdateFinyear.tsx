@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
+import {
+  ActionButtons,
+  BorderLayout,
+  Button,
+  Card,
+  Input,
+} from "@shared/index";
 import {
   AddUpdateFinYearType,
   addFinYearFormFields,
@@ -11,8 +17,12 @@ import { useParams } from "react-router-dom";
 
 export const AddUpdateFinYear: React.FC = () => {
   const methods = useForm<AddUpdateFinYearType>();
-  const { addFinYearMutation, getFinYearData, updateFinYearMutation } =
-    useFinYearApiCallHook();
+  const {
+    addFinYearMutation,
+    getFinYearData,
+    updateFinYearMutation,
+    getLastFinYear,
+  } = useFinYearApiCallHook();
   const { mutateAsync: addFinYear } = addFinYearMutation();
   const { mutateAsync: updateFinYear } = updateFinYearMutation();
   const params = useParams();
@@ -26,13 +36,18 @@ export const AddUpdateFinYear: React.FC = () => {
     },
   };
 
+  // const { data: finYearData } = getLastFinYear();
+  // if (finYearData?.data) {
+  //   console.log(finYearData?.data);
+  //   addFinYearFormFields.finyear.config.setData = finYearData.data;
+  // }
+
   if (params.id) {
     const { data: finYearData, isSuccess: finYearDataSuccess } = getFinYearData(
       "" + params.id
     );
     if (finYearDataSuccess) {
       console.log(finYearData);
-
       addFinYearFormFields.finyear.config.setData = finYearData.finYear;
       // addFinYearFormFields.totaltax.config.setData = finYearData.;
       addFinYearFormFields.stax.config.setData = finYearData.stax;
@@ -45,6 +60,11 @@ export const AddUpdateFinYear: React.FC = () => {
     useEffect(() => {
       methods.reset();
     }, []);
+    const { data: finYearData } = getLastFinYear();
+    if (finYearData?.data) {
+      console.log(finYearData?.data);
+      addFinYearFormFields.finyear.config.setData = finYearData.data;
+    }
   }
 
   const onSubmit = methods.handleSubmit((executiveData): void => {
@@ -55,6 +75,7 @@ export const AddUpdateFinYear: React.FC = () => {
       addFinYear(data);
     }
   });
+
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
@@ -70,6 +91,16 @@ export const AddUpdateFinYear: React.FC = () => {
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
                     <Input config={addFinYearFormFields.finyear.config} />
+                    {/* <div className="d-flex justify-content-end mb-2">
+                      <Button
+                        type="button"
+                        className="btn btn-danger waves-effect waves-light"
+                      >
+                        {" "}
+                        Get Fin Year
+                      </Button>
+                    </div> */}
+
                     <Input config={addFinYearFormFields.totaltax.config} />
                     <Input config={addFinYearFormFields.stax.config} />
                     <Input config={addFinYearFormFields.edcess.config} />

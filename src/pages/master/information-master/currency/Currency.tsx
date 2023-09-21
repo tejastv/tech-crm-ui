@@ -6,7 +6,7 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { CurrencyType, useCurrencyApiCallHook } from "@pages/master";
 import { useNavigate } from "react-router-dom";
@@ -104,7 +104,11 @@ export const Currency: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
-      pagination: true,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
       onDeleteClick: deleteCurrencyClick,
       onEditClick: editCurrencyClick,
     },
@@ -121,4 +125,3 @@ export const Currency: React.FC = () => {
     </>
   );
 };
-

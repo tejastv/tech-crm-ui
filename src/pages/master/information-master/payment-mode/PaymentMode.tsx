@@ -7,14 +7,14 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { PaymentModeType, usePaymentModeApiCallHook} from "@pages/master";
+import { PaymentModeType, usePaymentModeApiCallHook } from "@pages/master";
 import { ColumnDef } from "@tanstack/react-table";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { useNavigate } from "react-router-dom";
 
 export const PaymentMode: React.FC = () => {
-
-  const { getPaymentMode, deletePaymentModeMutation } = usePaymentModeApiCallHook();
+  const { getPaymentMode, deletePaymentModeMutation } =
+    usePaymentModeApiCallHook();
   const navigate = useNavigate();
 
   const config = {
@@ -71,7 +71,11 @@ export const PaymentMode: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
-      pagination: true,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
       onDeleteClick: deletePaymentModeClick,
       onEditClick: editPaymentModeClick,
     },
@@ -81,7 +85,7 @@ export const PaymentMode: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      <Table config={tableConfig.config}>
+        <Table config={tableConfig.config}>
           {isLoading ? <Loader /> : null}
         </Table>
       </BorderLayout>

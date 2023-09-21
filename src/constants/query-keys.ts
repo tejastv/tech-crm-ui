@@ -18,12 +18,11 @@ const BANKMASTER_DEPOSIT_DATA = "bankmasterdeposit-data";
 const PAYMENTMODE_DATA = "paymentmode-data";
 const SUPPLIER_MASTER_DATA = "supplier-master-data";
 const CURRENCY_DATA = "currency-data";
-<<<<<<< HEAD
 const STDPRICE_DATA = "currency-data";
-=======
 const CLIENT_GROUP_DATA = "client-group-data";
 const SOURCE_DATA = "source-data";
->>>>>>> 9662629bf52dee5e722f1051afcd133c0cb5de6c
+const LAST_FIN_YEAR = "last-fin-year-data";
+const CLIENT_DATA = "client-data";
 
 export const queryKeys = {
   CITY_DATA,
@@ -46,10 +45,10 @@ export const queryKeys = {
   BANKMASTER_DRAWN_DATA,
   BANKMASTER_DEPOSIT_DATA,
   SUPPLIER_MASTER_DATA,
-<<<<<<< HEAD
-  STDPRICE_DATA,
-=======
+<<<<<<<<< Temporary merge branch 1
   CLIENT_GROUP_DATA,
   SOURCE_DATA,
->>>>>>> 9662629bf52dee5e722f1051afcd133c0cb5de6c
+=========
+  STDPRICE_DATA,
+>>>>>>>>> Temporary merge branch 2
 };

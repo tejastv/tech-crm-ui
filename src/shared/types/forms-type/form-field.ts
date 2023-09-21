@@ -11,6 +11,8 @@ export interface FormFieldType {
     multiline?: boolean;
     className?: string;
     setData?: any;
+    isDisabled?: boolean;
     options?: Array<Options>;
   };
+  onChangeHandler?: (selectedOption: any) => void;
 }

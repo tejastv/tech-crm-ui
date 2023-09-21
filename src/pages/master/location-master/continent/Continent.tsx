@@ -7,7 +7,7 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { ContinentType, useContinentApiCallHook } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
@@ -69,7 +69,11 @@ export const Continent: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
-      pagination: true,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
       onDeleteClick: deleteContinentClick,
       onEditClick: editContinentClick,
     },

@@ -13,7 +13,7 @@ import {
   ROOT,
   TRANSACTION_ROUTES,
   UNKNOWN,
-} from "constants";
+} from "@constants/index";
 
 const Dashboard = React.lazy(() => import("../pages/dashboard/Dashboard"));
 const MasterRoutes = React.lazy(() => import("../pages/master/MasterRoutes"));

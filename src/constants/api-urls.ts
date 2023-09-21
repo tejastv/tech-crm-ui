@@ -62,9 +62,18 @@ export const apiUrls = {
 const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
 const GET_UPDATE_DELETE_CLIENT_GROUP = "entity/clientGroup/{id}";
 >>>>>>> 9662629bf52dee5e722f1051afcd133c0cb5de6c
+const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
+
+const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
+const GET_UPDATE_DELETE_CLIENT_GROUP = "entity/clientGroup/{id}";
 
 const GET_ADD_SOURCE = "utility/sourceMaster";
 const GET_UPDATE_DELETE_SOURCE = "utility/sourceMaster/{id}";
+
+const GET_LAST_FIN_YEAR = "utility/lastFinYear";
+
+const GET_ADD_CLIENT = "entity/client";
+const GET_UPDATE_DELETE_CLIENT = "entity/client/{id}";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -107,14 +116,14 @@ export const apiUrls = {
   GET_UPDATE_DELETE_BANKMASTER_DEPOSIT,
   GET_ADD_SUPPLIER_MASTER,
   GET_UPDATE_DELETE_SUPPLIER_MASTER,
-<<<<<<< HEAD
-
-  // Std Price
-  GET_UPDATE_DELETE_STDPRICE,
-=======
+<<<<<<<<< Temporary merge branch 1
   GET_ADD_CLIENT_GROUP,
   GET_UPDATE_DELETE_CLIENT_GROUP,
   GET_ADD_SOURCE,
   GET_UPDATE_DELETE_SOURCE,
->>>>>>> 9662629bf52dee5e722f1051afcd133c0cb5de6c
+=========
+
+  // Std Price
+  GET_UPDATE_DELETE_STDPRICE,
+>>>>>>>>> Temporary merge branch 2
 };

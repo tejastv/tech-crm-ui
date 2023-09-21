@@ -8,7 +8,7 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { CompanyType, useCompanyApiCallHook } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,6 @@ export const CompanyMaster: React.FC = () => {
   const { data: companyData, isLoading } = getCompany();
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
-
 
   const config = {
     breadcrumbConfig: {
@@ -134,7 +133,6 @@ export const CompanyMaster: React.FC = () => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", companyData.companyId));
   };
 
-
   const tableConfig: TableType<CompanyType> = {
     config: {
       columns: columns,
@@ -145,7 +143,11 @@ export const CompanyMaster: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
-      pagination: true,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
       onDeleteClick: deleteCompanyClick,
       onEditClick: editCompanyClick,
     },

@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { Executive, AddUpdateExecutive } from "@master/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 
 const ExecutiveIndex: React.FC = () => {
   return (

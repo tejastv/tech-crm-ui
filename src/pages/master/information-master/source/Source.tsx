@@ -7,7 +7,7 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { SourceType, useSourceApiCallHook } from "@master/index";
 import { useNavigate } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
@@ -76,7 +76,11 @@ export const Source: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
-      pagination: true,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
       onDeleteClick: deleteSourceClick,
       onEditClick: editSourceClick,
     },

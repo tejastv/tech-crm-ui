@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { MASTER_ROUTES } from "constants";
+import { MASTER_ROUTES } from "@constants/index";
 
 const BankDepositMasterIndex = React.lazy(
   () => import("./bank-master-deposit/BankDepositIndex")

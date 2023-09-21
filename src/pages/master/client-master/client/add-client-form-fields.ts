@@ -24,10 +24,10 @@ const GSTNClient = {
     value: true,
     message: "{label} field is rquired",
   },
-    pattern: {
-      value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
-      message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
-    },
+  pattern: {
+    value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+    message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
+  },
 } as ValidationType;
 
 const addressValidation = {
@@ -59,7 +59,8 @@ const FaxNoValidation = {
   },
   pattern: {
     value: /^\+?[0-9\s\-()+.]*$/,
-    message: "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
+    message:
+      "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
   },
 } as ValidationType;
 
@@ -158,7 +159,7 @@ const CrDayValidation = {
   },
   pattern: {
     value: /^\d+$/,
-    message: "Credit Days must be a positive number"
+    message: "Credit Days must be a positive number",
   },
 } as ValidationType;
 
@@ -170,7 +171,8 @@ const ClientCurrencyValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid currency format. Please use a valid currency code (e.g., USD).",
+    message:
+      "Invalid currency format. Please use a valid currency code (e.g., USD).",
   },
 } as ValidationType;
 const ExecutiveValidation = {

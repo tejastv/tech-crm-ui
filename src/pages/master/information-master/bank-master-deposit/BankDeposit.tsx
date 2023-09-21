@@ -7,14 +7,17 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { BankDepositType, useBankMasterDepositApiCallHook } from "@pages/master";
+import {
+  BankDepositType,
+  useBankMasterDepositApiCallHook,
+} from "@pages/master";
 import { ColumnDef } from "@tanstack/react-table";
-import { COMMON_ROUTES } from "constants";
+import { COMMON_ROUTES } from "@constants/index";
 import { useNavigate } from "react-router-dom";
 
 export const BankMasterDeposit: React.FC = () => {
-
-  const { getBankMasterDeposit, deleteBankMasterDepositMutation } = useBankMasterDepositApiCallHook();
+  const { getBankMasterDeposit, deleteBankMasterDepositMutation } =
+    useBankMasterDepositApiCallHook();
   const navigate = useNavigate();
 
   const config = {
@@ -53,9 +56,9 @@ export const BankMasterDeposit: React.FC = () => {
     },
   ];
 
-
   const { data: BankMasterDepositData, isLoading } = getBankMasterDeposit();
-  const { mutateAsync: deleteBankMasterDeposit } = deleteBankMasterDepositMutation();
+  const { mutateAsync: deleteBankMasterDeposit } =
+    deleteBankMasterDepositMutation();
 
   const deleteBankMasterDepositClick = async (BankMasterDepositData: any) => {
     var paymentMode = confirm("Are you sure to delete it?");
@@ -78,7 +81,11 @@ export const BankMasterDeposit: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
-      pagination: true,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
       onDeleteClick: deleteBankMasterDepositClick,
       onEditClick: editBankMasterDepositClick,
     },

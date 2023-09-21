@@ -50,6 +50,7 @@ export const Input = (props: FormFieldType) => {
             ) : (
               <Form.Control
                 id={props.config.id}
+                disabled={props.config.isDisabled}
                 type={
                   props.config.type && props.config.type.startsWith("file")
                     ? props.config.type.split(":")[0]
@@ -59,7 +60,7 @@ export const Input = (props: FormFieldType) => {
                 accept={
                   props.config.type && props.config.type.startsWith("file")
                     ? props.config.type.split(":")[1]
-                    : ''
+                    : ""
                 }
                 {...register(props.config.name, props.config.validation)}
               />

@@ -1,5 +1,9 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateFinYearType, FinYearType } from "@master/index";
+import {
+  AddUpdateFinYearType,
+  FinYearType,
+  LastFinYearType,
+} from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -21,6 +25,17 @@ export const useFinYearApiCallHook = () => {
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_FIN_YEAR);
         return response.data.data;
+      },
+      staleTime: Infinity,
+    });
+  };
+
+  const getLastFinYear = (): UseQueryResult<LastFinYearType> => {
+    return useQuery<LastFinYearType>({
+      queryKey: [queryKeys.LAST_FIN_YEAR],
+      queryFn: async () => {
+        const response = await instance.get(apiUrls.GET_LAST_FIN_YEAR);
+        return response.data;
       },
       staleTime: Infinity,
     });
@@ -111,6 +126,7 @@ export const useFinYearApiCallHook = () => {
   return {
     getFinYear,
     getFinYearData,
+    getLastFinYear,
     addFinYearMutation,
     updateFinYearMutation,
     deleteFinYearMutation,
