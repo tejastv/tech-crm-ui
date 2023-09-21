@@ -39,8 +39,12 @@ export const PriceListGroup: React.FC = () => {
   const methods = useForm();
   const { getCity } = useCityApiCallHook();
   const { data: cityData } = getCity();
-  const { getCityWiseGroupData, getGroupWiseCurrencyData, getStdPriceData } =
-    usePriceListGroupApiCallHook();
+  const {
+    getCityWiseGroupData,
+    getGroupWiseCurrencyData,
+    getStdPriceData,
+    getPriceListData,
+  } = usePriceListGroupApiCallHook();
   const [city, setCity] = useState<number>(-2);
   const [group, setGroup] = useState<number>(-2);
 
@@ -117,6 +121,7 @@ export const PriceListGroup: React.FC = () => {
     if (city != -2 && group != -2 && currency != 0) {
       setStdPriceReqObj({ currency });
       setIsStdPriceBtnClicked(true);
+      setIsPriecListBtnClicked(false);
     } else {
       setIsStdPriceBtnClicked(false);
     }
@@ -130,12 +135,13 @@ export const PriceListGroup: React.FC = () => {
   };
 
   const { data: priceListData, isLoading: priceListDataLoading } =
-    getStdPriceData(priceListReqObj?.priceListGroup, isPriecListBtnClicked);
+    getPriceListData(priceListReqObj?.priceListGroup, isPriecListBtnClicked);
 
   const getPriceList = () => {
     if (priceListGroup != -2) {
       setPriceListReqObj({ priceListGroup });
       setIsPriecListBtnClicked(true);
+      setIsStdPriceBtnClicked(false);
     } else {
       setIsPriecListBtnClicked(false);
     }
@@ -189,26 +195,49 @@ export const PriceListGroup: React.FC = () => {
     },
   ];
 
-  const tableConfig: TableType<CountryType> = {
-    config: {
-      tableName: "Std. Price List (Local Source)",
-      columns: columns,
-      tableData: stdPriceData ? stdPriceData : [],
-      copyBtn: true,
-      csvBtn: true,
-      excelBtn: true,
-      pdfBtn: true,
-      printBtn: true,
-      globalSearchBox: true,
-      pagination: {
-        showItemCountDropdown: false,
-        pageSize: 100,
-        nextPreviousBtnShow: false,
-        tableMetaDataShow: false,
-      },
-    },
-  };
+  let tableConfig: TableType<CountryType> = {} as TableType<CountryType>;
 
+  if (isPriecListBtnClicked) {
+    tableConfig = {
+      config: {
+        tableName: "Price List (Group)",
+        columns: columns,
+        tableData: priceListData ? priceListData : [],
+        copyBtn: true,
+        csvBtn: true,
+        excelBtn: true,
+        pdfBtn: true,
+        printBtn: true,
+        globalSearchBox: true,
+        pagination: {
+          showItemCountDropdown: false,
+          pageSize: 100,
+          nextPreviousBtnShow: false,
+          tableMetaDataShow: false,
+        },
+      },
+    };
+  } else {
+    tableConfig = {
+      config: {
+        tableName: "Price List (Group)",
+        columns: columns,
+        tableData: stdPriceData ? stdPriceData : [],
+        copyBtn: true,
+        csvBtn: true,
+        excelBtn: true,
+        pdfBtn: true,
+        printBtn: true,
+        globalSearchBox: true,
+        pagination: {
+          showItemCountDropdown: false,
+          pageSize: 100,
+          nextPreviousBtnShow: false,
+          tableMetaDataShow: false,
+        },
+      },
+    };
+  }
   useEffect(() => {
     // setIsStdPriceBtnClicked(true);
   }, []);
@@ -285,7 +314,7 @@ export const PriceListGroup: React.FC = () => {
         </FormProvider>
         <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
           <Table config={tableConfig.config}>
-            {stdPriceDataLoading && <Loader />}
+            {stdPriceDataLoading || (priceListDataLoading && <Loader />)}
           </Table>
         </BorderLayout>
       </Card>
