@@ -4,6 +4,8 @@ export interface CountryType {
   countryCode: string;
   // countrylocalSource: string;
   continentId: number;
+  price?: number;
+  currencyID?: number;
   countryId: number;
   countryID?: number;
   otherCharges?: number;

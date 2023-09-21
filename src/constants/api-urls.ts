@@ -32,7 +32,8 @@ const GET_CITY_WISE_GROUP =
 const GET_GROUP_WISE_CURRENCY =
   "entity/priceListGroupWise/getCurrencyByGroup/{id}";
 
-const GET_PRICE_LIST_STD_PRICE = "entity/priceListGroupWise/currency/{id}";
+const GET_PRICE_LIST_STD_DATA = "entity/priceListGroupWise/currency/{id}";
+const GET_PRICE_LIST_DATA = "entity/priceListGroupWise/getPriceByGroupId/{id}";
 
 const GET_ADD_CALL_TYPE = "utility/callType";
 const GET_UPDATE_DELETE_CALL_TYPE = "utility/callType/{id}";
@@ -132,5 +133,6 @@ export const apiUrls = {
   UPDATE_CLIENT_GROUP,
   GET_CITY_WISE_GROUP,
   GET_GROUP_WISE_CURRENCY,
-  GET_PRICE_LIST_STD_PRICE,
+  GET_PRICE_LIST_STD_DATA,
+  GET_PRICE_LIST_DATA,
 };

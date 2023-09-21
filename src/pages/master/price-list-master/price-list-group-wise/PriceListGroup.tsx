@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -44,7 +44,11 @@ export const PriceListGroup: React.FC = () => {
   const [city, setCity] = useState<number>(-2);
   const [group, setGroup] = useState<number>(-2);
   const [currency, setCurrency] = useState<number>(0);
-  const [isBtnClicked, setIsBtnClicked] = useState<boolean>(false);
+  const [isStdPriceBtnClicked, setIsStdPriceBtnClicked] =
+    useState<boolean>(false);
+  const [isGetPriceBtnClicked, setIsGetPriceBtnClicked] =
+    useState<boolean>(false);
+  let reqObj: any = {};
 
   if (cityData) {
     let cityArray = selectOptionsMaker(cityData, "id", "cityName");
@@ -75,6 +79,8 @@ export const PriceListGroup: React.FC = () => {
   const groupChangeHandler = (selectedOption: any) => {
     if (selectedOption) {
       setGroup(selectedOption.value);
+      reqObj["group"] = selectedOption.value;
+      console.log(reqObj);
     }
   };
 
@@ -93,18 +99,30 @@ export const PriceListGroup: React.FC = () => {
 
   const currencyChangeHandler = (selectedOption: any) => {
     if (selectedOption) {
-      setCurrency(selectedOption.value);
+      // setCurrency(selectedOption.value);
+      reqObj["currency"] = selectedOption.value;
+      console.log(reqObj);
     }
   };
 
   const { data: stdPriceData, isLoading: stdPriceDataLoading } =
-    getStdPriceData(currency, currency == 0 || isBtnClicked);
+    getStdPriceData(reqObj, isStdPriceBtnClicked);
 
   const getStdPrice = () => {
-    if (city != -2 && group != -2 && currency != 0) {
-      setIsBtnClicked(true);
+    console.log(reqObj);
+
+    if (city != -2 && group != -2 && reqObj.currency != 0) {
+      setIsStdPriceBtnClicked(true);
     } else {
-      setIsBtnClicked(false);
+      setIsStdPriceBtnClicked(false);
+    }
+  };
+
+  const getPrice = () => {
+    if (city != -2 && group != -2 && currency != 0) {
+      setIsStdPriceBtnClicked(true);
+    } else {
+      setIsStdPriceBtnClicked(false);
     }
   };
 
@@ -172,6 +190,10 @@ export const PriceListGroup: React.FC = () => {
     },
   };
 
+  useEffect(() => {
+    // setIsStdPriceBtnClicked(true);
+  }, []);
+
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
@@ -223,7 +245,11 @@ export const PriceListGroup: React.FC = () => {
                 </div>
                 {/* <div className="pt-lg-1"></div> */}
                 <div className="col-md-6 col-xs-12 text-right">
-                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+                  <Button
+                    type="button"
+                    onClick={getPrice}
+                    className={"btn btn-danger btn-sm"}
+                  >
                     <i className="far fa-save"></i>Get Price
                   </Button>
                 </div>
