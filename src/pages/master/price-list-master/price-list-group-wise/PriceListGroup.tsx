@@ -209,6 +209,10 @@ export const PriceListGroup: React.FC = () => {
     },
   };
 
+  useEffect(() => {
+    // setIsStdPriceBtnClicked(true);
+  }, []);
+
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>

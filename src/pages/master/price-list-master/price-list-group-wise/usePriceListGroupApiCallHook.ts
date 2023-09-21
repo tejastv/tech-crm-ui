@@ -53,7 +53,24 @@ export const usePriceListGroupApiCallHook = () => {
       queryKey: [queryKeys.GROUP_WISE_CURRENCY_DATA, id],
       queryFn: async () => {
         const response = await instance.get(
-          apiUrls.GET_PRICE_LIST_STD_PRICE.replace("{id}", "" + id)
+          apiUrls.GET_PRICE_LIST_STD_DATA.replace("{id}", "" + id)
+        );
+        return response.data.data;
+      },
+      enabled: condition, // Query is initially enabled
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+    });
+  };
+
+  const getPriceListData = (
+    id: number,
+    condition?: any
+  ): UseQueryResult<CountryType[]> => {
+    return useQuery<CountryType[]>({
+      queryKey: [queryKeys.PRICE_LIST_DATA, id],
+      queryFn: async () => {
+        const response = await instance.get(
+          apiUrls.GET_PRICE_LIST_DATA.replace("{id}", "" + id)
         );
         return response.data.data;
       },
@@ -66,5 +83,6 @@ export const usePriceListGroupApiCallHook = () => {
     getCityWiseGroupData,
     getGroupWiseCurrencyData,
     getStdPriceData,
+    getPriceListData,
   };
 };
