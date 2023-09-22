@@ -68,6 +68,7 @@ export const Source: React.FC = () => {
 
   const tableConfig: TableType<SourceType> = {
     config: {
+      tableName: "Source",
       columns: columns,
       tableData: sourceData ? sourceData : [],
       copyBtn: true,

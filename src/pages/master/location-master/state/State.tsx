@@ -73,6 +73,7 @@ export const State: React.FC = () => {
 
   const tableConfig: TableType<StateType> = {
     config: {
+      tableName: "State",
       columns: columns,
       tableData: stateData ? stateData : [],
       copyBtn: true,

@@ -61,6 +61,7 @@ export const Continent: React.FC = () => {
 
   const tableConfig: TableType<ContinentType> = {
     config: {
+      tableName: "Continent",
       columns: columns,
       tableData: continentData ? continentData : [],
       copyBtn: true,

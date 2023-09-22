@@ -1,5 +1,9 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateClientGroupType, ClientGroupType } from "@master/index";
+import {
+  AddUpdateClientGroupType,
+  ClientBasedOnClientId,
+  ClientGroupType,
+} from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -69,9 +73,12 @@ export const useClientGroupApiCallHook = () => {
     updateClientGroupData: AddUpdateClientGroupType
   ): Promise<ApiResponseType<ClientGroupType>> => {
     const response = await instance.put(
-      apiUrls.GET_UPDATE_DELETE_CLIENT_GROUP.replace(
-        "{id}",
+      apiUrls.UPDATE_CLIENT_GROUP.replace(
+        "{ClientGroupId}",
         "" + updateClientGroupData.id
+      ).replace(
+        "{clintGroupIdToMove}",
+        "" + updateClientGroupData.clintGroupIdToMove
       ),
       updateClientGroupData
     );
@@ -113,6 +120,21 @@ export const useClientGroupApiCallHook = () => {
     });
     return mutation;
   };
+  const getClientGroupBasedOnIdData = (
+    id: string
+  ): UseQueryResult<ClientBasedOnClientId[]> => {
+    return useQuery<ClientBasedOnClientId[]>({
+      queryKey: [queryKeys.CLIENT_GROUP_BASED_ON_ID_DATA, id],
+      queryFn: async () => {
+        const response = await instance.get(
+          apiUrls.GET_CLIENT_GROUP_BASED_ON_ID.replace("{id}", id)
+        );
+        return response.data.data;
+      },
+      enabled: true, // Query is initially enabled
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+    });
+  };
 
   return {
     getClientGroup,
@@ -120,5 +142,6 @@ export const useClientGroupApiCallHook = () => {
     addClientGroupMutation,
     updateClientGroupMutation,
     deleteClientGroupMutation,
+    getClientGroupBasedOnIdData,
   };
 };

@@ -27,6 +27,14 @@ const GET_UPDATE_DELETE_FIN_YEAR = "utility/finYear/{id}";
 const GET_ADD_INDUSTRY = "utility/industry";
 const GET_UPDATE_DELETE_INDUSTRY = "utility/industry/{id}";
 
+const GET_CITY_WISE_GROUP =
+  "entity/priceListGroupWise/getClientGroupByCity/{id}";
+const GET_GROUP_WISE_CURRENCY =
+  "entity/priceListGroupWise/getCurrencyByGroup/{id}";
+
+const GET_PRICE_LIST_STD_DATA = "entity/priceListGroupWise/currency/{id}";
+const GET_PRICE_LIST_DATA = "entity/priceListGroupWise/getPriceByGroupId/{id}";
+
 const GET_ADD_CALL_TYPE = "utility/callType";
 const GET_UPDATE_DELETE_CALL_TYPE = "utility/callType/{id}";
 
@@ -56,17 +64,21 @@ const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 
 // Std Price
 const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
+const GET_UPDATE_DELETE_STDPRICE_CLIENTS = "entity/stdPriceListForClients/{id}";
 
 const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
 const GET_UPDATE_DELETE_CLIENT_GROUP = "entity/clientGroup/{id}";
+const UPDATE_CLIENT_GROUP =
+  "entity/clientGroup/{ClientGroupId}/clintGroupIdToMove/{clintGroupIdToMove}";
 
 const GET_ADD_SOURCE = "utility/sourceMaster";
 const GET_UPDATE_DELETE_SOURCE = "utility/sourceMaster/{id}";
 
-const GET_LAST_FIN_YEAR = "utility/lastFinYear";
+const GET_LAST_FIN_YEAR = "utility/finYear/lastFinYear";
 
 const GET_ADD_CLIENT = "entity/client";
 const GET_UPDATE_DELETE_CLIENT = "entity/client/{id}";
+const GET_CLIENT_GROUP_BASED_ON_ID = "entity/client/clientGroup/{id}";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -109,7 +121,8 @@ export const apiUrls = {
   GET_UPDATE_DELETE_BANKMASTER_DEPOSIT,
   GET_ADD_SUPPLIER_MASTER,
   GET_UPDATE_DELETE_SUPPLIER_MASTER,
-// <<<<<<<<< Temporary merge branch 1
+  GET_UPDATE_DELETE_STDPRICE,
+  GET_UPDATE_DELETE_STDPRICE_CLIENTS,
   GET_ADD_CLIENT_GROUP,
   GET_UPDATE_DELETE_CLIENT_GROUP,
   GET_ADD_SOURCE,
@@ -117,9 +130,13 @@ export const apiUrls = {
 // =========
 
   // Std Price
-  GET_UPDATE_DELETE_STDPRICE,
   GET_LAST_FIN_YEAR,
-GET_ADD_CLIENT,
-GET_UPDATE_DELETE_CLIENT,
-// >>>>>>>>> Temporary merge branch 2
+  GET_ADD_CLIENT,
+  GET_UPDATE_DELETE_CLIENT,
+  GET_CLIENT_GROUP_BASED_ON_ID,
+  UPDATE_CLIENT_GROUP,
+  GET_CITY_WISE_GROUP,
+  GET_GROUP_WISE_CURRENCY,
+  GET_PRICE_LIST_STD_DATA,
+  GET_PRICE_LIST_DATA,
 };

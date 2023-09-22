@@ -86,6 +86,7 @@ export const Executive: React.FC = () => {
 
   const tableConfig: TableType<ExecutiveType> = {
     config: {
+      tableName: "Sales Executive",
       columns: columns,
       tableData: executiveData ? executiveData : [],
       copyBtn: true,

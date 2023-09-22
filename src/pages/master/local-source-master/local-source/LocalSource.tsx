@@ -86,6 +86,7 @@ export const LocalSource: React.FC = () => {
 
   const tableConfig: TableType<LocalSourceType> = {
     config: {
+      tableName: "Local Source",
       columns: columns,
       tableData: localsourceData ? localsourceData : [],
       copyBtn: true,

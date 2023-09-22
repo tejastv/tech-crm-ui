@@ -73,6 +73,7 @@ export const BankMasterDeposit: React.FC = () => {
 
   const tableConfig: TableType<BankDepositType> = {
     config: {
+      tableName: "Bank Master(Deposit)",
       columns: columns,
       tableData: BankMasterDepositData ? BankMasterDepositData : [],
       copyBtn: true,

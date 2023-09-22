@@ -64,6 +64,7 @@ export const BankMasterDrawn: React.FC = () => {
 
   const tableConfig: TableType<BankdrawnonType> = {
     config: {
+      tableName: "Bank Master(Drawn)",
       columns: columns,
       tableData: BankMasterDrawnData ? BankMasterDrawnData : [],
       copyBtn: true,

@@ -1,10 +1,10 @@
-export interface StdPriceClientsType {
+export interface PriceGroupType {
+  price: number;
   countryID: number;
   currencyID: number;
   countryName: string;
-  price: number;
-  priceHighDel: number;
   otherCharges: number;
   priceOnline: number;
   priceSuperflash: number;
+  priceHighDel: number;
 }

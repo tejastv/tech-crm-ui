@@ -80,6 +80,7 @@ export const Country: React.FC = () => {
 
   const tableConfig: TableType<CountryType> = {
     config: {
+      tableName: "Country",
       columns: columns,
       tableData: countryData ? countryData : [],
       copyBtn: true,

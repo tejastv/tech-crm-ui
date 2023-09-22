@@ -62,6 +62,7 @@ export const SiteStatus: React.FC = () => {
 
   const tableConfig: TableType<SiteStatusType> = {
     config: {
+      tableName: "Site Status",
       columns: columns,
       tableData: siteStatusData ? siteStatusData : [],
       copyBtn: true,

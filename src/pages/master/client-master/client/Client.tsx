@@ -253,6 +253,7 @@ export const Client: React.FC = () => {
 
   const tableConfig: TableType<ClientType> = {
     config: {
+      tableName: "Client",
       columns: columns,
       tableData: clientData ? clientData : [],
       copyBtn: true,

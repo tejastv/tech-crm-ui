@@ -62,6 +62,7 @@ export const CreditDays: React.FC = () => {
 
   const tableConfig: TableType<CreditDaysType> = {
     config: {
+      tableName: "Credit Period",
       columns: columns,
       tableData: creditDaysData ? creditDaysData : [],
       copyBtn: true,

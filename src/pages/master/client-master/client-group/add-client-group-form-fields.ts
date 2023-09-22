@@ -14,7 +14,7 @@ const ClientGroup = {
 
 const ClientGroup2 = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -34,50 +34,79 @@ const SearchClient = {
   },
 } as ValidationType;
 
-const Groupoptions = [
-  { value: "chocolate33", label: "Show Bank of Baroda Detail in Invoice" },
-  { value: "strawberry", label: "Show UNION Bank Detail in Invoice" },
-  { value: "1", label: "Show BOI Detail in Invoice" },
-  { value: "2", label: "Show South Indian Bank Detail in Invoice" },
-  { value: "3", label: "Show IOB Detail in Invoice" },
-];
-
-const SearchClientOptions = [
-  { value: "Mumbai", label: "Mumbai" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
 const clientGroupName: FormFieldType = createFormConfig(
-  "clientName",
+  "groupName",
   "Group Name",
   "text",
   ClientGroup,
   "Enter Client Name"
 );
-const clientGroupName2: FormFieldType = createFormConfig(
-  "clientGroupName2",
-  "Group Name",
+const showBOBDetails: FormFieldType = createFormConfig(
+  "showBOBDetails",
+  "Show Bank of Baroda Detail in Invoice",
   "checkbox",
   ClientGroup2,
-  "",
-  Groupoptions
+  ""
 );
+const showUnionBankDetails: FormFieldType = createFormConfig(
+  "showUnionBankDetails",
+  "Show UNION Bank Detail in Invoice",
+  "checkbox",
+  ClientGroup2,
+  ""
+);
+const showBOIDetails: FormFieldType = createFormConfig(
+  "showBOIDetails",
+  "Show BOI Detail in Invoice",
+  "checkbox",
+  ClientGroup2,
+  ""
+);
+const showSouthIndianBankDetails: FormFieldType = createFormConfig(
+  "showSouthIndianBankDetails",
+  "Show South Indian Bank Detail in Invoice",
+  "checkbox",
+  ClientGroup2,
+  ""
+);
+const showIOBDetails: FormFieldType = createFormConfig(
+  "showIOBDetails",
+  "Show IOB Detail in Invoice",
+  "checkbox",
+  ClientGroup2,
+  ""
+);
+
 const searchClient: FormFieldType = createFormConfig(
-  "selectClient",
-  "Select Client",
+  "clientIds",
+  "Client Name",
+  "select:isMulti",
+  SearchClient,
+  "Client Name",
+  []
+);
+
+const moveToClient: FormFieldType = createFormConfig(
+  "clintGroupIdToMove",
+  "Move to",
   "select",
   SearchClient,
-  "Select Client",
-  SearchClientOptions
+  "Move to",
+  []
 );
+
 const namenote: Note = createNoteConfig(
   "Note: When you are Creating New Group, Clientfor which group is NOT DEFINED will appear"
 );
 
 export const addClientGroupFormFields = {
   clientGroupName,
-  clientGroupName2,
+  showBOBDetails,
+  showUnionBankDetails,
+  showBOIDetails,
+  showSouthIndianBankDetails,
+  showIOBDetails,
   searchClient,
   namenote,
+  moveToClient,
 };

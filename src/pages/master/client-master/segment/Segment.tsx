@@ -20,7 +20,7 @@ export const Segment: React.FC = () => {
 
   const config = {
     breadcrumbConfig: {
-      pageHeading: "Segment ",
+      pageHeading: "Segment",
       btnTitle: "Add Segment",
       btnRoute: COMMON_ROUTES.ADD,
     },
@@ -61,6 +61,7 @@ export const Segment: React.FC = () => {
 
   const tableConfig: TableType<SegmentType> = {
     config: {
+      tableName: "Segment",
       columns: columns,
       tableData: segmentData ? segmentData : [],
       copyBtn: true,

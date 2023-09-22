@@ -135,6 +135,7 @@ export const CompanyMaster: React.FC = () => {
 
   const tableConfig: TableType<CompanyType> = {
     config: {
+      tableName: "Company Master",
       columns: columns,
       tableData: companyData ? companyData : [],
       copyBtn: true,

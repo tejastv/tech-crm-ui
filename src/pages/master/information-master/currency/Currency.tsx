@@ -96,6 +96,7 @@ export const Currency: React.FC = () => {
 
   const tableConfig: TableType<CurrencyType> = {
     config: {
+      tableName: "Currency",
       columns: columns,
       tableData: currencyData ? currencyData : [],
       copyBtn: true,

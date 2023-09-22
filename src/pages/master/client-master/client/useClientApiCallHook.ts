@@ -1,5 +1,8 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateClientType, ClientType } from "@master/index";
+import {
+  AddUpdateClientType,
+  ClientType,
+} from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {

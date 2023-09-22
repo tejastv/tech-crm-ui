@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { AddPriceGroup } from "@master/index";
+import { PriceListGroup } from "@master/index";
 
 const PriceGroupIndex: React.FC = () => {
   return (
     <Routes>
-      <Route index element={<AddPriceGroup />}></Route>
+      <Route index element={<PriceListGroup />}></Route>
     </Routes>
   );
 };

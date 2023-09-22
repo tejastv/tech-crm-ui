@@ -1,12 +1,13 @@
 export interface AddUpdateClientGroupType {
   id?: number;
-  groupId: number;
+  clintGroupIdToMove?: number;
+  clientIds: Array<any>;
   groupName: string;
   showBOBDetails: boolean;
   showUnionBankDetails: boolean;
   showBOIDetails: boolean;
   showSouthIndianBankDetails: boolean;
   showIOBDetails: boolean;
-  showIDBIDetails: null;
-  showSBIDetails: null;
+  showIDBIDetails: boolean;
+  showSBIDetails: boolean;
 }

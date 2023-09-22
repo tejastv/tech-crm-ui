@@ -54,6 +54,11 @@ export const City: React.FC = () => {
   const { data: cityData, isLoading } = getCity();
   const { mutateAsync: deleteCity } = deleteCityMutation();
 
+  // if (isLoading) {
+  //   console.log("inn");
+  //   notify();
+  // }
+
   const deleteCityClick = async (cityData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
@@ -67,6 +72,7 @@ export const City: React.FC = () => {
 
   const tableConfig: TableType<CityType> = {
     config: {
+      tableName: "City",
       columns: columns,
       tableData: cityData ? cityData : [],
       copyBtn: true,

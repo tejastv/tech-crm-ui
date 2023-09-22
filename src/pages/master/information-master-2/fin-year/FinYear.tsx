@@ -98,6 +98,7 @@ export const FinYear: React.FC = () => {
 
   const tableConfig: TableType<FinYearType> = {
     config: {
+      tableName: "Fin. Year",
       columns: columns,
       tableData: finYearData ? finYearData : [],
       copyBtn: true,

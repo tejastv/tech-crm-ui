@@ -110,18 +110,17 @@ export const Supplier: React.FC = () => {
   const deleteSupplierMasterClick = async (supplierMasterData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deleteSupplierMaster(supplierMasterData.creditPeriodId);
+      await deleteSupplierMaster(supplierMasterData.supplierId);
     }
   };
 
   const editSupplierMasterClick = (supplierMasterData: any) => {
-    navigate(
-      COMMON_ROUTES.EDIT.replace(":id", supplierMasterData.creditPeriodId)
-    );
+    navigate(COMMON_ROUTES.EDIT.replace(":id", supplierMasterData.supplierId));
   };
 
   const tableConfig: TableType<SupplierMasterType> = {
     config: {
+      tableName: "Supplier Master",
       columns: columns,
       tableData: supplierMasterData ? supplierMasterData : [],
       copyBtn: true,

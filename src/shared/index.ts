@@ -14,13 +14,13 @@ export { InputWithText } from "./components/ui/Note";
 export { ActionButtons } from "./components/ui/ActionButtons";
 export { Select } from "./components/ui/Select";
 export { Checkbox } from "./components/ui/Checkbox";
+export { SingleCheckbox } from "./components/ui/Single-Checkbox";
 export { Radio } from "./components/ui/Radio";
 export { DatePicker } from "./components/ui/DatePicker";
 export { Image } from "./components/ui/Image";
 export { DivLayout } from "./components/ui/Div-layout";
 export { Loader } from "./components/ui/Loader";
 export { DebouncedInput } from "./components/ui/DebouncedInput";
-export { Toaster } from "./components/ui/Toast";
 
 // Types
 export * from "./types/button-type";

@@ -60,39 +60,13 @@ const PriceGroupCurrency2Validation = {
 //   { value: "vanilla", label: "400" },
 // ];
 
-const priceGroupCityOptions = [
-  { value: "Mumbai", label: "200" },
-  { value: "strawberry", label: "300" },
-  { value: "vanilla", label: "400" },
-];
-const priceGroupMasterOptions = [
-  { value: "Mumbai", label: "200" },
-  { value: "strawberry", label: "300" },
-  { value: "vanilla", label: "400" },
-];
-const priceGroup2MasterOptions = [
-  { value: "Mumbai", label: "200" },
-  { value: "strawberry", label: "300" },
-  { value: "vanilla", label: "400" },
-];
-const priceGroupCurrencyOptions = [
-  { value: "Mumbai", label: "200" },
-  { value: "strawberry", label: "300" },
-  { value: "vanilla", label: "400" },
-];
-const priceGroupCurrency2Options = [
-  { value: "Mumbai", label: "200" },
-  { value: "strawberry", label: "300" },
-  { value: "vanilla", label: "400" },
-];
-
 const pricegroupcity: FormFieldType = createFormConfig(
   "city",
   "City",
   "slelect",
   PriceCityGroupValidation,
   "Select City",
-  priceGroupCityOptions
+  []
 );
 const priceGroupSelect: FormFieldType = createFormConfig(
   "priceGroup",
@@ -100,7 +74,7 @@ const priceGroupSelect: FormFieldType = createFormConfig(
   "select",
   PriceGroupValidation,
   "Select Group",
-  priceGroupMasterOptions
+  []
 );
 const priceGroupSelect2: FormFieldType = createFormConfig(
   "priceGroup2",
@@ -108,7 +82,7 @@ const priceGroupSelect2: FormFieldType = createFormConfig(
   "select",
   PriceGroup2Validation,
   "Select Group",
-  priceGroup2MasterOptions
+  []
 );
 const priceGroupCurrency: FormFieldType = createFormConfig(
   "Pricegroupcurrencey",
@@ -116,7 +90,7 @@ const priceGroupCurrency: FormFieldType = createFormConfig(
   "select",
   PriceGroupCurrencyValidation,
   "Select Currency",
-  priceGroupCurrencyOptions
+  []
 );
 const priceGroupCurrency2: FormFieldType = createFormConfig(
   "Pricegroupcurrencey",
@@ -124,7 +98,7 @@ const priceGroupCurrency2: FormFieldType = createFormConfig(
   "select",
   PriceGroupCurrency2Validation,
   "Select Currency",
-  priceGroupCurrency2Options
+  []
 );
 
 export const addPriceGroupFormFields = {
