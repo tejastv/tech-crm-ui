@@ -45,10 +45,9 @@ export const queryKeys = {
   BANKMASTER_DRAWN_DATA,
   BANKMASTER_DEPOSIT_DATA,
   SUPPLIER_MASTER_DATA,
-<<<<<<<<< Temporary merge branch 1
   CLIENT_GROUP_DATA,
   SOURCE_DATA,
-=========
   STDPRICE_DATA,
->>>>>>>>> Temporary merge branch 2
+  LAST_FIN_YEAR,
+  CLIENT_DATA,
 };

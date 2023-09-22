@@ -54,14 +54,7 @@ const GET_UPDATE_DELETE_BANKMASTER_DRAWN = "utility/bankMaster/{id}";
 const GET_ADD_BANKMASTER_DEPOSIT = "utility/bankDetails";
 const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 
-<<<<<<< HEAD
 // Std Price
-const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
-export const apiUrls = {
-=======
-const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
-const GET_UPDATE_DELETE_CLIENT_GROUP = "entity/clientGroup/{id}";
->>>>>>> 9662629bf52dee5e722f1051afcd133c0cb5de6c
 const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
 
 const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
@@ -116,14 +109,17 @@ export const apiUrls = {
   GET_UPDATE_DELETE_BANKMASTER_DEPOSIT,
   GET_ADD_SUPPLIER_MASTER,
   GET_UPDATE_DELETE_SUPPLIER_MASTER,
-<<<<<<<<< Temporary merge branch 1
+// <<<<<<<<< Temporary merge branch 1
   GET_ADD_CLIENT_GROUP,
   GET_UPDATE_DELETE_CLIENT_GROUP,
   GET_ADD_SOURCE,
   GET_UPDATE_DELETE_SOURCE,
-=========
+// =========
 
   // Std Price
   GET_UPDATE_DELETE_STDPRICE,
->>>>>>>>> Temporary merge branch 2
+  GET_LAST_FIN_YEAR,
+GET_ADD_CLIENT,
+GET_UPDATE_DELETE_CLIENT,
+// >>>>>>>>> Temporary merge branch 2
 };
