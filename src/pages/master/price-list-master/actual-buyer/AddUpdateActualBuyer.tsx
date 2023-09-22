@@ -12,7 +12,7 @@ import {
 } from "@shared/index";
 import { addActualBuyersFormFields } from "@master/index";
 
-export const AddActualBuyer: React.FC = () => {
+export const AddUpdateActualBuyer: React.FC = () => {
   const methods = useForm();
 
   const cardConfig = {

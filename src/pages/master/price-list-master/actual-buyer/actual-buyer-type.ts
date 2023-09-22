@@ -1,19 +1,25 @@
-export interface ActualBuyersType {
-    actualbuyerId : number,
-    clientactualbuyer : string,
-    nameactualbuyer : string,
-    addressactualbuyer : string,
-    telnoactualbuyer : string,
-    emailactualbuyer : string,
-    contactactualbuyer : string,
-    designationactualbuyer : string,
-    cityactualbuyer : string,
-    stateactualbuyer : string,
-    PIN : string,
-    countryactualbuyer : string,
-    faxnoactualbuyer : string,
-    websiteactualbuyer : string,
-    cstactualbuyer : string,
-    gstnactualbuyer : string,
-    actualbuyergstnote : string,
-  };
+export interface ActualBuyerType {
+  state: string;
+  partyId: number;
+  partyName: string;
+  partyAddress: string;
+  cityId: number;
+  pin: string;
+  stateId: number;
+  countryId: number;
+  telNo: string;
+  faxNo: string;
+  email: string;
+  website: string;
+  personResponsible: string;
+  personDesg: string;
+  refNo: string;
+  revisionCntr: number;
+  gstn: string;
+  clientId: number;
+  locked: string;
+  active: true;
+  clientName: string;
+  countryName: string;
+  cityName: string;
+}

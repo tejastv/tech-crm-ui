@@ -8,6 +8,7 @@ const EXECUTIVE_DATA = "continent-data";
 const COMPANY_MASTER_DATA = "companyMaster-data";
 const FIN_YEAR_DATA = "fin-year-data";
 const INDUSTRY_DATA = "industry-data";
+const ACTUAL_BUYER_DATA = "actual-buyer-data";
 const CITY_WISE_GROUP_DATA = "city-wise-group-data";
 const GROUP_WISE_CURRENCY_DATA = "group-wise-currency-data";
 const PRICE_LIST_DATA = "price-list-data";
@@ -60,4 +61,5 @@ export const queryKeys = {
   GROUP_WISE_CURRENCY_DATA,
   STD_PRICE_DATA,
   PRICE_LIST_DATA,
+  ACTUAL_BUYER_DATA,
 };

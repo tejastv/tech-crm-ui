@@ -13,9 +13,6 @@ import { useNavigate } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const Industry: React.FC = () => {
-  const { getIndustry, deleteIndustryMutation } = useIndustryApiCallHook();
-  const navigate = useNavigate();
-
   const config = {
     breadcrumbConfig: {
       pageHeading: "Industry",
@@ -26,6 +23,9 @@ export const Industry: React.FC = () => {
       heading: "List",
     },
   };
+
+  const { getIndustry, deleteIndustryMutation } = useIndustryApiCallHook();
+  const navigate = useNavigate();
 
   const columns: ColumnDef<IndustryType>[] = [
     {

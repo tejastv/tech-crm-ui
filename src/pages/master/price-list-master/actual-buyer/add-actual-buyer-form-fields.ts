@@ -61,7 +61,8 @@ const telNoValidation = {
   },
   pattern: {
     value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
-    message: "Invalid telephone number format. Please use a valid telephone number format, such as +1 (123) 456-7890.",
+    message:
+      "Invalid telephone number format. Please use a valid telephone number format, such as +1 (123) 456-7890.",
   },
 } as ValidationType;
 
@@ -72,7 +73,8 @@ const FaxNoValidation = {
   },
   pattern: {
     value: /^\+?[0-9\s\-()+.]*$/,
-    message: "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
+    message:
+      "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
   },
 } as ValidationType;
 
@@ -84,7 +86,7 @@ const EmailValidation = {
   pattern: {
     value:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      message: "Please Include an '@' and .com/in in the email address.",
+    message: "Please Include an '@' and .com/in in the email address.",
   },
 } as ValidationType;
 

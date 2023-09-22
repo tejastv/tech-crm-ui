@@ -27,7 +27,7 @@ export { StdPriceListClient } from "./price-list-master/std-price-list-client/St
 
 export { PriceListGroup } from "./price-list-master/price-list-group-wise/PriceListGroup";
 // Actual Buyer
-export { AddActualBuyer } from "./price-list-master/actual-buyer/AddActualBuyer";
+export { AddUpdateActualBuyer } from "./price-list-master/actual-buyer/AddUpdateActualBuyer";
 export { ActualBuyer } from "./price-list-master/actual-buyer/ActualBuyer";
 
 //Local Source
@@ -262,3 +262,4 @@ export { useSourceApiCallHook } from "./information-master/source/useSourceApiCa
 export { useClientApiCallHook } from "./client-master/client/useClientApiCallHook";
 export { useStdPriceClientsApiCallHook } from "./price-list-master/std-price-list-client/useStdPriceClientsApiCallHook";
 export { usePriceListGroupApiCallHook } from "./price-list-master/price-list-group-wise/usePriceListGroupApiCallHook";
+export { useActualBuyerApiCallHook } from "./price-list-master/actual-buyer/useActualBuyerApiCallHook";
