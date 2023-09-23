@@ -47,7 +47,7 @@ export const AddUpdateCompany: React.FC = () => {
   };
 
   // city api call
-  const { data: cityData, isSuccess: getCitySuccess } = getCity();
+  const { data: cityData } = getCity();
 
   if (cityData) {
     addCompanyFormFields.city.config.options = selectOptionsMaker(
@@ -58,7 +58,7 @@ export const AddUpdateCompany: React.FC = () => {
   }
 
   // state api call
-  const { data: stateData, isSuccess: getStateSuccess } = getState();
+  const { data: stateData } = getState();
 
   if (stateData) {
     addCompanyFormFields.state.config.options = selectOptionsMaker(
@@ -69,7 +69,7 @@ export const AddUpdateCompany: React.FC = () => {
   }
 
   // country api call
-  const { data: CountryData, isSuccess: countryDataSuccess } = getCountry();
+  const { data: CountryData } = getCountry();
 
   if (CountryData) {
     addCompanyFormFields.country.config.options = selectOptionsMaker(
@@ -102,8 +102,7 @@ export const AddUpdateCompany: React.FC = () => {
   });
 
   if (params.id) {
-    const { data: companyMasterData, isSuccess: companyMasterDataSuccess } =
-      getCompanyData("" + params.id);
+    const { data: companyMasterData } = getCompanyData("" + params.id);
     if (companyMasterData) {
       if (cityData) {
         let id = companyMasterData?.cityId;
