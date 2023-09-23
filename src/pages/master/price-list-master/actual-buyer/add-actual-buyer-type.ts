@@ -1,5 +1,5 @@
-export interface ActualBuyerType {
-  state: string;
+export interface AddUpdateActualBuyerType {
+  id?: string;
   partyId: number;
   partyName: string;
   partyAddress: string;
@@ -14,12 +14,9 @@ export interface ActualBuyerType {
   personResponsible: string;
   personDesg: string;
   refNo: string;
+  active: true;
   revisionCntr: number;
   gstn: string;
   clientId: number;
   locked: string;
-  active: true;
-  clientName: string;
-  countryName: string;
-  cityName: string;
 }

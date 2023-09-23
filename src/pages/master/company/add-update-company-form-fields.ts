@@ -30,7 +30,7 @@ const addressField: FormFieldType = {
     placeholder: "Enter Address ...",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Address field is rquired",
       },
       pattern: {
@@ -50,9 +50,10 @@ const officeAddressField: FormFieldType = {
     placeholder: " Enter Regd. Office Address...",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Regd Office Address field is rquired",
-      },pattern: {
+      },
+      pattern: {
         value: /^[\w\s\d#.,\-\/]+$/,
         message: "Invalid address format. Please use a valid format.",
       },
@@ -69,12 +70,13 @@ const telNo: FormFieldType = {
     placeholder: "Enter Tel No.",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Telephone Number field is rquired",
       },
       pattern: {
         value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
-        message: "Invalid telephone number format. Please use a valid format (e.g., +1 (123) 456-7890).",
+        message:
+          "Invalid telephone number format. Please use a valid format (e.g., +1 (123) 456-7890).",
       },
     },
   },
@@ -89,12 +91,13 @@ const faxNo: FormFieldType = {
     placeholder: "Enter Fax no ...",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Fax number field is rquired",
       },
       pattern: {
         value: /^\+?[0-9\s\-()+.]*$/,
-        message: "Invalid fax number,Please use a valid format (e.g., +1234567890).",
+        message:
+          "Invalid fax number,Please use a valid format (e.g., +1234567890).",
       },
     },
   },
@@ -109,7 +112,7 @@ const emailField: FormFieldType = {
     placeholder: "Enter email address",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Email field is rquired",
       },
       pattern: {
@@ -129,12 +132,13 @@ const website: FormFieldType = {
     placeholder: "Enter Your Website",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Website field is rquired",
       },
       pattern: {
         value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
-        message: "Please use a valid URL format (e.g., https://www.example.com).",
+        message:
+          "Please use a valid URL format (e.g., https://www.example.com).",
       },
     },
   },
@@ -149,7 +153,7 @@ const contactPerson: FormFieldType = {
     placeholder: "Enter Your Contact Person",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Contect person field is rquired",
       },
       maxLength: {
@@ -169,7 +173,7 @@ const designation: FormFieldType = {
     placeholder: "Enter designation",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Designation field is rquired",
       },
       maxLength: {
@@ -189,7 +193,7 @@ const zip: FormFieldType = {
     placeholder: "Enter Zip",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Zip field is rquired",
       },
       pattern: {
@@ -215,7 +219,7 @@ const city: FormFieldType = {
     placeholder: "Select city",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Select city field is rquired",
       },
       pattern: {
@@ -241,7 +245,7 @@ const state: FormFieldType = {
     placeholder: "Select State",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "State field is rquired",
       },
       pattern: {
@@ -327,7 +331,7 @@ const referenceno: FormFieldType = {
     placeholder: "Enter Reference number...",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Number field is rquired",
       },
       pattern: {
@@ -347,7 +351,7 @@ const financialyear: FormFieldType = {
     placeholder: "Enter Fincialyear...",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Year field is rquired",
       },
       pattern: {
@@ -367,12 +371,13 @@ const regno: FormFieldType = {
     placeholder: "Enter Reg. no...",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Reg no field is rquired",
       },
       pattern: {
         value: /^[a-zA-Z0-9\-]+$/,
-        message:"Invalid register number. Please use alphanumeric characters and hyphens"
+        message:
+          "Invalid register number. Please use alphanumeric characters and hyphens",
       },
     },
   },
@@ -386,7 +391,7 @@ const checkBoxField: FormFieldType = {
     options: selectOptionsMaker([], "value", "label"),
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "required",
       },
     },
@@ -394,10 +399,10 @@ const checkBoxField: FormFieldType = {
 };
 
 const companyOptions = [
-  { value: "proprietorship", label: "proprietorship" },
-  { value: "Partnership", label: "Partnership" },
-  { value: "Pvt Ltd", label: "Pvt Ltd" },
-  { value: "public Ltd", label: "public Ltd" },
+  { value: 1, label: "Proprietorship" },
+  { value: 2, label: "Partnership" },
+  { value: 3, label: "Pvt Ltd" },
+  { value: 4, label: "Public Ltd" },
 ];
 
 const companyType: FormFieldType = {
@@ -410,7 +415,7 @@ const companyType: FormFieldType = {
     placeholder: "write a random Select Box",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Company Type field is rquired",
       },
       maxLength: {
@@ -429,7 +434,7 @@ const incorporationDate: FormFieldType = {
     placeholder: "Select Date",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Date field is required",
       },
       // pattern: {
@@ -450,7 +455,7 @@ const bankers: FormFieldType = {
     placeholder: "Enter Bankers",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Bankers field is rquired",
       },
       maxLength: {
@@ -470,7 +475,7 @@ const notes: FormFieldType = {
     placeholder: "Enter Notes",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Notes field is rquired",
       },
       maxLength: {
@@ -489,7 +494,7 @@ const cmie: FormFieldType = {
     placeholder: "Enter CMIE",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "CMIE field is rquired",
       },
       maxLength: {
@@ -508,7 +513,7 @@ const rocStatus: FormFieldType = {
     placeholder: "Enter ROC Status",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "ROC Status field is rquired",
       },
       maxLength: {
@@ -528,7 +533,7 @@ const recodes: FormFieldType = {
     placeholder: "Enter Records",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Records field is rquired",
       },
       maxLength: {
@@ -548,7 +553,7 @@ const recfin: FormFieldType = {
     placeholder: "Enter Rec Fin",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Rec field is rquired",
       },
       maxLength: {

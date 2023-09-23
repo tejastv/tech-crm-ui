@@ -3,7 +3,7 @@ import { createFormConfig, createNoteConfig } from "@utils/index";
 
 const ClientActualBuyer = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -24,7 +24,7 @@ const nameActualBuyer = {
 
 const GSTN = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -34,7 +34,7 @@ const GSTN = {
 } as ValidationType;
 const cst = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -45,7 +45,7 @@ const cst = {
 
 const addressValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Address",
   },
   pattern: {
@@ -56,41 +56,43 @@ const addressValidation = {
 
 const telNoValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Telephone Number",
   },
   pattern: {
     value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
-    message: "Invalid telephone number format. Please use a valid telephone number format, such as +1 (123) 456-7890.",
+    message:
+      "Invalid telephone number format. Please use a valid telephone number format, such as +1 (123) 456-7890.",
   },
 } as ValidationType;
 
 const FaxNoValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Fax number",
   },
   pattern: {
     value: /^\+?[0-9\s\-()+.]*$/,
-    message: "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
+    message:
+      "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
   },
 } as ValidationType;
 
 const EmailValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter E-mail ",
   },
   pattern: {
     value:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      message: "Please Include an '@' and .com/in in the email address.",
+    message: "Please Include an '@' and .com/in in the email address.",
   },
 } as ValidationType;
 
 const WebsiteValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -101,7 +103,7 @@ const WebsiteValidation = {
 
 const ContactValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Contect person",
   },
   maxLength: {
@@ -112,7 +114,7 @@ const ContactValidation = {
 
 const DesignationValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Designation",
   },
   maxLength: {
@@ -123,7 +125,7 @@ const DesignationValidation = {
 
 const PinValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired ",
   },
   pattern: {
@@ -134,7 +136,7 @@ const PinValidation = {
 
 const CityValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -165,74 +167,51 @@ const CountryValidation = {
   },
 } as ValidationType;
 
-const cityactualbuyerOptions = [
-  { value: "Mumbai", label: "Mumbai" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const stateactualbuyerOptions = [
-  { value: "Maharashtra", label: "Maharashtra" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const countryactualbuyerOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const ClientActualBuyerOption = [
-  { value: "in %", label: "in %" },
-  { value: "Per Report", label: "Per Report" },
-  { value: "NO Discount", label: "NO Discount" },
-];
 const clientactualbuyer: FormFieldType = createFormConfig(
-  "clientactualbuyer",
+  "partyId",
   "Client",
   "select",
   ClientActualBuyer,
   "Select Client",
-  ClientActualBuyerOption
+  []
 );
 const nameactualbuyer: FormFieldType = createFormConfig(
-  "nameactualbuyer",
+  "partyName",
   "Name",
   "text",
   nameActualBuyer,
   "Name"
 );
 const addressactualbuyer: FormFieldType = createFormConfig(
-  "addressactualbuyer",
+  "partyAddress",
   "Address",
   "textarea",
   addressValidation,
   "Address"
 );
 const telnoactualbuyer: FormFieldType = createFormConfig(
-  "telnoactualbuyer",
+  "telNo",
   "Tel No.",
   "text",
   telNoValidation,
   "Enter Tel No."
 );
 const emailactualbuyer: FormFieldType = createFormConfig(
-  "emailactualbuyer",
+  "email",
   "E-Mail",
   "Email",
   EmailValidation,
   "Enter E-mail"
 );
 const contactactualbuyer: FormFieldType = createFormConfig(
-  "contactactualbuyer",
+  "personResponsible",
   "Contact",
   "text",
   ContactValidation,
   "Enter Contact"
 );
 const designationactualbuyer: FormFieldType = createFormConfig(
-  "designationactualbuyer",
+  "personDesg",
   "Designation",
   "text",
   DesignationValidation,
@@ -240,59 +219,59 @@ const designationactualbuyer: FormFieldType = createFormConfig(
 );
 //
 const cityactualbuyer: FormFieldType = createFormConfig(
-  "cityactualbuyer",
+  "cityId",
   "City",
   "select",
   CityValidation,
   "Select City",
-  cityactualbuyerOptions
+  []
 );
 const stateactualbuyer: FormFieldType = createFormConfig(
-  "stateactualbuyer",
+  "stateId",
   "State",
   "select",
   StateValidation,
   "Select State",
-  stateactualbuyerOptions
+  []
 );
 const PIN: FormFieldType = createFormConfig(
-  "PIN",
+  "pin",
   "PIN",
   "text",
   PinValidation,
   "PIN"
 );
 const countryactualbuyer: FormFieldType = createFormConfig(
-  "countryactualbuyer",
+  "countryId",
   "Country",
   "select",
   CountryValidation,
   "Select Country",
-  countryactualbuyerOptions
+  []
 );
 const faxnoactualbuyer: FormFieldType = createFormConfig(
-  "faxnoactualbuyer",
+  "faxNo",
   "Fax No.",
   "text",
   FaxNoValidation,
   "Enter Fax No."
 );
 const websiteactualbuyer: FormFieldType = createFormConfig(
-  "websiteactualbuyer",
+  "website",
   "Website",
   "text",
   WebsiteValidation,
   "https://"
 );
 const cstactualbuyer: FormFieldType = createFormConfig(
-  "cstactualbuyer",
+  "refNo",
   "CST/TIN No.",
   "text",
   cst,
   "CST/TIN No."
 );
 const gstnactualbuyer: FormFieldType = createFormConfig(
-  "GSTNactualbuyer",
+  "gstn",
   "GSTN",
   "text",
   GSTN,

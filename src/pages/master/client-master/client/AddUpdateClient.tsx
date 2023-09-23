@@ -65,13 +65,11 @@ export const AddUpdateClient: React.FC = () => {
                     />
                     <Select config={addClientFormFields.cityClient.config} />
                     <Input config={addClientFormFields.zipClient.config} />
-                    <div className="row ">
-                      <div className="col-md-5">
-                        <Select
-                          config={addClientFormFields.stateClient.config}
-                        />
-                      </div>
-                    </div>
+                    {/* <div className="row "> */}
+                    {/* <div className="col-md-5"> */}
+                    <Select config={addClientFormFields.stateClient.config} />
+                    {/* </div> */}
+                    {/* </div> */}
                     <Input
                       config={addClientFormFields.statecodeClient.config}
                     />

@@ -10,11 +10,22 @@ import {
   InputWithText,
   Select,
 } from "@shared/index";
-import { addActualBuyersFormFields } from "@master/index";
+import {
+  AddUpdateActualBuyerType,
+  addActualBuyersFormFields,
+  useActualBuyerApiCallHook,
+  useCityApiCallHook,
+  useClientApiCallHook,
+  useCountryApiCallHook,
+  useStateApiCallHook,
+} from "@master/index";
+import { selectOptionsMaker } from "@utils/selectOptionsMaker";
+import { cleanupObject } from "@utils/cleanUpObject";
+import { useParams } from "react-router-dom";
 
-export const AddActualBuyer: React.FC = () => {
-  const methods = useForm();
-
+export const AddUpdateActualBuyer: React.FC = () => {
+  const methods = useForm<AddUpdateActualBuyerType>();
+  const params = useParams();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Company Master",
@@ -25,8 +36,56 @@ export const AddActualBuyer: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data): void => {
-    console.log("value", data);
+  // const { getClient } = useClientApiCallHook();
+  // const { data: clientData } = getClient();
+  const { addActualBuyerMutation, updateActualBuyerMutation } =
+    useActualBuyerApiCallHook();
+  const { mutateAsync: updateActualBuyer } = updateActualBuyerMutation();
+  const { mutateAsync: addActualBuyer } = addActualBuyerMutation();
+  const { getCity } = useCityApiCallHook();
+  const { data: cityData } = getCity();
+  const { getState } = useStateApiCallHook();
+  const { data: stateData } = getState();
+  const { getCountry } = useCountryApiCallHook();
+  const { data: countryData } = getCountry();
+
+  if (cityData) {
+    addActualBuyersFormFields.cityactualbuyer.config.options =
+      selectOptionsMaker(cityData, "id", "cityName");
+  }
+
+  if (stateData) {
+    addActualBuyersFormFields.stateactualbuyer.config.options =
+      selectOptionsMaker(stateData, "stateId", "state");
+  }
+
+  if (countryData) {
+    addActualBuyersFormFields.countryactualbuyer.config.options =
+      selectOptionsMaker(countryData, "countryId", "countryName");
+  }
+
+  if ([]) {
+    addActualBuyersFormFields.clientactualbuyer.config.options =
+      selectOptionsMaker([], "clientID", "clientName");
+  }
+
+  const onSubmit = methods.handleSubmit((actualBuyerData): void => {
+    let data: any = { ...cleanupObject(actualBuyerData) };
+    if (data.stateId) {
+      data.stateId = data.stateId.value;
+    }
+    if (data.countryId) {
+      data.countryId = data.countryId.value;
+    }
+    if (data.cityId) {
+      data.cityId = data.cityId.value;
+    }
+    console.log(data);
+    if (params.id && data) {
+      updateActualBuyer({ id: params.id, ...data });
+    } else {
+      addActualBuyer(data);
+    }
   });
 
   return (
@@ -84,6 +143,11 @@ export const AddActualBuyer: React.FC = () => {
                     />
                     <Input config={addActualBuyersFormFields.PIN.config} />
                     <Select
+                      config={
+                        addActualBuyersFormFields.countryactualbuyer.config
+                      }
+                    />
+                    <Input
                       config={addActualBuyersFormFields.faxnoactualbuyer.config}
                     />
                     <Input

@@ -27,6 +27,9 @@ const GET_UPDATE_DELETE_FIN_YEAR = "utility/finYear/{id}";
 const GET_ADD_INDUSTRY = "utility/industry";
 const GET_UPDATE_DELETE_INDUSTRY = "utility/industry/{id}";
 
+const GET_ADD_ACTUAL_BUYER = "entity/actualBuyer";
+const GET_UPDATE_DELETE_ACTUAL_BUYER = "entity/actualBuyer/{id}";
+
 const GET_CITY_WISE_GROUP =
   "entity/priceListGroupWise/getClientGroupByCity/{id}";
 const GET_GROUP_WISE_CURRENCY =
@@ -139,4 +142,6 @@ export const apiUrls = {
   GET_GROUP_WISE_CURRENCY,
   GET_PRICE_LIST_STD_DATA,
   GET_PRICE_LIST_DATA,
+  GET_ADD_ACTUAL_BUYER,
+  GET_UPDATE_DELETE_ACTUAL_BUYER,
 };
