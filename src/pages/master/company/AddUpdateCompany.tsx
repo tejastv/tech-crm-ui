@@ -23,7 +23,7 @@ import {
 
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
-import { returnObjectBasedOnID } from "@utils/returnObjectBasedOnID";
+import { returnObjectBasedOnID, cleanupObject } from "@utils/index";
 
 export const AddUpdateCompany: React.FC = () => {
   const methods = useForm<AddUpdateCompanyType>();
@@ -45,15 +45,6 @@ export const AddUpdateCompany: React.FC = () => {
       heading: "Action Buttons",
     },
   };
-
-  useEffect(() => {
-    // This code will run when the component is about to unmount
-    return () => {
-      methods.reset();
-      // Place your cleanup code here
-      console.log("Component is unmounting. Cleanup can be performed here.");
-    };
-  }, []);
 
   // city api call
   const { data: cityData, isSuccess: getCitySuccess } = getCity();
@@ -89,12 +80,21 @@ export const AddUpdateCompany: React.FC = () => {
   }
 
   const onSubmit = methods.handleSubmit((companyData) => {
-    let data: any = { ...companyData };
-    data.cityId = +data.cityId["value"];
-    data.stateId = +data.stateId["value"];
-    data.countryId = +data.countryId["value"];
-
-    if (params.id && companyData) {
+    let data: any = { ...cleanupObject(companyData) };
+    if (data.cityId) {
+      data.cityId = +data.cityId["value"];
+    }
+    if (data.stateId) {
+      data.stateId = +data.stateId["value"];
+    }
+    if (data.countryId) {
+      data.countryId = +data.countryId["value"];
+    }
+    if (data.companyType) {
+      data.companyType = +data.companyType;
+    }
+    console.log(data);
+    if (params.id && data) {
       updateCompany({ id: params.id, ...data });
     } else {
       addCompany(data);
@@ -104,10 +104,16 @@ export const AddUpdateCompany: React.FC = () => {
   if (params.id) {
     const { data: companyMasterData, isSuccess: companyMasterDataSuccess } =
       getCompanyData("" + params.id);
-    if (companyMasterDataSuccess) {
-      if (getCitySuccess) {
+    if (companyMasterData) {
+      if (cityData) {
         let id = companyMasterData?.cityId;
-        let data: any = returnObjectBasedOnID(cityData, "id", id, "id", "city");
+        let data: any = returnObjectBasedOnID(
+          cityData,
+          "id",
+          id,
+          "id",
+          "cityName"
+        );
         addCompanyFormFields.city.config.setData = data
           ? {
               label: data.label,
@@ -115,13 +121,13 @@ export const AddUpdateCompany: React.FC = () => {
             }
           : [];
       }
-      if (getStateSuccess) {
+      if (stateData) {
         let id = companyMasterData?.stateId;
         let data: any = returnObjectBasedOnID(
           stateData,
-          "id",
+          "stateId",
           id,
-          "id",
+          "stateId",
           "state"
         );
         addCompanyFormFields.state.config.setData = data
@@ -131,14 +137,14 @@ export const AddUpdateCompany: React.FC = () => {
             }
           : [];
       }
-      if (countryDataSuccess) {
+      if (CountryData) {
         let id = companyMasterData?.countryId;
         let data: any = returnObjectBasedOnID(
           CountryData,
-          "id",
+          "countryId",
           id,
-          "id",
-          "country"
+          "countryId",
+          "countryName"
         );
         addCompanyFormFields.country.config.setData = data
           ? {
@@ -146,10 +152,6 @@ export const AddUpdateCompany: React.FC = () => {
               value: data.value,
             }
           : [];
-      } else {
-        useEffect(() => {
-          methods.reset();
-        }, []);
       }
       addCompanyFormFields.nameField.config.setData =
         companyMasterData.companyName;
