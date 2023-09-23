@@ -95,7 +95,7 @@ export { addCityFormFields } from "./location-master/city/add-city-form-fields";
 export { addClientGroupFormFields } from "./client-master/client-group/add-client-group-form-fields";
 export { addSegmentFormFields } from "./client-master/segment/add-segment-form-fields";
 
-export { addCompanyFormFields } from "./company/add-update-company";
+export { addCompanyFormFields } from "./company/add-update-company-form-fields";
 
 export { addPriceClientFormFields } from "./price-list-master/price-list-for-clients/add-price-client-form-fileds";
 export { addStdPriceClientsFormFields } from "./price-list-master/std-price-list-client/add-std-price-client-form-fields";
@@ -145,7 +145,7 @@ export * from "./client-master/segment/segment-type";
 
 // price master
 export * from "./price-list-master/actual-buyer/actual-buyer-type";
-export * from "./price-list-master/actual-buyer/add-actusl-buyer-type";
+export * from "./price-list-master/actual-buyer/add-actual-buyer-type";
 
 export * from "./price-list-master/price-list-for-clients/add-price-client-type";
 export * from "./price-list-master/price-list-for-clients/price-client-type";

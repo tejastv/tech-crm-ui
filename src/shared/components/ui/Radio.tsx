@@ -33,26 +33,26 @@ export const Radio = (props: FormFieldType) => {
           </Form.Label>
           <div className="col-sm-9">
             <div className="input-group">
-            {props.config.options &&
-              props.config.options.map((option) => {
-                return (
-                  <Form.Check
-                    value={option.value}
-                    id={"" + option.value}
-                    type="radio"
-                    key={option.value}
-                    label={option.label}
-                    {...register(props.config.name, props.config.validation)}
-                  />
-                );
-              })}
-            {isInvalid && (
-              <Form.Text className="text-danger">
-                <MdError />
-                {inputErrors.error.message}
-              </Form.Text>
-            )}
-            
+              {props.config.options &&
+                props.config.options.map((option) => {
+                  return (
+                    <Form.Check
+                      value={option.value}
+                      id={"" + option.value}
+                      type="radio"
+                      key={option.value}
+                      className="mr-3"
+                      label={option.label}
+                      {...register(props.config.name, props.config.validation)}
+                    />
+                  );
+                })}
+              {isInvalid && (
+                <Form.Text className="text-danger">
+                  <MdError />
+                  {inputErrors.error.message}
+                </Form.Text>
+              )}
             </div>
           </div>
         </div>
