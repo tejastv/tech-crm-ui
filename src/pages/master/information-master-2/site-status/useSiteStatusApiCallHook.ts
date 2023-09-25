@@ -20,7 +20,8 @@ export const useSiteStatusApiCallHook = () => {
       queryKey: [queryKeys.SITE_STATUS_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_SITE_STATUS);
-        return response.data.data;
+        const data = response.data.data.sort((a: { siteStatus: string; }, b: { siteStatus: any; }) => a.siteStatus.localeCompare(b.siteStatus));
+        return data;
       },
       staleTime: Infinity,
     });

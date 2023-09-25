@@ -17,7 +17,8 @@ export const useLocalSourceApiCallHook = () => {
       queryKey: [queryKeys.LOCALSOURCE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_LOCALSOURCE);
-        return response.data.data;
+        const data = response.data.data.sort((a: { localSource: string; }, b: { localSource: any; }) => a.localSource.localeCompare(b.localSource));
+        return data;
       },
       staleTime: Infinity,
     });

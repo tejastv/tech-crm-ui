@@ -16,7 +16,8 @@ export const useCompanyApiCallHook = () => {
       queryKey: [queryKeys.COMPANY_MASTER_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_COMPANY_MASTER);
-        return response.data.data;
+        const data = response.data.data.sort((a: { companyName: string; }, b: { companyName: any; }) => a.companyName.localeCompare(b.companyName));
+        return data;
       },
       staleTime: Infinity,
     });
