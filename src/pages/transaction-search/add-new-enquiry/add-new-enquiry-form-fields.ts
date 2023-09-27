@@ -605,12 +605,21 @@ const givenname: FormFieldType = createFormConfig(
   GivenNameEnquiryValidation,
   "Given Name",
 );
+const myDate = new Date(); // Replace this with your actual date
+
+// Extract year, month, and day components
+const year = myDate.getFullYear(); 
+const month = String(myDate.getMonth() + 1).padStart(2, '0'); 
+const day = String(myDate.getDate()).padStart(2, '0'); // Get the day (e.g., 07)
+
+// Format the date as "year/mm/dd"
+const formattedDate = `${year}/${month}/${day}`;
 const recdon: FormFieldType = createFormConfig(
   "clientCurrencey",
   "Recd . On",
   "date",
   recdOnValidation,
-  "Select Recd. On"
+  formattedDate
 );
 
 const enqtype: FormFieldType = createFormConfig(
