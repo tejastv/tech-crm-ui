@@ -20,7 +20,9 @@ export const useSupplierMasterApiCallHook = () => {
       queryKey: [queryKeys.SUPPLIER_MASTER_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_SUPPLIER_MASTER);
-        return response.data.data;
+        const data = response.data.data.sort((a: { supplierName: string; }, b: { supplierName: any; }) => a.supplierName.localeCompare(b.supplierName));
+        return data;
+
       },
       staleTime: Infinity,
     });

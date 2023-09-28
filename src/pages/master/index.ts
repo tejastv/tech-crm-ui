@@ -57,7 +57,7 @@ export { AddUpdateCurrency } from "./information-master/currency/AddUpdateCurren
 export { Currency } from "./information-master/currency/Currency";
 export { AddUpdateSource } from "./information-master/source/AddUpdateSource";
 export { Source } from "./information-master/source/Source";
-export { AddSupplier } from "./information-master/supplier-master/AddSupplier";
+export { AddSupplier } from "./information-master/supplier-master/AddUpdateSupplier";
 export { Supplier } from "./information-master/supplier-master/Supplier";
 export { AddBankMasterDrawn } from "./information-master/bank-master-drawn-on/AddUpdateBankDrawn";
 export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankDrawn";

@@ -110,7 +110,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     if (pdfMake) {
       (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
     }
-    const companyName = "Mirainform - CRM Software";
+    const companyName = `Mirainform - CRM Software - ${props.config.tableName}`;
     const table: any = tableRef.current;
     const rows: any = Array.from(table.querySelectorAll("tr"));
     const headers: any = Array.from(rows[0].querySelectorAll("th")).map(
@@ -177,7 +177,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     // Create a PDF document
     const pdfDoc = pdfMake.createPdf(docDefinition);
     // Download the PDF with a specific filename
-    pdfDoc.download("Mirainform - CRM Software.pdf");
+    pdfDoc.download(`Mirainform - CRM Software -${props.config.tableName}.pdf`);
   };
 
   const handlePrint = () => {
