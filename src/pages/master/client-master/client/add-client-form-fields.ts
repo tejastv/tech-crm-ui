@@ -14,14 +14,14 @@ const nameClientMaster = {
 
 const GSTClient = {
   required: {
-    value: true,
+    value: false,
     message: "Please check the {label} box",
   },
 } as ValidationType;
 
 const GSTNClient = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -32,7 +32,7 @@ const GSTNClient = {
 
 const addressValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Address",
   },
   pattern: {
@@ -43,7 +43,7 @@ const addressValidation = {
 
 const telNoValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Telephone Number",
   },
   pattern: {
@@ -54,7 +54,7 @@ const telNoValidation = {
 
 const FaxNoValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Fax number",
   },
   pattern: {
@@ -66,7 +66,7 @@ const FaxNoValidation = {
 
 const EmailValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -78,7 +78,7 @@ const EmailValidation = {
 
 const WebsiteValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -89,7 +89,7 @@ const WebsiteValidation = {
 
 const ContactValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -100,7 +100,7 @@ const ContactValidation = {
 
 const DesignationValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -111,7 +111,7 @@ const DesignationValidation = {
 
 const ZipValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -122,7 +122,7 @@ const ZipValidation = {
 
 const CityValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -133,7 +133,7 @@ const CityValidation = {
 
 const StateValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -154,7 +154,7 @@ const CountryValidation = {
 } as ValidationType;
 const CrDayValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -187,7 +187,7 @@ const ExecutiveValidation = {
 } as ValidationType;
 const InstructionValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
@@ -203,7 +203,7 @@ const GroupValidation = {
 } as ValidationType;
 const SegmentValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -213,7 +213,7 @@ const SegmentValidation = {
 } as ValidationType;
 const RemarksValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -223,31 +223,31 @@ const RemarksValidation = {
 } as ValidationType;
 const InvoiceValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
 const ClientIdValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
 const OsValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
 const DiscountValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please select a {label}",
   },
 } as ValidationType;
 const AdjustValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -257,7 +257,7 @@ const AdjustValidation = {
 } as ValidationType;
 const BalAdjustValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -267,7 +267,7 @@ const BalAdjustValidation = {
 } as ValidationType;
 const AdjustEnqValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -277,7 +277,7 @@ const AdjustEnqValidation = {
 } as ValidationType;
 const AdjustPropfomaValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -287,7 +287,7 @@ const AdjustPropfomaValidation = {
 } as ValidationType;
 const BalAdjustPropfomaValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -297,7 +297,7 @@ const BalAdjustPropfomaValidation = {
 } as ValidationType;
 const AdjustEnqPropfomaValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -312,79 +312,38 @@ const Gst = [
   { value: "No", label: "No" },
 ];
 
-const cityClientOptions = [
-  { value: "Mumbai", label: "Mumbai" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const stateClientOptions = [
-  { value: "Maharashtra", label: "Maharashtra" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const countryClientOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
 const crDayOptions = [
   { value: "Bill on Actual Buyer", label: "Bill on Actual Buyer" },
 ];
 
 // Right Field start
-const clientCurrencyOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const executiveOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const groupOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const clientIdOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const segmentOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+
 const invoiceOption = [
-  { value: "Monthly Invoice", label: "Monthly Invoice" },
+  { value: "monthlyInvoice", label: "Monthly Invoice" },
   {
-    value: "Individual Report / Invoice",
+    value: "individualReportInvoice",
     label: "Individual Report / Invoice",
   },
 ];
 const osEmailOptions = [
-  { value: "Auto Send O/S by e-Mail", label: "Auto Send O/S by e-Mail" },
-  { value: "OS List printed", label: "OS List printed" },
+  { value: "autoSendO/SByEmail", label: "Auto Send O/S by e-Mail" },
+  { value: "OSListPrinted", label: "OS List printed" },
 ];
 
 const discountOptions = [
-  { value: "in %", label: "in %" },
-  { value: "Per Report", label: "Per Report" },
-  { value: "NO Discount", label: "NO Discount" },
+  { value: "in%", label: "in %" },
+  { value: "perReport", label: "Per Report" },
+  { value: "noDiscount", label: "NO Discount" },
 ];
 const clientName: FormFieldType = createFormConfig(
-  "ClientName",
+  "clientName",
   "Name",
   "text",
   nameClientMaster,
   "Enter Client Name"
 );
 const clientGst: FormFieldType = createFormConfig(
-  "gst",
+  "gstYN",
   "GST",
   "radio",
   GSTClient,
@@ -392,7 +351,7 @@ const clientGst: FormFieldType = createFormConfig(
   Gst
 );
 const gstn: FormFieldType = createFormConfig(
-  "GSTN",
+  "gstn",
   "GSTN",
   "text",
   GSTNClient,
@@ -414,7 +373,7 @@ const telnoClient: FormFieldType = createFormConfig(
   "Enter Tel No."
 );
 const faxnoClient: FormFieldType = createFormConfig(
-  "faxno",
+  "fax",
   "Fax No.",
   "text",
   FaxNoValidation,
@@ -435,7 +394,7 @@ const websiteClient: FormFieldType = createFormConfig(
   "Enter WebSite"
 );
 const contactClient: FormFieldType = createFormConfig(
-  "contact",
+  "contactPerson",
   "Contact",
   "text",
   ContactValidation,
@@ -449,12 +408,12 @@ const designationClient: FormFieldType = createFormConfig(
   "Enter Designation"
 );
 const cityClient: FormFieldType = createFormConfig(
-  "city",
+  "cityID",
   "City",
   "select",
   CityValidation,
   "Select City",
-  cityClientOptions
+  []
 );
 const zipClient: FormFieldType = createFormConfig(
   "zip",
@@ -464,31 +423,33 @@ const zipClient: FormFieldType = createFormConfig(
   "Enter Zip"
 );
 const stateClient: FormFieldType = createFormConfig(
-  "state",
+  "stateID",
   "State",
   "select",
   StateValidation,
   "Select State",
-  stateClientOptions
+  []
 );
 const statecodeClient: FormFieldType = createFormConfig(
-  "state",
+  "stateCode",
   "State Code",
   "text",
   StateValidation,
-  ""
+  "",
+  [],
+  true
 );
 const countryClient: FormFieldType = createFormConfig(
-  "country",
+  "countryID",
   "Country",
   "select",
   CountryValidation,
   "Select Country",
-  countryClientOptions
+  []
 );
 
 const crDay: FormFieldType = createFormConfig(
-  "CrDays",
+  "crDays",
   "Cr. Days",
   "select",
   CrDayValidation,
@@ -496,7 +457,7 @@ const crDay: FormFieldType = createFormConfig(
   crDayOptions
 );
 const billonactual: FormFieldType = createFormConfig(
-  "billonActualBuyer",
+  "billONActualBuyer",
   "",
   "checkbox",
   CrDayValidation,
@@ -506,36 +467,37 @@ const billonactual: FormFieldType = createFormConfig(
 
 // Right Side Fields
 const id: FormFieldType = createFormConfig(
-  "clientId",
+  "clientCode",
   "Id",
   "select",
   ClientIdValidation,
-  " Id",
-  clientIdOptions
+  "",
+  [],
+  true
 );
 const clientIdSelect: FormFieldType = createFormConfig(
-  "clientIdSelect",
+  "clientId",
   "",
   "select",
   ClientIdValidation,
-  "Select Id",
-  clientIdOptions
+  "Select Client",
+  []
 );
 const clientCurrencey: FormFieldType = createFormConfig(
-  "clientCurrencey",
+  "currencyID",
   "Currency",
   "select",
   ClientCurrencyValidation,
   "Select Currency",
-  clientCurrencyOptions
+  []
 );
 const executive: FormFieldType = createFormConfig(
-  "executive",
+  "executive_id",
   "Executive",
   "select",
   ExecutiveValidation,
   "Select Executive",
-  executiveOptions
+  []
 );
 const instuction: FormFieldType = createFormConfig(
   "instruction",
@@ -545,20 +507,20 @@ const instuction: FormFieldType = createFormConfig(
   "Enter Instruction"
 );
 const groupClient: FormFieldType = createFormConfig(
-  "group",
+  "groupId",
   "Group",
   "select",
   GroupValidation,
   "Select Group",
-  groupOptions
+  []
 );
 const segmentClient: FormFieldType = createFormConfig(
-  "segment",
+  "segmentId",
   "Segment",
   "select",
   SegmentValidation,
   "Select Segment",
-  segmentOptions
+  []
 );
 const remarks: FormFieldType = createFormConfig(
   "remarks",
@@ -568,7 +530,7 @@ const remarks: FormFieldType = createFormConfig(
   "Enter Remarks"
 );
 const monthlyIvoice: FormFieldType = createFormConfig(
-  "monthlyinvoice",
+  "monthlyInvoice",
   "Monthly / Daily Invoice",
   "radio",
   InvoiceValidation,
@@ -576,7 +538,7 @@ const monthlyIvoice: FormFieldType = createFormConfig(
   invoiceOption
 );
 const osemail: FormFieldType = createFormConfig(
-  "osemail",
+  "osListPrInteger",
   "O/S Email",
   "checkbox",
   OsValidation,
@@ -586,7 +548,7 @@ const osemail: FormFieldType = createFormConfig(
 
 // Right Side Adjust From Section
 const discount: FormFieldType = createFormConfig(
-  "discount",
+  "disType",
   "Discount ",
   "radio",
   DiscountValidation,
@@ -601,21 +563,21 @@ const discountBlank: FormFieldType = createFormConfig(
   "discount"
 );
 const toAdjust: FormFieldType = createFormConfig(
-  "toadjust",
+  "toAdjust",
   "To Adjust",
   "text",
   AdjustValidation,
   "Adjust"
 );
 const baltoAdjust: FormFieldType = createFormConfig(
-  "toadjust",
+  "balToAdjust",
   "Bal.to Adjust",
   "text",
   BalAdjustValidation,
   "Bal to Adjust"
 );
 const adjustenquiry: FormFieldType = createFormConfig(
-  "adjustenquiry",
+  "adjustPerEnq",
   "Adjust/Enquiry",
   "text",
   AdjustEnqValidation,
@@ -623,21 +585,21 @@ const adjustenquiry: FormFieldType = createFormConfig(
 );
 // Adjust From Proforma
 const toAdjustproforma: FormFieldType = createFormConfig(
-  "toadjustproforma",
+  "toAdjust_PI",
   "To Adjusts",
   "text",
   AdjustPropfomaValidation,
   "Adjusts Proforma"
 );
 const baltoAdjustproformaproforma: FormFieldType = createFormConfig(
-  "toadjustproforma",
+  "balToAdjust_PI",
   "Bal.to Adjust",
   "text",
   BalAdjustPropfomaValidation,
   "Bal to Adjust Proforma"
 );
 const adjustenquiryproforma: FormFieldType = createFormConfig(
-  "adjustenquiryproforma",
+  "adjustPerEnq_PI",
   "Adjust/Enquiry",
   "text",
   AdjustEnqPropfomaValidation,

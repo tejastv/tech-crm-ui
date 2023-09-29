@@ -27,12 +27,13 @@ export const Select = (props: FormFieldType) => {
     if (props.onChangeHandler) {
       props.onChangeHandler(selectedOption);
     }
-    setValue(props.config.name, selectedOption);
+    setValue(props.config.name, selectedOption, { shouldValidate: true });
   };
   useEffect(() => {
-    if (props.config.setData) {
-      setValue(props.config.name, props.config.setData);
-    }
+    setValue(
+      props.config.name,
+      props.config.setData ? props.config.setData : null
+    );
   }, [props.config.setData]);
   return (
     <div className="row">
@@ -56,6 +57,7 @@ export const Select = (props: FormFieldType) => {
                   <AliceSelect
                     {...field}
                     isMulti
+                    isClearable
                     onChange={handleSelectChange} // Pass the onChange handler
                     options={props.config.options}
                     placeholder={props.config.placeholder}
@@ -70,6 +72,7 @@ export const Select = (props: FormFieldType) => {
                 render={({ field }) => (
                   <AliceSelect
                     {...field}
+                    isClearable
                     onChange={handleSelectChange} // Pass the onChange handler
                     options={props.config.options}
                     placeholder={props.config.placeholder}

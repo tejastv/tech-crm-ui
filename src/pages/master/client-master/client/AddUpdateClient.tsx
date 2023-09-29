@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   ActionButtons,
@@ -9,8 +9,20 @@ import {
   Radio,
   Select,
   DivLayout,
+  Options,
 } from "@shared/index";
-import { addClientFormFields } from "@master/index";
+import {
+  addClientFormFields,
+  useCityApiCallHook,
+  useClientApiCallHook,
+  useClientGroupApiCallHook,
+  useCountryApiCallHook,
+  useCurrencyApiCallHook,
+  useExecutiveApiCallHook,
+  useSegmentApiCallHook,
+  useStateApiCallHook,
+} from "@master/index";
+import { selectOptionsMaker, cleanupObject } from "@utils/index";
 
 export const AddUpdateClient: React.FC = () => {
   const methods = useForm();
@@ -33,7 +45,158 @@ export const AddUpdateClient: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((data): void => {
+  const [stateCode, setStateCode] = useState<number>();
+  const [clientCode, setClientCode] = useState<number>();
+  const { getCity } = useCityApiCallHook();
+  const { data: cityData } = getCity();
+  const { getState } = useStateApiCallHook();
+  const { data: stateData } = getState();
+  const { getCountry } = useCountryApiCallHook();
+  const { data: countryData } = getCountry();
+  const { getClient } = useClientApiCallHook();
+  const { data: clientData } = getClient();
+  const { getCurrency } = useCurrencyApiCallHook();
+  const { data: currencyData } = getCurrency();
+  const { getExecutive } = useExecutiveApiCallHook();
+  const { data: executiveData } = getExecutive();
+  const { getClientGroup } = useClientGroupApiCallHook();
+  const { data: clientGroupData } = getClientGroup();
+  const { getSegment } = useSegmentApiCallHook();
+  const { data: segmentData } = getSegment();
+
+  if (cityData) {
+    addClientFormFields.cityClient.config.options = selectOptionsMaker(
+      cityData,
+      "id",
+      "cityName"
+    );
+  }
+
+  if (stateData) {
+    addClientFormFields.stateClient.config.options = selectOptionsMaker(
+      stateData,
+      "stateId",
+      "state"
+    );
+  }
+
+  if (countryData) {
+    addClientFormFields.countryClient.config.options = selectOptionsMaker(
+      countryData,
+      "countryId",
+      "countryName"
+    );
+  }
+
+  if (clientData) {
+    addClientFormFields.clientIdSelect.config.options = selectOptionsMaker(
+      clientData,
+      "clientID",
+      "clientName"
+    );
+  }
+
+  if (currencyData) {
+    addClientFormFields.clientCurrencey.config.options = selectOptionsMaker(
+      currencyData,
+      "currencyId",
+      "currencyInWord"
+    );
+  }
+
+  if (executiveData) {
+    addClientFormFields.executive.config.options = selectOptionsMaker(
+      executiveData,
+      "executiveID",
+      "executive"
+    );
+  }
+
+  if (clientGroupData) {
+    addClientFormFields.groupClient.config.options = selectOptionsMaker(
+      clientGroupData,
+      "groupId",
+      "groupName"
+    );
+  }
+
+  if (segmentData) {
+    addClientFormFields.segmentClient.config.options = selectOptionsMaker(
+      segmentData,
+      "segmentId",
+      "segmentName"
+    );
+  }
+
+  const crDays: Array<Options> = [
+    {
+      label: "0",
+      value: 0,
+    },
+    {
+      label: "15",
+      value: 15,
+    },
+    {
+      label: "30",
+      value: 30,
+    },
+    {
+      label: "45",
+      value: 45,
+    },
+    {
+      label: "60",
+      value: 60,
+    },
+    {
+      label: "522",
+      value: 522,
+    },
+  ];
+
+  if (crDays) {
+    addClientFormFields.crDay.config.options = crDays;
+  }
+
+  const getStateCode = (data: any) => setStateCode(data ? data.value : null);
+  const getClientCode = (data: any) => setClientCode(data ? data.value : null);
+
+  addClientFormFields.statecodeClient.config.setData = stateCode;
+  addClientFormFields.id.config.setData = clientCode;
+
+  const onSubmit = methods.handleSubmit((clientData): void => {
+    let data: any = { ...cleanupObject(clientData) };
+    if (data.stateID) {
+      data.stateID = data.stateID.value;
+    }
+    if (data.countryID) {
+      data.countryID = data.countryID.value;
+    }
+    if (data.cityID) {
+      data.cityID = data.cityID.value;
+    }
+    if (data.clientId) {
+      data.clientId = data.clientId.value;
+    }
+    if (data.currencyID) {
+      data.currencyID = data.currencyID.value;
+    }
+    if (data.executive_id) {
+      data.executive_id = data.executive_id.value;
+    }
+    if (data.segmentId) {
+      data.segmentId = data.segmentId.value;
+    }
+    if (data.groupId) {
+      data.groupId = data.groupId.value;
+    }
+    if (data.crDays) {
+      data.crDays = data.crDays.value;
+    }
+    delete data.clientCode;
+    delete data.stateCode;
+
     console.log("value", data);
   });
 
@@ -67,7 +230,10 @@ export const AddUpdateClient: React.FC = () => {
                     <Input config={addClientFormFields.zipClient.config} />
                     {/* <div className="row "> */}
                     {/* <div className="col-md-5"> */}
-                    <Select config={addClientFormFields.stateClient.config} />
+                    <Select
+                      config={addClientFormFields.stateClient.config}
+                      onChangeHandler={getStateCode}
+                    />
                     {/* </div> */}
                     {/* </div> */}
                     <Input
@@ -90,6 +256,7 @@ export const AddUpdateClient: React.FC = () => {
                     <Input config={addClientFormFields.id.config} />
                     <Select
                       config={addClientFormFields.clientIdSelect.config}
+                      onChangeHandler={getClientCode}
                     />
                     <Select
                       config={addClientFormFields.clientCurrencey.config}
