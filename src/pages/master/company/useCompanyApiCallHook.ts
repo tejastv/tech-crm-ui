@@ -39,7 +39,6 @@ export const useCompanyApiCallHook = () => {
   const addCompany = async (
     companyData: AddUpdateCompanyType
   ): Promise<ApiResponseType<CompanyType>> => {
-    debugger;
     const response = await instance.post(apiUrls.GET_ADD_COMPANY_MASTER, companyData);
     return response.data.data;
   };

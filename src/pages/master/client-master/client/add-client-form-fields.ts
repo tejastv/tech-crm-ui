@@ -157,10 +157,10 @@ const CrDayValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+$/,
-    message: "Credit Days must be a positive number",
-  },
+  // pattern: {
+  //   value: /^\d+$/,
+  //   message: "Credit Days must be a positive number",
+  // },
 } as ValidationType;
 
 // Right Field validation
@@ -377,14 +377,14 @@ const discountOptions = [
   { value: "NO Discount", label: "NO Discount" },
 ];
 const clientName: FormFieldType = createFormConfig(
-  "ClientName",
+  "clientName",
   "Name",
   "text",
   nameClientMaster,
   "Enter Client Name"
 );
 const clientGst: FormFieldType = createFormConfig(
-  "gst",
+  "gstYN",
   "GST",
   "radio",
   GSTClient,
@@ -392,7 +392,7 @@ const clientGst: FormFieldType = createFormConfig(
   Gst
 );
 const gstn: FormFieldType = createFormConfig(
-  "GSTN",
+  "gstn",
   "GSTN",
   "text",
   GSTNClient,
@@ -407,14 +407,14 @@ const addressClient: FormFieldType = createFormConfig(
   "Enter Address"
 );
 const telnoClient: FormFieldType = createFormConfig(
-  "telno",
+  "phone",
   "Tel No.",
   "text",
   telNoValidation,
   "Enter Tel No."
 );
 const faxnoClient: FormFieldType = createFormConfig(
-  "faxno",
+  "fax",
   "Fax No.",
   "text",
   FaxNoValidation,
@@ -435,7 +435,7 @@ const websiteClient: FormFieldType = createFormConfig(
   "Enter WebSite"
 );
 const contactClient: FormFieldType = createFormConfig(
-  "contact",
+  "contactPerson",
   "Contact",
   "text",
   ContactValidation,
@@ -449,7 +449,7 @@ const designationClient: FormFieldType = createFormConfig(
   "Enter Designation"
 );
 const cityClient: FormFieldType = createFormConfig(
-  "city",
+  "cityID",
   "City",
   "select",
   CityValidation,
@@ -464,7 +464,7 @@ const zipClient: FormFieldType = createFormConfig(
   "Enter Zip"
 );
 const stateClient: FormFieldType = createFormConfig(
-  "state",
+  "stateID",
   "State",
   "select",
   StateValidation,
@@ -479,7 +479,7 @@ const statecodeClient: FormFieldType = createFormConfig(
   ""
 );
 const countryClient: FormFieldType = createFormConfig(
-  "country",
+  "countryID",
   "Country",
   "select",
   CountryValidation,
@@ -488,7 +488,7 @@ const countryClient: FormFieldType = createFormConfig(
 );
 
 const crDay: FormFieldType = createFormConfig(
-  "CrDays",
+  "crDays",
   "Cr. Days",
   "select",
   CrDayValidation,
@@ -496,7 +496,7 @@ const crDay: FormFieldType = createFormConfig(
   crDayOptions
 );
 const billonactual: FormFieldType = createFormConfig(
-  "billonActualBuyer",
+  "billONActualBuyer",
   "",
   "checkbox",
   CrDayValidation,
@@ -522,7 +522,7 @@ const clientIdSelect: FormFieldType = createFormConfig(
   clientIdOptions
 );
 const clientCurrencey: FormFieldType = createFormConfig(
-  "clientCurrencey",
+  "currencyID",
   "Currency",
   "select",
   ClientCurrencyValidation,
@@ -530,7 +530,7 @@ const clientCurrencey: FormFieldType = createFormConfig(
   clientCurrencyOptions
 );
 const executive: FormFieldType = createFormConfig(
-  "executive",
+  "executive_id",
   "Executive",
   "select",
   ExecutiveValidation,
@@ -545,7 +545,7 @@ const instuction: FormFieldType = createFormConfig(
   "Enter Instruction"
 );
 const groupClient: FormFieldType = createFormConfig(
-  "group",
+  "groupId",
   "Group",
   "select",
   GroupValidation,
@@ -553,7 +553,7 @@ const groupClient: FormFieldType = createFormConfig(
   groupOptions
 );
 const segmentClient: FormFieldType = createFormConfig(
-  "segment",
+  "segmentId",
   "Segment",
   "select",
   SegmentValidation,
@@ -568,7 +568,7 @@ const remarks: FormFieldType = createFormConfig(
   "Enter Remarks"
 );
 const monthlyIvoice: FormFieldType = createFormConfig(
-  "monthlyinvoice",
+  "monthlyInvoice",
   "Monthly / Daily Invoice",
   "radio",
   InvoiceValidation,
@@ -576,7 +576,7 @@ const monthlyIvoice: FormFieldType = createFormConfig(
   invoiceOption
 );
 const osemail: FormFieldType = createFormConfig(
-  "osemail",
+  "osListPrInteger",
   "O/S Email",
   "checkbox",
   OsValidation,
@@ -586,7 +586,7 @@ const osemail: FormFieldType = createFormConfig(
 
 // Right Side Adjust From Section
 const discount: FormFieldType = createFormConfig(
-  "discount",
+  "disType",
   "Discount ",
   "radio",
   DiscountValidation,
@@ -601,21 +601,21 @@ const discountBlank: FormFieldType = createFormConfig(
   "discount"
 );
 const toAdjust: FormFieldType = createFormConfig(
-  "toadjust",
+  "toAdjust",
   "To Adjust",
   "text",
   AdjustValidation,
   "Adjust"
 );
 const baltoAdjust: FormFieldType = createFormConfig(
-  "toadjust",
+  "balToAdjust",
   "Bal.to Adjust",
   "text",
   BalAdjustValidation,
   "Bal to Adjust"
 );
 const adjustenquiry: FormFieldType = createFormConfig(
-  "adjustenquiry",
+  "adjustPerEnq",
   "Adjust/Enquiry",
   "text",
   AdjustEnqValidation,
@@ -623,21 +623,21 @@ const adjustenquiry: FormFieldType = createFormConfig(
 );
 // Adjust From Proforma
 const toAdjustproforma: FormFieldType = createFormConfig(
-  "toadjustproforma",
+  "toAdjust_PI",
   "To Adjusts",
   "text",
   AdjustPropfomaValidation,
   "Adjusts Proforma"
 );
 const baltoAdjustproformaproforma: FormFieldType = createFormConfig(
-  "toadjustproforma",
+  "balToAdjust_PI",
   "Bal.to Adjust",
   "text",
   BalAdjustPropfomaValidation,
   "Bal to Adjust Proforma"
 );
 const adjustenquiryproforma: FormFieldType = createFormConfig(
-  "adjustenquiryproforma",
+  "adjustPerEnq_PI",
   "Adjust/Enquiry",
   "text",
   AdjustEnqPropfomaValidation,
