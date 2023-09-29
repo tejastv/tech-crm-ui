@@ -1,5 +1,5 @@
-import { FormFieldType, Note, ValidationType } from "@shared/index";
-import { createFormConfig, createNoteConfig } from "@utils/index";
+import { FormFieldType, ValidationType } from "@shared/index";
+import { createFormConfig,  } from "@utils/index";
 
 const FromDateValidation = {
     required: {
