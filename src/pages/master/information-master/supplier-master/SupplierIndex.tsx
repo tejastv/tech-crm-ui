@@ -9,6 +9,7 @@ const SupplierMasterIndex: React.FC = () => {
     <Routes>
       <Route index element={<Supplier />}></Route>
       <Route path={COMMON_ROUTES.ADD} element={<AddSupplier />}></Route>
+      <Route path={COMMON_ROUTES.EDIT} element={<AddSupplier />}></Route>
     </Routes>
   );
 };
