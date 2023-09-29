@@ -634,13 +634,25 @@ export const Header: React.FC = () => {
                           <span className="hide-menu ">Add New Enquiry</span>
                         </Link>
                       </li>
-                      <li className="sidebar-item">
-                        {" "}
-                        <a className="sidebar-link" href="enq_details.php">
+                    <li className="sidebar-item">
+                        <Link
+                          className="sidebar-link"
+                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYDETAILS_TRANSACTION_ROUTES.ENQUIRYDETAILS}`}
+                        >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">All Enquiries</span>
-                        </a>
+                        </Link>
                       </li>
+                    <li className="sidebar-item">
+                        <Link
+                          className="sidebar-link"
+                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYSEARCH_TRANSACTION_ROUTES.ENQUIRYSEARCH}`}
+                        >
+                          <i className="mdi mdi-creation"></i>
+                          <span className="hide-menu ">Enquiry Search</span>
+                        </Link>
+                      </li>
+                     
                       <li className="sidebar-item">
                         {" "}
                         <a className="sidebar-link" href="enquiry_search.php">

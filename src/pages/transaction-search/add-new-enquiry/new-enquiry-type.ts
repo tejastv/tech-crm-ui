@@ -1,4 +1,4 @@
-export interface addClient {
+export interface addClientType {
     companyenquiryId:number,
     companyenquiry:string,
     yearenquiry:string,

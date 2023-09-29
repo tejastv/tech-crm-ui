@@ -123,8 +123,15 @@ export const TRANSACTION_ROUTES = {
 
   NEWENQUIRY_TRANSACTION_ROUTES: {
     NEWENQUIRY_TRANSACTION_PARENT_ROUTE: "/add-new-enquiry/*",
-    NEWENQUIRY: "add-new-enquiry/",
-    
+    NEWENQUIRY: "add-new-enquiry/", 
+  },
+  ENQUIRYDETAILS_TRANSACTION_ROUTES: {
+    ENQUIRYDETAILS_TRANSACTION_PARENT_ROUTE: "/enquiry-details/*",
+    ENQUIRYDETAILS: "enquiry-details/", 
+  },
+  ENQUIRYSEARCH_TRANSACTION_ROUTES: {
+    ENQUIRYSEARCH_TRANSACTION_PARENT_ROUTE: "/enquiry-search/*",
+    ENQUIRYSEARCH: "enquiry-search/", 
   },
 }
 

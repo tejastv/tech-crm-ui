@@ -255,10 +255,9 @@ export { useCreditDaysApiCallHook } from "./information-master-2/credit-days/use
 export { useSiteStatusApiCallHook } from "./information-master-2/site-status/useSiteStatusApiCallHook";
 export { useUserApiCallHook } from "./information-master-2/user-master/useUserApiCallHook";
 export { useSupplierMasterApiCallHook } from "./information-master/supplier-master/useSupplierMasterApiCallHook";
-
-export { useStdPriceApiCallHook } from "./local-source-master/std-price-list/useStdPriceApiCallHook";
 export { useClientGroupApiCallHook } from "./client-master/client-group/useClientGroupApiCallHook";
 export { useSourceApiCallHook } from "./information-master/source/useSourceApiCallHook";
+export { useStdPriceApiCallHook } from "./local-source-master/std-price-list/useStdPriceApiCallHook";;
 export { useClientApiCallHook } from "./client-master/client/useClientApiCallHook";
 export { useStdPriceClientsApiCallHook } from "./price-list-master/std-price-list-client/useStdPriceClientsApiCallHook";
 export { usePriceListGroupApiCallHook } from "./price-list-master/price-list-group-wise/usePriceListGroupApiCallHook";
