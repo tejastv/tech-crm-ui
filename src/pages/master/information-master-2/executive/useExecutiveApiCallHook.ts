@@ -20,7 +20,8 @@ export const useExecutiveApiCallHook = () => {
       queryKey: [queryKeys.EXECUTIVE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_EXECUTIVE);
-        return response.data.data;
+        const data = response.data.data.sort((a: { executive: string; }, b: { executive: any; }) => a.executive.localeCompare(b.executive));
+        return data;
       },
       staleTime: Infinity,
     });

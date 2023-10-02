@@ -20,7 +20,8 @@ export const useCreditDaysApiCallHook = () => {
       queryKey: [queryKeys.CREDIT_DAYS_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CREDIT_DAYS);
-        return response.data.data;
+        const data = response.data.data.sort((a: { creditPeriod: number; }, b: { creditPeriod: number; }) => a.creditPeriod - b.creditPeriod);
+        return data;
       },
       staleTime: Infinity,
     });

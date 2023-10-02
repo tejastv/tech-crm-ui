@@ -21,7 +21,8 @@ export const useSegmentApiCallHook = () => {
       queryKey: [queryKeys.SEGMENT_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_SEGMENT);
-        return response.data.data;
+        const data = response.data.data.sort((a: { segmentName: string; }, b: { segmentName: any; }) => a.segmentName.localeCompare(b.segmentName));
+        return data;
       },
       staleTime: Infinity,
     });

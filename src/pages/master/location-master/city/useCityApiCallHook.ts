@@ -20,7 +20,8 @@ export const useCityApiCallHook = () => {
       queryKey: [queryKeys.CITY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CITY);
-        return response.data.data;
+        const data = response.data.data.sort((a: { cityName: string; }, b: { cityName: any; }) => a.cityName.localeCompare(b.cityName));
+        return data;
       },
       staleTime: Infinity,
     });

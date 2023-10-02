@@ -20,7 +20,8 @@ export const useBankMasterDrawnApiCallHook = () => {
       queryKey: [queryKeys.BANKMASTER_DRAWN_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_BANKMASTER_DRAWN);
-        return response.data.data;
+        const data = response.data.data.sort((a: { bankName: string; }, b: { bankName: any; }) => a.bankName.localeCompare(b.bankName));
+        return data;
       },
       staleTime: Infinity,
     });

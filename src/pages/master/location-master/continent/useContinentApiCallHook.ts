@@ -20,7 +20,8 @@ export const useContinentApiCallHook = () => {
       queryKey: [queryKeys.CONTINENT_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CONTINENT);
-        return response.data.data;
+        const data = response.data.data.sort((a: { continent: string; }, b: { continent: any; }) => a.continent.localeCompare(b.continent));
+        return data
       },
       staleTime: Infinity,
     });

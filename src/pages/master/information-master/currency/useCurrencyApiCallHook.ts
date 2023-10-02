@@ -15,7 +15,8 @@ export const useCurrencyApiCallHook = () => {
       queryKey: [queryKeys.CURRENCY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CURRENCY);
-        return response.data.data;
+        const data = response.data.data.sort((a: { currencyType: string; }, b: { currencyType: any; }) => a.currencyType.localeCompare(b.currencyType));
+        return data;
       },
       staleTime: Infinity,
     });

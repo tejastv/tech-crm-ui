@@ -20,7 +20,8 @@ export const usePaymentModeApiCallHook = () => {
       queryKey: [queryKeys.PAYMENTMODE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_PAYMENTMODE);
-        return response.data.data;
+        const data = response.data.data.sort((a: { paymentMode: string; }, b: { paymentMode: any; }) => a.paymentMode.localeCompare(b.paymentMode));
+        return data;
       },
       staleTime: Infinity,
     });
