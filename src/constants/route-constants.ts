@@ -133,6 +133,26 @@ export const TRANSACTION_ROUTES = {
     ENQUIRYSEARCH_TRANSACTION_PARENT_ROUTE: "/enquiry-search/*",
     ENQUIRYSEARCH: "enquiry-search/", 
   },
+  ADDBULKENQUIRIES_TRANSACTION_ROUTES: {
+    ADDBULKENQUIRIES_TRANSACTION_PARENT_ROUTE: "add-bulk-enquiries/*",
+    ADDBULKENQUIRIES: "add-bulk-enquiries/", 
+  },
+  PURCHASEBILLS_TRANSACTION_ROUTES: {
+    PURCHASEBILLS_TRANSACTION_PARENT_ROUTE: "purchase-bills/*",
+    PURCHASEBILLS_MASTER: "purchase-bills/", 
+  },
+  LOCATION_MASTER_ROUTES: {
+    LOCATION_MASTER_PARENT_ROUTE: "/location/*",
+    LOCATION_MASTER_ROUTE: "location/",
+    CITY_PARENT_ROUTE: "/city/*",
+    STATE_PARENT_ROUTE: "/state/*",
+    COUNTRY_PARENT_ROUTE: "/country/*",
+    CONTINENT_PARENT_ROUTE: "/continent/*",
+    CITY: "city",
+    STATE: "state",
+    COUNTRY: "country",
+    CONTINENT: "continent",
+  },
 }
 
 export const COMMON_ROUTES = {

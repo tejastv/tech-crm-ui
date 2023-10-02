@@ -11,6 +11,12 @@ const AllEnquiriesIndex = React.lazy(
 );
 const EnquirySearchIndex = React.lazy(
   () => import("./enquiry-search/EnquirySearchIndex")
+  );
+const AddBulkEnquiries = React.lazy(
+  () => import("./add-bulk-enquiries/AddBulkEnquiriesIndex")
+);
+const PurchaseBillsof = React.lazy(
+  () => import("./purchase-bills/PurchaseBillsIndex")
 );
 
 
@@ -31,6 +37,14 @@ const EnquirySearchIndex = React.lazy(
         <Route
           path={TRANSACTION_ROUTES.ENQUIRYSEARCH_TRANSACTION_ROUTES.ENQUIRYSEARCH_TRANSACTION_PARENT_ROUTE}
           element={<EnquirySearchIndex />}>
+          </Route>
+        <Route
+          path={TRANSACTION_ROUTES.ADDBULKENQUIRIES_TRANSACTION_ROUTES.ADDBULKENQUIRIES_TRANSACTION_PARENT_ROUTE}
+          element={<AddBulkEnquiries />}>
+          </Route>
+        <Route
+          path={TRANSACTION_ROUTES.PURCHASEBILLS_TRANSACTION_ROUTES.PURCHASEBILLS_TRANSACTION_PARENT_ROUTE}
+          element={<PurchaseBillsof />}>
           </Route>
 
       </Routes>
