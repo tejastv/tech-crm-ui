@@ -1,5 +1,5 @@
 // Company master child pages
-export { AddEnquiry} from "./add-new-enquiry/AddUpdateNewEnquiry";
+export { AddEnquiry } from "./add-new-enquiry/AddUpdateNewEnquiry";
 export { addEnquiryFormFields } from "./add-new-enquiry/add-new-enquiry-form-fields";
 
 export { Enquiries } from "./all-enquiries/AllEnquiries";
@@ -14,7 +14,6 @@ export { AddBulkEnquiries } from "./add-bulk-enquiries/AddBulkEnquiries";
 
 export { addEnquirySearchFormFields } from "./enquiry-search/add-enquiry-search-form-field";
 export { addBulkEnquiriesFormFields } from "./add-bulk-enquiries/add-bulk-enquires-form-field";
-
 
 export * from "./add-new-enquiry/add-update-new-emquiry-type";
 export * from "./add-new-enquiry/new-enquiry-type";

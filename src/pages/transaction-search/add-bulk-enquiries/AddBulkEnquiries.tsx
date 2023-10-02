@@ -4,7 +4,6 @@ import React from "react";
 import {
   BorderLayout,
   Button,
-  Card,
   Input,
   InputWithText,
   Loader,
@@ -19,8 +18,9 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import {
-    AddClientType, addBulkEnquiriesFormFields, addEnquirySearchFormFields
-  } from "@transaction-search/index"
+  AddClientType,
+  addBulkEnquiriesFormFields,
+} from "@transaction-search/index";
 
 export const AddBulkEnquiries: React.FC = () => {
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
@@ -33,7 +33,7 @@ export const AddBulkEnquiries: React.FC = () => {
     breadcrumbConfig: {
       pageHeading: "Bulk Enquiries",
       btnTitle: "",
-      btnRoute: '',
+      btnRoute: "",
     },
     borderLayoutConfig: {
       heading: "List",
@@ -108,25 +108,25 @@ export const AddBulkEnquiries: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <div className="col-12">
-      <BorderLayout heading={config.borderLayoutConfig.heading}>
-    
-        <FormProvider {...methods}>
-          <form
-            
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
+        <BorderLayout heading={config.borderLayoutConfig.heading}>
+          <FormProvider {...methods}>
+            <form noValidate autoComplete="off" className="p-t-20">
               <div className="row">
-              <div className="col-md-5 col-xs-12">
-                    <Select config={addBulkEnquiriesFormFields.clientnameField.config} />
+                <div className="col-md-5 col-xs-12">
+                  <Select
+                    config={addBulkEnquiriesFormFields.clientnameField.config}
+                  />
                 </div>
                 <div className="col-md-5 col-xs-12">
-                    <Input config={addBulkEnquiriesFormFields.uploadfileField.config} />
-                    <div className="col-md-9">
+                  <Input
+                    config={addBulkEnquiriesFormFields.uploadfileField.config}
+                  />
+                  <div className="col-md-9">
                     <small className="text-center">
                       <InputWithText
-                        config={addBulkEnquiriesFormFields.uploadFilenote.config}
+                        config={
+                          addBulkEnquiriesFormFields.uploadFilenote.config
+                        }
                       />
                     </small>
                   </div>
@@ -136,13 +136,12 @@ export const AddBulkEnquiries: React.FC = () => {
                     <i className="far fa-save"></i>Submit
                   </Button>
                 </div>
-                </div>
-          </form>
-        </FormProvider>
-    
-        
-        <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
-      </BorderLayout>
+              </div>
+            </form>
+          </FormProvider>
+
+          <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
+        </BorderLayout>
       </div>
     </>
   );

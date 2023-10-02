@@ -1,6 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Enquiries , AddEnquiry,EnquirySearch} from "@pages/transaction-search";
+import {
+  Enquiries,
+  AddEnquiry,
+  EnquirySearch,
+} from "@pages/transaction-search";
 // import { State, AddUpdateState } from "@master/index";
 import { COMMON_ROUTES } from "@constants/index";
 
@@ -15,4 +19,3 @@ const AllEnquiriesIndex: React.FC = () => {
 };
 
 export default AllEnquiriesIndex;
-

@@ -123,23 +123,23 @@ export const TRANSACTION_ROUTES = {
 
   NEWENQUIRY_TRANSACTION_ROUTES: {
     NEWENQUIRY_TRANSACTION_PARENT_ROUTE: "/add-new-enquiry/*",
-    NEWENQUIRY: "add-new-enquiry/", 
+    NEWENQUIRY: "add-new-enquiry",
   },
   ENQUIRYDETAILS_TRANSACTION_ROUTES: {
     ENQUIRYDETAILS_TRANSACTION_PARENT_ROUTE: "/enquiry-details/*",
-    ENQUIRYDETAILS: "enquiry-details/", 
+    ENQUIRYDETAILS: "enquiry-details/",
   },
   ENQUIRYSEARCH_TRANSACTION_ROUTES: {
     ENQUIRYSEARCH_TRANSACTION_PARENT_ROUTE: "/enquiry-search/*",
-    ENQUIRYSEARCH: "enquiry-search/", 
+    ENQUIRYSEARCH: "enquiry-search/",
   },
   ADDBULKENQUIRIES_TRANSACTION_ROUTES: {
     ADDBULKENQUIRIES_TRANSACTION_PARENT_ROUTE: "add-bulk-enquiries/*",
-    ADDBULKENQUIRIES: "add-bulk-enquiries/", 
+    ADDBULKENQUIRIES: "add-bulk-enquiries/",
   },
   PURCHASEBILLS_TRANSACTION_ROUTES: {
     PURCHASEBILLS_TRANSACTION_PARENT_ROUTE: "purchase-bills/*",
-    PURCHASEBILLS_MASTER: "purchase-bills/", 
+    PURCHASEBILLS_MASTER: "purchase-bills/",
   },
   LOCATION_MASTER_ROUTES: {
     LOCATION_MASTER_PARENT_ROUTE: "/location/*",
@@ -153,7 +153,7 @@ export const TRANSACTION_ROUTES = {
     COUNTRY: "country",
     CONTINENT: "continent",
   },
-}
+};
 
 export const COMMON_ROUTES = {
   ADD: "add",

@@ -1,15 +1,15 @@
 import { FormFieldType, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
-const CurrencyValidation = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-  maxLength: {
-    value: 30,
-    message: "Please select a {label}",
-  },
-} as ValidationType;
+// const CurrencyValidation = {
+//   required: {
+//     value: true,
+//     message: "{label} field is rquired",
+//   },
+//   maxLength: {
+//     value: 30,
+//     message: "Please select a {label}",
+//   },
+// } as ValidationType;
 const GrsAmountValidation = {
   required: {
     value: true,
@@ -39,7 +39,7 @@ const edCessValidation = {
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
     message: "use alphanumeric characters or hyphens only.",
-  },  
+  },
 } as ValidationType;
 const invoiceAmountValidation = {
   required: {
@@ -86,41 +86,38 @@ const invoiceDateValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
- },
+  pattern: {},
 } as ValidationType;
 const calculateValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
- },
+  pattern: {},
 } as ValidationType;
 
-
 const fYearField: FormFieldType = {
-    config: {
-      name: "fyear",
-      label: "F. Year",
-      id: "fyear",
-      options: [],
-      placeholder: "Select  ",
-      validation: {
-        required: {
-          value: true,
-          message: "Select ",
-        },
+  config: {
+    name: "fyear",
+    label: "F. Year",
+    id: "fyear",
+    options: [],
+    placeholder: "Select  ",
+    validation: {
+      required: {
+        value: true,
+        message: "Select ",
       },
     },
-  };
+  },
+};
 
 const myDate = new Date(); // Replace this with your actual date
 
 // Extract year, month, and day components
-const year = myDate.getFullYear(); 
-const month = String(myDate.getMonth() + 1).padStart(2, '0'); 
-const day = String(myDate.getDate()).padStart(2, '0'); // Get the day (e.g., 07)
+const year = myDate.getFullYear();
+const month = String(myDate.getMonth() + 1).padStart(2, "0");
+const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
@@ -198,10 +195,6 @@ const blankField: FormFieldType = createFormConfig(
   invoicenoValidation,
   ""
 );
-
-
-
-
 
 export const addPurchaseBillsFormFields = {
   fYearField,

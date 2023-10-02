@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { EnquirySearch} from "@pages/transaction-search";
+import { EnquirySearch } from "@pages/transaction-search";
 
 const EnquirySearchIndex: React.FC = () => {
   return (
@@ -11,4 +11,3 @@ const EnquirySearchIndex: React.FC = () => {
 };
 
 export default EnquirySearchIndex;
-
