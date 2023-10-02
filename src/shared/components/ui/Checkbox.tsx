@@ -25,7 +25,7 @@ export const Checkbox = (props: FormFieldType) => {
   const isInvalid = isFormInvalid(inputErrors);
   useEffect(() => {
     if (props.config.setData) {
-      setValue(props.config.name, eval(props.config.setData));
+      setValue(props.config.name, props.config.setData);
     }
   }, [props.config.setData]);
   return (
