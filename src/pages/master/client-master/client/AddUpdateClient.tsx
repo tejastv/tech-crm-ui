@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   ActionButtons,
@@ -32,6 +32,7 @@ import { returnObjectBasedOnID, cleanupObject } from "@utils/index";
 export const AddUpdateClient: React.FC = () => {
   const methods = useForm<AddUpdateClientType>();
   const params = useParams();
+  const [stateId, setstateId] = useState();
   const { addClientMutation, updateClientMutation, getClientData } = useClientApiCallHook();
   const { mutate: addClient } = addClientMutation();
   const { mutate: updateClient } = updateClientMutation();
@@ -148,14 +149,24 @@ export const AddUpdateClient: React.FC = () => {
     let data: any = { ...cleanupObject(currencyData) };
     delete data.state;
     data["ourRefNo"] = "String";
-    data["adjustfromDate"] = "String";
-    data["autoSendOutstanding"] = "String";
+    data["adjustfromDate"] = new Date().toISOString();
+    data["autoSendOutstanding"] = "Y";
     data["enteredBy"] = 0;
-    data["individualReport"] = "String";
-    data["locked"] = "String";
+    data["individualReport"] = "1";
+    data["locked"] = "Y";
     data["nickName"] = "String";
-    data["staxApplicable"] = "String";
-
+    data["staxApplicable"] = "Y";
+    data.adjustPerEnq = parseFloat(data.adjustPerEnq);
+    data.adjustPerEnq_PI = parseFloat(data.adjustPerEnq_PI);
+    data.balToAdjust = parseFloat(data.balToAdjust);
+    data.balToAdjust_PI = parseFloat(data.balToAdjust_PI);
+    data.discount = parseFloat(data.discount);
+    data.toAdjust = parseFloat(data.toAdjust);
+    data.toAdjust_PI = parseFloat(data.toAdjust_PI);
+    data.disType = data.disType.toString();
+    data.gstYN = data.gstYN.toString();
+    data.monthlyInvoice = data.monthlyInvoice.toString();
+    data.osListPrInteger = data.osListPrInteger.toString();
     if (data.cityID) {
       data.cityID = +data.cityID["value"];
     }
@@ -358,6 +369,12 @@ export const AddUpdateClient: React.FC = () => {
     }, []);
   }
 
+  const handleSelectChange = (selectedOption: any) => {
+    if (selectedOption) {
+      setstateId(selectedOption.value);
+      addClientFormFields.statecodeClient.config.setData = selectedOption.value;
+    }
+  };
 
   return (
     <>
@@ -389,7 +406,7 @@ export const AddUpdateClient: React.FC = () => {
                     <Input config={addClientFormFields.zipClient.config} />
                     {/* <div className="row "> */}
                     {/* <div className="col-md-5"> */}
-                    <Select config={addClientFormFields.stateClient.config} />
+                    <Select config={addClientFormFields.stateClient.config}  onChangeHandler={handleSelectChange} />
                     {/* </div> */}
                     {/* </div> */}
                     <Input
@@ -403,7 +420,7 @@ export const AddUpdateClient: React.FC = () => {
                     {/* </h6> */}
                     <Select config={addClientFormFields.crDay.config} />
                     <Checkbox
-                      config={addClientFormFields.billonactual.config}
+                      config={addClientFormFields.billonactual.config} 
                     />
                   </div>
                 </div>

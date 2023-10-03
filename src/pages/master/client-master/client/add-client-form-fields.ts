@@ -157,10 +157,10 @@ const CrDayValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  // pattern: {
-  //   value: /^\d+$/,
-  //   message: "Credit Days must be a positive number",
-  // },
+  pattern: {
+    value: /^\d+$/,
+    message: "Credit Days must be a positive number",
+  },
 } as ValidationType;
 
 // Right Field validation
@@ -239,6 +239,12 @@ const OsValidation = {
     message: "{label} field is rquired",
   },
 } as ValidationType;
+const billonactualValidation = {
+  required: {
+    value: true,
+    message: "{label} field is rquired",
+  },
+} as ValidationType;
 const DiscountValidation = {
   required: {
     value: true,
@@ -307,9 +313,9 @@ const AdjustEnqPropfomaValidation = {
 } as ValidationType;
 
 // Option Section
-const Gst = [
-  { value: "Yes", label: "Yes" },
-  { value: "No", label: "No" },
+const GstOption = [
+  { value: "Y", label: "Yes" },
+  { value: "N", label: "No" },
 ];
 
 const cityClientOptions = [
@@ -329,8 +335,14 @@ const countryClientOptions = [
   { value: "strawberry", label: "Strawberry" },
   { value: "vanilla", label: "Vanilla" },
 ];
+const biilOnActualBuyerOptions = [
+  { value: "Y", label: "Bill on Actual Buyer" },
+];
+
 const crDayOptions = [
-  { value: "Bill on Actual Buyer", label: "Bill on Actual Buyer" },
+  { value: "India", label: "India" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
 ];
 
 // Right Field start
@@ -360,21 +372,21 @@ const segmentOptions = [
   { value: "vanilla", label: "Vanilla" },
 ];
 const invoiceOption = [
-  { value: "Monthly Invoice", label: "Monthly Invoice" },
+  { value: "1", label: "Monthly Invoice" },
   {
-    value: "Individual Report / Invoice",
+    value: "2",
     label: "Individual Report / Invoice",
   },
 ];
 const osEmailOptions = [
-  { value: "Auto Send O/S by e-Mail", label: "Auto Send O/S by e-Mail" },
-  { value: "OS List printed", label: "OS List printed" },
+  { value: "1", label: "Auto Send O/S by e-Mail" },
+  { value: "2", label: "OS List printed" },
 ];
 
 const discountOptions = [
-  { value: "in %", label: "in %" },
-  { value: "Per Report", label: "Per Report" },
-  { value: "NO Discount", label: "NO Discount" },
+  { value: "1", label: "in %" },
+  { value: "2", label: "Per Report" },
+  { value: "3", label: "NO Discount" },
 ];
 const clientName: FormFieldType = createFormConfig(
   "clientName",
@@ -389,7 +401,7 @@ const clientGst: FormFieldType = createFormConfig(
   "radio",
   GSTClient,
   "",
-  Gst
+  GstOption
 );
 const gstn: FormFieldType = createFormConfig(
   "gstn",
@@ -499,9 +511,9 @@ const billonactual: FormFieldType = createFormConfig(
   "billONActualBuyer",
   "",
   "checkbox",
-  CrDayValidation,
+  billonactualValidation,//CrDayValidation,
   "",
-  crDayOptions
+  biilOnActualBuyerOptions
 );
 
 // Right Side Fields
