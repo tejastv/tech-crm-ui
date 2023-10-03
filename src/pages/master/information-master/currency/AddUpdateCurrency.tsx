@@ -1,13 +1,23 @@
 import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import {BorderLayout,Card,Input,DivLayout,ActionButtons,} from "@shared/index";
-import { addCurrencyFormFields,AddUpdateCurrencyType,useCurrencyApiCallHook, } from "@master/index";
+import {
+  BorderLayout,
+  Card,
+  Input,
+  DivLayout,
+  ActionButtons,
+} from "@shared/index";
+import {
+  addCurrencyFormFields,
+  AddUpdateCurrencyType,
+  useCurrencyApiCallHook,
+} from "@master/index";
 import { useParams } from "react-router-dom";
-
 
 export const AddUpdateCurrency: React.FC = () => {
   const methods = useForm<AddUpdateCurrencyType>();
-  const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
+  const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } =
+    useCurrencyApiCallHook();
   const { mutateAsync: addCurrency } = addCurrencyMutation();
   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
   const params = useParams();
@@ -38,17 +48,22 @@ export const AddUpdateCurrency: React.FC = () => {
   }, []);
 
   if (params.id) {
-    const { data: currencyData, isSuccess: currencyDataSuccess } = getCurrencyData(
-      "" + params.id
-    );
+    const { data: currencyData, isSuccess: currencyDataSuccess } =
+      getCurrencyData("" + params.id);
     if (currencyDataSuccess) {
-      addCurrencyFormFields.currencyField.config.setData = currencyData?.currencyType;
-      addCurrencyFormFields.symbolField.config.setData = currencyData?.currencySymbol;
-      addCurrencyFormFields.currencyWordField.config.setData = currencyData?.currencyInWord;
-      addCurrencyFormFields.purchesExchanegField.config.setData = currencyData?.exchangeRateRs;
+      addCurrencyFormFields.currencyField.config.setData =
+        currencyData?.currencyType;
+      addCurrencyFormFields.symbolField.config.setData =
+        currencyData?.currencySymbol;
+      addCurrencyFormFields.currencyWordField.config.setData =
+        currencyData?.currencyInWord;
+      addCurrencyFormFields.purchesExchanegField.config.setData =
+        currencyData?.exchangeRateRs;
       addCurrencyFormFields.pDateField.config.setData = currencyData?.entryDate;
-      addCurrencyFormFields.sellExchanegField.config.setData = currencyData?.exchangeRateRsSell;
-      addCurrencyFormFields.sDateField.config.setData = currencyData?.entryDateSell;
+      addCurrencyFormFields.sellExchanegField.config.setData =
+        currencyData?.exchangeRateRsSell;
+      addCurrencyFormFields.sDateField.config.setData =
+        currencyData?.entryDateSell;
     }
   } else {
     useEffect(() => {
@@ -57,7 +72,6 @@ export const AddUpdateCurrency: React.FC = () => {
   }
 
   const onSubmit = methods.handleSubmit((currencyData) => {
-    
     if (params.id && currencyData) {
       updateCurrency({ id: params.id, ...currencyData });
     } else {
@@ -76,58 +90,73 @@ export const AddUpdateCurrency: React.FC = () => {
             className="p-t-20"
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <div className="col-md-7 col-xs-12">
-                      <Input config={addCurrencyFormFields.currencyField.config} />
-                    </div>
-
-                    <div className="col-md-7 col-xs-12">
-                      <Input config={addCurrencyFormFields.symbolField.config} />
-                    </div>
-                    <div className="card-title col-md-12 m-t-40 text-center">
-                      <DivLayout
-                        heading={cardConfig.formPurchesConfig.heading}
-                      />
-                      <hr />
-                    </div>
-                    <div className="col-md-7 col-xs-12">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="col-md-12 col-xs-12">
                       <Input
-                        config={addCurrencyFormFields.purchesExchanegField.config}
+                        config={addCurrencyFormFields.currencyField.config}
                       />
+                    </div>
+                    <div className="col-md-12 col-xs-12">
                       <Input
-                        config={addCurrencyFormFields.pDateField.config}
+                        config={addCurrencyFormFields.symbolField.config}
                       />
                     </div>
                   </div>
+                  <div className="col-md-6 col-xs-12">
+                    <Input
+                      config={addCurrencyFormFields.currencyWordField.config}
+                    />
+                  </div>
                 </div>
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <div className="col-md-12 col-xs-12">
-                      <Input
-                        config={addCurrencyFormFields.currencyWordField.config}
-                      />
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="row">
+                      <div className="card-title col-md-12 m-t-40 text-center">
+                        <DivLayout
+                          heading={cardConfig.formPurchesConfig.heading}
+                        />
+                        <hr />
+                      </div>
+                      <div className="col-md-12 col-xs-12">
+                        <Input
+                          config={
+                            addCurrencyFormFields.purchesExchanegField.config
+                          }
+                        />
+                        <Input
+                          config={addCurrencyFormFields.pDateField.config}
+                        />
+                      </div>
                     </div>
-                    <div className="card-title col-md-12 m-t-40 text-center">
-                      <DivLayout heading={cardConfig.formSellConfig.heading} />
-                      <hr />
-                    </div>
-                    <div className="col-md-7 col-xs-12">
-                      <Input
-                        config={addCurrencyFormFields.sellExchanegField.config}
-                      />
-                      <Input config={addCurrencyFormFields.sDateField.config} />
+                  </div>
+                  <div className="col-md-6">
+                    <div className="row">
+                      <div className="card-title col-md-12 m-t-40 text-center">
+                        <DivLayout
+                          heading={cardConfig.formSellConfig.heading}
+                        />
+                        <hr />
+                      </div>
+                      <div className="col-md-12 col-xs-12">
+                        <Input
+                          config={
+                            addCurrencyFormFields.sellExchanegField.config
+                          }
+                        />
+                        <Input
+                          config={addCurrencyFormFields.sDateField.config}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </BorderLayout>
-            <div className="card-body">
-              <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-                <ActionButtons />
-              </BorderLayout>
-            </div>
+            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+              <ActionButtons />
+            </BorderLayout>
           </form>
         </FormProvider>
       </Card>
