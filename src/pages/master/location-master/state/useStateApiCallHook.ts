@@ -21,7 +21,8 @@ export const useStateApiCallHook = () => {
       queryKey: [queryKeys.STATE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_STATE);
-        return response.data.data;
+        const data = response.data.data.sort((a: { state: string; }, b: { state: any; }) => a.state.localeCompare(b.state));
+        return data;
       },
       staleTime: Infinity,
     });

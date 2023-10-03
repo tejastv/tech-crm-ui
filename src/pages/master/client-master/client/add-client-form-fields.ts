@@ -14,14 +14,14 @@ const nameClientMaster = {
 
 const GSTClient = {
   required: {
-    value: true,
+    value: false,
     message: "Please check the {label} box",
   },
 } as ValidationType;
 
 const GSTNClient = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -32,7 +32,7 @@ const GSTNClient = {
 
 const addressValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Address",
   },
   pattern: {
@@ -43,7 +43,7 @@ const addressValidation = {
 
 const telNoValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Telephone Number",
   },
   pattern: {
@@ -54,7 +54,7 @@ const telNoValidation = {
 
 const FaxNoValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Fax number",
   },
   pattern: {
@@ -66,7 +66,7 @@ const FaxNoValidation = {
 
 const EmailValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -78,7 +78,7 @@ const EmailValidation = {
 
 const WebsiteValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -89,7 +89,7 @@ const WebsiteValidation = {
 
 const ContactValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -100,7 +100,7 @@ const ContactValidation = {
 
 const DesignationValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -111,7 +111,7 @@ const DesignationValidation = {
 
 const ZipValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -122,7 +122,7 @@ const ZipValidation = {
 
 const CityValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -133,7 +133,7 @@ const CityValidation = {
 
 const StateValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -154,7 +154,7 @@ const CountryValidation = {
 } as ValidationType;
 const CrDayValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -187,7 +187,7 @@ const ExecutiveValidation = {
 } as ValidationType;
 const InstructionValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
@@ -203,7 +203,7 @@ const GroupValidation = {
 } as ValidationType;
 const SegmentValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -213,7 +213,7 @@ const SegmentValidation = {
 } as ValidationType;
 const RemarksValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -223,19 +223,19 @@ const RemarksValidation = {
 } as ValidationType;
 const InvoiceValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
 const ClientIdValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
 const OsValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
@@ -247,13 +247,13 @@ const billonactualValidation = {
 } as ValidationType;
 const DiscountValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please select a {label}",
   },
 } as ValidationType;
 const AdjustValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -263,7 +263,7 @@ const AdjustValidation = {
 } as ValidationType;
 const BalAdjustValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -273,7 +273,7 @@ const BalAdjustValidation = {
 } as ValidationType;
 const AdjustEnqValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -283,7 +283,7 @@ const AdjustEnqValidation = {
 } as ValidationType;
 const AdjustPropfomaValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -293,7 +293,7 @@ const AdjustPropfomaValidation = {
 } as ValidationType;
 const BalAdjustPropfomaValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -303,7 +303,7 @@ const BalAdjustPropfomaValidation = {
 } as ValidationType;
 const AdjustEnqPropfomaValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -346,31 +346,7 @@ const crDayOptions = [
 ];
 
 // Right Field start
-const clientCurrencyOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const executiveOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const groupOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const clientIdOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const segmentOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+
 const invoiceOption = [
   { value: "1", label: "Monthly Invoice" },
   {
@@ -466,7 +442,7 @@ const cityClient: FormFieldType = createFormConfig(
   "select",
   CityValidation,
   "Select City",
-  cityClientOptions
+  []
 );
 const zipClient: FormFieldType = createFormConfig(
   "zip",
@@ -481,14 +457,16 @@ const stateClient: FormFieldType = createFormConfig(
   "select",
   StateValidation,
   "Select State",
-  stateClientOptions
+  []
 );
 const statecodeClient: FormFieldType = createFormConfig(
-  "state",
+  "stateCode",
   "State Code",
   "text",
   StateValidation,
-  ""
+  "",
+  [],
+  true
 );
 const countryClient: FormFieldType = createFormConfig(
   "countryID",
@@ -496,7 +474,7 @@ const countryClient: FormFieldType = createFormConfig(
   "select",
   CountryValidation,
   "Select Country",
-  countryClientOptions
+  []
 );
 
 const crDay: FormFieldType = createFormConfig(
@@ -518,20 +496,21 @@ const billonactual: FormFieldType = createFormConfig(
 
 // Right Side Fields
 const id: FormFieldType = createFormConfig(
-  "clientId",
+  "clientCode",
   "Id",
   "select",
   ClientIdValidation,
-  " Id",
-  clientIdOptions
+  "",
+  [],
+  true
 );
 const clientIdSelect: FormFieldType = createFormConfig(
-  "clientIdSelect",
+  "clientId",
   "",
   "select",
   ClientIdValidation,
-  "Select Id",
-  clientIdOptions
+  "Select Client",
+  []
 );
 const clientCurrencey: FormFieldType = createFormConfig(
   "currencyID",
@@ -539,7 +518,7 @@ const clientCurrencey: FormFieldType = createFormConfig(
   "select",
   ClientCurrencyValidation,
   "Select Currency",
-  clientCurrencyOptions
+  []
 );
 const executive: FormFieldType = createFormConfig(
   "executive_id",
@@ -547,7 +526,7 @@ const executive: FormFieldType = createFormConfig(
   "select",
   ExecutiveValidation,
   "Select Executive",
-  executiveOptions
+  []
 );
 const instuction: FormFieldType = createFormConfig(
   "instruction",
@@ -562,7 +541,7 @@ const groupClient: FormFieldType = createFormConfig(
   "select",
   GroupValidation,
   "Select Group",
-  groupOptions
+  []
 );
 const segmentClient: FormFieldType = createFormConfig(
   "segmentId",
@@ -570,7 +549,7 @@ const segmentClient: FormFieldType = createFormConfig(
   "select",
   SegmentValidation,
   "Select Segment",
-  segmentOptions
+  []
 );
 const remarks: FormFieldType = createFormConfig(
   "remarks",

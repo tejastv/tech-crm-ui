@@ -20,7 +20,8 @@ export const useIndustryApiCallHook = () => {
       queryKey: [queryKeys.INDUSTRY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_INDUSTRY);
-        return response.data.data;
+        const data = response.data.data.sort((a: { industryName: string; }, b: { industryName: any; }) => a.industryName.localeCompare(b.industryName));
+        return data;
       },
       staleTime: Infinity,
     });

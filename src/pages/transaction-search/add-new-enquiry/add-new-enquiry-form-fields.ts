@@ -38,10 +38,10 @@ const SourceEnquiry = {
     value: true,
     message: "{label} field is rquired",
   },
-    pattern: {
-      value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
-      message: "Select {label}",
-    },
+  pattern: {
+    value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+    message: "Select {label}",
+  },
 } as ValidationType;
 
 const GivenaddressValidation = {
@@ -73,7 +73,8 @@ const FaxNoEnquiryValidation = {
   },
   pattern: {
     value: /^\+?[0-9\s\-()+.]*$/,
-    message: "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
+    message:
+      "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
   },
 } as ValidationType;
 
@@ -173,15 +174,15 @@ const blankValidation = {
     message: "{label} field is rquired",
   },
 } as ValidationType;
-const GivenNameEnquiryValidation= {
-        required: {
-          value: true,
-          message: "Given Name field is rquired",
-        },
-        maxLength: {
-          value: 30,
-          message: "Given Name should not exceed 30 characters",
-        },
+const GivenNameEnquiryValidation = {
+  required: {
+    value: true,
+    message: "Given Name field is rquired",
+  },
+  maxLength: {
+    value: 30,
+    message: "Given Name should not exceed 30 characters",
+  },
 } as ValidationType;
 const recdOnValidation = {
   required: {
@@ -457,7 +458,7 @@ const PrintStatuseOption = [
 ];
 const EnqStatusOptions = [
   { value: "1-Pending", label: "1-Pending" },
-  { value: "2-Pending", label: "2-Pending"}
+  { value: "2-Pending", label: "2-Pending" },
 ];
 
 const svisitOptions = [
@@ -588,8 +589,6 @@ const countryenquiry: FormFieldType = createFormConfig(
   countryEnquiryOptions
 );
 
-
-
 // Right Side Fields
 const blankenquiry: FormFieldType = createFormConfig(
   "blank",
@@ -603,14 +602,14 @@ const givenname: FormFieldType = createFormConfig(
   "Given Name",
   "text",
   GivenNameEnquiryValidation,
-  "Given Name",
+  "Given Name"
 );
 const myDate = new Date(); // Replace this with your actual date
 
 // Extract year, month, and day components
-const year = myDate.getFullYear(); 
-const month = String(myDate.getMonth() + 1).padStart(2, '0'); 
-const day = String(myDate.getDate()).padStart(2, '0'); // Get the day (e.g., 07)
+const year = myDate.getFullYear();
+const month = String(myDate.getMonth() + 1).padStart(2, "0");
+const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
@@ -707,7 +706,6 @@ const adjustenquiry: FormFieldType = createFormConfig(
   "Adjust /Enquiry"
 );
 
-
 const clientrefenquiry: FormFieldType = createFormConfig(
   "clientrefenquiry",
   "Client Ref",
@@ -773,21 +771,14 @@ const commenquiry: FormFieldType = createFormConfig(
   "Comm."
 );
 
-
-const refnote: Note = createNoteConfig(
-  "Note: Ref. No is Auto"
-);
-const actualbuyeraddnote: Note = createNoteConfig(
-  "Add New Actual Buyer"
-);
+const refnote: Note = createNoteConfig("Note: Ref. No is Auto");
+const actualbuyeraddnote: Note = createNoteConfig("Add New Actual Buyer");
 const discountcommissionnote: Note = createNoteConfig(
   "Discount / Commission Details"
 );
 const discounttypenote: Note = createNoteConfig(
   "Discount Type - | % of Discount - | Discounted Value -"
 );
-
-
 
 export const addEnquiryFormFields = {
   companyenquiry,
@@ -832,5 +823,5 @@ export const addEnquiryFormFields = {
   refnote,
   actualbuyeraddnote,
   discountcommissionnote,
-  discounttypenote
+  discounttypenote,
 };

@@ -3,7 +3,7 @@ import { createFormConfig, createNoteConfig } from "@utils/index";
 
 const ClientActualBuyer = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -136,7 +136,7 @@ const PinValidation = {
 
 const CityValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -168,7 +168,7 @@ const CountryValidation = {
 } as ValidationType;
 
 const clientactualbuyer: FormFieldType = createFormConfig(
-  "partyId",
+  "clientId",
   "Client",
   "select",
   ClientActualBuyer,

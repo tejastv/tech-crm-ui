@@ -28,7 +28,7 @@ export const AddUpdateActualBuyer: React.FC = () => {
   const params = useParams();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Add Company Master",
+      mainHeading: "Add Actual Buyer",
       heading: "Company Details",
     },
     formActionsConfig: {
@@ -36,8 +36,8 @@ export const AddUpdateActualBuyer: React.FC = () => {
     },
   };
 
-  // const { getClient } = useClientApiCallHook();
-  // const { data: clientData } = getClient();
+  const { getClient } = useClientApiCallHook();
+  const { data: clientData } = getClient();
   const { addActualBuyerMutation, updateActualBuyerMutation } =
     useActualBuyerApiCallHook();
   const { mutateAsync: updateActualBuyer } = updateActualBuyerMutation();
@@ -64,9 +64,9 @@ export const AddUpdateActualBuyer: React.FC = () => {
       selectOptionsMaker(countryData, "countryId", "countryName");
   }
 
-  if ([]) {
+  if (clientData) {
     addActualBuyersFormFields.clientactualbuyer.config.options =
-      selectOptionsMaker([], "clientID", "clientName");
+      selectOptionsMaker(clientData, "clientID", "clientName");
   }
 
   const onSubmit = methods.handleSubmit((actualBuyerData): void => {
@@ -79,6 +79,9 @@ export const AddUpdateActualBuyer: React.FC = () => {
     }
     if (data.cityId) {
       data.cityId = data.cityId.value;
+    }
+    if (data.clientId) {
+      data.clientId = data.clientId.value;
     }
     console.log(data);
     if (params.id && data) {

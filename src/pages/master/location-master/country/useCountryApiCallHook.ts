@@ -20,7 +20,8 @@ export const useCountryApiCallHook = () => {
       queryKey: [queryKeys.COUNTRY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_COUNTRY);
-        return response.data.data;
+        const data = response.data.data.sort((a: { countryName: string; }, b: { countryName: any; }) => a.countryName.localeCompare(b.countryName));
+        return data;
       },
       staleTime: Infinity,
     });

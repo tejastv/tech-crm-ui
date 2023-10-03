@@ -706,12 +706,24 @@ export const Header: React.FC = () => {
                         </a>
                       </li>
                       <li className="sidebar-item">
-                        {" "}
-                        <a className="sidebar-link" href="bulk_enquiries.php">
+                        <Link
+                          className="sidebar-link"
+                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.PURCHASEBILLS_TRANSACTION_ROUTES.PURCHASEBILLS_MASTER}`}
+                        >
+                          <i className="mdi mdi-creation"></i>
+                          <span className="hide-menu ">Purchase Bills(of Suppliers)</span>
+                        </Link>
+                      </li>
+                      <li className="sidebar-item">
+                        <Link
+                          className="sidebar-link"
+                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ADDBULKENQUIRIES_TRANSACTION_ROUTES.ADDBULKENQUIRIES}`}
+                        >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Add Bulk Enquiries</span>
-                        </a>
+                        </Link>
                       </li>
+                     
                     </ul>
                   </li>
                   <li className="sidebar-item">

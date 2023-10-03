@@ -27,7 +27,7 @@ export const Radio = (props: FormFieldType) => {
     if (props.config.setData) {
       console.log(props.config.name, props.config.setData);
 
-      setValue(props.config.name, "" + props.config.setData);
+      setValue(props.config.name, props.config.setData);
     }
   }, [props.config.setData]);
   return (

@@ -4,7 +4,6 @@ import React from "react";
 import {
   BorderLayout,
   Button,
-  Card,
   Input,
   Loader,
   PageBreadcrumb,
@@ -18,8 +17,9 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import {
-    AddClientType, addEnquirySearchFormFields
-  } from "@transaction-search/index"
+  AddClientType,
+  addEnquirySearchFormFields,
+} from "@transaction-search/index";
 
 export const EnquirySearch: React.FC = () => {
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
@@ -32,7 +32,7 @@ export const EnquirySearch: React.FC = () => {
     breadcrumbConfig: {
       pageHeading: "Enquiry Details",
       btnTitle: "",
-      btnRoute: '',
+      btnRoute: "",
     },
     borderLayoutConfig: {
       heading: "List",
@@ -132,10 +132,10 @@ export const EnquirySearch: React.FC = () => {
       header: () => <>Contact Person</>,
     },
     {
-        accessorFn: (row) => row.contactPerson,
-        id: "designation",
-        cell: (info) => info.getValue(),
-        header: () => <>Designation</>,
+      accessorFn: (row) => row.contactPerson,
+      id: "designation",
+      cell: (info) => info.getValue(),
+      header: () => <>Designation</>,
     },
     {
       accessorFn: (row) => row.regdOffice,
@@ -153,19 +153,19 @@ export const EnquirySearch: React.FC = () => {
       accessorFn: (row) => row.regdOffice,
       id: "source",
       cell: (info) => info.getValue(),
-      header: () =><>Source</>,
+      header: () => <>Source</>,
     },
     {
       accessorFn: (row) => row.regdOffice,
       id: "enqstatus",
       cell: (info) => info.getValue(),
-      header: () =><>Enq.Status</>,
+      header: () => <>Enq.Status</>,
     },
     {
       accessorFn: (row) => row.regdOffice,
       id: "localsource",
       cell: (info) => info.getValue(),
-      header: () =><>Local Source</>,
+      header: () => <>Local Source</>,
     },
     {
       accessorFn: (row) => row.cmie,
@@ -180,89 +180,89 @@ export const EnquirySearch: React.FC = () => {
       header: () => <>client</>,
     },
     {
-        accessorFn: (row) => row.address,
-        id: "address",
-        cell: (info) => info.getValue(),
-        header: () => <>Client Address</>,
-      },
-      {
-        accessorFn: (row) => row.countryName,
-        id: "city",
-        cell: (info) => info.getValue(),
-        header: () => <>Client City</>,
-      },
-      {
-        accessorFn: (row) => row.countryName,
-        id: "Zip",
-        cell: (info) => info.getValue(),
-        header: () => <>Client Zip</>,
-      },
-      {
-        accessorFn: (row) => row.countryName,
-        id: "state",
-        cell: (info) => info.getValue(),
-        header: () => <>Client State</>,
-      },
-      {
-        accessorFn: (row) => row.countryName,
-        id: "countryName",
-        cell: (info) => info.getValue(),
-        header: () => <>Client Country</>,
-      },
-      {
-        accessorFn: (row) => row.phone,
-        id: "phone",
-        cell: (info) => info.getValue(),
-        header: () => <>Client Phone</>,
-      },
-      {
-        accessorFn: (row) => row.phone,
-        id: "fax",
-        cell: (info) => info.getValue(),
-        header: () => <>Client Fax</>,
-      },
-      {
-        accessorFn: (row) => row.contactPerson,
-        id: "contactPerson",
-        cell: (info) => info.getValue(),
-        header: () => <>Client Contact Person</>,
-      },
-      {
-        accessorFn: (row) => row.contactPerson,
-        id: "contactPerson",
-        cell: (info) => info.getValue(),
-        header: () => <>Client Designation</>,
-      },
-      {
-        accessorFn: (row) => row.contactPerson,
-        id: "contactPerson",
-        cell: (info) => info.getValue(),
-        header: () => <>Client Print Status</>,
-      },
-      {
-        accessorFn: (row) => row.contactPerson,
-        id: "contactPerson",
-        cell: (info) => info.getValue(),
-        header: () => <>Due on</>,
-      },
-      {
-        accessorFn: (row) => row.contactPerson,
-        id: "contactPerson",
-        cell: (info) => info.getValue(),
-        header: () => <>Service Type </>,
-      },
-      {
-        accessorFn: (row) => row.contactPerson,
-        id: "contactPerson",
-        cell: (info) => info.getValue(),
-        header: () => <>Executive</>,
-      },
-      {
-        accessorFn: (row) => row.contactPerson,
-        id: "contactPerson",
-        cell: (info) => info.getValue(),
-        header: () => <>Due on</>,
-      },
+      accessorFn: (row) => row.address,
+      id: "address",
+      cell: (info) => info.getValue(),
+      header: () => <>Client Address</>,
+    },
+    {
+      accessorFn: (row) => row.countryName,
+      id: "city",
+      cell: (info) => info.getValue(),
+      header: () => <>Client City</>,
+    },
+    {
+      accessorFn: (row) => row.countryName,
+      id: "Zip",
+      cell: (info) => info.getValue(),
+      header: () => <>Client Zip</>,
+    },
+    {
+      accessorFn: (row) => row.countryName,
+      id: "state",
+      cell: (info) => info.getValue(),
+      header: () => <>Client State</>,
+    },
+    {
+      accessorFn: (row) => row.countryName,
+      id: "countryName",
+      cell: (info) => info.getValue(),
+      header: () => <>Client Country</>,
+    },
+    {
+      accessorFn: (row) => row.phone,
+      id: "phone",
+      cell: (info) => info.getValue(),
+      header: () => <>Client Phone</>,
+    },
+    {
+      accessorFn: (row) => row.phone,
+      id: "fax",
+      cell: (info) => info.getValue(),
+      header: () => <>Client Fax</>,
+    },
+    {
+      accessorFn: (row) => row.contactPerson,
+      id: "contactPerson",
+      cell: (info) => info.getValue(),
+      header: () => <>Client Contact Person</>,
+    },
+    {
+      accessorFn: (row) => row.contactPerson,
+      id: "contactPerson",
+      cell: (info) => info.getValue(),
+      header: () => <>Client Designation</>,
+    },
+    {
+      accessorFn: (row) => row.contactPerson,
+      id: "contactPerson",
+      cell: (info) => info.getValue(),
+      header: () => <>Client Print Status</>,
+    },
+    {
+      accessorFn: (row) => row.contactPerson,
+      id: "contactPerson",
+      cell: (info) => info.getValue(),
+      header: () => <>Due on</>,
+    },
+    {
+      accessorFn: (row) => row.contactPerson,
+      id: "contactPerson",
+      cell: (info) => info.getValue(),
+      header: () => <>Service Type </>,
+    },
+    {
+      accessorFn: (row) => row.contactPerson,
+      id: "contactPerson",
+      cell: (info) => info.getValue(),
+      header: () => <>Executive</>,
+    },
+    {
+      accessorFn: (row) => row.contactPerson,
+      id: "contactPerson",
+      cell: (info) => info.getValue(),
+      header: () => <>Due on</>,
+    },
     {
       id: "action",
       cell: (info) => info.getValue(),
@@ -307,38 +307,52 @@ export const EnquirySearch: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <div className="col-12">
-      <BorderLayout heading={config.borderLayoutConfig.heading}>
-    
-        <FormProvider {...methods}>
-          <form
-            
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
+        <BorderLayout heading={config.borderLayoutConfig.heading}>
+          <FormProvider {...methods}>
+            <form noValidate autoComplete="off" className="p-t-20">
               <div className="row">
                 <div className="col-md-2 col-xs-12">
-            <div className="pull-left col-4 col-xs-12">
-                <a href=""><img src="assets/images/print_label.png" height="50" width="auto" alt="print_label" /></a>
-                <a href=""><img src="assets/images/print_labels.png" height="50" width="auto" alt="print_labels" /></a>
-            </div>
-        </div>
-        {/* <div className="pull-left col-3">
+                  <div className="pull-left col-4 col-xs-12">
+                    <a href="">
+                      <img
+                        src="assets/images/print_label.png"
+                        height="50"
+                        width="auto"
+                        alt="print_label"
+                      />
+                    </a>
+                    <a href="">
+                      <img
+                        src="assets/images/print_labels.png"
+                        height="50"
+                        width="auto"
+                        alt="print_labels"
+                      />
+                    </a>
+                  </div>
+                </div>
+                {/* <div className="pull-left col-3">
                   <Select config={addEnquirySearchFormFields.clientnameField.config} />
                   <Input config={addEnquirySearchFormFields.fromdateField.config} />
                   <Input config={addEnquirySearchFormFields.todateeField.config} />
                 </div> */}
-              {/* </div> */}
-              <div className="col-md-3 col-xs-12">
-                    <Select config={addEnquirySearchFormFields.clientnameField.config} />
+                {/* </div> */}
+                <div className="col-md-3 col-xs-12">
+                  <Select
+                    config={addEnquirySearchFormFields.clientnameField.config}
+                  />
                 </div>
 
                 <div className="col-md-3 col-xs-12">
-                    <Input config={addEnquirySearchFormFields.fromdateField.config} />
+                  <Input
+                    config={addEnquirySearchFormFields.fromdateField.config}
+                  />
                 </div>
 
                 <div className="col-md-2 col-xs-12">
-                  <Input config={addEnquirySearchFormFields.todateeField.config} />
+                  <Input
+                    config={addEnquirySearchFormFields.todateeField.config}
+                  />
                 </div>
 
                 <div className="col-md-2 col-xs-12 text-left">
@@ -346,13 +360,12 @@ export const EnquirySearch: React.FC = () => {
                     <i className="far fa-save"></i>Search
                   </Button>
                 </div>
-                </div>
-          </form>
-        </FormProvider>
-    
-        
-        <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
-      </BorderLayout>
+              </div>
+            </form>
+          </FormProvider>
+
+          <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
+        </BorderLayout>
       </div>
     </>
   );

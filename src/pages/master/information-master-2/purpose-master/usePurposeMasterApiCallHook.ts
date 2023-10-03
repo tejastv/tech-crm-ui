@@ -20,7 +20,8 @@ export const usePurposeMasterApiCallHook = () => {
       queryKey: [queryKeys.PURPOSE_MASTER_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_PURPOSE_MASTER);
-        return response.data.data;
+        const data = response.data.data.sort((a: { purpose: string; }, b: { purpose: any; }) => a.purpose.localeCompare(b.purpose));
+        return data;
       },
       staleTime: Infinity,
     });

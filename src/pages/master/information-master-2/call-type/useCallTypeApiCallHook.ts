@@ -20,7 +20,8 @@ export const useCallTypeApiCallHook = () => {
       queryKey: [queryKeys.CALL_TYPE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CALL_TYPE);
-        return response.data.data;
+        const data = response.data.data.sort((a: { typeName: string; }, b: { typeName: any; }) => a.typeName.localeCompare(b.typeName));
+        return data;
       },
       staleTime: Infinity,
     });
