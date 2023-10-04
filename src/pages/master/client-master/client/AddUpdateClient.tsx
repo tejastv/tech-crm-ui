@@ -1,39 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
 import {
   ActionButtons,
   BorderLayout,
   Card,
   Checkbox,
+  DivLayout,
   Input,
   Radio,
-  Select,
-  DivLayout,
-  Options,
+  Select
 } from "@shared/index";
+import React, { useEffect } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 
 import {
   AddUpdateClientType,
   addClientFormFields,
-  useClientApiCallHook,
   useCityApiCallHook,
-  useStateApiCallHook,
+  useClientApiCallHook,
+  useClientGroupApiCallHook,
   useCountryApiCallHook,
   useCreditDaysApiCallHook,
   useCurrencyApiCallHook,
   useExecutiveApiCallHook,
-  useClientGroupApiCallHook,
   useSegmentApiCallHook,
+  useStateApiCallHook,
 } from "@master/index";
 
+import { cleanupObject, returnObjectBasedOnID } from "@utils/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
-import { returnObjectBasedOnID, cleanupObject } from "@utils/index";
 
 export const AddUpdateClient: React.FC = () => {
   const methods = useForm<AddUpdateClientType>();
   const params = useParams();
-  const [stateId, setstateId] = useState();
   const { addClientMutation, updateClientMutation, getClientData } = useClientApiCallHook();
   const { mutate: addClient } = addClientMutation();
   const { mutate: updateClient } = updateClientMutation();
@@ -372,7 +370,6 @@ export const AddUpdateClient: React.FC = () => {
 
   const handleSelectChange = (selectedOption: any) => {
     if (selectedOption) {
-      setstateId(selectedOption.value);
       addClientFormFields.statecodeClient.config.setData = selectedOption.value;
     }
   };
