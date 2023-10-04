@@ -31,7 +31,8 @@
       "@auth/*": ["pages/auth/*"],
       "@dashboard/*": ["pages/dashboard/*"],
       "@master/*": ["pages/master/*"],
-      "@transaction-search/*": ["pages/transaction-search/*"]
+      "@transaction-search/*": ["pages/transaction-search/*"],
+      "@profoma/*": ["pages/profoma/*"]
     }
   },
   "include": [

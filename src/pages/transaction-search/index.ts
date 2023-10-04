@@ -11,7 +11,6 @@ export { AddUpdatePurchase } from "./purchase-bills/AddUpdatePurchaseBills";
 export { addPurchaseBillsFormFields } from "./purchase-bills/add-purchase-bills-form-field";
 
 export { AddBulkEnquiries } from "./add-bulk-enquiries/AddBulkEnquiries";
-
 export { addEnquirySearchFormFields } from "./enquiry-search/add-enquiry-search-form-field";
 export { addBulkEnquiriesFormFields } from "./add-bulk-enquiries/add-bulk-enquires-form-field";
 

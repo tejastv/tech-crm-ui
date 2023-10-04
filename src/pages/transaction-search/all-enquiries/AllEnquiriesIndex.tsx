@@ -13,7 +13,7 @@ const AllEnquiriesIndex: React.FC = () => {
     <Routes>
       <Route index element={<Enquiries />}></Route>
       <Route path={COMMON_ROUTES.ADD} element={<AddEnquiry />}></Route>
-      <Route path={COMMON_ROUTES.EDIT} element={<EnquirySearch />}></Route>
+      <Route path={COMMON_ROUTES.LIST} element={<EnquirySearch />}></Route>
     </Routes>
   );
 };

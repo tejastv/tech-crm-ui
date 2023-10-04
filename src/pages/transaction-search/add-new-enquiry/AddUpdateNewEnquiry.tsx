@@ -8,9 +8,13 @@ import {
   Button,
   InputWithText,
   ActionButtons,
+  Table,
+  Loader,
+  TableType,
 } from "@shared/index";
-import { addEnquiryFormFields } from "@transaction-search/index";
+import { ClientType, addEnquiryFormFields } from "@transaction-search/index";
 import { Link } from "react-router-dom";
+import { ColumnDef } from "@tanstack/react-table";
 // import {useStateApiCallHook } from "@pages/master";
 
 export const AddEnquiry: React.FC = () => {
@@ -35,55 +39,55 @@ export const AddEnquiry: React.FC = () => {
   };
 
 
-  // const columns: ColumnDef<StateType>[] = [
-  //   {
-  //     id: "srNo",
-  //     // cell: (info) => info.getValue(),
-  //     header: () => <>Sr no</>,
-  //   },
-  //   {
-  //     accessorFn: (row) => row.state,
-  //     id: "Client Name",
-  //     // cell: (info) => info.getValue(),
-  //     header: () => <>Client Name</>,
-  //   },
-  //   {
-  //     accessorFn: (row) => row.stateCodeN,
-  //     id: "Address",
-  //     // cell: (info) => info.getValue(),
-  //     header: () => <>Address</>,
-  //   },
-  //   {
-  //     // accessorFn: (row) => row.stateCodeA,
-  //     id: "Country Name",
-  //     // cell: (info) => info.getValue(),
-  //     header: () => <>Country Name</>,
-  //   },
-  //   {
-  //     id: "Instruction",
-  //     // cell: (info) => info.getValue(),
-  //     header: () => <>Instruction</>,
-  //   },
-  // ];
+  const columns: ColumnDef<ClientType>[] = [
+    {
+      id: "srNo",
+      // cell: (info) => info.getValue(),
+      header: () => <>Sr no</>,
+    },
+    {
+      // accessorFn: (row) => row.state,
+      id: "Client Name",
+      // cell: (info) => info.getValue(),
+      header: () => <>Client Name</>,
+    },
+    {
+      // accessorFn: (row) => row.stateCodeN,
+      id: "Address",
+      // cell: (info) => info.getValue(),
+      header: () => <>Address</>,
+    },
+    {
+      // accessorFn: (row) => row.stateCodeA,
+      id: "Country Name",
+      // cell: (info) => info.getValue(),
+      header: () => <>Country Name</>,
+    },
+    {
+      id: "Instruction",
+      // cell: (info) => info.getValue(),
+      header: () => <>Instruction</>,
+    },
+  ];
 
-  // const tableConfig: TableType<StateType> = {
-  //   config: {
-  //     tableName: "State",
-  //     columns: columns,
-  //     // tableData: stateData ? stateData : [],
-  //     // copyBtn: true,
-  //     // csvBtn: true,
-  //     // excelBtn: true,
-  //     // pdfBtn: true,
-  //     // printBtn: true,
-  //     // globalSearchBox: true,
-  //     // pagination: {
-  //     //   pageSize: 10,
-  //     //   nextPreviousBtnShow: true,
-  //     //   tableMetaDataShow: true,
-  //     // },
-  //   },
-  // };
+  const tableConfig: TableType<ClientType> = {
+    config: {
+      tableName: "State",
+      columns: columns,
+      tableData : [],
+      copyBtn: true,
+      csvBtn: true,
+      excelBtn: true,
+      pdfBtn: true,
+      printBtn: true,
+      globalSearchBox: true,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
+    },
+  };
 
   const onSubmit = methods.handleSubmit((data) => {
     console.log("value", data);
@@ -180,22 +184,12 @@ export const AddEnquiry: React.FC = () => {
                 </div>
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  {/* <div className="card-body">
-                  <Input config={addEnquiryFormFields.clientIdenquiry.config} />
-                  <div className="col-md-12">
-                  <div className="col-sm-9">
-                  <Select config={addEnquiryFormFields.actualbureyenquiry.config} />
-                  </div>
-                  <div className="col-sm-1">
-                  <i className="fa fa-refresh"></i>
-                  </div>
-                  </div>
-                  <Link to={""} className="card-title"><InputWithText  config={addEnquiryFormFields.actualbuyeraddnote.config} /></Link>
-                  <Input config={addEnquiryFormFields.priceenquiry.config} />
-                </div> */}
-                {/* <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table> */}
+                  <div className="card-body">
+                  
+                 <Table config={tableConfig.config}>
+                  null
+                 </Table>
+                </div> 
                 </div>
                 
                 <div className="card-title">

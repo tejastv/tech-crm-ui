@@ -155,6 +155,16 @@ export const TRANSACTION_ROUTES = {
   },
 };
 
+export const PROFOMA_ROUTES = {
+  PROFOMA_PARENT_ROUTE: "/profoma/*",
+  PROFOMA: "/profoma/",
+
+  GENERATEPI_PROFOMA_ROUTES: {
+    GENERATEPI_PROFOMA_PARENT_ROUTE: "/generate-pi/*",
+    GENERATEPI: "generate-pi",
+  },
+}
+
 export const COMMON_ROUTES = {
   ADD: "add",
   EDIT: "edit/:id",
