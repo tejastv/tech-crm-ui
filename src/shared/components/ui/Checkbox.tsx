@@ -57,9 +57,9 @@ export const Checkbox = (props: FormFieldType) => {
                           props.config.name,
                           props.config.validation
                         )}
-                        onChange={(e: any) => {
-                          field.onChange(e.target.checked); // Toggle the field value
-                        }}
+                        // onChange={(e: any) => {
+                        //   field.onChange(() => props.config.setData = e.target.value);
+                        // }}
                       />
                     )}
                   ></Controller>
