@@ -18,8 +18,8 @@ const countryCodeFieldValidation = {
     message: "{label} field is rquired",
   },
   maxLength: {
-    value: 30,
-    message: "30 characters max",
+    value: 2,
+    message: "2 characters max",
   },
 } as ValidationType;
 const countrylocalSourceFieldValidation = {

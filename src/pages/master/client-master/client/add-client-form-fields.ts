@@ -157,10 +157,10 @@ const CrDayValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+$/,
-    message: "Credit Days must be a positive number",
-  },
+  // pattern: {
+  //   value: /^\d+$/,
+  //   message: "Credit Days must be a positive number",
+  // },
 } as ValidationType;
 
 // Right Field validation

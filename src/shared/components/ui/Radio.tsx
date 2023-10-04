@@ -25,8 +25,6 @@ export const Radio = (props: FormFieldType) => {
   const isInvalid = isFormInvalid(inputErrors);
   useEffect(() => {
     if (props.config.setData) {
-      console.log(props.config.name, props.config.setData);
-
       setValue(props.config.name, props.config.setData);
     }
   }, [props.config.setData]);
@@ -62,7 +60,7 @@ export const Radio = (props: FormFieldType) => {
                             props.config.validation
                           )}
                           onChange={(e: any) => {
-                            field.onChange(e.target.checked); // Toggle the field value
+                            field.onChange(() => props.config.setData = e.target.value); // Toggle the field value
                           }}
                         />
                       )}
