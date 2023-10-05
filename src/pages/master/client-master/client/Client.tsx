@@ -243,12 +243,12 @@ export const Client: React.FC = () => {
   const deleteClientClick = async (clientData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deleteClient(clientData.creditPeriodId);
+      await deleteClient(clientData.clientID);
     }
   };
 
   const editClientClick = (clientData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", clientData.creditPeriodId));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", clientData.clientID));
   };
 
   const tableConfig: TableType<ClientType> = {
