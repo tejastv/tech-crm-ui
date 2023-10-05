@@ -46,10 +46,10 @@ export const Executive: React.FC = () => {
       header: () => <>Email</>,
     },
     {
-      accessorFn: (row) => row.cityId,
-      id: "cityId",
+      accessorFn: (row) => row.cityName,
+      id: "cityName",
       cell: (info) => info.getValue(),
-      header: () => <>CityId</>,
+      header: () => <>City</>,
     },
     {
       accessorFn: (row) => row.invoiceRequired,
@@ -58,10 +58,10 @@ export const Executive: React.FC = () => {
       header: () => <>InvoiceRequired</>,
     },
     {
-      accessorFn: (row) => row.stateId,
-      id: "stateId",
+      accessorFn: (row) => row.stateName,
+      id: "stateName",
       cell: (info) => info.getValue(),
-      header: () => <>StateId</>,
+      header: () => <>State</>,
     },
     {
       id: "action",

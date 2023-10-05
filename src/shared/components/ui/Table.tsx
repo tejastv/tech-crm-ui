@@ -13,6 +13,7 @@ import * as XLSX from "xlsx";
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { Alignment, TDocumentDefinitions } from "pdfmake/interfaces";
+import { useToaster } from "@hooks/useToaster";
 
 export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
@@ -21,6 +22,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const data = props.config.tableData;
   const columns = props.config.columns;
   const pageSizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+  const { errorMessageToaster, successMessageToaster } = useToaster();
   const table = useReactTable({
     data,
     columns,
@@ -55,8 +57,10 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
       const copiedText = `Mirainform - CRM Software - ${props.config.tableName}\n\n${tableText}`;
       await navigator.clipboard.writeText(copiedText);
       console.log("Table data copied to clipboard!");
+      successMessageToaster("Table data copied to clipboard!");
     } catch (err) {
       console.error("Unable to copy to clipboard: ", err);
+      errorMessageToaster(err,"Unable to copy to clipboard");
     }
   };
 

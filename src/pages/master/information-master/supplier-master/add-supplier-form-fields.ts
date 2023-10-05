@@ -13,7 +13,7 @@ const NameSuppliervalidation = {
 } as ValidationType;
 const NickNamevalidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -24,7 +24,7 @@ const NickNamevalidation = {
 
 const addressValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Address",
   },
   pattern: {
@@ -35,7 +35,7 @@ const addressValidation = {
 
 const telNoValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Telephone Number",
   },
   pattern: {
@@ -46,7 +46,7 @@ const telNoValidation = {
 
 const FaxNoValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Fax number",
   },
   pattern: {
@@ -57,7 +57,7 @@ const FaxNoValidation = {
 
 const EmailValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter E-mail ",
   },
   pattern: {
@@ -69,7 +69,7 @@ const EmailValidation = {
 
 const WebsiteValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Website",
   },
   pattern: {
@@ -80,7 +80,7 @@ const WebsiteValidation = {
 
 const ContactValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Contect person",
   },
   maxLength: {
@@ -91,7 +91,7 @@ const ContactValidation = {
 
 const DesignationValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Designation",
   },
   maxLength: {
@@ -102,7 +102,7 @@ const DesignationValidation = {
 
 const ZipValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Zip",
   },
   pattern: {
@@ -113,7 +113,7 @@ const ZipValidation = {
 
 const CityValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Select city",
   },
   pattern: {
@@ -124,7 +124,7 @@ const CityValidation = {
 
 const StateValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Select State",
   },
   pattern: {
@@ -146,7 +146,7 @@ const CountryValidation = {
 
 const CurrencyValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
