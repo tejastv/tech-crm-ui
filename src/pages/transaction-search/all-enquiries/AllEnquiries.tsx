@@ -138,12 +138,12 @@ export const Enquiries: React.FC = () => {
           btnTitle: "Add Enquiry Details",
           btnTitle2: "Enquiry Search",
           btnRoute: COMMON_ROUTES.ADD,
-          btnRoute2:COMMON_ROUTES.EDIT
+        
         },
         btnConfig:{
           pageHeading:"",
           btnTitle: "Enquiry Search",
-          btnRoute:COMMON_ROUTES.EDIT
+          btnRoute:COMMON_ROUTES.LIST
         },
         borderLayoutConfig: {
           heading: "List",

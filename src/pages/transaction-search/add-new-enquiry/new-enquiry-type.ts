@@ -1,4 +1,4 @@
-export interface addClientType {
+export interface ClientType {
   companyenquiryId: number;
   companyenquiry: string;
   yearenquiry: string;

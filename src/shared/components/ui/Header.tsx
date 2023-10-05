@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import logoImage from "@assets/images/logo.png";
 import { useAuth } from "@hooks/index";
-import { DASHBOARD, LOGIN, MASTER_ROUTES, TRANSACTION_ROUTES } from "@constants/index";
+import { DASHBOARD, LOGIN, MASTER_ROUTES, PROFOMA_ROUTES, TRANSACTION_ROUTES } from "@constants/index";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -694,18 +694,6 @@ export const Header: React.FC = () => {
                         </a>
                       </li>
                       <li className="sidebar-item">
-                        {" "}
-                        <a
-                          className="sidebar-link"
-                          href="purchase_bills_of_suppliers.php"
-                        >
-                          <i className="mdi mdi-creation"></i>
-                          <span className="hide-menu ">
-                            Purchase Bills(of Suppliers)
-                          </span>
-                        </a>
-                      </li>
-                      <li className="sidebar-item">
                         <Link
                           className="sidebar-link"
                           to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.PURCHASEBILLS_TRANSACTION_ROUTES.PURCHASEBILLS_MASTER}`}
@@ -743,16 +731,15 @@ export const Header: React.FC = () => {
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Enq. (PI)</span>
                         </a>
-                      </li>
+                      </li>                      
                       <li className="sidebar-item">
-                        {" "}
-                        <a
+                        <Link
                           className="sidebar-link"
-                          href="generate_invoice_pi.php"
+                          to={`${PROFOMA_ROUTES.PROFOMA}${PROFOMA_ROUTES.GENERATEPI_PROFOMA_ROUTES.GENERATEPI}`}
                         >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Generate PI</span>
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </li>

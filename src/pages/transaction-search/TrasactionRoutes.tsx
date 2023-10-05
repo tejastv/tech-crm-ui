@@ -19,7 +19,7 @@ const PurchaseBillsof = React.lazy(
   () => import("./purchase-bills/PurchaseBillsIndex")
 );
 
-const MasterRoutes = () => {
+const TransactionRoutes = () => {
   return (
     <Routes>
       <Route
@@ -63,4 +63,4 @@ const MasterRoutes = () => {
   );
 };
 
-export default MasterRoutes;
+export default TransactionRoutes;
