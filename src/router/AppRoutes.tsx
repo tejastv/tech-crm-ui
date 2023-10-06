@@ -10,6 +10,7 @@ import {
   DASHBOARD,
   LOGIN,
   MASTER_ROUTES,
+  PROFOMA_ROUTES,
   ROOT,
   TRANSACTION_ROUTES,
   UNKNOWN,
@@ -18,6 +19,7 @@ import {
 const Dashboard = React.lazy(() => import("../pages/dashboard/Dashboard"));
 const MasterRoutes = React.lazy(() => import("../pages/master/MasterRoutes"));
 const TransactionRoutes = React.lazy(() => import("../pages/transaction-search/TrasactionRoutes"));
+const ProfomaRoutes = React.lazy(() => import("../pages/profoma/ProfomaRoutes"));
 
 const AppRoutes = () => {
   return (
@@ -49,6 +51,14 @@ const AppRoutes = () => {
             element={
               <React.Suspense>
                 <TransactionRoutes />
+              </React.Suspense>
+            }
+          ></Route>
+          <Route
+            path={PROFOMA_ROUTES.PROFOMA_PARENT_ROUTE}
+            element={
+              <React.Suspense>
+                <ProfomaRoutes />
               </React.Suspense>
             }
           ></Route>
