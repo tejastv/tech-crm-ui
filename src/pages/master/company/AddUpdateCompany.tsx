@@ -94,11 +94,11 @@ export const AddUpdateCompany: React.FC = () => {
       data.companyType = +data.companyType;
     }
     console.log(data);
-    // if (params.id && data) {
-    //   updateCompany({ id: params.id, ...data });
-    // } else {
-    //   addCompany(data);
-    // }
+    if (params.id && data) {
+      updateCompany({ id: params.id, ...data });
+    } else {
+      addCompany(data);
+    }
   });
 
   if (params.id) {

@@ -27,13 +27,15 @@ export const Select = (props: FormFieldType) => {
     if (props.onChangeHandler) {
       props.onChangeHandler(selectedOption);
     }
-    setValue(props.config.name, selectedOption, { shouldValidate: true });
+    setValue(props.config.name, selectedOption);
   };
   useEffect(() => {
-    setValue(
-      props.config.name,
-      props.config.setData ? props.config.setData : null
-    );
+    if (props.config.setData) {
+      setValue(
+        props.config.name,
+        props.config.setData ? props.config.setData : null
+      )
+    }
   }, [props.config.setData]);
   return (
     <div className="row">
