@@ -163,6 +163,10 @@ export const PROFOMA_ROUTES = {
     GENERATEPI_PROFOMA_PARENT_ROUTE: "/generate-pi/*",
     GENERATEPI: "generate-pi",
   },
+  ENQPI_PROFOMA_ROUTES: {
+    ENQPI_PROFOMA_PARENT_ROUTE: "/enq-pi/*",
+    ENQPI: "enq-pi",
+  },
 }
 
 export const COMMON_ROUTES = {

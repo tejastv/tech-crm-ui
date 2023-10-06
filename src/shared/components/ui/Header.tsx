@@ -725,13 +725,15 @@ export const Header: React.FC = () => {
                       <span className="hide-menu ">Proforma</span>
                     </a>
                     <ul aria-expanded="false" className="collapse first-level">
-                      <li className="sidebar-item">
-                        {" "}
-                        <a className="sidebar-link" href="enq_details_pi.php">
+                    <li className="sidebar-item">
+                        <Link
+                          className="sidebar-link"
+                          to={`${PROFOMA_ROUTES.PROFOMA}${PROFOMA_ROUTES.ENQPI_PROFOMA_ROUTES.ENQPI}`}
+                        >
                           <i className="mdi mdi-creation"></i>
-                          <span className="hide-menu ">Enq. (PI)</span>
-                        </a>
-                      </li>                      
+                          <span className="hide-menu ">Enq.(PI) </span>
+                        </Link>
+                      </li>                     
                       <li className="sidebar-item">
                         <Link
                           className="sidebar-link"

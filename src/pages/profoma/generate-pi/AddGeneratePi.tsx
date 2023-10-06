@@ -165,8 +165,6 @@ export const AddGeneratePi: React.FC = () => {
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
-               
-                      
                     <div className="col-4 col-xs-12">
                     <div className="card-body">
 
