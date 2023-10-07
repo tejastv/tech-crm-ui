@@ -21,7 +21,10 @@ export const useStateApiCallHook = () => {
       queryKey: [queryKeys.STATE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_STATE);
-        const data = response.data.data.sort((a: { state: string; }, b: { state: any; }) => a.state.localeCompare(b.state));
+        const data = response.data.data.sort(
+          (a: { state: string }, b: { state: any }) =>
+            a.state.localeCompare(b.state)
+        );
         return data;
       },
       staleTime: Infinity,
@@ -55,7 +58,7 @@ export const useStateApiCallHook = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
-            queryKey: [queryKeys.CONTINENT_DATA],
+            queryKey: [queryKeys.STATE_DATA],
           });
           navigate("..");
         },

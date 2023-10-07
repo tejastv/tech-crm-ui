@@ -11,14 +11,21 @@ import Form from "react-bootstrap/Form";
 
 import { FormFieldType } from "@shared/index";
 import { findInputError, isFormInvalid } from "@utils/index";
+import { useEffect } from "react";
 
 export const DatePicker = (props: FormFieldType) => {
   const {
     register,
     formState: { errors },
+    setValue,
   } = useFormContext();
   const inputErrors = findInputError(errors, props.config.name);
   const isInvalid = isFormInvalid(inputErrors);
+  useEffect(() => {
+    if (props.config.setData) {
+      setValue(props.config.name, props.config.setData);
+    }
+  }, [props.config.setData]);
   return (
     <div className="row">
       <div className="col-12">
