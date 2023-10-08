@@ -129,7 +129,7 @@ import { AllEnquiriesType, useAllEnquiriesApiCallHook } from "@pages/master";
 export const Enquiries: React.FC = () => {
   const { getEnquiries } = useAllEnquiriesApiCallHook();
   // const { mutateAsync: deleteState } = deleteContinentMutation();
-  const { data: enquiriesData, isLoading } = getEnquiries(true);
+  const { data: enquiriesData, isLoading } = getEnquiries();
   // const navigate = useNavigate();
 
   const config = {
@@ -206,14 +206,14 @@ export const Enquiries: React.FC = () => {
       header: () => <>Zip</>,
     },
     {
-      accessorFn: (row) => row.stateId,
-      id: "stateId",
+      accessorFn: (row) => row.stateName,
+      id: "stateName",
       cell: (info) => info.getValue(),
       header: () => <>State</>,
     },
     {
-      accessorFn: (row) => row.countryId,
-      id: "countryId",
+      accessorFn: (row) => row.countryName,
+      id: "countryName",
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
     },
@@ -272,14 +272,14 @@ export const Enquiries: React.FC = () => {
       header: () => <>Source</>,
     },
     {
-      accessorFn: (row) => row.enqStatusID,
-      id: "enqStatusID",
+      accessorFn: (row) => row.enquiryStatus,
+      id: "enquiryStatus",
       cell: (info) => info.getValue(),
       header: () => <>Enq. Status</>,
     },
     {
-      accessorFn: (row) => row.bankers,
-      id: "LocalSource",
+      accessorFn: (row) => row.localSource,
+      id: "localSource",
       cell: (info) => info.getValue(),
       header: () => <>Local Source</>,
     },
@@ -296,61 +296,61 @@ export const Enquiries: React.FC = () => {
       header: () => <>Client</>,
     },
     {
-      accessorFn: (row) => row.bankers,
+      accessorFn: (row) => row.clientAddress,
       id: "clientAddress",
       cell: (info) => info.getValue(),
       header: () => <>Client Address</>,
     },
     {
-      accessorFn: (row) => row.bankers,
-      id: "clientCity",
+      accessorFn: (row) => row.clientCityName,
+      id: "clientCityName",
       cell: (info) => info.getValue(),
       header: () => <>Client City</>,
     },
     {
-      accessorFn: (row) => row.bankers,
+      accessorFn: (row) => row.clientZip,
       id: "clientZip",
       cell: (info) => info.getValue(),
       header: () => <>Client Zip</>,
     },
     {
-      accessorFn: (row) => row.bankers,
+      accessorFn: (row) => row.clientState,
       id: "clientState",
       cell: (info) => info.getValue(),
       header: () => <>Client State</>,
     },
     {
-      accessorFn: (row) => row.bankers,
-      id: "clientCountry",
+      accessorFn: (row) => row.clientCountryName,
+      id: "clientCountryName",
       cell: (info) => info.getValue(),
       header: () => <>Client Country</>,
     },
     {
-      accessorFn: (row) => row.bankers,
+      accessorFn: (row) => row.clientPhone,
       id: "clientPhone",
       cell: (info) => info.getValue(),
       header: () => <>Client Phone</>,
     },
     {
-      accessorFn: (row) => row.bankers,
+      accessorFn: (row) => row.clientFax,
       id: "clientFax",
       cell: (info) => info.getValue(),
       header: () => <>Client Fax</>,
     },
     {
-      accessorFn: (row) => row.bankers,
+      accessorFn: (row) => row.clientContactPerson,
       id: "clientContactPerson",
       cell: (info) => info.getValue(),
       header: () => <>Client ContactPerson</>,
     },
     {
-      accessorFn: (row) => row.bankers,
+      accessorFn: (row) => row.clientDesignation,
       id: "clientDesignation",
       cell: (info) => info.getValue(),
       header: () => <>Client Designation</>,
     },
     {
-      accessorFn: (row) => row.bankers,
+      accessorFn: (row) => row.printStatus,
       id: "printStatus",
       cell: (info) => info.getValue(),
       header: () => <>Print Status</>,
@@ -362,14 +362,14 @@ export const Enquiries: React.FC = () => {
       header: () => <>Due on</>,
     },
     {
-      accessorFn: (row) => row.bankers,
-      id: "serviceType",
+      accessorFn: (row) => row.serviceTypeName,
+      id: "serviceTypeName",
       cell: (info) => info.getValue(),
       header: () => <>Service Type</>,
     },
     {
-      accessorFn: (row) => row.bankers,
-      id: "executive",
+      accessorFn: (row) => row.executiveName,
+      id: "executiveName",
       cell: (info) => info.getValue(),
       header: () => <>Executive</>,
     },
@@ -392,7 +392,7 @@ export const Enquiries: React.FC = () => {
       header: () => <>Report Filename</>,
     },
     {
-      accessorFn: (row) => row.bankers,
+      accessorFn: (row) => row.groupName,
       id: "groupName",
       cell: (info) => info.getValue(),
       header: () => <>Group Name</>,
@@ -446,7 +446,7 @@ export const Enquiries: React.FC = () => {
       header: () => <>DisType</>,
     },
     {
-      accessorFn: (row) => row.bankers,
+      accessorFn: (row) => row.clientEmail,
       id: "clientEmail",
       cell: (info) => info.getValue(),
       header: () => <>Client Email</>,
@@ -488,14 +488,14 @@ export const Enquiries: React.FC = () => {
       header: () => <>Site status</>,
     },
     {
-      accessorFn: (row) => row.bankers,
+      accessorFn: (row) => row.remarks,
       id: "remarks",
       cell: (info) => info.getValue(),
       header: () => <>Remarks</>,
     },
     {
-      accessorFn: (row) => row.bankers,
-      id: "cliPrice",
+      accessorFn: (row) => row.clientPrice,
+      id: "clientPrice",
       cell: (info) => info.getValue(),
       header: () => <>Cli Price</>,
     },
