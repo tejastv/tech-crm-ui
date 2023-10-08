@@ -49,10 +49,10 @@ export const Radio = (props: FormFieldType) => {
                       key={index + "" + option.value}
                       render={({ field }) => (
                         <Form.Check
+                          {...field}
                           value={option.value}
                           id={"" + option.value}
                           type="radio"
-                          key={option.value}
                           className="mr-3"
                           label={option.label}
                           {...register(
@@ -60,7 +60,9 @@ export const Radio = (props: FormFieldType) => {
                             props.config.validation
                           )}
                           onChange={(e: any) => {
-                            field.onChange(() => props.config.setData = e.target.value); // Toggle the field value
+                            field.onChange(
+                              () => (props.config.setData = e.target.value)
+                            ); // Toggle the field value
                           }}
                         />
                       )}

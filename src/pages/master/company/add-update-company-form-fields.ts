@@ -411,7 +411,7 @@ const companyType: FormFieldType = {
     label: "Company Type",
     id: "companyType",
     className: "custom-control-input",
-    options: selectOptionsMaker(companyOptions, "value", "label"),
+    options: companyOptions,
     placeholder: "write a random Select Box",
     validation: {
       required: {

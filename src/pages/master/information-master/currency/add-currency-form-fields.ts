@@ -27,7 +27,8 @@ const SymbolValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid symbol format. Please use alphanumeric characters or hyphens only.",
+    message:
+      "Invalid symbol format. Please use alphanumeric characters or hyphens only.",
   },
 } as ValidationType;
 
@@ -38,8 +39,9 @@ const PurchesExchanegValidation = {
   },
   pattern: {
     value: /^\d+(\.\d{1,2})?$/,
-    message: "Invalid exchange rate format. Please use a valid number format (e.g., 123.45).",
-  },  
+    message:
+      "Invalid exchange rate format. Please use a valid number format (e.g., 123.45).",
+  },
 } as ValidationType;
 const SellExchanegValidation = {
   required: {
@@ -48,7 +50,8 @@ const SellExchanegValidation = {
   },
   pattern: {
     value: /^\d+(\.\d{1,2})?$/,
-    message: "Invalid exchange rate format. Please use a valid number format (e.g., 123.45).",
+    message:
+      "Invalid exchange rate format. Please use a valid number format (e.g., 123.45).",
   },
 } as ValidationType;
 const PurchesDateValidation = {
@@ -112,9 +115,9 @@ const sellExchanegField: FormFieldType = createFormConfig(
 const myDate = new Date(); // Replace this with your actual date
 
 // Extract year, month, and day components
-const year = myDate.getFullYear(); 
-const month = String(myDate.getMonth() + 1).padStart(2, '0'); 
-const day = String(myDate.getDate()).padStart(2, '0'); // Get the day (e.g., 07)
+const year = myDate.getFullYear();
+const month = String(myDate.getMonth() + 1).padStart(2, "0");
+const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
@@ -132,8 +135,6 @@ const sDateField: FormFieldType = createFormConfig(
   SellDateValidation,
   formattedDate
 );
-
-
 
 export const addCurrencyFormFields = {
   currencyField,
