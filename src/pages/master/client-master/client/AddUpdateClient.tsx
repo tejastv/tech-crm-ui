@@ -6,7 +6,7 @@ import {
   DivLayout,
   Input,
   Radio,
-  Select
+  Select,
 } from "@shared/index";
 import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -32,7 +32,8 @@ import { useParams } from "react-router-dom";
 export const AddUpdateClient: React.FC = () => {
   const methods = useForm<AddUpdateClientType>();
   const params = useParams();
-  const { addClientMutation, updateClientMutation, getClientData } = useClientApiCallHook();
+  const { addClientMutation, updateClientMutation, getClientData } =
+    useClientApiCallHook();
   const { mutate: addClient } = addClientMutation();
   const { mutate: updateClient } = updateClientMutation();
   const { getCity } = useCityApiCallHook();
@@ -42,8 +43,7 @@ export const AddUpdateClient: React.FC = () => {
   const { getCurrency } = useCurrencyApiCallHook();
   const { getExecutive } = useExecutiveApiCallHook();
   const { getClientGroup } = useClientGroupApiCallHook();
-  const { getSegment } = useSegmentApiCallHook()
-
+  const { getSegment } = useSegmentApiCallHook();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -155,17 +155,20 @@ export const AddUpdateClient: React.FC = () => {
     data["locked"] = "Y";
     data["nickName"] = "String";
     data["staxApplicable"] = "Y";
-    data.adjustPerEnq = parseFloat(data.adjustPerEnq);
-    data.adjustPerEnq_PI = parseFloat(data.adjustPerEnq_PI);
-    data.balToAdjust = parseFloat(data.balToAdjust);
-    data.balToAdjust_PI = parseFloat(data.balToAdjust_PI);
-    data.discount = parseFloat(data.discount);
-    data.toAdjust = parseFloat(data.toAdjust);
-    data.toAdjust_PI = parseFloat(data.toAdjust_PI);
-    data.disType = data.disType.toString();
-    data.gstYN = data.gstYN.toString();
-    data.monthlyInvoice = data.monthlyInvoice.toString();
-    data.osListPrInteger = data.osListPrInteger.toString();
+    data.adjustPerEnq = data.adjustPerEnq && parseFloat(data.adjustPerEnq);
+    data.adjustPerEnq_PI =
+      data.adjustPerEnq_PI && parseFloat(data.adjustPerEnq_PI);
+    data.balToAdjust = data.balToAdjust && parseFloat(data.balToAdjust);
+    data.balToAdjust_PI =
+      data.balToAdjust_PI && parseFloat(data.balToAdjust_PI);
+    data.discount = data.discount && parseFloat(data.discount);
+    data.toAdjust = data.toAdjust && parseFloat(data.toAdjust);
+    data.toAdjust_PI = data.toAdjust_PI && parseFloat(data.toAdjust_PI);
+    data.disType = data.disType && data.disType.toString();
+    data.gstYN = data.gstYN && data.gstYN.toString();
+    data.monthlyInvoice = data.monthlyInvoice && data.monthlyInvoice.toString();
+    data.osListPrInteger =
+      data.osListPrInteger && data.osListPrInteger.toString();
     if (data.cityID) {
       data.cityID = +data.cityID["value"];
     }
@@ -198,7 +201,6 @@ export const AddUpdateClient: React.FC = () => {
     }
   });
 
-
   if (params.id) {
     const { data: clientMasterData } = getClientData("" + params.id);
     if (clientMasterData) {
@@ -213,9 +215,9 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.cityClient.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (stateData) {
@@ -229,11 +231,11 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.stateClient.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
-        addClientFormFields.statecodeClient.config.setData = data.value
+        addClientFormFields.statecodeClient.config.setData = data.value;
       }
       if (CountryData) {
         let id = clientMasterData?.countryID;
@@ -246,9 +248,9 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.countryClient.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (CreditDaysData) {
@@ -262,9 +264,9 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.cityClient.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (CurrencyData) {
@@ -278,9 +280,9 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.clientCurrencey.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (ExecutiveData) {
@@ -294,9 +296,9 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.executive.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (ClientGroupData) {
@@ -310,9 +312,9 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.groupClient.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (SegmentData) {
@@ -326,24 +328,23 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.segmentClient.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
 
-      
       addClientFormFields.clientName.config.setData =
         clientMasterData.clientName;
-      addClientFormFields.clientGst.config.setData =
-        clientMasterData.gstYN;
-      addClientFormFields.gstn.config.setData =
-        clientMasterData.gstn;
-      addClientFormFields.addressClient.config.setData = clientMasterData.address;
+      addClientFormFields.clientGst.config.setData = clientMasterData.gstYN;
+      addClientFormFields.gstn.config.setData = clientMasterData.gstn;
+      addClientFormFields.addressClient.config.setData =
+        clientMasterData.address;
       addClientFormFields.telnoClient.config.setData = clientMasterData.phone;
       addClientFormFields.faxnoClient.config.setData = clientMasterData.fax;
       addClientFormFields.emailClient.config.setData = clientMasterData.email;
-      addClientFormFields.websiteClient.config.setData = clientMasterData.website;
+      addClientFormFields.websiteClient.config.setData =
+        clientMasterData.website;
       addClientFormFields.contactClient.config.setData =
         clientMasterData.contactPerson;
       addClientFormFields.designationClient.config.setData =
@@ -351,16 +352,26 @@ export const AddUpdateClient: React.FC = () => {
       addClientFormFields.zipClient.config.setData = clientMasterData.zip;
       addClientFormFields.instuction.config.setData = clientMasterData.email;
       addClientFormFields.remarks.config.setData = clientMasterData.remarks;
-      addClientFormFields.monthlyIvoice.config.setData = clientMasterData.monthlyInvoice;
-      addClientFormFields.osemail.config.setData = clientMasterData.osListPrInteger;
+      addClientFormFields.monthlyIvoice.config.setData =
+        clientMasterData.monthlyInvoice;
+      addClientFormFields.osemail.config.setData =
+        clientMasterData.osListPrInteger;
       addClientFormFields.discount.config.setData = clientMasterData.disType;
-      addClientFormFields.discountBlank.config.setData = clientMasterData.discount;
+      addClientFormFields.discountBlank.config.setData =
+        clientMasterData.discount;
       addClientFormFields.toAdjust.config.setData = clientMasterData.toAdjust;
-      addClientFormFields.baltoAdjust.config.setData = clientMasterData.balToAdjust;
-      addClientFormFields.adjustenquiry.config.setData = clientMasterData.adjustPerEnq;
-      addClientFormFields.toAdjustproforma.config.setData = clientMasterData.toAdjust_PI;
-      addClientFormFields.baltoAdjustproformaproforma.config.setData = clientMasterData.balToAdjust_PI;
-      addClientFormFields.adjustenquiryproforma.config.setData = clientMasterData.adjustPerEnq_PI;
+      addClientFormFields.baltoAdjust.config.setData =
+        clientMasterData.balToAdjust;
+      addClientFormFields.adjustenquiry.config.setData =
+        clientMasterData.adjustPerEnq;
+      addClientFormFields.toAdjustproforma.config.setData =
+        clientMasterData.toAdjust_PI;
+      addClientFormFields.billonactual.config.setData =
+        clientMasterData.billONActualBuyer;
+      addClientFormFields.baltoAdjustproformaproforma.config.setData =
+        clientMasterData.balToAdjust_PI;
+      addClientFormFields.adjustenquiryproforma.config.setData =
+        clientMasterData.adjustPerEnq_PI;
     }
   } else {
     useEffect(() => {
@@ -404,7 +415,10 @@ export const AddUpdateClient: React.FC = () => {
                     <Input config={addClientFormFields.zipClient.config} />
                     {/* <div className="row "> */}
                     {/* <div className="col-md-5"> */}
-                    <Select config={addClientFormFields.stateClient.config}  onChangeHandler={handleSelectChange} />
+                    <Select
+                      config={addClientFormFields.stateClient.config}
+                      onChangeHandler={handleSelectChange}
+                    />
                     {/* </div> */}
                     {/* </div> */}
                     <Input
@@ -418,7 +432,7 @@ export const AddUpdateClient: React.FC = () => {
                     {/* </h6> */}
                     <Select config={addClientFormFields.crDay.config} />
                     <Checkbox
-                      config={addClientFormFields.billonactual.config} 
+                      config={addClientFormFields.billonactual.config}
                     />
                   </div>
                 </div>
@@ -437,7 +451,7 @@ export const AddUpdateClient: React.FC = () => {
                     <Select config={addClientFormFields.segmentClient.config} />
                     <Input config={addClientFormFields.remarks.config} />
                     <Radio config={addClientFormFields.monthlyIvoice.config} />
-                    <Checkbox config={addClientFormFields.osemail.config} />
+                    <Radio config={addClientFormFields.osemail.config} />
                     {/* <h6 className="card-title m-t-20"> */}
                     <DivLayout heading={cardConfig.formAdjustConfig.heading} />
                     {/* </h6> */}

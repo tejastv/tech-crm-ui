@@ -8,6 +8,7 @@ import {
   Select,
   DivLayout,
   Button,
+  DatePicker,
 } from "@shared/index";
 import { addPriceFormFields } from "@master/index";
 
@@ -45,43 +46,47 @@ export const AddPrice: React.FC = () => {
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
-                <div className="col-md-4 col-xs-12">
+                <div className="col-md-2 col-xs-12"></div>
+                <div className="col-md-5 col-xs-12">
                   <Select config={addPriceFormFields.priceLocalSource.config} />
                 </div>
-
-                <div className="col-md-4 col-xs-12">
+                <div className="col-md-5 col-xs-12">
                   <Select config={addPriceFormFields.priceCurrency.config} />
                 </div>
-
-                <div className="col-md-4 col-xs-12 text-right">
+              </div>
+              <div className="row justify-content-end">
+                <div className="col-md-2 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>Get Std. Price
+                    <i className="far fa-save"></i> Get Std. Price
                   </Button>
                 </div>
+              </div>
+              <div className="row mt-2">
                 <div className="col-md-2 col-xs-12">
                   <DivLayout heading={cardConfig.formPurchesConfig.heading} />
                 </div>
-                <div className="col-md-4 col-xs-12">
+                <div className="col-md-5 col-xs-12">
                   <Input
                     config={addPriceFormFields.purchesExchanegRate.config}
                   />
                 </div>
-                <div className="col-md-4 col-xs-12">
-                  <Input config={addPriceFormFields.purchesDate.config} />
+                <div className="col-md-5 col-xs-12">
+                  <DatePicker config={addPriceFormFields.purchesDate.config} />
                 </div>
-                <div className="col-md-2 col-xs-12"></div>
                 <div className="col-md-2 col-xs-12">
                   <DivLayout heading={cardConfig.formSellConfig.heading} />
                 </div>
-                <div className="col-md-4 col-xs-12">
+                <div className="col-md-5 col-xs-12">
                   <Input config={addPriceFormFields.sellExchanegRate.config} />
                 </div>
-                <div className="col-md-4 col-xs-12">
-                  <Input config={addPriceFormFields.sellDate.config} />
+                <div className="col-md-5 col-xs-12">
+                  <DatePicker config={addPriceFormFields.sellDate.config} />
                 </div>
+              </div>
+              <div className="row justify-content-end">
                 <div className="col-md-2 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>Save All
+                    <i className="far fa-save"></i> Save All
                   </Button>
                 </div>
               </div>

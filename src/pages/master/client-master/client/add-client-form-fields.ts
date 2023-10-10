@@ -14,7 +14,7 @@ const nameClientMaster = {
 
 const GSTClient = {
   required: {
-    value: false,
+    value: true,
     message: "Please check the {label} box",
   },
 } as ValidationType;
@@ -133,7 +133,7 @@ const CityValidation = {
 
 const StateValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -154,7 +154,7 @@ const CountryValidation = {
 } as ValidationType;
 const CrDayValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
   // pattern: {
@@ -177,7 +177,7 @@ const ClientCurrencyValidation = {
 } as ValidationType;
 const ExecutiveValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -203,7 +203,7 @@ const GroupValidation = {
 } as ValidationType;
 const SegmentValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -223,7 +223,7 @@ const RemarksValidation = {
 } as ValidationType;
 const InvoiceValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
 } as ValidationType;
@@ -241,13 +241,13 @@ const OsValidation = {
 } as ValidationType;
 const billonactualValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
 const DiscountValidation = {
   required: {
-    value: false,
+    value: true,
     message: "Please select a {label}",
   },
 } as ValidationType;
@@ -331,21 +331,21 @@ const crDayOptions = [
 // Right Field start
 
 const invoiceOption = [
-  { value: "1", label: "Monthly Invoice" },
+  { value: "Y", label: "Monthly Invoice" },
   {
-    value: "2",
+    value: "N",
     label: "Individual Report / Invoice",
   },
 ];
 const osEmailOptions = [
-  { value: "1", label: "Auto Send O/S by e-Mail" },
-  { value: "2", label: "OS List printed" },
+  { value: "Y", label: "Auto Send O/S by e-Mail" },
+  { value: "N", label: "OS List printed" },
 ];
 
 const discountOptions = [
-  { value: "1", label: "in %" },
-  { value: "2", label: "Per Report" },
-  { value: "3", label: "NO Discount" },
+  { value: "in", label: "in %" },
+  { value: "perRep", label: "Per Report" },
+  { value: "NA", label: "NO Discount" },
 ];
 const clientName: FormFieldType = createFormConfig(
   "clientName",
@@ -472,7 +472,7 @@ const billonactual: FormFieldType = createFormConfig(
   "billONActualBuyer",
   "",
   "checkbox",
-  billonactualValidation,//CrDayValidation,
+  billonactualValidation, //CrDayValidation,
   "",
   biilOnActualBuyerOptions
 );

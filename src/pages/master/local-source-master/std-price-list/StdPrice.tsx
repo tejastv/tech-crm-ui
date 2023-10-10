@@ -128,7 +128,7 @@ export const StdPrice: React.FC = () => {
           <form noValidate autoComplete="off" className="p-t-20">
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
               <div className="row">
-                <div className="col-3 pull-right">
+                <div className="col-4 pull-right">
                   <Select
                     config={addStdPriceFormFields.stdcurrencey.config}
                     onChangeHandler={handleSelectChange}

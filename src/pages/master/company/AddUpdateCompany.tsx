@@ -69,11 +69,11 @@ export const AddUpdateCompany: React.FC = () => {
   }
 
   // country api call
-  const { data: CountryData } = getCountry();
+  const { data: countryData } = getCountry();
 
-  if (CountryData) {
+  if (countryData) {
     addCompanyFormFields.country.config.options = selectOptionsMaker(
-      CountryData,
+      countryData,
       "countryId",
       "countryName"
     );
@@ -136,10 +136,10 @@ export const AddUpdateCompany: React.FC = () => {
             }
           : [];
       }
-      if (CountryData) {
+      if (countryData) {
         let id = companyMasterData?.countryId;
         let data: any = returnObjectBasedOnID(
-          CountryData,
+          countryData,
           "countryId",
           id,
           "countryId",
@@ -177,7 +177,7 @@ export const AddUpdateCompany: React.FC = () => {
       addCompanyFormFields.regno.config.setData =
         companyMasterData.companyRegNo;
       addCompanyFormFields.companyType.config.setData =
-        companyMasterData.companyType;
+        +companyMasterData.companyType;
       addCompanyFormFields.incorporationDate.config.setData =
         companyMasterData.incorporationDate;
       addCompanyFormFields.bankers.config.setData = companyMasterData.bankers;
