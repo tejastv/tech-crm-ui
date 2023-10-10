@@ -9,7 +9,6 @@ import {
   InputWithText,
   ActionButtons,
   Table,
-  Loader,
   TableType,
 } from "@shared/index";
 import { ClientType, addEnquiryFormFields } from "@transaction-search/index";

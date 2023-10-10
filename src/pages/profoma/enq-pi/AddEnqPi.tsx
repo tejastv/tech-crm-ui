@@ -9,13 +9,10 @@ import {
   InputWithText,
   ActionButtons,
   Table,
-  Loader,
   TableType,
-  DivLayout,
   SingleCheckbox,
 } from "@shared/index";
-import { EnqPi, addEnqPiFormFields } from "@profoma/index";
-import { Link } from "react-router-dom";
+import { addEnqPiFormFields } from "@profoma/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { ClientType } from "@pages/master";
 // import {useStateApiCallHook } from "@pages/master";

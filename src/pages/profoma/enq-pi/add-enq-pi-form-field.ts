@@ -274,16 +274,16 @@ const svisitValidation = {
     message: "Please select a {label}",
   },
 } as ValidationType;
-const NotesForAdjValidation = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-  maxLength: {
-    value: 30,
-    message: "{label} should be up to 30 characters max",
-  },
-} as ValidationType;
+// const NotesForAdjValidation = {
+//   required: {
+//     value: true,
+//     message: "{label} field is rquired",
+//   },
+//   maxLength: {
+//     value: 30,
+//     message: "{label} should be up to 30 characters max",
+//   },
+// } as ValidationType;
 const instructionEnquiryValidation = {
   required: {
     value: true,
@@ -345,16 +345,16 @@ const ClientIdEnquiryValidation = {
   },
 } as ValidationType;
 
-const ActualBuyerEnquiryValidation = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-  maxLength: {
-    value: 30,
-    message: "Select {label}",
-  },
-} as ValidationType;
+// const ActualBuyerEnquiryValidation = {
+//   required: {
+//     value: true,
+//     message: "{label} field is rquired",
+//   },
+//   maxLength: {
+//     value: 30,
+//     message: "Select {label}",
+//   },
+// } as ValidationType;
 
 const PriceeEnquiryEnquiryValidation = {
   required: {
@@ -366,36 +366,36 @@ const PriceeEnquiryEnquiryValidation = {
     message: "30 max Chearcter",
   },
 } as ValidationType;
-const DisEnquiryValidation = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-  maxLength: {
-    value: 30,
-    message: "30 max Chearcter",
-  },
-} as ValidationType;
-const DiscountEnquiryValidation = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-  maxLength: {
-    value: 30,
-    message: "30 max Chearcter",
-  },
-} as ValidationType;
-const CommEnquiryValidation = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-  maxLength: {
-    value: 30,
-    message: "30 max Chearcter",
-  },
-} as ValidationType;
+// const DisEnquiryValidation = {
+//   required: {
+//     value: true,
+//     message: "{label} field is rquired",
+//   },
+//   maxLength: {
+//     value: 30,
+//     message: "30 max Chearcter",
+//   },
+// } as ValidationType;
+// const DiscountEnquiryValidation = {
+//   required: {
+//     value: true,
+//     message: "{label} field is rquired",
+//   },
+//   maxLength: {
+//     value: 30,
+//     message: "30 max Chearcter",
+//   },
+// } as ValidationType;
+// const CommEnquiryValidation = {
+//   required: {
+//     value: true,
+//     message: "{label} field is rquired",
+//   },
+//   maxLength: {
+//     value: 30,
+//     message: "30 max Chearcter",
+//   },
+// } as ValidationType;
 
 const CompanyIdValidation = {
   required: {
@@ -562,11 +562,6 @@ const EnqStatusOptions = [
 ];
 
 const svisitOptions = [
-  { value: "in %", label: "in %" },
-  { value: "Per Report", label: "Per Report" },
-  { value: "NO Discount", label: "NO Discount" },
-];
-const actualbuyerOptions = [
   { value: "in %", label: "in %" },
   { value: "Per Report", label: "Per Report" },
   { value: "NO Discount", label: "NO Discount" },
@@ -912,7 +907,7 @@ const fyearField: FormFieldType = createFormConfig(
 );
 
 const refnote: Note = createNoteConfig("Note: Ref. No is Auto");
-const actualbuyeraddnote: Note = createNoteConfig("Add New Actual Buyer");
+// const actualbuyeraddnote: Note = createNoteConfig("Add New Actual Buyer");
 
 export const addEnqPiFormFields = {
   companyField,

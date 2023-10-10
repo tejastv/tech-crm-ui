@@ -318,23 +318,6 @@ const GstOption = [
   { value: "N", label: "No" },
 ];
 
-const cityClientOptions = [
-  { value: "Mumbai", label: "Mumbai" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const stateClientOptions = [
-  { value: "Maharashtra", label: "Maharashtra" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const countryClientOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
 const biilOnActualBuyerOptions = [
   { value: "Y", label: "Bill on Actual Buyer" },
 ];
