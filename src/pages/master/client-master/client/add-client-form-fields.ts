@@ -14,7 +14,7 @@ const nameClientMaster = {
 
 const GSTClient = {
   required: {
-    value: false,
+    value: true,
     message: "Please check the {label} box",
   },
 } as ValidationType;
@@ -133,7 +133,7 @@ const CityValidation = {
 
 const StateValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -154,7 +154,7 @@ const CountryValidation = {
 } as ValidationType;
 const CrDayValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
   // pattern: {
@@ -177,7 +177,7 @@ const ClientCurrencyValidation = {
 } as ValidationType;
 const ExecutiveValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -203,7 +203,7 @@ const GroupValidation = {
 } as ValidationType;
 const SegmentValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -223,7 +223,7 @@ const RemarksValidation = {
 } as ValidationType;
 const InvoiceValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
 } as ValidationType;
@@ -241,13 +241,13 @@ const OsValidation = {
 } as ValidationType;
 const billonactualValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
 const DiscountValidation = {
   required: {
-    value: false,
+    value: true,
     message: "Please select a {label}",
   },
 } as ValidationType;
