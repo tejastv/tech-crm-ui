@@ -124,13 +124,13 @@ import {
 } from "@shared/index";
 import { COMMON_ROUTES } from "@constants/index";
 import { AllEnquiriesType, useAllEnquiriesApiCallHook } from "@pages/master";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Enquiries: React.FC = () => {
-  const { getEnquiries } = useAllEnquiriesApiCallHook();
-  // const { mutateAsync: deleteState } = deleteContinentMutation();
+  const { getEnquiries , deleteEnquiryMutation} = useAllEnquiriesApiCallHook();
+  const { mutateAsync: deleteEnquiry } = deleteEnquiryMutation();
   const { data: enquiriesData, isLoading } = getEnquiries();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const config = {
         breadcrumbConfig: {
@@ -513,11 +513,12 @@ export const Enquiries: React.FC = () => {
     
   ];
 
+
   const deleteEnquiryClick = (enquiriesData: any) => {
-    // var conformation = confirm("Are you sure to delete it?");
-    // if (conformation) {
-    //   deleteState(stateData.stateId);
-    // }
+    var conformation = confirm("Are you sure to delete it?");
+    if (conformation) {
+      deleteEnquiry(enquiriesData.enqID);
+    }
     console.log("delete clicked");
     
   };
@@ -544,7 +545,7 @@ export const Enquiries: React.FC = () => {
         nextPreviousBtnShow: true,
         tableMetaDataShow: true,
       },
-      // onDeleteClick: deleteEnquiryClick,
+      onDeleteClick: deleteEnquiryClick,
       // onEditClick: editEnquiryClick,
     },
   };

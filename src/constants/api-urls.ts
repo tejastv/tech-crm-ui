@@ -87,6 +87,7 @@ const GET_CLIENT_GROUP_BASED_ON_ID = "entity/client/clientGroup/{id}";
 // Transaction Master
 
 const GET_ADD_ALL_ENQUIRY = "transaction/enquiry";
+const GET_UPDATE_DELETE_ALL_ENQUIRY = "transaction/enquiry/{id}"
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -154,4 +155,5 @@ export const apiUrls = {
   //transaction master
 
   GET_ADD_ALL_ENQUIRY,
+  GET_UPDATE_DELETE_ALL_ENQUIRY,
 };

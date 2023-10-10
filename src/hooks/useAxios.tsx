@@ -26,6 +26,7 @@ export const useAxios = () => {
       config.headers["Content-Type"] = "application/json";
 
       if (config.headers["X-Transaction-Master"] === "true") {
+        delete config.headers["X-Transaction-Master"];
         config.baseURL = transactionMasterBaseUrl;
       } else {
         config.baseURL = defaultBaseUrl;

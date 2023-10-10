@@ -1,17 +1,17 @@
 import { useAxios } from "@hooks/useAxios";
 import { AllEnquiriesType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-// import { ApiResponseType } from "@shared/index";
+import { ApiResponseType } from "@shared/index";
 import {
   UseQueryResult,
-  // useMutation,
+  useMutation,
   useQuery,
-  // useQueryClient,
+  useQueryClient,
 } from "@tanstack/react-query";
 
 export const useAllEnquiriesApiCallHook = () => {
   const { instance } = useAxios();
-  //   const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
   const headersForTransactionMaster = {
     'X-Transaction-Master': 'true',
@@ -29,24 +29,24 @@ export const useAllEnquiriesApiCallHook = () => {
   };
 
 
-  //   const deleteEnquiry = async (id: string): Promise<ApiResponseType<CityType>> => {
-  //     const response = await instance.delete(
-  //       apiUrls.GET_UPDATE_DELETE_CITY.replace("{id}", id)
-  //     );
-  //     return response.data.data;
-  //   };
+    const deleteEnquiry = async (id: string): Promise<ApiResponseType<AllEnquiriesType>> => {
+      const response = await instance.delete(
+        apiUrls.GET_UPDATE_DELETE_ALL_ENQUIRY.replace("{id}", id), { headers: headersForTransactionMaster }
+      );
+      return response.data.data;
+    };
 
-  //   const deleteEnquiryMutation = () => {
-  //     const mutation = useMutation((id: string) => deleteCity(id), {
-  //       onSuccess: () => {
-  //         queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
-  //       },
-  //     });
-  //     return mutation;
-  //   };
+    const deleteEnquiryMutation = () => {
+      const mutation = useMutation((id: string) => deleteEnquiry(id), {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: [queryKeys.ALL_ENQUIRIES_DATA] });
+        },
+      });
+      return mutation;
+    };
 
   return {
     getEnquiries,
-    // deleteEnquiryMutation,
+    deleteEnquiryMutation,
   };
 };
