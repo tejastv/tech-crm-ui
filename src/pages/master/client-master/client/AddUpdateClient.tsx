@@ -155,17 +155,20 @@ export const AddUpdateClient: React.FC = () => {
     data["locked"] = "Y";
     data["nickName"] = "String";
     data["staxApplicable"] = "Y";
-    data.adjustPerEnq = parseFloat(data.adjustPerEnq);
-    data.adjustPerEnq_PI = parseFloat(data.adjustPerEnq_PI);
-    data.balToAdjust = parseFloat(data.balToAdjust);
-    data.balToAdjust_PI = parseFloat(data.balToAdjust_PI);
-    data.discount = parseFloat(data.discount);
-    data.toAdjust = parseFloat(data.toAdjust);
-    data.toAdjust_PI = parseFloat(data.toAdjust_PI);
-    data.disType = data.disType.toString();
-    data.gstYN = data.gstYN.toString();
-    data.monthlyInvoice = data.monthlyInvoice.toString();
-    data.osListPrInteger = data.osListPrInteger.toString();
+    data.adjustPerEnq = data.adjustPerEnq && parseFloat(data.adjustPerEnq);
+    data.adjustPerEnq_PI =
+      data.adjustPerEnq_PI && parseFloat(data.adjustPerEnq_PI);
+    data.balToAdjust = data.balToAdjust && parseFloat(data.balToAdjust);
+    data.balToAdjust_PI =
+      data.balToAdjust_PI && parseFloat(data.balToAdjust_PI);
+    data.discount = data.discount && parseFloat(data.discount);
+    data.toAdjust = data.toAdjust && parseFloat(data.toAdjust);
+    data.toAdjust_PI = data.toAdjust_PI && parseFloat(data.toAdjust_PI);
+    data.disType = data.disType && data.disType.toString();
+    data.gstYN = data.gstYN && data.gstYN.toString();
+    data.monthlyInvoice = data.monthlyInvoice && data.monthlyInvoice.toString();
+    data.osListPrInteger =
+      data.osListPrInteger && data.osListPrInteger.toString();
     if (data.cityID) {
       data.cityID = +data.cityID["value"];
     }
