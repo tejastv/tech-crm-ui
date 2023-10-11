@@ -83,6 +83,12 @@ const GET_ADD_CLIENT = "entity/client";
 const GET_UPDATE_DELETE_CLIENT = "entity/client/{id}";
 const GET_CLIENT_GROUP_BASED_ON_ID = "entity/client/clientGroup/{id}";
 
+
+// Transaction Master
+
+const GET_ADD_ALL_ENQUIRY = "transaction/enquiry";
+const GET_UPDATE_DELETE_ALL_ENQUIRY = "transaction/enquiry/{id}"
+
 export const apiUrls = {
   GET_ADD_CONTINENT,
   GET_ADD_COUNTRY,
@@ -144,4 +150,10 @@ export const apiUrls = {
   GET_PRICE_LIST_DATA,
   GET_ADD_ACTUAL_BUYER,
   GET_UPDATE_DELETE_ACTUAL_BUYER,
+
+
+  //transaction master
+
+  GET_ADD_ALL_ENQUIRY,
+  GET_UPDATE_DELETE_ALL_ENQUIRY,
 };

@@ -30,6 +30,10 @@ const LAST_FIN_YEAR = "last-fin-year-data";
 const CLIENT_DATA = "client-data";
 const CLIENT_GROUP_BASED_ON_ID_DATA = "client-group-based-on-id-data";
 
+//transaction master
+
+const ALL_ENQUIRIES_DATA = "all-enquiries-data";
+
 export const queryKeys = {
   CITY_DATA,
   STATE_DATA,
@@ -62,4 +66,8 @@ export const queryKeys = {
   STD_PRICE_DATA,
   PRICE_LIST_DATA,
   ACTUAL_BUYER_DATA,
+
+  //transaction master
+
+  ALL_ENQUIRIES_DATA,
 };
