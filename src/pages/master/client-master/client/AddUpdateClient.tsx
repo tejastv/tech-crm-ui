@@ -8,7 +8,7 @@ import {
   Radio,
   Select,
 } from "@shared/index";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -32,6 +32,7 @@ import { useParams } from "react-router-dom";
 export const AddUpdateClient: React.FC = () => {
   const methods = useForm<AddUpdateClientType>();
   const params = useParams();
+  const [stateCode, setStateCode] = useState();
   const { addClientMutation, updateClientMutation, getClientData } =
     useClientApiCallHook();
   const { mutate: addClient } = addClientMutation();
@@ -384,10 +385,12 @@ export const AddUpdateClient: React.FC = () => {
 
   const handleSelectChange = (selectedOption: any) => {
     if (selectedOption) {
-      addClientFormFields.statecodeClient.config.setData = selectedOption.value;
+      setStateCode(selectedOption.value)
     }
   };
 
+  addClientFormFields.statecodeClient.config.setData = stateCode;
+  
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
