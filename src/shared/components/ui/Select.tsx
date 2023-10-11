@@ -59,7 +59,7 @@ export const Select = (props: FormFieldType) => {
                   <AliceSelect
                     {...field}
                     isMulti
-                    isClearable
+                    // isClearable
                     onChange={handleSelectChange} // Pass the onChange handler
                     options={props.config.options}
                     placeholder={props.config.placeholder}
@@ -74,7 +74,7 @@ export const Select = (props: FormFieldType) => {
                 render={({ field }) => (
                   <AliceSelect
                     {...field}
-                    isClearable
+                    // isClearable
                     onChange={handleSelectChange} // Pass the onChange handler
                     options={props.config.options}
                     placeholder={props.config.placeholder}
