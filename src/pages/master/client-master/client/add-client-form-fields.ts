@@ -316,6 +316,8 @@ const AdjustEnqPropfomaValidation = {
 const GstOption = [
   { value: "Y", label: "Yes" },
   { value: "N", label: "No" },
+  { value: "S", label: "SEZ-IGST" },
+  { value: "Z", label: "SEZ-NO GST" },
 ];
 
 const biilOnActualBuyerOptions = [

@@ -1,59 +1,60 @@
 import { useAxios } from "@hooks/useAxios";
-import { EnqType, ServiceType } from "@transaction-search/index";
+import { EnqType, RefNoType, ServiceType } from "@transaction-search/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
-import { UseQueryResult, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { UseQueryResult, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useServiceTypeApiCallHook = () => {
   const { instance } = useAxios();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
-const getEnqType = () => {
-    // const response = await instance.get(apiUrls.GET_ADD_COUNTRY);
-    // return response.data.data;
+
+  const callFormConfig = {
+    headers: {
+      "callFrom": "transaction",
+    },
+  };
+
+  const getEnqStatus = (): UseQueryResult<EnqType[]> => {
     return useQuery<EnqType[]>({
-      queryKey: [queryKeys.ENQTYPE_DATA],
+      queryKey: [queryKeys.ENQSTATUS_DATA],
       queryFn: async () => {
-        const response = await instance.get(apiUrls.GET_ADD_ENQTYPE);
-        const data = response.data.data.sort((a: { enqtype: string; }, b: { enqtype: any; }) => a.enqtype.localeCompare(b.enqtype));
-        return data;
+        const response = await instance.get(apiUrls.GET_ADD_ENQSTATUS,callFormConfig);
+        return response.data.data;
       },
       staleTime: Infinity,
     });
   };
 
-    const getServiceType = (): UseQueryResult<ServiceType[]> => {
+  
+  const getServiceType = (): UseQueryResult<ServiceType[]> => {
     return useQuery<ServiceType[]>({
       queryKey: [queryKeys.SERVICETYPE_DATA],
       queryFn: async () => {
-        const response = await instance.get(apiUrls.GET_ADD_SERVICETYPE);
-        const data = response.data.data.sort(
-          (a: { state: string }, b: { state: any }) =>
-            a.state.localeCompare(b.state)
-        );
-        return data;
+        const response = await instance.get(apiUrls.GET_ADD_SERVICETYPE,callFormConfig);
+        return response.data.data;
       },
       staleTime: Infinity,
     });
   };
 
-  const getServiceTypeData = (id: string) => {
-    return useQuery<ServiceType>({
-      queryKey: [queryKeys.SERVICETYPE_DATA, id],
+
+//   ref no 
+const getRefNo = (): UseQueryResult<RefNoType[]> => {
+    return useQuery<RefNoType[]>({
+      queryKey: [queryKeys.REFNO_DATA],
       queryFn: async () => {
-        const response = await instance.get(
-          apiUrls.GET_ADD_SERVICETYPE.replace("{id}", id)
-        );
-        return response.data.data;
+        const response = await instance.get(apiUrls.GET_ADD_REFNO);
+        const data = response.data.data.sort((a: { refNo: number; }, b: { refNo: number; }) => b.refNo - a.refNo);
+        return data;
+
       },
-      enabled: true, // Query is initially enabled
-      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+      staleTime: Infinity,
     });
   };
+
+
   return {
     getServiceType,
-    getServiceTypeData,
-    getEnqType,
+    getEnqStatus,
+    getRefNo,
   }
 }

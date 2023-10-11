@@ -1,7 +1,6 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateEnquiryType, AllEnquiriesType } from "@transaction-search/index";
+import { AllEnquiriesType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-
 import { ApiResponseType } from "@shared/index";
 import {
   UseQueryResult,
@@ -9,34 +8,39 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
+
+import { AddUpdateEnquiryType } from "@transaction-search/index";
 import { useNavigate } from "react-router-dom";
 
-export const useEnquiryApiCallHook = () => {
+export const useAllEnquiriesApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  // const getState = (): UseQueryResult<StateType[]> => {
-  //   return useQuery<StateType[]>({
-  //     queryKey: [queryKeys.STATE_DATA],
-  //     queryFn: async () => {
-  //       const response = await instance.get(apiUrls.GET_ADD_STATE);
-  //       const data = response.data.data.sort(
-  //         (a: { state: string }, b: { state: any }) =>
-  //           a.state.localeCompare(b.state)
-  //       );
-  //       return data;
-  //     },
-  //     staleTime: Infinity,
-  //   });
-  // };
+  const callFormConfig = {
+    headers: {
+      "callFrom": "transaction",
+    },
+  };
+
+  const getEnquiries = (): UseQueryResult<AllEnquiriesType[]> => {
+    return useQuery<AllEnquiriesType[]>({
+      queryKey: [queryKeys.ALL_ENQUIRIES_DATA],
+      queryFn: async () => {
+        const response = await instance.get(apiUrls.GET_ADD_ALL_ENQUIRY,callFormConfig);
+        return response.data.data;
+      },
+      staleTime: Infinity,
+    });
+  };
+
 
   const getEnquiryData = (id: string): UseQueryResult<AllEnquiriesType> => {
     return useQuery<AllEnquiriesType>({
       queryKey: [queryKeys.ENQUIRY_DATA, id],
       queryFn: async () => {
         const response = await instance.get(
-          apiUrls.GET_UPDATE_DELETE_ENQUIRY.replace("{id}", id)
+          apiUrls.GET_UPDATE_DELETE_ALL_ENQUIRY.replace("{id}", id),callFormConfig
         );
         return response.data.data;
       },
@@ -48,7 +52,7 @@ export const useEnquiryApiCallHook = () => {
   const addEnquiry = async (
     enquiryData: AddUpdateEnquiryType
   ): Promise<ApiResponseType<AllEnquiriesType>> => {
-    const response = await instance.post(apiUrls.GET_ADD_ENQUIRY, enquiryData);
+    const response = await instance.post(apiUrls.GET_ADD_ALL_ENQUIRY, enquiryData,callFormConfig);
     return response.data.data;
   };
 
@@ -72,7 +76,7 @@ export const useEnquiryApiCallHook = () => {
   ): Promise<ApiResponseType<AllEnquiriesType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_STATE.replace("{id}", "" + updateStateData.id),
-      updateStateData
+      updateStateData,callFormConfig
     );
     return response.data.data;
   };
@@ -92,26 +96,29 @@ export const useEnquiryApiCallHook = () => {
     return mutation;
   };
 
-  const deleteState = async (id: string): Promise<AddUpdateEnquiryType[]> => {
+  const deleteEnquiry = async (id: string): Promise<ApiResponseType<AllEnquiriesType>> => {
     const response = await instance.delete(
-      apiUrls.GET_UPDATE_DELETE_STATE.replace("{id}", id)
-    );
+      apiUrls.GET_UPDATE_DELETE_ALL_ENQUIRY.replace("{id}", id),callFormConfig );
     return response.data.data;
   };
 
-  // const deleteContinentMutation = () => {
-  //   const mutation = useMutation((id: string) => deleteState(id), {
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries({ queryKey: [queryKeys.STATE_DATA] });
-  //     },
-  //   });
-  //   return mutation;
-  // };
+  const deleteEnquiryMutation = () => {
+    const mutation = useMutation((id: string) => deleteEnquiry(id), {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [queryKeys.ALL_ENQUIRIES_DATA] });
+      },
+    });
+    return mutation;
+  };
+
+
 
   return {
     getEnquiryData,
     addEnquiryMutation,
     updateEnquiryMutation,
+    getEnquiries,
+    deleteEnquiryMutation,
     // deleteContinentMutation,
   };
 };

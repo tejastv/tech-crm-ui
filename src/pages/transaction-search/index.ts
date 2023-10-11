@@ -20,8 +20,9 @@ export * from "./add-new-enquiry/new-enquiry-type";
 export * from "./all-enquiries/allenquiries-type";
 export * from "./add-new-enquiry/service-type";
 export * from "./add-new-enquiry/enq-type";
+export * from "./add-new-enquiry/ref-no-type";
 
 
 
-export { useEnquiryApiCallHook } from "./all-enquiries/useAllEnquiriesApiCallHook";
+export { useAllEnquiriesApiCallHook } from "./all-enquiries/useAllEnquiriesApiCallHook";
 export { useServiceTypeApiCallHook } from "./add-new-enquiry/useServiceTypeApiCallHook";

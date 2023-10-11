@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   BorderLayout,
@@ -9,14 +9,13 @@ import {
   InputWithText,
   ActionButtons,
   Table,
-  Loader,
   TableType,
 } from "@shared/index";
-import { AddUpdateEnquiryType, ClientType, addEnquiryFormFields, useEnquiryApiCallHook, useServiceTypeApiCallHook } from "@transaction-search/index";
+import { AddUpdateEnquiryType, ClientType, addEnquiryFormFields, useAllEnquiriesApiCallHook, useServiceTypeApiCallHook } from "@transaction-search/index";
 import { Link, useParams } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 import { useActualBuyerApiCallHook, useCityApiCallHook, useClientApiCallHook, useClientGroupApiCallHook, useCompanyApiCallHook, useCountryApiCallHook, useCreditDaysApiCallHook, useCurrencyApiCallHook, useExecutiveApiCallHook, useFinYearApiCallHook, useLocalSourceApiCallHook, useSegmentApiCallHook, useSourceApiCallHook, useStateApiCallHook } from "@pages/master";
-import { cleanupObject, selectOptionsMaker } from "@utils/index";
+import { cleanupObject, returnObjectBasedOnID, selectOptionsMaker } from "@utils/index";
 // import {useStateApiCallHook } from "@pages/master";
 
 export const AddEnquiry: React.FC = () => {
@@ -24,7 +23,7 @@ export const AddEnquiry: React.FC = () => {
   // const { data: stateData, isLoading } = getState();
   const methods = useForm<AddUpdateEnquiryType>();
   const { addEnquiryMutation, updateEnquiryMutation,getEnquiryData} =
-     useEnquiryApiCallHook();
+     useAllEnquiriesApiCallHook();
   const params = useParams();
   const { mutateAsync: addEnquiry } = addEnquiryMutation();
   const { mutateAsync: updateEnquiry } = updateEnquiryMutation();
@@ -32,7 +31,7 @@ export const AddEnquiry: React.FC = () => {
   const { getState } = useStateApiCallHook();
   const { getCountry } = useCountryApiCallHook();
   const { getServiceType } = useServiceTypeApiCallHook();
-  const { getEnqType } = useServiceTypeApiCallHook();
+  const { getEnqStatus } = useServiceTypeApiCallHook();
   const { getSource } = useSourceApiCallHook();
   const { getLocalSource } = useLocalSourceApiCallHook();
   const { getClient } = useClientApiCallHook();
@@ -40,6 +39,9 @@ export const AddEnquiry: React.FC = () => {
   const { getActualBuyer } = useActualBuyerApiCallHook();
   const { getFinYear } = useFinYearApiCallHook();
 
+
+  const [clientId, setClientId] = useState<number>();
+  const [refNo, setRefNo] = useState<number>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Enquiry",
@@ -154,41 +156,53 @@ export const AddEnquiry: React.FC = () => {
      );
    }
  
-   // enq Type api call
-   const { data: enqtypeData } = getEnqType();
-   if (enqtypeData) {
-     addEnquiryFormFields.enqtype.config.options = selectOptionsMaker(
-      enqtypeData,
+   // enq Status api call
+   const { data: enqstatusData } = getEnqStatus();
+   if (enqstatusData) {
+     addEnquiryFormFields.enqstatus.config.options = selectOptionsMaker(
+      enqstatusData,
        "enquiryStatusID",
        "enquiryStatus"
      );
    }
+ 
+   //RefNo api call
+   
+     addEnquiryFormFields.refnoenquiry.config.setData = refNo
+
+
+
+
+    
+   
 
    const onSubmit = methods.handleSubmit((enquiryData): void => {
     let data: any = { ...cleanupObject(enquiryData) };
+    delete data.state;
+
     if (data.stateId) {
-      data.stateId = data.stateId.value;
+      data.stateId = +data.stateId["value"];
     }
     if (data.countryId) {
-      data.countryId = data.countryId.value;
+      data.countryId = +data.countryId["value"];
     }
     if (data.cityId) {
-      data.cityId = data.cityId.value;
+      data.cityId = +data.cityId["value"];
     }
     if (data.clientId) {
-      data.clientId = data.clientId.value;
+      data.clientId = +data.clientId["value"];
     }
     if (data.localSourceId) {
-      data.localSourceId = data.localSourceId.value;
+      data.localSourceId = +data.localSourceId["value"];
     }
     if (data.sourceID) {
-      data.sourceID = data.sourceID.value;
+      data.sourceID = +data.sourceID["value"];
     }
     if (data.partyId) {
-      data.partyId = data.partyId.value;
+      data.partyId = +data.partyId["value"];
     }
     if (data.fYearid) {
-      data.fYearid = data.fYearid.value;
+      data.fYearid = +data.fYearid["value"];
     }
 
     console.log(data);
@@ -198,6 +212,225 @@ export const AddEnquiry: React.FC = () => {
       addEnquiry(data);
     }
   });
+
+  if (params.id) {
+    const { data: EnquiryMasterData } = getEnquiryData("" + params.id);
+    if (EnquiryMasterData) {
+      if (cityData) {
+        let id = EnquiryMasterData?.cityId;
+        let data: any = returnObjectBasedOnID(
+          cityData,
+          "id",
+          id,
+          "id",
+          "cityName"
+        );
+        addEnquiryFormFields.cityenquiry.config.setData = data
+          ? {
+              label: data.label,
+              value: data.value,
+            }
+          : [];
+      }
+      if (stateData) {
+        let id = EnquiryMasterData?.stateId;
+        let data: any = returnObjectBasedOnID(
+          stateData,
+          "stateId",
+          id,
+          "stateId",
+          "state"
+        );
+        addEnquiryFormFields.stateenquiry.config.setData = data
+          ? {
+              label: data.label,
+              value: data.value,
+            }
+          : [];
+      }
+      if (CountryData) {
+        let id = EnquiryMasterData?.countryId;
+        let data: any = returnObjectBasedOnID(
+          CountryData,
+          "countryId",
+          id,
+          "countryId",
+          "countryName"
+        );
+        addEnquiryFormFields.countryenquiry.config.setData = data
+          ? {
+              label: data.label,
+              value: data.value,
+            }
+          : [];
+      }
+      if (ClientData) {
+        let id = EnquiryMasterData?.clientID;
+        let data: any = returnObjectBasedOnID(
+          ClientData,
+          "clientId",
+          id,
+          "clientId",
+          "clientName"
+        );
+        addEnquiryFormFields.clientenquiry.config.setData = data
+          ? {
+              label: data.label,
+              value: data.value,
+            }
+          : [];
+      }
+      
+      
+      
+      if (fYearData) {
+        let id = EnquiryMasterData?.fyearId;
+        let data: any = returnObjectBasedOnID(
+          fYearData,
+          "id",
+          id,
+          "id",
+          "finYear"
+        );
+        addEnquiryFormFields.yearenquiry.config.setData = data
+          ? {
+              label: data.label,
+              value: data.value,
+            }
+          : [];
+      }
+      if (ActualBuyerData) {
+        let id = EnquiryMasterData?.actualBuyerId;
+        let data: any = returnObjectBasedOnID(
+          ActualBuyerData,
+          "partyId",
+          id,
+          "partyId",
+          "partyName"
+        );
+        addEnquiryFormFields.actualbureyenquiry.config.setData = data
+          ? {
+              label: data.label,
+              value: data.value,
+            }
+          : [];
+      }
+      if (SourceData) {
+        let id = EnquiryMasterData?.sourceID;
+        let data: any = returnObjectBasedOnID(
+          SourceData,
+          "sourceID",
+          id,
+          "sourceID",
+          "source"
+        );
+        addEnquiryFormFields.sourceenquiry.config.setData = data
+          ? {
+              label: data.label,
+              value: data.value,
+            }
+          : [];
+      }
+      if (LocalSourceData) {
+        let id = EnquiryMasterData?.localSourceId;
+        let data: any = returnObjectBasedOnID(
+          LocalSourceData,
+          "localSourceId",
+          id,
+          "localSourceId",
+          "localSource"
+        );
+        addEnquiryFormFields.localsourceenquiry.config.setData = data
+          ? {
+              label: data.label,
+              value: data.value,
+            }
+          : [];
+      }
+      
+      if (CompanyData
+        ) {
+        let id = EnquiryMasterData?.companyID;
+        let data: any = returnObjectBasedOnID(
+          CompanyData,
+          "companyId",
+          id,
+          "companyId",
+          "companyName"
+        );
+        addEnquiryFormFields.companyenquiry.config.setData = data
+          ? {
+              label: data.label,
+              value: data.value,
+            }
+          : [];
+      }
+      if (ServiceData
+        ) {
+        let id = EnquiryMasterData?.serviceTypeID;
+        let data: any = returnObjectBasedOnID(
+          ServiceData,
+          "serviceTypeID",
+          id,
+          "serviceTypeID",
+          "serviceTypeName"
+        );
+        addEnquiryFormFields.companyenquiry.config.setData = data
+          ? {
+              label: data.label,
+              value: data.value,
+            }
+          : [];
+      }
+      if (enqstatusData
+        ) {
+        let id = EnquiryMasterData?.enqStatusID;
+        let data: any = returnObjectBasedOnID(
+          enqstatusData,
+          "enquiryStatusID",
+          id,
+          "enquiryStatusID",
+          "enquiryStatus"
+        );
+        addEnquiryFormFields.companyenquiry.config.setData = data
+          ? {
+              label: data.label,
+              value: data.value,
+            }
+          : [];
+      }
+
+      
+      addEnquiryFormFields.zipenquiry.config.setData = EnquiryMasterData.zip;
+      addEnquiryFormFields.telnoenquiry.config.setData = EnquiryMasterData.phone;
+      addEnquiryFormFields.givenaddressEnquiry.config.setData =
+        EnquiryMasterData.givenAddress;
+     
+      addEnquiryFormFields.faxnoenquiry.config.setData = EnquiryMasterData.fax;
+      addEnquiryFormFields.emailenquiry.config.setData = EnquiryMasterData.email;
+      addEnquiryFormFields.websiteenquiry.config.setData =
+        EnquiryMasterData.website;
+      addEnquiryFormFields.contactenquiry.config.setData =
+        EnquiryMasterData.contactPerson;
+      addEnquiryFormFields.designationenquiry.config.setData =
+        EnquiryMasterData.designation;
+      addEnquiryFormFields.givenname.config.setData = EnquiryMasterData.givenName;
+      addEnquiryFormFields.notesforenquiry.config.setData = EnquiryMasterData.noteforenq;
+      addEnquiryFormFields.notesforadj.config.setData =
+        EnquiryMasterData.noteforadj;
+      addEnquiryFormFields.clientrefenquiry.config.setData =
+        EnquiryMasterData.clientRefNo;
+  } }else {
+    useEffect(() => {
+      methods.reset();
+    }, []);
+  }
+
+  const handleSelectChange = (selectedOption: any) => {
+    if (selectedOption) {
+      setClientId(selectedOption.value)
+    }
+  };
   const columns: ColumnDef<ClientType>[] = [
     {
       id: "srNo",
@@ -417,5 +650,3 @@ export const AddEnquiry: React.FC = () => {
     </>
   );
 };
-
-

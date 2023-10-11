@@ -84,12 +84,15 @@ const GET_UPDATE_DELETE_CLIENT = "entity/client/{id}";
 const GET_CLIENT_GROUP_BASED_ON_ID = "entity/client/clientGroup/{id}";
 
 
-// Transaction Search -  Enquiry 
-const GET_ADD_ENQUIRY = "transaction/enquiry";
-const GET_UPDATE_DELETE_ENQUIRY = "transaction/enquiry/{id}";
+// Transaction Master
+
+const GET_ADD_ALL_ENQUIRY = "transaction/enquiry";
+const GET_UPDATE_DELETE_ALL_ENQUIRY = "transaction/enquiry/{id}"
 
 const GET_ADD_SERVICETYPE = "transaction/serviceType";
 const GET_ADD_ENQTYPE= "transaction/enquiryStatus";
+const GET_ADD_ENQSTATUS= "transaction/enquiryStatus";
+const GET_ADD_REFNO= "transaction/getRefNo";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -152,10 +155,10 @@ export const apiUrls = {
   GET_PRICE_LIST_DATA,
   GET_ADD_ACTUAL_BUYER,
   GET_UPDATE_DELETE_ACTUAL_BUYER,
- 
-//  Transaction Search - Enquiry
-  GET_ADD_ENQUIRY,
-  GET_UPDATE_DELETE_ENQUIRY,
+  GET_ADD_ALL_ENQUIRY,
+  GET_UPDATE_DELETE_ALL_ENQUIRY,
   GET_ADD_SERVICETYPE,
   GET_ADD_ENQTYPE,
+  GET_ADD_REFNO,
+  GET_ADD_ENQSTATUS,
 };

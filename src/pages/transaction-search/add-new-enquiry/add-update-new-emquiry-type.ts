@@ -1,7 +1,7 @@
 export interface AddUpdateEnquiryType {
   id?: string;
   companyenquiry: string;
-  financialYear: string;
+  fyearId: any;
   refNo: number;
   sourceenquiry: string;
   givenAddress: string;
@@ -25,7 +25,7 @@ export interface AddUpdateEnquiryType {
   givenname: string;
   records: string;
   enqtype: string;
-  localsourceenquiry: string;
+  localsourceId: string;
   serviceTypeID: string;
   dueDate: string;
   printstatus: string;

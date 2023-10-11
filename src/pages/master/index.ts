@@ -226,6 +226,11 @@ export * from "./price-list-master/price-list-group-wise/city-wise-group-type";
 export * from "./price-list-master/price-list-group-wise/group-wise-currency-type";
 export * from "./client-master/client-group/client-group-basedon-clientID-type";
 
+
+// Transaction master 
+export * from "../transaction-search/all-enquiries/allenquiries-type"
+
+
 //Services/ Hooks
 
 // Location Master
@@ -262,3 +267,4 @@ export { useClientApiCallHook } from "./client-master/client/useClientApiCallHoo
 export { useStdPriceClientsApiCallHook } from "./price-list-master/std-price-list-client/useStdPriceClientsApiCallHook";
 export { usePriceListGroupApiCallHook } from "./price-list-master/price-list-group-wise/usePriceListGroupApiCallHook";
 export { useActualBuyerApiCallHook } from "./price-list-master/actual-buyer/useActualBuyerApiCallHook";
+export { useAllEnquiriesApiCallHook } from "../transaction-search/all-enquiries/useAllEnquiriesApiCallHook";

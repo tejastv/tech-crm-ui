@@ -10,9 +10,7 @@ import {
   Button,
   Table,
   TableType,
-  Checkbox,
 } from "@shared/index";
-import { useParams } from "react-router-dom";
 import { addGeneratePiFormFields, GeneratePiType } from "@profoma/index";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -21,7 +19,6 @@ export const AddGeneratePi: React.FC = () => {
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
-  const params = useParams();
 
   const cardConfig = {
     formLayoutConfig: {
