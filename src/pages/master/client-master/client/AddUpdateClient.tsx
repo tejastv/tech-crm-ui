@@ -169,6 +169,9 @@ export const AddUpdateClient: React.FC = () => {
     data.monthlyInvoice = data.monthlyInvoice && data.monthlyInvoice.toString();
     data.osListPrInteger =
       data.osListPrInteger && data.osListPrInteger.toString();
+      if (!data.billONActualBuyer) {
+        data.billONActualBuyer = "N";
+      }
     if (data.cityID) {
       data.cityID = +data.cityID["value"];
     }
