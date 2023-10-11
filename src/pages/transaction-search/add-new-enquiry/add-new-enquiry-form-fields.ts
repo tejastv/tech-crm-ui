@@ -439,11 +439,11 @@ const localsourceenquiryOptions = [
   { value: "strawberry", label: "Strawberry" },
   { value: "vanilla", label: "Vanilla" },
 ];
-// const clientIdOptions = [
-//   { value: "India", label: "India" },
-//   { value: "strawberry", label: "Strawberry" },
-//   { value: "vanilla", label: "Vanilla" },
-// ];
+const companyOptions = [
+  { value: "India", label: "India" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 const ServiceOptions = [
   { value: "India", label: "India" },
   { value: "strawberry", label: "Strawberry" },
@@ -462,9 +462,9 @@ const EnqStatusOptions = [
 ];
 
 const svisitOptions = [
-  { value: "in %", label: "in %" },
-  { value: "Per Report", label: "Per Report" },
-  { value: "NO Discount", label: "NO Discount" },
+  { value: "NA", label: "NA" },
+  { value: "Pending To Visit", label: "Pending To Visit" },
+  { value: "Visited", label: "Visited" },
 ];
 const actualbuyerOptions = [
   { value: "in %", label: "in %" },
@@ -474,9 +474,10 @@ const actualbuyerOptions = [
 const companyenquiry: FormFieldType = createFormConfig(
   "company",
   "Company",
-  "text",
+  "select",
   CompanyEnquiry,
-  "Enter Company"
+  "",
+  companyOptions
 );
 const yearenquiry: FormFieldType = createFormConfig(
   "year",
@@ -700,10 +701,10 @@ const instructionenquiry: FormFieldType = createFormConfig(
 );
 const adjustenquiry: FormFieldType = createFormConfig(
   "adjustenquiry",
-  "Adjust/Enquiry",
+  "Adjust",
   "text",
   AdjustEnqValidation,
-  "Adjust /Enquiry"
+  "Adjust"
 );
 
 const clientrefenquiry: FormFieldType = createFormConfig(

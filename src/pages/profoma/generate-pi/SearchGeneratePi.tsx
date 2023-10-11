@@ -191,74 +191,42 @@ export const SearchGeneratePi: React.FC = () => {
 
                 <div className="col-4 col-xs-12">
                   <div className="card-body">
-                    <div className="row">
-                    <div className="col-sm-10 col-xs-12">                      
-                        <Input
-                          config={addGeneratePiFormFields.invoicenoField.config}
-                        />
-                     </div>
-                    <div className="col-sm-2 ">
+                    
+                   
+                      <Input config={addGeneratePiFormFields.invoicenoField.config}/>
+                    
+                      <div className="col-md-14 col-xs-12 text-right">
                             <Button
                               type="button"
                               className={"btn btn-danger btn-sm"}>
                               Get
                             </Button>
                     </div>
-                    <div className="col-12">
-                        <Input
-                          config={addGeneratePiFormFields.countryField.config}
-                        />
-                        </div>
-                         <div className="col-8">
-                         <Select
-                          config={addGeneratePiFormFields.stateField.config}
-                        />
-                        </div>
-                        <div className="col-4 col-xs-12">
+                    
+                        <Input config={addGeneratePiFormFields.countryField.config} />
 
-                        <Input
-                          config={addGeneratePiFormFields.codeField.config}
-                          />
+                        <Select config={addGeneratePiFormFields.stateField.config} />
 
-                            </div>
+                        <Input config={addGeneratePiFormFields.codeField.config} />
+                          
 
-                          <div className="col-sm-12">
                           <div className="col-1">
                           <label htmlFor="" className="col-sm-7 control-label col-form-label"></label>
                           
-                        <SingleCheckbox
-                          config={addGeneratePiFormFields.gstField.config}
-                          />
+                        <SingleCheckbox config={addGeneratePiFormFields.gstField.config}/>
                           </div>
-                          
-                          </div>
-                        
-                    </div>
                   </div>
                 </div>
                 <div className="col-4 col-xs-12">
                   <div className="card-body">
-                    <div className="row">
-                      <div className="col-12 col-">
-                        <Input
-                          config={
-                            addGeneratePiFormFields.clientField.config
-                          }
-                        />
-                        <Input
-                          config={
-                            addGeneratePiFormFields.symbolField.config
-                          }
-                        />
-                        <Input
-                          config={
-                            addGeneratePiFormFields.currencyField.config
-                          }
-                        />
-                      </div>
-                    </div>
+                      
+                      <Input config={ addGeneratePiFormFields.clientField.config }/>
+                      <Input config={ addGeneratePiFormFields.symbolField.config } />
+                      <Input config={ addGeneratePiFormFields.currencyField.config } />
+                     
                   </div>
                 </div>
+
                 <div className="col-md-12 col-xs-12">
                   <div className="card-body">
                   
@@ -270,110 +238,110 @@ export const SearchGeneratePi: React.FC = () => {
   
                 <div className="col-md-5 col-xs-12">
                   <div className="card-body">
-                    <div className="row">
+                    
                   
-                    <div className="col-sm-6 ">
+                    {/* <div className="col-sm-6 "> */}
                  <Select config={addGeneratePiFormFields.fyearField.config} />
                   
-               </div>
-               <div className="col-sm-6 ">
+               {/* </div> */}
+               {/* <div className="col-sm-6 "> */}
                <Input config={addGeneratePiFormFields.invoicenoField.config} />    
              
-                    </div>
-                    <div className="col-sm-6 ">
+                    {/* </div> */}
+                    {/* <div className="col-sm-6 "> */}
                  <Input config={addGeneratePiFormFields.amountField.config} />
                   
-               </div>
-               <div className="col-sm-5 ">
+               {/* </div> */}
+               {/* <div className="col-sm-5 "> */}
                <Input config={addGeneratePiFormFields.disamountField.config} />   
                
-               </div>
-               <div className="col-sm-1 ">
+               {/* </div> */}
+               <div className="col-md-14 col-xs-12 text-right">
                <Button
                     type="button"
                     className={"btn btn-danger btn-sm"}>
                     Get Dis
                     </Button>   
                     </div>
-                <div className="col-sm-6 ">
+                {/* <div className="col-sm-6 "> */}
                  <Input config={addGeneratePiFormFields.stField.config} />
                   
-               </div>
-               <div className="col-sm-6 ">
+               {/* </div> */}
+               {/* <div className="col-sm-6 "> */}
                <Input config={addGeneratePiFormFields.cgstperField.config} />    
-                    </div>
+                    {/* </div> */}
 
 
-                <div className="col-sm-6 ">
+                {/* <div className="col-sm-6 "> */}
                  <Input config={addGeneratePiFormFields.stamountField.config} />
                   
-               </div>
-               <div className="col-sm-6 ">
+               {/* </div> */}
+               {/* <div className="col-sm-6 "> */}
                <Input config={addGeneratePiFormFields.cgstField.config} />    
-                    </div>
-                </div>
+                    {/* </div> */}
+                
                 </div> 
                 </div> 
 
                  <div className="col-md-4 col-xs-12">
                   <div className="card-body">
-                    <div className="row">
-                  
-                    <div className="col-sm-7 ">
-                    <Input config={addGeneratePiFormFields.dateField.config} />
-                    </div>
-
-                    <div className="col-sm-5 ">
-                    <SingleCheckbox config={addGeneratePiFormFields.donotField.config} />    
-                    </div>
                     
-                    <div className="col-sm-12">
+                  
+                    {/* <div className="col-sm-7 "> */}
+                    <Input config={addGeneratePiFormFields.dateField.config} />
+                    {/* </div> */}
+
+                    {/* <div className="col-sm-5 "> */}
+                    <SingleCheckbox config={addGeneratePiFormFields.donotField.config} />    
+                    {/* </div> */}
+                    
+                    {/* <div className="col-sm-12"> */}
                  <Input config={addGeneratePiFormFields.subtotalField.config} />
-               </div>
+               {/* </div> */}
 
-               <div className="col-sm-6 ">
+             {/* <div className="col-sm-6 "> */}
                     <Input config={addGeneratePiFormFields.sgstperField.config} />
-                    </div>
+                    {/* </div> */}
 
-                    <div className="col-sm-6 ">
+                    {/* <div className="col-sm-6 "> */}
                     <Input config={addGeneratePiFormFields.igstperField.config} />    
-                    </div>
-               <div className="col-sm-6 ">
+                    {/* </div> */}
+               {/* <div className="col-sm-6 "> */}
                     <Input config={addGeneratePiFormFields.sgstField.config} />
-                    </div>
+                    {/* </div> */}
 
-                    <div className="col-sm-6 ">
+                    {/* <div className="col-sm-6 "> */}
                     <Input config={addGeneratePiFormFields.igstField.config} />    
-                    </div>
+                    {/* </div> */}
 
-               </div>
+               
                </div>
                </div>
 
                 <div className="col-md-3 col-xs-12">
                   <div className="card-body">
-                    <div className="row">
+                    
 
-                     <div className="col-sm-12 ">
+                    
                     <Input config={addGeneratePiFormFields.staxField.config} />    
-                    </div> 
-                     <div className="col-sm-12 ">
+                    
+                    
                     <Input config={addGeneratePiFormFields.ecessField.config} />    
-                    </div> 
-                     <div className="col-sm-12 ">
+                    
+                    
                     <Input config={addGeneratePiFormFields.krishicessField.config} />    
-                    </div> 
-                     <div className="col-sm-9 ">
+                    
+                    
                     <Input config={addGeneratePiFormFields.totalField.config} />    
-                    </div> 
-                     <div className="col-sm-2 ">
+                    
+                    <div className="col-md-14 col-xs-12 text-right">
                      <Button
                     type="button"
                     className={"btn btn-danger btn-sm"}>
                     calculate
                     </Button>   
                     </div> 
-                  </div> 
+                  
                   </div>
                   </div>
               </div>

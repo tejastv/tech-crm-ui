@@ -30,6 +30,11 @@ const LAST_FIN_YEAR = "last-fin-year-data";
 const CLIENT_DATA = "client-data";
 const CLIENT_GROUP_BASED_ON_ID_DATA = "client-group-based-on-id-data";
 
+// Transaction Enquiry
+const ENQUIRY_DATA = "enquiry-data";
+const SERVICETYPE_DATA = "servicetype-data";
+const ENQTYPE_DATA = "enqtype-data";
+
 export const queryKeys = {
   CITY_DATA,
   STATE_DATA,
@@ -62,4 +67,9 @@ export const queryKeys = {
   STD_PRICE_DATA,
   PRICE_LIST_DATA,
   ACTUAL_BUYER_DATA,
+
+  // Transaction Search - Enquiry
+  ENQUIRY_DATA,
+  SERVICETYPE_DATA,
+  ENQTYPE_DATA
 };
