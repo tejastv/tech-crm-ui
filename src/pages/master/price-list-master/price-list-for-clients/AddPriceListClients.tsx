@@ -41,39 +41,47 @@ export const AddPriceClients: React.FC = () => {
                 <div className="col-md-3 col-xs-12">
                   <Select config={addPriceClientFormFields.pricecity.config} />
                 </div>
-
                 <div className="col-md-3 col-xs-12">
                   <Select
                     config={addPriceClientFormFields.priceClient.config}
                   />
                 </div>
-                <div className="col-md-2 col-xs-12">
+                <div className="col-md-3 col-xs-12">
                   <Select
                     config={addPriceClientFormFields.priceClientCurrency.config}
                   />
                 </div>
-                <div className="col-md-2 col-xs-12">
+                <div className="col-md-3 col-xs-12">
                   <Select config={addPriceClientFormFields.priceGroup.config} />
                 </div>
+              </div>
 
-                <div className="col-md-1 col-xs-12 text-right">
-                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>Get Price(From Group)
+              <div className="row justify-content-end">
+                <div className="col-md-2 col-xs-12 text-right">
+                  <Button
+                    type={"submit"}
+                    className={"btn btn-danger btn-sm mb-2"}
+                  >
+                    <i className="far fa-save"></i> Get Price(From Group)
                   </Button>
-                  <div className="pt-lg-5"></div>
                 </div>
+              </div>
+              <div className="row justify-content-end">
                 <div className="col-md-12 col-xs-12 text-right">
-                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>Get Std. Price
+                  <Button
+                    type={"submit"}
+                    className={"btn btn-danger btn-sm mb-2"}
+                  >
+                    <i className="far fa-save"></i> Get Std. Price
                   </Button>
                 </div>
-                <div className="pt-lg-3"></div>
+              </div>
+              <div className="row">
                 <div className="col-md-3 col-xs-12">
                   <Select
                     config={addPriceClientFormFields.priceGroup2.config}
                   />
                 </div>
-
                 <div className="col-md-3 col-xs-12">
                   <Select
                     config={addPriceClientFormFields.priceCurrencyClient.config}
@@ -82,16 +90,17 @@ export const AddPriceClients: React.FC = () => {
                 {/* <div className="pt-lg-1"></div> */}
                 <div className="col-md-6 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>Get Price(From Other Group)
+                    <i className="far fa-save"></i> Get Price(From Other Group)
                   </Button>
                 </div>
+              </div>
+              <div className="row">
                 {/* <div className="pt-lg-3"></div> */}
                 <div className="col-md-3 col-xs-12">
                   <Select
                     config={addPriceClientFormFields.priceClient2.config}
                   />
                 </div>
-
                 <div className="col-md-3 col-xs-12">
                   <Select
                     config={addPriceClientFormFields.priceCurrencyGroup.config}
@@ -100,13 +109,14 @@ export const AddPriceClients: React.FC = () => {
                 {/* <div className="pt-lg-1"></div> */}
                 <div className="col-md-6 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>Get Price
+                    <i className="far fa-save"></i> Get Price
                   </Button>
                 </div>
-
-                <div className="col-md-12 col-xs-12 text-right">
+              </div>
+              <div className="row justify-content-end">
+                <div className="col-md-2 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>Save All
+                    <i className="far fa-save"></i> Save All
                   </Button>
                 </div>
               </div>
