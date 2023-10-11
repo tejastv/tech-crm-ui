@@ -11,8 +11,11 @@ export const useAxios = () => {
   const { user } = useAuth();
   const { errorMessageToaster, successMessageToaster } = useToaster();
 
+  const defaultBaseUrl = `${import.meta.env.VITE_BASE_URL}`;
+  const transactionMasterBaseUrl = `${import.meta.env.VITE_BASE_URL_TRANSACTION_MASTER}`;
+
   const instance = axios.create({
-    baseURL: `${import.meta.env.VITE_BASE_URL}`,
+    baseURL: defaultBaseUrl,
   });
 
   instance.interceptors.request.use(
@@ -21,6 +24,13 @@ export const useAxios = () => {
         config.headers["Authorization"] = "Bearer " + user.authToken;
       }
       config.headers["Content-Type"] = "application/json";
+
+      if (config.headers["callFrom"] === "transaction") {
+        config.baseURL = transactionMasterBaseUrl;
+      } else {
+        config.baseURL = defaultBaseUrl;
+      }
+      delete config.headers["callFrom"];
       return config;
     },
     (error) => {
