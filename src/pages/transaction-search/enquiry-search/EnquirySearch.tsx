@@ -31,8 +31,6 @@ export const EnquirySearch: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Enquiry Details",
-      btnTitle: "",
-      btnRoute: "",
     },
     borderLayoutConfig: {
       heading: "List",
@@ -288,10 +286,10 @@ export const EnquirySearch: React.FC = () => {
       columns: columns,
       tableData: companyData ? companyData : [],
       copyBtn: true,
-      csvBtn: true,
+      csvBtn: false,
       excelBtn: true,
-      pdfBtn: true,
-      printBtn: true,
+      pdfBtn: false,
+      printBtn: false,
       globalSearchBox: true,
       pagination: {
         pageSize: 10,
@@ -311,7 +309,7 @@ export const EnquirySearch: React.FC = () => {
           <FormProvider {...methods}>
             <form noValidate autoComplete="off" className="p-t-20">
               <div className="row">
-                <div className="col-md-2 col-xs-12">
+                {/* <div className="col-md-2 col-xs-12">
                   <div className="pull-left col-4 col-xs-12">
                     <a href="">
                       <img
@@ -330,7 +328,7 @@ export const EnquirySearch: React.FC = () => {
                       />
                     </a>
                   </div>
-                </div>
+                </div> */}
                 {/* <div className="pull-left col-3">
                   <Select config={addEnquirySearchFormFields.clientnameField.config} />
                   <Input config={addEnquirySearchFormFields.fromdateField.config} />
@@ -357,7 +355,7 @@ export const EnquirySearch: React.FC = () => {
 
                 <div className="col-md-2 col-xs-12 text-left">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>Search
+                    <i className="far fa-save"></i> Search
                   </Button>
                 </div>
               </div>

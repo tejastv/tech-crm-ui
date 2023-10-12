@@ -34,6 +34,13 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     getPaginationRowModel: getPaginationRowModel(),
     //
     debugTable: true,
+    initialState: {
+      pagination: {
+        pageSize: props.config.pagination?.pageSize
+          ? props.config.pagination?.pageSize
+          : 10,
+      },
+    },
     state: {
       globalFilter,
       sorting,
@@ -60,7 +67,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
       successMessageToaster("Table data copied to clipboard!");
     } catch (err) {
       console.error("Unable to copy to clipboard: ", err);
-      errorMessageToaster(err,"Unable to copy to clipboard");
+      errorMessageToaster(err, "Unable to copy to clipboard");
     }
   };
 

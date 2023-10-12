@@ -223,6 +223,7 @@ export * from "./location-master/continent/add-update-continent-type";
 export * from "./location-master/country/add-update-country-type";
 export * from "./price-list-master/price-list-group-wise/city-wise-group-type";
 export * from "./price-list-master/price-list-group-wise/group-wise-currency-type";
+export * from "./price-list-master/price-list-for-clients/currency-and-group-type";
 export * from "./client-master/client-group/client-group-basedon-clientID-type";
 
 // Transaction master

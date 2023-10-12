@@ -9,7 +9,7 @@ export const PageBreadcrumb: React.FC<PageBreadcrumbType> = (props) => {
   const navigate = useNavigate();
 
   const routeHandler = () => {
-    navigate(props.config.btnRoute);
+    props.config.btnRoute && navigate(props.config.btnRoute);
   };
 
   return (
@@ -21,13 +21,15 @@ export const PageBreadcrumb: React.FC<PageBreadcrumbType> = (props) => {
           </div>
           <div className="col-7 align-self-center">
             <div className="d-flex no-block justify-content-end align-items-center">
-              <Button
-                variant="primary"
-                className="btn waves-effect waves-light btn-danger btn-sm"
-                onClick={routeHandler}
-              >
-                {props.config.btnTitle}
-              </Button>
+              {props.config.btnTitle && (
+                <Button
+                  variant="primary"
+                  className="btn waves-effect waves-light btn-danger btn-sm"
+                  onClick={routeHandler}
+                >
+                  {props.config.btnTitle}
+                </Button>
+              )}
             </div>
           </div>
         </div>
