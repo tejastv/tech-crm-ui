@@ -68,6 +68,8 @@ const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 // Std Price
 const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
 const GET_UPDATE_DELETE_STDPRICE_CLIENTS = "entity/stdPriceListForClients/{id}";
+const GET_CLIENT_WISE_CURRENCY_AND_GROUP =
+  "entity/priceListForClient/getCurrencyAndGroup/{id}";
 const GET_CLIENT_BY_CITY_ID = "entity/priceListForClient/city/{id}";
 
 const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
@@ -162,4 +164,5 @@ export const apiUrls = {
   GET_ADD_REFNO,
   GET_ADD_ENQSTATUS,
   GET_CLIENT_BY_CITY_ID,
+  GET_CLIENT_WISE_CURRENCY_AND_GROUP,
 };

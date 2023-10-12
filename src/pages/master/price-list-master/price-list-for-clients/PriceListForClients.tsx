@@ -7,6 +7,8 @@ import {
   useCityApiCallHook,
   useClientApiCallHook,
   useClientGroupApiCallHook,
+  usePriceListForClientsApiCallHook,
+  usePriceListGroupApiCallHook,
 } from "@master/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
@@ -18,8 +20,13 @@ export const PriceListForClients: React.FC = () => {
   const { getCity } = useCityApiCallHook();
   const { getClientsByCityId } = useClientApiCallHook();
   const { getClientGroup } = useClientGroupApiCallHook();
+  const { getGroupWiseCurrencyData } = usePriceListGroupApiCallHook();
+  const { getCurrencyAndGroupByClientID } = usePriceListForClientsApiCallHook();
   const { data: cityData } = getCity();
   const [city, setCity] = useState<number>(-2);
+  const [group, setGroup] = useState<number>(-2);
+  const [client, setClient] = useState<number>(-2);
+  const [client2, setClient2] = useState<number>(-2);
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Price List (Client)",
@@ -45,6 +52,15 @@ export const PriceListForClients: React.FC = () => {
     addPriceClientFormFields.pricecity.config.options = cityArray;
   }
 
+  const { data: clientGroupData } = getClientGroup();
+  if (clientGroupData) {
+    addPriceClientFormFields.priceGroup2.config.options = selectOptionsMaker(
+      clientGroupData,
+      "groupId",
+      "groupName"
+    );
+  }
+
   const { data: cityWiseClientsData } = getClientsByCityId(city, city != -2);
   if (cityWiseClientsData) {
     let groupArray = selectOptionsMaker(
@@ -56,19 +72,81 @@ export const PriceListForClients: React.FC = () => {
     addPriceClientFormFields.priceClient2.config.options = groupArray;
   }
 
-  // ClientGroup api call
-  const { data: clientGroupData } = getClientGroup();
-  if (clientGroupData) {
-    addPriceClientFormFields.priceGroup2.config.options = selectOptionsMaker(
-      clientGroupData,
-      "groupId",
-      "groupName"
-    );
-  }
-
   const cityChangeHandler = (selectedOption: any) => {
     if (selectedOption) {
       setCity(selectedOption.value);
+      // setIsStdPriceBtnClicked(false);
+    }
+  };
+
+  const { data: groupWiseCurrencyData } = getGroupWiseCurrencyData(
+    group,
+    group != -2
+  );
+  if (groupWiseCurrencyData) {
+    let currencyData = selectOptionsMaker(
+      [groupWiseCurrencyData],
+      "currencyId",
+      "currecnyName"
+    );
+    addPriceClientFormFields.priceCurrencyClient.config.options = currencyData;
+  }
+
+  const groupChangeHandler = (selectedOption: any) => {
+    if (selectedOption) {
+      setGroup(selectedOption.value);
+      // setIsStdPriceBtnClicked(false);
+    }
+  };
+
+  const { data: clientWiseCurrencyAndGroup } = getCurrencyAndGroupByClientID(
+    client,
+    client != -2
+  );
+
+  if (clientWiseCurrencyAndGroup) {
+    let currency = [
+      {
+        value: clientWiseCurrencyAndGroup.currencyId,
+        label: clientWiseCurrencyAndGroup.currencyName,
+      },
+    ];
+    let group = [
+      {
+        value: clientWiseCurrencyAndGroup.groupId,
+        label: clientWiseCurrencyAndGroup.groupName,
+      },
+    ];
+    addPriceClientFormFields.priceClientCurrency.config.options = currency;
+    addPriceClientFormFields.priceGroup.config.options = group;
+  }
+
+  const clientChangeHandler = (selectedOption: any) => {
+    if (selectedOption) {
+      setClient(selectedOption.value);
+      // setIsStdPriceBtnClicked(false);
+    }
+  };
+
+  const { data: clientWiseCurrency } = getCurrencyAndGroupByClientID(
+    client2,
+    client2 != -2
+  );
+
+  if (clientWiseCurrency) {
+    let currency = [
+      {
+        value: clientWiseCurrency.currencyId,
+        label: clientWiseCurrency.currencyName,
+      },
+    ];
+
+    addPriceClientFormFields.priceCurrencyGroup.config.options = currency;
+  }
+
+  const client2ChangeHandler = (selectedOption: any) => {
+    if (selectedOption) {
+      setClient2(selectedOption.value);
       // setIsStdPriceBtnClicked(false);
     }
   };
@@ -109,6 +187,7 @@ export const PriceListForClients: React.FC = () => {
                   <div className="col-md-3 col-xs-12">
                     <Select
                       config={addPriceClientFormFields.priceClient.config}
+                      onChangeHandler={clientChangeHandler}
                     />
                   </div>
                   <div className="col-md-3 col-xs-12">
@@ -157,6 +236,7 @@ export const PriceListForClients: React.FC = () => {
                   <div className="col-md-3 col-xs-12">
                     <Select
                       config={addPriceClientFormFields.priceGroup2.config}
+                      onChangeHandler={groupChangeHandler}
                     />
                   </div>
                   <div className="col-md-3 col-xs-12">
@@ -185,6 +265,7 @@ export const PriceListForClients: React.FC = () => {
                   <div className="col-md-3 col-xs-12">
                     <Select
                       config={addPriceClientFormFields.priceClient2.config}
+                      onChangeHandler={client2ChangeHandler}
                     />
                   </div>
                   <div className="col-md-3 col-xs-12">
