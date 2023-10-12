@@ -23,7 +23,8 @@ const BANKMASTER_DEPOSIT_DATA = "bankmasterdeposit-data";
 const PAYMENTMODE_DATA = "paymentmode-data";
 const SUPPLIER_MASTER_DATA = "supplier-master-data";
 const CURRENCY_DATA = "currency-data";
-const STDPRICE_DATA = "currency-data";
+const STDPRICE_DATA = "std-price-for-clients-data";
+const CITY_WISE_CLIENT_DATA = "city-wise-clients-data";
 const CLIENT_GROUP_DATA = "client-group-data";
 const SOURCE_DATA = "source-data";
 const LAST_FIN_YEAR = "last-fin-year-data";
@@ -70,4 +71,5 @@ export const queryKeys = {
   //transaction master
 
   ALL_ENQUIRIES_DATA,
+  CITY_WISE_CLIENT_DATA,
 };

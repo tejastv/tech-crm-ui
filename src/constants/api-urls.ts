@@ -68,6 +68,7 @@ const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 // Std Price
 const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
 const GET_UPDATE_DELETE_STDPRICE_CLIENTS = "entity/stdPriceListForClients/{id}";
+const GET_CLIENT_BY_CITY_ID = "entity/priceListForClient/city/{id}";
 
 const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
 const GET_UPDATE_DELETE_CLIENT_GROUP = "entity/clientGroup/{id}";
@@ -83,11 +84,10 @@ const GET_ADD_CLIENT = "entity/client";
 const GET_UPDATE_DELETE_CLIENT = "entity/client/{id}";
 const GET_CLIENT_GROUP_BASED_ON_ID = "entity/client/clientGroup/{id}";
 
-
 // Transaction Master
 
 const GET_ADD_ALL_ENQUIRY = "transaction/enquiry";
-const GET_UPDATE_DELETE_ALL_ENQUIRY = "transaction/enquiry/{id}"
+const GET_UPDATE_DELETE_ALL_ENQUIRY = "transaction/enquiry/{id}";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -136,7 +136,7 @@ export const apiUrls = {
   GET_UPDATE_DELETE_CLIENT_GROUP,
   GET_ADD_SOURCE,
   GET_UPDATE_DELETE_SOURCE,
-// =========
+  // =========
 
   // Std Price
   GET_LAST_FIN_YEAR,
@@ -151,9 +151,9 @@ export const apiUrls = {
   GET_ADD_ACTUAL_BUYER,
   GET_UPDATE_DELETE_ACTUAL_BUYER,
 
-
   //transaction master
 
   GET_ADD_ALL_ENQUIRY,
   GET_UPDATE_DELETE_ALL_ENQUIRY,
+  GET_CLIENT_BY_CITY_ID,
 };
