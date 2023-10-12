@@ -17,19 +17,19 @@ export const useServiceTypeApiCallHook = () => {
     return useQuery<EnqType[]>({
       queryKey: [queryKeys.ENQSTATUS_DATA],
       queryFn: async () => {
-        const response = await instance.get(apiUrls.GET_ADD_ENQSTATUS,callFormConfig);
+        const response = await instance.get(apiUrls.GET_ADD_ENQSTATUS, callFormConfig);
         return response.data.data;
       },
       staleTime: Infinity,
     });
   };
 
-  
+
   const getServiceType = (): UseQueryResult<ServiceType[]> => {
     return useQuery<ServiceType[]>({
       queryKey: [queryKeys.SERVICETYPE_DATA],
       queryFn: async () => {
-        const response = await instance.get(apiUrls.GET_ADD_SERVICETYPE,callFormConfig);
+        const response = await instance.get(apiUrls.GET_ADD_SERVICETYPE, callFormConfig);
         return response.data.data;
       },
       staleTime: Infinity,
@@ -37,24 +37,21 @@ export const useServiceTypeApiCallHook = () => {
   };
 
 
-//   ref no 
-const getRefNo = (): UseQueryResult<RefNoType[]> => {
-    return useQuery<RefNoType[]>({
-      queryKey: [queryKeys.REFNO_DATA],
-      queryFn: async () => {
-        const response = await instance.get(apiUrls.GET_ADD_REFNO);
-        const data = response.data.data.sort((a: { refNo: number; }, b: { refNo: number; }) => b.refNo - a.refNo);
-        return data;
-
-      },
-      staleTime: Infinity,
-    });
+  //   ref no 
+  const getRefNo = async (): Promise<RefNoType> => {
+    const response = await instance.get(apiUrls.GET_ADD_REFNO, callFormConfig);
+    return response.data;
   };
 
+  const getClientDetails = async (id: string): Promise<RefNoType> => {
+    const response = await instance.get(apiUrls.GET_UPDATE_DELETE_CLIENT.replace("{id}", id));
+    return response.data;
+  };
 
   return {
     getServiceType,
     getEnqStatus,
     getRefNo,
+    getClientDetails,
   }
 }

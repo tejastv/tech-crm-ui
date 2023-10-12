@@ -491,7 +491,9 @@ const refnoenquiry: FormFieldType = createFormConfig(
   "Ref No",
   "text",
   refnoEnquiry,
-  "1"
+  "",
+  [],
+  true
 );
 const sourceenquiry: FormFieldType = createFormConfig(
   "souce",
