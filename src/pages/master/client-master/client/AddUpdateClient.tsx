@@ -206,7 +206,7 @@ export const AddUpdateClient: React.FC = () => {
   });
 
   if (params.id) {
-    const { data: clientMasterData } = getClientData("" + params.id);
+    const { data: clientMasterData } = getClientData(+params.id);
     if (clientMasterData) {
       if (cityData) {
         let id = clientMasterData?.cityID;

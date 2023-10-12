@@ -11,11 +11,36 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { AddUpdateEnquiryType, ClientType, addEnquiryFormFields, useAllEnquiriesApiCallHook, useServiceTypeApiCallHook } from "@transaction-search/index";
+import {
+  AddUpdateEnquiryType,
+  ClientType,
+  addEnquiryFormFields,
+  useAllEnquiriesApiCallHook,
+  useServiceTypeApiCallHook,
+} from "@transaction-search/index";
 import { Link, useParams } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
-import { useActualBuyerApiCallHook, useCityApiCallHook, useClientApiCallHook, useClientGroupApiCallHook, useCompanyApiCallHook, useCountryApiCallHook, useCreditDaysApiCallHook, useCurrencyApiCallHook, useExecutiveApiCallHook, useFinYearApiCallHook, useLocalSourceApiCallHook, useSegmentApiCallHook, useSourceApiCallHook, useStateApiCallHook } from "@pages/master";
-import { cleanupObject, returnObjectBasedOnID, selectOptionsMaker } from "@utils/index";
+import {
+  useActualBuyerApiCallHook,
+  useCityApiCallHook,
+  useClientApiCallHook,
+  useClientGroupApiCallHook,
+  useCompanyApiCallHook,
+  useCountryApiCallHook,
+  useCreditDaysApiCallHook,
+  useCurrencyApiCallHook,
+  useExecutiveApiCallHook,
+  useFinYearApiCallHook,
+  useLocalSourceApiCallHook,
+  useSegmentApiCallHook,
+  useSourceApiCallHook,
+  useStateApiCallHook,
+} from "@pages/master";
+import {
+  cleanupObject,
+  returnObjectBasedOnID,
+  selectOptionsMaker,
+} from "@utils/index";
 // import {useStateApiCallHook } from "@pages/master";
 
 export const AddEnquiry: React.FC = () => {
@@ -35,14 +60,13 @@ export const AddEnquiry: React.FC = () => {
   const { getRefNo } = useServiceTypeApiCallHook();
   const { getSource } = useSourceApiCallHook();
   const { getLocalSource } = useLocalSourceApiCallHook();
-  const { getClient } = useClientApiCallHook();
+  const { getClient, getClientData } = useClientApiCallHook();
   const { getCompany } = useCompanyApiCallHook();
   const { getActualBuyer } = useActualBuyerApiCallHook();
   const { getFinYear } = useFinYearApiCallHook();
   const { getClientDetails } = useServiceTypeApiCallHook();
 
-
-  const [clientId, setClientId] = useState<any>();
+  const [clientId, setClientId] = useState<number>(-2);
   const [refNo, setRefNo] = useState<any>();
   const [clientIdData, setClientIdData] = useState<any>();
   const cardConfig = {
@@ -170,9 +194,8 @@ export const AddEnquiry: React.FC = () => {
   }
 
   //RefNo api call
-  
-    addEnquiryFormFields.refnoenquiry.config.setData = refNo;
-  
+
+  addEnquiryFormFields.refnoenquiry.config.setData = refNo;
 
   const onSubmit = methods.handleSubmit((enquiryData): void => {
     let data: any = { ...cleanupObject(enquiryData) };
@@ -225,9 +248,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.cityenquiry.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (stateData) {
@@ -241,9 +264,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.stateenquiry.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (CountryData) {
@@ -257,9 +280,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.countryenquiry.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (ClientData) {
@@ -273,13 +296,11 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.clientenquiry.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
-
-
 
       if (fYearData) {
         let id = EnquiryMasterData?.fyearId;
@@ -292,9 +313,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.yearenquiry.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (ActualBuyerData) {
@@ -308,9 +329,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.actualbureyenquiry.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (SourceData) {
@@ -324,9 +345,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.sourceenquiry.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (LocalSourceData) {
@@ -340,14 +361,13 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.localsourceenquiry.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
 
-      if (CompanyData
-      ) {
+      if (CompanyData) {
         let id = EnquiryMasterData?.companyID;
         let data: any = returnObjectBasedOnID(
           CompanyData,
@@ -358,13 +378,12 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.companyenquiry.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
-      if (ServiceData
-      ) {
+      if (ServiceData) {
         let id = EnquiryMasterData?.serviceTypeID;
         let data: any = returnObjectBasedOnID(
           ServiceData,
@@ -375,13 +394,12 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.companyenquiry.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
-      if (enqstatusData
-      ) {
+      if (enqstatusData) {
         let id = EnquiryMasterData?.enqStatusID;
         let data: any = returnObjectBasedOnID(
           enqstatusData,
@@ -392,28 +410,29 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.companyenquiry.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
-
-
       addEnquiryFormFields.zipenquiry.config.setData = EnquiryMasterData.zip;
-      addEnquiryFormFields.telnoenquiry.config.setData = EnquiryMasterData.phone;
+      addEnquiryFormFields.telnoenquiry.config.setData =
+        EnquiryMasterData.phone;
       addEnquiryFormFields.givenaddressEnquiry.config.setData =
         EnquiryMasterData.givenAddress;
-
       addEnquiryFormFields.faxnoenquiry.config.setData = EnquiryMasterData.fax;
-      addEnquiryFormFields.emailenquiry.config.setData = EnquiryMasterData.email;
+      addEnquiryFormFields.emailenquiry.config.setData =
+        EnquiryMasterData.email;
       addEnquiryFormFields.websiteenquiry.config.setData =
         EnquiryMasterData.website;
       addEnquiryFormFields.contactenquiry.config.setData =
         EnquiryMasterData.contactPerson;
       addEnquiryFormFields.designationenquiry.config.setData =
         EnquiryMasterData.designation;
-      addEnquiryFormFields.givenname.config.setData = EnquiryMasterData.givenName;
-      addEnquiryFormFields.notesforenquiry.config.setData = EnquiryMasterData.noteforenq;
+      addEnquiryFormFields.givenname.config.setData =
+        EnquiryMasterData.givenName;
+      addEnquiryFormFields.notesforenquiry.config.setData =
+        EnquiryMasterData.noteforenq;
       addEnquiryFormFields.notesforadj.config.setData =
         EnquiryMasterData.noteforadj;
       addEnquiryFormFields.clientrefenquiry.config.setData =
@@ -422,7 +441,7 @@ export const AddEnquiry: React.FC = () => {
   } else {
     useEffect(() => {
       methods.reset();
-      getRefNo().then((refno:any) => {  
+      getRefNo().then((refno: any) => {
         if (refno) {
           setRefNo(refno.data);
         }
@@ -430,38 +449,14 @@ export const AddEnquiry: React.FC = () => {
     }, []);
   }
 
+  const { data: clientData } = getClientData(clientId, clientId != -2);
+
   const handleSelectChange = (selectedOption: any) => {
     debugger;
     if (selectedOption) {
       setClientId(selectedOption.value);
     }
   };
-  if(clientId){
-    addEnquiryFormFields.clientIdenquiry.config.setData = clientId;
-    getClientDetails(clientId).then((clientData:any) => {  
-      if (clientData) {
-        console.log(clientData.data); 
-      }
-    });
-  }
-
-  // const customData = [
-  //   {
-  //     srNo: 1,
-  //     ClientName: "John Doe",
-  //     Address: "123 Main St",
-  //     CountryName: "United States",
-  //     Instruction: "Handle with care",
-  //   },
-  //   {
-  //     srNo: 2,
-  //     ClientName: "Jane Smith",
-  //     Address: "456 Elm St",
-  //     CountryName: "Canada",
-  //     Instruction: "Urgent delivery",
-  //   },
-  //   // Add more data as needed
-  // ];
 
   const columns: ColumnDef<any>[] = [
     {
@@ -499,7 +494,7 @@ export const AddEnquiry: React.FC = () => {
     config: {
       tableName: "State",
       columns: columns,
-      tableData: [],
+      tableData: clientData ? [clientData] : [],
       copyBtn: false,
       csvBtn: false,
       excelBtn: false,
@@ -527,126 +522,100 @@ export const AddEnquiry: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-
-                    <Select config={addEnquiryFormFields.companyenquiry.config} />
-
-                    <Select config={addEnquiryFormFields.yearenquiry.config} />
-
-                    <Input config={addEnquiryFormFields.refnoenquiry.config} />
-
-                    <div className="col-md-12 col-xs-12 text-right">
-
-                      <small className="enquirynote">
-                        <InputWithText config={addEnquiryFormFields.refnote.config} />
-                      </small>
-
-                    </div>
-
-                    <Select config={addEnquiryFormFields.sourceenquiry.config} />
-
-                    <Input config={addEnquiryFormFields.givenaddressEnquiry.config} />
-
-                    <Select config={addEnquiryFormFields.cityenquiry.config} />
-
-                    <Select config={addEnquiryFormFields.stateenquiry.config} />
-
-                    <Select config={addEnquiryFormFields.countryenquiry.config} />
-
-                    <Input config={addEnquiryFormFields.zipenquiry.config} />
-
-                    <Input config={addEnquiryFormFields.telnoenquiry.config} />
-
-                    <Input config={addEnquiryFormFields.faxnoenquiry.config} />
-
-                    <Input config={addEnquiryFormFields.emailenquiry.config} />
-
-                    <Input config={addEnquiryFormFields.websiteenquiry.config} />
-
-                    <Input config={addEnquiryFormFields.contactenquiry.config} />
-
-                    <Input config={addEnquiryFormFields.designationenquiry.config} />
-                  </div>
+                  <Select config={addEnquiryFormFields.companyenquiry.config} />
+                  <Select config={addEnquiryFormFields.yearenquiry.config} />
+                  <Input config={addEnquiryFormFields.refnoenquiry.config} />
+                  <small className="enquirynote text-right">
+                    <InputWithText
+                      config={addEnquiryFormFields.refnote.config}
+                    />
+                  </small>
+                  <Select config={addEnquiryFormFields.sourceenquiry.config} />
+                  <Input
+                    config={addEnquiryFormFields.givenaddressEnquiry.config}
+                  />
+                  <Select config={addEnquiryFormFields.cityenquiry.config} />
+                  <Select config={addEnquiryFormFields.stateenquiry.config} />
+                  <Select config={addEnquiryFormFields.countryenquiry.config} />
+                  <Input config={addEnquiryFormFields.zipenquiry.config} />
+                  <Input config={addEnquiryFormFields.telnoenquiry.config} />
+                  <Input config={addEnquiryFormFields.faxnoenquiry.config} />
+                  <Input config={addEnquiryFormFields.emailenquiry.config} />
+                  <Input config={addEnquiryFormFields.websiteenquiry.config} />
+                  <Input config={addEnquiryFormFields.contactenquiry.config} />
+                  <Input
+                    config={addEnquiryFormFields.designationenquiry.config}
+                  />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-
-                    <Input config={addEnquiryFormFields.givenname.config} />
-
-                    <Input config={addEnquiryFormFields.recdon.config} />
-
-                    <Select config={addEnquiryFormFields.enqtype.config} />
-
-                    <Select config={addEnquiryFormFields.localsourceenquiry.config} />
-
-                    <Select config={addEnquiryFormFields.servicetype.config} />
-
-                    <Input config={addEnquiryFormFields.dueon.config} />
-
-                    <Select config={addEnquiryFormFields.printstatus.config} />
-
-                    <Select config={addEnquiryFormFields.enqstatus.config} />
-
-                    <Select config={addEnquiryFormFields.svisit.config} />
-
-                    <Input config={addEnquiryFormFields.notesforenquiry.config} />
-
-                    <Input config={addEnquiryFormFields.notesforadj.config} />
-
-                    <Input config={addEnquiryFormFields.instructionenquiry.config} />
-                  </div>
+                  <Input config={addEnquiryFormFields.givenname.config} />
+                  <Input config={addEnquiryFormFields.recdon.config} />
+                  <Select config={addEnquiryFormFields.enqtype.config} />
+                  <Select
+                    config={addEnquiryFormFields.localsourceenquiry.config}
+                  />
+                  <Select config={addEnquiryFormFields.servicetype.config} />
+                  <Input config={addEnquiryFormFields.dueon.config} />
+                  <Select config={addEnquiryFormFields.printstatus.config} />
+                  <Select config={addEnquiryFormFields.enqstatus.config} />
+                  <Select config={addEnquiryFormFields.svisit.config} />
+                  <Input config={addEnquiryFormFields.notesforenquiry.config} />
+                  <Input config={addEnquiryFormFields.notesforadj.config} />
+                  <Input
+                    config={addEnquiryFormFields.instructionenquiry.config}
+                  />
                 </div>
-
                 <h6 className="card-title col-12">Client Details</h6>
                 <div className="col-md-4 col-xs-12">
-                  <div className="card-body">
-                    <Input config={addEnquiryFormFields.clientrefenquiry.config} />
-                    {/* <div className="col-sm-9"> */}
-                    <Select config={addEnquiryFormFields.clientenquiry.config} onChangeHandler={handleSelectChange} />
-                    {/* </div> */}
-                    <div className="col-md-14 col-xs-12 text-right">
-                      <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                        <i className="far fa-save"></i>Get Price
+                  <Input
+                    config={addEnquiryFormFields.clientrefenquiry.config}
+                  />
+                  <Select
+                    config={addEnquiryFormFields.clientenquiry.config}
+                    onChangeHandler={handleSelectChange}
+                  />
+                  <div className="row justify-content-end">
+                    <div className="col-md-4 col-xs-12 text-right">
+                      <Button
+                        type={"submit"}
+                        className={"btn btn-danger btn-sm mb-2"}
+                      >
+                        <i className="far fa-save"></i> Get Price
                       </Button>
                     </div>
-                    <Input config={addEnquiryFormFields.requestnoenquiry.config} />
                   </div>
+                  <Input
+                    config={addEnquiryFormFields.requestnoenquiry.config}
+                  />
                 </div>
-
                 <div className="col-md-4 col-xs-12">
-                  <div className="card-body">
-                    <Input config={addEnquiryFormFields.clientIdenquiry.config} />
-                    {/* <div className="col-md-12"> */}
-                    {/* <div className="col-sm-9"> */}
-                    <Select config={addEnquiryFormFields.actualbureyenquiry.config} />
-                    {/* </div> */}
-                    {/* <div className="col-sm-1"> */}
-                    <div className="col-md-14 col-xs-12 text-right">
+                  <Input config={addEnquiryFormFields.clientIdenquiry.config} />
+                  <Select
+                    config={addEnquiryFormFields.actualbureyenquiry.config}
+                  />
+                  <div className="row">
+                    <div className="col-md-8 col-xs-12 text-right">
+                      <Link to={""} className="card-title">
+                        <InputWithText
+                          config={
+                            addEnquiryFormFields.actualbuyeraddnote.config
+                          }
+                        />
+                      </Link>
+                    </div>
+                    <div className="col-md-4 col-xs-12 text-right">
                       <i className="fa fa-refresh"></i>
                     </div>
-                    {/* </div> */}
-                    {/* </div> */}
-                    <div className="col-md-11 col-xs-12 text-right">
-                      <Link to={""} className="card-title"><InputWithText config={addEnquiryFormFields.actualbuyeraddnote.config} /></Link>
-                    </div>
-                    <Input config={addEnquiryFormFields.priceenquiry.config} />
                   </div>
+                  <Input config={addEnquiryFormFields.priceenquiry.config} />
                 </div>
-
                 <div className="col-md-4 col-xs-12">
-                  <div className="card-body">
-
-                    <Table config={tableConfig.config}>
-                    </Table>
-                  </div>
+                  <Table config={tableConfig.config}></Table>
                 </div>
-
-                <div className="col-md-4 col-xs-12">
-                  <div className="card-body"></div>
-                </div>
-
                 <div className="card-title">
-                  <InputWithText config={addEnquiryFormFields.discountcommissionnote.config} />
+                  <InputWithText
+                    config={addEnquiryFormFields.discountcommissionnote.config}
+                  />
                 </div>
                 <div className="col-3">
                   <Input config={addEnquiryFormFields.disenquiry.config} />
@@ -654,30 +623,34 @@ export const AddEnquiry: React.FC = () => {
                 <div className="col-3">
                   <Input config={addEnquiryFormFields.discountenquiry.config} />
                 </div>
-                {/* <Input  config={addEnquiryFormFields.discountenquiry.config} /> */}
                 <div className="col-3">
                   <Input config={addEnquiryFormFields.adjustenquiry.config} />
-                  <div className="col-md-14 col-xs-12 text-right">
-                    <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                      <i className="far fa-save"></i>View Adjust
-                    </Button>
+                  <div className="row">
+                    <div className="col-md-12 col-xs-12 text-right">
+                      <Button
+                        type={"submit"}
+                        className={"btn btn-danger btn-sm"}
+                      >
+                        <i className="far fa-save"></i> View Adjust
+                      </Button>
+                    </div>
                   </div>
                 </div>
                 <div className="col-3">
                   <Input config={addEnquiryFormFields.commenquiry.config} />
                 </div>
                 <div className="card-title col-12">
-                  <InputWithText config={addEnquiryFormFields.discounttypenote.config} />
+                  <InputWithText
+                    config={addEnquiryFormFields.discounttypenote.config}
+                  />
                 </div>
               </div>
-
+            </BorderLayout>
+            <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
+              <ActionButtons />
             </BorderLayout>
           </form>
         </FormProvider>
-
-        <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-          <ActionButtons />
-        </BorderLayout>
       </Card>
     </>
   );

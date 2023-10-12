@@ -397,94 +397,20 @@ const CommEnquiryValidation = {
   },
 } as ValidationType;
 
-// Option Section
-const SourceEnquiryOption = [
-  { value: "Yes", label: "Yes" },
-  { value: "No", label: "No" },
-];
-
-const cityEnquiryOptions = [
-  { value: "Mumbai", label: "Mumbai" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const stateEnquiryOptions = [
-  { value: "Maharashtra", label: "Maharashtra" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const countryEnquiryOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-// const crDayOptions = [
-//   { value: "Bill on Actual Buyer", label: "Bill on Actual Buyer" },
-// ];
-
-// Right Field start
-const enqTypeOption = [
-  { value: "NEW", label: "NEW" },
-  { value: "RENUAL", label: "RENUAL" },
-];
-// const executiveOptions = [
-//   { value: "India", label: "India" },
-//   { value: "strawberry", label: "Strawberry" },
-//   { value: "vanilla", label: "Vanilla" },
-// ];
-const localsourceenquiryOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const companyOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const ServiceOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const PrintStatuseOption = [
-  { value: "Not Recived ", label: " Not Recived" },
-  {
-    value: "Recived",
-    label: "Recived",
-  },
-];
-const EnqStatusOptions = [
-  { value: "1-Pending", label: "1-Pending" },
-  { value: "2-Pending", label: "2-Pending" },
-];
-
-const svisitOptions = [
-  { value: "NA", label: "NA" },
-  { value: "Pending To Visit", label: "Pending To Visit" },
-  { value: "Visited", label: "Visited" },
-];
-const actualbuyerOptions = [
-  { value: "in %", label: "in %" },
-  { value: "Per Report", label: "Per Report" },
-  { value: "NO Discount", label: "NO Discount" },
-];
 const companyenquiry: FormFieldType = createFormConfig(
   "company",
   "Company",
   "select",
   CompanyEnquiry,
-  "",
-  companyOptions
+  "Select Company",
+  []
 );
 const yearenquiry: FormFieldType = createFormConfig(
   "year",
   "Year",
   "year",
   YearEnquiry,
-  ""
+  "Select Year"
 );
 const refnoenquiry: FormFieldType = createFormConfig(
   "refno",
@@ -500,8 +426,8 @@ const sourceenquiry: FormFieldType = createFormConfig(
   "Source",
   "select",
   SourceEnquiry,
-  "",
-  SourceEnquiryOption
+  "Select Source",
+  []
 );
 
 const givenaddressEnquiry: FormFieldType = createFormConfig(
@@ -559,7 +485,7 @@ const cityenquiry: FormFieldType = createFormConfig(
   "select",
   CityEnquiryValidation,
   "Select City",
-  cityEnquiryOptions
+  []
 );
 const zipenquiry: FormFieldType = createFormConfig(
   "zip",
@@ -574,7 +500,7 @@ const stateenquiry: FormFieldType = createFormConfig(
   "select",
   StateEnquiryValidation,
   "Select State",
-  stateEnquiryOptions
+  []
 );
 const statecodeenquiry: FormFieldType = createFormConfig(
   "state",
@@ -589,7 +515,7 @@ const countryenquiry: FormFieldType = createFormConfig(
   "select",
   CountryEnquiryValidation,
   "Select Country",
-  countryEnquiryOptions
+  []
 );
 
 // Right Side Fields
@@ -629,8 +555,8 @@ const enqtype: FormFieldType = createFormConfig(
   "Enq. Type",
   "select",
   EnqValidation,
-  "",
-  enqTypeOption
+  "Select Enq. Type",
+  []
 );
 const localsourceenquiry: FormFieldType = createFormConfig(
   "localsource",
@@ -638,7 +564,7 @@ const localsourceenquiry: FormFieldType = createFormConfig(
   "select",
   localsourceenquiryValidation,
   "Select Local Source",
-  localsourceenquiryOptions
+  []
 );
 const servicetype: FormFieldType = createFormConfig(
   "servicetype",
@@ -646,7 +572,7 @@ const servicetype: FormFieldType = createFormConfig(
   "select",
   ServiceTypeValidation,
   "Select Service",
-  ServiceOptions
+  []
 );
 const dueon: FormFieldType = createFormConfig(
   "dueon",
@@ -660,25 +586,25 @@ const printstatus: FormFieldType = createFormConfig(
   "Print Status",
   "select",
   PrintStatusValidationValidation,
-  "",
-  PrintStatuseOption
+  "Select Print Status",
+  []
 );
 const enqstatus: FormFieldType = createFormConfig(
   "ennqstatus",
   "Enq. Status",
   "select",
   EnqStatusValidation,
-  "",
-  EnqStatusOptions
+  "Select Enq. Status",
+  []
 );
 
 const svisit: FormFieldType = createFormConfig(
   "svisit",
-  "S.Visit ",
+  "S.Visit",
   "select",
   svisitValidation,
-  "",
-  svisitOptions
+  "Select S.Visit",
+  []
 );
 const notesforenquiry: FormFieldType = createFormConfig(
   "notesforenquiry",
@@ -743,7 +669,7 @@ const actualbureyenquiry: FormFieldType = createFormConfig(
   "select",
   ActualBuyerEnquiryValidation,
   "Actual Buyer",
-  actualbuyerOptions
+  []
 );
 const priceenquiry: FormFieldType = createFormConfig(
   "priceenquiry",

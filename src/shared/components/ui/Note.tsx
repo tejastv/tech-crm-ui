@@ -17,7 +17,7 @@ export const InputWithText = (props: Note) => {
           {/* <Form.Label
             className="col-sm-6 control-label col-form-label">
           </Form.Label> */}
-          <div className="col-sm-9">
+          <div className="col-sm-12">
             <Form.Text className="text-danger"></Form.Text>
             {/* <p className="text-center m-b-0"> */}
             {/* <small id="name45" className="badge badge-default badge-primary form-text text-white"> */}
