@@ -22,7 +22,7 @@ export { State } from "./location-master/state/State";
 
 //Price List Master
 //Price List Clients
-export { AddPriceClients } from "./price-list-master/price-list-for-clients/AddPriceListClients";
+export { PriceListForClients } from "./price-list-master/price-list-for-clients/PriceListForClients";
 export { StdPriceListClient } from "./price-list-master/std-price-list-client/StdPriceListClient";
 
 export { PriceListGroup } from "./price-list-master/price-list-group-wise/PriceListGroup";
@@ -97,7 +97,7 @@ export { addSegmentFormFields } from "./client-master/segment/add-segment-form-f
 
 export { addCompanyFormFields } from "./company/add-update-company-form-fields";
 
-export { addPriceClientFormFields } from "./price-list-master/price-list-for-clients/add-price-client-form-fileds";
+export { addPriceClientFormFields } from "./price-list-master/price-list-for-clients/price-list-for-clients-form-fields";
 export { addStdPriceClientsFormFields } from "./price-list-master/std-price-list-client/add-std-price-client-form-fields";
 export { addActualBuyersFormFields } from "./price-list-master/actual-buyer/add-actual-buyer-form-fields";
 export { addPriceGroupFormFields } from "./price-list-master/price-list-group-wise/add-price-group-form-fields";
@@ -147,8 +147,7 @@ export * from "./client-master/segment/segment-type";
 export * from "./price-list-master/actual-buyer/actual-buyer-type";
 export * from "./price-list-master/actual-buyer/add-actual-buyer-type";
 
-export * from "./price-list-master/price-list-for-clients/add-price-client-type";
-export * from "./price-list-master/price-list-for-clients/price-client-type";
+// export * from "./price-list-master/price-list-for-clients/price-client-type";
 
 export * from "./price-list-master/price-list-group-wise/price-group-type";
 
@@ -226,10 +225,8 @@ export * from "./price-list-master/price-list-group-wise/city-wise-group-type";
 export * from "./price-list-master/price-list-group-wise/group-wise-currency-type";
 export * from "./client-master/client-group/client-group-basedon-clientID-type";
 
-
-// Transaction master 
-export * from "../transaction-search/all-enquiries/allenquiries-type"
-
+// Transaction master
+export * from "../transaction-search/all-enquiries/allenquiries-type";
 
 //Services/ Hooks
 
@@ -262,9 +259,10 @@ export { useUserApiCallHook } from "./information-master-2/user-master/useUserAp
 export { useSupplierMasterApiCallHook } from "./information-master/supplier-master/useSupplierMasterApiCallHook";
 export { useClientGroupApiCallHook } from "./client-master/client-group/useClientGroupApiCallHook";
 export { useSourceApiCallHook } from "./information-master/source/useSourceApiCallHook";
-export { useStdPriceApiCallHook } from "./local-source-master/std-price-list/useStdPriceApiCallHook";;
+export { useStdPriceApiCallHook } from "./local-source-master/std-price-list/useStdPriceApiCallHook";
 export { useClientApiCallHook } from "./client-master/client/useClientApiCallHook";
 export { useStdPriceClientsApiCallHook } from "./price-list-master/std-price-list-client/useStdPriceClientsApiCallHook";
 export { usePriceListGroupApiCallHook } from "./price-list-master/price-list-group-wise/usePriceListGroupApiCallHook";
 export { useActualBuyerApiCallHook } from "./price-list-master/actual-buyer/useActualBuyerApiCallHook";
 export { useAllEnquiriesApiCallHook } from "../transaction-search/all-enquiries/useAllEnquiriesApiCallHook";
+export { usePriceListForClientsApiCallHook } from "./price-list-master/price-list-for-clients/usePriceListForClientsApiCallHook";

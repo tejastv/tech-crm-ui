@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { AddPriceClients } from "@master/index";
+import { PriceListForClients } from "@master/index";
 
 const PriceMasterIndex: React.FC = () => {
   return (
     <Routes>
-      <Route index element={<AddPriceClients />}></Route>
+      <Route index element={<PriceListForClients />}></Route>
     </Routes>
   );
 };

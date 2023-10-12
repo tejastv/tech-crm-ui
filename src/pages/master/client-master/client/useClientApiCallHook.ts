@@ -1,8 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import {
-  AddUpdateClientType,
-  ClientType,
-} from "@master/index";
+import { AddUpdateClientType, ClientType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -113,11 +110,29 @@ export const useClientApiCallHook = () => {
     return mutation;
   };
 
+  const getClientsByCityId = (
+    id: number,
+    condition: any
+  ): UseQueryResult<ClientType[]> => {
+    return useQuery<ClientType[]>({
+      queryKey: [queryKeys.CITY_WISE_CLIENT_DATA, id],
+      queryFn: async () => {
+        const response = await instance.get(
+          apiUrls.GET_CLIENT_BY_CITY_ID.replace("{id}", "" + id)
+        );
+        return response.data.data;
+      },
+      enabled: condition, // Query is initially enabled
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+    });
+  };
+
   return {
     getClient,
     getClientData,
     addClientMutation,
     updateClientMutation,
     deleteClientMutation,
+    getClientsByCityId,
   };
 };
