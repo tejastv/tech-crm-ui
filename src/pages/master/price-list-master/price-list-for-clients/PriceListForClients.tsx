@@ -6,6 +6,7 @@ import {
   addPriceClientFormFields,
   useCityApiCallHook,
   useClientApiCallHook,
+  useClientGroupApiCallHook,
 } from "@master/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
@@ -16,6 +17,7 @@ export const PriceListForClients: React.FC = () => {
 
   const { getCity } = useCityApiCallHook();
   const { getClientsByCityId } = useClientApiCallHook();
+  const { getClientGroup } = useClientGroupApiCallHook();
   const { data: cityData } = getCity();
   const [city, setCity] = useState<number>(-2);
   const cardConfig = {
@@ -52,6 +54,16 @@ export const PriceListForClients: React.FC = () => {
     );
     addPriceClientFormFields.priceClient.config.options = groupArray;
     addPriceClientFormFields.priceClient2.config.options = groupArray;
+  }
+
+  // ClientGroup api call
+  const { data: clientGroupData } = getClientGroup();
+  if (clientGroupData) {
+    addPriceClientFormFields.priceGroup2.config.options = selectOptionsMaker(
+      clientGroupData,
+      "groupId",
+      "groupName"
+    );
   }
 
   const cityChangeHandler = (selectedOption: any) => {
