@@ -6,6 +6,7 @@ const LOCALSOURCE_DATA = "localsource-data";
 const SEGMENT_DATA = "segment-data";
 const EXECUTIVE_DATA = "continent-data";
 const COMPANY_MASTER_DATA = "companyMaster-data";
+const PRICE_DATA = "price-data";
 const FIN_YEAR_DATA = "fin-year-data";
 const INDUSTRY_DATA = "industry-data";
 const ACTUAL_BUYER_DATA = "actual-buyer-data";
@@ -79,4 +80,5 @@ export const queryKeys = {
   ENQSTATUS_DATA,
   REFNO_DATA,
   CITY_WISE_CLIENT_DATA,
+  PRICE_DATA,
 };

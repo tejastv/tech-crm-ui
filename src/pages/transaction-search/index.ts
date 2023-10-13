@@ -21,8 +21,7 @@ export * from "./all-enquiries/allenquiries-type";
 export * from "./add-new-enquiry/service-type";
 export * from "./add-new-enquiry/enq-type";
 export * from "./add-new-enquiry/ref-no-type";
-
-
+export * from "./add-new-enquiry/price-type";
 
 export { useAllEnquiriesApiCallHook } from "./all-enquiries/useAllEnquiriesApiCallHook";
 export { useServiceTypeApiCallHook } from "./add-new-enquiry/useServiceTypeApiCallHook";

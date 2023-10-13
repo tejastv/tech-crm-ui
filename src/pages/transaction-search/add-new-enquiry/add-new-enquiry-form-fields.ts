@@ -46,7 +46,7 @@ const SourceEnquiry = {
 
 const GivenaddressValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -57,7 +57,7 @@ const GivenaddressValidation = {
 
 const telNoEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Telephone Number",
   },
   pattern: {
@@ -68,7 +68,7 @@ const telNoEnquiryValidation = {
 
 const FaxNoEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please Enter Fax number",
   },
   pattern: {
@@ -80,7 +80,7 @@ const FaxNoEnquiryValidation = {
 
 const EmailEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -92,7 +92,7 @@ const EmailEnquiryValidation = {
 
 const WebsiteEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -103,7 +103,7 @@ const WebsiteEnquiryValidation = {
 
 const ContactEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -114,7 +114,7 @@ const ContactEnquiryValidation = {
 
 const DesignationEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -125,7 +125,7 @@ const DesignationEnquiryValidation = {
 
 const ZipEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -186,7 +186,7 @@ const GivenNameEnquiryValidation = {
 } as ValidationType;
 const recdOnValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -226,7 +226,7 @@ const ServiceTypeValidation = {
 } as ValidationType;
 const DueOnValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -246,7 +246,7 @@ const PrintStatusValidationValidation = {
 } as ValidationType;
 const NotesforEnqValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -276,7 +276,7 @@ const svisitValidation = {
 } as ValidationType;
 const NotesForAdjValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -286,7 +286,7 @@ const NotesForAdjValidation = {
 } as ValidationType;
 const instructionEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -296,7 +296,7 @@ const instructionEnquiryValidation = {
 } as ValidationType;
 const AdjustEnqValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -306,7 +306,7 @@ const AdjustEnqValidation = {
 } as ValidationType;
 const ClientRefEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -326,7 +326,7 @@ const ClientEnquiryValidation = {
 } as ValidationType;
 const RequestNoValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -336,7 +336,7 @@ const RequestNoValidation = {
 } as ValidationType;
 const ClientIdEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -358,7 +358,7 @@ const ActualBuyerEnquiryValidation = {
 
 const PriceeEnquiryEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -368,7 +368,7 @@ const PriceeEnquiryEnquiryValidation = {
 } as ValidationType;
 const DisEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -378,7 +378,7 @@ const DisEnquiryValidation = {
 } as ValidationType;
 const DiscountEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -388,7 +388,7 @@ const DiscountEnquiryValidation = {
 } as ValidationType;
 const CommEnquiryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -398,7 +398,7 @@ const CommEnquiryValidation = {
 } as ValidationType;
 
 const companyenquiry: FormFieldType = createFormConfig(
-  "company",
+  "companyID",
   "Company",
   "select",
   CompanyEnquiry,
@@ -406,14 +406,14 @@ const companyenquiry: FormFieldType = createFormConfig(
   []
 );
 const yearenquiry: FormFieldType = createFormConfig(
-  "year",
+  "financialYear",
   "Year",
   "year",
   YearEnquiry,
   "Select Year"
 );
 const refnoenquiry: FormFieldType = createFormConfig(
-  "refno",
+  "refNo",
   "Ref No",
   "text",
   refnoEnquiry,
@@ -422,7 +422,7 @@ const refnoenquiry: FormFieldType = createFormConfig(
   true
 );
 const sourceenquiry: FormFieldType = createFormConfig(
-  "souce",
+  "sourceID",
   "Source",
   "select",
   SourceEnquiry,
@@ -431,21 +431,21 @@ const sourceenquiry: FormFieldType = createFormConfig(
 );
 
 const givenaddressEnquiry: FormFieldType = createFormConfig(
-  "address",
+  "givenAddress",
   "Address",
   "textarea",
   GivenaddressValidation,
   "Enter Address"
 );
 const telnoenquiry: FormFieldType = createFormConfig(
-  "telno",
+  "phone",
   "Tel No.",
   "text",
   telNoEnquiryValidation,
   "Enter Tel No."
 );
 const faxnoenquiry: FormFieldType = createFormConfig(
-  "faxno",
+  "fax",
   "Fax No.",
   "text",
   FaxNoEnquiryValidation,
@@ -466,7 +466,7 @@ const websiteenquiry: FormFieldType = createFormConfig(
   "Enter WebSite"
 );
 const contactenquiry: FormFieldType = createFormConfig(
-  "contact",
+  "contactPerson",
   "Contact",
   "text",
   ContactEnquiryValidation,
@@ -480,7 +480,7 @@ const designationenquiry: FormFieldType = createFormConfig(
   "Enter Designation"
 );
 const cityenquiry: FormFieldType = createFormConfig(
-  "city",
+  "cityId",
   "City",
   "select",
   CityEnquiryValidation,
@@ -495,7 +495,7 @@ const zipenquiry: FormFieldType = createFormConfig(
   "Enter Zip"
 );
 const stateenquiry: FormFieldType = createFormConfig(
-  "state",
+  "stateId",
   "State",
   "select",
   StateEnquiryValidation,
@@ -510,7 +510,7 @@ const statecodeenquiry: FormFieldType = createFormConfig(
   ""
 );
 const countryenquiry: FormFieldType = createFormConfig(
-  "country",
+  "countryId",
   "Country",
   "select",
   CountryEnquiryValidation,
@@ -527,7 +527,7 @@ const blankenquiry: FormFieldType = createFormConfig(
   ""
 );
 const givenname: FormFieldType = createFormConfig(
-  "givenname",
+  "reportFilename",
   "Given Name",
   "text",
   GivenNameEnquiryValidation,
@@ -543,23 +543,34 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
 const recdon: FormFieldType = createFormConfig(
-  "clientCurrencey",
+  "recdDate",
   "Recd . On",
   "date",
   recdOnValidation,
   formattedDate
 );
 
+const enqType = [
+  {
+    label: "0",
+    value: "NEW",
+  },
+  {
+    label: "1",
+    value: "RENEWAL",
+  },
+];
+
 const enqtype: FormFieldType = createFormConfig(
-  "enqtype",
+  "typeofEnquiry",
   "Enq. Type",
   "select",
   EnqValidation,
   "Select Enq. Type",
-  []
+  enqType
 );
 const localsourceenquiry: FormFieldType = createFormConfig(
-  "localsource",
+  "LocalSourceID",
   "Local Source",
   "select",
   localsourceenquiryValidation,
@@ -567,7 +578,7 @@ const localsourceenquiry: FormFieldType = createFormConfig(
   []
 );
 const servicetype: FormFieldType = createFormConfig(
-  "servicetype",
+  "serviceTypeID",
   "Service Type",
   "select",
   ServiceTypeValidation,
@@ -575,22 +586,25 @@ const servicetype: FormFieldType = createFormConfig(
   []
 );
 const dueon: FormFieldType = createFormConfig(
-  "dueon",
+  "dueDate",
   "Due On",
   "date",
   DueOnValidation,
   "date"
 );
 const printstatus: FormFieldType = createFormConfig(
-  "printstatus",
+  "pmtstatus",
   "Print Status",
   "select",
   PrintStatusValidationValidation,
   "Select Print Status",
-  []
+  [
+    { value: "Not Received", label: "Not Received" },
+    { label: "Received", value: "Received" },
+  ]
 );
 const enqstatus: FormFieldType = createFormConfig(
-  "ennqstatus",
+  "enqStatusID",
   "Enq. Status",
   "select",
   EnqStatusValidation,
@@ -604,10 +618,14 @@ const svisit: FormFieldType = createFormConfig(
   "select",
   svisitValidation,
   "Select S.Visit",
-  []
+  [
+    { value: "0", label: "NA" },
+    { value: "1", label: "Pending to Visit" },
+    { value: "2", label: "Visited" },
+  ]
 );
 const notesforenquiry: FormFieldType = createFormConfig(
-  "notesforenquiry",
+  "notes",
   "Notes for Enquiry ",
   "textarea",
   NotesforEnqValidation,
@@ -621,7 +639,7 @@ const notesforadj: FormFieldType = createFormConfig(
   "Notes For Comma/Adj "
 );
 const instructionenquiry: FormFieldType = createFormConfig(
-  "instructionenquiry",
+  "instruction",
   "Instruction ",
   "text",
   instructionEnquiryValidation,
@@ -632,25 +650,27 @@ const adjustenquiry: FormFieldType = createFormConfig(
   "Adjust",
   "text",
   AdjustEnqValidation,
-  "Adjust"
+  "Adjust",
+  [],
+  true
 );
 
 const clientrefenquiry: FormFieldType = createFormConfig(
-  "clientrefenquiry",
+  "clientRefNo",
   "Client Ref",
   "text",
   ClientRefEnquiryValidation,
   "Client Ref"
 );
 const clientenquiry: FormFieldType = createFormConfig(
-  "clientenquiry",
+  "clientID",
   "Client",
   "select",
   ClientEnquiryValidation,
   "Select Client"
 );
 const requestnoenquiry: FormFieldType = createFormConfig(
-  "requestnoenquiry",
+  "requestNo",
   "Request No.",
   "text",
   RequestNoValidation,
@@ -661,39 +681,47 @@ const clientIdenquiry: FormFieldType = createFormConfig(
   "Client Id",
   "text",
   ClientIdEnquiryValidation,
-  "Client Id"
+  "Client Id",
+  [],
+  true
 );
 const actualbureyenquiry: FormFieldType = createFormConfig(
-  "actualbureyenquiry",
+  "actualBuyerId",
   "Actual Buyer",
   "select",
   ActualBuyerEnquiryValidation,
   "Actual Buyer",
-  []
+  [{ label: "Direct", value: "1" }]
 );
 const priceenquiry: FormFieldType = createFormConfig(
-  "priceenquiry",
+  "reportPrice",
   "Price",
   "text",
   PriceeEnquiryEnquiryValidation,
-  "Price"
+  "Price",
+  [],
+  true
 );
 const disenquiry: FormFieldType = createFormConfig(
   "disenquiry",
   "Dis.%",
   "text",
   DisEnquiryValidation,
-  "Dis.%"
+  "Dis.%",
+  [],
+  true
 );
 const discountenquiry: FormFieldType = createFormConfig(
   "discountenquiry",
   "Discount",
   "text",
   DiscountEnquiryValidation,
-  "Discount"
+  "Discount",
+  [],
+  true
 );
 const commenquiry: FormFieldType = createFormConfig(
-  "commenquiry",
+  "reportComission",
   "Comm.",
   "text",
   CommEnquiryValidation,
