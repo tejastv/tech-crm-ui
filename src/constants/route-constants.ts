@@ -131,7 +131,7 @@ export const TRANSACTION_ROUTES = {
   },
   ENQUIRYSEARCH_TRANSACTION_ROUTES: {
     ENQUIRYSEARCH_TRANSACTION_PARENT_ROUTE: "/enquiry-search/*",
-    ENQUIRYSEARCH: "enquiry-search/",
+    ENQUIRYSEARCH: "enquiry-search",
   },
   ADDBULKENQUIRIES_TRANSACTION_ROUTES: {
     ADDBULKENQUIRIES_TRANSACTION_PARENT_ROUTE: "add-bulk-enquiries/*",
@@ -167,7 +167,7 @@ export const PROFOMA_ROUTES = {
     ENQPI_PROFOMA_PARENT_ROUTE: "/enq-pi/*",
     ENQPI: "enq-pi",
   },
-}
+};
 
 export const COMMON_ROUTES = {
   ADD: "add",

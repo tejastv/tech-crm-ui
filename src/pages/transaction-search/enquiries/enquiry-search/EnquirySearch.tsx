@@ -17,7 +17,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import {
-  AddClientType,
+  AddUpdateEnquiryType,
   addEnquirySearchFormFields,
 } from "@transaction-search/index";
 
@@ -26,7 +26,7 @@ export const EnquirySearch: React.FC = () => {
   const { data: companyData, isLoading } = getCompany();
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
-  const methods = useForm<AddClientType>();
+  const methods = useForm<AddUpdateEnquiryType>();
 
   const config = {
     breadcrumbConfig: {

@@ -61,6 +61,7 @@ export const AddEnquiry: React.FC = () => {
   const [serviceTypeId, setServiceTypeId] = useState<number>(-2);
   const [countryId, setCountryId] = useState<number>(-2);
   const [refNo, setRefNo] = useState<any>();
+  const [isCompanyChange, setIsCompanyChange] = useState<boolean>(false);
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Enquiry",
@@ -191,11 +192,12 @@ export const AddEnquiry: React.FC = () => {
   const companyOnChangeHandler = (companyData: any) => {
     console.log(companyData, companyData.data);
     if (companyData.data) {
+      setIsCompanyChange(true);
       setCompanyData(companyData.data);
     }
   };
 
-  useEffect(() => {
+  if (isCompanyChange) {
     addEnquiryFormFields.givenaddressEnquiry.config.setData =
       slectedCompanyData?.address;
     addEnquiryFormFields.zipenquiry.config.setData = slectedCompanyData?.zip;
@@ -236,7 +238,7 @@ export const AddEnquiry: React.FC = () => {
       slectedCompanyData?.contactPerson;
     addEnquiryFormFields.designationenquiry.config.setData =
       slectedCompanyData?.designation;
-  }, [slectedCompanyData]);
+  }
 
   addEnquiryFormFields.refnoenquiry.config.setData = refNo;
 
@@ -459,15 +461,20 @@ export const AddEnquiry: React.FC = () => {
   addEnquiryFormFields.clientIdenquiry.config.setData = clientId;
 
   const onServiceTypeChangeHandler = (serviceTypeData: any) => {
+    setIsCompanyChange(false);
     setServiceTypeId(serviceTypeData?.value);
   };
 
   const onCountryChangeHandler = (countryData: any) => {
-    setCountryId(countryData?.value);
+    if (countryData) {
+      setIsCompanyChange(false);
+      setCountryId(countryData?.value);
+    }
   };
 
-  const handleSelectChange = (selectedOption: any) => {
+  const onClientChangeHandler = (selectedOption: any) => {
     if (selectedOption) {
+      setIsCompanyChange(false);
       setClientId(selectedOption.value);
     }
   };
@@ -476,7 +483,10 @@ export const AddEnquiry: React.FC = () => {
     { clientId, serviceTypeId, countryId },
     clientId != -2 && serviceTypeId != -2 && countryId != -2
   );
-  addEnquiryFormFields.priceenquiry.config.setData = priceData?.data;
+
+  if (priceData) {
+    addEnquiryFormFields.priceenquiry.config.setData = priceData?.data;
+  }
 
   const columns: ColumnDef<any>[] = [
     {
@@ -531,52 +541,56 @@ export const AddEnquiry: React.FC = () => {
 
   const onSubmit = methods.handleSubmit((enquiryData): void => {
     let data: any = { ...cleanupObject(enquiryData) };
-    delete data.state;
+
+    if (data.companyID) {
+      data.companyID = +data.companyID["value"];
+    }
+    if (data.financialYear) {
+      data.financialYear = "" + data.financialYear["value"];
+    }
+    if (data.sourceID) {
+      data.sourceID = +data.sourceID["value"];
+    }
+    if (data.cityId) {
+      data.cityId = data.cityId["value"];
+    }
+    if (data.stateId) {
+      data.stateId = data.stateId["value"];
+    }
+    if (data.countryId) {
+      data.countryId = data.countryId["value"];
+    }
+    if (data.typeofEnquiry) {
+      data.typeofEnquiry = "" + data.typeofEnquiry["value"];
+    }
+    if (data.serviceTypeID) {
+      data.serviceTypeID = +data.serviceTypeID["value"];
+    }
+    if (data.pmtstatus) {
+      data.pmtstatus = "" + data.pmtstatus["value"];
+    }
+    if (data.enqStatusID) {
+      data.enqStatusID = +data.enqStatusID["value"];
+    }
+    if (data.clientID) {
+      data.clientID = +data.clientID["value"];
+    }
+    if (data.actualBuyerId) {
+      data.actualBuyerId = +data.actualBuyerId["value"];
+    }
+    if (data.localSourceId) {
+      data.localSourceId = data.localSourceId["value"];
+    }
+    data["bulk_enquiry_id"] = 0;
+    delete data.svisit;
+    delete data.clientidenquiry;
     console.log(data);
-
-    // if (data.companyID) {
-    //   data.companyID = +data.companyID["value"];
-    // }
-    // if (data.financialYear) {
-    //   data.financialYear = "" + data.financialYear["value"];
-    // }
-    // if (data.sourceID) {
-    //   data.sourceID = +data.sourceID["value"];
-    // }
-    // if (data.cityId) {
-    //   data.cityId = +data.cityId["value"];
-    // }
-    // if (data.stateId) {
-    //   data.stateId = +data.stateId["value"];
-    // }
-    // if (data.countryId) {
-    //   data.countryId = +data.countryId["value"];
-    // }
-    // if (data.typeofEnquiry) {
-    //   data.typeofEnquiry = "" + data.typeofEnquiry["value"];
-    // }
-    // if (data.serviceTypeID) {
-    //   data.serviceTypeID = +data.serviceTypeID["value"];
-    // }
-    // if (data.pmtstatus) {
-    //   data.pmtstatus = "" + data.pmtstatus["value"];
-    // }
-    // if (data.enqStatusID) {
-    //   data.enqStatusID = +data.enqStatusID["value"];
-    // }
-    // if (data.clientID) {
-    //   data.clientID = +data.clientID["value"];
-    // }
-    // if (data.actualBuyerId) {
-    //   data.actualBuyerId = +data.actualBuyerId["value"];
-    // }
-
     // console.log(data);
-    // if (params.id && data) {
-    //   updateEnquiry({ id: params.id, ...data });
-    // } else {
-    //   addEnquiry(data);
-    // }
+    if (params.id && data) {
+      updateEnquiry({ id: params.id, ...data });
+    } else {
+      addEnquiry(data);
+    }
   });
 
   return (
@@ -651,7 +665,7 @@ export const AddEnquiry: React.FC = () => {
                   />
                   <Select
                     config={addEnquiryFormFields.clientenquiry.config}
-                    onChangeHandler={handleSelectChange}
+                    onChangeHandler={onClientChangeHandler}
                   />
                   {/* <div className="row justify-content-end">
                     <div className="col-md-4 col-xs-12 text-right">

@@ -266,7 +266,7 @@ const EnqStatusValidation = {
 } as ValidationType;
 const svisitValidation = {
   required: {
-    value: true,
+    value: false,
     message: "Please select a {label}",
   },
   maxLength: {
@@ -527,7 +527,7 @@ const blankenquiry: FormFieldType = createFormConfig(
   ""
 );
 const givenname: FormFieldType = createFormConfig(
-  "reportFilename",
+  "givenName",
   "Given Name",
   "text",
   GivenNameEnquiryValidation,
@@ -570,7 +570,7 @@ const enqtype: FormFieldType = createFormConfig(
   enqType
 );
 const localsourceenquiry: FormFieldType = createFormConfig(
-  "LocalSourceID",
+  "localSourceId",
   "Local Source",
   "select",
   localsourceenquiryValidation,
@@ -632,7 +632,7 @@ const notesforenquiry: FormFieldType = createFormConfig(
   "Notes For Enquiry"
 );
 const notesforadj: FormFieldType = createFormConfig(
-  "notesforadj",
+  "noteForComission",
   "Notes for Comma/Adj",
   "text",
   NotesForAdjValidation,
@@ -646,7 +646,7 @@ const instructionenquiry: FormFieldType = createFormConfig(
   "Instruction"
 );
 const adjustenquiry: FormFieldType = createFormConfig(
-  "adjustenquiry",
+  "adjustment",
   "Adjust",
   "text",
   AdjustEnqValidation,
@@ -703,7 +703,7 @@ const priceenquiry: FormFieldType = createFormConfig(
   true
 );
 const disenquiry: FormFieldType = createFormConfig(
-  "disenquiry",
+  "disPer",
   "Dis.%",
   "text",
   DisEnquiryValidation,
@@ -712,7 +712,7 @@ const disenquiry: FormFieldType = createFormConfig(
   true
 );
 const discountenquiry: FormFieldType = createFormConfig(
-  "discountenquiry",
+  "discount",
   "Discount",
   "text",
   DiscountEnquiryValidation,

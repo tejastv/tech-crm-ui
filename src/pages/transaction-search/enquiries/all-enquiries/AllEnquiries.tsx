@@ -73,10 +73,8 @@
 //       cell: (info) => info.getValue(),
 //       header: () => <>Given Address</>,
 //     },
-    
+
 //   ];
-
-
 
 //   const tableConfig: TableType<AllEnquiriesType> = {
 //     config: {
@@ -110,8 +108,6 @@
 //   );
 // };
 
-
-
 import React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -127,28 +123,27 @@ import { AllEnquiriesType, useAllEnquiriesApiCallHook } from "@pages/master";
 import { useNavigate } from "react-router-dom";
 
 export const Enquiries: React.FC = () => {
-  const { getEnquiries , deleteEnquiryMutation} = useAllEnquiriesApiCallHook();
+  const { getEnquiries, deleteEnquiryMutation } = useAllEnquiriesApiCallHook();
   const { mutateAsync: deleteEnquiry } = deleteEnquiryMutation();
   const { data: enquiriesData, isLoading } = getEnquiries();
   const navigate = useNavigate();
 
   const config = {
-        breadcrumbConfig: {
-          pageHeading: "Enquiry Details",
-          btnTitle: "Add Enquiry Details",
-          btnTitle2: "Enquiry Search",
-          btnRoute: COMMON_ROUTES.ADD,
-        
-        },
-        btnConfig:{
-          pageHeading:"",
-          btnTitle: "Enquiry Search",
-          btnRoute:COMMON_ROUTES.LIST
-        },
-        borderLayoutConfig: {
-          heading: "List",
-        },
-      };
+    breadcrumbConfig: {
+      pageHeading: "Enquiry Details",
+      btnTitle: "Add Enquiry Details",
+      btnTitle2: "Enquiry Search",
+      btnRoute: COMMON_ROUTES.ADD,
+    },
+    btnConfig: {
+      pageHeading: "",
+      btnTitle: "Enquiry Search",
+      btnRoute: COMMON_ROUTES.LIST,
+    },
+    borderLayoutConfig: {
+      heading: "List",
+    },
+  };
 
   const columns: ColumnDef<AllEnquiriesType>[] = [
     {
@@ -278,7 +273,7 @@ export const Enquiries: React.FC = () => {
       header: () => <>Enq. Status</>,
     },
     {
-      accessorFn: (row) => row.localSource,
+      accessorFn: (row) => row.localSourceId,
       id: "localSource",
       cell: (info) => info.getValue(),
       header: () => <>Local Source</>,
@@ -510,9 +505,7 @@ export const Enquiries: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Action</>,
     },
-    
   ];
-
 
   const deleteEnquiryClick = (enquiriesData: any) => {
     var conformation = confirm("Are you sure to delete it?");
@@ -520,13 +513,10 @@ export const Enquiries: React.FC = () => {
       deleteEnquiry(enquiriesData.enqID);
     }
     console.log("delete clicked");
-    
   };
 
   const editEnquiryClick = (enquiriesData: any) => {
-    // navigate(COMMON_ROUTES.EDIT.replace(":id", continentData.stateId));
-    console.log("edit button clicked");
-    
+    navigate(COMMON_ROUTES.EDIT.replace(":id", enquiriesData.enqID));
   };
 
   const tableConfig: TableType<AllEnquiriesType> = {
@@ -546,7 +536,7 @@ export const Enquiries: React.FC = () => {
         tableMetaDataShow: true,
       },
       onDeleteClick: deleteEnquiryClick,
-      // onEditClick: editEnquiryClick,
+      onEditClick: editEnquiryClick,
     },
   };
 
@@ -562,4 +552,3 @@ export const Enquiries: React.FC = () => {
     </>
   );
 };
-
