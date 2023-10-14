@@ -186,71 +186,59 @@ export const AddEnquiry: React.FC = () => {
     );
   }
 
+  const [slectedCompanyData, setCompanyData] = useState<CompanyType>();
+
+  const companyOnChangeHandler = (companyData: any) => {
+    console.log(companyData, companyData.data);
+    if (companyData.data) {
+      setCompanyData(companyData.data);
+    }
+  };
+
+  useEffect(() => {
+    addEnquiryFormFields.givenaddressEnquiry.config.setData =
+      slectedCompanyData?.address;
+    addEnquiryFormFields.zipenquiry.config.setData = slectedCompanyData?.zip;
+    addEnquiryFormFields.telnoenquiry.config.setData =
+      slectedCompanyData?.phone;
+    addEnquiryFormFields.faxnoenquiry.config.setData = slectedCompanyData?.fax;
+    addEnquiryFormFields.cityenquiry.config.setData = slectedCompanyData?.cityId
+      ? [
+          {
+            label: slectedCompanyData?.cityName,
+            value: slectedCompanyData?.cityId,
+          },
+        ]
+      : [];
+    addEnquiryFormFields.stateenquiry.config.setData =
+      slectedCompanyData?.stateId
+        ? [
+            {
+              label: slectedCompanyData?.state,
+              value: slectedCompanyData?.stateId,
+            },
+          ]
+        : [];
+    addEnquiryFormFields.countryenquiry.config.setData =
+      slectedCompanyData?.countryId
+        ? [
+            {
+              label: slectedCompanyData?.countryName,
+              value: slectedCompanyData?.countryId,
+            },
+          ]
+        : [];
+    addEnquiryFormFields.emailenquiry.config.setData =
+      slectedCompanyData?.email;
+    addEnquiryFormFields.websiteenquiry.config.setData =
+      slectedCompanyData?.website;
+    addEnquiryFormFields.contactenquiry.config.setData =
+      slectedCompanyData?.contactPerson;
+    addEnquiryFormFields.designationenquiry.config.setData =
+      slectedCompanyData?.designation;
+  }, [slectedCompanyData]);
+
   addEnquiryFormFields.refnoenquiry.config.setData = refNo;
-
-  const onSubmit = methods.handleSubmit((enquiryData): void => {
-    let data: any = { ...cleanupObject(enquiryData) };
-    delete data.state;
-    console.log(data);
-
-    // if (data.companyID) {
-    //   data.companyID = +data.companyID["value"];
-    // }
-    // if (data.financialYear) {
-    //   data.financialYear = "" + data.financialYear["value"];
-    // }
-    // if (data.sourceID) {
-    //   data.sourceID = +data.sourceID["value"];
-    // }
-    // if (data.cityId) {
-    //   data.cityId = +data.cityId["value"];
-    // }
-    // if (data.stateId) {
-    //   data.stateId = +data.stateId["value"];
-    // }
-    // if (data.countryId) {
-    //   data.countryId = +data.countryId["value"];
-    // }
-    // if (data.typeofEnquiry) {
-    //   data.typeofEnquiry = "" + data.typeofEnquiry["value"];
-    // }
-    // if (data.serviceTypeID) {
-    //   data.serviceTypeID = +data.serviceTypeID["value"];
-    // }
-    // if (data.pmtstatus) {
-    //   data.pmtstatus = "" + data.pmtstatus["value"];
-    // }
-    // if (data.enqStatusID) {
-    //   data.enqStatusID = +data.enqStatusID["value"];
-    // }
-    // if (data.clientID) {
-    //   data.clientID = +data.clientID["value"];
-    // }
-    // if (data.actualBuyerId) {
-    //   data.actualBuyerId = +data.actualBuyerId["value"];
-    // }
-
-    // console.log(data);
-    // if (params.id && data) {
-    //   updateEnquiry({ id: params.id, ...data });
-    // } else {
-    //   addEnquiry(data);
-    // }
-  });
-
-  const onServiceTypeChangeHandler = (serviceTypeData: any) => {
-    setServiceTypeId(serviceTypeData?.value);
-  };
-
-  const onCountryChangeHandler = (countryData: any) => {
-    setCountryId(countryData?.value);
-  };
-
-  const { data: priceData } = getPrice(
-    { clientId, serviceTypeId, countryId },
-    clientId != -2 && serviceTypeId != -2 && countryId != -2
-  );
-  addEnquiryFormFields.priceenquiry.config.setData = priceData?.data;
 
   if (params.id) {
     const { data: EnquiryMasterData } = getEnquiryData("" + params.id);
@@ -470,62 +458,25 @@ export const AddEnquiry: React.FC = () => {
   const { data: clientData } = getClientData(clientId, clientId != -2);
   addEnquiryFormFields.clientIdenquiry.config.setData = clientId;
 
+  const onServiceTypeChangeHandler = (serviceTypeData: any) => {
+    setServiceTypeId(serviceTypeData?.value);
+  };
+
+  const onCountryChangeHandler = (countryData: any) => {
+    setCountryId(countryData?.value);
+  };
+
   const handleSelectChange = (selectedOption: any) => {
     if (selectedOption) {
       setClientId(selectedOption.value);
     }
   };
 
-  const [slectedCompanyData, setCompanyData] = useState<CompanyType>();
-
-  const companyOnChangeHandler = (companyData: any) => {
-    console.log(companyData, companyData.data);
-    if (companyData.data) {
-      setCompanyData(companyData.data);
-    }
-  };
-  if (slectedCompanyData) {
-    addEnquiryFormFields.givenaddressEnquiry.config.setData =
-      slectedCompanyData?.address;
-    addEnquiryFormFields.zipenquiry.config.setData = slectedCompanyData?.zip;
-    addEnquiryFormFields.telnoenquiry.config.setData =
-      slectedCompanyData?.phone;
-    addEnquiryFormFields.faxnoenquiry.config.setData = slectedCompanyData?.fax;
-    addEnquiryFormFields.cityenquiry.config.setData = slectedCompanyData?.cityId
-      ? [
-          {
-            label: slectedCompanyData?.cityName,
-            value: slectedCompanyData?.cityId,
-          },
-        ]
-      : [];
-    addEnquiryFormFields.stateenquiry.config.setData =
-      slectedCompanyData?.stateId
-        ? [
-            {
-              label: slectedCompanyData?.state,
-              value: slectedCompanyData?.stateId,
-            },
-          ]
-        : [];
-    addEnquiryFormFields.countryenquiry.config.setData =
-      slectedCompanyData?.countryId
-        ? [
-            {
-              label: slectedCompanyData?.countryName,
-              value: slectedCompanyData?.countryId,
-            },
-          ]
-        : [];
-    addEnquiryFormFields.emailenquiry.config.setData =
-      slectedCompanyData?.email;
-    addEnquiryFormFields.websiteenquiry.config.setData =
-      slectedCompanyData?.website;
-    addEnquiryFormFields.contactenquiry.config.setData =
-      slectedCompanyData?.contactPerson;
-    addEnquiryFormFields.designationenquiry.config.setData =
-      slectedCompanyData?.designation;
-  }
+  const { data: priceData } = getPrice(
+    { clientId, serviceTypeId, countryId },
+    clientId != -2 && serviceTypeId != -2 && countryId != -2
+  );
+  addEnquiryFormFields.priceenquiry.config.setData = priceData?.data;
 
   const columns: ColumnDef<any>[] = [
     {
@@ -577,6 +528,56 @@ export const AddEnquiry: React.FC = () => {
       },
     },
   };
+
+  const onSubmit = methods.handleSubmit((enquiryData): void => {
+    let data: any = { ...cleanupObject(enquiryData) };
+    delete data.state;
+    console.log(data);
+
+    // if (data.companyID) {
+    //   data.companyID = +data.companyID["value"];
+    // }
+    // if (data.financialYear) {
+    //   data.financialYear = "" + data.financialYear["value"];
+    // }
+    // if (data.sourceID) {
+    //   data.sourceID = +data.sourceID["value"];
+    // }
+    // if (data.cityId) {
+    //   data.cityId = +data.cityId["value"];
+    // }
+    // if (data.stateId) {
+    //   data.stateId = +data.stateId["value"];
+    // }
+    // if (data.countryId) {
+    //   data.countryId = +data.countryId["value"];
+    // }
+    // if (data.typeofEnquiry) {
+    //   data.typeofEnquiry = "" + data.typeofEnquiry["value"];
+    // }
+    // if (data.serviceTypeID) {
+    //   data.serviceTypeID = +data.serviceTypeID["value"];
+    // }
+    // if (data.pmtstatus) {
+    //   data.pmtstatus = "" + data.pmtstatus["value"];
+    // }
+    // if (data.enqStatusID) {
+    //   data.enqStatusID = +data.enqStatusID["value"];
+    // }
+    // if (data.clientID) {
+    //   data.clientID = +data.clientID["value"];
+    // }
+    // if (data.actualBuyerId) {
+    //   data.actualBuyerId = +data.actualBuyerId["value"];
+    // }
+
+    // console.log(data);
+    // if (params.id && data) {
+    //   updateEnquiry({ id: params.id, ...data });
+    // } else {
+    //   addEnquiry(data);
+    // }
+  });
 
   return (
     <>

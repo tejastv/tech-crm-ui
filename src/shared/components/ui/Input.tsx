@@ -22,9 +22,9 @@ export const Input = (props: FormFieldType) => {
   const inputErrors = findInputError(errors, props.config.name);
   const isInvalid = isFormInvalid(inputErrors);
   useEffect(() => {
-    // if (props.config.setData) {
-    setValue(props.config.name, props.config.setData);
-    // }
+    if (props.config.setData) {
+      setValue(props.config.name, props.config.setData);
+    }
   }, [props.config.setData]);
   return (
     <div className="row">

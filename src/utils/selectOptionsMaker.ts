@@ -6,9 +6,16 @@ export function selectOptionsMaker(
   label: string,
   otherDataAllowed?: boolean
 ) {
-  return array.map((option: Generic) => ({
-    value: option[value],
-    label: option[label],
-    data: otherDataAllowed && option,
-  }));
+  return array.map((option: Generic) => {
+    const result: any = {
+      value: option[value],
+      label: option[label],
+    };
+
+    if (otherDataAllowed) {
+      result["data"] = option;
+    }
+
+    return result;
+  });
 }
