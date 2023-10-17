@@ -1,15 +1,26 @@
 import { useAxios } from "@hooks/useAxios";
 import {
+  AddUpdateEnquiryType,
+  AllEnquiriesType,
   EnqType,
   PriceType,
   RefNoType,
   ServiceType,
 } from "@transaction-search/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+import { ApiResponseType } from "@shared/index";
+import { useNavigate } from "react-router-dom";
 
-export const useServiceTypeApiCallHook = () => {
+export const useAddEnquiryApiCallHook = () => {
   const { instance } = useAxios();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const callFormConfig = {
     headers: {
@@ -77,7 +88,34 @@ export const useServiceTypeApiCallHook = () => {
     });
   };
 
+  const addEnquiry = async (
+    enquiryData: AddUpdateEnquiryType
+  ): Promise<ApiResponseType<AllEnquiriesType>> => {
+    const response = await instance.post(
+      apiUrls.GET_ADD_ALL_ENQUIRY,
+      enquiryData,
+      callFormConfig
+    );
+    return response.data.data;
+  };
+
+  const addEnquiryMutation = () => {
+    const mutation = useMutation(
+      (updatedItem: AddUpdateEnquiryType) => addEnquiry(updatedItem),
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [queryKeys.ENQUIRY_DATA],
+          });
+          navigate("/transaction/enquiry-details");
+        },
+      }
+    );
+    return mutation;
+  };
+
   return {
+    addEnquiryMutation,
     getServiceType,
     getEnqStatus,
     getRefNo,

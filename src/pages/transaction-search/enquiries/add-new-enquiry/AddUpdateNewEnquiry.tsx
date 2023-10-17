@@ -14,8 +14,8 @@ import {
 import {
   AddUpdateEnquiryType,
   addEnquiryFormFields,
+  useAddEnquiryApiCallHook,
   useAllEnquiriesApiCallHook,
-  useServiceTypeApiCallHook,
 } from "@transaction-search/index";
 import { Link, useParams } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
@@ -41,16 +41,21 @@ export const AddEnquiry: React.FC = () => {
   // const { getState } = useStateApiCallHook();
   // const { data: stateData, isLoading } = getState();
   const methods = useForm<AddUpdateEnquiryType>();
-  const { addEnquiryMutation, updateEnquiryMutation, getEnquiryData } =
+  const { updateEnquiryMutation, getEnquiryData } =
     useAllEnquiriesApiCallHook();
+  const {
+    getEnqStatus,
+    getRefNo,
+    getServiceType,
+    getPrice,
+    addEnquiryMutation,
+  } = useAddEnquiryApiCallHook();
   const params = useParams();
   const { mutateAsync: addEnquiry } = addEnquiryMutation();
   const { mutateAsync: updateEnquiry } = updateEnquiryMutation();
   const { getCity } = useCityApiCallHook();
   const { getState } = useStateApiCallHook();
   const { getCountry } = useCountryApiCallHook();
-  const { getEnqStatus, getRefNo, getServiceType, getPrice } =
-    useServiceTypeApiCallHook();
   const { getSource } = useSourceApiCallHook();
   const { getLocalSource } = useLocalSourceApiCallHook();
   const { getClient, getClientData } = useClientApiCallHook();
@@ -190,7 +195,6 @@ export const AddEnquiry: React.FC = () => {
   const [slectedCompanyData, setCompanyData] = useState<CompanyType>();
 
   const companyOnChangeHandler = (companyData: any) => {
-    console.log(companyData, companyData.data);
     if (companyData.data) {
       setIsCompanyChange(true);
       setCompanyData(companyData.data);
@@ -198,46 +202,71 @@ export const AddEnquiry: React.FC = () => {
   };
 
   if (isCompanyChange) {
-    addEnquiryFormFields.givenaddressEnquiry.config.setData =
-      slectedCompanyData?.address;
-    addEnquiryFormFields.zipenquiry.config.setData = slectedCompanyData?.zip;
-    addEnquiryFormFields.telnoenquiry.config.setData =
-      slectedCompanyData?.phone;
-    addEnquiryFormFields.faxnoenquiry.config.setData = slectedCompanyData?.fax;
-    addEnquiryFormFields.cityenquiry.config.setData = slectedCompanyData?.cityId
-      ? [
-          {
-            label: slectedCompanyData?.cityName,
-            value: slectedCompanyData?.cityId,
-          },
-        ]
-      : [];
-    addEnquiryFormFields.stateenquiry.config.setData =
-      slectedCompanyData?.stateId
-        ? [
-            {
-              label: slectedCompanyData?.state,
-              value: slectedCompanyData?.stateId,
-            },
-          ]
-        : [];
-    addEnquiryFormFields.countryenquiry.config.setData =
-      slectedCompanyData?.countryId
-        ? [
-            {
-              label: slectedCompanyData?.countryName,
-              value: slectedCompanyData?.countryId,
-            },
-          ]
-        : [];
-    addEnquiryFormFields.emailenquiry.config.setData =
-      slectedCompanyData?.email;
-    addEnquiryFormFields.websiteenquiry.config.setData =
-      slectedCompanyData?.website;
-    addEnquiryFormFields.contactenquiry.config.setData =
-      slectedCompanyData?.contactPerson;
+    let dataObj = cleanupObject(slectedCompanyData);
+    addEnquiryFormFields.givenaddressEnquiry.config.setData = dataObj?.address;
+    addEnquiryFormFields.zipenquiry.config.setData = dataObj?.zip;
+    addEnquiryFormFields.telnoenquiry.config.setData = dataObj?.phone;
+    addEnquiryFormFields.faxnoenquiry.config.setData = dataObj?.fax;
+    if (cityData) {
+      let data: any = returnObjectBasedOnID(
+        cityData,
+        "id",
+        dataObj?.cityId,
+        "id",
+        "cityName"
+      );
+      addEnquiryFormFields.cityenquiry.config.setData =
+        data.length > 0
+          ? [
+              {
+                label: data?.label,
+                value: data?.value,
+              },
+            ]
+          : [];
+    }
+    if (stateData) {
+      let data: any = returnObjectBasedOnID(
+        stateData,
+        "stateId",
+        dataObj?.stateId,
+        "stateId",
+        "state"
+      );
+      addEnquiryFormFields.stateenquiry.config.setData =
+        data.length > 0
+          ? [
+              {
+                label: dataObj?.state,
+                value: dataObj?.stateId,
+              },
+            ]
+          : [];
+    }
+    if (CountryData) {
+      let data: any = returnObjectBasedOnID(
+        CountryData,
+        "countryId",
+        dataObj?.countryId,
+        "countryId",
+        "countryName"
+      );
+      addEnquiryFormFields.countryenquiry.config.setData =
+        data.length > 0
+          ? [
+              {
+                label: dataObj?.countryName,
+                value: dataObj?.countryId,
+              },
+            ]
+          : [];
+    }
+
+    addEnquiryFormFields.emailenquiry.config.setData = dataObj?.email;
+    addEnquiryFormFields.websiteenquiry.config.setData = dataObj?.website;
+    addEnquiryFormFields.contactenquiry.config.setData = dataObj?.contactPerson;
     addEnquiryFormFields.designationenquiry.config.setData =
-      slectedCompanyData?.designation;
+      dataObj?.designation;
   }
 
   addEnquiryFormFields.refnoenquiry.config.setData = refNo;
@@ -584,7 +613,7 @@ export const AddEnquiry: React.FC = () => {
     data["bulk_enquiry_id"] = 0;
     delete data.svisit;
     delete data.clientidenquiry;
-    console.log(data);
+    // console.log(data);
     // console.log(data);
     if (params.id && data) {
       updateEnquiry({ id: params.id, ...data });

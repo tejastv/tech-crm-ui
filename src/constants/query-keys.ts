@@ -34,8 +34,6 @@ const CLIENT_GROUP_BASED_ON_ID_DATA = "client-group-based-on-id-data";
 
 //transaction master
 
-const ALL_ENQUIRIES_DATA = "all-enquiries-data";
-
 // Transaction Enquiry
 const ENQUIRY_DATA = "enquiry-data";
 const SERVICETYPE_DATA = "servicetype-data";
@@ -74,7 +72,6 @@ export const queryKeys = {
   STD_PRICE_DATA,
   PRICE_LIST_DATA,
   ACTUAL_BUYER_DATA,
-  ALL_ENQUIRIES_DATA,
   ENQUIRY_DATA,
   SERVICETYPE_DATA,
   ENQSTATUS_DATA,

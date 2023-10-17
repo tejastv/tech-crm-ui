@@ -81,7 +81,8 @@ export const AddUpdateClient: React.FC = () => {
     addClientFormFields.stateClient.config.options = selectOptionsMaker(
       stateData,
       "stateId",
-      "state"
+      "state",
+      true
     );
   }
 
@@ -385,7 +386,7 @@ export const AddUpdateClient: React.FC = () => {
 
   const handleSelectChange = (selectedOption: any) => {
     if (selectedOption) {
-      setStateCode(selectedOption.value);
+      setStateCode(selectedOption.data.stateCodeN);
     }
   };
 

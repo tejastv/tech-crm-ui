@@ -186,7 +186,7 @@ const GivenNameEnquiryValidation = {
 } as ValidationType;
 const recdOnValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -226,7 +226,7 @@ const ServiceTypeValidation = {
 } as ValidationType;
 const DueOnValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -358,7 +358,7 @@ const ActualBuyerEnquiryValidation = {
 
 const PriceeEnquiryEnquiryValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -552,12 +552,12 @@ const recdon: FormFieldType = createFormConfig(
 
 const enqType = [
   {
-    label: "0",
-    value: "NEW",
+    label: "NEW",
+    value: "0",
   },
   {
-    label: "1",
-    value: "RENEWAL",
+    label: "RENEWAL",
+    value: "1",
   },
 ];
 
@@ -699,8 +699,7 @@ const priceenquiry: FormFieldType = createFormConfig(
   "text",
   PriceeEnquiryEnquiryValidation,
   "Price",
-  [],
-  true
+  []
 );
 const disenquiry: FormFieldType = createFormConfig(
   "disPer",
