@@ -1,28 +1,27 @@
 // Company master child pages
-export { AddEnquiry } from "./add-new-enquiry/AddUpdateNewEnquiry";
-export { addEnquiryFormFields } from "./add-new-enquiry/add-new-enquiry-form-fields";
+export { AddEnquiry } from "./enquiries/add-new-enquiry/AddUpdateNewEnquiry";
+export { addEnquiryFormFields } from "./enquiries/add-new-enquiry/add-new-enquiry-form-fields";
 
-export { Enquiries } from "./all-enquiries/AllEnquiries";
+export { Enquiries } from "./enquiries/all-enquiries/AllEnquiries";
 
-export { EnquirySearch } from "./enquiry-search/EnquirySearch";
+export { EnquirySearch } from "./enquiries/enquiry-search/EnquirySearch";
 
 export { PurchaseBills } from "./purchase-bills/PurchaseBills";
 export { AddUpdatePurchase } from "./purchase-bills/AddUpdatePurchaseBills";
 export { addPurchaseBillsFormFields } from "./purchase-bills/add-purchase-bills-form-field";
 
 export { AddBulkEnquiries } from "./add-bulk-enquiries/AddBulkEnquiries";
-export { addEnquirySearchFormFields } from "./enquiry-search/add-enquiry-search-form-field";
+export { addEnquirySearchFormFields } from "./enquiries/enquiry-search/add-enquiry-search-form-field";
 export { addBulkEnquiriesFormFields } from "./add-bulk-enquiries/add-bulk-enquires-form-field";
 
-export * from "./add-new-enquiry/add-update-new-emquiry-type";
-export * from "./add-new-enquiry/new-enquiry-type";
+export * from "./enquiries/add-new-enquiry/add-update-new-emquiry-type";
+export * from "./enquiries/add-new-enquiry/new-enquiry-type";
 
-export * from "./all-enquiries/allenquiries-type";
-export * from "./add-new-enquiry/service-type";
-export * from "./add-new-enquiry/enq-type";
-export * from "./add-new-enquiry/ref-no-type";
+export * from "./enquiries/all-enquiries/allenquiries-type";
+export * from "./enquiries/add-new-enquiry/service-type";
+export * from "./enquiries/add-new-enquiry/enq-type";
+export * from "./enquiries/add-new-enquiry/ref-no-type";
+export * from "./enquiries/add-new-enquiry/price-type";
 
-
-
-export { useAllEnquiriesApiCallHook } from "./all-enquiries/useAllEnquiriesApiCallHook";
-export { useServiceTypeApiCallHook } from "./add-new-enquiry/useServiceTypeApiCallHook";
+export { useAllEnquiriesApiCallHook } from "./enquiries/all-enquiries/useAllEnquiriesApiCallHook";
+export { useAddEnquiryApiCallHook } from "./enquiries/add-new-enquiry/useAddEnquiryApiCallHook";

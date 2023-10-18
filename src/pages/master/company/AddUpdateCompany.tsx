@@ -210,19 +210,18 @@ export const AddUpdateCompany: React.FC = () => {
                   <div className="card-body">
                     <Input config={addCompanyFormFields.nameField.config} />
                     <Input config={addCompanyFormFields.addressField.config} />
-                    <Input
-                      config={addCompanyFormFields.officeAddressField.config}
-                    />
-                    <Input config={addCompanyFormFields.telNo.config} />
-                    <Input config={addCompanyFormFields.faxNo.config} />
-                    <Input config={addCompanyFormFields.emailField.config} />
-                    <Input config={addCompanyFormFields.website.config} />
-                    <Input config={addCompanyFormFields.contactPerson.config} />
-                    <Input config={addCompanyFormFields.designation.config} />
                     <Input config={addCompanyFormFields.zip.config} />
                     <Select config={addCompanyFormFields.city.config} />
                     <Select config={addCompanyFormFields.state.config} />
                     <Select config={addCompanyFormFields.country.config} />
+                    <Input config={addCompanyFormFields.officeAddressField.config} />
+                    <Input config={addCompanyFormFields.telNo.config} />
+                    <Input config={addCompanyFormFields.faxNo.config} />
+                    <Input config={addCompanyFormFields.emailField.config} />
+                    <Input config={addCompanyFormFields.website.config} />
+                    <Input config={addCompanyFormFields.contactPerson.config}/>
+                    <Input config={addCompanyFormFields.designation.config} />
+                    
                   </div>
                 </div>
                 <div className="col-md-6 col-xs-12">

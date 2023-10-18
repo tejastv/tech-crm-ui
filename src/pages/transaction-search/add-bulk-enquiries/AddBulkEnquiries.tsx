@@ -13,21 +13,22 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "@constants/index";
-import { CompanyType, useCompanyApiCallHook } from "@master/index";
+import {
+  AddUpdateClientType,
+  CompanyType,
+  useCompanyApiCallHook,
+} from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
-import {
-  AddClientType,
-  addBulkEnquiriesFormFields,
-} from "@transaction-search/index";
+import { addBulkEnquiriesFormFields } from "@transaction-search/index";
 
 export const AddBulkEnquiries: React.FC = () => {
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
   const { data: companyData, isLoading } = getCompany();
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
-  const methods = useForm<AddClientType>();
+  const methods = useForm<AddUpdateClientType>();
 
   const config = {
     breadcrumbConfig: {

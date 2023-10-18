@@ -68,6 +68,9 @@ const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 // Std Price
 const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
 const GET_UPDATE_DELETE_STDPRICE_CLIENTS = "entity/stdPriceListForClients/{id}";
+const GET_CLIENT_WISE_CURRENCY_AND_GROUP =
+  "entity/priceListForClient/getCurrencyAndGroup/{id}";
+const GET_CLIENT_BY_CITY_ID = "entity/priceListForClient/city/{id}";
 
 const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
 const GET_UPDATE_DELETE_CLIENT_GROUP = "entity/clientGroup/{id}";
@@ -83,16 +86,17 @@ const GET_ADD_CLIENT = "entity/client";
 const GET_UPDATE_DELETE_CLIENT = "entity/client/{id}";
 const GET_CLIENT_GROUP_BASED_ON_ID = "entity/client/clientGroup/{id}";
 
-
 // Transaction Master
 
 const GET_ADD_ALL_ENQUIRY = "transaction/enquiry";
-const GET_UPDATE_DELETE_ALL_ENQUIRY = "transaction/enquiry/{id}"
+const GET_UPDATE_DELETE_ALL_ENQUIRY = "transaction/enquiry/{id}";
+const GET_PRICE =
+  "entity/priceListForClient/client/{client_id}/country/{country_id}/serviceType/{serviceTypeId}";
 
 const GET_ADD_SERVICETYPE = "transaction/serviceType";
-const GET_ADD_ENQTYPE= "transaction/enquiryStatus";
-const GET_ADD_ENQSTATUS= "transaction/enquiryStatus";
-const GET_ADD_REFNO= "transaction/getRefNo";
+const GET_ADD_ENQTYPE = "transaction/enquiryStatus";
+const GET_ADD_ENQSTATUS = "transaction/enquiryStatus";
+const GET_ADD_REFNO = "transaction/getRefNo";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -141,7 +145,7 @@ export const apiUrls = {
   GET_UPDATE_DELETE_CLIENT_GROUP,
   GET_ADD_SOURCE,
   GET_UPDATE_DELETE_SOURCE,
-// =========
+  // =========
 
   // Std Price
   GET_LAST_FIN_YEAR,
@@ -161,4 +165,7 @@ export const apiUrls = {
   GET_ADD_ENQTYPE,
   GET_ADD_REFNO,
   GET_ADD_ENQSTATUS,
+  GET_CLIENT_BY_CITY_ID,
+  GET_CLIENT_WISE_CURRENCY_AND_GROUP,
+  GET_PRICE,
 };

@@ -6,6 +6,7 @@ const LOCALSOURCE_DATA = "localsource-data";
 const SEGMENT_DATA = "segment-data";
 const EXECUTIVE_DATA = "continent-data";
 const COMPANY_MASTER_DATA = "companyMaster-data";
+const PRICE_DATA = "price-data";
 const FIN_YEAR_DATA = "fin-year-data";
 const INDUSTRY_DATA = "industry-data";
 const ACTUAL_BUYER_DATA = "actual-buyer-data";
@@ -23,7 +24,8 @@ const BANKMASTER_DEPOSIT_DATA = "bankmasterdeposit-data";
 const PAYMENTMODE_DATA = "paymentmode-data";
 const SUPPLIER_MASTER_DATA = "supplier-master-data";
 const CURRENCY_DATA = "currency-data";
-const STDPRICE_DATA = "currency-data";
+const STDPRICE_DATA = "std-price-for-clients-data";
+const CITY_WISE_CLIENT_DATA = "city-wise-clients-data";
 const CLIENT_GROUP_DATA = "client-group-data";
 const SOURCE_DATA = "source-data";
 const LAST_FIN_YEAR = "last-fin-year-data";
@@ -31,8 +33,6 @@ const CLIENT_DATA = "client-data";
 const CLIENT_GROUP_BASED_ON_ID_DATA = "client-group-based-on-id-data";
 
 //transaction master
-
-const ALL_ENQUIRIES_DATA = "all-enquiries-data";
 
 // Transaction Enquiry
 const ENQUIRY_DATA = "enquiry-data";
@@ -72,9 +72,10 @@ export const queryKeys = {
   STD_PRICE_DATA,
   PRICE_LIST_DATA,
   ACTUAL_BUYER_DATA,
-  ALL_ENQUIRIES_DATA,
-ENQUIRY_DATA,
-SERVICETYPE_DATA,
-ENQSTATUS_DATA,
-REFNO_DATA
+  ENQUIRY_DATA,
+  SERVICETYPE_DATA,
+  ENQSTATUS_DATA,
+  REFNO_DATA,
+  CITY_WISE_CLIENT_DATA,
+  PRICE_DATA,
 };

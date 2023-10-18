@@ -215,7 +215,7 @@ export const AddEnqPi: React.FC = () => {
                 
                 <Select  config={addEnqPiFormFields.clientField.config} />
 
-                <div className="col-md-14 col-xs-12 text-right">
+                <div className="col-md-14 col-xs-14 text-right">
 
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                     <i className="far fa-save"></i>Get Price

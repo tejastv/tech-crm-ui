@@ -64,7 +64,7 @@ export const PriceListGroup: React.FC = () => {
     let cityArray = selectOptionsMaker(cityData, "id", "cityName");
     cityArray.unshift({
       label: "All",
-      value: -1,
+      value: "-1",
     });
     addPriceGroupFormFields.pricegroupcity.config.options = cityArray;
   }
@@ -211,7 +211,7 @@ export const PriceListGroup: React.FC = () => {
         globalSearchBox: true,
         pagination: {
           showItemCountDropdown: false,
-          pageSize: 100,
+          pageSize: 1000,
           nextPreviousBtnShow: false,
           tableMetaDataShow: false,
         },
@@ -231,7 +231,7 @@ export const PriceListGroup: React.FC = () => {
         globalSearchBox: true,
         pagination: {
           showItemCountDropdown: false,
-          pageSize: 100,
+          pageSize: 1000,
           nextPreviousBtnShow: false,
           tableMetaDataShow: false,
         },
@@ -314,7 +314,7 @@ export const PriceListGroup: React.FC = () => {
         </FormProvider>
         <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
           <Table config={tableConfig.config}>
-            {stdPriceDataLoading || (priceListDataLoading && <Loader />)}
+            {(stdPriceDataLoading || priceListDataLoading) && <Loader />}
           </Table>
         </BorderLayout>
       </Card>
