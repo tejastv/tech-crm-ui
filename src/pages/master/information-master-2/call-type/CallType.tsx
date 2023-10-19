@@ -29,6 +29,11 @@ export const CallType: React.FC = () => {
 
   const columns: ColumnDef<CallTypeType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -38,11 +43,6 @@ export const CallType: React.FC = () => {
       id: "typeName",
       cell: (info) => info.getValue(),
       header: () => <>Type Name</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

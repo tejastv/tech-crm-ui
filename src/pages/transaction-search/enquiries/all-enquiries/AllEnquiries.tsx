@@ -37,6 +37,11 @@ export const Enquiries: React.FC = () => {
 
   const columns: ColumnDef<AllEnquiriesType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       accessorFn: (row) => row.enqID,
       id: "enqID",
       cell: (info) => info.getValue(),
@@ -390,11 +395,7 @@ export const Enquiries: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Group Price</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const deleteEnquiryClick = (enquiriesData: any) => {

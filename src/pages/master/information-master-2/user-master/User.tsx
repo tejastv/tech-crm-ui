@@ -28,6 +28,11 @@ export const User: React.FC = () => {
   const navigate = useNavigate();
   const columns: ColumnDef<UserType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -56,11 +61,7 @@ export const User: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Type Of User</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const { data: userData, isLoading } = getUser();

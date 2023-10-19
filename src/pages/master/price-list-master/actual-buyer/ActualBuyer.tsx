@@ -31,6 +31,10 @@ export const ActualBuyer: React.FC = () => {
 
   const columns: ColumnDef<ActualBuyerType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },{
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -112,11 +116,6 @@ export const ActualBuyer: React.FC = () => {
       id: "gstn",
       cell: (info) => info.getValue(),
       header: () => <>GSTN</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

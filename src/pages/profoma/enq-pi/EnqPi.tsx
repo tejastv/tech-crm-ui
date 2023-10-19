@@ -37,6 +37,11 @@ export const EnqPi: React.FC = () => {
 
   const columns: ColumnDef<CompanyType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "selectall",
       cell: (info) => info.getValue(),
       header: () => <>Select All</>,
@@ -258,11 +263,6 @@ export const EnqPi: React.FC = () => {
       id: "contactPerson",
       cell: (info) => info.getValue(),
       header: () => <>Due on</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

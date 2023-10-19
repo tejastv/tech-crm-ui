@@ -29,6 +29,11 @@ export const SiteStatus: React.FC = () => {
   const navigate = useNavigate();
   const columns: ColumnDef<SiteStatusType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -39,11 +44,7 @@ export const SiteStatus: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Site Status</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const { data: siteStatusData, isLoading } = getSiteStatus();

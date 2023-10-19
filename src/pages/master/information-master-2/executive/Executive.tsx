@@ -29,6 +29,11 @@ export const Executive: React.FC = () => {
 
   const columns: ColumnDef<ExecutiveType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -63,11 +68,7 @@ export const Executive: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>State</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const { data: executiveData, isLoading } = getExecutive();

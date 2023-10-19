@@ -669,6 +669,7 @@ export const AddEnquiry: React.FC = () => {
                 <div className="col-md-6 col-xs-12">
                   <Input config={addEnquiryFormFields.givenname.config} />
                   <Input config={addEnquiryFormFields.recdon.config} />
+                  <Input config={addEnquiryFormFields.dueon.config} />
                   <Select config={addEnquiryFormFields.enqtype.config} />
                   <Select
                     config={addEnquiryFormFields.localsourceenquiry.config}
@@ -677,7 +678,7 @@ export const AddEnquiry: React.FC = () => {
                     config={addEnquiryFormFields.servicetype.config}
                     onChangeHandler={onServiceTypeChangeHandler}
                   />
-                  <Input config={addEnquiryFormFields.dueon.config} />
+                  
                   <Select config={addEnquiryFormFields.printstatus.config} />
                   <Select config={addEnquiryFormFields.enqstatus.config} />
                   <Select config={addEnquiryFormFields.svisit.config} />

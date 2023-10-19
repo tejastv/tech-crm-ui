@@ -8,7 +8,7 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "@constants/index";
-import { ClientType, useClientApiCallHook } from "@master/index";
+import { ClientType, useCityApiCallHook, useClientApiCallHook, useStateApiCallHook } from "@master/index";
 import { useNavigate } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -26,7 +26,22 @@ export const Client: React.FC = () => {
 
   const { getClient, deleteClientMutation } = useClientApiCallHook();
   const navigate = useNavigate();
+  const { getCity } = useCityApiCallHook();
+  const { getState } = useStateApiCallHook();
+  const { data: cityData } = getCity();
+  const { data: stateData } = getState();
   const columns: ColumnDef<ClientType>[] = [
+
+
+
+
+
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -45,8 +60,10 @@ export const Client: React.FC = () => {
       header: () => <>Address</>,
     },
     {
-      accessorFn: (row) => row.cityID,
-      id: "cityID",
+      accessorFn: (row) => row.cityName,
+     
+      
+      id: "id",
       cell: (info) => info.getValue(),
       header: () => <>City</>,
     },
@@ -57,14 +74,14 @@ export const Client: React.FC = () => {
       header: () => <>Zip</>,
     },
     {
-      accessorFn: (row) => row.stateID,
-      id: "stateID",
+      accessorFn: (row) => row.state,
+      id: "stateId",
       cell: (info) => info.getValue(),
       header: () => <>State</>,
     },
     {
-      accessorFn: (row) => row.countryID,
-      id: "countryID",
+      accessorFn: (row) => row.countryName,
+      id: "country",
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
     },
@@ -230,11 +247,7 @@ export const Client: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>GSTYN</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+ 
   ];
 
   const { data: clientData, isLoading } = getClient();
