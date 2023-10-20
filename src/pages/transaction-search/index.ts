@@ -3,6 +3,8 @@ export { AddEnquiry } from "./add-new-enquiry/AddUpdateNewEnquiry";
 export { addEnquiryFormFields } from "./add-new-enquiry/add-new-enquiry-form-fields";
 
 export { Enquiries } from "./all-enquiries/AllEnquiries";
+export { allEnquiryFormFields } from "./all-enquiries/all-enquiry-form-field";
+
 
 export { EnquirySearch } from "./enquiry-search/EnquirySearch";
 
@@ -18,3 +20,8 @@ export * from "./add-new-enquiry/add-update-new-emquiry-type";
 export * from "./add-new-enquiry/new-enquiry-type";
 
 export * from "./all-enquiries/allenquiries-type";
+
+
+
+
+export { useAllEnquiriesApiCallHook } from "../transaction-search/all-enquiries/useAllEnquiriesApiCallHook";

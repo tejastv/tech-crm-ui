@@ -61,7 +61,7 @@ const todateeField: FormFieldType = createFormConfig(
   formattedDate
 );
 
-export const addEnquirySearchFormFields = {
+export const allEnquiryFormFields = {
   clientnameField,
   fromdateField,
   todateeField,

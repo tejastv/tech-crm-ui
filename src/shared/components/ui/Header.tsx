@@ -646,7 +646,7 @@ export const Header: React.FC = () => {
                     <li className="sidebar-item">
                         <Link
                           className="sidebar-link"
-                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYSEARCH_TRANSACTION_ROUTES.ENQUIRYSEARCH}`}
+                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYDETAILS_TRANSACTION_ROUTES.ENQUIRYDETAILS}?category=search`}
                         >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Enquiry Search</span>

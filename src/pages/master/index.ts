@@ -265,5 +265,4 @@ export { useClientApiCallHook } from "./client-master/client/useClientApiCallHoo
 export { useStdPriceClientsApiCallHook } from "./price-list-master/std-price-list-client/useStdPriceClientsApiCallHook";
 export { usePriceListGroupApiCallHook } from "./price-list-master/price-list-group-wise/usePriceListGroupApiCallHook";
 export { useActualBuyerApiCallHook } from "./price-list-master/actual-buyer/useActualBuyerApiCallHook";
-export { useAllEnquiriesApiCallHook } from "../transaction-search/all-enquiries/useAllEnquiriesApiCallHook";
 export { usePriceListForClientsApiCallHook } from "./price-list-master/price-list-for-clients/usePriceListForClientsApiCallHook";

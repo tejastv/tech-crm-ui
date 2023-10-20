@@ -73,7 +73,7 @@
 //       cell: (info) => info.getValue(),
 //       header: () => <>Given Address</>,
 //     },
-    
+
 //   ];
 
 
@@ -112,43 +112,58 @@
 
 
 
-import React from "react";
+import React, { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 
 import {
   BorderLayout,
+  Button,
+  Input,
   Loader,
   PageBreadcrumb,
+  Select,
   Table,
   TableType,
 } from "@shared/index";
-import { COMMON_ROUTES } from "@constants/index";
-import { AllEnquiriesType, useAllEnquiriesApiCallHook } from "@pages/master";
-import { useNavigate } from "react-router-dom";
+import { COMMON_ROUTES, TRANSACTION_ROUTES } from "@constants/index";
+import { AllEnquiriesType, allEnquiryFormFields, useAllEnquiriesApiCallHook } from "@pages/transaction-search";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useClientApiCallHook } from "@pages/master";
+import { FormProvider, useForm } from "react-hook-form";
+import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
 export const Enquiries: React.FC = () => {
-  const { getEnquiries , deleteEnquiryMutation} = useAllEnquiriesApiCallHook();
+  const { getEnquiries, getSearchParam, deleteEnquiryMutation } = useAllEnquiriesApiCallHook();
   const { mutateAsync: deleteEnquiry } = deleteEnquiryMutation();
   const { data: enquiriesData, isLoading } = getEnquiries();
   const navigate = useNavigate();
+  const { getClient } = useClientApiCallHook();
+  const methods = useForm<AllEnquiriesType>();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const category = queryParams.get('category');
+
+  const [clientName, setClientName] = useState('');
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
 
   const config = {
-        breadcrumbConfig: {
-          pageHeading: "Enquiry Details",
-          btnTitle: "Add Enquiry Details",
-          btnTitle2: "Enquiry Search",
-          btnRoute: COMMON_ROUTES.ADD,
-        
-        },
-        btnConfig:{
-          pageHeading:"",
-          btnTitle: "Enquiry Search",
-          btnRoute:COMMON_ROUTES.LIST
-        },
-        borderLayoutConfig: {
-          heading: "List",
-        },
-      };
+    breadcrumbConfig: {
+      pageHeading: "Enquiry Details",
+      btnTitle: "Add Enquiry Details",
+      btnTitle2: "Enquiry Search",
+      btnRoute: COMMON_ROUTES.ADD,
+
+    },
+    btnConfig: {
+      pageHeading: "",
+      btnTitle: "Enquiry Search",
+      btnRoute: `${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYDETAILS_TRANSACTION_ROUTES.ENQUIRYDETAILS}?category=search`
+    },
+    borderLayoutConfig: {
+      heading: "List",
+    },
+  };
 
   const columns: ColumnDef<AllEnquiriesType>[] = [
     {
@@ -510,28 +525,36 @@ export const Enquiries: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Action</>,
     },
-    
+
   ];
 
-
+  // client api call
+  const { data: clientData } = getClient();
+  if (clientData) {
+    allEnquiryFormFields.clientnameField.config.options = selectOptionsMaker(
+      clientData,
+      "id",
+      "clientName"
+    );
+  }
   const deleteEnquiryClick = (enquiriesData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
       deleteEnquiry(enquiriesData.enqID);
     }
     console.log("delete clicked");
-    
+
   };
 
   const editEnquiryClick = (enquiriesData: any) => {
     // navigate(COMMON_ROUTES.EDIT.replace(":id", continentData.stateId));
     console.log("edit button clicked");
-    
+
   };
 
   const tableConfig: TableType<AllEnquiriesType> = {
     config: {
-      tableName: "State",
+      tableName: "Enquiry",
       columns: columns,
       tableData: enquiriesData ? enquiriesData : [],
       copyBtn: true,
@@ -549,12 +572,61 @@ export const Enquiries: React.FC = () => {
       // onEditClick: editEnquiryClick,
     },
   };
+  const handleSearch = () => {
+    console.log("handle search");
+    // const queryParams = {
+    //   clientName: clientName,
+    //   fromDate: fromDate,
+    //   toDate: toDate,
+    // };
+
+    // getSearchParam(queryParams);
+  };
 
   return (
     <>
-      <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
-      <PageBreadcrumb config={config.btnConfig}></PageBreadcrumb>
+      {category !== 'search' && (
+        <>
+          <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
+          <PageBreadcrumb config={config.btnConfig}></PageBreadcrumb>
+        </>
+      )}
       <BorderLayout heading={config.borderLayoutConfig.heading}>
+        {category === 'search' && ( // Conditional rendering
+          <FormProvider {...methods}>
+            <form noValidate autoComplete="off" className="p-t-20">
+              <div className="row">
+                <div className="col-md-3 col-xs-12">
+                  <Select
+                    config={allEnquiryFormFields.clientnameField.config}
+                    onChangeHandler={(e) => setClientName(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-md-3 col-xs-12">
+                  <Input
+                    config={allEnquiryFormFields.fromdateField.config}
+                    onChangeHandler={(e) => setFromDate(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-md-2 col-xs-12">
+                  <Input
+                    config={allEnquiryFormFields.todateeField.config}
+                    onChangeHandler={(e) => setToDate(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-md-2 col-xs-12 text-left">
+                  <Button type={"submit"} className={"btn btn-danger btn-sm"} onClick={handleSearch}>
+                    <i className="far fa-save"></i> Search
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </FormProvider>
+        )}
+
         <Table config={tableConfig.config}>
           {isLoading ? <Loader /> : null}
         </Table>

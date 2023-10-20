@@ -90,6 +90,7 @@ const GET_CLIENT_GROUP_BASED_ON_ID = "entity/client/clientGroup/{id}";
 
 const GET_ADD_ALL_ENQUIRY = "transaction/enquiry";
 const GET_UPDATE_DELETE_ALL_ENQUIRY = "transaction/enquiry/{id}";
+const GET_ADD_ALL_ENQUIRY_SEARCH = "transaction/allEnquiryAndSearch";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -159,4 +160,5 @@ export const apiUrls = {
   GET_UPDATE_DELETE_ALL_ENQUIRY,
   GET_CLIENT_BY_CITY_ID,
   GET_CLIENT_WISE_CURRENCY_AND_GROUP,
+  GET_ADD_ALL_ENQUIRY_SEARCH,
 };
