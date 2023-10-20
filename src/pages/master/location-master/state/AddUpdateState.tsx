@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
+import { ActionButtons, BorderLayout, Card, Input, Select } from "@shared/index";
 import {
   AddUpdateStateType,
   addStateFormFields,
+  useCountryApiCallHook,
   useStateApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
+import { returnObjectBasedOnID, selectOptionsMaker } from "@utils/index";
 
 export const AddUpdateState: React.FC = () => {
   const methods = useForm<AddUpdateStateType>();
@@ -16,6 +18,7 @@ export const AddUpdateState: React.FC = () => {
   const params = useParams();
   const { mutateAsync: addState } = addStateMutation();
   const { mutateAsync: updateState } = updateStateMutation();
+  const { getCountry } = useCountryApiCallHook();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -27,6 +30,15 @@ export const AddUpdateState: React.FC = () => {
     },
   };
 
+  const { data: CountryData } = getCountry();
+  if (CountryData) {
+    addStateFormFields.country.config.options = selectOptionsMaker(
+      CountryData,
+      "countryId",
+      "countryName"
+    );
+  }
+
   if (params.id) {
     const { data: stateData, isSuccess: stateDataSuccess } = getStateData(
       "" + params.id
@@ -36,6 +48,24 @@ export const AddUpdateState: React.FC = () => {
       addStateFormFields.numbericCodeField.config.setData =
         stateData?.stateCodeN;
       addStateFormFields.stateCodeField.config.setData = stateData?.stateCodeA;
+      if (CountryData) {
+        let data: any = returnObjectBasedOnID(
+          CountryData,
+          "countryId",
+          stateData?.countryId,
+          "countryId",
+          "countryName"
+        );
+        addStateFormFields.country.config.setData =
+          data.length > 0
+            ? [
+                {
+                  label: stateData?.countryName,
+                  value: stateData?.countryId,
+                },
+              ]
+            : [];
+      }
     }
   } else {
     useEffect(() => {
@@ -69,6 +99,7 @@ export const AddUpdateState: React.FC = () => {
                 </div>
                 <div className="col-md-6 col-xs-12">
                   <Input config={addStateFormFields.stateCodeField.config} />
+                  <Select config={addStateFormFields.country.config} />
                 </div>
               </div>
             </BorderLayout>

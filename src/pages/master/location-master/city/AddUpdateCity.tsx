@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
+import { ActionButtons, BorderLayout, Card, Input, Select } from "@shared/index";
 import {
   AddUpdateCityType,
   addCityFormFields,
   useCityApiCallHook,
+  useStateApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
+import { selectOptionsMaker } from "@utils/index";
 
 export const AddUpdateCity: React.FC = () => {
   const methods = useForm<AddUpdateCityType>();
@@ -16,6 +18,7 @@ export const AddUpdateCity: React.FC = () => {
   const { mutateAsync: addCity } = addCityMutation();
   const { mutateAsync: updateCity } = updateCityMutation();
   const params = useParams();
+  const { getState } = useStateApiCallHook();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -25,8 +28,33 @@ export const AddUpdateCity: React.FC = () => {
     formActionsConfig: {
       heading: "Action Buttons",
     },
+    
   };
 
+  const { data: stateData } = getState();
+  if (stateData) {
+    addCityFormFields.state.config.options = selectOptionsMaker(
+      stateData,
+      "stateId",
+      "stateName"
+    );
+  }
+  // if (stateData) {
+  //   let id = EnquiryMasterData?.stateId;
+  //   let data: any = returnObjectBasedOnID(
+  //     stateData,
+  //     "stateId",
+  //     id,
+  //     "stateId",
+  //     "state"
+  //   );
+  //   addCityFormFields.state.config.setData = data
+  //     ? {
+  //         label: data.label,
+  //         value: data.value,
+  //       }
+  //     : [];
+  // }
   // useEffect(() => {
   //   methods.reset();
   // }, []);
@@ -78,6 +106,9 @@ export const AddUpdateCity: React.FC = () => {
                 </div>
                 <div className="col-md-6 col-xs-12">
                   <Input config={addCityFormFields.osPrintField.config} />
+                </div>
+                <div className="col-md-6 col-xs-12">
+                  <Select config={addCityFormFields.state.config} />
                 </div>
               </div>
             </BorderLayout>

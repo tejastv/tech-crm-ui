@@ -48,8 +48,8 @@ export const Enquiries: React.FC = () => {
       header: () => <>SN</>,
     },
     {
-      accessorFn: (row) => row.fyear,
-      id: "fyear",
+      accessorFn: (row) => row.financialYear,
+      id: "financialYear",
       cell: (info) => info.getValue(),
       header: () => <>Year</>,
     },

@@ -34,6 +34,17 @@ const numbericCodeFieldValidation = {
   },
 } as ValidationType;
 
+const CountryValidation = {
+  required: {
+    value: true,
+    message: "{label} field is rquired",
+  },
+  pattern: {
+    value: /^[a-zA-Z0-9\-]+$/,
+    message: "Please select a {label}",
+  },
+} as ValidationType;
+
 const stateField: FormFieldType = createFormConfig(
   "state",
   "State",
@@ -55,9 +66,18 @@ const numbericCodeField: FormFieldType = createFormConfig(
   numbericCodeFieldValidation,
   ""
 );
+const country: FormFieldType = createFormConfig(
+  "countryId",
+  "Country",
+  "select",
+  CountryValidation,
+  "Select Country",
+  []
+);
 
 export const addStateFormFields = {
   stateField,
   stateCodeField,
   numbericCodeField,
+  country
 };

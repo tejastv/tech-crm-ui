@@ -470,6 +470,7 @@ const crDay: FormFieldType = createFormConfig(
   "Select Cr. days",
   crDayOptions
 );
+
 const billonactual: FormFieldType = createFormConfig(
   "billONActualBuyer",
   "",

@@ -35,7 +35,7 @@ export const Input = (props: FormFieldType) => {
               className="col-sm-3 control-label col-form-label"
               htmlFor={props.config.name}
             >
-              {props.config.label}
+              {props.config.label} {props.config.validation?.required.value && <span>*</span>}
             </Form.Label>
           )}
           <div className="col-sm-9">
