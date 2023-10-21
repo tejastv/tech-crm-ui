@@ -410,6 +410,13 @@ export const AddUpdateClient: React.FC = () => {
                     <Radio config={addClientFormFields.clientGst.config} />
                     <Input config={addClientFormFields.gstn.config} />
                     <Input config={addClientFormFields.addressClient.config} />
+                    <Select config={addClientFormFields.cityClient.config} />
+                    <Input config={addClientFormFields.zipClient.config} />
+  <Select config={addClientFormFields.stateClient.config}  onChangeHandler={handleSelectChange}  />
+<Input
+                      config={addClientFormFields.statecodeClient.config}
+                    />
+                    <Select config={addClientFormFields.countryClient.config} />
                     <Input config={addClientFormFields.telnoClient.config} />
                     <Input config={addClientFormFields.faxnoClient.config} />
                     <Input config={addClientFormFields.emailClient.config} />
@@ -418,20 +425,13 @@ export const AddUpdateClient: React.FC = () => {
                     <Input
                       config={addClientFormFields.designationClient.config}
                     />
-                    <Select config={addClientFormFields.cityClient.config} />
-                    <Input config={addClientFormFields.zipClient.config} />
+                    
                     {/* <div className="row "> */}
                     {/* <div className="col-md-5"> */}
-                    <Select
-                      config={addClientFormFields.stateClient.config}
-                      onChangeHandler={handleSelectChange}
-                    />
+                  
                     {/* </div> */}
                     {/* </div> */}
-                    <Input
-                      config={addClientFormFields.statecodeClient.config}
-                    />
-                    <Select config={addClientFormFields.countryClient.config} />
+                    
                     {/* <h6 className="card-title m-t-20 md-2"> */}
                     <DivLayout
                       heading={cardConfig.formclieckUpdateConfig.heading}
