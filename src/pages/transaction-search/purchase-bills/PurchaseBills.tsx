@@ -22,8 +22,12 @@ export const PurchaseBills: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Purchase Bills(of Suppliers)",
-      btnTitle: "Add Purchase Bills(of Suppliers)",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Purchase Bills(of Suppliers)",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -99,7 +103,6 @@ export const PurchaseBills: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Note</>,
     },
-
   ];
 
   const deleteCompanyClick = (companyData: any) => {

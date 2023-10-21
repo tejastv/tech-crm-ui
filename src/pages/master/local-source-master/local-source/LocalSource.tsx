@@ -23,8 +23,12 @@ export const LocalSource: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Local Source",
-      btnTitle: "Add Local Source",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Local Source",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -71,7 +75,6 @@ export const LocalSource: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Country Name</>,
     },
-
   ];
   const deleteLocalSourceClick = (localsourceData: any) => {
     var conformation = confirm("Are you sure to delete it?");

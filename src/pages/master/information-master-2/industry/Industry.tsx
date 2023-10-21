@@ -16,8 +16,12 @@ export const Industry: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Industry",
-      btnTitle: "Add Industry",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Industry",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -44,7 +48,6 @@ export const Industry: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Industry Name</>,
     },
-
   ];
 
   const { data: industryData, isLoading } = getIndustry();

@@ -20,8 +20,12 @@ export const Supplier: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Supplier Master",
-      btnTitle: "Add Supplier",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Supplier",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -102,7 +106,6 @@ export const Supplier: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
     },
-
   ];
 
   const { data: supplierMasterData, isLoading } = getSupplierMaster();

@@ -33,8 +33,12 @@ export const AddBulkEnquiries: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Bulk Enquiries",
-      btnTitle: "",
-      btnRoute: "",
+      buttons: [
+        {
+          btnTitle: "",
+          btnRoute: "",
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",

@@ -21,8 +21,12 @@ export const Segment: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Segment",
-      btnTitle: "Add Segment",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Segment",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -46,7 +50,6 @@ export const Segment: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Segment Name</>,
     },
-
   ];
 
   const deleteSegmentClick = async (segmentData: any) => {

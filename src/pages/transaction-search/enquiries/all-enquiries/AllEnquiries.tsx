@@ -12,7 +12,11 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES, TRANSACTION_ROUTES } from "@constants/index";
-import { AllEnquiriesType, allEnquiryFormFields, useAllEnquiriesApiCallHook } from "@pages/transaction-search";
+import {
+  AllEnquiriesType,
+  allEnquiryFormFields,
+  useAllEnquiriesApiCallHook,
+} from "@pages/transaction-search";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useClientApiCallHook } from "@pages/master";
 import { FormProvider, useForm } from "react-hook-form";
@@ -21,7 +25,8 @@ import { cleanupObject } from "@utils/cleanUpObject";
 import { formatDateString } from "@utils/dateFormatter";
 
 export const Enquiries: React.FC = () => {
-  const { getEnquiries, getEnquiryBasedOnSearchParam, deleteEnquiryMutation } = useAllEnquiriesApiCallHook();
+  const { getEnquiries, getEnquiryBasedOnSearchParam, deleteEnquiryMutation } =
+    useAllEnquiriesApiCallHook();
   const { mutateAsync: deleteEnquiry } = deleteEnquiryMutation();
   const { data: enquiriesData, isLoading } = getEnquiries();
   const navigate = useNavigate();
@@ -29,19 +34,24 @@ export const Enquiries: React.FC = () => {
   const methods = useForm<AllEnquiriesType>();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const category = queryParams.get('category');
+  const category = queryParams.get("category");
 
   const config = {
     breadcrumbConfig: {
       pageHeading: "Enquiry Details",
-      btnTitle: "Add Enquiry Details",
-      btnTitle2: "Enquiry Search",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Enquiry Details",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+        {
+          btnTitle: "Enquiry Search",
+          btnRoute: `${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYDETAILS_TRANSACTION_ROUTES.ENQUIRYDETAILS}?category=search`,
+        },
+      ],
     },
     btnConfig: {
       pageHeading: "",
-      btnTitle: "Enquiry Search",
-      btnRoute: `${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYDETAILS_TRANSACTION_ROUTES.ENQUIRYDETAILS}?category=search`
     },
     borderLayoutConfig: {
       heading: "List",
@@ -458,12 +468,12 @@ export const Enquiries: React.FC = () => {
     }
     if (data.startDate) {
       const inputDate = new Date(data.startDate);
-      const formattedDate = formatDateString(inputDate, 'd-m-y', '-');
+      const formattedDate = formatDateString(inputDate, "d-m-y", "-");
       data.startDate = formattedDate;
     }
     if (data.endDate) {
       const inputDate = new Date(data.endDate);
-      const formattedDate = formatDateString(inputDate, 'd-m-y', '-');
+      const formattedDate = formatDateString(inputDate, "d-m-y", "-");
       data.endDate = formattedDate;
     }
     if (data) {
@@ -473,16 +483,20 @@ export const Enquiries: React.FC = () => {
 
   return (
     <>
-      {category !== 'search' && (
+      {category !== "search" && (
         <>
           <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
-          <PageBreadcrumb config={config.btnConfig}></PageBreadcrumb>
         </>
       )}
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {category === 'search' && ( // Conditional rendering
+        {category === "search" && ( // Conditional rendering
           <FormProvider {...methods}>
-            <form onSubmit={onSubmit} noValidate autoComplete="off" className="p-t-20">
+            <form
+              onSubmit={onSubmit}
+              noValidate
+              autoComplete="off"
+              className="p-t-20"
+            >
               <div className="row">
                 <div className="col-md-3 col-xs-12">
                   <Select
@@ -491,18 +505,14 @@ export const Enquiries: React.FC = () => {
                 </div>
 
                 <div className="col-md-3 col-xs-12">
-                  <Input
-                    config={allEnquiryFormFields.fromdateField.config}
-                  />
+                  <Input config={allEnquiryFormFields.fromdateField.config} />
                 </div>
 
-                <div className="col-md-2 col-xs-12">
-                  <Input
-                    config={allEnquiryFormFields.todateeField.config}
-                  />
+                <div className="col-md-3 col-xs-12">
+                  <Input config={allEnquiryFormFields.todateeField.config} />
                 </div>
 
-                <div className="col-md-2 col-xs-12 text-left">
+                <div className="col-md-3 col-xs-12 text-left">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                     <i className="far fa-save"></i> Search
                   </Button>
@@ -519,4 +529,3 @@ export const Enquiries: React.FC = () => {
     </>
   );
 };
-

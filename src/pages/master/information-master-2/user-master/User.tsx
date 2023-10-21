@@ -16,8 +16,12 @@ export const User: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "User Master",
-      btnTitle: "Add User",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add User",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -61,7 +65,6 @@ export const User: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Type Of User</>,
     },
-
   ];
 
   const { data: userData, isLoading } = getUser();

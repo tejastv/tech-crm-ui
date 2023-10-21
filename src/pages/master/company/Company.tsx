@@ -22,8 +22,12 @@ export const CompanyMaster: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Company Master",
-      btnTitle: "Add Company",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Company",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -120,7 +124,6 @@ export const CompanyMaster: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>RecFin</>,
     },
-
   ];
 
   const deleteCompanyClick = (companyData: any) => {

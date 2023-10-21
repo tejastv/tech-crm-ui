@@ -20,8 +20,12 @@ export const BankMasterDrawn: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Bank Master(Drawn)",
-      btnTitle: "Add Bank Master(Drawn)",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Bank Master(Drawn)",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -45,7 +49,6 @@ export const BankMasterDrawn: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Bank Name</>,
     },
-    
   ];
 
   const { data: BankMasterDrawnData, isLoading } = getBankMasterDrawnOn();
