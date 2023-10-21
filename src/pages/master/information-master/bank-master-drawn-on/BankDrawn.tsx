@@ -30,6 +30,11 @@ export const BankMasterDrawn: React.FC = () => {
 
   const columns: ColumnDef<BankdrawnonType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -40,11 +45,7 @@ export const BankMasterDrawn: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Bank Name</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+    
   ];
 
   const { data: BankMasterDrawnData, isLoading } = getBankMasterDrawnOn();

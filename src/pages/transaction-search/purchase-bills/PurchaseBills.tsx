@@ -32,6 +32,11 @@ export const PurchaseBills: React.FC = () => {
 
   const columns: ColumnDef<CompanyType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "selectall",
       cell: (info) => info.getValue(),
       header: () => <>SN</>,
@@ -94,11 +99,7 @@ export const PurchaseBills: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Note</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const deleteCompanyClick = (companyData: any) => {

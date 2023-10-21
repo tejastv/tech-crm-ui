@@ -33,6 +33,11 @@ export const BankMasterDeposit: React.FC = () => {
 
   const columns: ColumnDef<BankDepositType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -49,11 +54,7 @@ export const BankMasterDeposit: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Account No</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const { data: BankMasterDepositData, isLoading } = getBankMasterDeposit();

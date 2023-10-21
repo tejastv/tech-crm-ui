@@ -29,6 +29,11 @@ export const FinYear: React.FC = () => {
 
   const columns: ColumnDef<FinYearType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -75,11 +80,7 @@ export const FinYear: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>IGST per</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const { data: finYearData, isLoading } = getFinYear();

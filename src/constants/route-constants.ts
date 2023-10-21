@@ -174,3 +174,30 @@ export const COMMON_ROUTES = {
   EDIT: "edit/:id",
   LIST: "list",
 };
+
+export const REPORT_ROUTES = {
+  REPORT_PARENT_ROUTE: "/report/*",
+  REPORT: "/report/",
+
+  NUMBER_OF_ENQUIRIES_ROUTES: {
+    NUMBER_OF_ENQUIRIES_PARENT_ROUTE: "/no-of-enquiries/*",
+    NUMBER_OF_ENQUIRIES: "no-of-enquiries",
+  },
+  NUMBER_OF_ENQUIRIES_GROUP_COUNTRY_WISE_ROUTES: {
+    NUMBER_OF_ENQUIRIES_GROUP_COUNTRY_WISE_PARENT_ROUTE:
+      "/no-of-enquiries-group-country-wise/*",
+    NUMBER_OF_ENQUIRIES_GROUP_COUNTRY_WISE:
+      "no-of-enquiries-group-country-wise",
+  },
+  NUMBER_OF_ENQUIRIES_GRAPH_VIEW_ROUTES: {
+    NUMBER_OF_ENQUIRIES_GRAPH_VIEW_PARENT_ROUTE:
+      "/no-of-enquiries-graph-view/*",
+    NUMBER_OF_ENQUIRIES_GRAPH_VIEW: "no-of-enquiries-graph-view",
+  },
+  NUMBER_OF_ENQUIRIES_GRAPH_VIEW_GROUP_WISE_ROUTES: {
+    NUMBER_OF_ENQUIRIES_GRAPH_VIEW_GROUP_WISE_PARENT_ROUTE:
+      "/no-of-enquiries-graph-view-group-wise/*",
+    NUMBER_OF_ENQUIRIES_GRAPH_VIEW_GROUP_WISE:
+      "no-of-enquiries-graph-view-group-wise",
+  },
+};

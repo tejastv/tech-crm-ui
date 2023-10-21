@@ -32,6 +32,11 @@ export const LocalSource: React.FC = () => {
   };
   const columns: ColumnDef<LocalSourceType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -66,11 +71,7 @@ export const LocalSource: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Country Name</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
   const deleteLocalSourceClick = (localsourceData: any) => {
     var conformation = confirm("Are you sure to delete it?");

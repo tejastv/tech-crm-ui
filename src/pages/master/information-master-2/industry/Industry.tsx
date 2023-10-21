@@ -29,6 +29,11 @@ export const Industry: React.FC = () => {
 
   const columns: ColumnDef<IndustryType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -39,11 +44,7 @@ export const Industry: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Industry Name</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const { data: industryData, isLoading } = getIndustry();

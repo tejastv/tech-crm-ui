@@ -3,7 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 
 import logoImage from "@assets/images/logo.png";
 import { useAuth } from "@hooks/index";
-import { DASHBOARD, LOGIN, MASTER_ROUTES, PROFOMA_ROUTES, TRANSACTION_ROUTES } from "@constants/index";
+import {
+  DASHBOARD,
+  LOGIN,
+  MASTER_ROUTES,
+  PROFOMA_ROUTES,
+  REPORT_ROUTES,
+  TRANSACTION_ROUTES,
+} from "@constants/index";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -106,10 +113,8 @@ export const Header: React.FC = () => {
                             {" "}
                             <Link
                               className="sidebar-link"
-                              
                               to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.SEGMENT}`}
                             >
-
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Segment</span>
                             </Link>
@@ -153,7 +158,7 @@ export const Header: React.FC = () => {
                               </span>
                             </Link>
                           </li>
-                                
+
                           <li className="sidebar-item">
                             {" "}
                             <Link
@@ -174,12 +179,10 @@ export const Header: React.FC = () => {
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
-                              Actual Buyer Master
+                                Actual Buyer Master
                               </span>
                             </Link>
                           </li>
-                          
-                          
                         </ul>
                       </li>
                       <li className="sidebar-item">
@@ -313,9 +316,7 @@ export const Header: React.FC = () => {
                               to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.INFORMATION_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.PAYMENTMODE}`}
                             >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">
-                                Payment Mode
-                              </span>
+                              <span className="hide-menu ">Payment Mode</span>
                             </Link>
                           </li>
                           <li className="sidebar-item">
@@ -349,9 +350,7 @@ export const Header: React.FC = () => {
                               to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.INFORMATION_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.SOURCE}`}
                             >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">
-                                Source
-                              </span>
+                              <span className="hide-menu ">Source</span>
                             </Link>
                           </li>
                           <li className="sidebar-item">
@@ -361,9 +360,7 @@ export const Header: React.FC = () => {
                               to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.INFORMATION_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.CURRENCY}`}
                             >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">
-                                Currency
-                              </span>
+                              <span className="hide-menu ">Currency</span>
                             </Link>
                           </li>
                           <li className="sidebar-item">
@@ -396,7 +393,7 @@ export const Header: React.FC = () => {
                           aria-expanded="false"
                           className="collapse second-level"
                         >
-                        <li className="sidebar-item">
+                          <li className="sidebar-item">
                             {" "}
                             <Link
                               className="sidebar-link"
@@ -478,7 +475,7 @@ export const Header: React.FC = () => {
                           </li>
                         </ul>
                       </li>
-                      <li className="sidebar-item">
+                      {/* <li className="sidebar-item">
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
@@ -593,7 +590,7 @@ export const Header: React.FC = () => {
                             </a>
                           </li>
                         </ul>
-                      </li>
+                      </li> */}
                       <li className="sidebar-item">
                         <a
                           className="sidebar-link"
@@ -625,7 +622,7 @@ export const Header: React.FC = () => {
                       <span className="hide-menu ">Transaction / Search</span>
                     </a>
                     <ul className="collapse first-level">
-                    <li className="sidebar-item">
+                      <li className="sidebar-item">
                         <Link
                           className="sidebar-link"
                           to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.NEWENQUIRY_TRANSACTION_ROUTES.NEWENQUIRY}`}
@@ -634,7 +631,7 @@ export const Header: React.FC = () => {
                           <span className="hide-menu ">Add New Enquiry</span>
                         </Link>
                       </li>
-                    <li className="sidebar-item">
+                      <li className="sidebar-item">
                         <Link
                           className="sidebar-link"
                           to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYDETAILS_TRANSACTION_ROUTES.ENQUIRYDETAILS}`}
@@ -643,7 +640,7 @@ export const Header: React.FC = () => {
                           <span className="hide-menu ">All Enquiries</span>
                         </Link>
                       </li>
-                    <li className="sidebar-item">
+                      <li className="sidebar-item">
                         <Link
                           className="sidebar-link"
                           to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYDETAILS_TRANSACTION_ROUTES.ENQUIRYDETAILS}?category=search`}
@@ -652,7 +649,7 @@ export const Header: React.FC = () => {
                           <span className="hide-menu ">Enquiry Search</span>
                         </Link>
                       </li>
-                     
+
                       <li className="sidebar-item">
                         {" "}
                         <a className="sidebar-link" href="enquiry_search.php">
@@ -699,7 +696,9 @@ export const Header: React.FC = () => {
                           to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.PURCHASEBILLS_TRANSACTION_ROUTES.PURCHASEBILLS_MASTER}`}
                         >
                           <i className="mdi mdi-creation"></i>
-                          <span className="hide-menu ">Purchase Bills(of Suppliers)</span>
+                          <span className="hide-menu ">
+                            Purchase Bills(of Suppliers)
+                          </span>
                         </Link>
                       </li>
                       <li className="sidebar-item">
@@ -711,7 +710,6 @@ export const Header: React.FC = () => {
                           <span className="hide-menu ">Add Bulk Enquiries</span>
                         </Link>
                       </li>
-                     
                     </ul>
                   </li>
                   <li className="sidebar-item">
@@ -725,7 +723,7 @@ export const Header: React.FC = () => {
                       <span className="hide-menu ">Proforma</span>
                     </a>
                     <ul aria-expanded="false" className="collapse first-level">
-                    <li className="sidebar-item">
+                      <li className="sidebar-item">
                         <Link
                           className="sidebar-link"
                           to={`${PROFOMA_ROUTES.PROFOMA}${PROFOMA_ROUTES.ENQPI_PROFOMA_ROUTES.ENQPI}`}
@@ -733,7 +731,7 @@ export const Header: React.FC = () => {
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Enq.(PI) </span>
                         </Link>
-                      </li>                     
+                      </li>
                       <li className="sidebar-item">
                         <Link
                           className="sidebar-link"
@@ -771,52 +769,48 @@ export const Header: React.FC = () => {
                           className="collapse second-level"
                         >
                           <li className="sidebar-item">
-                            {" "}
-                            <a
-                              className="sidebar-link "
-                              href="report_no_of_enquiries.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${REPORT_ROUTES.REPORT}${REPORT_ROUTES.NUMBER_OF_ENQUIRIES_ROUTES.NUMBER_OF_ENQUIRIES}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 No. of Enquiries
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
-                            {" "}
-                            <a
-                              className="sidebar-link "
-                              href="report_no_of_enquiries_group_country_wise.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${REPORT_ROUTES.REPORT}${REPORT_ROUTES.NUMBER_OF_ENQUIRIES_GROUP_COUNTRY_WISE_ROUTES.NUMBER_OF_ENQUIRIES_GROUP_COUNTRY_WISE}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 No. of Enquiries - Group - Country
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
-                            {" "}
-                            <a
-                              className="sidebar-link "
-                              href="report_no_of_enquiries_graph.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${REPORT_ROUTES.REPORT}${REPORT_ROUTES.NUMBER_OF_ENQUIRIES_GRAPH_VIEW_ROUTES.NUMBER_OF_ENQUIRIES_GRAPH_VIEW}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 No. of Enquiries(Graph)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
-                            {" "}
-                            <a
-                              className="sidebar-link "
-                              href="report_no_of_enquiries_graph_groupwise.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${REPORT_ROUTES.REPORT}${REPORT_ROUTES.NUMBER_OF_ENQUIRIES_GRAPH_VIEW_GROUP_WISE_ROUTES.NUMBER_OF_ENQUIRIES_GRAPH_VIEW_GROUP_WISE}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 No. of Enquiries(Graph)-Group wise
                               </span>
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </li>

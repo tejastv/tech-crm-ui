@@ -30,6 +30,11 @@ export const PaymentMode: React.FC = () => {
 
   const columns: ColumnDef<PaymentModeType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -39,11 +44,6 @@ export const PaymentMode: React.FC = () => {
       id: "paymentMode",
       cell: (info) => info.getValue(),
       header: () => <>PaymentMode</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

@@ -33,6 +33,11 @@ export const Supplier: React.FC = () => {
   const navigate = useNavigate();
   const columns: ColumnDef<AddUpdateSupplierMasterType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -97,11 +102,7 @@ export const Supplier: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const { data: supplierMasterData, isLoading } = getSupplierMaster();

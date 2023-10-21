@@ -50,14 +50,19 @@ export const Enquiries: React.FC = () => {
 
   const columns: ColumnDef<AllEnquiriesType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       accessorFn: (row) => row.enqID,
       id: "enqID",
       cell: (info) => info.getValue(),
       header: () => <>SN</>,
     },
     {
-      accessorFn: (row) => row.fyear,
-      id: "fyear",
+      accessorFn: (row) => row.financialYear,
+      id: "financialYear",
       cell: (info) => info.getValue(),
       header: () => <>Year</>,
     },

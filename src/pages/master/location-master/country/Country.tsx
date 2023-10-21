@@ -31,6 +31,11 @@ export const Country: React.FC = () => {
 
   const columns: ColumnDef<CountryType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -59,11 +64,7 @@ export const Country: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Continent</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const deleteCountryClick = (countryData: any) => {

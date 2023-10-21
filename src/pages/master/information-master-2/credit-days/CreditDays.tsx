@@ -29,6 +29,11 @@ export const CreditDays: React.FC = () => {
   const navigate = useNavigate();
   const columns: ColumnDef<CreditDaysType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -39,11 +44,7 @@ export const CreditDays: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Credit Days</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const { data: creditDaysData, isLoading } = getCreditDays();

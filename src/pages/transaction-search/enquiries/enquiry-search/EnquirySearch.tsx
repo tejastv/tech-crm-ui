@@ -39,6 +39,11 @@ export const EnquirySearch: React.FC = () => {
 
   const columns: ColumnDef<CompanyType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "selectall",
       cell: (info) => info.getValue(),
       header: () => <>Select All</>,
@@ -261,11 +266,7 @@ export const EnquirySearch: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Due on</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const deleteCompanyClick = (companyData: any) => {

@@ -29,6 +29,11 @@ export const Source: React.FC = () => {
 
   const columns: ColumnDef<SourceType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -44,11 +49,6 @@ export const Source: React.FC = () => {
       id: "firstLetterFile",
       cell: (info) => info.getValue(),
       header: () => <>First Letter File</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 
