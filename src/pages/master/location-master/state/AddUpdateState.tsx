@@ -30,42 +30,81 @@ export const AddUpdateState: React.FC = () => {
     },
   };
 
-  const { data: CountryData } = getCountry();
-  if (CountryData) {
-    addStateFormFields.country.config.options = selectOptionsMaker(
-      CountryData,
-      "countryId",
-      "countryName"
-    );
+  // const { data: CountryData } = getCountry();
+  // if (CountryData) {
+  //   addStateFormFields.country.config.options = selectOptionsMaker(
+  //     CountryData,
+  //     "countryId",
+  //     "countryName"
+  //   );
+  // }
+  const { data: countryData, isSuccess: getCountrySuccess } =
+  getCountry();
+  
+  if (countryData) {
+    addStateFormFields.country.config.options =
+    selectOptionsMaker(countryData, "countryId", "countryName");
   }
-
   if (params.id) {
     const { data: stateData, isSuccess: stateDataSuccess } = getStateData(
       "" + params.id
     );
     if (stateDataSuccess) {
+      if (getCountrySuccess){
+        let id = stateData?.countryId;
+        let countrynamedata: any = returnObjectBasedOnID(
+          countryData,
+          "countryId",
+          id,
+          "countryId",
+          "countryName"
+        );addStateFormFields.country.config.setData = countrynamedata
+        ? {
+            label: countrynamedata.label,
+            value: countrynamedata.value,
+          }
+        : [];
+      }
       addStateFormFields.stateField.config.setData = stateData?.state;
       addStateFormFields.numbericCodeField.config.setData =
         stateData?.stateCodeN;
       addStateFormFields.stateCodeField.config.setData = stateData?.stateCodeA;
-      if (CountryData) {
-        let data: any = returnObjectBasedOnID(
-          CountryData,
-          "countryId",
-          stateData?.countryId,
-          "countryId",
-          "countryName"
-        );
-        addStateFormFields.country.config.setData =
-          data.length > 0
-            ? [
-                {
-                  label: stateData?.countryName,
-                  value: stateData?.countryId,
-                },
-              ]
-            : [];
-      }
+      // if (CountryData) {
+      //   let id = stateData?.countryId;
+      //   let data: any = returnObjectBasedOnID(
+      //     CountryData,
+      //     "countryId",
+      //     id,
+      //     "countryId",
+      //     "countryName"
+      //   );
+      //   addStateFormFields.country.config.setData =
+      //     data.length > 0
+      //       ? [
+      //           {
+      //             label: stateData?.countryName,
+      //             value: stateData?.countryId,
+      //           },
+      //         ]
+      //       : [];
+      // }
+
+      // if (CountryData) {
+      //   let id = stateData?.countryId;
+      //   let data: any = returnObjectBasedOnID(
+      //     CountryData,
+      //     "countryId",
+      //     id,
+      //     "countryId",
+      //     "countryName"
+      //   );
+      //   addStateFormFields.country.config.setData = data
+      //     ? {
+      //         label: data.label,
+      //         value: data.value,
+      //       }
+      //     : [];
+      // }
     }
   } else {
     useEffect(() => {
@@ -74,10 +113,12 @@ export const AddUpdateState: React.FC = () => {
   }
 
   const onSubmit = methods.handleSubmit((stateData): void => {
+    let data: any = { ...stateData };
+    data.countryId = +data.countryId["value"];
     if (params.id && stateData) {
-      updateState({ id: params.id, ...stateData });
+      updateState({ id: params.id, ...data });
     } else {
-      addState(stateData);
+      addState(data);
     }
   });
 

@@ -9,7 +9,7 @@ import {
   useStateApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
-import { selectOptionsMaker } from "@utils/index";
+import { returnObjectBasedOnID, selectOptionsMaker } from "@utils/index";
 
 export const AddUpdateCity: React.FC = () => {
   const methods = useForm<AddUpdateCityType>();
@@ -71,9 +71,27 @@ export const AddUpdateCity: React.FC = () => {
     const { data: cityData, isSuccess: cityDataSuccess } = getCityData(
       "" + params.id
     );
+
+    if (stateData) {
+      let id = cityData?.stateId;
+      let data: any = returnObjectBasedOnID(
+        stateData,
+        "stateId",
+        id,
+        "stateId",
+        "stateName"
+      );
+      addCityFormFields.state.config.setData = data
+        ? {
+            label: data.label,
+            value: data.value,
+          }
+        : [];
+    }
     if (cityDataSuccess) {
       addCityFormFields.cityField.config.setData = cityData?.cityName;
       addCityFormFields.osPrintField.config.setData = cityData?.oscopies;
+
     }
   } else {
     useEffect(() => {
@@ -82,10 +100,12 @@ export const AddUpdateCity: React.FC = () => {
   }
 
   const onSubmit = methods.handleSubmit((cityData): void => {
+    let data: any = { ...cityData };
+    data.stateId = +data.stateId["value"];
     if (params.id && cityData) {
-      updateCity({ id: params.id, ...cityData });
+      updateCity({ id: params.id, ...data });
     } else {
-      addCity(cityData);
+      addCity(data);
     }
   });
 

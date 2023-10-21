@@ -32,13 +32,12 @@ export const useAddEnquiryApiCallHook = () => {
     return useQuery<EnqType[]>({
       queryKey: [queryKeys.ENQSTATUS_DATA],
       queryFn: async () => {
-        const response = await instance.get(
-          apiUrls.GET_ADD_ENQSTATUS,
-          callFormConfig
-        );
-        return response.data.data;
+        const response = await instance.get(apiUrls.GET_ADD_ENQSTATUS,callFormConfig);
+       const data = response.data.data.sort((a: { enquiryStatus: string; }, b: { enquiryStatus: any; }) => a.enquiryStatus.localeCompare(b.enquiryStatus));
+        return data;
       },
       staleTime: Infinity,
+  
     });
   };
 
@@ -50,7 +49,8 @@ export const useAddEnquiryApiCallHook = () => {
           apiUrls.GET_ADD_SERVICETYPE,
           callFormConfig
         );
-        return response.data.data;
+        const data = response.data.data.sort((a: { serviceType: string; }, b: { serviceType: any; }) => a.serviceType.localeCompare(b.serviceType));
+        return data;
       },
       staleTime: Infinity,
     });

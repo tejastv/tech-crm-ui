@@ -22,8 +22,8 @@ export const useStateApiCallHook = () => {
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_STATE);
         const data = response.data.data.sort(
-          (a: { state: string }, b: { state: any }) =>
-            a.state.localeCompare(b.state)
+          (a: { stateName: string }, b: { stateName: any }) =>
+            a.stateName.localeCompare(b.stateName)
         );
         return data;
       },
