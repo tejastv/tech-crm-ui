@@ -26,16 +26,19 @@ export const useClientApiCallHook = () => {
     });
   };
 
-  const getClientData = (id: string): UseQueryResult<ClientType> => {
+  const getClientData = (
+    id: number,
+    condition: any = true
+  ): UseQueryResult<ClientType> => {
     return useQuery<ClientType>({
       queryKey: [queryKeys.CLIENT_DATA, id],
       queryFn: async () => {
         const response = await instance.get(
-          apiUrls.GET_UPDATE_DELETE_CLIENT.replace("{id}", id)
+          apiUrls.GET_UPDATE_DELETE_CLIENT.replace("{id}", "" + id)
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };

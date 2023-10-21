@@ -74,81 +74,39 @@ export const AddUpdatePurchase: React.FC = () => {
               <div className="row">
                 <div className="col-4 col-xs-12">
                   <div className="card-body">
-                    <div className="row">
-                      <div className="col-12 col-">
-                        <Select
-                          config={addPurchaseBillsFormFields.fYearField.config}
-                        />
-                        {/* </div> */}
+                      
+                        <Select config={addPurchaseBillsFormFields.fYearField.config}/>
 
-                        <Input
-                          config={
-                            addPurchaseBillsFormFields.invoicedateField.config
-                          }
-                        />
-                        <Input
-                          config={
-                            addPurchaseBillsFormFields.grsamountField.config
-                          }
-                        />
+                        <Input config={addPurchaseBillsFormFields.invoicedateField.config}/>
+                        <Input config={ addPurchaseBillsFormFields.grsamountField.config}/>
 
-                        <div className="col-12 col-xs-12">
-                          <SingleCheckbox
-                            config={
-                              addPurchaseBillsFormFields.calculateField.config
-                            }
-                          />
+                        <div className="col-md-7 col-xs-12 text-right">
+                          <SingleCheckbox config={ addPurchaseBillsFormFields.calculateField.config }/>
                         </div>
 
-                        <div className="col-8 col-xs-12">
-                          <Input
-                            config={addPurchaseBillsFormFields.stField.config}
-                          />
-                        </div>
-                        <div className="col-md-8 col-xs-12">
-                          <Input
-                            config={
-                              addPurchaseBillsFormFields.edcessField.config
-                            }
-                          />
-                        </div>
-                        <Input
-                          config={
-                            addPurchaseBillsFormFields.invoiceamountField.config
-                          }
-                        />
-                      </div>
-                    </div>
+                        <Input config={addPurchaseBillsFormFields.stField.config}/>
+                                                
+                        <Input config={ addPurchaseBillsFormFields.edcessField.config }/>
+                        
+                        <Input config={ addPurchaseBillsFormFields.invoiceamountField.config}/>
+
+                </div>
+                </div>
+
+                <div className="col-4 col-xs-12">
+                  <div className="card-body">
+
+                      <Select config={addPurchaseBillsFormFields.suplliernameField.config}/>
+
+                      <Input config={addPurchaseBillsFormFields.notesField.config}/>
                   </div>
                 </div>
 
                 <div className="col-4 col-xs-12">
                   <div className="card-body">
-                    <div className="row">
-                      <div className="col-12 ">
-                        <Select
-                          config={
-                            addPurchaseBillsFormFields.suplliernameField.config
-                          }
-                        />
-                        <Input
-                          config={addPurchaseBillsFormFields.notesField.config}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-4 col-xs-12">
-                  <div className="card-body">
-                    <div className="row">
-                      <div className="col-12 col-">
-                        <Input
-                          config={
-                            addPurchaseBillsFormFields.invoicenoField.config
-                          }
-                        />
-                      </div>
-                    </div>
+                    
+                    <Input config={addPurchaseBillsFormFields.invoicenoField.config}/>
+
                   </div>
                 </div>
               </div>

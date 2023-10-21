@@ -64,7 +64,7 @@ export const PriceListGroup: React.FC = () => {
     let cityArray = selectOptionsMaker(cityData, "id", "cityName");
     cityArray.unshift({
       label: "All",
-      value: -1,
+      value: "-1",
     });
     addPriceGroupFormFields.pricegroupcity.config.options = cityArray;
   }

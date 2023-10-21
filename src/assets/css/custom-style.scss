@@ -43,3 +43,7 @@ hr {
 .enquirynote {
   background-color: #000;
 }
+.required-label::before {
+  content: " *";
+  color: red; /* You can choose your preferred color for the asterisk */
+}

@@ -227,7 +227,7 @@ export * from "./price-list-master/price-list-for-clients/currency-and-group-typ
 export * from "./client-master/client-group/client-group-basedon-clientID-type";
 
 // Transaction master
-export * from "../transaction-search/all-enquiries/allenquiries-type";
+export * from "../transaction-search/enquiries/all-enquiries/allenquiries-type";
 
 //Services/ Hooks
 
@@ -265,4 +265,5 @@ export { useClientApiCallHook } from "./client-master/client/useClientApiCallHoo
 export { useStdPriceClientsApiCallHook } from "./price-list-master/std-price-list-client/useStdPriceClientsApiCallHook";
 export { usePriceListGroupApiCallHook } from "./price-list-master/price-list-group-wise/usePriceListGroupApiCallHook";
 export { useActualBuyerApiCallHook } from "./price-list-master/actual-buyer/useActualBuyerApiCallHook";
+export { useAllEnquiriesApiCallHook } from "../transaction-search/enquiries/useAllEnquiriesApiCallHook";
 export { usePriceListForClientsApiCallHook } from "./price-list-master/price-list-for-clients/usePriceListForClientsApiCallHook";

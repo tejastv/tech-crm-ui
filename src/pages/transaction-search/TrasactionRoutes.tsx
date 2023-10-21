@@ -4,13 +4,13 @@ import { Route, Routes } from "react-router-dom";
 import { TRANSACTION_ROUTES } from "@constants/index";
 
 const AddEnquiryIndex = React.lazy(
-  () => import("./add-new-enquiry/NewEnquiryIndex")
+  () => import("./enquiries/add-new-enquiry/NewEnquiryIndex")
 );
 const AllEnquiriesIndex = React.lazy(
-  () => import("./all-enquiries/AllEnquiriesIndex")
+  () => import("./enquiries/AllEnquiriesIndex")
 );
 const EnquirySearchIndex = React.lazy(
-  () => import("./enquiry-search/EnquirySearchIndex")
+  () => import("./enquiries/enquiry-search/EnquirySearchIndex")
 );
 const AddBulkEnquiries = React.lazy(
   () => import("./add-bulk-enquiries/AddBulkEnquiriesIndex")

@@ -1,4 +1,5 @@
 export interface AllEnquiriesType {
+  fyearId: any;
   actualBuyerId: number;
   adjustment: number;
   bankers: string;
@@ -6,6 +7,9 @@ export interface AllEnquiriesType {
   bulk_enquiry_id: number;
   cityId: number;
   cityName: string;
+  givenName: string;
+  noteforadj: string;
+  noteforenq: string;
   clientAddress: string;
   clientCityName: string;
   clientContactPerson: string;
@@ -49,7 +53,7 @@ export interface AllEnquiriesType {
   industryName: string;
   instruction: string;
   lineOfBusiness: string;
-  localSource: string;
+  localSourceId: any;
   locked: string;
   modifiedBy: string;
   modifiedDate: string;

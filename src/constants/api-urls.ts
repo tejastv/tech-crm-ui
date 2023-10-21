@@ -91,6 +91,13 @@ const GET_CLIENT_GROUP_BASED_ON_ID = "entity/client/clientGroup/{id}";
 const GET_ADD_ALL_ENQUIRY = "transaction/enquiry";
 const GET_UPDATE_DELETE_ALL_ENQUIRY = "transaction/enquiry/{id}";
 const GET_ADD_ALL_ENQUIRY_SEARCH = "transaction/allEnquiryAndSearch";
+const GET_PRICE =
+  "entity/priceListForClient/client/{client_id}/country/{country_id}/serviceType/{serviceTypeId}";
+
+const GET_ADD_SERVICETYPE = "transaction/serviceType";
+const GET_ADD_ENQTYPE = "transaction/enquiryStatus";
+const GET_ADD_ENQSTATUS = "transaction/enquiryStatus";
+const GET_ADD_REFNO = "transaction/getRefNo";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -153,12 +160,14 @@ export const apiUrls = {
   GET_PRICE_LIST_DATA,
   GET_ADD_ACTUAL_BUYER,
   GET_UPDATE_DELETE_ACTUAL_BUYER,
-
-  //transaction master
-
   GET_ADD_ALL_ENQUIRY,
   GET_UPDATE_DELETE_ALL_ENQUIRY,
+  GET_ADD_SERVICETYPE,
+  GET_ADD_ENQTYPE,
+  GET_ADD_REFNO,
+  GET_ADD_ENQSTATUS,
   GET_CLIENT_BY_CITY_ID,
   GET_CLIENT_WISE_CURRENCY_AND_GROUP,
   GET_ADD_ALL_ENQUIRY_SEARCH,
+  GET_PRICE,
 };

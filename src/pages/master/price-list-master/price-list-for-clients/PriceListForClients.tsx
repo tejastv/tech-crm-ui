@@ -203,24 +203,28 @@ export const PriceListForClients: React.FC = () => {
                     />
                   </div>
                 </div>
-
-                <div className="row justify-content-end">
-                  <div className="col-md-2 col-xs-12 text-right">
+                <div className="row">
+                <div className="col-md-3 col-xs-12"></div>
+                <div className="col-md-4 col-xs-12"></div>
+                {/* <div className="col-md-3 col-xs-12"></div> */}
+                {/* <div className="row justify-content-center"> */}
+                  <div className="col-md-3 col-xs-12">
                     <Button
                       type={"submit"}
                       className={"btn btn-danger btn-sm mb-2"}
                     >
-                      <i className="far fa-save"></i> Get Price(From Group)
+                      <i className="far fa-save"></i>Get Std. Price
                     </Button>
                   </div>
-                </div>
+                  </div>
+                {/* </div> */}
                 <div className="row justify-content-end">
                   <div className="col-md-12 col-xs-12 text-right">
                     <Button
                       type={"submit"}
                       className={"btn btn-danger btn-sm mb-2"}
                     >
-                      <i className="far fa-save"></i> Get Std. Price
+                      <i className="far fa-save"></i>Get Price(From Group)
                     </Button>
                   </div>
                 </div>
@@ -246,7 +250,8 @@ export const PriceListForClients: React.FC = () => {
                       }
                     />
                   </div>
-                  <div className="col-md-6 col-xs-12 text-right">
+            
+                  <div className="col-md-2 col-xs-12 text-right">
                     <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                       <i className="far fa-save"></i> Get Price(From Other
                       Group)
@@ -275,14 +280,14 @@ export const PriceListForClients: React.FC = () => {
                       }
                     />
                   </div>
-                  <div className="col-md-6 col-xs-12 text-right">
+                  <div className="col-md-1 col-xs-12 text-right">
                     <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                       <i className="far fa-save"></i> Get Price
                     </Button>
                   </div>
                 </div>
-                <div className="row justify-content-end">
-                  <div className="col-md-2 col-xs-12 text-right">
+                <div className="row m-6 justify-content-center">
+                  <div className="col-mt-6 col-xs-12 text-center">
                     <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                       <i className="far fa-save"></i> Save All
                     </Button>
