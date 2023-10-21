@@ -74,7 +74,7 @@ export const Client: React.FC = () => {
       header: () => <>Zip</>,
     },
     {
-      accessorFn: (row) => row.state,
+      accessorFn: (row) => row.stateName,
       id: "stateId",
       cell: (info) => info.getValue(),
       header: () => <>State</>,

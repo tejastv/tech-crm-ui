@@ -411,7 +411,7 @@ export const Enquiries: React.FC = () => {
 
   const tableConfig: TableType<AllEnquiriesType> = {
     config: {
-      tableName: "State",
+      tableName: "Enquiry",
       columns: columns,
       tableData: enquiriesData ? enquiriesData : [],
       copyBtn: true,

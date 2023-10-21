@@ -41,8 +41,8 @@ export const State: React.FC = () => {
       header: () => <>Sr no</>,
     },
     {
-      accessorFn: (row) => row.state,
-      id: "state",
+      accessorFn: (row) => row.stateName,
+      id: "stateName",
       cell: (info) => info.getValue(),
       header: () => <>State</>,
     },
@@ -57,6 +57,12 @@ export const State: React.FC = () => {
       id: "stateCodeA",
       cell: (info) => info.getValue(),
       header: () => <>StateCodeA</>,
+    },
+    {
+      accessorFn: (row) => row.countryName,
+      id: "countryName",
+      cell: (info) => info.getValue(),
+      header: () => <>Country Name</>,
     },
 
   ];

@@ -44,6 +44,12 @@ export const City: React.FC = () => {
       header: () => <>City Name</>,
     },
     {
+      accessorFn: (row) => row.stateName,
+      id: "stateName",
+      cell: (info) => info.getValue(),
+      header: () => <>State Name</>,
+    },
+    {
       accessorFn: (row) => row.oscopies,
       id: "oscopies",
       cell: (info) => info.getValue(),
