@@ -478,7 +478,7 @@ export const Header: React.FC = () => {
                           </li>
                         </ul>
                       </li>
-                      <li className="sidebar-item">
+                      {/* <li className="sidebar-item">
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
@@ -593,7 +593,7 @@ export const Header: React.FC = () => {
                             </a>
                           </li>
                         </ul>
-                      </li>
+                      </li> */}
                       <li className="sidebar-item">
                         <a
                           className="sidebar-link"

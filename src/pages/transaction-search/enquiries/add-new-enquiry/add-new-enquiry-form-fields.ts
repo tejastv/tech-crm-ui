@@ -544,11 +544,12 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 const formattedDate = `${year}/${month}/${day}`;
 const recdon: FormFieldType = createFormConfig(
   "recdDate",
-  "Recd . On",
+  "Enq. Date/Recd. On",
   "date",
   recdOnValidation,
   formattedDate
 );
+
 
 const enqType = [
   {

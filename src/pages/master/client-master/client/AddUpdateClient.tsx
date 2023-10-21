@@ -33,6 +33,7 @@ export const AddUpdateClient: React.FC = () => {
   const methods = useForm<AddUpdateClientType>();
   const params = useParams();
   const [stateCode, setStateCode] = useState();
+  const [crDays, setCrDays] = useState('30');
   const { addClientMutation, updateClientMutation, getClientData } =
     useClientApiCallHook();
   const { mutate: addClient } = addClientMutation();
@@ -267,6 +268,7 @@ export const AddUpdateClient: React.FC = () => {
           "creditPeriod",
           "creditPeriod"
         );
+
         addClientFormFields.cityClient.config.setData = data
           ? {
               label: data.label,
@@ -439,7 +441,7 @@ export const AddUpdateClient: React.FC = () => {
                     {/* </h6> */}
                     <Select config={addClientFormFields.crDay.config} />
                     <Checkbox
-                      config={addClientFormFields.billonactual.config}
+                      config={addClientFormFields.billonactual.config} 
                     />
                   </div>
                 </div>
@@ -468,21 +470,9 @@ export const AddUpdateClient: React.FC = () => {
                     <Input config={addClientFormFields.baltoAdjust.config} />
                     <Input config={addClientFormFields.adjustenquiry.config} />
                     {/* <h6 className="card-title m-t-20"> */}
-                    <DivLayout
-                      heading={cardConfig.formAdjustProformaConfig.heading}
-                    />
+                   
                     {/* </h6> */}
-                    <Input
-                      config={addClientFormFields.toAdjustproforma.config}
-                    />
-                    <Input
-                      config={
-                        addClientFormFields.baltoAdjustproformaproforma.config
-                      }
-                    />
-                    <Input
-                      config={addClientFormFields.adjustenquiryproforma.config}
-                    />
+                   
                   </div>
                 </div>
               </div>

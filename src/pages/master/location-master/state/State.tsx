@@ -31,6 +31,11 @@ export const State: React.FC = () => {
 
   const columns: ColumnDef<StateType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -53,11 +58,7 @@ export const State: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>StateCodeA</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const deleteStateClick = (stateData: any) => {

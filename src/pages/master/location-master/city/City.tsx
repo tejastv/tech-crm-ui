@@ -28,6 +28,11 @@ export const City: React.FC = () => {
 
   const columns: ColumnDef<CityType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -44,11 +49,7 @@ export const City: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>OSCopies</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const { data: cityData, isLoading } = getCity();

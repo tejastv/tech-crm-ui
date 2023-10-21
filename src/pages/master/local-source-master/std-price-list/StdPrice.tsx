@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
+  ActionButtons,
   BorderLayout,
+  Button,
   Card,
   Loader,
   Select,
@@ -135,6 +137,13 @@ export const StdPrice: React.FC = () => {
                   />
                 </div>
               </div>
+              <div className="row m-6 justify-content-end">
+                  <div className="col-mt- col-xs-12 text-end">
+                    <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+                      <i className="far fa-save"></i> Save 
+                    </Button>
+                  </div>
+                  </div>
             </BorderLayout>
           </form>
         </FormProvider>

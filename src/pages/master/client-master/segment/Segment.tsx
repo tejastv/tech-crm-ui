@@ -31,6 +31,11 @@ export const Segment: React.FC = () => {
 
   const columns: ColumnDef<SegmentType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -41,11 +46,7 @@ export const Segment: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Segment Name</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const deleteSegmentClick = async (segmentData: any) => {
