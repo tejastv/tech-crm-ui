@@ -408,12 +408,6 @@ export const Enquiries: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Group Price</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
-
   ];
 
   // client api call
