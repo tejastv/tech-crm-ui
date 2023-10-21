@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import {
   Enquiries,
   AddEnquiry,
-  EnquirySearch,
 } from "@pages/transaction-search";
 // import { State, AddUpdateState } from "@master/index";
 import { COMMON_ROUTES } from "@constants/index";

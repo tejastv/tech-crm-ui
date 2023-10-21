@@ -23,14 +23,14 @@ const ToDateValidation = {
 } as ValidationType;
 const clientnameField: FormFieldType = {
   config: {
-    name: "clientName",
+    name: "clientId",
     label: "Client Name",
-    id: "clientName",
+    id: "clientId",
     options: [],
     placeholder: "Select Client ",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Select Client",
       },
     },
@@ -44,17 +44,17 @@ const year = myDate.getFullYear();
 const month = String(myDate.getMonth() + 1).padStart(2, "0");
 const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
-// Format the date as "year/mm/dd"
-const formattedDate = `${year}/${month}/${day}`;
+// Format the date as "dd/mm/yyyy"
+const formattedDate = `${day}/${month}/${year}`;
 const fromdateField: FormFieldType = createFormConfig(
-  "fromDate",
+  "startDate",
   "From Date",
   "date",
   FromDateValidation,
   formattedDate
 );
 const todateeField: FormFieldType = createFormConfig(
-  "toDate",
+  "endDate",
   "To Date",
   "date",
   ToDateValidation,

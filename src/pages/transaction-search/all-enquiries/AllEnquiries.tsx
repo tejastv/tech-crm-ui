@@ -131,6 +131,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useClientApiCallHook } from "@pages/master";
 import { FormProvider, useForm } from "react-hook-form";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
+import { cleanupObject } from "@utils/cleanUpObject";
 
 export const Enquiries: React.FC = () => {
   const { getEnquiries, getSearchParam, deleteEnquiryMutation } = useAllEnquiriesApiCallHook();
@@ -142,10 +143,6 @@ export const Enquiries: React.FC = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get('category');
-
-  const [clientName, setClientName] = useState('');
-  const [fromDate, setFromDate] = useState('');
-  const [toDate, setToDate] = useState('');
 
   const config = {
     breadcrumbConfig: {
@@ -533,7 +530,7 @@ export const Enquiries: React.FC = () => {
   if (clientData) {
     allEnquiryFormFields.clientnameField.config.options = selectOptionsMaker(
       clientData,
-      "id",
+      "clientID",
       "clientName"
     );
   }
@@ -572,17 +569,19 @@ export const Enquiries: React.FC = () => {
       // onEditClick: editEnquiryClick,
     },
   };
-  const handleSearch = () => {
-    console.log("handle search");
-    // const queryParams = {
-    //   clientName: clientName,
-    //   fromDate: fromDate,
-    //   toDate: toDate,
-    // };
 
-    // getSearchParam(queryParams);
-  };
-
+  const onSubmit = methods.handleSubmit((searchData) => {
+    let data: any = { ...cleanupObject(searchData) };
+    if (data.clientId) {
+      data.clientId = +data.clientId["value"].toString();
+    }
+    console.log(data);
+    debugger
+    if (data) {
+      getSearchParam(data);
+    }
+  });
+  
   return (
     <>
       {category !== 'search' && (
@@ -594,31 +593,28 @@ export const Enquiries: React.FC = () => {
       <BorderLayout heading={config.borderLayoutConfig.heading}>
         {category === 'search' && ( // Conditional rendering
           <FormProvider {...methods}>
-            <form noValidate autoComplete="off" className="p-t-20">
+            <form onSubmit={onSubmit} noValidate autoComplete="off" className="p-t-20">
               <div className="row">
                 <div className="col-md-3 col-xs-12">
                   <Select
                     config={allEnquiryFormFields.clientnameField.config}
-                    onChangeHandler={(e) => setClientName(e.target.value)}
                   />
                 </div>
 
                 <div className="col-md-3 col-xs-12">
                   <Input
                     config={allEnquiryFormFields.fromdateField.config}
-                    onChangeHandler={(e) => setFromDate(e.target.value)}
                   />
                 </div>
 
                 <div className="col-md-2 col-xs-12">
                   <Input
                     config={allEnquiryFormFields.todateeField.config}
-                    onChangeHandler={(e) => setToDate(e.target.value)}
                   />
                 </div>
 
                 <div className="col-md-2 col-xs-12 text-left">
-                  <Button type={"submit"} className={"btn btn-danger btn-sm"} onClick={handleSearch}>
+                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                     <i className="far fa-save"></i> Search
                   </Button>
                 </div>

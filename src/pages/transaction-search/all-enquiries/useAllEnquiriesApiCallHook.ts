@@ -41,10 +41,12 @@ export const useAllEnquiriesApiCallHook = () => {
         
         for (const key in queryParam) {
           if (queryParam[key] !== undefined) {
-            queryParams.push(`${key}=${encodeURIComponent(queryParam[key]!)}`);
+            queryParams.push(`${key}=${queryParam[key]!}`);
           }
         }
-        const fullUrl = `${baseUrl}?${queryParams.join('&')}`
+        const fullUrl = queryParams.length > 0 ? `${baseUrl}?${queryParams.join('&')}` : baseUrl;
+        console.log(fullUrl);
+        debugger
         const response = await instance.get(fullUrl, callFormConfig);
         return response.data.data;
       },
