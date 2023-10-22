@@ -1,4 +1,4 @@
-export interface EnquiryType {
+export interface EnquiryCountType {
   clientName: string;
   countryId: number;
   countryName: string;

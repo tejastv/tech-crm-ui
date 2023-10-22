@@ -9,7 +9,7 @@ import {
   TableType,
 } from "@shared/index";
 import { enquiriesCountFormFields, EnquiriesCountType } from "@reports/index";
-import { EnquiryType } from "@reports/index";
+import { EnquiryCountType } from "@reports/index";
 import { ColumnDef } from "@tanstack/react-table";
 
 const cardConfig = {
@@ -25,7 +25,7 @@ const cardConfig = {
   },
 };
 
-const columns: ColumnDef<EnquiryType>[] = [
+const columns: ColumnDef<EnquiryCountType>[] = [
   {
     id: "srNo",
     cell: (info) => info.getValue(),
@@ -57,7 +57,7 @@ const columns: ColumnDef<EnquiryType>[] = [
   },
 ];
 
-const tableConfig: TableType<EnquiryType> = {
+const tableConfig: TableType<EnquiryCountType> = {
   config: {
     tableName: "Company Master",
     columns: columns,
