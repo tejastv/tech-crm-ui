@@ -16,8 +16,12 @@ export const Source: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Source",
-      btnTitle: "Add Source",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Source",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",

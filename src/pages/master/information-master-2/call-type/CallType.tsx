@@ -19,8 +19,12 @@ export const CallType: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Call Type",
-      btnTitle: "Add Call Type",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Call Type",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",

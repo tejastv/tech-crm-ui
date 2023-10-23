@@ -21,8 +21,12 @@ export const State: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "State",
-      btnTitle: "Add State",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add State",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -64,7 +68,6 @@ export const State: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Country Name</>,
     },
-
   ];
 
   const deleteStateClick = (stateData: any) => {

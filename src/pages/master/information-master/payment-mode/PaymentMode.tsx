@@ -20,8 +20,12 @@ export const PaymentMode: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Payment Mode",
-      btnTitle: "Add Payment Mode",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Payment Mode",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",

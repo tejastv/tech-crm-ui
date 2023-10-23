@@ -17,8 +17,12 @@ export const Currency: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Currency",
-      btnTitle: "Add Currency",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Currency",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",

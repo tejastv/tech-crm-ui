@@ -19,8 +19,12 @@ export const Executive: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Sales Executive",
-      btnTitle: "Add Sales Executive",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Sales Executive",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -68,7 +72,6 @@ export const Executive: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>State</>,
     },
-
   ];
 
   const { data: executiveData, isLoading } = getExecutive();

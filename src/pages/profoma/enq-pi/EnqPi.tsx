@@ -22,13 +22,16 @@ export const EnqPi: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Enquiry Details(PI)",
-      btnTitle: "Add Enquiry Details",
-      btnRoute: COMMON_ROUTES.ADD,
-    },
-    button2Config: {
-      pageHeading: "",
-      btnTitle: "Search Enquiry",
-      btnRoute: COMMON_ROUTES.LIST,
+      buttons: [
+        {
+          btnTitle: "Add Enquiry Details",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+        {
+          btnTitle: "Search Enquiry",
+          btnRoute: COMMON_ROUTES.LIST,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -302,7 +305,6 @@ export const EnqPi: React.FC = () => {
   return (
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
-      <PageBreadcrumb config={config.button2Config}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
         <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
       </BorderLayout>

@@ -18,8 +18,12 @@ export const City: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "City",
-      btnTitle: "Add City",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add City",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -55,7 +59,6 @@ export const City: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>OSCopies</>,
     },
-
   ];
 
   const { data: cityData, isLoading } = getCity();

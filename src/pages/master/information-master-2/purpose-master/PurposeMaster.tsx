@@ -16,8 +16,12 @@ export const PurposeMaster: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Purpose",
-      btnTitle: "Add Purpose",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Purpose",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -44,7 +48,6 @@ export const PurposeMaster: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Type Name</>,
     },
-
   ];
 
   const { data: purposeMasterData, isLoading } = getPurposeMaster();

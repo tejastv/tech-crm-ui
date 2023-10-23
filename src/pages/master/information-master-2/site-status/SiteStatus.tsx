@@ -16,8 +16,12 @@ export const SiteStatus: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Site Status",
-      btnTitle: "Add Site Status",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Site Status",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -44,7 +48,6 @@ export const SiteStatus: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Site Status</>,
     },
-
   ];
 
   const { data: siteStatusData, isLoading } = getSiteStatus();

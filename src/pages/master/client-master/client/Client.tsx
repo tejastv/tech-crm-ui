@@ -8,7 +8,12 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "@constants/index";
-import { ClientType, useCityApiCallHook, useClientApiCallHook, useStateApiCallHook } from "@master/index";
+import {
+  ClientType,
+  useCityApiCallHook,
+  useClientApiCallHook,
+  useStateApiCallHook,
+} from "@master/index";
 import { useNavigate } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -16,8 +21,12 @@ export const Client: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Client",
-      btnTitle: "Add Client",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Client",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -31,11 +40,6 @@ export const Client: React.FC = () => {
   const { data: cityData } = getCity();
   const { data: stateData } = getState();
   const columns: ColumnDef<ClientType>[] = [
-
-
-
-
-
     {
       id: "action",
       cell: (info) => info.getValue(),
@@ -245,7 +249,6 @@ export const Client: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>GSTYN</>,
     },
- 
   ];
 
   const { data: clientData, isLoading } = getClient();

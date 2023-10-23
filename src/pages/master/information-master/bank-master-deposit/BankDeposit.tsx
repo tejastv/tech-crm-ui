@@ -23,8 +23,12 @@ export const BankMasterDeposit: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Bank Master(Deposit)",
-      btnTitle: "Add Bank Master(Deposit)",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Bank Master(Deposit)",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -54,7 +58,6 @@ export const BankMasterDeposit: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Account No</>,
     },
-
   ];
 
   const { data: BankMasterDepositData, isLoading } = getBankMasterDeposit();

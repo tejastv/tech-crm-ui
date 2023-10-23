@@ -11,11 +11,14 @@ import {
 
 import { AddUpdateEnquiryType } from "@transaction-search/index";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const useAllEnquiriesApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [queryParam, setQueryParam] = useState<{ [key: string]: string | undefined }>({});
+  
 
   const callFormConfig = {
     headers: {
@@ -23,19 +26,43 @@ export const useAllEnquiriesApiCallHook = () => {
     },
   };
 
+  // const getEnquiries = (): UseQueryResult<AllEnquiriesType[]> => {
+  //   return useQuery<AllEnquiriesType[]>({
+  //     queryKey: [queryKeys.ENQUIRY_DATA],
+  //     queryFn: async () => {
+  //       const response = await instance.get(
+  //         apiUrls.GET_ADD_ALL_ENQUIRY,
+  //         callFormConfig
+  //       );
+  //       return response.data.data;
+  //     },
+  //     staleTime: Infinity,
+  //   });
+  // };
+
   const getEnquiries = (): UseQueryResult<AllEnquiriesType[]> => {
     return useQuery<AllEnquiriesType[]>({
-      queryKey: [queryKeys.ENQUIRY_DATA],
+      queryKey: [queryKeys.ENQUIRY_DATA, queryParam],
       queryFn: async () => {
-        const response = await instance.get(
-          apiUrls.GET_ADD_ALL_ENQUIRY,
-          callFormConfig
-        );
+        const baseUrl = apiUrls.GET_ADD_ALL_ENQUIRY_SEARCH;
+        const queryParams = [];       
+        for (const key in queryParam) {
+          if (queryParam[key] !== undefined) {
+            queryParams.push(`${key}=${queryParam[key]!}`);
+          }
+        }
+        const fullUrl = queryParams.length > 0 ? `${baseUrl}?${queryParams.join('&')}` : baseUrl;
+        const response = await instance.get(fullUrl, callFormConfig);
         return response.data.data;
       },
       staleTime: Infinity,
     });
   };
+
+  const getEnquiryBasedOnSearchParam = (params: any) => {
+    setQueryParam(params);
+
+  }
 
   const getEnquiryData = (id: string): UseQueryResult<AllEnquiriesType> => {
     return useQuery<AllEnquiriesType>({
@@ -104,5 +131,6 @@ export const useAllEnquiriesApiCallHook = () => {
     updateEnquiryMutation,
     getEnquiries,
     deleteEnquiryMutation,
+    getEnquiryBasedOnSearchParam,
   };
 };
