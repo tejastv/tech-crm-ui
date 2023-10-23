@@ -100,7 +100,7 @@ export const FinYear: React.FC = () => {
     config: {
       tableName: "Fin. Year",
       columns: columns,
-      tableData: finYearData ? finYearData : [],
+      tableData: finYearData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

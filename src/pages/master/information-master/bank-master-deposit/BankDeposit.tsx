@@ -75,7 +75,7 @@ export const BankMasterDeposit: React.FC = () => {
     config: {
       tableName: "Bank Master(Deposit)",
       columns: columns,
-      tableData: BankMasterDepositData ? BankMasterDepositData : [],
+      tableData: BankMasterDepositData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

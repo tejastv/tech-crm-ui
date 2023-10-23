@@ -412,7 +412,7 @@ export const Enquiries: React.FC = () => {
     config: {
       tableName: "State",
       columns: columns,
-      tableData: enquiriesData ? enquiriesData : [],
+      tableData: enquiriesData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

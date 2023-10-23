@@ -82,7 +82,7 @@ export const Country: React.FC = () => {
     config: {
       tableName: "Country",
       columns: columns,
-      tableData: countryData ? countryData : [],
+      tableData: countryData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

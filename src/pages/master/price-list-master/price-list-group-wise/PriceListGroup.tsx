@@ -202,7 +202,7 @@ export const PriceListGroup: React.FC = () => {
       config: {
         tableName: "Price List (Group)",
         columns: columns,
-        tableData: priceListData ? priceListData : [],
+        tableData: priceListData || [],
         copyBtn: true,
         csvBtn: true,
         excelBtn: true,
@@ -222,7 +222,7 @@ export const PriceListGroup: React.FC = () => {
       config: {
         tableName: "Price List (Group)",
         columns: columns,
-        tableData: stdPriceData ? stdPriceData : [],
+        tableData: stdPriceData || [],
         copyBtn: true,
         csvBtn: true,
         excelBtn: true,

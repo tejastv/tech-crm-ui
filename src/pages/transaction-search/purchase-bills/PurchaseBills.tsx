@@ -117,7 +117,7 @@ export const PurchaseBills: React.FC = () => {
     config: {
       tableName: "Company Master",
       columns: columns,
-      tableData: companyData ? companyData : [],
+      tableData: companyData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

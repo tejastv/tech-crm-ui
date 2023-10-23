@@ -138,7 +138,7 @@ export const ActualBuyer: React.FC = () => {
     config: {
       tableName: "ActualBuyer",
       columns: columns,
-      tableData: actualBuyerData ? actualBuyerData : [],
+      tableData: actualBuyerData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

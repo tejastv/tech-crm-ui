@@ -64,7 +64,7 @@ export const PurposeMaster: React.FC = () => {
     config: {
       tableName: "Purpose",
       columns: columns,
-      tableData: purposeMasterData ? purposeMasterData : [],
+      tableData: purposeMasterData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

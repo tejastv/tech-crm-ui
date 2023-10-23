@@ -125,7 +125,7 @@ export const GroupMaster: React.FC = () => {
     config: {
       tableName: "Group Master",
       columns: columns,
-      tableData: clientGroupData ? clientGroupData : [],
+      tableData: clientGroupData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

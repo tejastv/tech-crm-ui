@@ -63,7 +63,7 @@ export const Segment: React.FC = () => {
     config: {
       tableName: "Segment",
       columns: columns,
-      tableData: segmentData ? segmentData : [],
+      tableData: segmentData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

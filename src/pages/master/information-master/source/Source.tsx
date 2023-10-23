@@ -70,7 +70,7 @@ export const Source: React.FC = () => {
     config: {
       tableName: "Source",
       columns: columns,
-      tableData: sourceData ? sourceData : [],
+      tableData: sourceData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

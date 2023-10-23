@@ -74,7 +74,7 @@ export const City: React.FC = () => {
     config: {
       tableName: "City",
       columns: columns,
-      tableData: cityData ? cityData : [],
+      tableData: cityData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

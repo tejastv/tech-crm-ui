@@ -81,7 +81,7 @@ export const User: React.FC = () => {
     config: {
       tableName: "User Master",
       columns: columns,
-      tableData: userData ? userData : [],
+      tableData: userData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

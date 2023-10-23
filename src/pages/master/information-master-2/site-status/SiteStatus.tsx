@@ -64,7 +64,7 @@ export const SiteStatus: React.FC = () => {
     config: {
       tableName: "Site Status",
       columns: columns,
-      tableData: siteStatusData ? siteStatusData : [],
+      tableData: siteStatusData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

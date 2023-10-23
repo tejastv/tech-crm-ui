@@ -64,7 +64,7 @@ export const Industry: React.FC = () => {
     config: {
       tableName: "Industry",
       columns: columns,
-      tableData: industryData ? industryData : [],
+      tableData: industryData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

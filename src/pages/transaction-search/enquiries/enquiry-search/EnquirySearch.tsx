@@ -284,7 +284,7 @@ export const EnquirySearch: React.FC = () => {
     config: {
       tableName: "Company Master",
       columns: columns,
-      tableData: companyData ? companyData : [],
+      tableData: companyData || [],
       copyBtn: true,
       csvBtn: false,
       excelBtn: true,

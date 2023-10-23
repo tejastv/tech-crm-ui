@@ -98,7 +98,7 @@ export const Currency: React.FC = () => {
     config: {
       tableName: "Currency",
       columns: columns,
-      tableData: currencyData ? currencyData : [],
+      tableData: currencyData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

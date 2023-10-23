@@ -63,7 +63,7 @@ export const Continent: React.FC = () => {
     config: {
       tableName: "Continent",
       columns: columns,
-      tableData: continentData ? continentData : [],
+      tableData: continentData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

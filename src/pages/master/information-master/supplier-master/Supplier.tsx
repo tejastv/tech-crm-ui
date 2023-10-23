@@ -122,7 +122,7 @@ export const Supplier: React.FC = () => {
     config: {
       tableName: "Supplier Master",
       columns: columns,
-      tableData: supplierMasterData ? supplierMasterData : [],
+      tableData: supplierMasterData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

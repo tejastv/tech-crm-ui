@@ -65,7 +65,7 @@ export const PaymentMode: React.FC = () => {
     config: {
       tableName: "Payment Mode",
       columns: columns,
-      tableData: paymentModeData ? paymentModeData : [],
+      tableData: paymentModeData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

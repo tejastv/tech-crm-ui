@@ -88,7 +88,7 @@ export const Executive: React.FC = () => {
     config: {
       tableName: "Sales Executive",
       columns: columns,
-      tableData: executiveData ? executiveData : [],
+      tableData: executiveData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

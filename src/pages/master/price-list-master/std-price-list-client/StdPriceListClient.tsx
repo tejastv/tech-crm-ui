@@ -99,7 +99,7 @@ export const StdPriceListClient: React.FC = () => {
     config: {
       tableName: "Std. Price List",
       columns: columns,
-      tableData: stdPriceData ? stdPriceData : [],
+      tableData: stdPriceData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
