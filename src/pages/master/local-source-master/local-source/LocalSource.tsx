@@ -23,14 +23,23 @@ export const LocalSource: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Local Source",
-      btnTitle: "Add Local Source",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Local Source",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
     },
   };
   const columns: ColumnDef<LocalSourceType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -65,11 +74,6 @@ export const LocalSource: React.FC = () => {
       id: "country",
       cell: (info) => info.getValue(),
       header: () => <>Country Name</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
   const deleteLocalSourceClick = (localsourceData: any) => {

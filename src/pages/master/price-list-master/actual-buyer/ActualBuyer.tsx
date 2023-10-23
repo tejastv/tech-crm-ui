@@ -17,8 +17,12 @@ export const ActualBuyer: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Actual Buyer Master",
-      btnTitle: "Add Actual Buyer Master",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Actual Buyer Master",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -30,6 +34,11 @@ export const ActualBuyer: React.FC = () => {
   const navigate = useNavigate();
 
   const columns: ColumnDef<ActualBuyerType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -112,11 +121,6 @@ export const ActualBuyer: React.FC = () => {
       id: "gstn",
       cell: (info) => info.getValue(),
       header: () => <>GSTN</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

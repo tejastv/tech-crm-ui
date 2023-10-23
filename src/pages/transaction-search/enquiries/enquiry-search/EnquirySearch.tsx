@@ -18,48 +18,61 @@ import { useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   AddUpdateEnquiryType,
+  AllEnquiriesType,
   addEnquirySearchFormFields,
+  useAllEnquiriesApiCallHook,
 } from "@transaction-search/index";
 
 export const EnquirySearch: React.FC = () => {
-  const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
-  const { data: companyData, isLoading } = getCompany();
-  const { mutateAsync: deleteCompany } = deleteCompanyMutation();
+  const { getEnquiries, deleteEnquiryMutation } = useAllEnquiriesApiCallHook();
+  const { data: enquiriesData, isLoading } = getEnquiries();
+  const { mutateAsync: deleteEnquiry } = deleteEnquiryMutation();
+
   const navigate = useNavigate();
   const methods = useForm<AddUpdateEnquiryType>();
 
   const config = {
     breadcrumbConfig: {
       pageHeading: "Enquiry Details",
+      buttons: [],
     },
     borderLayoutConfig: {
       heading: "List",
     },
   };
 
-  const columns: ColumnDef<CompanyType>[] = [
+  const columns: ColumnDef<AllEnquiriesType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "selectall",
       cell: (info) => info.getValue(),
       header: () => <>Select All</>,
     },
     {
-      id: "year",
+      accessorFn: (row) => row.financialYear,
+      id: "financialYear",
       cell: (info) => info.getValue(),
       header: () => <>Year</>,
     },
     {
-      id: "refno",
+      accessorFn: (row) => row.refNo,
+      id: "refNo",
       cell: (info) => info.getValue(),
       header: () => <>Ref.no</>,
     },
     {
-      id: "enqdate",
+      accessorFn: (row) => row.recdDate,
+      id: "recdDate",
       cell: (info) => info.getValue(),
       header: () => <>Enq.Date</>,
     },
     {
-      id: "reportdate",
+      accessorFn: (row) => row.reportDate,
+      id: "reportDate",
       cell: (info) => info.getValue(),
       header: () => <>Report Date</>,
     },
@@ -70,26 +83,26 @@ export const EnquirySearch: React.FC = () => {
       header: () => <>Company</>,
     },
     {
-      accessorFn: (row) => row.address,
-      id: "address",
+      accessorFn: (row) => row.givenAddress,
+      id: "givenAddress",
       cell: (info) => info.getValue(),
       header: () => <>Given Address</>,
     },
     {
-      accessorFn: (row) => row.countryName,
-      id: "city",
+      accessorFn: (row) => row.cityName,
+      id: "cityName",
       cell: (info) => info.getValue(),
       header: () => <>City</>,
     },
     {
-      accessorFn: (row) => row.countryName,
-      id: "Zip",
+      accessorFn: (row) => row.zip,
+      id: "zip",
       cell: (info) => info.getValue(),
       header: () => <>Zip</>,
     },
     {
-      accessorFn: (row) => row.countryName,
-      id: "state",
+      accessorFn: (row) => row.stateName,
+      id: "stateName",
       cell: (info) => info.getValue(),
       header: () => <>State</>,
     },
@@ -106,7 +119,7 @@ export const EnquirySearch: React.FC = () => {
       header: () => <>Phone</>,
     },
     {
-      accessorFn: (row) => row.phone,
+      accessorFn: (row) => row.fax,
       id: "fax",
       cell: (info) => info.getValue(),
       header: () => <>Fax</>,
@@ -130,74 +143,74 @@ export const EnquirySearch: React.FC = () => {
       header: () => <>Contact Person</>,
     },
     {
-      accessorFn: (row) => row.contactPerson,
+      accessorFn: (row) => row.designation,
       id: "designation",
       cell: (info) => info.getValue(),
       header: () => <>Designation</>,
     },
     {
-      accessorFn: (row) => row.regdOffice,
+      accessorFn: (row) => row.bankers,
       id: "bankers",
       cell: (info) => info.getValue(),
       header: () => <>Bankers</>,
     },
     {
-      accessorFn: (row) => row.regdOffice,
+      accessorFn: (row) => row.notes,
       id: "notes",
       cell: (info) => info.getValue(),
       header: () => <>Notes</>,
     },
     {
-      accessorFn: (row) => row.regdOffice,
-      id: "source",
+      accessorFn: (row) => row.sourceName,
+      id: "sourceName",
       cell: (info) => info.getValue(),
       header: () => <>Source</>,
     },
     {
-      accessorFn: (row) => row.regdOffice,
-      id: "enqstatus",
+      accessorFn: (row) => row.enquiryStatus,
+      id: "enquiryStatus",
       cell: (info) => info.getValue(),
       header: () => <>Enq.Status</>,
     },
     {
-      accessorFn: (row) => row.regdOffice,
-      id: "localsource",
+      accessorFn: (row) => row.localSourceId,
+      id: "localSource",
       cell: (info) => info.getValue(),
       header: () => <>Local Source</>,
     },
     {
-      accessorFn: (row) => row.cmie,
+      accessorFn: (row) => row.clientRefNo,
       id: "clientref",
       cell: (info) => info.getValue(),
       header: () => <>Client Ref.</>,
     },
     {
-      accessorFn: (row) => row.rocStatus,
-      id: "client",
+      accessorFn: (row) => row.clientName,
+      id: "clientName",
       cell: (info) => info.getValue(),
       header: () => <>client</>,
     },
     {
-      accessorFn: (row) => row.address,
-      id: "address",
+      accessorFn: (row) => row.clientAddress,
+      id: "clientAddress",
       cell: (info) => info.getValue(),
       header: () => <>Client Address</>,
     },
     {
-      accessorFn: (row) => row.countryName,
-      id: "city",
+      accessorFn: (row) => row.clientCityName,
+      id: "clientCityName",
       cell: (info) => info.getValue(),
       header: () => <>Client City</>,
     },
     {
-      accessorFn: (row) => row.countryName,
-      id: "Zip",
+      accessorFn: (row) => row.clientZip,
+      id: "clientZip",
       cell: (info) => info.getValue(),
       header: () => <>Client Zip</>,
     },
     {
-      accessorFn: (row) => row.countryName,
-      id: "state",
+      accessorFn: (row) => row.clientState,
+      id: "clientState",
       cell: (info) => info.getValue(),
       header: () => <>Client State</>,
     },
@@ -208,83 +221,204 @@ export const EnquirySearch: React.FC = () => {
       header: () => <>Client Country</>,
     },
     {
-      accessorFn: (row) => row.phone,
-      id: "phone",
+      accessorFn: (row) => row.clientPhone,
+      id: "clientPhone",
       cell: (info) => info.getValue(),
       header: () => <>Client Phone</>,
     },
     {
-      accessorFn: (row) => row.phone,
-      id: "fax",
+      accessorFn: (row) => row.clientFax,
+      id: "clientFax",
       cell: (info) => info.getValue(),
       header: () => <>Client Fax</>,
     },
     {
-      accessorFn: (row) => row.contactPerson,
-      id: "contactPerson",
+      accessorFn: (row) => row.clientContactPerson,
+      id: "clientContactPerson",
       cell: (info) => info.getValue(),
       header: () => <>Client Contact Person</>,
     },
     {
-      accessorFn: (row) => row.contactPerson,
-      id: "contactPerson",
+      accessorFn: (row) => row.clientDesignation,
+      id: "clientDesignation",
       cell: (info) => info.getValue(),
       header: () => <>Client Designation</>,
     },
     {
-      accessorFn: (row) => row.contactPerson,
-      id: "contactPerson",
+      accessorFn: (row) => row.printStatus,
+      id: "printStatus",
       cell: (info) => info.getValue(),
       header: () => <>Client Print Status</>,
     },
     {
-      accessorFn: (row) => row.contactPerson,
-      id: "contactPerson",
+      accessorFn: (row) => row.dueDate,
+      id: "dueDate",
       cell: (info) => info.getValue(),
       header: () => <>Due on</>,
     },
     {
-      accessorFn: (row) => row.contactPerson,
-      id: "contactPerson",
+      accessorFn: (row) => row.serviceTypeName,
+      id: "serviceTypeName",
       cell: (info) => info.getValue(),
       header: () => <>Service Type </>,
     },
     {
-      accessorFn: (row) => row.contactPerson,
-      id: "contactPerson",
+      accessorFn: (row) => row.executiveName,
+      id: "executiveName",
       cell: (info) => info.getValue(),
       header: () => <>Executive</>,
     },
     {
-      accessorFn: (row) => row.contactPerson,
-      id: "contactPerson",
+      accessorFn: (row) => row.requestNo,
+      id: "requestNo",
       cell: (info) => info.getValue(),
-      header: () => <>Due on</>,
+      header: () => <>Request No</>,
     },
     {
-      id: "action",
+      accessorFn: (row) => row.instruction,
+      id: "instruction",
       cell: (info) => info.getValue(),
-      header: () => <>Action</>,
+      header: () => <>Instruction</>,
+    },
+    {
+      accessorFn: (row) => row.reportFilename,
+      id: "reportFilename",
+      cell: (info) => info.getValue(),
+      header: () => <>Report Filename</>,
+    },
+    {
+      accessorFn: (row) => row.groupName,
+      id: "groupName",
+      cell: (info) => info.getValue(),
+      header: () => <>Group Name</>,
+    },
+    {
+      accessorFn: (row) => row.reportPrice,
+      id: "reportPrice",
+      cell: (info) => info.getValue(),
+      header: () => <>Report Price</>,
+    },
+    {
+      accessorFn: (row) => row.reportComission,
+      id: "reportComission",
+      cell: (info) => info.getValue(),
+      header: () => <>Report commission</>,
+    },
+    {
+      accessorFn: (row) => row.typeofEnquiry,
+      id: "typeofEnquiry",
+      cell: (info) => info.getValue(),
+      header: () => <>Type Of Enquiry</>,
+    },
+    {
+      accessorFn: (row) => row.noteForComission,
+      id: "noteForComission",
+      cell: (info) => info.getValue(),
+      header: () => <>Note For commission</>,
+    },
+    {
+      accessorFn: (row) => row.disPer,
+      id: "disPer",
+      cell: (info) => info.getValue(),
+      header: () => <>Dis Per</>,
+    },
+    {
+      accessorFn: (row) => row.discount,
+      id: "discount",
+      cell: (info) => info.getValue(),
+      header: () => <>Discount</>,
+    },
+    {
+      accessorFn: (row) => row.adjustment,
+      id: "adjustment",
+      cell: (info) => info.getValue(),
+      header: () => <>Adjustment</>,
+    },
+    {
+      accessorFn: (row) => row.disType,
+      id: "disType",
+      cell: (info) => info.getValue(),
+      header: () => <>DisType</>,
+    },
+    {
+      accessorFn: (row) => row.clientEmail,
+      id: "clientEmail",
+      cell: (info) => info.getValue(),
+      header: () => <>Client Email</>,
+    },
+    {
+      accessorFn: (row) => row.enteredDate,
+      id: "enteredDate",
+      cell: (info) => info.getValue(),
+      header: () => <>EnteredDate</>,
+    },
+    {
+      accessorFn: (row) => row.modifiedDate,
+      id: "modifiedDate",
+      cell: (info) => info.getValue(),
+      header: () => <>ModifiedDate</>,
+    },
+    {
+      accessorFn: (row) => row.modifiedBy,
+      id: "modifiedBy",
+      cell: (info) => info.getValue(),
+      header: () => <>ModifiedByUser</>,
+    },
+    {
+      accessorFn: (row) => row.actualBuyerId,
+      id: "actualBuyerId",
+      cell: (info) => info.getValue(),
+      header: () => <>ActualBuyerId</>,
+    },
+    {
+      accessorFn: (row) => row.partyName,
+      id: "partyName",
+      cell: (info) => info.getValue(),
+      header: () => <>PartyName</>,
+    },
+    {
+      accessorFn: (row) => row.siteStatus,
+      id: "siteStatus",
+      cell: (info) => info.getValue(),
+      header: () => <>Site status</>,
+    },
+    {
+      accessorFn: (row) => row.remarks,
+      id: "remarks",
+      cell: (info) => info.getValue(),
+      header: () => <>Remarks</>,
+    },
+    {
+      accessorFn: (row) => row.clientPrice,
+      id: "clientPrice",
+      cell: (info) => info.getValue(),
+      header: () => <>Cli Price</>,
+    },
+    {
+      accessorFn: (row) => row.bankers,
+      id: "groupPrice",
+      cell: (info) => info.getValue(),
+      header: () => <>Group Price</>,
     },
   ];
 
-  const deleteCompanyClick = (companyData: any) => {
+  const deleteCompanyClick = (enquiriesData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
-      deleteCompany(companyData.companyId);
+      deleteEnquiry(enquiriesData.companyId);
     }
   };
 
-  const editCompanyClick = (companyData: any) => {
-    console.log(companyData);
-    navigate(COMMON_ROUTES.EDIT.replace(":id", companyData.companyId));
+  const editCompanyClick = (enquiriesData: any) => {
+    console.log(enquiriesData);
+    navigate(COMMON_ROUTES.EDIT.replace(":id", enquiriesData.companyId));
   };
 
-  const tableConfig: TableType<CompanyType> = {
+  const tableConfig: TableType<AllEnquiriesType> = {
     config: {
-      tableName: "Company Master",
+      tableName: "Enqury Search",
       columns: columns,
-      tableData: companyData || [],
+      tableData: enquiriesData || [],
       copyBtn: true,
       csvBtn: false,
       excelBtn: true,

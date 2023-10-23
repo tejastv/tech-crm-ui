@@ -17,8 +17,12 @@ export const Currency: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Currency",
-      btnTitle: "Add Currency",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Currency",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -26,6 +30,11 @@ export const Currency: React.FC = () => {
   };
 
   const columns: ColumnDef<CurrencyType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -72,11 +81,6 @@ export const Currency: React.FC = () => {
       id: "selldate",
       cell: (info) => info.getValue(),
       header: () => <>Sell Date</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

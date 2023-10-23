@@ -30,6 +30,11 @@ export const GroupMaster: React.FC = () => {
 
   const columns: ColumnDef<ClientGroupType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -100,11 +105,7 @@ export const GroupMaster: React.FC = () => {
       ),
       header: () => <>Show IOB Details</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
+
   ];
 
   const { data: clientGroupData, isLoading } = getClientGroup();

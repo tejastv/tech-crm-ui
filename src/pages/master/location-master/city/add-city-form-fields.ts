@@ -1,5 +1,5 @@
 import { FormFieldType, ValidationType } from "@shared/index";
-import { createFormConfig } from "@utils/index";
+import { createFormConfig, selectOptionsMaker } from "@utils/index";
 
 const cityFieldValidation = {
   required: {
@@ -9,6 +9,17 @@ const cityFieldValidation = {
   maxLength: {
     value: 30,
     message: "30 characters max",
+  },
+} as ValidationType;
+
+const StateValidation = {
+  required: {
+    value: true,
+    message: "{label} field is rquired",
+  },
+  pattern: {
+    value: /^[a-zA-Z0-9\-]+$/,
+    message: "Please select a {label}",
   },
 } as ValidationType;
 
@@ -33,6 +44,33 @@ const cityField = {
   
 
 };
+const state: FormFieldType = createFormConfig(
+  "stateId",
+  "State",
+  "select",
+  StateValidation,
+  "Select State",
+  []
+);
+// const country: FormFieldType = {
+//   config: {
+//     name: "State",
+//     label: "State",
+//     id: "stateId",
+//     options: selectOptionsMaker(countryOptions, "value", "label"),
+//     placeholder: "Country field is rquired",
+//     validation: {
+//       required: {
+//         value: true,
+//         message: "Country field is rquired",
+//       },
+//       pattern: {
+//         value: /^[a-zA-Z0-9\-]+$/,
+//         message: "Select Country ",
+//       },
+//     },
+//   },
+// };
 
 // ...createFormConfig(
 //   "cityName",
@@ -51,5 +89,6 @@ const osPrintField: FormFieldType = createFormConfig(
 
 export const addCityFormFields = {
   cityField,
+  state,
   osPrintField,
 };

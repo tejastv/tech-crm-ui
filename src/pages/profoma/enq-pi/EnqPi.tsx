@@ -22,13 +22,16 @@ export const EnqPi: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Enquiry Details(PI)",
-      btnTitle: "Add Enquiry Details",
-      btnRoute: COMMON_ROUTES.ADD,
-    },
-    button2Config: {
-      pageHeading: "",
-      btnTitle: "Search Enquiry",
-      btnRoute: COMMON_ROUTES.LIST,
+      buttons: [
+        {
+          btnTitle: "Add Enquiry Details",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+        {
+          btnTitle: "Search Enquiry",
+          btnRoute: COMMON_ROUTES.LIST,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -36,6 +39,11 @@ export const EnqPi: React.FC = () => {
   };
 
   const columns: ColumnDef<CompanyType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "selectall",
       cell: (info) => info.getValue(),
@@ -259,11 +267,6 @@ export const EnqPi: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Due on</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const deleteCompanyClick = (companyData: any) => {
@@ -302,7 +305,6 @@ export const EnqPi: React.FC = () => {
   return (
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
-      <PageBreadcrumb config={config.button2Config}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
         <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
       </BorderLayout>

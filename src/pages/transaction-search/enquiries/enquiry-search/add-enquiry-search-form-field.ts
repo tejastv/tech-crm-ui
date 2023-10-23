@@ -23,9 +23,9 @@ const ToDateValidation = {
 } as ValidationType;
 const clientnameField: FormFieldType = {
   config: {
-    name: "clientname",
+    name: "clientName",
     label: "Client Name",
-    id: "clientname",
+    id: "clientName",
     options: [],
     placeholder: "Select Client ",
     validation: {

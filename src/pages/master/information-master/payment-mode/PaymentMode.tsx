@@ -20,8 +20,12 @@ export const PaymentMode: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Payment Mode",
-      btnTitle: "Add Payment Mode",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Payment Mode",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -29,6 +33,11 @@ export const PaymentMode: React.FC = () => {
   };
 
   const columns: ColumnDef<PaymentModeType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -39,11 +48,6 @@ export const PaymentMode: React.FC = () => {
       id: "paymentMode",
       cell: (info) => info.getValue(),
       header: () => <>PaymentMode</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

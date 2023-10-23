@@ -22,8 +22,12 @@ export const SearchEnqPi: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Generate Invoice(PI)",
-      btnTitle: "",
-      btnRoute: "",
+      buttons: [
+        {
+          btnTitle: "",
+          btnRoute: "",
+        },
+      ],
     },
 
     borderLayoutConfig: {

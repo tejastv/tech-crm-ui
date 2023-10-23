@@ -36,7 +36,7 @@ export const Checkbox = (props: FormFieldType) => {
             className="col-sm-3 control-label col-form-label"
             htmlFor={props.config.id}
           >
-            {props.config.label}
+            {props.config.label} {props.config.validation?.required.value && <span>*</span>}
           </Form.Label>
           <div className="col-sm-9">
             {props.config.options &&
@@ -56,7 +56,7 @@ export const Checkbox = (props: FormFieldType) => {
                         {...register(
                           props.config.name,
                           props.config.validation
-                        )}
+                        )}className="custom-checkbox" 
                         // onChange={(e: any) => {
                         //   field.onChange(() => props.config.setData = e.target.value);
                         // }}

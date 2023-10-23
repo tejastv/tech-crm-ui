@@ -16,8 +16,12 @@ export const CreditDays: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Credit Period",
-      btnTitle: "Add Credit Period",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Credit Period",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -29,6 +33,11 @@ export const CreditDays: React.FC = () => {
   const navigate = useNavigate();
   const columns: ColumnDef<CreditDaysType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -38,11 +47,6 @@ export const CreditDays: React.FC = () => {
       id: "creditPeriod",
       cell: (info) => info.getValue(),
       header: () => <>Credit Days</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

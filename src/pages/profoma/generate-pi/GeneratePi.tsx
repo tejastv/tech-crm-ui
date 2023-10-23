@@ -22,13 +22,16 @@ export const GeneratePi: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Generate Invoice(PI)",
-      btnTitle: "Add Generate Invoice(PI)",
-      btnRoute: COMMON_ROUTES.ADD,
-    },
-    button2Config: {
-      pageHeading: "",
-      btnTitle: "Find Invoice",
-      btnRoute: COMMON_ROUTES.LIST,
+      buttons: [
+        {
+          btnTitle: "Add Generate Invoice(PI)",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+        {
+          btnTitle: "Find Invoice",
+          btnRoute: COMMON_ROUTES.LIST,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -36,6 +39,11 @@ export const GeneratePi: React.FC = () => {
   };
 
   const columns: ColumnDef<CompanyType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "selectall",
       cell: (info) => info.getValue(),
@@ -259,11 +267,6 @@ export const GeneratePi: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Due on</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const deleteCompanyClick = (companyData: any) => {
@@ -302,7 +305,6 @@ export const GeneratePi: React.FC = () => {
   return (
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
-      <PageBreadcrumb config={config.button2Config}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
         <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
       </BorderLayout>

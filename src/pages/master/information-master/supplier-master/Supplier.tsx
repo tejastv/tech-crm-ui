@@ -20,8 +20,12 @@ export const Supplier: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Supplier Master",
-      btnTitle: "Add Supplier",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Supplier",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -32,6 +36,11 @@ export const Supplier: React.FC = () => {
     useSupplierMasterApiCallHook();
   const navigate = useNavigate();
   const columns: ColumnDef<AddUpdateSupplierMasterType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -96,11 +105,6 @@ export const Supplier: React.FC = () => {
       id: "countryID",
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

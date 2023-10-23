@@ -23,8 +23,12 @@ export const BankMasterDeposit: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Bank Master(Deposit)",
-      btnTitle: "Add Bank Master(Deposit)",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Bank Master(Deposit)",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -32,6 +36,11 @@ export const BankMasterDeposit: React.FC = () => {
   };
 
   const columns: ColumnDef<BankDepositType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -48,11 +57,6 @@ export const BankMasterDeposit: React.FC = () => {
       id: "accountNo",
       cell: (info) => info.getValue(),
       header: () => <>Account No</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

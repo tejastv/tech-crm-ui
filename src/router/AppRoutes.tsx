@@ -11,15 +11,21 @@ import {
   LOGIN,
   MASTER_ROUTES,
   PROFOMA_ROUTES,
+  REPORT_ROUTES,
   ROOT,
   TRANSACTION_ROUTES,
   UNKNOWN,
 } from "@constants/index";
+import ReportsRoutes from "@pages/reports/ReportsRoutes";
 
 const Dashboard = React.lazy(() => import("../pages/dashboard/Dashboard"));
 const MasterRoutes = React.lazy(() => import("../pages/master/MasterRoutes"));
-const TransactionRoutes = React.lazy(() => import("../pages/transaction-search/TrasactionRoutes"));
-const ProfomaRoutes = React.lazy(() => import("../pages/profoma/ProfomaRoutes"));
+const TransactionRoutes = React.lazy(
+  () => import("../pages/transaction-search/TrasactionRoutes")
+);
+const ProfomaRoutes = React.lazy(
+  () => import("../pages/profoma/ProfomaRoutes")
+);
 
 const AppRoutes = () => {
   return (
@@ -62,6 +68,14 @@ const AppRoutes = () => {
               </React.Suspense>
             }
           ></Route>
+          <Route
+            path={REPORT_ROUTES.REPORT_PARENT_ROUTE}
+            element={
+              <React.Suspense>
+                <ReportsRoutes />
+              </React.Suspense>
+            }
+          />
         </Route>
         {/* Fallback route for unknown paths */}
         <Route path={UNKNOWN} element={<NotFound />} />

@@ -18,8 +18,12 @@ export const City: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "City",
-      btnTitle: "Add City",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add City",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -27,6 +31,11 @@ export const City: React.FC = () => {
   };
 
   const columns: ColumnDef<CityType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -39,15 +48,16 @@ export const City: React.FC = () => {
       header: () => <>City Name</>,
     },
     {
+      accessorFn: (row) => row.stateName,
+      id: "stateName",
+      cell: (info) => info.getValue(),
+      header: () => <>State Name</>,
+    },
+    {
       accessorFn: (row) => row.oscopies,
       id: "oscopies",
       cell: (info) => info.getValue(),
       header: () => <>OSCopies</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

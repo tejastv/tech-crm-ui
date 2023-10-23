@@ -19,8 +19,12 @@ export const Executive: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Sales Executive",
-      btnTitle: "Add Sales Executive",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Sales Executive",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -28,6 +32,11 @@ export const Executive: React.FC = () => {
   };
 
   const columns: ColumnDef<ExecutiveType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -62,11 +71,6 @@ export const Executive: React.FC = () => {
       id: "stateName",
       cell: (info) => info.getValue(),
       header: () => <>State</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

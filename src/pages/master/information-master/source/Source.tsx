@@ -16,8 +16,12 @@ export const Source: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Source",
-      btnTitle: "Add Source",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Source",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -28,6 +32,11 @@ export const Source: React.FC = () => {
   const navigate = useNavigate();
 
   const columns: ColumnDef<SourceType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -44,11 +53,6 @@ export const Source: React.FC = () => {
       id: "firstLetterFile",
       cell: (info) => info.getValue(),
       header: () => <>First Letter File</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

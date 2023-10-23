@@ -1,6 +1,7 @@
 export interface StateType {
-  countryId: number;
+  stateName: string;
   countryName: string;
+  countryId: number;
   stateId: number;
   state: string;
   stateCodeN: number;

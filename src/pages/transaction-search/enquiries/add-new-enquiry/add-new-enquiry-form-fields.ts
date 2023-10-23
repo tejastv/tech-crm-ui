@@ -544,7 +544,7 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 const formattedDate = `${year}/${month}/${day}`;
 const recdon: FormFieldType = createFormConfig(
   "recdDate",
-  "Recd . On",
+  "Enq. Date/Recd. On",
   "date",
   recdOnValidation,
   formattedDate
@@ -553,11 +553,11 @@ const recdon: FormFieldType = createFormConfig(
 const enqType = [
   {
     label: "NEW",
-    value: "0",
+    value: "true",
   },
   {
     label: "RENEWAL",
-    value: "1",
+    value: "false",
   },
 ];
 
@@ -565,10 +565,12 @@ const enqtype: FormFieldType = createFormConfig(
   "typeofEnquiry",
   "Enq. Type",
   "select",
-  EnqValidation,
-  "Select Enq. Type",
-  enqType
+  EnqValidation, // Replace with your validation function
+  "",
+  enqType,
+  true // Default value set to "NEW"
 );
+
 const localsourceenquiry: FormFieldType = createFormConfig(
   "localSourceId",
   "Local Source",

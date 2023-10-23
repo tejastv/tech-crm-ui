@@ -21,8 +21,12 @@ export const Segment: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Segment",
-      btnTitle: "Add Segment",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Segment",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -30,6 +34,11 @@ export const Segment: React.FC = () => {
   };
 
   const columns: ColumnDef<SegmentType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -40,11 +49,6 @@ export const Segment: React.FC = () => {
       id: "cityName",
       cell: (info) => info.getValue(),
       header: () => <>Segment Name</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

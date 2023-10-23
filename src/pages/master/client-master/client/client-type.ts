@@ -1,4 +1,9 @@
 export interface ClientType {
+
+  cityName: unknown;
+  city: string;
+  stateName: string;
+  countryName: string;
   clientID: number;
   ourRefNo: string;
   clientName: string;

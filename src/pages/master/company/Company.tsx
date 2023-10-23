@@ -22,8 +22,12 @@ export const CompanyMaster: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Company Master",
-      btnTitle: "Add Company",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Company",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -31,6 +35,11 @@ export const CompanyMaster: React.FC = () => {
   };
 
   const columns: ColumnDef<CompanyType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -54,9 +63,10 @@ export const CompanyMaster: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Address</>,
     },
+
     {
       accessorFn: (row) => row.countryName,
-      id: "countryName",
+      id: "country",
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
     },
@@ -113,11 +123,6 @@ export const CompanyMaster: React.FC = () => {
       id: "recFin",
       cell: (info) => info.getValue(),
       header: () => <>RecFin</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 
