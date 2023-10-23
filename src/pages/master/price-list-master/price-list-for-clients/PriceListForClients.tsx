@@ -191,34 +191,22 @@ export const PriceListForClients: React.FC = () => {
                     />
                   </div>
                   <div className="col-md-3 col-xs-12">
-                    <Select
-                      config={
-                        addPriceClientFormFields.priceClientCurrency.config
-                      }
-                    />
-                  </div>
-                  <div className="col-md-3 col-xs-12">
-                    <Select
-                      config={addPriceClientFormFields.priceGroup.config}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                <div className="col-md-3 col-xs-12"></div>
-                <div className="col-md-4 col-xs-12"></div>
-                {/* <div className="col-md-3 col-xs-12"></div> */}
-                {/* <div className="row justify-content-center"> */}
-                  <div className="col-md-3 col-xs-12">
-                    <Button
-                      type={"submit"}
-                      className={"btn btn-danger btn-sm mb-2"}
-                    >
+                    <Select config={addPriceClientFormFields.priceClientCurrency.config } />
+                  <div className="row justify-content-end">
+                  <div className="col-md-12 col-xs-12 text-right">
+                    <Button type={"submit"}  className={"btn btn-danger btn-sm mb-2"}  >
                       <i className="far fa-save"></i>Get Std. Price
                     </Button>
                   </div>
                   </div>
-                {/* </div> */}
-                <div className="row justify-content-end">
+
+                  
+                  </div>
+
+                  <div className="col-md-3  col-xs-12">
+                    <Select config={addPriceClientFormFields.priceGroup.config}/>
+
+                  <div className="row justify-content-end">
                   <div className="col-md-12 col-xs-12 text-right">
                     <Button
                       type={"submit"}
@@ -228,6 +216,12 @@ export const PriceListForClients: React.FC = () => {
                     </Button>
                   </div>
                 </div>
+                  </div>
+                 
+                </div>
+               
+               
+               
               </form>
             </FormProvider>
             <FormProvider {...otherFormGroupForm}>

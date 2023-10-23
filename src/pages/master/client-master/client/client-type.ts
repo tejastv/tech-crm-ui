@@ -1,4 +1,8 @@
 export interface ClientType {
+  executive: string;
+  segmentName: string;
+  currencyName: string;
+  groupName: string;
 
   cityName: unknown;
   city: string;
