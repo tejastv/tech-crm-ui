@@ -32,13 +32,14 @@ const LAST_FIN_YEAR = "last-fin-year-data";
 const CLIENT_DATA = "client-data";
 const CLIENT_GROUP_BASED_ON_ID_DATA = "client-group-based-on-id-data";
 
-//transaction master
-
 // Transaction Enquiry
 const ENQUIRY_DATA = "enquiry-data";
 const SERVICETYPE_DATA = "servicetype-data";
 const ENQSTATUS_DATA = "enqstatus-data";
 const REFNO_DATA = "refno-data";
+
+// Proforma
+const GET_ENQUIRY_PI = "get-enquiry-pi";
 
 export const queryKeys = {
   CITY_DATA,
@@ -78,4 +79,5 @@ export const queryKeys = {
   REFNO_DATA,
   CITY_WISE_CLIENT_DATA,
   PRICE_DATA,
+  GET_ENQUIRY_PI
 };

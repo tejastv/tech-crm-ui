@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import logoImage from "@assets/images/logo.png";
 import { useAuth } from "@hooks/index";
-import { DASHBOARD, LOGIN, MASTER_ROUTES, PROFOMA_ROUTES, TRANSACTION_ROUTES } from "@constants/index";
+import { DASHBOARD, LOGIN, MASTER_ROUTES, PROFORMA_ROUTES, TRANSACTION_ROUTES } from "@constants/index";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -728,7 +728,7 @@ export const Header: React.FC = () => {
                     <li className="sidebar-item">
                         <Link
                           className="sidebar-link"
-                          to={`${PROFOMA_ROUTES.PROFOMA}${PROFOMA_ROUTES.ENQPI_PROFOMA_ROUTES.ENQPI}`}
+                          to={`${PROFORMA_ROUTES.PROFORMA}${PROFORMA_ROUTES.ENQ_PI_PROFORMA_ROUTES.ENQ_PI}`}
                         >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Enq.(PI) </span>
@@ -737,7 +737,7 @@ export const Header: React.FC = () => {
                       <li className="sidebar-item">
                         <Link
                           className="sidebar-link"
-                          to={`${PROFOMA_ROUTES.PROFOMA}${PROFOMA_ROUTES.GENERATEPI_PROFOMA_ROUTES.GENERATEPI}`}
+                          to={`${PROFORMA_ROUTES.PROFORMA}${PROFORMA_ROUTES.GENERATE_PI_PROFORMA_ROUTES.GENERATE_PI}`}
                         >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Generate PI</span>
