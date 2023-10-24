@@ -56,8 +56,7 @@ export const Client: React.FC = () => {
     },
     {
       accessorFn: (row) => row.cityName,
-
-      id: "id",
+      id: "cityId",
       cell: (info) => info.getValue(),
       header: () => <>City</>,
     },
@@ -110,7 +109,7 @@ export const Client: React.FC = () => {
       header: () => <>Contact Person</>,
     },
     {
-      accessorFn: (row) => row.currencyID,
+      accessorFn: (row) => row.currencyName,
       id: "currencyID",
       cell: (info) => info.getValue(),
       header: () => <>Currency Type</>,
@@ -158,7 +157,7 @@ export const Client: React.FC = () => {
       header: () => <>Instruction</>,
     },
     {
-      accessorFn: (row) => row.groupId,
+      accessorFn: (row) => row.groupName,
       id: "groupId",
       cell: (info) => info.getValue(),
       header: () => <>group Name</>,
@@ -212,7 +211,7 @@ export const Client: React.FC = () => {
       header: () => <>Adjust From Date</>,
     },
     {
-      accessorFn: (row) => row.segmentId,
+      accessorFn: (row) => row.segmentName,
       id: "segmentId",
       cell: (info) => info.getValue(),
       header: () => <>Segment Name</>,

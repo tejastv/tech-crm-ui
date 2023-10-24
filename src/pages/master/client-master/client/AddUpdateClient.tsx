@@ -81,7 +81,7 @@ export const AddUpdateClient: React.FC = () => {
     addClientFormFields.stateClient.config.options = selectOptionsMaker(
       stateData,
       "stateId",
-      "state",
+      "stateName",
       true
     );
   }
@@ -146,8 +146,8 @@ export const AddUpdateClient: React.FC = () => {
     );
   }
 
-  const onSubmit = methods.handleSubmit((currencyData) => {
-    let data: any = { ...cleanupObject(currencyData) };
+  const onSubmit = methods.handleSubmit((clientData) => {
+    let data: any = { ...cleanupObject(clientData) };
     delete data.state;
     data["ourRefNo"] = "String";
     data["adjustfromDate"] = new Date().toISOString();
@@ -201,6 +201,7 @@ export const AddUpdateClient: React.FC = () => {
     console.log(data);
     if (params.id && data) {
       updateClient({ id: params.id, ...data });
+      console.log(data)
     } else {
       addClient(data);
     }
@@ -213,9 +214,9 @@ export const AddUpdateClient: React.FC = () => {
         let id = clientMasterData?.cityID;
         let data: any = returnObjectBasedOnID(
           cityData,
-          "id",
+          "cityID",
           id,
-          "id",
+          "cityID",
           "cityName"
         );
         addClientFormFields.cityClient.config.setData = data
@@ -232,7 +233,7 @@ export const AddUpdateClient: React.FC = () => {
           "stateId",
           id,
           "stateId",
-          "state"
+          "stateName"
         );
         addClientFormFields.stateClient.config.setData = data
           ? {
