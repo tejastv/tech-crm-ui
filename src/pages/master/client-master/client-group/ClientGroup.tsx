@@ -16,8 +16,12 @@ export const GroupMaster: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Group Master",
-      btnTitle: "Add Group Master",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Group Master",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -105,7 +109,6 @@ export const GroupMaster: React.FC = () => {
       ),
       header: () => <>Show IOB Details</>,
     },
-
   ];
 
   const { data: clientGroupData, isLoading } = getClientGroup();

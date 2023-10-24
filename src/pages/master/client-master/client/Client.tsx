@@ -8,12 +8,7 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "@constants/index";
-import {
-  ClientType,
-  useCityApiCallHook,
-  useClientApiCallHook,
-  useStateApiCallHook,
-} from "@master/index";
+import { ClientType, useClientApiCallHook } from "@master/index";
 import { useNavigate } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -35,10 +30,6 @@ export const Client: React.FC = () => {
 
   const { getClient, deleteClientMutation } = useClientApiCallHook();
   const navigate = useNavigate();
-  const { getCity } = useCityApiCallHook();
-  const { getState } = useStateApiCallHook();
-  const { data: cityData } = getCity();
-  const { data: stateData } = getState();
   const columns: ColumnDef<ClientType>[] = [
     {
       id: "action",

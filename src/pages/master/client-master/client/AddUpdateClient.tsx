@@ -33,7 +33,6 @@ export const AddUpdateClient: React.FC = () => {
   const methods = useForm<AddUpdateClientType>();
   const params = useParams();
   const [stateCode, setStateCode] = useState();
-  const [crDays, setCrDays] = useState('30');
   const { addClientMutation, updateClientMutation, getClientData } =
     useClientApiCallHook();
   const { mutate: addClient } = addClientMutation();
@@ -414,8 +413,11 @@ export const AddUpdateClient: React.FC = () => {
                     <Input config={addClientFormFields.addressClient.config} />
                     <Select config={addClientFormFields.cityClient.config} />
                     <Input config={addClientFormFields.zipClient.config} />
-  <Select config={addClientFormFields.stateClient.config}  onChangeHandler={handleSelectChange}  />
-<Input
+                    <Select
+                      config={addClientFormFields.stateClient.config}
+                      onChangeHandler={handleSelectChange}
+                    />
+                    <Input
                       config={addClientFormFields.statecodeClient.config}
                     />
                     <Select config={addClientFormFields.countryClient.config} />
@@ -427,13 +429,13 @@ export const AddUpdateClient: React.FC = () => {
                     <Input
                       config={addClientFormFields.designationClient.config}
                     />
-                    
+
                     {/* <div className="row "> */}
                     {/* <div className="col-md-5"> */}
-                  
+
                     {/* </div> */}
                     {/* </div> */}
-                    
+
                     {/* <h6 className="card-title m-t-20 md-2"> */}
                     <DivLayout
                       heading={cardConfig.formclieckUpdateConfig.heading}
@@ -441,7 +443,7 @@ export const AddUpdateClient: React.FC = () => {
                     {/* </h6> */}
                     <Select config={addClientFormFields.crDay.config} />
                     <Checkbox
-                      config={addClientFormFields.billonactual.config} 
+                      config={addClientFormFields.billonactual.config}
                     />
                   </div>
                 </div>
@@ -470,9 +472,8 @@ export const AddUpdateClient: React.FC = () => {
                     <Input config={addClientFormFields.baltoAdjust.config} />
                     <Input config={addClientFormFields.adjustenquiry.config} />
                     {/* <h6 className="card-title m-t-20"> */}
-                   
+
                     {/* </h6> */}
-                   
                   </div>
                 </div>
               </div>

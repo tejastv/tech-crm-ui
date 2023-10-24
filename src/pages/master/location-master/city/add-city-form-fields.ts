@@ -1,5 +1,5 @@
 import { FormFieldType, ValidationType } from "@shared/index";
-import { createFormConfig, selectOptionsMaker } from "@utils/index";
+import { createFormConfig } from "@utils/index";
 
 const cityFieldValidation = {
   required: {
@@ -32,17 +32,10 @@ const osPrintFieldValidation = {
 
 const cityField = {
   config: {
-    ...createFormConfig(
-      "cityName",
-      "City",
-      "text",
-      cityFieldValidation,
-      ""
-    ).config,
-    name: 'cityName',
+    ...createFormConfig("cityName", "City", "text", cityFieldValidation, "")
+      .config,
+    name: "cityName",
   },
-  
-
 };
 const state: FormFieldType = createFormConfig(
   "stateId",
