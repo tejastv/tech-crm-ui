@@ -679,14 +679,22 @@ export const AddEnquiry: React.FC = () => {
                         />
                       </Link>
                   <Select config={addEnquiryFormFields.actualbureyenquiry.config}/>
+                  <Select config={addEnquiryFormFields.servicetype.config} onChangeHandler={onServiceTypeChangeHandler} />
+                  <div className="row mb-2 justify-content-end">
+                <div className="col-md-4 col-xs-12 text-right">
+                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+                    <i className="far fa-save"></i> Get Price
+                  </Button>
+                </div>
+              </div>
+                  
                   <Input config={addEnquiryFormFields.priceenquiry.config} /> 
                   <Input config={addEnquiryFormFields.givenname.config} />
                   <Input config={addEnquiryFormFields.recdon.config} />
                   <Input config={addEnquiryFormFields.dueon.config} />
                   <Select config={addEnquiryFormFields.enqtype.config} />
                   <Select config={addEnquiryFormFields.localsourceenquiry.config}/>
-                  <Select config={addEnquiryFormFields.servicetype.config} onChangeHandler={onServiceTypeChangeHandler}
-                  />
+                  
                   
                   <Select config={addEnquiryFormFields.printstatus.config} />
                   <Select config={addEnquiryFormFields.enqstatus.config} />

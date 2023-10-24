@@ -60,10 +60,10 @@ const telNoEnquiryValidation = {
     value: false,
     message: "Please Enter Telephone Number",
   },
-  pattern: {
-    value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
-    message: "Invalid telephone number. Please use Number.",
-  },
+  // pattern: {
+  //   value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
+  //   message: "Invalid telephone number. Please use Number.",
+  // },
 } as ValidationType;
 
 const FaxNoEnquiryValidation = {
@@ -128,10 +128,10 @@ const ZipEnquiryValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d{6}$/,
-    message: "Invalid ZIP code,Please enter a 6-digit number.",
-  },
+  // pattern: {
+  //   value: /^\d{6}$/,
+  //   message: "Invalid ZIP code,Please enter a 6-digit number.",
+  // },
 } as ValidationType;
 
 const CityEnquiryValidation = {
