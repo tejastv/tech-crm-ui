@@ -32,7 +32,8 @@
       "@dashboard/*": ["pages/dashboard/*"],
       "@master/*": ["pages/master/*"],
       "@transaction-search/*": ["pages/transaction-search/*"],
-      "@proforma/*": ["pages/proforma/*"]
+      "@proforma/*": ["pages/proforma/*"],
+      "@reports/*": ["pages/reports/*"]
     }
   },
   "include": [
