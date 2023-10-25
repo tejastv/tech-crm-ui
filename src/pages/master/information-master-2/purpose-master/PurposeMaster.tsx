@@ -16,8 +16,12 @@ export const PurposeMaster: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Purpose",
-      btnTitle: "Add Purpose",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Purpose",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -29,6 +33,11 @@ export const PurposeMaster: React.FC = () => {
   const navigate = useNavigate();
   const columns: ColumnDef<PurposeMasterType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -38,11 +47,6 @@ export const PurposeMaster: React.FC = () => {
       id: "purpose",
       cell: (info) => info.getValue(),
       header: () => <>Type Name</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

@@ -87,8 +87,10 @@ const GET_UPDATE_DELETE_CLIENT = "v1/entity/client/{id}";
 const GET_CLIENT_GROUP_BASED_ON_ID = "v1/entity/client/clientGroup/{id}";
 
 // Transaction Master
+
 const GET_ADD_ALL_ENQUIRY = "v1/transaction/enquiry";
 const GET_UPDATE_DELETE_ALL_ENQUIRY = "v1/transaction/enquiry/{id}";
+const GET_ADD_ALL_ENQUIRY_SEARCH = "v1/transaction/allEnquiryAndSearch";
 const GET_PRICE =
   "v1/entity/priceListForClient/client/{client_id}/country/{country_id}/serviceType/{serviceTypeId}";
 
@@ -170,6 +172,7 @@ export const apiUrls = {
   GET_ADD_ENQSTATUS,
   GET_CLIENT_BY_CITY_ID,
   GET_CLIENT_WISE_CURRENCY_AND_GROUP,
+  GET_ADD_ALL_ENQUIRY_SEARCH,
   GET_PRICE,
 
   // Proforma

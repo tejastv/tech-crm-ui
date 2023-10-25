@@ -16,8 +16,12 @@ export const SiteStatus: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Site Status",
-      btnTitle: "Add Site Status",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Site Status",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -29,6 +33,11 @@ export const SiteStatus: React.FC = () => {
   const navigate = useNavigate();
   const columns: ColumnDef<SiteStatusType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -38,11 +47,6 @@ export const SiteStatus: React.FC = () => {
       id: "siteStatus",
       cell: (info) => info.getValue(),
       header: () => <>Site Status</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

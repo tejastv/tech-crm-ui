@@ -22,8 +22,12 @@ export const PurchaseBills: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Purchase Bills(of Suppliers)",
-      btnTitle: "Add Purchase Bills(of Suppliers)",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Purchase Bills(of Suppliers)",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -31,6 +35,11 @@ export const PurchaseBills: React.FC = () => {
   };
 
   const columns: ColumnDef<CompanyType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "selectall",
       cell: (info) => info.getValue(),
@@ -93,11 +102,6 @@ export const PurchaseBills: React.FC = () => {
       id: "countryName",
       cell: (info) => info.getValue(),
       header: () => <>Note</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

@@ -16,8 +16,12 @@ export const User: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "User Master",
-      btnTitle: "Add User",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add User",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -27,6 +31,11 @@ export const User: React.FC = () => {
   const { getUser, deleteUserMutation } = useUserApiCallHook();
   const navigate = useNavigate();
   const columns: ColumnDef<UserType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -55,11 +64,6 @@ export const User: React.FC = () => {
       id: "usertype",
       cell: (info) => info.getValue(),
       header: () => <>Type Of User</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

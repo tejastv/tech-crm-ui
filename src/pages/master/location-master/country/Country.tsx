@@ -21,8 +21,12 @@ export const Country: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Country",
-      btnTitle: "Add Country",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Country",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -30,6 +34,11 @@ export const Country: React.FC = () => {
   };
 
   const columns: ColumnDef<CountryType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -58,11 +67,6 @@ export const Country: React.FC = () => {
       id: "continent",
       cell: (info) => info.getValue(),
       header: () => <>Continent</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

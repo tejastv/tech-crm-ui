@@ -19,8 +19,12 @@ export const CallType: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Call Type",
-      btnTitle: "Add Call Type",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Call Type",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -28,6 +32,11 @@ export const CallType: React.FC = () => {
   };
 
   const columns: ColumnDef<CallTypeType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -38,11 +47,6 @@ export const CallType: React.FC = () => {
       id: "typeName",
       cell: (info) => info.getValue(),
       header: () => <>Type Name</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

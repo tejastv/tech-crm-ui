@@ -19,8 +19,12 @@ export const FinYear: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Fin. Year",
-      btnTitle: "Add Fin. Year",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Fin. Year",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -28,6 +32,11 @@ export const FinYear: React.FC = () => {
   };
 
   const columns: ColumnDef<FinYearType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -74,11 +83,6 @@ export const FinYear: React.FC = () => {
       id: "igstper",
       cell: (info) => info.getValue(),
       header: () => <>IGST per</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 

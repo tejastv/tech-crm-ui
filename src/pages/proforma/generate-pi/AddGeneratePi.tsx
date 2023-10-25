@@ -125,19 +125,19 @@ export const AddGeneratePi: React.FC = () => {
 
   const tableConfig: TableType<GeneratePiType> = {
     config: {
-      tableName: "State",
+      tableName: "generate Pi",
       columns: columns,
       tableData: [],
-      copyBtn: true,
-      csvBtn: true,
-      excelBtn: true,
-      pdfBtn: true,
-      printBtn: true,
-      globalSearchBox: true,
+      copyBtn: false,
+      csvBtn: false,
+      excelBtn: false,
+      pdfBtn: false,
+      printBtn: false,
+      globalSearchBox: false,
       pagination: {
         pageSize: 10,
-        nextPreviousBtnShow: true,
-        tableMetaDataShow: true,
+        nextPreviousBtnShow: false,
+        tableMetaDataShow: false,
       },
     },
   };
@@ -164,13 +164,16 @@ export const AddGeneratePi: React.FC = () => {
                     <Select
                       config={addGeneratePiFormFields.clientField.config}
                     />
-
-                    <div className="col-md-14 col-xs-12 text-right">
-                      <Button type="button" className={"btn btn-danger btn-sm"}>
-                        View
-                      </Button>
+                    <div className="mb-2">
+                      <div className="col-md-14 col-xs-12 text-right">
+                        <Button
+                          type="button"
+                          className={"btn btn-danger btn-sm"}
+                        >
+                          View
+                        </Button>
+                      </div>
                     </div>
-
                     <Input
                       config={addGeneratePiFormFields.currencyField.config}
                     />
@@ -261,10 +264,16 @@ export const AddGeneratePi: React.FC = () => {
                     />
 
                     {/* </div> */}
-                    <div className="col-md-14 col-xs-12 text-right">
-                      <Button type="button" className={"btn btn-danger btn-sm"}>
-                        Get Dis
-                      </Button>
+
+                    <div className="mb-2">
+                      <div className="col-md-14 col-xs-12 text-right">
+                        <Button
+                          type="button"
+                          className={"btn btn-danger btn-sm"}
+                        >
+                          Get Dis
+                        </Button>
+                      </div>
                     </div>
                     {/* <div className="col-sm-6 "> */}
                     <Input config={addGeneratePiFormFields.stField.config} />

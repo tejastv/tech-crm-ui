@@ -98,6 +98,9 @@ const moveToClient: FormFieldType = createFormConfig(
 const namenote: Note = createNoteConfig(
   "Note: When you are Creating New Group, Clientfor which group is NOT DEFINED will appear"
 );
+const mendetorynote: Note = createNoteConfig(
+  "Note: * Mendetory Fields "
+);
 
 export const addClientGroupFormFields = {
   clientGroupName,
@@ -109,4 +112,5 @@ export const addClientGroupFormFields = {
   searchClient,
   namenote,
   moveToClient,
+  mendetorynote
 };

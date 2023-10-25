@@ -1,7 +1,11 @@
 export interface PageBreadcrumbType {
   config: {
     pageHeading: string;
-    btnTitle?: string;
-    btnRoute?: string;
+    buttons: Array<buttonConfig>;
   };
+}
+
+export interface buttonConfig {
+  btnTitle?: string;
+  btnRoute?: string;
 }

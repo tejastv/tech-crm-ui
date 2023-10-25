@@ -40,7 +40,7 @@ export const SingleCheckbox = (props: FormFieldType) => {
                 <Form.Check
                   id={props.config.name}
                   type="checkbox"
-                  label={props.config.label}
+                  label={props.config.label} 
                   {...field}
                   {...register(props.config.name, props.config.validation)}
                   onChange={(e: any) => {
