@@ -1,8 +1,10 @@
 export interface CityType {
   stateName: string;
   // currentytype: unknown;
-  id: number;
+  cityId: number;
   cityName: string;
   oscopies: number;
   stateId:any;
+  countryName: any;
+  countryId:any;
 }
