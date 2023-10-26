@@ -83,6 +83,21 @@ export const AddEnquiry: React.FC = () => {
     },
   };
 
+
+  useEffect(() => {
+    // addEnquiryFormFields.enqtype.config.setData = "false";
+    if(addEnquiryFormFields.enqtype.config.options){
+      const defaultenqTypeOption = addEnquiryFormFields.enqtype.config.options.find(
+        (option) => option.label === "NEW"
+      );
+    
+      if (defaultenqTypeOption) {
+        addEnquiryFormFields.enqtype.config.setData = defaultenqTypeOption;
+      }
+    }
+  }, []);
+
+
   // city api call
   const { data: cityData } = getCity();
   if (cityData) {

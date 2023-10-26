@@ -24,8 +24,14 @@ export const useClientGroupApiCallHook = () => {
       queryKey: [queryKeys.CLIENT_GROUP_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CLIENT_GROUP);
-        // const data = response.data.data.sort((a: { groupName: string; }, b: { groupName: any; }) => a.groupName.localeCompare(b.groupName));
-        return response.data.data;
+        const data = response.data.data.sort((a: { groupName: string; }, b: { groupName: any; }) => {
+          if (a.groupName && b.groupName) {
+            return a.groupName.localeCompare(b.groupName, undefined, { sensitivity: 'base' });
+          } else {
+            return 0;
+          }
+        });
+        return data;
       },
       staleTime: Infinity,
     });

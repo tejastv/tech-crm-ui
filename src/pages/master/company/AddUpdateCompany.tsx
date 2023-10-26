@@ -1,5 +1,5 @@
 // AddUpdateCompany.tsx
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -35,6 +35,8 @@ export const AddUpdateCompany: React.FC = () => {
   const { getCity } = useCityApiCallHook();
   const { getState } = useStateApiCallHook();
   const { getCountry } = useCountryApiCallHook();
+  const [selectedStateId, setSelectedStateId] = useState();
+  const [selectedCountryId, setSelectedCountryId] = useState();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -48,12 +50,12 @@ export const AddUpdateCompany: React.FC = () => {
 
   // city api call
   const { data: cityData } = getCity();
-
   if (cityData) {
     addCompanyFormFields.city.config.options = selectOptionsMaker(
       cityData,
-      "id",
-      "cityName"
+      "cityId",
+      "cityName",
+      true
     );
   }
 
@@ -64,7 +66,8 @@ export const AddUpdateCompany: React.FC = () => {
     addCompanyFormFields.state.config.options = selectOptionsMaker(
       stateData,
       "stateId",
-      "state"
+      "stateName",
+      true
     );
   }
 
@@ -108,16 +111,16 @@ export const AddUpdateCompany: React.FC = () => {
         let id = companyMasterData?.cityId;
         let data: any = returnObjectBasedOnID(
           cityData,
-          "id",
+          "cityId",
           id,
-          "id",
+          "cityId",
           "cityName"
         );
         addCompanyFormFields.city.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (stateData) {
@@ -127,13 +130,13 @@ export const AddUpdateCompany: React.FC = () => {
           "stateId",
           id,
           "stateId",
-          "state"
+          "stateName"
         );
         addCompanyFormFields.state.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (countryData) {
@@ -147,9 +150,9 @@ export const AddUpdateCompany: React.FC = () => {
         );
         addCompanyFormFields.country.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       addCompanyFormFields.nameField.config.setData =
@@ -194,6 +197,47 @@ export const AddUpdateCompany: React.FC = () => {
     }, []);
   }
 
+  const handleSelectChange = (selectedOption: any) => {
+    if (selectedOption) {
+      setSelectedStateId(selectedOption.data.stateId)
+      setSelectedCountryId(selectedOption.data.countryId)
+    }
+  };
+
+  if (selectedStateId && stateData) {
+    let id = selectedStateId;
+    let data: any = returnObjectBasedOnID(
+      stateData,
+      "stateId",
+      id,
+      "stateId",
+      "stateName"
+    );
+    addCompanyFormFields.state.config.setData = data
+      ? {
+        label: data.label,
+        value: data.value,
+      }
+      : [];
+  }
+
+  if (selectedCountryId && countryData) {
+    let id = selectedCountryId;
+    let data: any = returnObjectBasedOnID(
+      countryData,
+      "countryId",
+      id,
+      "countryId",
+      "countryName"
+    );
+    addCompanyFormFields.country.config.setData = data
+      ? {
+        label: data.label,
+        value: data.value,
+      }
+      : [];
+  }
+
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
@@ -211,7 +255,7 @@ export const AddUpdateCompany: React.FC = () => {
                     <Input config={addCompanyFormFields.nameField.config} />
                     <Input config={addCompanyFormFields.addressField.config} />
                     <Input config={addCompanyFormFields.zip.config} />
-                    <Select config={addCompanyFormFields.city.config} />
+                    <Select config={addCompanyFormFields.city.config} onChangeHandler={handleSelectChange} />
                     <Select config={addCompanyFormFields.state.config} />
                     <Select config={addCompanyFormFields.country.config} />
                     <Input config={addCompanyFormFields.officeAddressField.config} />
@@ -219,9 +263,9 @@ export const AddUpdateCompany: React.FC = () => {
                     <Input config={addCompanyFormFields.faxNo.config} />
                     <Input config={addCompanyFormFields.emailField.config} />
                     <Input config={addCompanyFormFields.website.config} />
-                    <Input config={addCompanyFormFields.contactPerson.config}/>
+                    <Input config={addCompanyFormFields.contactPerson.config} />
                     <Input config={addCompanyFormFields.designation.config} />
-                    
+
                   </div>
                 </div>
                 <div className="col-md-6 col-xs-12">
