@@ -46,8 +46,8 @@ export const AddUpdateClient: React.FC = () => {
   const { getClientGroup } = useClientGroupApiCallHook();
   const { getSegment } = useSegmentApiCallHook();
 
-  const [selectedStateId, setSelectedStateId] = useState();
-  const [selectedCountryId, setSelectedCountryId] = useState();
+  const [selectedState, setSelectedState] = useState<any>();
+  const [selectedCountry, setSelectedCountry] = useState<any>();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -73,7 +73,7 @@ export const AddUpdateClient: React.FC = () => {
     addClientFormFields.osemail.config.setData = "N";
 
   }, []);
- 
+
 
   // city api call
   const { data: cityData } = getCity();
@@ -119,7 +119,7 @@ export const AddUpdateClient: React.FC = () => {
     const defaultCrDayOption = addClientFormFields.crDay.config.options.find(
       (option) => option.label.toString() === "30"
     );
-  
+
     if (defaultCrDayOption) {
       addClientFormFields.crDay.config.setData = defaultCrDayOption;
     }
@@ -415,44 +415,24 @@ export const AddUpdateClient: React.FC = () => {
 
   const handleSelectCity = (selectedOption: any) => {
     if (selectedOption) {
-      setSelectedStateId(selectedOption.data.stateId)
-      setSelectedCountryId(selectedOption.data.countryId)
+      setSelectedState({
+        label: selectedOption.data.stateName,
+        value: selectedOption.data.stateId,
+      });
+      setSelectedCountry({
+        label: selectedOption.data.countryName,
+        value: selectedOption.data.countryId,
+      });
     }
   };
 
-  if (selectedStateId && stateData) {
-    let id = selectedStateId;
-    let data: any = returnObjectBasedOnID(
-      stateData,
-      "stateId",
-      id,
-      "stateId",
-      "stateName"
-    );
-    addClientFormFields.stateClient.config.setData = data
-      ? {
-        label: data.label,
-        value: data.value,
-      }
-      : [];
-    addClientFormFields.statecodeClient.config.setData = data.value;
+  if (selectedState) {
+    addClientFormFields.stateClient.config.setData = selectedState;
+    addClientFormFields.statecodeClient.config.setData = selectedState.value;
   }
 
-  if (selectedCountryId && countryData) {
-    let id = selectedCountryId;
-    let data: any = returnObjectBasedOnID(
-      countryData,
-      "countryId",
-      id,
-      "countryId",
-      "countryName"
-    );
-    addClientFormFields.countryClient.config.setData = data
-      ? {
-        label: data.label,
-        value: data.value,
-      }
-      : [];
+  if (selectedCountry) {
+    addClientFormFields.countryClient.config.setData = selectedCountry;    
   }
 
   return (
@@ -473,7 +453,7 @@ export const AddUpdateClient: React.FC = () => {
                     <Radio config={addClientFormFields.clientGst.config} />
                     <Input config={addClientFormFields.gstn.config} />
                     <Input config={addClientFormFields.addressClient.config} />
-                    <Select config={addClientFormFields.cityClient.config} onChangeHandler={handleSelectCity}  />
+                    <Select config={addClientFormFields.cityClient.config} onChangeHandler={handleSelectCity} />
                     <Input config={addClientFormFields.zipClient.config} />
                     <Select config={addClientFormFields.stateClient.config} onChangeHandler={handleSelectChange} />
                     <Input

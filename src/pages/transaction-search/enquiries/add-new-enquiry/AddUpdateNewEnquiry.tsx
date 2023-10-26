@@ -32,6 +32,7 @@ import {
 } from "@pages/master";
 import {
   cleanupObject,
+  formatDateString,
   returnObjectBasedOnID,
   selectOptionsMaker,
 } from "@utils/index";
@@ -86,14 +87,19 @@ export const AddEnquiry: React.FC = () => {
 
   useEffect(() => {
     // addEnquiryFormFields.enqtype.config.setData = "false";
-    if(addEnquiryFormFields.enqtype.config.options){
+    if (addEnquiryFormFields.enqtype.config.options) {
       const defaultenqTypeOption = addEnquiryFormFields.enqtype.config.options.find(
         (option) => option.label === "NEW"
       );
-    
+
       if (defaultenqTypeOption) {
         addEnquiryFormFields.enqtype.config.setData = defaultenqTypeOption;
       }
+
+      addEnquiryFormFields.recdon.config.setData = formatDateString(new Date(), "y-m-d", "-");
+      const currentDate = new Date();
+      currentDate.setDate(currentDate.getDate() + 4); // Add 4 days to the current date
+      addEnquiryFormFields.dueon.config.setData = formatDateString(currentDate, "y-m-d", "-");
     }
   }, []);
 
@@ -233,11 +239,11 @@ export const AddEnquiry: React.FC = () => {
       addEnquiryFormFields.cityenquiry.config.setData =
         data.length > 0
           ? [
-              {
-                label: data?.label,
-                value: data?.value,
-              },
-            ]
+            {
+              label: data?.label,
+              value: data?.value,
+            },
+          ]
           : [];
     }
     if (stateData) {
@@ -251,11 +257,11 @@ export const AddEnquiry: React.FC = () => {
       addEnquiryFormFields.stateenquiry.config.setData =
         data.length > 0
           ? [
-              {
-                label: dataObj?.state,
-                value: dataObj?.stateId,
-              },
-            ]
+            {
+              label: dataObj?.state,
+              value: dataObj?.stateId,
+            },
+          ]
           : [];
     }
     if (CountryData) {
@@ -269,11 +275,11 @@ export const AddEnquiry: React.FC = () => {
       addEnquiryFormFields.countryenquiry.config.setData =
         data.length > 0
           ? [
-              {
-                label: dataObj?.countryName,
-                value: dataObj?.countryId,
-              },
-            ]
+            {
+              label: dataObj?.countryName,
+              value: dataObj?.countryId,
+            },
+          ]
           : [];
     }
 
@@ -300,9 +306,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.cityenquiry.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (stateData) {
@@ -316,9 +322,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.stateenquiry.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (CountryData) {
@@ -332,9 +338,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.countryenquiry.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (ClientData) {
@@ -348,9 +354,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.clientenquiry.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
 
@@ -365,9 +371,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.yearenquiry.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       // if (ActualBuyerData) {
@@ -397,9 +403,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.sourceenquiry.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (LocalSourceData) {
@@ -413,9 +419,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.localsourceenquiry.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
 
@@ -430,9 +436,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.companyenquiry.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (ServiceData) {
@@ -446,9 +452,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.companyenquiry.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (enqstatusData) {
@@ -462,9 +468,9 @@ export const AddEnquiry: React.FC = () => {
         );
         addEnquiryFormFields.companyenquiry.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       addEnquiryFormFields.zipenquiry.config.setData = EnquiryMasterData.zip;
@@ -677,40 +683,40 @@ export const AddEnquiry: React.FC = () => {
                   <Input config={addEnquiryFormFields.emailenquiry.config} />
                   <Input config={addEnquiryFormFields.websiteenquiry.config} />
                   <Input config={addEnquiryFormFields.contactenquiry.config} />
-                  <Input config={addEnquiryFormFields.designationenquiry.config}/>
+                  <Input config={addEnquiryFormFields.designationenquiry.config} />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                <Input config={addEnquiryFormFields.clientrefenquiry.config} />
+                  <Input config={addEnquiryFormFields.clientrefenquiry.config} />
                   <Select config={addEnquiryFormFields.clientenquiry.config} onChangeHandler={onClientChangeHandler} />
                   <Input
                     config={addEnquiryFormFields.requestnoenquiry.config}
                   />
-                <Input config={addEnquiryFormFields.clientIdenquiry.config} />
-                <Link to={""} className="card-title">
-                        <InputWithText
-                          config={
-                            addEnquiryFormFields.actualbuyeraddnote.config
-                          }
-                        />
-                      </Link>
-                  <Select config={addEnquiryFormFields.actualbureyenquiry.config}/>
+                  <Input config={addEnquiryFormFields.clientIdenquiry.config} />
+                  <Link to={""} className="card-title">
+                    <InputWithText
+                      config={
+                        addEnquiryFormFields.actualbuyeraddnote.config
+                      }
+                    />
+                  </Link>
+                  <Select config={addEnquiryFormFields.actualbureyenquiry.config} />
                   <Select config={addEnquiryFormFields.servicetype.config} onChangeHandler={onServiceTypeChangeHandler} />
                   <div className="row mb-2 justify-content-end">
-                <div className="col-md-4 col-xs-12 text-right">
-                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i> Get Price
-                  </Button>
-                </div>
-              </div>
-                  
-                  <Input config={addEnquiryFormFields.priceenquiry.config} /> 
+                    <div className="col-md-4 col-xs-12 text-right">
+                      <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+                        <i className="far fa-save"></i> Get Price
+                      </Button>
+                    </div>
+                  </div>
+
+                  <Input config={addEnquiryFormFields.priceenquiry.config} />
                   <Input config={addEnquiryFormFields.givenname.config} />
                   <Input config={addEnquiryFormFields.recdon.config} />
                   <Input config={addEnquiryFormFields.dueon.config} />
                   <Select config={addEnquiryFormFields.enqtype.config} />
-                  <Select config={addEnquiryFormFields.localsourceenquiry.config}/>
-                  
-                  
+                  <Select config={addEnquiryFormFields.localsourceenquiry.config} />
+
+
                   <Select config={addEnquiryFormFields.printstatus.config} />
                   <Select config={addEnquiryFormFields.enqstatus.config} />
                   <Select config={addEnquiryFormFields.svisit.config} />
@@ -720,9 +726,9 @@ export const AddEnquiry: React.FC = () => {
                     config={addEnquiryFormFields.instructionenquiry.config}
                   />
                 </div>
-                
+
                 <div className="col-md-3   col-xs-12">
-                
+
                   <div className="row">
                     {/* <div className="col-md-8 col-xs-12 text-right">
                       <Link to={""} className="card-title">

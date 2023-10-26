@@ -35,8 +35,8 @@ export const AddUpdateCompany: React.FC = () => {
   const { getCity } = useCityApiCallHook();
   const { getState } = useStateApiCallHook();
   const { getCountry } = useCountryApiCallHook();
-  const [selectedStateId, setSelectedStateId] = useState();
-  const [selectedCountryId, setSelectedCountryId] = useState();
+  const [selectedState, setSelectedState] = useState<any>();
+  const [selectedCountry, setSelectedCountry] = useState<any>();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -199,43 +199,23 @@ export const AddUpdateCompany: React.FC = () => {
 
   const handleSelectChange = (selectedOption: any) => {
     if (selectedOption) {
-      setSelectedStateId(selectedOption.data.stateId)
-      setSelectedCountryId(selectedOption.data.countryId)
+      setSelectedState({
+        label: selectedOption.data.stateName,
+        value: selectedOption.data.stateId,
+      });
+      setSelectedCountry({
+        label: selectedOption.data.countryName,
+        value: selectedOption.data.countryId,
+      });
     }
   };
 
-  if (selectedStateId && stateData) {
-    let id = selectedStateId;
-    let data: any = returnObjectBasedOnID(
-      stateData,
-      "stateId",
-      id,
-      "stateId",
-      "stateName"
-    );
-    addCompanyFormFields.state.config.setData = data
-      ? {
-        label: data.label,
-        value: data.value,
-      }
-      : [];
+  if (selectedState) {
+    addCompanyFormFields.state.config.setData = selectedState;
   }
 
-  if (selectedCountryId && countryData) {
-    let id = selectedCountryId;
-    let data: any = returnObjectBasedOnID(
-      countryData,
-      "countryId",
-      id,
-      "countryId",
-      "countryName"
-    );
-    addCompanyFormFields.country.config.setData = data
-      ? {
-        label: data.label,
-        value: data.value,
-      }
-      : [];
+  if (selectedCountry) {
+    addCompanyFormFields.country.config.setData = selectedCountry;    
   }
 
   return (
