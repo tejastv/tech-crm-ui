@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useRef } from "react";
+import React, { PropsWithChildren, useRef, useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -19,20 +19,53 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const tableRef = useRef(null);
-  const data = props.config.tableData;
+  // const data = props.config.tableData;
+
+  const [data, setData] = useState(() => [...props.config.tableData]);
+  const [originalData, setOriginalData] = useState(() => [
+    ...props.config.tableData,
+  ]);
+  const [editedRows, setEditedRows] = useState({});
   const columns = props.config.columns;
   const pageSizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   const { errorMessageToaster, successMessageToaster } = useToaster();
   const table = useReactTable({
     data,
     columns,
-    // Pipeline
     onGlobalFilterChange: setGlobalFilter,
-    // globalFilterFn: fuzzyFilter,
     getCoreRowModel: getCoreRowModel(),
+    meta: {
+      editedRows,
+      setEditedRows,
+      revertData: (rowIndex: number, revert: boolean) => {
+        if (revert) {
+          setData((old) =>
+            old.map((row, index) =>
+              index === rowIndex ? originalData[rowIndex] : row
+            )
+          );
+        } else {
+          setOriginalData((old) =>
+            old.map((row, index) => (index === rowIndex ? data[rowIndex] : row))
+          );
+        }
+      },
+      updateData: (rowIndex: number, columnId: string, value: string) => {
+        setData((old) =>
+          old.map((row, index) => {
+            if (index === rowIndex) {
+              return {
+                ...old[rowIndex],
+                [columnId]: value,
+              };
+            }
+            return row;
+          })
+        );
+      },
+    },
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    //
     debugTable: true,
     initialState: {
       pagination: {
@@ -361,129 +394,130 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                 </label>
               </div>
             )}
-            <table
-              id="file_export"
-              border={0}
-              className="table table-striped table-bordered display dataTable no-footer mt-2 mb-2"
-              width="100%"
-              role="grid"
-              aria-describedby="company-master-grid-data_info"
-              key="data-table"
-              ref={tableRef}
-            >
-              <thead>
-                {table.getHeaderGroups().map((headerGroup) => (
-                  <tr
-                    role="row"
-                    key={`thead_tr_${headerGroup.id}`}
-                    id={`thead_tr_${headerGroup.id}`}
-                  >
-                    {headerGroup.headers.map((header) => {
-                      return (
-                        <th
-                          className="sorting"
-                          aria-controls="company-master-grid-data"
-                          key={`thead_th_${header.id}`}
-                          colSpan={header.colSpan}
-                        >
-                          <div
-                            {...{
-                              className: header.column.getCanSort()
-                                ? "cursor-pointer select-none"
-                                : "",
-                              onClick: header.column.getToggleSortingHandler(),
-                            }}
+            {data && data.length && (
+              <table
+                id="file_export"
+                border={0}
+                className="table table-striped table-bordered display dataTable no-footer mt-2 mb-2"
+                width="100%"
+                role="grid"
+                aria-describedby="company-master-grid-data_info"
+                key="data-table"
+                ref={tableRef}
+              >
+                <thead>
+                  {table.getHeaderGroups().map((headerGroup, index) => {
+                    return (
+                      <tr role="row" key={`table_head_tr_${index+Math.random()*19}`}  id={`thead_tr_${headerGroup.id}`}>
+                      {headerGroup.headers.map((header) => {
+                        return (
+                          <th
+                            className="sorting"
+                            aria-controls="company-master-grid-data"
+                            colSpan={header.colSpan}
+                            key={`table_head_th_${index+Math.random()*16}`}
                           >
-                            {header.isPlaceholder ? null : (
+                            <div
+                              {...{
+                                className: header.column.getCanSort()
+                                  ? "cursor-pointer select-none"
+                                  : "",
+                                onClick:
+                                  header.column.getToggleSortingHandler(),
+                              }}
+                            >
+                              {header.isPlaceholder ? null : (
+                                <>
+                                  {flexRender(
+                                    header.column.columnDef.header,
+                                    header.getContext()
+                                  )}
+                                  {{
+                                    asc: " 🔼",
+                                    desc: " 🔽",
+                                  }[header.column.getIsSorted() as string] ??
+                                    null}
+                                </>
+                              )}
+                            </div>
+                          </th>
+                        );
+                      })}
+                    </tr>
+                    )
+                  }
+                  )}
+                </thead>
+                {data && data.length ? (
+                  <tbody>
+                    {table.getRowModel().rows.map((row, index) => {
+                      return (
+                        <tr key={`row_${index}`}>
+                          {row.getVisibleCells().map((cell) => {
+                            return (
                               <>
-                                {flexRender(
-                                  header.column.columnDef.header,
-                                  header.getContext()
+                                {cell.column.id == "srNo" ? (
+                                  <td key={`cell_action_${cell.column.id+Math.random()*15}`}>{index + 1}</td>
+                                ) : cell.column.id == "action" ? (
+                                  <td key={`cell_action_${cell.column.id+Math.random()*17}`}>
+                                    <a
+                                      className="icon"
+                                      data-toggle="tooltip"
+                                      data-original-title="Edit"
+                                      onClick={() =>
+                                        onTableEditBtnClick(row.original)
+                                      }
+                                    >
+                                      <span className="badge badge-danger m-r-10">
+                                        <i className="ti-pencil"></i>
+                                      </span>
+                                    </a>
+                                    <a
+                                      className="icon"
+                                      data-toggle="tooltip"
+                                      data-original-title="Delete"
+                                      onClick={() =>
+                                        onTableDeleteBtnClick(row.original)
+                                      }
+                                    >
+                                      <span className="badge badge-danger m-r-10">
+                                        <i className="ti-trash"></i>
+                                      </span>
+                                    </a>
+                                  </td>
+                                ) : (
+                                  <td key={`cell_data_${cell.column.id+Math.random()*13}`}>
+                                    {flexRender(
+                                      cell.column.columnDef.cell,
+                                      cell.getContext()
+                                    )}
+                                  </td>
                                 )}
-                                {{
-                                  asc: " 🔼",
-                                  desc: " 🔽",
-                                }[header.column.getIsSorted() as string] ??
-                                  null}
                               </>
-                            )}
-                          </div>
-                        </th>
+                            );
+                          })}
+                        </tr>
                       );
                     })}
-                  </tr>
-                ))}
-              </thead>
-              {data && data.length ? (
-                <tbody>
-                  {table.getRowModel().rows.map((row, index) => {
-                    return (
-                      <tr key={`${Math.random().toFixed(5)}`}>
-                        {row.getVisibleCells().map((cell) => {
-                          return (
-                            <>
-                              {cell.column.id == "srNo" ? (
-                                <td key={`${Math.random().toFixed(5)}`}>
-                                  {index + 1}
-                                </td>
-                              ) : cell.column.id == "action" ? (
-                                <td>
-                                  <a
-                                    className="icon"
-                                    data-toggle="tooltip"
-                                    data-original-title="Edit"
-                                    onClick={() =>
-                                      onTableEditBtnClick(row.original)
-                                    }
-                                  >
-                                    <span className="badge badge-danger m-r-10">
-                                      <i className="ti-pencil"></i>
-                                    </span>
-                                  </a>
-                                  <a
-                                    className="icon"
-                                    data-toggle="tooltip"
-                                    data-original-title="Delete"
-                                    onClick={() =>
-                                      onTableDeleteBtnClick(row.original)
-                                    }
-                                  >
-                                    <span className="badge badge-danger m-r-10">
-                                      <i className="ti-trash"></i>
-                                    </span>
-                                  </a>
-                                </td>
-                              ) : (
-                                <td key={`data_${cell.id}${index}`}>
-                                  {flexRender(
-                                    cell.column.columnDef.cell,
-                                    cell.getContext()
-                                  )}
-                                </td>
-                              )}
-                            </>
-                          );
-                        })}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              ) : (
-                <tbody>
-                  <tr className="odd">
-                    <td
-                      valign="top"
-                      colSpan={columns.length}
-                      className="dataTables_empty text-left"
-                    >
-                      {props.children
-                        ? props.children
-                        : "No data available in table"}
-                    </td>
-                  </tr>
-                </tbody>
-              )}
-            </table>
+                  </tbody>
+                ) : (
+                  <tbody>
+                    <tr className="odd">
+                      <td
+                        valign="top"
+                        colSpan={columns.length}
+                        className="dataTables_empty text-left"
+                        key={"no_data_found"}
+                      >
+                        {props.children
+                          ? props.children
+                          : "No data available in table"}
+                      </td>
+                    </tr>
+                  </tbody>
+                )}
+              </table>
+            )}
           </div>
         </div>
 

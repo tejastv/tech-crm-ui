@@ -4,7 +4,7 @@ import { PeginationConfigType } from "..";
 export interface TableType<T> {
   config: {
     tableName?: string;
-    columns: ColumnDef<T>[];
+    columns: any;
     tableData: T[];
     sorting?: boolean;
     copyBtn?: boolean;

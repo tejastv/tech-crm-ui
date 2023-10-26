@@ -4,5 +4,7 @@ export interface CityType {
   id: number;
   cityName: string;
   oscopies: number;
-  stateId:any;
+  stateId: any;
+  action?: any;
+  srNo?: any;
 }

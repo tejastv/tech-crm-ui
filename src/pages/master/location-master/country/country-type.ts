@@ -1,4 +1,6 @@
 export interface CountryType {
+  action?: any;
+  srNo?: number;
   continent: string;
   countryName: string;
   countryCode: string;
