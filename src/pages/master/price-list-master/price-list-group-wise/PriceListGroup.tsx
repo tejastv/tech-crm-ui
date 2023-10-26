@@ -20,8 +20,8 @@ import {
 } from "@master/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import {
-  ColumnDef,
-  ColumnHelper,
+  // ColumnDef,
+  // ColumnHelper,
   createColumnHelper,
 } from "@tanstack/react-table";
 
