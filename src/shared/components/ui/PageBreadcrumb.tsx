@@ -22,9 +22,10 @@ export const PageBreadcrumb: React.FC<PageBreadcrumbType> = (props) => {
           <div className="col-7 align-self-center">
             <div className="d-flex no-block justify-content-end align-items-center">
               {props.config.buttons &&
-                props.config.buttons.map((button) => (
+                props.config.buttons.map((button, index) => (
                   <Button
                     variant="primary"
+                    key={`page_breadcrumb_btn+${index}`}
                     className="btn waves-effect waves-light mr-2 btn-danger btn-sm"
                     onClick={() => routeHandler(button)}
                   >

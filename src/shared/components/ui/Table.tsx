@@ -394,7 +394,6 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                 </label>
               </div>
             )}
-            {data && data.length && (
               <table
                 id="file_export"
                 border={0}
@@ -517,7 +516,6 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                   </tbody>
                 )}
               </table>
-            )}
           </div>
         </div>
 

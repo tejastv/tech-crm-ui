@@ -28,7 +28,7 @@ hr {
 
 .loader-wrapper {
   display: flex;
-  position: absolute;
+  position: fixed;
   z-index: 99;
   background: #f8f9fa75;
   width: 100%;
@@ -38,6 +38,7 @@ hr {
   justify-content: center;
   align-items: center;
   margin: 0;
+  z-index: 1;
 }
 
 .enquirynote {

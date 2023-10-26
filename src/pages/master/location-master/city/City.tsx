@@ -64,11 +64,6 @@ export const City: React.FC = () => {
   const { data: cityData, isLoading } = getCity();
   const { mutateAsync: deleteCity } = deleteCityMutation();
 
-  // if (isLoading) {
-  //   console.log("inn");
-  //   notify();
-  // }
-
   const deleteCityClick = async (cityData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
@@ -105,9 +100,7 @@ export const City: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+        {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );
