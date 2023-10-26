@@ -522,9 +522,7 @@ export const Enquiries: React.FC = () => {
           </FormProvider>
         )}
 
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+{!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );
