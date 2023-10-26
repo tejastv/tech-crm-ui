@@ -145,7 +145,7 @@ export const AddBulkEnquiries: React.FC = () => {
             </form>
           </FormProvider>
 
-          <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
+          {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
         </BorderLayout>
       </div>
     </>

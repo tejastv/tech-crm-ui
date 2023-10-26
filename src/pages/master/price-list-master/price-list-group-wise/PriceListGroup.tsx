@@ -370,11 +370,8 @@ export const PriceListGroup: React.FC = () => {
         </FormProvider>
         <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
           {/* {(stdPriceDataLoading || priceListDataLoading) && <Loader />} */}
-          {!stdPriceDataLoading || !priceListDataLoading ? (
-            <Table config={tableConfig.config}></Table>
-          ) : (
-            <Loader />
-          )}
+          
+          {!stdPriceDataLoading || !priceListDataLoading ? <Table config={tableConfig.config}/> :  <Loader />}
         </BorderLayout>
       </Card>
     </>

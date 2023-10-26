@@ -93,7 +93,7 @@ export const StdPriceListClient: React.FC = () => {
     },
   ];
 
-  const { data: stdPriceData, isLoading: isStdPriceDataLoading } =
+  const { data: stdPriceData, isLoading } =
     getStdPriceClientsData(currency);
 
   const tableConfig: TableType<StdPriceClientsType> = {
@@ -149,9 +149,7 @@ export const StdPriceListClient: React.FC = () => {
           </form>
         </FormProvider>
         <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-          <Table config={tableConfig.config}>
-            {isStdPriceDataLoading && <Loader />}
-          </Table>
+        {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
         </BorderLayout>
       </Card>
     </>
