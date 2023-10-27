@@ -29,6 +29,7 @@ import {
   useLocalSourceApiCallHook,
   useSourceApiCallHook,
   useStateApiCallHook,
+  useActualBuyerApiCallHook,
 } from "@pages/master";
 import {
   cleanupObject,
@@ -62,6 +63,7 @@ export const AddEnquiry: React.FC = () => {
   const { getClient, getClientData } = useClientApiCallHook();
   const { getCompany } = useCompanyApiCallHook();
   const { getFinYear } = useFinYearApiCallHook();
+  const { getActualBuyerByCLientData } = useActualBuyerApiCallHook();
 
   const [clientId, setClientId] = useState<number>(-2);
   const [serviceTypeId, setServiceTypeId] = useState<number>(-2);
@@ -528,6 +530,25 @@ export const AddEnquiry: React.FC = () => {
       setClientId(selectedOption.value);
     }
   };
+
+  if (clientId) {
+    const ActualBuyerData = getActualBuyerByCLientData("" + clientId);
+  
+    if (ActualBuyerData && !ActualBuyerData.error) {
+      const actualBuyers = ActualBuyerData.data;
+  
+      if (actualBuyers && Array.isArray(actualBuyers)) {
+        // Ensure actualBuyers is an array
+        const ActualBuyerArray = selectOptionsMaker(actualBuyers, "partyId", "partyName");
+        ActualBuyerArray.unshift({
+          label: "Direct",
+          value: 1,
+        });
+        addEnquiryFormFields.actualbureyenquiry.config.options = ActualBuyerArray;
+        addEnquiryFormFields.actualbureyenquiry.config.setData = ActualBuyerArray;
+      }
+    }
+  }
 
   const { data: priceData } = getPrice(
     { clientId, serviceTypeId, countryId },

@@ -29,6 +29,8 @@ const GET_UPDATE_DELETE_INDUSTRY = "utility/industry/{id}";
 
 const GET_ADD_ACTUAL_BUYER = "entity/actualBuyer";
 const GET_UPDATE_DELETE_ACTUAL_BUYER = "entity/actualBuyer/{id}";
+const GET_ADD_ACTUAL_BUYER_BY_CLIENT = "entity/actualBuyerByClient/{id}";
+
 
 const GET_CITY_WISE_GROUP =
   "entity/priceListGroupWise/getClientGroupByCity/{id}";
@@ -160,6 +162,7 @@ export const apiUrls = {
   GET_PRICE_LIST_DATA,
   GET_ADD_ACTUAL_BUYER,
   GET_UPDATE_DELETE_ACTUAL_BUYER,
+  GET_ADD_ACTUAL_BUYER_BY_CLIENT,
   GET_ADD_ALL_ENQUIRY,
   GET_UPDATE_DELETE_ALL_ENQUIRY,
   GET_ADD_SERVICETYPE,

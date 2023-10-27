@@ -114,11 +114,26 @@ export const useActualBuyerApiCallHook = () => {
     return mutation;
   };
 
+  const getActualBuyerByCLientData = (id: string): UseQueryResult<ActualBuyerType> => {
+    return useQuery<ActualBuyerType>({
+      queryKey: [queryKeys.ACTUAL_BUYER_DATA, id],
+      queryFn: async () => {
+        const response = await instance.get(
+          apiUrls.GET_ADD_ACTUAL_BUYER_BY_CLIENT.replace("{id}", id)
+        );
+        return response.data.data;
+      },
+      enabled: true, // Query is initially enabled
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+    });
+  };
+
   return {
     getActualBuyer,
     getActualBuyerData,
     addActualBuyerMutation,
     updateActualBuyerMutation,
     deleteActualBuyerMutation,
+    getActualBuyerByCLientData,
   };
 };
