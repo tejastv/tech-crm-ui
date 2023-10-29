@@ -4,7 +4,7 @@ import { createFormConfig } from "@utils/index";
 const cityFieldValidation = {
   required: {
     value: true,
-    message: "{label} field is rquired",
+    message: "City field is rquired",
   },
   maxLength: {
     value: 30,
@@ -15,11 +15,11 @@ const cityFieldValidation = {
 const StateValidation = {
   required: {
     value: true,
-    message: "{label} field is rquired",
+    message: "State field is rquired",
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Please select a {label}",
+    message: "Please select a State",
   },
 } as ValidationType;
 
@@ -30,21 +30,69 @@ const osPrintFieldValidation = {
   },
 } as ValidationType;
 
-const cityField = {
+// const cityField = {
+//   config: {
+//     ...createFormConfig("cityName", "City", "text", cityFieldValidation, "")
+//       .config,
+//     name: "cityName",
+//   },
+// };
+
+const cityField: FormFieldType = {
   config: {
-    ...createFormConfig("cityName", "City", "text", cityFieldValidation, "")
-      .config,
+    label: "City",
     name: "cityName",
+    id: "cityName",
+    type: "text",
+    placeholder: "Enter City",
+    validation: cityFieldValidation,
+    isDisabled: false,
+    multiline: false,
   },
 };
-const state: FormFieldType = createFormConfig(
-  "stateId",
-  "State",
-  "select",
-  StateValidation,
-  "Select State",
-  []
-);
+
+const state: FormFieldType = {
+  config: {
+    label: "State",
+    name: "stateId",
+    id: "stateId",
+    type: "text",
+    placeholder: "Enter State",
+    validation: StateValidation,
+    isDisabled: false,
+    multiline: false,
+  },
+};
+
+const osPrintField: FormFieldType = {
+  config: {
+    label: "Copy of O/s. to Print",
+    name: "oscopies",
+    id: "oscopies",
+    type: "text",
+    placeholder: "Enter Copy of O/s. to Print",
+    validation: osPrintFieldValidation,
+    isDisabled: false,
+    multiline: false,
+  },
+};
+
+// const osPrintField: FormFieldType = createFormConfig(
+//   "oscopies",
+//   "Copy of O/s. to Print",
+//   "text",
+//   osPrintFieldValidation,
+//   ""
+// );
+
+// const state: FormFieldType = createFormConfig(
+//   "stateId",
+//   "State",
+//   "select",
+//   StateValidation,
+//   "Select State",
+//   []
+// );
 // const country: FormFieldType = {
 //   config: {
 //     name: "State",
@@ -72,13 +120,6 @@ const state: FormFieldType = createFormConfig(
 //   cityFieldValidation,
 //   ""
 // )
-const osPrintField: FormFieldType = createFormConfig(
-  "oscopies",
-  "Copy of O/s. to Print",
-  "text",
-  osPrintFieldValidation,
-  ""
-);
 
 export const addCityFormFields = {
   cityField,

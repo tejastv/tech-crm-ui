@@ -23,6 +23,8 @@ export { Loader } from "./components/ui/Loader";
 export { DebouncedInput } from "./components/ui/DebouncedInput";
 export { TableCell } from "./components/ui/TableCell";
 export { EditCell } from "./components/ui/EditCell";
+export { NewInput } from "./components/ui/NewInput";
+export { NewSelect } from "./components/ui/NewSelect";
 
 // Types
 export * from "./types/button-type";
