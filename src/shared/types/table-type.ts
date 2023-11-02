@@ -1,4 +1,4 @@
-import { ColumnDef } from "@tanstack/react-table";
+// import { ColumnDef } from "@tanstack/react-table";
 import { PeginationConfigType } from "..";
 
 export interface TableType<T> {
