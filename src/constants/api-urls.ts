@@ -66,6 +66,7 @@ const GET_ADD_BANKMASTER_DEPOSIT = "utility/bankDetails";
 const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 
 // Std Price
+const GET_ADD_STDPRICE_LOCALSOURCE = "stdPriceListForLocalSource/updatingStdPriceListForLocalSource/currency/{currencyId}/country/{countryId}"
 const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
 const GET_UPDATE_DELETE_STDPRICE_CLIENTS = "entity/stdPriceListForClients/{id}";
 const GET_CLIENT_WISE_CURRENCY_AND_GROUP =
@@ -149,6 +150,7 @@ export const apiUrls = {
   // =========
 
   // Std Price
+  GET_ADD_STDPRICE_LOCALSOURCE,
   GET_LAST_FIN_YEAR,
   GET_ADD_CLIENT,
   GET_UPDATE_DELETE_CLIENT,

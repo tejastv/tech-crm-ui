@@ -116,7 +116,13 @@ export const MASTER_ROUTES = {
     FINYEAR: "finyear",
     USER: "user",
   },
-};
+  INDIVIDUAL_REPORT_MASTER_ROUTES: {
+    INDIVIDUAL_REPORT_PARENT_ROUTE: "/individual-report/*",
+    // INDIVIDUAL_REPORT_ROUTE: "individual-reports/",
+    // INDIVIDUALREPORT_PARENT_ROUTE: "/individual-reports/*",
+    INDIVIDUALREPORT: "individual-report",
+},
+}
 export const TRANSACTION_ROUTES = {
   TRANSACTION_PARENT_ROUTE: "/transaction/*",
   TRANSACTION: "/transaction/",

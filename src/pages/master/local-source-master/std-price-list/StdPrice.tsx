@@ -19,6 +19,8 @@ import {
 } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
+import { COMMON_ROUTES } from "@constants/route-constants";
+import { useNavigate } from "react-router-dom";
 
 export const StdPrice: React.FC = () => {
   const cardConfig = {
@@ -38,7 +40,9 @@ export const StdPrice: React.FC = () => {
   const [currency, setCurrency] = useState("0");
   const { getCurrency } = useCurrencyApiCallHook();
   const { data: currencyData } = getCurrency();
-  const { getStdPriceData } = useStdPriceApiCallHook();
+  const { getStdPriceData ,deleteStdPriceMutation} = useStdPriceApiCallHook();
+  const { mutateAsync: deleteLocalSource } = deleteStdPriceMutation();
+  const navigate = useNavigate();
 
   if (currencyData) {
     console.log(currencyData);
@@ -50,6 +54,11 @@ export const StdPrice: React.FC = () => {
   }
 
   const columns: ColumnDef<StdPriceType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -92,7 +101,17 @@ export const StdPrice: React.FC = () => {
       header: () => <>Superflash</>,
     },
   ];
+  const deleteStdPriceClick = (stdPriceData: any) => {
+    var conformation = confirm("Are you sure to delete it?");
+    if (conformation) {
+      deleteLocalSource(stdPriceData.countryID);
+    }
+  };
 
+  const editStdPriceClick = (stdPriceData: any) => {
+    console.log(stdPriceData);
+    navigate(COMMON_ROUTES.EDIT.replace(":id", stdPriceData.currencyId));
+  };
   const { data: stdPriceData, isLoading } =
     getStdPriceData(currency);
 
@@ -113,6 +132,8 @@ export const StdPrice: React.FC = () => {
         nextPreviousBtnShow: false,
         tableMetaDataShow: false,
       },
+      onDeleteClick: deleteStdPriceClick,
+      onEditClick: editStdPriceClick,
     },
   };
 

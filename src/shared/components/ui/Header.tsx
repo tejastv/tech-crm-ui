@@ -601,14 +601,25 @@ export const Header: React.FC = () => {
                         </a>
                       </li>
                       <li className="sidebar-item">
-                        <a
-                          className="sidebar-link"
-                          href="mirainform_report.php"
-                        >
-                          <i className="mdi mdi-creation"></i>
-                          <span className="hide-menu ">Mirainform Report</span>
-                        </a>
-                      </li>
+                            {" "}
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INDIVIDUAL_REPORT_MASTER_ROUTES.INDIVIDUALREPORT}`}
+                              
+                            >
+                              <i className="mdi mdi-creation"></i>
+                              <span className="hide-menu ">Mirainform Report</span>
+                            </Link>
+                          </li>
+                        {/* <li className="sidebar-item">
+                          <a
+                            className="sidebar-link"
+                            href="mirainform_report.php"
+                          >
+                            <i className="mdi mdi-creation"></i>
+                            <span className="hide-menu ">Mirainform Report</span>
+                          </a>
+                        </li> */}
                     </ul>
                   </li>
                   <li className="sidebar-item">
