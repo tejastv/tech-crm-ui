@@ -32,6 +32,11 @@ export const useAxios = () => {
       } else {
         config.baseURL = defaultBaseUrl;
       }
+
+      if (config.headers["callFrom"] === "source") {
+        config.headers["Content-Type"] = "multipart/form-data";
+      }
+
       delete config.headers["callFrom"];
       return config;
     },
