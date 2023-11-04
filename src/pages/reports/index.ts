@@ -1,5 +1,6 @@
 export { enquiriesCountFormFields } from "./enquiries/no-of-enquiries/enquiries-count-form-fields";
 export { enquiriesCountGroupCountryWiseFormFields } from "./enquiries/no-of-enquiries-group-country-wise/enquiries-count-group-country-wise-form-fields";
+export { enquiriesCountGraphViewFormFields } from "./enquiries/no-of-enquiries-graph-view/enquiries-count-graph-view-form-fields";
 
 export { EnquiriesCount } from "./enquiries/no-of-enquiries/EnquiriesCount";
 export { EnquiriesCountGroupCountryWise } from "./enquiries/no-of-enquiries-group-country-wise/EnquiriesCountGroupCountryWise";
@@ -10,3 +11,5 @@ export * from "./enquiries/no-of-enquiries/enquiries-count-type";
 export * from "./enquiries/no-of-enquiries-group-country-wise/enquiries-count-group-country-wise-type";
 export * from "./enquiries/no-of-enquiries/enquiry-count-type";
 export * from "./enquiries/no-of-enquiries-group-country-wise/enquiry-count-group-country-wise-type";
+export * from "./enquiries/no-of-enquiries-graph-view/enquiries-count-graph-view-type";
+export * from "./enquiries/no-of-enquiries-graph-view/enquiry-count-graph-view-type";
