@@ -46,6 +46,7 @@ export const AddUpdateClient: React.FC = () => {
   const { getClientGroup } = useClientGroupApiCallHook();
   const { getSegment } = useSegmentApiCallHook();
 
+  const [selectedCityId, setSelectedCityId] = useState();
   const [selectedStateId, setSelectedStateId] = useState();
   const [selectedCountryId, setSelectedCountryId] = useState();
 
@@ -91,7 +92,7 @@ export const AddUpdateClient: React.FC = () => {
   if (stateData) {
     addClientFormFields.stateClient.config.options = selectOptionsMaker(
       stateData,
-      "stateId",
+      "stateCodeN",
       "stateName",
       true
     );
@@ -227,7 +228,7 @@ export const AddUpdateClient: React.FC = () => {
   });
 
   if (params.id) {
-    const { data: clientMasterData } = getClientData(+params.id);
+    const { data: clientMasterData } = getClientData(+params.id);    
     if (clientMasterData) {
       if (cityData) {
         let id = clientMasterData?.cityID;
@@ -249,9 +250,9 @@ export const AddUpdateClient: React.FC = () => {
         let id = clientMasterData?.stateID;
         let data: any = returnObjectBasedOnID(
           stateData,
-          "stateId",
+          "stateCodeN",
           id,
-          "stateId",
+          "stateCodeN",
           "stateName"
         );
         addClientFormFields.stateClient.config.setData = data
@@ -359,7 +360,6 @@ export const AddUpdateClient: React.FC = () => {
           }
           : [];
       }
-
       addClientFormFields.clientName.config.setData =
         clientMasterData.clientName;
       addClientFormFields.clientGst.config.setData = clientMasterData.gstYN;
@@ -413,9 +413,10 @@ export const AddUpdateClient: React.FC = () => {
 
   addClientFormFields.statecodeClient.config.setData = stateCode;
 
-  const handleSelectCity = (selectedOption: any) => {
+  const handleSelectCity = (selectedOption: any) => {  
     if (selectedOption) {
-      setSelectedStateId(selectedOption.data.stateId)
+      setSelectedCityId(selectedOption.data.cityId)
+      setSelectedStateId(selectedOption.data.stateCodeN)
       setSelectedCountryId(selectedOption.data.countryId)
     }
   };
@@ -424,9 +425,9 @@ export const AddUpdateClient: React.FC = () => {
     let id = selectedStateId;
     let data: any = returnObjectBasedOnID(
       stateData,
-      "stateId",
+      "stateCodeN",
       id,
-      "stateId",
+      "stateCodeN",
       "stateName"
     );
     addClientFormFields.stateClient.config.setData = data
@@ -436,6 +437,24 @@ export const AddUpdateClient: React.FC = () => {
       }
       : [];
     addClientFormFields.statecodeClient.config.setData = data.value;
+  }
+
+  if (selectedCityId && cityData) {
+    let id = selectedCityId;
+    let data: any = returnObjectBasedOnID(
+      cityData,
+      "cityId",
+      id,
+      "cityId",
+      "cityName"
+    );
+    addClientFormFields.cityClient.config.setData = data
+      ? {
+        label: data.label,
+        value: data.value,
+      }
+      : [];
+    addClientFormFields.cityClient.config.setData = data.value;
   }
 
   if (selectedCountryId && countryData) {
