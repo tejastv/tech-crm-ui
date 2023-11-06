@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   BorderLayout,
@@ -19,15 +19,34 @@ import {
   useCityApiCallHook,
   useStateApiCallHook,
   useCountryApiCallHook,
+  useSourceApiCallHook,
+  useLocalSourceApiCallHook,
+  useClientApiCallHook,
+  useCompanyApiCallHook,
+  useFinYearApiCallHook,
 } from "@master/index";
 import { selectOptionsMaker } from "@utils/index";
-// import {useStateApiCallHook } from "@pages/master";
+import { useAddEnquiryApiCallHook } from "@transaction-search/index";
+import { useParams } from "react-router-dom";
 
 export const AddEnqPi: React.FC = () => {
+  const {
+    getEnqStatus,
+    getRefNo,
+    getServiceType,
+    getPrice,
+  } = useAddEnquiryApiCallHook();
+  const params = useParams();
   const { getCity } = useCityApiCallHook();
   const { getState } = useStateApiCallHook();
   const { getCountry } = useCountryApiCallHook();
+  const { getSource } = useSourceApiCallHook();
+  const { getLocalSource } = useLocalSourceApiCallHook();
+  const { getClient, getClientData } = useClientApiCallHook();
+  const { getCompany } = useCompanyApiCallHook();
+  const { getFinYear } = useFinYearApiCallHook();
 
+  const [refNo, setRefNo] = useState<any>();
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
@@ -108,9 +127,7 @@ export const AddEnqPi: React.FC = () => {
     );
   }
 
-  // state api call
   const { data: stateData } = getState();
-  console.log(stateData)
   if (stateData) {
     addEnqPiFormFields.stateField.config.options = selectOptionsMaker(
       stateData,
@@ -119,7 +136,6 @@ export const AddEnqPi: React.FC = () => {
     );
   }
 
-  // country api call
   const { data: CountryData } = getCountry();
   if (CountryData) {
     addEnqPiFormFields.countryField.config.options = selectOptionsMaker(
@@ -127,6 +143,75 @@ export const AddEnqPi: React.FC = () => {
       "countryId",
       "countryName"
     );
+  }
+
+  const { data: ClientData } = getClient();
+  if (ClientData) {
+    addEnqPiFormFields.clientField.config.options = selectOptionsMaker(
+      ClientData,
+      "clientID",
+      "clientName"
+    );
+  }
+
+  const { data: fYearData } = getFinYear();
+  if (fYearData) {
+    addEnqPiFormFields.fYearField.config.options = selectOptionsMaker(
+      fYearData,
+      "finYear",
+      "finYear"
+    );
+  }
+
+  const { data: SourceData } = getSource();
+  if (SourceData) {
+    addEnqPiFormFields.sourceField.config.options = selectOptionsMaker(
+      SourceData,
+      "sourceID",
+      "source"
+    );
+  }
+
+  const { data: LocalSourceData } = getLocalSource();
+  if (LocalSourceData) {
+    addEnqPiFormFields.localSourceField.config.options = selectOptionsMaker(
+      LocalSourceData,
+      "localSourceId",
+      "localSource"
+    );
+  }
+
+  const { data: companyData } = getCompany();
+  if (companyData) {
+    addEnqPiFormFields.companyField.config.options = selectOptionsMaker(
+      companyData,
+      "companyId",
+      "companyName",
+      true
+    );
+  }
+
+  const { data: ServiceData } = getServiceType();
+  if (ServiceData) {
+    addEnqPiFormFields.serviceTypeField.config.options = selectOptionsMaker(
+      ServiceData,
+      "serviceTypeID",
+      "serviceType"
+    );
+  }
+
+  addEnqPiFormFields.refNoField.config.setData = refNo;
+  if (params.id) {
+   
+  } else {
+    useEffect(() => {
+      methods.reset();
+      getRefNo().then((refNo: any) => {
+        if (refNo) {
+          setRefNo(refNo.data);
+        }
+      });
+    }, []);
   }
 
   return (

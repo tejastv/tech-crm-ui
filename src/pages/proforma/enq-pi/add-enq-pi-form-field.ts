@@ -651,7 +651,9 @@ const blankField: FormFieldType = createFormConfig(
   "",
   "text",
   blankValidation,
-  ""
+  "",
+  [],
+  true
 );
 const givenNameField: FormFieldType = createFormConfig(
   "givenName",
@@ -797,7 +799,9 @@ const companyIdField: FormFieldType = createFormConfig(
   "CompanyId",
   "text",
   companyIdValidation,
-  ""
+  "",
+  [],
+  true
 );
 const bankField: FormFieldType = createFormConfig(
   "bank",
