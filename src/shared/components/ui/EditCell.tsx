@@ -13,6 +13,7 @@ export const EditCell: React.FC<{ row: any; table: any }> = ({
       ...old,
       [row.id]: !old[row.id],
     }));
+    // meta?.updateData(row.index, column.id, value);
     if (elName !== "edit") {
       meta?.revertData(row.index, e.currentTarget.name === "cancel");
     }
@@ -22,15 +23,30 @@ export const EditCell: React.FC<{ row: any; table: any }> = ({
     <div className="edit-cell-container">
       {meta?.editedRows[row.id] ? (
         <div className="edit-cell">
-          <button type="button" onClick={setEditedRows} name="cancel" className={"btn btn-danger btn-sm"}>
+          <button
+            type="button"
+            onClick={setEditedRows}
+            name="cancel"
+            className={"btn btn-danger btn-sm"}
+          >
             X
           </button>{" "}
-          <button type="button" onClick={setEditedRows} name="done" className={"btn btn-danger btn-sm"}>
+          <button
+            type="button"
+            onClick={setEditedRows}
+            name="done"
+            className={"btn btn-danger btn-sm"}
+          >
             ✔
           </button>
         </div>
       ) : (
-        <button type="button" onClick={setEditedRows} name="edit" className={"btn btn-danger btn-sm"}>
+        <button
+          type="button"
+          onClick={setEditedRows}
+          name="edit"
+          className={"btn btn-danger btn-sm"}
+        >
           ✐
         </button>
       )}

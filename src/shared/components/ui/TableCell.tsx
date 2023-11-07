@@ -20,13 +20,34 @@ export const TableCell: React.FC<{
     setValue(initialValue || "");
   }, [initialValue]);
 
-  const onBlur = () => {
-    tableMeta?.updateData(row.index, column.id, value);
+ 
+  const setCellData = (e: any) => {
+    console.log(row);
+    
+    tableMeta?.updateData(row, column.id, e.target.value);
+  }
+
+  const displayValidationMessage = <
+    T extends HTMLInputElement | HTMLSelectElement
+  >(
+    e: ChangeEvent<T>
+  ) => {
+    if (columnMeta?.validate) {
+      const isValid = columnMeta.validate(e.target.value);
+      if (isValid) {
+        e.target.setCustomValidity("");
+      } else {
+        e.target.setCustomValidity(columnMeta.validationMessage);
+      }
+    }
   };
 
   const onSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setValue(e.target.value);
-    tableMeta?.updateData(row.index, column.id, e.target.value);
+    console.log("innn 2");
+    
+    displayValidationMessage(e);
+    // setValue(e.target.value);
+    // tableMeta?.updateData(row.index, column.id, e.target.value);
   };
 
   if (tableMeta?.editedRows[row.id]) {
@@ -40,9 +61,8 @@ export const TableCell: React.FC<{
       </select>
     ) : (
       <input
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onBlur={onBlur}
+        onChange={(e) => setCellData(e)}
+        // onBlur={onBlur}
         type={columnMeta?.type || "text"}
       />
     );
