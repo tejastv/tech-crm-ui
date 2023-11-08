@@ -16,8 +16,6 @@ import { Alignment, TDocumentDefinitions } from "pdfmake/interfaces";
 import { useToaster } from "@hooks/useToaster";
 
 export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
-  console.log("innnnn");
-  
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const tableRef = useRef(null);
@@ -54,20 +52,15 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
         }
       },
       updateData: (row: any, columnId: string, value: string) => {
-        console.log(row.original.countryID);
-        
         let cellMap = tableData[row.id];
         if (cellMap) {
           cellMap[columnId] = value;
-          
         } else {
           tableData[row.id] = {
             [columnId]: value,
-            countryID: row.original.countryID
-          }
+            countryID: row.original.countryID,
+          };
         }
-        console.log([tableData]);
-        
         // setData((old) =>
         //   old.map((row, index) => {
         //     if (index === rowIndex) {
@@ -79,6 +72,11 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
         //     return row;
         //   })
         // );
+      },
+      saveData: (callFrom: string) => {
+        if (callFrom == "done") {
+          props.config.onEditClick && props.config.onEditClick(tableData);
+        }
       },
     },
     getFilteredRowModel: getFilteredRowModel(),

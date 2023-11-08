@@ -3,12 +3,22 @@ import {
   CityWiseGroupType,
   CountryType,
   GroupWiseCurrencyType,
+  UpdatePriceListForGroup,
 } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import {
+  QueryClient,
+  UseQueryResult,
+  useMutation,
+  useQuery,
+} from "@tanstack/react-query";
+import { ApiResponseType } from "@shared/index";
+import { useNavigate } from "react-router-dom";
 
 export const usePriceListGroupApiCallHook = () => {
   const { instance } = useAxios();
+  const queryClient = new QueryClient();
+  const navigate = useNavigate();
 
   const getCityWiseGroupData = (
     id: number,
@@ -78,10 +88,39 @@ export const usePriceListGroupApiCallHook = () => {
     });
   };
 
+  const updatePriceListForGroup = async (
+    updatePriceListForGroup: Array<UpdatePriceListForGroup>
+  ): Promise<ApiResponseType<any>> => {
+    console.log(updatePriceListForGroup);
+    const response = await instance.post(
+      apiUrls.UPDATE_PRICE_LIST_FOR_GROUP.replace(
+        "{id}",
+        "" + updatePriceListForGroup[0].groupId
+      ),
+      updatePriceListForGroup
+    );
+    return response.data.data;
+  };
+
+  const updatePriceListForGroupMutation = () => {
+    const mutation = useMutation(
+      (updatedItem: Array<UpdatePriceListForGroup>) =>
+        updatePriceListForGroup(updatedItem),
+      {
+        onSuccess: () => {
+          // queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
+          // navigate("..");
+        },
+      }
+    );
+    return mutation;
+  };
+
   return {
     getCityWiseGroupData,
     getGroupWiseCurrencyData,
     getStdPriceData,
     getPriceListData,
+    updatePriceListForGroupMutation,
   };
 };

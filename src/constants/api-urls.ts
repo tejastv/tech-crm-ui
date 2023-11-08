@@ -3,6 +3,7 @@ const GET_ADD_COUNTRY = "location/country";
 const GET_ADD_STATE = "location/state";
 const GET_ADD_CITY = "location/city";
 const GET_UPDATE_DELETE_CITY = "location/city/{id}";
+const UPDATE_PRICE_LIST_FOR_GROUP = "entity/priceListGroupWise/{id}";
 const GET_UPDATE_DELETE_CONTINENT = "location/continent/{id}";
 const GET_UPDATE_DELETE_COUNTRY = "location/country/{id}";
 const GET_UPDATE_DELETE_STATE = "location/state/{id}";
@@ -170,4 +171,5 @@ export const apiUrls = {
   GET_CLIENT_WISE_CURRENCY_AND_GROUP,
   GET_ADD_ALL_ENQUIRY_SEARCH,
   GET_PRICE,
+  UPDATE_PRICE_LIST_FOR_GROUP,
 };

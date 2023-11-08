@@ -20,12 +20,10 @@ export const TableCell: React.FC<{
     setValue(initialValue || "");
   }, [initialValue]);
 
- 
   const setCellData = (e: any) => {
-    console.log(row);
-    
+    setValue(e.target.value);
     tableMeta?.updateData(row, column.id, e.target.value);
-  }
+  };
 
   const displayValidationMessage = <
     T extends HTMLInputElement | HTMLSelectElement
@@ -43,8 +41,6 @@ export const TableCell: React.FC<{
   };
 
   const onSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    console.log("innn 2");
-    
     displayValidationMessage(e);
     // setValue(e.target.value);
     // tableMeta?.updateData(row.index, column.id, e.target.value);
@@ -61,6 +57,7 @@ export const TableCell: React.FC<{
       </select>
     ) : (
       <input
+        value={value}
         onChange={(e) => setCellData(e)}
         // onBlur={onBlur}
         type={columnMeta?.type || "text"}

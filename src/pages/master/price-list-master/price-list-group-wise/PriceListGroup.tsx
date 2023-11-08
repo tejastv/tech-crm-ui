@@ -50,7 +50,9 @@ export const PriceListGroup: React.FC = () => {
     getGroupWiseCurrencyData,
     getStdPriceData,
     getPriceListData,
+    updatePriceListForGroupMutation,
   } = usePriceListGroupApiCallHook();
+  const { mutateAsync: updatePriceGroup } = updatePriceListForGroupMutation();
   const [city, setCity] = useState<number>(-2);
   const [group, setGroup] = useState<number>(-2);
 
@@ -174,7 +176,7 @@ export const PriceListGroup: React.FC = () => {
     }),
     columnHelper.accessor("otherCharges", {
       header: "Normal Price",
-      id: "otherCharges",
+      id: "price",
       cell: TableCell,
       meta: {
         type: "number",
@@ -251,6 +253,14 @@ export const PriceListGroup: React.FC = () => {
     // },
   ];
 
+  const onDataEditClick = async (data: any) => {
+    let cellData: any = Object.values(data);
+    if (cellData.length > 0) {
+      cellData[0]["groupId"] = group;
+      await updatePriceGroup(cellData);
+    }
+  };
+
   let tableConfig: TableType<CountryType> = {} as TableType<CountryType>;
 
   if (isPriecListBtnClicked) {
@@ -285,6 +295,7 @@ export const PriceListGroup: React.FC = () => {
         pdfBtn: true,
         printBtn: true,
         globalSearchBox: true,
+        onEditClick: onDataEditClick,
         pagination: {
           showItemCountDropdown: false,
           pageSize: 1000,
@@ -294,9 +305,6 @@ export const PriceListGroup: React.FC = () => {
       },
     };
   }
-  // useEffect(() => {
-  //   // setIsStdPriceBtnClicked(true);
-  // }, []);
 
   return (
     <>
