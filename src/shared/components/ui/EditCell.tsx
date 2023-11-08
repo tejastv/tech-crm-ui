@@ -13,7 +13,9 @@ export const EditCell: React.FC<{ row: any; table: any }> = ({
       ...old,
       [row.id]: !old[row.id],
     }));
-    meta.saveData(elName);
+    if (elName == "done") {
+      meta.saveData(elName, table);
+    }
     if (elName !== "edit") {
       meta?.revertData(row.index, e.currentTarget.name === "cancel");
     }

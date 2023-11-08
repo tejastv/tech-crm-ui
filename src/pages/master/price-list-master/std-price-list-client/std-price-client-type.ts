@@ -1,6 +1,7 @@
 export interface StdPriceClientsType {
-  countryID: number;
-  currencyID: number;
+  srNo?: number;
+  countryId: number;
+  currencyId: number;
   countryName: string;
   price: number;
   priceHighDel: number;

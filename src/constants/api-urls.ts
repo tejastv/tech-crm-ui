@@ -4,6 +4,7 @@ const GET_ADD_STATE = "location/state";
 const GET_ADD_CITY = "location/city";
 const GET_UPDATE_DELETE_CITY = "location/city/{id}";
 const UPDATE_PRICE_LIST_FOR_GROUP = "entity/priceListGroupWise/{id}";
+const UPDATE_STANDARD_PRICE = "currency/{id}/std-prices";
 const GET_UPDATE_DELETE_CONTINENT = "location/continent/{id}";
 const GET_UPDATE_DELETE_COUNTRY = "location/country/{id}";
 const GET_UPDATE_DELETE_STATE = "location/state/{id}";
@@ -68,7 +69,7 @@ const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 
 // Std Price
 const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
-const GET_UPDATE_DELETE_STDPRICE_CLIENTS = "entity/stdPriceListForClients/{id}";
+const GET_UPDATE_DELETE_STDPRICE_CLIENTS = "currency/{id}/std-prices";
 const GET_CLIENT_WISE_CURRENCY_AND_GROUP =
   "entity/priceListForClient/getCurrencyAndGroup/{id}";
 const GET_CLIENT_BY_CITY_ID = "entity/priceListForClient/city/{id}";
@@ -172,4 +173,5 @@ export const apiUrls = {
   GET_ADD_ALL_ENQUIRY_SEARCH,
   GET_PRICE,
   UPDATE_PRICE_LIST_FOR_GROUP,
+  UPDATE_STANDARD_PRICE,
 };

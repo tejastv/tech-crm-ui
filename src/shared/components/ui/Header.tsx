@@ -138,11 +138,21 @@ export const Header: React.FC = () => {
                             {" "}
                             <Link
                               className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_ROUTE}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.STD_PRICE_CLIENT}`}
+                            >
+                              <i className="mdi mdi-creation"></i>
+                              <span className="hide-menu ">Standard Price</span>
+                            </Link>
+                          </li>
+                          <li className="sidebar-item">
+                            {" "}
+                            <Link
+                              className="sidebar-link"
                               to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_ROUTE}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_CLIENT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
-                                Price List(for Clients)
+                                Price List (Clients)
                               </span>
                             </Link>
                           </li>
@@ -154,23 +164,11 @@ export const Header: React.FC = () => {
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
-                                Price List(Group Wise)
+                                Price List (Group)
                               </span>
                             </Link>
                           </li>
 
-                          <li className="sidebar-item">
-                            {" "}
-                            <Link
-                              className="sidebar-link"
-                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_ROUTE}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.STD_PRICE_CLIENT}`}
-                            >
-                              <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">
-                                Std.Price List(for Clients)
-                              </span>
-                            </Link>
-                          </li>
                           <li className="sidebar-item">
                             {" "}
                             <Link
@@ -271,24 +269,20 @@ export const Header: React.FC = () => {
                             {" "}
                             <Link
                               className="sidebar-link"
-                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.PRICE}`}
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.STDPRICE}`}
                             >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">
-                                Price List(for local source)
-                              </span>
+                              <span className="hide-menu ">Standard Price</span>
                             </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
                             <Link
                               className="sidebar-link"
-                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.STDPRICE}`}
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.PRICE}`}
                             >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">
-                                Std Price List(for local source)
-                              </span>
+                              <span className="hide-menu ">Price List</span>
                             </Link>
                           </li>
                         </ul>

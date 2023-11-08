@@ -19,7 +19,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const tableRef = useRef(null);
-  const tableData: any = {};
+  const [tableData, setTableData]: any = useState();
   // const data = props.config.tableData;
 
   const [data, setData] = useState(() => [...props.config.tableData]);
@@ -58,25 +58,28 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
         } else {
           tableData[row.id] = {
             [columnId]: value,
-            countryID: row.original.countryID,
+            countryId: row.original.countryId,
           };
         }
-        // setData((old) =>
-        //   old.map((row, index) => {
-        //     if (index === rowIndex) {
-        //       return {
-        //         ...old[rowIndex],
-        //         [columnId]: value,
-        //       };
-        //     }
-        //     return row;
-        //   })
-        // );
+        let obj = { rowId: row.id, columnId, value, dataObj: tableData };
+        setTableData(obj);
       },
-      saveData: (callFrom: string) => {
-        if (callFrom == "done") {
-          props.config.onEditClick && props.config.onEditClick(tableData);
-        }
+      updateDataSuccess: (rowIndex: any, columnId: any, value: any) => {
+        setData((old) =>
+          old.map((row, index) => {
+            if (index === rowIndex) {
+              return {
+                ...old[rowIndex],
+                [columnId]: value,
+              };
+            }
+            return row;
+          })
+        );
+      },
+      saveData: (callFrom: any, tableRef: any) => {
+        props.config.onEditClick &&
+          props.config.onEditClick(tableData, tableRef);
       },
     },
     getFilteredRowModel: getFilteredRowModel(),
