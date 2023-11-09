@@ -7,5 +7,6 @@ export interface StdPriceClientsType {
   priceHighDel: number;
   otherCharges: number;
   priceOnline: number;
-  priceSuperflash: number;
+  priceSuperFlash: number;
+  priceSME: number;
 }

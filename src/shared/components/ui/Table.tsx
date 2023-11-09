@@ -7,6 +7,7 @@ import {
   flexRender,
   SortingState,
   getSortedRowModel,
+  RowData,
 } from "@tanstack/react-table";
 import { Button, DebouncedInput, TableType } from "@shared/index";
 import * as XLSX from "xlsx";
@@ -15,71 +16,60 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { Alignment, TDocumentDefinitions } from "pdfmake/interfaces";
 import { useToaster } from "@hooks/useToaster";
 
+declare module "@tanstack/react-table" {
+  interface TableMeta<TData extends RowData> {
+    updateData: (rowIndex: number, columnId: string, value: unknown) => void;
+  }
+}
+
+const useSkipper = () => {
+  const shouldSkipRef = React.useRef(true);
+  const shouldSkip = shouldSkipRef.current;
+
+  // Wrap a function with this to skip a pagination reset temporarily
+  const skip = React.useCallback(() => {
+    shouldSkipRef.current = false;
+  }, []);
+
+  React.useEffect(() => {
+    shouldSkipRef.current = true;
+  });
+
+  return [shouldSkip, skip] as const;
+};
+
 export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [autoResetPageIndex, skipAutoResetPageIndex] = useSkipper();
   const tableRef = useRef(null);
-  const [tableData, setTableData]: any = useState();
   // const data = props.config.tableData;
-
   const [data, setData] = useState(() => [...props.config.tableData]);
-  const [originalData, setOriginalData] = useState(() => [
-    ...props.config.tableData,
-  ]);
-  const [editedRows, setEditedRows] = useState({});
   const columns = props.config.columns;
   const pageSizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   const { errorMessageToaster, successMessageToaster } = useToaster();
+
   const table = useReactTable({
     data,
     columns,
-    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
+    onGlobalFilterChange: setGlobalFilter,
+    autoResetPageIndex,
     meta: {
-      editedRows,
-      setEditedRows,
-      revertData: (rowIndex: number, revert: boolean) => {
-        if (revert) {
-          setData((old) =>
-            old.map((row, index) =>
-              index === rowIndex ? originalData[rowIndex] : row
-            )
-          );
-        } else {
-          setOriginalData((old) =>
-            old.map((row, index) => (index === rowIndex ? data[rowIndex] : row))
-          );
-        }
-      },
-      updateData: (row: any, columnId: string, value: string) => {
-        let cellMap = tableData[row.id];
-        if (cellMap) {
-          cellMap[columnId] = value;
-        } else {
-          tableData[row.id] = {
-            [columnId]: value,
-            countryId: row.original.countryId,
-          };
-        }
-        let obj = { rowId: row.id, columnId, value, dataObj: tableData };
-        setTableData(obj);
-      },
-      updateDataSuccess: (rowIndex: any, columnId: any, value: any) => {
+      updateData: (rowIndex, columnId, value) => {
+        // Skip page index reset until after next rerender
+        skipAutoResetPageIndex();
         setData((old) =>
           old.map((row, index) => {
             if (index === rowIndex) {
               return {
-                ...old[rowIndex],
+                ...old[rowIndex]!,
                 [columnId]: value,
               };
             }
             return row;
           })
         );
-      },
-      saveData: (callFrom: any, tableRef: any) => {
-        props.config.onEditClick &&
-          props.config.onEditClick(tableData, tableRef);
       },
     },
     getFilteredRowModel: getFilteredRowModel(),

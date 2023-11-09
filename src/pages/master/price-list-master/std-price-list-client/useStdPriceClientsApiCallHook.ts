@@ -10,6 +10,7 @@ export const useStdPriceClientsApiCallHook = () => {
   const getStdPriceClientsData = (
     id: string
   ): UseQueryResult<StdPriceClientsType[]> => {
+    console.log(id);
     return useQuery<StdPriceClientsType[]>({
       queryKey: [queryKeys.STDPRICE_DATA, id],
       queryFn: async () => {
