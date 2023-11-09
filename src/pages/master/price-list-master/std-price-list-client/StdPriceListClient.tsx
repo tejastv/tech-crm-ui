@@ -8,6 +8,7 @@ import {
   Loader,
   Select,
   Table,
+  TableCell,
   TableType,
 } from "@shared/index";
 import {
@@ -20,10 +21,10 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { queryKeys } from "@constants/query-keys";
-import { QueryClient } from "@tanstack/react-query";
-const queryClient = new QueryClient();
+import { useQueryClient } from "@tanstack/react-query";
 
 export const StdPriceListClient: React.FC = () => {
+  const queryClient = useQueryClient(); // Get the queryClient instance
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Standard Price",
@@ -53,7 +54,7 @@ export const StdPriceListClient: React.FC = () => {
       selectOptionsMaker(currencyData, "currencyId", "currencyInWord");
   }
 
-  const [tableData, setTableData] = useState({} as any);
+  let [tableData, setTableData] = useState({} as any);
 
   const columns = useMemo<ColumnDef<StdPriceClientsType>[]>(
     () => [
@@ -77,28 +78,14 @@ export const StdPriceListClient: React.FC = () => {
       {
         accessorFn: (row) => row.price,
         id: "price",
-        cell: ({ getValue, row, column: { id }, table }) => {
+        cell: ({ getValue, row, column: { id } }) => {
           const initialValue = getValue();
           // We need to keep and update the state of the cell normally
           const [value, setValue] = React.useState(initialValue);
 
           // When the input is blurred, we'll call our table meta's updateData function
           const onBlur = () => {
-            let cellMap = tableData[row.id];
-            if (!cellMap) {
-              tableData[row.id] = {
-                price: row.original.price,
-                priceHighDel: row.original.priceHighDel,
-                priceOnline: row.original.priceOnline,
-                priceSuperFlash: row.original.priceSuperFlash,
-                priceSME: row.original.priceSME,
-                countryId: row.original.countryId,
-              };
-              tableData[row.id][id] = Number(value);
-            } else {
-              cellMap[id] = Number(value);
-            }
-            setTableData(tableData);
+            cellMapDataHandler(row, id, value);
             // table.options.meta?.updateData(index, id, value);
           };
 
@@ -122,28 +109,14 @@ export const StdPriceListClient: React.FC = () => {
       {
         accessorFn: (row) => row.priceHighDel,
         id: "priceHighDel",
-        cell: ({ getValue, row, column: { id }, table }) => {
+        cell: ({ getValue, row, column: { id } }) => {
           const initialValue = getValue();
           // We need to keep and update the state of the cell normally
           const [value, setValue] = React.useState(initialValue);
 
           // When the input is blurred, we'll call our table meta's updateData function
           const onBlur = () => {
-            let cellMap = tableData[row.id];
-            if (!cellMap) {
-              tableData[row.id] = {
-                price: row.original.price,
-                priceHighDel: row.original.priceHighDel,
-                priceOnline: row.original.priceOnline,
-                priceSuperFlash: row.original.priceSuperFlash,
-                priceSME: row.original.priceSME,
-                countryId: row.original.countryId,
-              };
-              tableData[row.id][id] = Number(value);
-            } else {
-              cellMap[id] = Number(value);
-            }
-            setTableData(tableData);
+            cellMapDataHandler(row, id, value);
             // table.options.meta?.updateData(index, id, value);
           };
 
@@ -167,28 +140,14 @@ export const StdPriceListClient: React.FC = () => {
       {
         accessorFn: (row) => row.priceOnline,
         id: "priceOnline",
-        cell: ({ getValue, row, column: { id }, table }) => {
+        cell: ({ getValue, row, column: { id } }) => {
           const initialValue = getValue();
           // We need to keep and update the state of the cell normally
           const [value, setValue] = React.useState(initialValue);
 
           // When the input is blurred, we'll call our table meta's updateData function
           const onBlur = () => {
-            let cellMap = tableData[row.id];
-            if (!cellMap) {
-              tableData[row.id] = {
-                price: row.original.price,
-                priceHighDel: row.original.priceHighDel,
-                priceOnline: row.original.priceOnline,
-                priceSuperFlash: row.original.priceSuperFlash,
-                priceSME: row.original.priceSME,
-                countryId: row.original.countryId,
-              };
-              tableData[row.id][id] = Number(value);
-            } else {
-              cellMap[id] = Number(value);
-            }
-            setTableData(tableData);
+            cellMapDataHandler(row, id, value);
             // table.options.meta?.updateData(index, id, value);
           };
 
@@ -212,28 +171,14 @@ export const StdPriceListClient: React.FC = () => {
       {
         accessorFn: (row) => row.priceSuperFlash,
         id: "priceSuperFlash",
-        cell: ({ getValue, row, column: { id }, table }) => {
+        cell: ({ getValue, row, column: { id } }) => {
           const initialValue = getValue();
           // We need to keep and update the state of the cell normally
           const [value, setValue] = React.useState(initialValue);
 
           // When the input is blurred, we'll call our table meta's updateData function
           const onBlur = () => {
-            let cellMap = tableData[row.id];
-            if (!cellMap) {
-              tableData[row.id] = {
-                price: row.original.price,
-                priceHighDel: row.original.priceHighDel,
-                priceOnline: row.original.priceOnline,
-                priceSuperFlash: row.original.priceSuperFlash,
-                priceSME: row.original.priceSME,
-                countryId: row.original.countryId,
-              };
-              tableData[row.id][id] = Number(value);
-            } else {
-              cellMap[id] = Number(value);
-            }
-            setTableData(tableData);
+            cellMapDataHandler(row, id, value);
             // table.options.meta?.updateData(index, id, value);
           };
 
@@ -257,28 +202,14 @@ export const StdPriceListClient: React.FC = () => {
       {
         accessorFn: (row) => row.priceSME,
         id: "priceSME",
-        cell: ({ getValue, row, column: { id }, table }) => {
+        cell: ({ getValue, row, column: { id } }) => {
           const initialValue = getValue();
           // We need to keep and update the state of the cell normally
           const [value, setValue] = React.useState(initialValue);
 
           // When the input is blurred, we'll call our table meta's updateData function
           const onBlur = () => {
-            let cellMap = tableData[row.id];
-            if (!cellMap) {
-              tableData[row.id] = {
-                price: row.original.price,
-                priceHighDel: row.original.priceHighDel,
-                priceOnline: row.original.priceOnline,
-                priceSuperFlash: row.original.priceSuperFlash,
-                priceSME: row.original.priceSME,
-                countryId: row.original.countryId,
-              };
-              tableData[row.id][id] = Number(value);
-            } else {
-              cellMap[id] = Number(value);
-            }
-            setTableData(tableData);
+            cellMapDataHandler(row, id, value);
             // table.options.meta?.updateData(index, id, value);
           };
 
@@ -303,81 +234,42 @@ export const StdPriceListClient: React.FC = () => {
     []
   );
 
-  // const columnHelper = createColumnHelper<StdPriceClientsType>();
-
-  // const columns = [
-  //   columnHelper.accessor("srNo", {
-  //     header: "Sr no",
-  //     id: "srNo",
-  //   }),
-  //   columnHelper.accessor("countryId", {
-  //     header: "Country ID",
-  //     id: "countryID",
-  //   }),
-  //   columnHelper.accessor("countryName", {
-  //     header: "Country",
-  //     id: "countryName",
-  //   }),
-  //   columnHelper.accessor("otherCharges", {
-  //     header: "Normal Price",
-  //     id: "price",
-  //     cell: TableCell,
-  //     meta: {
-  //       type: "number",
-  //     },
-  //   }),
-  //   columnHelper.accessor("priceHighDel", {
-  //     header: "High Del Price",
-  //     id: "priceHighDel",
-  //     cell: TableCell,
-  //     meta: {
-  //       type: "number",
-  //     },
-  //   }),
-  //   columnHelper.accessor("priceOnline", {
-  //     header: "On-Line",
-  //     id: "priceOnline",
-  //     cell: TableCell,
-  //     meta: {
-  //       type: "number",
-  //     },
-  //   }),
-  //   columnHelper.accessor("priceSuperFlash", {
-  //     header: "Superflash",
-  //     id: "priceSuperFlash",
-  //     cell: TableCell,
-  //     meta: {
-  //       type: "number",
-  //     },
-  //   }),
-  //   columnHelper.display({
-  //     id: "edit",
-  //     cell: EditCell,
-  //   }),
-  // ];
-
-  const {
-    data: stdPriceData,
-    isLoading,
-    isSuccess,
-  } = getStdPriceClientsData(currency);
-
-  if (isSuccess) {
-    // setTableData({});
-  }
+  const cellMapDataHandler = (row: any, id: any, value: any) => {
+    if (tableData == undefined) return;
+    let cellMap = tableData[row.id];
+    if (!cellMap) {
+      tableData[row.id] = {
+        price: row.original.price,
+        priceHighDel: row.original.priceHighDel,
+        priceOnline: row.original.priceOnline,
+        priceSuperFlash: row.original.priceSuperFlash,
+        priceSME: row.original.priceSME,
+        countryId: row.original.countryId,
+      };
+      tableData[row.id][id] = Number(value);
+    } else {
+      cellMap[id] = Number(value);
+    }
+    setTableData(tableData);
+    // table.options.meta?.updateData(index, id, value);
+  };
 
   const onDataEditClick = () => {
     let cellData: any = Object.values(tableData);
     if (cellData.length > 0) {
       cellData[0]["currency_id"] = +currency;
-      updateStandardPrice(cellData).then((onSuccessData: any) => {
+      updateStandardPrice(cellData).then(() => {
+        tableData = {};
+        setTableData(tableData);
+        console.log(tableData);
         queryClient.invalidateQueries({
-          queryKey: [queryKeys.STDPRICE_DATA, currency],
+          queryKey: [queryKeys.PRICE_LIST_STANDARD_PRICE, currency],
         });
-        setCurrency(currency);
       });
     }
   };
+
+  const { data: stdPriceData, isFetching } = getStdPriceClientsData(currency);
 
   const tableConfig: TableType<StdPriceClientsType> = {
     config: {
@@ -436,7 +328,7 @@ export const StdPriceListClient: React.FC = () => {
           </form>
         </FormProvider>
         <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-          {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+          {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
         </BorderLayout>
       </Card>
     </>

@@ -227,6 +227,7 @@ export * from "./price-list-master/price-list-for-clients/currency-and-group-typ
 export * from "./client-master/client-group/client-group-basedon-clientID-type";
 export * from "./price-list-master/price-list-group-wise/update-price-group-type";
 export * from "./price-list-master/std-price-list-client/update-standard-price-type";
+export * from "./local-source-master/std-price-list/update-ls-standard-price-type";
 
 // Transaction master
 export * from "../transaction-search/enquiries/all-enquiries/allenquiries-type";

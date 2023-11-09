@@ -24,7 +24,7 @@ const BANKMASTER_DEPOSIT_DATA = "bankmasterdeposit-data";
 const PAYMENTMODE_DATA = "paymentmode-data";
 const SUPPLIER_MASTER_DATA = "supplier-master-data";
 const CURRENCY_DATA = "currency-data";
-const STDPRICE_DATA = "std-price-for-clients-data";
+const LOCALSOURCE_STANDARD_PRCE = "localsource-standard-price";
 const CITY_WISE_CLIENT_DATA = "city-wise-clients-data";
 const CLIENT_GROUP_DATA = "client-group-data";
 const SOURCE_DATA = "source-data";
@@ -39,6 +39,7 @@ const ENQUIRY_DATA = "enquiry-data";
 const SERVICETYPE_DATA = "servicetype-data";
 const ENQSTATUS_DATA = "enqstatus-data";
 const REFNO_DATA = "refno-data";
+const PRICE_LIST_STANDARD_PRICE = "price-list-standard-price";
 
 export const queryKeys = {
   CITY_DATA,
@@ -63,7 +64,7 @@ export const queryKeys = {
   SUPPLIER_MASTER_DATA,
   CLIENT_GROUP_DATA,
   SOURCE_DATA,
-  STDPRICE_DATA,
+  LOCALSOURCE_STANDARD_PRCE,
   LAST_FIN_YEAR,
   CLIENT_DATA,
   CLIENT_GROUP_BASED_ON_ID_DATA,
@@ -78,4 +79,5 @@ export const queryKeys = {
   REFNO_DATA,
   CITY_WISE_CLIENT_DATA,
   PRICE_DATA,
+  PRICE_LIST_STANDARD_PRICE,
 };
