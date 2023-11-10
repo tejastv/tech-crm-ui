@@ -10,7 +10,7 @@ export const usePriceListForClientsApiCallHook = () => {
     id: string
   ): UseQueryResult<StdPriceClientsType[]> => {
     return useQuery<StdPriceClientsType[]>({
-      queryKey: [queryKeys.STDPRICE_DATA, id],
+      queryKey: [queryKeys.PRICE_LIST_FOR_CLIENT, id],
       queryFn: async () => {
         const response = await instance.get(
           apiUrls.GET_UPDATE_DELETE_STDPRICE_CLIENTS.replace("{id}", id)
@@ -27,7 +27,7 @@ export const usePriceListForClientsApiCallHook = () => {
     condition: any
   ): UseQueryResult<CurrencyAndGroupType> => {
     return useQuery<CurrencyAndGroupType>({
-      queryKey: [queryKeys.STDPRICE_DATA, id],
+      queryKey: [queryKeys.PRICE_LIST_FOR_CLIENT, id],
       queryFn: async () => {
         const response = await instance.get(
           apiUrls.GET_CLIENT_WISE_CURRENCY_AND_GROUP.replace("{id}", "" + id)

@@ -31,8 +31,9 @@ const SOURCE_DATA = "source-data";
 const LAST_FIN_YEAR = "last-fin-year-data";
 const CLIENT_DATA = "client-data";
 const CLIENT_GROUP_BASED_ON_ID_DATA = "client-group-based-on-id-data";
+const PRICE_LIST_FOR_CLIENT = "price-list-for-client";
 
-//transaction master
+// Transaction master
 
 // Transaction Enquiry
 const ENQUIRY_DATA = "enquiry-data";
@@ -80,4 +81,5 @@ export const queryKeys = {
   CITY_WISE_CLIENT_DATA,
   PRICE_DATA,
   PRICE_LIST_STANDARD_PRICE,
+  PRICE_LIST_FOR_CLIENT,
 };

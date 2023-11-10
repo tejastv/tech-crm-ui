@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -8,7 +8,7 @@ import {
   Loader,
   Select,
   Table,
-  TableCell,
+  // TableCell,
   TableType,
 } from "@shared/index";
 import {
@@ -310,17 +310,19 @@ export const StdPriceListClient: React.FC = () => {
                   />
                 </div>
               </div>
-              <div className="row m-6 justify-content-end">
-                <div className="col-mt- col-xs-12 text-end">
-                  <Button
-                    type="button"
-                    onClick={onDataEditClick}
-                    className={"btn btn-danger btn-sm"}
-                  >
-                    <i className="far fa-save"></i> Save
-                  </Button>
+              {currency !== "0" && (
+                <div className="row m-6 justify-content-end">
+                  <div className="col-mt- col-xs-12 text-end">
+                    <Button
+                      type="button"
+                      onClick={onDataEditClick}
+                      className={"btn btn-danger btn-sm"}
+                    >
+                      <i className="far fa-save"></i> Save
+                    </Button>
+                  </div>
                 </div>
-              </div>
+              )}
             </BorderLayout>
           </form>
         </FormProvider>

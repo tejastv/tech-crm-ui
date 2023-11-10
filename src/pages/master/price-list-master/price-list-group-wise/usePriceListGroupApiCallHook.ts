@@ -7,18 +7,18 @@ import {
 } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import {
-  QueryClient,
+  // QueryClient,
   UseQueryResult,
   useMutation,
   useQuery,
 } from "@tanstack/react-query";
 import { ApiResponseType } from "@shared/index";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export const usePriceListGroupApiCallHook = () => {
   const { instance } = useAxios();
-  const queryClient = new QueryClient();
-  const navigate = useNavigate();
+  // const queryClient = new QueryClient();
+  // const navigate = useNavigate();
 
   const getCityWiseGroupData = (
     id: number,

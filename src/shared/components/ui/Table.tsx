@@ -12,7 +12,7 @@ import {
 import { Button, DebouncedInput, TableType } from "@shared/index";
 import * as XLSX from "xlsx";
 import * as pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from "pdfmake/build/vfs_fonts";
+// import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { Alignment, TDocumentDefinitions } from "pdfmake/interfaces";
 import { useToaster } from "@hooks/useToaster";
 
