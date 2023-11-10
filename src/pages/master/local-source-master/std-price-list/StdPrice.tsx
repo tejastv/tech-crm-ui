@@ -99,183 +99,180 @@ export const StdPrice: React.FC = () => {
 
   const [tableData, setTableData] = useState({} as any);
 
-  const columns = useMemo<ColumnDef<StdPriceType>[]>(
-    () => [
-      {
-        id: "srNo",
-        cell: (info) => info.getValue(),
-        header: () => <>Sr no</>,
+  const columns: ColumnDef<StdPriceType>[] = [
+    {
+      id: "srNo",
+      cell: (info) => info.getValue(),
+      header: () => <>Sr no</>,
+    },
+    {
+      accessorFn: (row) => row.countryId,
+      id: "countryId",
+      cell: (info) => info.getValue(),
+      header: () => <>Country Id</>,
+    },
+    {
+      accessorFn: (row) => row.countryName,
+      id: "country",
+      cell: (info) => info.getValue(),
+      header: () => <>Country Name</>,
+    },
+    {
+      accessorFn: (row) => row.price,
+      id: "price",
+      cell: ({ getValue, row, column: { id } }) => {
+        const initialValue = getValue();
+        // We need to keep and update the state of the cell normally
+        const [value, setValue] = React.useState(initialValue);
+
+        // When the input is blurred, we'll call our table meta's updateData function
+        const onBlur = () => {
+          cellMapDataHandler(row, id, value);
+          // table.options.meta?.updateData(index, id, value);
+        };
+
+        // If the initialValue is changed external, sync it up with our state
+        React.useEffect(() => {
+          setValue(initialValue);
+        }, [initialValue]);
+
+        return (
+          <input
+            value={value as number}
+            type="number"
+            onChange={(e) => setValue(+e.target.value)}
+            onBlur={onBlur}
+            className="editable-cell-style"
+          />
+        );
       },
-      {
-        accessorFn: (row) => row.countryId,
-        id: "countryId",
-        cell: (info) => info.getValue(),
-        header: () => <>Country Id</>,
+      header: () => <>Normal Price</>,
+    },
+    {
+      accessorFn: (row) => row.priceHighDel,
+      id: "priceHighDel",
+      cell: ({ getValue, row, column: { id } }) => {
+        const initialValue = getValue();
+        // We need to keep and update the state of the cell normally
+        const [value, setValue] = React.useState(initialValue);
+
+        // When the input is blurred, we'll call our table meta's updateData function
+        const onBlur = () => {
+          cellMapDataHandler(row, id, value);
+          // table.options.meta?.updateData(index, id, value);
+        };
+
+        // If the initialValue is changed external, sync it up with our state
+        React.useEffect(() => {
+          setValue(initialValue || "");
+        }, [initialValue]);
+
+        return (
+          <input
+            value={value as number}
+            type="number"
+            onChange={(e) => setValue(e.target.value)}
+            onBlur={onBlur}
+            className="editable-cell-style"
+          />
+        );
       },
-      {
-        accessorFn: (row) => row.countryName,
-        id: "country",
-        cell: (info) => info.getValue(),
-        header: () => <>Country Name</>,
+      header: () => <>High Del Price</>,
+    },
+    {
+      accessorFn: (row) => row.priceOnline,
+      id: "priceOnline",
+      cell: ({ getValue, row, column: { id } }) => {
+        const initialValue = getValue();
+        // We need to keep and update the state of the cell normally
+        const [value, setValue] = React.useState(initialValue);
+
+        // When the input is blurred, we'll call our table meta's updateData function
+        const onBlur = () => {
+          cellMapDataHandler(row, id, value);
+          // table.options.meta?.updateData(index, id, value);
+        };
+
+        // If the initialValue is changed external, sync it up with our state
+        React.useEffect(() => {
+          setValue(initialValue || "");
+        }, [initialValue]);
+
+        return (
+          <input
+            value={value as number}
+            type="number"
+            onChange={(e) => setValue(e.target.value)}
+            onBlur={onBlur}
+            className="editable-cell-style"
+          />
+        );
       },
-      {
-        accessorFn: (row) => row.price,
-        id: "price",
-        cell: ({ getValue, row, column: { id } }) => {
-          const initialValue = getValue();
-          // We need to keep and update the state of the cell normally
-          const [value, setValue] = React.useState(initialValue);
+      header: () => <>On-Line</>,
+    },
+    {
+      accessorFn: (row) => row.priceSuperFlash,
+      id: "priceSuperFlash",
+      cell: ({ getValue, row, column: { id } }) => {
+        const initialValue = getValue();
+        // We need to keep and update the state of the cell normally
+        const [value, setValue] = React.useState(initialValue);
 
-          // When the input is blurred, we'll call our table meta's updateData function
-          const onBlur = () => {
-            cellMapDataHandler(row, id, value);
-            // table.options.meta?.updateData(index, id, value);
-          };
+        // When the input is blurred, we'll call our table meta's updateData function
+        const onBlur = () => {
+          cellMapDataHandler(row, id, value);
+          // table.options.meta?.updateData(index, id, value);
+        };
 
-          // If the initialValue is changed external, sync it up with our state
-          React.useEffect(() => {
-            setValue(initialValue);
-          }, [initialValue]);
+        // If the initialValue is changed external, sync it up with our state
+        React.useEffect(() => {
+          setValue(initialValue || "");
+        }, [initialValue]);
 
-          return (
-            <input
-              value={value as number}
-              type="number"
-              onChange={(e) => setValue(+e.target.value)}
-              onBlur={onBlur}
-              className="editable-cell-style"
-            />
-          );
-        },
-        header: () => <>Normal Price</>,
+        return (
+          <input
+            value={value as number}
+            type="number"
+            onChange={(e) => setValue(e.target.value)}
+            onBlur={onBlur}
+            className="editable-cell-style"
+          />
+        );
       },
-      {
-        accessorFn: (row) => row.priceHighDel,
-        id: "priceHighDel",
-        cell: ({ getValue, row, column: { id } }) => {
-          const initialValue = getValue();
-          // We need to keep and update the state of the cell normally
-          const [value, setValue] = React.useState(initialValue);
+      header: () => <>Superflash</>,
+    },
+    {
+      accessorFn: (row) => row.priceSME,
+      id: "priceSME",
+      cell: ({ getValue, row, column: { id } }) => {
+        const initialValue = getValue();
+        // We need to keep and update the state of the cell normally
+        const [value, setValue] = React.useState(initialValue);
 
-          // When the input is blurred, we'll call our table meta's updateData function
-          const onBlur = () => {
-            cellMapDataHandler(row, id, value);
-            // table.options.meta?.updateData(index, id, value);
-          };
+        // When the input is blurred, we'll call our table meta's updateData function
+        const onBlur = () => {
+          cellMapDataHandler(row, id, value);
+          // table.options.meta?.updateData(index, id, value);
+        };
 
-          // If the initialValue is changed external, sync it up with our state
-          React.useEffect(() => {
-            setValue(initialValue || "");
-          }, [initialValue]);
+        // If the initialValue is changed external, sync it up with our state
+        React.useEffect(() => {
+          setValue(initialValue || "");
+        }, [initialValue]);
 
-          return (
-            <input
-              value={value as number}
-              type="number"
-              onChange={(e) => setValue(e.target.value)}
-              onBlur={onBlur}
-              className="editable-cell-style"
-            />
-          );
-        },
-        header: () => <>High Del Price</>,
+        return (
+          <input
+            value={value as number}
+            type="number"
+            onChange={(e) => setValue(e.target.value)}
+            onBlur={onBlur}
+            className="editable-cell-style"
+          />
+        );
       },
-      {
-        accessorFn: (row) => row.priceOnline,
-        id: "priceOnline",
-        cell: ({ getValue, row, column: { id } }) => {
-          const initialValue = getValue();
-          // We need to keep and update the state of the cell normally
-          const [value, setValue] = React.useState(initialValue);
-
-          // When the input is blurred, we'll call our table meta's updateData function
-          const onBlur = () => {
-            cellMapDataHandler(row, id, value);
-            // table.options.meta?.updateData(index, id, value);
-          };
-
-          // If the initialValue is changed external, sync it up with our state
-          React.useEffect(() => {
-            setValue(initialValue || "");
-          }, [initialValue]);
-
-          return (
-            <input
-              value={value as number}
-              type="number"
-              onChange={(e) => setValue(e.target.value)}
-              onBlur={onBlur}
-              className="editable-cell-style"
-            />
-          );
-        },
-        header: () => <>On-Line</>,
-      },
-      {
-        accessorFn: (row) => row.priceSuperFlash,
-        id: "priceSuperFlash",
-        cell: ({ getValue, row, column: { id } }) => {
-          const initialValue = getValue();
-          // We need to keep and update the state of the cell normally
-          const [value, setValue] = React.useState(initialValue);
-
-          // When the input is blurred, we'll call our table meta's updateData function
-          const onBlur = () => {
-            cellMapDataHandler(row, id, value);
-            // table.options.meta?.updateData(index, id, value);
-          };
-
-          // If the initialValue is changed external, sync it up with our state
-          React.useEffect(() => {
-            setValue(initialValue || "");
-          }, [initialValue]);
-
-          return (
-            <input
-              value={value as number}
-              type="number"
-              onChange={(e) => setValue(e.target.value)}
-              onBlur={onBlur}
-              className="editable-cell-style"
-            />
-          );
-        },
-        header: () => <>Superflash</>,
-      },
-      {
-        accessorFn: (row) => row.priceSME,
-        id: "priceSME",
-        cell: ({ getValue, row, column: { id } }) => {
-          const initialValue = getValue();
-          // We need to keep and update the state of the cell normally
-          const [value, setValue] = React.useState(initialValue);
-
-          // When the input is blurred, we'll call our table meta's updateData function
-          const onBlur = () => {
-            cellMapDataHandler(row, id, value);
-            // table.options.meta?.updateData(index, id, value);
-          };
-
-          // If the initialValue is changed external, sync it up with our state
-          React.useEffect(() => {
-            setValue(initialValue || "");
-          }, [initialValue]);
-
-          return (
-            <input
-              value={value as number}
-              type="number"
-              onChange={(e) => setValue(e.target.value)}
-              onBlur={onBlur}
-              className="editable-cell-style"
-            />
-          );
-        },
-        header: () => <>Price SME</>,
-      },
-    ],
-    []
-  );
+      header: () => <>Price SME</>,
+    },
+  ];
 
   const cellMapDataHandler = (row: any, id: any, value: any) => {
     let cellMap = tableData[row.id];
