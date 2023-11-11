@@ -49,6 +49,7 @@ export * from "./types/table-type";
 export * from "./types/toaster-type";
 export * from "./types/api-response-type";
 export * from "./types/pegination-config-type";
+export * from "./types/pagination-type";
 
 ///////////////////////////////////////////////////////////////
 //DEV
