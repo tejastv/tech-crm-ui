@@ -18,8 +18,12 @@ export const City: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "City",
-      btnTitle: "Add City",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add City",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -27,6 +31,11 @@ export const City: React.FC = () => {
   };
 
   const columns: ColumnDef<CityType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -39,25 +48,21 @@ export const City: React.FC = () => {
       header: () => <>City Name</>,
     },
     {
+      accessorFn: (row) => row.stateName,
+      id: "stateName",
+      cell: (info) => info.getValue(),
+      header: () => <>State Name</>,
+    },
+    {
       accessorFn: (row) => row.oscopies,
       id: "oscopies",
       cell: (info) => info.getValue(),
       header: () => <>OSCopies</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const { data: cityData, isLoading } = getCity();
   const { mutateAsync: deleteCity } = deleteCityMutation();
-
-  // if (isLoading) {
-  //   console.log("inn");
-  //   notify();
-  // }
 
   const deleteCityClick = async (cityData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
@@ -67,8 +72,9 @@ export const City: React.FC = () => {
   };
 
   const editCityClick = (cityData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", cityData.id));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", cityData.cityId));
   };
+  console.log(cityData);
 
   const tableConfig: TableType<CityType> = {
     config: {
@@ -95,9 +101,7 @@ export const City: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

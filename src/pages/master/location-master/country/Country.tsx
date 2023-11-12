@@ -21,8 +21,12 @@ export const Country: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Country",
-      btnTitle: "Add Country",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Country",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -30,6 +34,11 @@ export const Country: React.FC = () => {
   };
 
   const columns: ColumnDef<CountryType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -59,11 +68,6 @@ export const Country: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Continent</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const deleteCountryClick = (countryData: any) => {
@@ -82,7 +86,7 @@ export const Country: React.FC = () => {
     config: {
       tableName: "Country",
       columns: columns,
-      tableData: countryData ? countryData : [],
+      tableData: countryData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -103,7 +107,7 @@ export const Country: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

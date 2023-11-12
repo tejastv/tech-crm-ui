@@ -19,8 +19,12 @@ export const Executive: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Sales Executive",
-      btnTitle: "Add Sales Executive",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Sales Executive",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -28,6 +32,11 @@ export const Executive: React.FC = () => {
   };
 
   const columns: ColumnDef<ExecutiveType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -63,11 +72,6 @@ export const Executive: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>State</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const { data: executiveData, isLoading } = getExecutive();
@@ -88,7 +92,7 @@ export const Executive: React.FC = () => {
     config: {
       tableName: "Sales Executive",
       columns: columns,
-      tableData: executiveData ? executiveData : [],
+      tableData: executiveData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -109,9 +113,7 @@ export const Executive: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

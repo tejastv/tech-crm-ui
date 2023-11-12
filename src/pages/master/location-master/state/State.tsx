@@ -21,8 +21,12 @@ export const State: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "State",
-      btnTitle: "Add State",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add State",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -31,13 +35,18 @@ export const State: React.FC = () => {
 
   const columns: ColumnDef<StateType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
     },
     {
-      accessorFn: (row) => row.state,
-      id: "state",
+      accessorFn: (row) => row.stateName,
+      id: "stateName",
       cell: (info) => info.getValue(),
       header: () => <>State</>,
     },
@@ -54,9 +63,10 @@ export const State: React.FC = () => {
       header: () => <>StateCodeA</>,
     },
     {
-      id: "action",
+      accessorFn: (row) => row.countryName,
+      id: "countryName",
       cell: (info) => info.getValue(),
-      header: () => <>Action</>,
+      header: () => <>Country Name</>,
     },
   ];
 
@@ -96,9 +106,9 @@ export const State: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+       
+        {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+
       </BorderLayout>
     </>
   );

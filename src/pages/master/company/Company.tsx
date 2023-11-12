@@ -22,8 +22,12 @@ export const CompanyMaster: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Company Master",
-      btnTitle: "Add Company",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Company",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -31,6 +35,11 @@ export const CompanyMaster: React.FC = () => {
   };
 
   const columns: ColumnDef<CompanyType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -54,9 +63,10 @@ export const CompanyMaster: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Address</>,
     },
+
     {
       accessorFn: (row) => row.countryName,
-      id: "countryName",
+      id: "country",
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
     },
@@ -114,11 +124,6 @@ export const CompanyMaster: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>RecFin</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const deleteCompanyClick = (companyData: any) => {
@@ -137,7 +142,7 @@ export const CompanyMaster: React.FC = () => {
     config: {
       tableName: "Company Master",
       columns: columns,
-      tableData: companyData ? companyData : [],
+      tableData: companyData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -158,7 +163,7 @@ export const CompanyMaster: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

@@ -3,13 +3,13 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 
 //Types
-import { PageBreadcrumbType } from "@shared/index";
+import { PageBreadcrumbType, buttonConfig } from "@shared/index";
 
 export const PageBreadcrumb: React.FC<PageBreadcrumbType> = (props) => {
   const navigate = useNavigate();
 
-  const routeHandler = () => {
-    props.config.btnRoute && navigate(props.config.btnRoute);
+  const routeHandler = (button: buttonConfig) => {
+    button.btnRoute && navigate(button.btnRoute);
   };
 
   return (
@@ -21,15 +21,17 @@ export const PageBreadcrumb: React.FC<PageBreadcrumbType> = (props) => {
           </div>
           <div className="col-7 align-self-center">
             <div className="d-flex no-block justify-content-end align-items-center">
-              {props.config.btnTitle && (
-                <Button
-                  variant="primary"
-                  className="btn waves-effect waves-light btn-danger btn-sm"
-                  onClick={routeHandler}
-                >
-                  {props.config.btnTitle}
-                </Button>
-              )}
+              {props.config.buttons &&
+                props.config.buttons.map((button, index) => (
+                  <Button
+                    variant="primary"
+                    key={`page_breadcrumb_btn+${index}`}
+                    className="btn waves-effect waves-light mr-2 btn-danger btn-sm"
+                    onClick={() => routeHandler(button)}
+                  >
+                    {button.btnTitle}
+                  </Button>
+                ))}
             </div>
           </div>
         </div>

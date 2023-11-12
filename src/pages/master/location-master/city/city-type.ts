@@ -1,6 +1,12 @@
 export interface CityType {
+  stateName: string;
   // currentytype: unknown;
-  id: number;
+  cityId: number;
   cityName: string;
   oscopies: number;
+  action?: any;
+  srNo?: any;
+  stateId:any;
+  countryName: any;
+  countryId:any;
 }

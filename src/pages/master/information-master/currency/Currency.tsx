@@ -17,8 +17,12 @@ export const Currency: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Currency",
-      btnTitle: "Add Currency",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Currency",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -26,6 +30,11 @@ export const Currency: React.FC = () => {
   };
 
   const columns: ColumnDef<CurrencyType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -73,11 +82,6 @@ export const Currency: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Sell Date</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const { data: currencyData, isLoading } = getCurrency();
@@ -98,7 +102,7 @@ export const Currency: React.FC = () => {
     config: {
       tableName: "Currency",
       columns: columns,
-      tableData: currencyData ? currencyData : [],
+      tableData: currencyData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -119,9 +123,7 @@ export const Currency: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

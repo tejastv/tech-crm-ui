@@ -16,5 +16,6 @@ export const STATUS_CODES = {
   CODE_302: 302,
   CODE_400: 400,
   CODE_401: 401,
+  CODE_404: 404,
   CODE_500: 500,
 };

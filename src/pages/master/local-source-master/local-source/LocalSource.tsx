@@ -23,14 +23,23 @@ export const LocalSource: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Local Source",
-      btnTitle: "Add Local Source",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Local Source",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
     },
   };
   const columns: ColumnDef<LocalSourceType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -66,11 +75,6 @@ export const LocalSource: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Country Name</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
   const deleteLocalSourceClick = (localsourceData: any) => {
     var conformation = confirm("Are you sure to delete it?");
@@ -88,7 +92,7 @@ export const LocalSource: React.FC = () => {
     config: {
       tableName: "Local Source",
       columns: columns,
-      tableData: localsourceData ? localsourceData : [],
+      tableData: localsourceData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -109,7 +113,7 @@ export const LocalSource: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

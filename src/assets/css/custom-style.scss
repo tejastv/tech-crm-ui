@@ -28,7 +28,7 @@ hr {
 
 .loader-wrapper {
   display: flex;
-  position: absolute;
+  position: fixed;
   z-index: 99;
   background: #f8f9fa75;
   width: 100%;
@@ -38,8 +38,23 @@ hr {
   justify-content: center;
   align-items: center;
   margin: 0;
+  z-index: 1;
 }
 
 .enquirynote {
   background-color: #000;
+}
+.required-label::before {
+  content: " *";
+  color: red; /* You can choose your preferred color for the asterisk */
+}
+
+.custom-checkbox {
+  font-size: 20px; /* Increase font size */
+  color: red; /* Change the text color */
+}
+
+.editable-cell-style {
+  background-color: transparent;
+  border: none;
 }

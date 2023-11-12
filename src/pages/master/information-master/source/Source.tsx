@@ -16,8 +16,12 @@ export const Source: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Source",
-      btnTitle: "Add Source",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Source",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -28,6 +32,11 @@ export const Source: React.FC = () => {
   const navigate = useNavigate();
 
   const columns: ColumnDef<SourceType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -44,11 +53,6 @@ export const Source: React.FC = () => {
       id: "firstLetterFile",
       cell: (info) => info.getValue(),
       header: () => <>First Letter File</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 
@@ -70,7 +74,7 @@ export const Source: React.FC = () => {
     config: {
       tableName: "Source",
       columns: columns,
-      tableData: sourceData ? sourceData : [],
+      tableData: sourceData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -91,9 +95,7 @@ export const Source: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

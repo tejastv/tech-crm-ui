@@ -1,10 +1,11 @@
 export interface StdPriceType {
-  countryID: number;
-  currencyID: number;
+  countryId: number;
+  currencyId: number;
   countryName: string;
   price: number;
   priceHighDel: number;
   otherCharges: number;
   priceOnline: number;
-  priceSuperflash: number;
+  priceSuperFlash: number;
+  priceSME: number;
 }

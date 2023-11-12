@@ -46,6 +46,9 @@ export const AddUpdateClient: React.FC = () => {
   const { getClientGroup } = useClientGroupApiCallHook();
   const { getSegment } = useSegmentApiCallHook();
 
+  const [selectedStateId, setSelectedStateId] = useState();
+  const [selectedCountryId, setSelectedCountryId] = useState();
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Client Master",
@@ -65,13 +68,21 @@ export const AddUpdateClient: React.FC = () => {
     },
   };
 
+  useEffect(() => {
+    addClientFormFields.monthlyIvoice.config.setData = "N";
+    addClientFormFields.osemail.config.setData = "N";
+
+  }, []);
+ 
+
   // city api call
   const { data: cityData } = getCity();
   if (cityData) {
     addClientFormFields.cityClient.config.options = selectOptionsMaker(
       cityData,
-      "id",
-      "cityName"
+      "cityId",
+      "cityName",
+      true
     );
   }
 
@@ -81,7 +92,7 @@ export const AddUpdateClient: React.FC = () => {
     addClientFormFields.stateClient.config.options = selectOptionsMaker(
       stateData,
       "stateId",
-      "state",
+      "stateName",
       true
     );
   }
@@ -104,6 +115,14 @@ export const AddUpdateClient: React.FC = () => {
       "creditPeriodId",
       "creditPeriod"
     );
+
+    const defaultCrDayOption = addClientFormFields.crDay.config.options.find(
+      (option) => option.label.toString() === "30"
+    );
+  
+    if (defaultCrDayOption) {
+      addClientFormFields.crDay.config.setData = defaultCrDayOption;
+    }
   }
 
   // currency api call
@@ -146,8 +165,8 @@ export const AddUpdateClient: React.FC = () => {
     );
   }
 
-  const onSubmit = methods.handleSubmit((currencyData) => {
-    let data: any = { ...cleanupObject(currencyData) };
+  const onSubmit = methods.handleSubmit((clientData) => {
+    let data: any = { ...cleanupObject(clientData) };
     delete data.state;
     data["ourRefNo"] = "String";
     data["adjustfromDate"] = new Date().toISOString();
@@ -201,6 +220,7 @@ export const AddUpdateClient: React.FC = () => {
     console.log(data);
     if (params.id && data) {
       updateClient({ id: params.id, ...data });
+      console.log(data)
     } else {
       addClient(data);
     }
@@ -213,16 +233,16 @@ export const AddUpdateClient: React.FC = () => {
         let id = clientMasterData?.cityID;
         let data: any = returnObjectBasedOnID(
           cityData,
-          "id",
+          "cityId",
           id,
-          "id",
+          "cityId",
           "cityName"
         );
         addClientFormFields.cityClient.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (stateData) {
@@ -232,13 +252,13 @@ export const AddUpdateClient: React.FC = () => {
           "stateId",
           id,
           "stateId",
-          "state"
+          "stateName"
         );
         addClientFormFields.stateClient.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
         addClientFormFields.statecodeClient.config.setData = data.value;
       }
@@ -253,9 +273,9 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.countryClient.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (creditDaysData) {
@@ -267,11 +287,12 @@ export const AddUpdateClient: React.FC = () => {
           "creditPeriod",
           "creditPeriod"
         );
+
         addClientFormFields.cityClient.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (currencyData) {
@@ -285,9 +306,9 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.clientCurrencey.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (executiveData) {
@@ -301,9 +322,9 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.executive.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (clientGroupData) {
@@ -317,9 +338,9 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.groupClient.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
       if (segmentData) {
@@ -333,9 +354,9 @@ export const AddUpdateClient: React.FC = () => {
         );
         addClientFormFields.segmentClient.config.setData = data
           ? {
-              label: data.label,
-              value: data.value,
-            }
+            label: data.label,
+            value: data.value,
+          }
           : [];
       }
 
@@ -392,6 +413,48 @@ export const AddUpdateClient: React.FC = () => {
 
   addClientFormFields.statecodeClient.config.setData = stateCode;
 
+  const handleSelectCity = (selectedOption: any) => {
+    if (selectedOption) {
+      setSelectedStateId(selectedOption.data.stateId)
+      setSelectedCountryId(selectedOption.data.countryId)
+    }
+  };
+
+  if (selectedStateId && stateData) {
+    let id = selectedStateId;
+    let data: any = returnObjectBasedOnID(
+      stateData,
+      "stateId",
+      id,
+      "stateId",
+      "stateName"
+    );
+    addClientFormFields.stateClient.config.setData = data
+      ? {
+        label: data.label,
+        value: data.value,
+      }
+      : [];
+    addClientFormFields.statecodeClient.config.setData = data.value;
+  }
+
+  if (selectedCountryId && countryData) {
+    let id = selectedCountryId;
+    let data: any = returnObjectBasedOnID(
+      countryData,
+      "countryId",
+      id,
+      "countryId",
+      "countryName"
+    );
+    addClientFormFields.countryClient.config.setData = data
+      ? {
+        label: data.label,
+        value: data.value,
+      }
+      : [];
+  }
+
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
@@ -410,6 +473,13 @@ export const AddUpdateClient: React.FC = () => {
                     <Radio config={addClientFormFields.clientGst.config} />
                     <Input config={addClientFormFields.gstn.config} />
                     <Input config={addClientFormFields.addressClient.config} />
+                    <Select config={addClientFormFields.cityClient.config} onChangeHandler={handleSelectCity}  />
+                    <Input config={addClientFormFields.zipClient.config} />
+                    <Select config={addClientFormFields.stateClient.config} onChangeHandler={handleSelectChange} />
+                    <Input
+                      config={addClientFormFields.statecodeClient.config}
+                    />
+                    <Select config={addClientFormFields.countryClient.config} />
                     <Input config={addClientFormFields.telnoClient.config} />
                     <Input config={addClientFormFields.faxnoClient.config} />
                     <Input config={addClientFormFields.emailClient.config} />
@@ -418,20 +488,13 @@ export const AddUpdateClient: React.FC = () => {
                     <Input
                       config={addClientFormFields.designationClient.config}
                     />
-                    <Select config={addClientFormFields.cityClient.config} />
-                    <Input config={addClientFormFields.zipClient.config} />
+
                     {/* <div className="row "> */}
                     {/* <div className="col-md-5"> */}
-                    <Select
-                      config={addClientFormFields.stateClient.config}
-                      onChangeHandler={handleSelectChange}
-                    />
+
                     {/* </div> */}
                     {/* </div> */}
-                    <Input
-                      config={addClientFormFields.statecodeClient.config}
-                    />
-                    <Select config={addClientFormFields.countryClient.config} />
+
                     {/* <h6 className="card-title m-t-20 md-2"> */}
                     <DivLayout
                       heading={cardConfig.formclieckUpdateConfig.heading}
@@ -468,21 +531,8 @@ export const AddUpdateClient: React.FC = () => {
                     <Input config={addClientFormFields.baltoAdjust.config} />
                     <Input config={addClientFormFields.adjustenquiry.config} />
                     {/* <h6 className="card-title m-t-20"> */}
-                    <DivLayout
-                      heading={cardConfig.formAdjustProformaConfig.heading}
-                    />
+
                     {/* </h6> */}
-                    <Input
-                      config={addClientFormFields.toAdjustproforma.config}
-                    />
-                    <Input
-                      config={
-                        addClientFormFields.baltoAdjustproformaproforma.config
-                      }
-                    />
-                    <Input
-                      config={addClientFormFields.adjustenquiryproforma.config}
-                    />
                   </div>
                 </div>
               </div>

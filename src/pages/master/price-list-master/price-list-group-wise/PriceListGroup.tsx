@@ -9,6 +9,8 @@ import {
   Table,
   Loader,
   TableType,
+  TableCell,
+  EditCell,
 } from "@shared/index";
 import {
   CountryType,
@@ -17,7 +19,11 @@ import {
   usePriceListGroupApiCallHook,
 } from "@master/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
-import { ColumnDef } from "@tanstack/react-table";
+import {
+  // ColumnDef,
+  // ColumnHelper,
+  createColumnHelper,
+} from "@tanstack/react-table";
 
 export const PriceListGroup: React.FC = () => {
   const cardConfig = {
@@ -44,7 +50,9 @@ export const PriceListGroup: React.FC = () => {
     getGroupWiseCurrencyData,
     getStdPriceData,
     getPriceListData,
+    updatePriceListForGroupMutation,
   } = usePriceListGroupApiCallHook();
+  const { mutateAsync: updatePriceGroup } = updatePriceListForGroupMutation();
   const [city, setCity] = useState<number>(-2);
   const [group, setGroup] = useState<number>(-2);
 
@@ -61,7 +69,7 @@ export const PriceListGroup: React.FC = () => {
     useState<boolean>(false);
 
   if (cityData) {
-    let cityArray = selectOptionsMaker(cityData, "id", "cityName");
+    let cityArray = selectOptionsMaker(cityData, "cityId", "cityName");
     cityArray.unshift({
       label: "All",
       value: "-1",
@@ -151,49 +159,107 @@ export const PriceListGroup: React.FC = () => {
     setIsStdPriceBtnClicked(true);
   }, []);
 
-  const columns: ColumnDef<CountryType>[] = [
-    {
+  const columnHelper = createColumnHelper<CountryType>();
+
+  const columns = [
+    columnHelper.accessor("srNo", {
+      header: "Sr no",
       id: "srNo",
-      cell: (info) => info.getValue(),
-      header: () => <>Sr no</>,
-    },
-    {
-      accessorFn: (row) => row.countryID,
-      id: "countryId",
-      cell: (info) => info.getValue(),
-      header: () => <>Country ID</>,
-    },
-    {
-      accessorFn: (row) => row.countryName,
+    }),
+    columnHelper.accessor("countryID", {
+      header: "Country ID",
+      id: "countryID",
+    }),
+    columnHelper.accessor("countryName", {
+      header: "Country",
       id: "countryName",
-      cell: (info) => info.getValue(),
-      header: () => <>Country</>,
-    },
-    {
-      accessorFn: (row) => row.otherCharges,
-      id: "otherCharges",
-      cell: (info) => info.getValue(),
-      header: () => <>Normal Price</>,
-    },
-    {
-      accessorFn: (row) => row.priceHighDel,
+    }),
+    columnHelper.accessor("otherCharges", {
+      header: "Normal Price",
+      id: "price",
+      cell: TableCell,
+      meta: {
+        type: "number",
+      },
+    }),
+    columnHelper.accessor("priceHighDel", {
+      header: "High Del Price",
       id: "priceHighDel",
-      cell: (info) => info.getValue(),
-      header: () => <>High Del Price</>,
-    },
-    {
-      accessorFn: (row) => row.priceOnline,
+      cell: TableCell,
+      meta: {
+        type: "number",
+      },
+    }),
+    columnHelper.accessor("priceOnline", {
+      header: "On-Line",
       id: "priceOnline",
-      cell: (info) => info.getValue(),
-      header: () => <>On-Line</>,
-    },
-    {
-      accessorFn: (row) => row.priceSuperflash,
+      cell: TableCell,
+      meta: {
+        type: "number",
+      },
+    }),
+    columnHelper.accessor("priceSuperflash", {
+      header: "Superflash",
       id: "priceSuperflash",
-      cell: (info) => info.getValue(),
-      header: () => <>Superflash</>,
-    },
+      cell: TableCell,
+      meta: {
+        type: "number",
+      },
+    }),
+    columnHelper.display({
+      id: "edit",
+      cell: EditCell,
+    }),
+    // {
+    //   id: "srNo",
+    //   cell: (info) => info.getValue(),
+    //   header: () => <>Sr no</>,
+    // },
+    // {
+    //   accessorFn: (row) => row.countryID,
+    //   id: "countryId",
+    //   cell: (info) => info.getValue(),
+    //   header: () => <>Country ID</>,
+    // },
+    // {
+    //   accessorFn: (row) => row.countryName,
+    //   id: "countryName",
+    //   cell: (info) => info.getValue(),
+    //   header: () => <>Country</>,
+    // },
+    // {
+    //   accessorFn: (row) => row.otherCharges,
+    //   id: "otherCharges",
+    //   cell: (info) => info.getValue(),
+    //   header: () => <>Normal Price</>,
+    // },
+    // {
+    //   accessorFn: (row) => row.priceHighDel,
+    //   id: "priceHighDel",
+    //   cell: (info) => info.getValue(),
+    //   header: () => <>High Del Price</>,
+    // },
+    // {
+    //   accessorFn: (row) => row.priceOnline,
+    //   id: "priceOnline",
+    //   cell: (info) => info.getValue(),
+    //   header: () => <>On-Line</>,
+    // },
+    // {
+    //   accessorFn: (row) => row.priceSuperflash,
+    //   id: "priceSuperflash",
+    //   cell: (info) => info.getValue(),
+    //   header: () => <>Superflash</>,
+    // },
   ];
+
+  const onDataEditClick = async (data: any) => {
+    let cellData: any = Object.values(data);
+    if (cellData.length > 0) {
+      cellData[0]["groupId"] = group;
+      await updatePriceGroup(cellData);
+    }
+  };
 
   let tableConfig: TableType<CountryType> = {} as TableType<CountryType>;
 
@@ -202,7 +268,7 @@ export const PriceListGroup: React.FC = () => {
       config: {
         tableName: "Price List (Group)",
         columns: columns,
-        tableData: priceListData ? priceListData : [],
+        tableData: priceListData || [],
         copyBtn: true,
         csvBtn: true,
         excelBtn: true,
@@ -222,13 +288,14 @@ export const PriceListGroup: React.FC = () => {
       config: {
         tableName: "Price List (Group)",
         columns: columns,
-        tableData: stdPriceData ? stdPriceData : [],
+        tableData: stdPriceData || [],
         copyBtn: true,
         csvBtn: true,
         excelBtn: true,
         pdfBtn: true,
         printBtn: true,
         globalSearchBox: true,
+        onEditClick: onDataEditClick,
         pagination: {
           showItemCountDropdown: false,
           pageSize: 1000,
@@ -238,9 +305,6 @@ export const PriceListGroup: React.FC = () => {
       },
     };
   }
-  useEffect(() => {
-    // setIsStdPriceBtnClicked(true);
-  }, []);
 
   return (
     <>
@@ -276,7 +340,7 @@ export const PriceListGroup: React.FC = () => {
                     onClick={getStdPrice}
                     className={"btn btn-danger btn-sm"}
                   >
-                    <i className="far fa-save"></i>Get Std. Price
+                    <i className="far fa-save"></i> Get Std. Price
                   </Button>
                 </div>
                 {/* <div className="pt-lg-3"></div> */}
@@ -299,13 +363,13 @@ export const PriceListGroup: React.FC = () => {
                     onClick={getPriceList}
                     className={"btn btn-danger btn-sm"}
                   >
-                    <i className="far fa-save"></i>Get Price
+                    <i className="far fa-save"></i> Get Price
                   </Button>
                 </div>
 
                 <div className="col-md-12 col-xs-12 text-right">
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>Save All
+                    <i className="far fa-save"></i> Save All
                   </Button>
                 </div>
               </div>
@@ -313,9 +377,13 @@ export const PriceListGroup: React.FC = () => {
           </form>
         </FormProvider>
         <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-          <Table config={tableConfig.config}>
-            {(stdPriceDataLoading || priceListDataLoading) && <Loader />}
-          </Table>
+          {/* {(stdPriceDataLoading || priceListDataLoading) && <Loader />} */}
+
+          {!stdPriceDataLoading || !priceListDataLoading ? (
+            <Table config={tableConfig.config} />
+          ) : (
+            <Loader />
+          )}
         </BorderLayout>
       </Card>
     </>

@@ -16,8 +16,12 @@ export const Industry: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Industry",
-      btnTitle: "Add Industry",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Industry",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -29,6 +33,11 @@ export const Industry: React.FC = () => {
 
   const columns: ColumnDef<IndustryType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -38,11 +47,6 @@ export const Industry: React.FC = () => {
       id: "industryName",
       cell: (info) => info.getValue(),
       header: () => <>Industry Name</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 
@@ -64,7 +68,7 @@ export const Industry: React.FC = () => {
     config: {
       tableName: "Industry",
       columns: columns,
-      tableData: industryData ? industryData : [],
+      tableData: industryData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -85,9 +89,7 @@ export const Industry: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

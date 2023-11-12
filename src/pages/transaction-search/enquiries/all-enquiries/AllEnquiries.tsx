@@ -3,32 +3,55 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import {
   BorderLayout,
+  Button,
+  Input,
   Loader,
   PageBreadcrumb,
+  Select,
   Table,
   TableType,
 } from "@shared/index";
-import { COMMON_ROUTES } from "@constants/index";
-import { AllEnquiriesType, useAllEnquiriesApiCallHook } from "@pages/master";
-import { useNavigate } from "react-router-dom";
+import { COMMON_ROUTES, TRANSACTION_ROUTES } from "@constants/index";
+import {
+  AllEnquiriesType,
+  allEnquiryFormFields,
+  useAllEnquiriesApiCallHook,
+} from "@pages/transaction-search";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useClientApiCallHook } from "@pages/master";
+import { FormProvider, useForm } from "react-hook-form";
+import { selectOptionsMaker } from "@utils/selectOptionsMaker";
+import { cleanupObject } from "@utils/cleanUpObject";
+import { formatDateString } from "@utils/dateFormatter";
 
 export const Enquiries: React.FC = () => {
-  const { getEnquiries, deleteEnquiryMutation } = useAllEnquiriesApiCallHook();
+  const { getEnquiries, getEnquiryBasedOnSearchParam, deleteEnquiryMutation } =
+    useAllEnquiriesApiCallHook();
   const { mutateAsync: deleteEnquiry } = deleteEnquiryMutation();
   const { data: enquiriesData, isLoading } = getEnquiries();
   const navigate = useNavigate();
+  const { getClient } = useClientApiCallHook();
+  const methods = useForm<AllEnquiriesType>();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const category = queryParams.get("category");
 
   const config = {
     breadcrumbConfig: {
       pageHeading: "Enquiry Details",
-      btnTitle: "Add Enquiry Details",
-      btnTitle2: "Enquiry Search",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Enquiry Details",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+        {
+          btnTitle: "Enquiry Search",
+          btnRoute: `${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYDETAILS_TRANSACTION_ROUTES.ENQUIRYDETAILS}?category=search`,
+        },
+      ],
     },
     btnConfig: {
       pageHeading: "",
-      btnTitle: "Enquiry Search",
-      btnRoute: COMMON_ROUTES.LIST,
     },
     borderLayoutConfig: {
       heading: "List",
@@ -37,14 +60,19 @@ export const Enquiries: React.FC = () => {
 
   const columns: ColumnDef<AllEnquiriesType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       accessorFn: (row) => row.enqID,
       id: "enqID",
       cell: (info) => info.getValue(),
       header: () => <>SN</>,
     },
     {
-      accessorFn: (row) => row.fyear,
-      id: "fyear",
+      accessorFn: (row) => row.financialYear,
+      id: "financialYear",
       cell: (info) => info.getValue(),
       header: () => <>Year</>,
     },
@@ -390,13 +418,17 @@ export const Enquiries: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Group Price</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
+  // client api call
+  const { data: clientData } = getClient();
+  if (clientData) {
+    allEnquiryFormFields.clientnameField.config.options = selectOptionsMaker(
+      clientData,
+      "clientID",
+      "clientName"
+    );
+  }
   const deleteEnquiryClick = (enquiriesData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
@@ -410,9 +442,9 @@ export const Enquiries: React.FC = () => {
 
   const tableConfig: TableType<AllEnquiriesType> = {
     config: {
-      tableName: "State",
+      tableName: "Enquiry",
       columns: columns,
-      tableData: enquiriesData ? enquiriesData : [],
+      tableData: enquiriesData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -429,14 +461,68 @@ export const Enquiries: React.FC = () => {
     },
   };
 
+  const onSubmit = methods.handleSubmit((searchData) => {
+    let data: any = { ...cleanupObject(searchData) };
+    if (data.clientId) {
+      data.clientId = +data.clientId["value"];
+    }
+    if (data.startDate) {
+      const inputDate = new Date(data.startDate);
+      const formattedDate = formatDateString(inputDate, "d-m-y", "-");
+      data.startDate = formattedDate;
+    }
+    if (data.endDate) {
+      const inputDate = new Date(data.endDate);
+      const formattedDate = formatDateString(inputDate, "d-m-y", "-");
+      data.endDate = formattedDate;
+    }
+    if (data) {
+      getEnquiryBasedOnSearchParam(data);
+    }
+  });
+
   return (
     <>
-      <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
-      <PageBreadcrumb config={config.btnConfig}></PageBreadcrumb>
+      {category !== "search" && (
+        <>
+          <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
+        </>
+      )}
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+        {category === "search" && ( // Conditional rendering
+          <FormProvider {...methods}>
+            <form
+              onSubmit={onSubmit}
+              noValidate
+              autoComplete="off"
+              className="p-t-20"
+            >
+              <div className="row">
+                <div className="col-md-3 col-xs-12">
+                  <Select
+                    config={allEnquiryFormFields.clientnameField.config}
+                  />
+                </div>
+
+                <div className="col-md-3 col-xs-12">
+                  <Input config={allEnquiryFormFields.fromdateField.config} />
+                </div>
+
+                <div className="col-md-3 col-xs-12">
+                  <Input config={allEnquiryFormFields.todateeField.config} />
+                </div>
+
+                <div className="col-md-3 col-xs-12 text-left">
+                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+                    <i className="far fa-save"></i> Search
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </FormProvider>
+        )}
+
+{!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

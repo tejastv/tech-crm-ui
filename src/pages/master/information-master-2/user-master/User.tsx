@@ -16,8 +16,12 @@ export const User: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "User Master",
-      btnTitle: "Add User",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add User",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -27,6 +31,11 @@ export const User: React.FC = () => {
   const { getUser, deleteUserMutation } = useUserApiCallHook();
   const navigate = useNavigate();
   const columns: ColumnDef<UserType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -56,11 +65,6 @@ export const User: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Type Of User</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const { data: userData, isLoading } = getUser();
@@ -81,7 +85,7 @@ export const User: React.FC = () => {
     config: {
       tableName: "User Master",
       columns: columns,
-      tableData: userData ? userData : [],
+      tableData: userData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -102,9 +106,7 @@ export const User: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

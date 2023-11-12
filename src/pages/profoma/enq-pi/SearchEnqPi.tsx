@@ -22,10 +22,14 @@ export const SearchEnqPi: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Generate Invoice(PI)",
-      btnTitle: "",
-      btnRoute: "",
+      buttons: [
+        {
+          btnTitle: "",
+          btnRoute: "",
+        },
+      ],
     },
-   
+
     borderLayoutConfig: {
       heading: "List",
     },
@@ -278,7 +282,7 @@ export const SearchEnqPi: React.FC = () => {
     config: {
       tableName: "Company Master",
       columns: columns,
-      tableData: companyData ? companyData : [],
+      tableData: companyData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

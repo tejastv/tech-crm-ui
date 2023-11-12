@@ -16,8 +16,12 @@ export const Client: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Client",
-      btnTitle: "Add Client",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Client",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -27,6 +31,12 @@ export const Client: React.FC = () => {
   const { getClient, deleteClientMutation } = useClientApiCallHook();
   const navigate = useNavigate();
   const columns: ColumnDef<ClientType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -45,8 +55,8 @@ export const Client: React.FC = () => {
       header: () => <>Address</>,
     },
     {
-      accessorFn: (row) => row.cityID,
-      id: "cityID",
+      accessorFn: (row) => row.cityName,
+      id: "cityId",
       cell: (info) => info.getValue(),
       header: () => <>City</>,
     },
@@ -57,14 +67,14 @@ export const Client: React.FC = () => {
       header: () => <>Zip</>,
     },
     {
-      accessorFn: (row) => row.stateID,
-      id: "stateID",
+      accessorFn: (row) => row.stateName,
+      id: "stateId",
       cell: (info) => info.getValue(),
       header: () => <>State</>,
     },
     {
-      accessorFn: (row) => row.countryID,
-      id: "countryID",
+      accessorFn: (row) => row.countryName,
+      id: "country",
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
     },
@@ -99,7 +109,7 @@ export const Client: React.FC = () => {
       header: () => <>Contact Person</>,
     },
     {
-      accessorFn: (row) => row.currencyID,
+      accessorFn: (row) => row.currencyName,
       id: "currencyID",
       cell: (info) => info.getValue(),
       header: () => <>Currency Type</>,
@@ -147,7 +157,7 @@ export const Client: React.FC = () => {
       header: () => <>Instruction</>,
     },
     {
-      accessorFn: (row) => row.groupId,
+      accessorFn: (row) => row.groupName,
       id: "groupId",
       cell: (info) => info.getValue(),
       header: () => <>group Name</>,
@@ -201,7 +211,7 @@ export const Client: React.FC = () => {
       header: () => <>Adjust From Date</>,
     },
     {
-      accessorFn: (row) => row.segmentId,
+      accessorFn: (row) => row.segmentName,
       id: "segmentId",
       cell: (info) => info.getValue(),
       header: () => <>Segment Name</>,
@@ -229,11 +239,6 @@ export const Client: React.FC = () => {
       id: "gstYN",
       cell: (info) => info.getValue(),
       header: () => <>GSTYN</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 
@@ -276,9 +281,7 @@ export const Client: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

@@ -193,7 +193,7 @@ const zip: FormFieldType = {
     placeholder: "Enter Zip",
     validation: {
       required: {
-        value: false,
+        value: true,
         message: "Zip field is rquired",
       },
       pattern: {
@@ -219,7 +219,7 @@ const city: FormFieldType = {
     placeholder: "Select city",
     validation: {
       required: {
-        value: false,
+        value: true,
         message: "Select city field is rquired",
       },
       pattern: {
@@ -245,7 +245,7 @@ const state: FormFieldType = {
     placeholder: "Select State",
     validation: {
       required: {
-        value: false,
+        value: true,
         message: "State field is rquired",
       },
       pattern: {

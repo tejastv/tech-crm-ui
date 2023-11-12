@@ -83,6 +83,21 @@ export const AddEnquiry: React.FC = () => {
     },
   };
 
+
+  useEffect(() => {
+    // addEnquiryFormFields.enqtype.config.setData = "false";
+    if(addEnquiryFormFields.enqtype.config.options){
+      const defaultenqTypeOption = addEnquiryFormFields.enqtype.config.options.find(
+        (option) => option.label === "NEW"
+      );
+    
+      if (defaultenqTypeOption) {
+        addEnquiryFormFields.enqtype.config.setData = defaultenqTypeOption;
+      }
+    }
+  }, []);
+
+
   // city api call
   const { data: cityData } = getCity();
   if (cityData) {
@@ -99,7 +114,7 @@ export const AddEnquiry: React.FC = () => {
     addEnquiryFormFields.stateenquiry.config.options = selectOptionsMaker(
       stateData,
       "stateId",
-      "state"
+      "stateName"
     );
   }
 
@@ -662,22 +677,40 @@ export const AddEnquiry: React.FC = () => {
                   <Input config={addEnquiryFormFields.emailenquiry.config} />
                   <Input config={addEnquiryFormFields.websiteenquiry.config} />
                   <Input config={addEnquiryFormFields.contactenquiry.config} />
-                  <Input
-                    config={addEnquiryFormFields.designationenquiry.config}
-                  />
+                  <Input config={addEnquiryFormFields.designationenquiry.config}/>
                 </div>
                 <div className="col-md-6 col-xs-12">
+                <Input config={addEnquiryFormFields.clientrefenquiry.config} />
+                  <Select config={addEnquiryFormFields.clientenquiry.config} onChangeHandler={onClientChangeHandler} />
+                  <Input
+                    config={addEnquiryFormFields.requestnoenquiry.config}
+                  />
+                <Input config={addEnquiryFormFields.clientIdenquiry.config} />
+                <Link to={""} className="card-title">
+                        <InputWithText
+                          config={
+                            addEnquiryFormFields.actualbuyeraddnote.config
+                          }
+                        />
+                      </Link>
+                  <Select config={addEnquiryFormFields.actualbureyenquiry.config}/>
+                  <Select config={addEnquiryFormFields.servicetype.config} onChangeHandler={onServiceTypeChangeHandler} />
+                  <div className="row mb-2 justify-content-end">
+                <div className="col-md-4 col-xs-12 text-right">
+                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+                    <i className="far fa-save"></i> Get Price
+                  </Button>
+                </div>
+              </div>
+                  
+                  <Input config={addEnquiryFormFields.priceenquiry.config} /> 
                   <Input config={addEnquiryFormFields.givenname.config} />
                   <Input config={addEnquiryFormFields.recdon.config} />
-                  <Select config={addEnquiryFormFields.enqtype.config} />
-                  <Select
-                    config={addEnquiryFormFields.localsourceenquiry.config}
-                  />
-                  <Select
-                    config={addEnquiryFormFields.servicetype.config}
-                    onChangeHandler={onServiceTypeChangeHandler}
-                  />
                   <Input config={addEnquiryFormFields.dueon.config} />
+                  <Select config={addEnquiryFormFields.enqtype.config} />
+                  <Select config={addEnquiryFormFields.localsourceenquiry.config}/>
+                  
+                  
                   <Select config={addEnquiryFormFields.printstatus.config} />
                   <Select config={addEnquiryFormFields.enqstatus.config} />
                   <Select config={addEnquiryFormFields.svisit.config} />
@@ -687,36 +720,11 @@ export const AddEnquiry: React.FC = () => {
                     config={addEnquiryFormFields.instructionenquiry.config}
                   />
                 </div>
-                <h6 className="card-title col-12">Client Details</h6>
-                <div className="col-md-4 col-xs-12">
-                  <Input
-                    config={addEnquiryFormFields.clientrefenquiry.config}
-                  />
-                  <Select
-                    config={addEnquiryFormFields.clientenquiry.config}
-                    onChangeHandler={onClientChangeHandler}
-                  />
-                  {/* <div className="row justify-content-end">
-                    <div className="col-md-4 col-xs-12 text-right">
-                      <Button
-                        type={"submit"}
-                        className={"btn btn-danger btn-sm mb-2"}
-                      >
-                        <i className="far fa-save"></i> Get Price
-                      </Button>
-                    </div>
-                  </div> */}
-                  <Input
-                    config={addEnquiryFormFields.requestnoenquiry.config}
-                  />
-                </div>
-                <div className="col-md-4 col-xs-12">
-                  <Input config={addEnquiryFormFields.clientIdenquiry.config} />
-                  <Select
-                    config={addEnquiryFormFields.actualbureyenquiry.config}
-                  />
+                
+                <div className="col-md-3   col-xs-12">
+                
                   <div className="row">
-                    <div className="col-md-8 col-xs-12 text-right">
+                    {/* <div className="col-md-8 col-xs-12 text-right">
                       <Link to={""} className="card-title">
                         <InputWithText
                           config={
@@ -724,14 +732,14 @@ export const AddEnquiry: React.FC = () => {
                           }
                         />
                       </Link>
-                    </div>
-                    <div className="col-md-4 col-xs-12 text-right">
+                    </div> */}
+                    {/* <div className="col-md-4 col-xs-12 text-right">
                       <i className="fa fa-refresh"></i>
-                    </div>
+                    </div> */}
                   </div>
-                  <Input config={addEnquiryFormFields.priceenquiry.config} />
+                  {/* <Input config={addEnquiryFormFields.priceenquiry.config} /> */}
                 </div>
-                <div className="col-md-4 col-xs-12">
+                <div className="col-md-6 col-xs-12">
                   <Table config={tableConfig.config}></Table>
                 </div>
                 <div className="card-title">

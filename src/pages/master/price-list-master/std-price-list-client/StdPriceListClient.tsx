@@ -3,10 +3,12 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import {
   BorderLayout,
+  Button,
   Card,
   Loader,
   Select,
   Table,
+  // TableCell,
   TableType,
 } from "@shared/index";
 import {
@@ -18,11 +20,14 @@ import {
 } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
+import { queryKeys } from "@constants/query-keys";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const StdPriceListClient: React.FC = () => {
+  const queryClient = useQueryClient(); // Get the queryClient instance
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Std. Price List",
+      mainHeading: "Standard Price",
       heading: "Action Buttons",
     },
     formPurchesConfig: {
@@ -40,13 +45,16 @@ export const StdPriceListClient: React.FC = () => {
   const [currency, setCurrency] = useState("0");
   const { getCurrency } = useCurrencyApiCallHook();
   const { data: currencyData } = getCurrency();
-  const { getStdPriceClientsData } = useStdPriceClientsApiCallHook();
+  const { getStdPriceClientsData, updateStandardPriceMutation } =
+    useStdPriceClientsApiCallHook();
+  const { mutateAsync: updateStandardPrice } = updateStandardPriceMutation();
 
   if (currencyData) {
-    console.log(currencyData);
     addStdPriceClientsFormFields.stdPriceClientCurrency.config.options =
       selectOptionsMaker(currencyData, "currencyId", "currencyInWord");
   }
+
+  let [tableData, setTableData] = useState({} as any);
 
   const columns: ColumnDef<StdPriceClientsType>[] = [
     {
@@ -55,7 +63,7 @@ export const StdPriceListClient: React.FC = () => {
       header: () => <>Sr no</>,
     },
     {
-      accessorFn: (row) => row.countryID,
+      accessorFn: (row) => row.countryId,
       id: "countryId",
       cell: (info) => info.getValue(),
       header: () => <>Country Id</>,
@@ -69,37 +77,202 @@ export const StdPriceListClient: React.FC = () => {
     {
       accessorFn: (row) => row.price,
       id: "price",
-      cell: (info) => info.getValue(),
+      cell: ({ getValue, row, column: { id } }) => {
+        const initialValue = getValue();
+        // We need to keep and update the state of the cell normally
+        const [value, setValue] = React.useState(initialValue);
+
+        // When the input is blurred, we'll call our table meta's updateData function
+        const onBlur = () => {
+          cellMapDataHandler(row, id, value);
+          // table.options.meta?.updateData(index, id, value);
+        };
+
+        // If the initialValue is changed external, sync it up with our state
+        React.useEffect(() => {
+          setValue(initialValue);
+        }, [initialValue]);
+
+        return (
+          <input
+            value={value as number}
+            type="number"
+            onChange={(e) => setValue(+e.target.value)}
+            onBlur={onBlur}
+            className="editable-cell-style"
+          />
+        );
+      },
       header: () => <>Normal Price</>,
     },
     {
       accessorFn: (row) => row.priceHighDel,
       id: "priceHighDel",
-      cell: (info) => info.getValue(),
+      cell: ({ getValue, row, column: { id } }) => {
+        const initialValue = getValue();
+        // We need to keep and update the state of the cell normally
+        const [value, setValue] = React.useState(initialValue);
+
+        // When the input is blurred, we'll call our table meta's updateData function
+        const onBlur = () => {
+          cellMapDataHandler(row, id, value);
+          // table.options.meta?.updateData(index, id, value);
+        };
+
+        // If the initialValue is changed external, sync it up with our state
+        React.useEffect(() => {
+          setValue(initialValue || "");
+        }, [initialValue]);
+
+        return (
+          <input
+            value={value as number}
+            type="number"
+            onChange={(e) => setValue(e.target.value)}
+            onBlur={onBlur}
+            className="editable-cell-style"
+          />
+        );
+      },
       header: () => <>High Del Price</>,
     },
     {
       accessorFn: (row) => row.priceOnline,
-      id: "on-line",
-      cell: (info) => info.getValue(),
+      id: "priceOnline",
+      cell: ({ getValue, row, column: { id } }) => {
+        const initialValue = getValue();
+        // We need to keep and update the state of the cell normally
+        const [value, setValue] = React.useState(initialValue);
+
+        // When the input is blurred, we'll call our table meta's updateData function
+        const onBlur = () => {
+          cellMapDataHandler(row, id, value);
+          // table.options.meta?.updateData(index, id, value);
+        };
+
+        // If the initialValue is changed external, sync it up with our state
+        React.useEffect(() => {
+          setValue(initialValue || "");
+        }, [initialValue]);
+
+        return (
+          <input
+            value={value as number}
+            type="number"
+            onChange={(e) => setValue(e.target.value)}
+            onBlur={onBlur}
+            className="editable-cell-style"
+          />
+        );
+      },
       header: () => <>On-Line</>,
     },
     {
-      accessorFn: (row) => row.priceSuperflash,
-      id: "superflash",
-      cell: (info) => info.getValue(),
+      accessorFn: (row) => row.priceSuperFlash,
+      id: "priceSuperFlash",
+      cell: ({ getValue, row, column: { id } }) => {
+        const initialValue = getValue();
+        // We need to keep and update the state of the cell normally
+        const [value, setValue] = React.useState(initialValue);
+
+        // When the input is blurred, we'll call our table meta's updateData function
+        const onBlur = () => {
+          cellMapDataHandler(row, id, value);
+          // table.options.meta?.updateData(index, id, value);
+        };
+
+        // If the initialValue is changed external, sync it up with our state
+        React.useEffect(() => {
+          setValue(initialValue || "");
+        }, [initialValue]);
+
+        return (
+          <input
+            value={value as number}
+            type="number"
+            onChange={(e) => setValue(e.target.value)}
+            onBlur={onBlur}
+            className="editable-cell-style"
+          />
+        );
+      },
       header: () => <>Superflash</>,
+    },
+    {
+      accessorFn: (row) => row.priceSME,
+      id: "priceSME",
+      cell: ({ getValue, row, column: { id } }) => {
+        const initialValue = getValue();
+        // We need to keep and update the state of the cell normally
+        const [value, setValue] = React.useState(initialValue);
+
+        // When the input is blurred, we'll call our table meta's updateData function
+        const onBlur = () => {
+          cellMapDataHandler(row, id, value);
+          // table.options.meta?.updateData(index, id, value);
+        };
+
+        // If the initialValue is changed external, sync it up with our state
+        React.useEffect(() => {
+          setValue(initialValue || "");
+        }, [initialValue]);
+
+        return (
+          <input
+            value={value as number}
+            type="number"
+            onChange={(e) => setValue(e.target.value)}
+            onBlur={onBlur}
+            className="editable-cell-style"
+          />
+        );
+      },
+      header: () => <>Price SME</>,
     },
   ];
 
-  const { data: stdPriceData, isLoading: isStdPriceDataLoading } =
-    getStdPriceClientsData(currency);
+  const cellMapDataHandler = (row: any, id: any, value: any) => {
+    if (tableData == undefined) return;
+    let cellMap = tableData[row.id];
+    if (!cellMap) {
+      tableData[row.id] = {
+        price: row.original.price,
+        priceHighDel: row.original.priceHighDel,
+        priceOnline: row.original.priceOnline,
+        priceSuperFlash: row.original.priceSuperFlash,
+        priceSME: row.original.priceSME,
+        countryId: row.original.countryId,
+      };
+      tableData[row.id][id] = Number(value);
+    } else {
+      cellMap[id] = Number(value);
+    }
+    setTableData(tableData);
+    // table.options.meta?.updateData(index, id, value);
+  };
+
+  const onDataEditClick = () => {
+    let cellData: any = Object.values(tableData);
+    if (cellData.length > 0) {
+      cellData[0]["currency_id"] = +currency;
+      updateStandardPrice(cellData).then(() => {
+        tableData = {};
+        setTableData(tableData);
+        console.log(tableData);
+        queryClient.invalidateQueries({
+          queryKey: [queryKeys.PRICE_LIST_STANDARD_PRICE, currency],
+        });
+      });
+    }
+  };
+
+  const { data: stdPriceData, isFetching } = getStdPriceClientsData(currency);
 
   const tableConfig: TableType<StdPriceClientsType> = {
     config: {
-      tableName: "Std. Price List",
+      tableName: "Standard Price",
       columns: columns,
-      tableData: stdPriceData ? stdPriceData : [],
+      tableData: stdPriceData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -108,7 +281,7 @@ export const StdPriceListClient: React.FC = () => {
       globalSearchBox: true,
       pagination: {
         showItemCountDropdown: false,
-        pageSize: 100,
+        pageSize: -1,
         nextPreviousBtnShow: false,
         tableMetaDataShow: false,
       },
@@ -137,13 +310,24 @@ export const StdPriceListClient: React.FC = () => {
                   />
                 </div>
               </div>
+              {currency !== "0" && (
+                <div className="row m-6 justify-content-end">
+                  <div className="col-mt- col-xs-12 text-end">
+                    <Button
+                      type="button"
+                      onClick={onDataEditClick}
+                      className={"btn btn-danger btn-sm"}
+                    >
+                      <i className="far fa-save"></i> Save
+                    </Button>
+                  </div>
+                </div>
+              )}
             </BorderLayout>
           </form>
         </FormProvider>
         <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-          <Table config={tableConfig.config}>
-            {isStdPriceDataLoading && <Loader />}
-          </Table>
+          {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
         </BorderLayout>
       </Card>
     </>

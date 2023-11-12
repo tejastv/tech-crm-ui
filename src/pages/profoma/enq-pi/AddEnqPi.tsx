@@ -75,16 +75,16 @@ export const AddEnqPi: React.FC = () => {
       tableName: "State",
       columns: columns,
       tableData : [],
-      copyBtn: true,
-      csvBtn: true,
-      excelBtn: true,
-      pdfBtn: true,
-      printBtn: true,
-      globalSearchBox: true,
+      copyBtn: false,
+      csvBtn: false,
+      excelBtn: false,
+      pdfBtn: false,
+      printBtn: false,
+      globalSearchBox: false,
       pagination: {
         pageSize: 10,
-        nextPreviousBtnShow: true,
-        tableMetaDataShow: true,
+        nextPreviousBtnShow: false,
+        tableMetaDataShow: false,
       },
     },
   };
@@ -105,7 +105,7 @@ export const AddEnqPi: React.FC = () => {
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
             <div className="row">
-                <div className="col-md-4 col-xs-12">
+            <div className="col-md-6 col-xs-12">
                   <div className="card-body">
                   
                   <Input config={addEnqPiFormFields.companyField.config} />
@@ -143,7 +143,7 @@ export const AddEnqPi: React.FC = () => {
                 </div>
 
                 {/* 2 Column */}
-                  <div className="col-md-4 col-xs-12">
+                  <div className="col-md-6 col-xs-12">
                   <div className="card-body">
                   {/* Blank Field  */}
 
@@ -171,16 +171,17 @@ export const AddEnqPi: React.FC = () => {
                   <Input config={addEnqPiFormFields.fyearField.config} />
 
                   <Input config={addEnqPiFormFields.bankField.config} />
+                  <Input config={addEnqPiFormFields.companyIdField.config} />
+
+                  <Select config={addEnqPiFormFields.servicetypeField.config} />
+
                   </div>
                   </div>
 
                   {/* 3 Column  */}
-                  <div className="col-md-4 col-xs-12">
+                  <div className="col-md-6 col-xs-12">
                   <div className="card-body">
 
-                  <Input config={addEnqPiFormFields.companyIdField.config} />
-
-                  <Select config={addEnqPiFormFields.servicetypeField.config} />
 
                   <Input config={addEnqPiFormFields.dueonField.config} />
 
@@ -205,45 +206,46 @@ export const AddEnqPi: React.FC = () => {
                 </div>
 
                 {/* 4th Column */}
-                <div className="card-title">
+                {/* <div className="card-title">
                 <InputWithText  config={addEnqPiFormFields.clientdetailsnote.config} />
-                </div>
-                <div className="col-md-4 col-xs-12">
+                </div> */}
+                <div className="col-md-6 col-xs-12">
                 <div className="card-body">  
 
                 <Input  config={addEnqPiFormFields.clientrefField.config} />
                 
                 <Select  config={addEnqPiFormFields.clientField.config} />
 
-                <div className="col-md-14 col-xs-12 text-right">
+                <div className="col-md-14 col-xs-14 text-right">
 
                   <Button type={"submit"} className={"btn btn-danger btn-sm"}>
                     <i className="far fa-save"></i>Get Price
                   </Button>
+                  </div>
+                  <Input  config={addEnqPiFormFields.requestnoField.config} />
 
-                </div>
-
+                  <Input  config={addEnqPiFormFields.clientIdField.config} />
+               
+                  <Table config={tableConfig.config}>
+                  null
+                 </Table>
                 </div>
                 </div>
 
                 {/* 5th column */}
-                <div className="col-md-4 col-xs-12">
-                <div className="card-body">
+                {/* <div className="col-md-4 col-xs-12">
+                <div className="card-body"> */}
 
-                <Input  config={addEnqPiFormFields.requestnoField.config} />
+                
 
-                <Input  config={addEnqPiFormFields.clientIdField.config} />
-
-                </div>
-                </div>
+                {/* </div>
+                </div> */}
 
                 {/* Table */}
-                <div className="col-md-4 col-xs-12">
+                <div className="col-md-6 col-xs-12">
                 <div className="card-body">
 
-                 <Table config={tableConfig.config}>
-                  null
-                 </Table>
+                
                
                </div>
                </div>

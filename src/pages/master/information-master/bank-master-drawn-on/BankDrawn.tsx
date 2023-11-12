@@ -20,8 +20,12 @@ export const BankMasterDrawn: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Bank Master(Drawn)",
-      btnTitle: "Add Bank Master(Drawn)",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Bank Master(Drawn)",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -29,6 +33,11 @@ export const BankMasterDrawn: React.FC = () => {
   };
 
   const columns: ColumnDef<BankdrawnonType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -39,11 +48,6 @@ export const BankMasterDrawn: React.FC = () => {
       id: "bankName",
       cell: (info) => info.getValue(),
       header: () => <>Bank Name</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 
@@ -66,7 +70,7 @@ export const BankMasterDrawn: React.FC = () => {
     config: {
       tableName: "Bank Master(Drawn)",
       columns: columns,
-      tableData: BankMasterDrawnData ? BankMasterDrawnData : [],
+      tableData: BankMasterDrawnData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -87,9 +91,7 @@ export const BankMasterDrawn: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

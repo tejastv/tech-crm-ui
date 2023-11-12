@@ -20,8 +20,12 @@ export const PaymentMode: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Payment Mode",
-      btnTitle: "Add Payment Mode",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Payment Mode",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -29,6 +33,11 @@ export const PaymentMode: React.FC = () => {
   };
 
   const columns: ColumnDef<PaymentModeType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -39,11 +48,6 @@ export const PaymentMode: React.FC = () => {
       id: "paymentMode",
       cell: (info) => info.getValue(),
       header: () => <>PaymentMode</>,
-    },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
     },
   ];
 
@@ -65,7 +69,7 @@ export const PaymentMode: React.FC = () => {
     config: {
       tableName: "Payment Mode",
       columns: columns,
-      tableData: paymentModeData ? paymentModeData : [],
+      tableData: paymentModeData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -86,9 +90,7 @@ export const PaymentMode: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

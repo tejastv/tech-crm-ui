@@ -19,8 +19,12 @@ export const FinYear: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Fin. Year",
-      btnTitle: "Add Fin. Year",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Fin. Year",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -28,6 +32,11 @@ export const FinYear: React.FC = () => {
   };
 
   const columns: ColumnDef<FinYearType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -75,11 +84,6 @@ export const FinYear: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>IGST per</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const { data: finYearData, isLoading } = getFinYear();
@@ -100,7 +104,7 @@ export const FinYear: React.FC = () => {
     config: {
       tableName: "Fin. Year",
       columns: columns,
-      tableData: finYearData ? finYearData : [],
+      tableData: finYearData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -121,9 +125,7 @@ export const FinYear: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

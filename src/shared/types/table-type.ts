@@ -1,10 +1,10 @@
-import { ColumnDef } from "@tanstack/react-table";
+// import { ColumnDef } from "@tanstack/react-table";
 import { PeginationConfigType } from "..";
 
 export interface TableType<T> {
   config: {
     tableName?: string;
-    columns: ColumnDef<T>[];
+    columns: any;
     tableData: T[];
     sorting?: boolean;
     copyBtn?: boolean;
@@ -16,6 +16,6 @@ export interface TableType<T> {
     pagination?: PeginationConfigType;
     showItemCountDropdown?: boolean;
     onDeleteClick?: (data: any) => void;
-    onEditClick?: (data: any) => void;
+    onEditClick?: (data: any, other?: any) => void;
   };
 }

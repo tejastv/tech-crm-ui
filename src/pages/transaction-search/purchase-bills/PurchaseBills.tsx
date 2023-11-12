@@ -22,8 +22,12 @@ export const PurchaseBills: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Purchase Bills(of Suppliers)",
-      btnTitle: "Add Purchase Bills(of Suppliers)",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Purchase Bills(of Suppliers)",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -31,6 +35,11 @@ export const PurchaseBills: React.FC = () => {
   };
 
   const columns: ColumnDef<CompanyType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "selectall",
       cell: (info) => info.getValue(),
@@ -94,11 +103,6 @@ export const PurchaseBills: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Note</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const deleteCompanyClick = (companyData: any) => {
@@ -117,7 +121,7 @@ export const PurchaseBills: React.FC = () => {
     config: {
       tableName: "Company Master",
       columns: columns,
-      tableData: companyData ? companyData : [],
+      tableData: companyData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -138,7 +142,7 @@ export const PurchaseBills: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

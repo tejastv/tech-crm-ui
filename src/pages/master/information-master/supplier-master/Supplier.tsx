@@ -20,8 +20,12 @@ export const Supplier: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Supplier Master",
-      btnTitle: "Add Supplier",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Supplier",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -32,6 +36,11 @@ export const Supplier: React.FC = () => {
     useSupplierMasterApiCallHook();
   const navigate = useNavigate();
   const columns: ColumnDef<AddUpdateSupplierMasterType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -97,11 +106,6 @@ export const Supplier: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const { data: supplierMasterData, isLoading } = getSupplierMaster();
@@ -122,7 +126,7 @@ export const Supplier: React.FC = () => {
     config: {
       tableName: "Supplier Master",
       columns: columns,
-      tableData: supplierMasterData ? supplierMasterData : [],
+      tableData: supplierMasterData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -143,9 +147,7 @@ export const Supplier: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

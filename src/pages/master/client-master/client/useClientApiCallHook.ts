@@ -1,7 +1,7 @@
 import { useAxios } from "@hooks/useAxios";
 import { AddUpdateClientType, ClientType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, PaginationType } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
@@ -114,15 +114,15 @@ export const useClientApiCallHook = () => {
   };
 
   const getClientsByCityId = (
-    id: number,
+    filterObj: any,
     condition: any
-  ): UseQueryResult<ClientType[]> => {
-    return useQuery<ClientType[]>({
-      queryKey: [queryKeys.CITY_WISE_CLIENT_DATA, id],
+  ): UseQueryResult<PaginationType<ClientType[]>> => {
+    let queryParam = new URLSearchParams(filterObj).toString();
+    let URL = `${apiUrls.GET_CLIENT_BY_CITY_ID}?${queryParam}`;
+    return useQuery<PaginationType<ClientType[]>>({
+      queryKey: [queryKeys.CITY_WISE_CLIENT_DATA],
       queryFn: async () => {
-        const response = await instance.get(
-          apiUrls.GET_CLIENT_BY_CITY_ID.replace("{id}", "" + id)
-        );
+        const response = await instance.get(URL);
         return response.data.data;
       },
       enabled: condition, // Query is initially enabled

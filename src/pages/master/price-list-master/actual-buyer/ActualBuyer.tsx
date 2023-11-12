@@ -17,8 +17,12 @@ export const ActualBuyer: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Actual Buyer Master",
-      btnTitle: "Add Actual Buyer Master",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Actual Buyer Master",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -30,6 +34,11 @@ export const ActualBuyer: React.FC = () => {
   const navigate = useNavigate();
 
   const columns: ColumnDef<ActualBuyerType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -113,11 +122,6 @@ export const ActualBuyer: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>GSTN</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const { data: actualBuyerData, isLoading } = getActualBuyer();
@@ -138,7 +142,7 @@ export const ActualBuyer: React.FC = () => {
     config: {
       tableName: "ActualBuyer",
       columns: columns,
-      tableData: actualBuyerData ? actualBuyerData : [],
+      tableData: actualBuyerData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -159,9 +163,7 @@ export const ActualBuyer: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

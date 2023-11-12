@@ -16,8 +16,12 @@ export const GroupMaster: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Group Master",
-      btnTitle: "Add Group Master",
-      btnRoute: COMMON_ROUTES.ADD,
+      buttons: [
+        {
+          btnTitle: "Add Group Master",
+          btnRoute: COMMON_ROUTES.ADD,
+        },
+      ],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -29,6 +33,11 @@ export const GroupMaster: React.FC = () => {
   const navigate = useNavigate();
 
   const columns: ColumnDef<ClientGroupType>[] = [
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -100,11 +109,6 @@ export const GroupMaster: React.FC = () => {
       ),
       header: () => <>Show IOB Details</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const { data: clientGroupData, isLoading } = getClientGroup();
@@ -125,7 +129,7 @@ export const GroupMaster: React.FC = () => {
     config: {
       tableName: "Group Master",
       columns: columns,
-      tableData: clientGroupData ? clientGroupData : [],
+      tableData: clientGroupData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -146,9 +150,7 @@ export const GroupMaster: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );
