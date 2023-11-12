@@ -32,6 +32,7 @@ const LAST_FIN_YEAR = "last-fin-year-data";
 const CLIENT_DATA = "client-data";
 const CLIENT_GROUP_BASED_ON_ID_DATA = "client-group-based-on-id-data";
 const PRICE_LIST_FOR_CLIENT = "price-list-for-client";
+const CURRENCY_WISE_PRICE = "currency-wise-price";
 const CLIENT_WISE_PRICE = "client-wise-price";
 const GROUP_WISE_PRICE = "group-wise-price";
 
@@ -86,4 +87,5 @@ export const queryKeys = {
   PRICE_LIST_FOR_CLIENT,
   CLIENT_WISE_PRICE,
   GROUP_WISE_PRICE,
+  CURRENCY_WISE_PRICE,
 };

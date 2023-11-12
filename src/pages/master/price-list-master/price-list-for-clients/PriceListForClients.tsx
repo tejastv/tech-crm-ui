@@ -16,35 +16,27 @@ import {
   ClientWisePriceType,
   addPriceClientFormFields,
   useCityApiCallHook,
-  useClientApiCallHook,
-  // useClientGroupApiCallHook,
-  usePriceListForClientsApiCallHook,
-  // usePriceListGroupApiCallHook,
 } from "@master/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { ColumnDef } from "@tanstack/react-table";
+import { useAxios } from "@hooks/useAxios";
+import { apiUrls } from "@constants/api-urls";
 
 export const PriceListForClients: React.FC = () => {
   const getPriceFromOtherGroupForm = useForm();
-  // const otherFormGroupForm = useForm();
-  // const getPriceForm = useForm();
-
+  const { instance } = useAxios();
   const { getCity } = useCityApiCallHook();
-  const { getClientsByCityId } = useClientApiCallHook();
-  // const { getClientGroup } = useClientGroupApiCallHook();
-  // const { getGroupWiseCurrencyData } = usePriceListGroupApiCallHook();
-  const {
-    // getCurrencyAndGroupByClientID,
-    getClientWisePrice,
-    getStdPriceClientsData,
-    getCurrencyWiseStandardPrice,
-  } = usePriceListForClientsApiCallHook();
+
   const { data: cityData } = getCity();
   const [city, setCity] = useState<number>(-2);
   // const [group, setGroup] = useState<number>(-2);
   const [client, setClient] = useState<ClientType>({} as ClientType);
   let [tableCellData, setTableCellData] = useState({} as any);
-  // const [client2, setClient2] = useState<number>(-2);
+  let [tableData, setTableData] = useState<Array<any>>([] as any);
+  let [cityWiseClient, setCityWiseClient] = useState<Array<any>>([] as any);
+  let [isLoading, setIsLoading] = useState<boolean>(false);
+  let [tableHeading, setTableHeading] = useState<string>("");
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Price List (Client)",
@@ -73,35 +65,80 @@ export const PriceListForClients: React.FC = () => {
     addPriceClientFormFields.pricecity.config.options = cityArray;
   }
 
-  const { data: cityWiseClientsData } = getClientsByCityId(
-    { cityId: city },
-    city != -2
-  );
-
-  if (cityWiseClientsData) {
-    let groupArray = selectOptionsMaker(
-      cityWiseClientsData.records,
-      "clientID",
-      "clientName",
-      true
-    );
-    addPriceClientFormFields.priceClient.config.options = groupArray;
-    // addPriceClientFormFields.priceClient2.config.options = groupArray;
-  }
-
   const cityChangeHandler = (selectedOption: any) => {
     if (selectedOption) {
       setCity(selectedOption.value);
+      getCityWiseClient(selectedOption);
     }
   };
 
-  const { data: clientWisePrice, isFetching: clientWisePriceFacting } =
-    getClientWisePrice("" + client.clientID, !!client.clientID);
+  const getCityWiseClient = async (clientObj: any) => {
+    let queryParam = new URLSearchParams({
+      cityId: clientObj.value,
+    }).toString();
+    let URL = `${apiUrls.GET_CLIENT_BY_CITY_ID}?${queryParam}`;
+    const response = await instance.get(URL);
+    const data = response.data.data;
+    if (data) {
+      let groupArray = selectOptionsMaker(
+        data.records,
+        "clientID",
+        "clientName",
+        true
+      );
+      setCityWiseClient(groupArray);
+    }
+  };
+
+  if (cityWiseClient) {
+    addPriceClientFormFields.priceClient.config.options = cityWiseClient;
+  }
+
+  const getClientWisePrice = async (clientObj: ClientType) => {
+    const response = await instance.get(
+      apiUrls.CLIENT_WISE_PRICE.replace("{id}", "" + clientObj.clientID)
+    );
+    const data = response.data.data;
+    if (data) {
+      setTableData(data);
+      setIsLoading(false);
+      setTableHeading("Client wise Price");
+    }
+  };
+
+  const getCurrencyWisePrice = async (clientObj: ClientType) => {
+    const response = await instance.get(
+      apiUrls.GET_UPDATE_DELETE_STDPRICE_CLIENTS.replace(
+        "{id}",
+        "" + clientObj.currencyID
+      )
+    );
+    const data = response.data.data;
+    if (data) {
+      setTableData(data);
+      setIsLoading(false);
+      setTableHeading("Standard Price");
+    }
+  };
+
+  const getGroupWisePrice = async (clientObj: ClientType) => {
+    const response = await instance.get(
+      apiUrls.GET_GROUP_WISE_PRICE.replace("{id}", "" + clientObj.groupId)
+    );
+    const data = response.data.data;
+    if (data) {
+      setTableData(data);
+      setIsLoading(false);
+      setTableHeading("Group wise Price");
+    }
+  };
 
   const clientChangeHandler = (selectedOption: any) => {
     if (selectedOption) {
+      setTableData([]);
+      setIsLoading(true);
       setClient(selectedOption.data);
-      // setIsStdPriceBtnClicked(false);
+      getClientWisePrice(selectedOption.data);
     }
   };
 
@@ -111,18 +148,23 @@ export const PriceListForClients: React.FC = () => {
     addPriceClientFormFields.priceGroup.config.setData = client.groupName;
   }
 
-  const {
-    data: currencyWisePrice,
-    isFetching: currencyWisePriceDataFatching,
-    refetch: refatchStandardPrice,
-  } = getCurrencyWiseStandardPrice("" + client.currencyID);
-
   const onGetPriceFromOtherGroupFormSubmit =
     getPriceFromOtherGroupForm.handleSubmit((data, e): void => {
-      console.log("value", data, e);
+      setIsLoading(true);
       if (e?.target.name == "stdPrice") {
-        refatchStandardPrice();
+        let confirmation = confirm(
+          "Do you want fatch price from Standard Price?"
+        );
+        if (confirmation) {
+          setTableData([]);
+          getCurrencyWisePrice(client);
+        }
       } else if (e?.target.name == "fromGroup") {
+        let confirmation = confirm("Do you want fatch price from Group?");
+        if (confirmation) {
+          setTableData([]);
+          getGroupWisePrice(client);
+        }
       }
     });
 
@@ -325,7 +367,7 @@ export const PriceListForClients: React.FC = () => {
     config: {
       tableName: "",
       columns: columns,
-      tableData: [],
+      tableData: tableData,
       copyBtn: false,
       csvBtn: false,
       excelBtn: false,
@@ -430,25 +472,13 @@ export const PriceListForClients: React.FC = () => {
           </BorderLayout>
         </div>
         <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-          {!clientWisePriceFacting ? (
-            <Table
-              config={{
-                ...tableConfig.config,
-                tableData: clientWisePrice || [],
-              }}
-            />
-          ) : (
-            <Loader />
+          {tableHeading && (
+            <label className="custom-label" htmlFor="tableHeading">
+              {tableHeading}
+            </label>
           )}
-          {!currencyWisePriceDataFatching ? (
-            <Table
-              config={{
-                ...tableConfig.config,
-                tableData: currencyWisePrice || [],
-              }}
-            />
-          ) : (
-            <Loader />
+          {tableData.length > 0 && (
+            <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
           )}
         </BorderLayout>
       </Card>

@@ -76,6 +76,8 @@ export const useAxios = () => {
       if (error.response?.status === STATUS_CODES.CODE_401) {
         removeItem("user");
         navigate("/login");
+      } else {
+        errorMessageToaster(error.message, "single");
       }
       return Promise.reject(error);
     }

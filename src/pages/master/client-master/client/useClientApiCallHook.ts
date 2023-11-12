@@ -20,7 +20,7 @@ export const useClientApiCallHook = () => {
       queryKey: [queryKeys.CLIENT_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CLIENT);
-        return response.data.data;
+        return response.data.data.records;
       },
       staleTime: Infinity,
     });

@@ -2,45 +2,34 @@ import { useAxios } from "@hooks/useAxios";
 import {
   ClientWisePriceType,
   CurrencyAndGroupType,
-  StdPriceClientsType,
+  CurrencyWisePrice,
 } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 export const usePriceListForClientsApiCallHook = () => {
   const { instance } = useAxios();
+  const queryClient = useQueryClient();
 
-  const getStdPriceClientsData = (
-    id: string
-  ): UseQueryResult<StdPriceClientsType[]> => {
-    return useQuery<StdPriceClientsType[]>({
-      queryKey: [queryKeys.PRICE_LIST_FOR_CLIENT, id],
-      queryFn: async () => {
-        const response = await instance.get(
-          apiUrls.GET_UPDATE_DELETE_STDPRICE_CLIENTS.replace("{id}", id)
-        );
-        return response.data.data;
-      },
-      enabled: false, // Query is initially enabled
-      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus,
-    });
-  };
-
-  const getCurrencyWiseStandardPrice = (
-    id: string
-  ): UseQueryResult<StdPriceClientsType[]> => {
-    return useQuery<StdPriceClientsType[]>({
-      queryKey: [queryKeys.PRICE_LIST_FOR_CLIENT, id],
-      queryFn: async () => {
-        const response = await instance.get(
-          apiUrls.GET_UPDATE_DELETE_STDPRICE_CLIENTS.replace("{id}", id)
-        );
-        return response.data.data;
-      },
-      enabled: false, // Query is initially enabled
-      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus,
-    });
-  };
+  // const getStdPriceClientsData = (
+  //   id: string
+  // ): UseQueryResult<StdPriceClientsType[]> => {
+  //   return useQuery<StdPriceClientsType[]>({
+  //     queryKey: [queryKeys.PRICE_LIST_FOR_CLIENT, id],
+  //     queryFn: async () => {
+  //       const response = await instance.get(
+  //         apiUrls.GET_UPDATE_DELETE_STDPRICE_CLIENTS.replace("{id}", id)
+  //       );
+  //       return response.data.data;
+  //     },
+  //     enabled: false, // Query is initially enabled
+  //     refetchOnWindowFocus: false, // Prevent automatic refetch on window focus,
+  //   });
+  // };
 
   const getClientWisePrice = (
     id: string,
@@ -56,6 +45,22 @@ export const usePriceListForClientsApiCallHook = () => {
       },
       enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+    });
+  };
+
+  const getCurrencyWisePrice = (
+    id: string
+  ): UseQueryResult<CurrencyWisePrice[]> => {
+    return useQuery<CurrencyWisePrice[]>({
+      queryKey: [queryKeys.CURRENCY_WISE_PRICE, id],
+      queryFn: async () => {
+        const response = await instance.get(
+          apiUrls.GET_UPDATE_DELETE_STDPRICE_CLIENTS.replace("{id}", id)
+        );
+        return response.data.data;
+      },
+      enabled: false, // Query is initially enabled
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus,
     });
   };
 
@@ -86,28 +91,28 @@ export const usePriceListForClientsApiCallHook = () => {
   //   });
   // };
 
-  const getCurrencyAndGroupByClientID = (
-    id: number,
-    condition: any
-  ): UseQueryResult<CurrencyAndGroupType> => {
-    return useQuery<CurrencyAndGroupType>({
-      queryKey: [queryKeys.PRICE_LIST_FOR_CLIENT, id],
-      queryFn: async () => {
-        const response = await instance.get(
-          apiUrls.GET_CLIENT_WISE_CURRENCY_AND_GROUP.replace("{id}", "" + id)
-        );
-        return response.data.data;
-      },
-      enabled: condition, // Query is initially enabled
-      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
-    });
-  };
+  // const getCurrencyAndGroupByClientID = (
+  //   id: number,
+  //   condition: any
+  // ): UseQueryResult<CurrencyAndGroupType> => {
+  //   return useQuery<CurrencyAndGroupType>({
+  //     queryKey: [queryKeys.PRICE_LIST_FOR_CLIENT, id],
+  //     queryFn: async () => {
+  //       const response = await instance.get(
+  //         apiUrls.GET_CLIENT_WISE_CURRENCY_AND_GROUP.replace("{id}", "" + id)
+  //       );
+  //       return response.data.data;
+  //     },
+  //     enabled: condition, // Query is initially enabled
+  //     refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+  //   });
+  // };
 
   return {
-    getStdPriceClientsData,
-    getCurrencyAndGroupByClientID,
     getClientWisePrice,
-    getCurrencyWiseStandardPrice,
+    getCurrencyWisePrice,
+    // getStdPriceClientsData,
+    // getCurrencyAndGroupByClientID,
     // getPriceBasedOnParamater,
   };
 };
