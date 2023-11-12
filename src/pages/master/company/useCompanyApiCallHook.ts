@@ -1,10 +1,9 @@
 import { useAxios } from "@hooks/useAxios";
 import { CompanyType, AddUpdateCompanyType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, PaginationType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-
 
 export const useCompanyApiCallHook = () => {
   const { instance } = useAxios();
@@ -12,11 +11,18 @@ export const useCompanyApiCallHook = () => {
   const navigate = useNavigate();
 
   const getCompany = () => {
+    console.log("response");
     return useQuery<CompanyType[]>({
       queryKey: [queryKeys.COMPANY_MASTER_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_COMPANY_MASTER);
-        const data = response.data.data.sort((a: { companyName: string; }, b: { companyName: any; }) => a.companyName.localeCompare(b.companyName));
+        console.log(response.data.data.records);
+        const data = response.data.data.records.sort(
+          (a: { companyName: string }, b: { companyName: any }) =>
+            a.companyName.localeCompare(b.companyName)
+        );
+        console.log(data);
+
         return data;
       },
       staleTime: Infinity,
@@ -40,7 +46,10 @@ export const useCompanyApiCallHook = () => {
   const addCompany = async (
     companyData: AddUpdateCompanyType
   ): Promise<ApiResponseType<CompanyType>> => {
-    const response = await instance.post(apiUrls.GET_ADD_COMPANY_MASTER, companyData);
+    const response = await instance.post(
+      apiUrls.GET_ADD_COMPANY_MASTER,
+      companyData
+    );
     return response.data.data;
   };
 
@@ -97,7 +106,9 @@ export const useCompanyApiCallHook = () => {
   const deleteCompanyMutation = () => {
     const mutation = useMutation((id: string) => deleteCompany(id), {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.COMPANY_MASTER_DATA] });
+        queryClient.invalidateQueries({
+          queryKey: [queryKeys.COMPANY_MASTER_DATA],
+        });
       },
     });
     return mutation;

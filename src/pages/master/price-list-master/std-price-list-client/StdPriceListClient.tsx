@@ -13,7 +13,7 @@ import {
 } from "@shared/index";
 import {
   AddStdPriceClientsType,
-  StdPriceClientsType,
+  CurrencyWisePrice,
   addStdPriceClientsFormFields,
   useCurrencyApiCallHook,
   useStdPriceClientsApiCallHook,
@@ -56,7 +56,7 @@ export const StdPriceListClient: React.FC = () => {
 
   let [tableData, setTableData] = useState({} as any);
 
-  const columns: ColumnDef<StdPriceClientsType>[] = [
+  const columns: ColumnDef<CurrencyWisePrice>[] = [
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -268,7 +268,7 @@ export const StdPriceListClient: React.FC = () => {
 
   const { data: stdPriceData, isFetching } = getStdPriceClientsData(currency);
 
-  const tableConfig: TableType<StdPriceClientsType> = {
+  const tableConfig: TableType<CurrencyWisePrice> = {
     config: {
       tableName: "Standard Price",
       columns: columns,

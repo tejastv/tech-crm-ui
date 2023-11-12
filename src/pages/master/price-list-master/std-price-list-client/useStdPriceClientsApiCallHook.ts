@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { StdPriceClientsType, UpdateStandardPrice } from "@master/index";
+import { CurrencyWisePrice, UpdateStandardPrice } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { UseQueryResult, useMutation, useQuery } from "@tanstack/react-query";
 import { ApiResponseType } from "@shared/index";
@@ -9,8 +9,8 @@ export const useStdPriceClientsApiCallHook = () => {
 
   const getStdPriceClientsData = (
     id: string
-  ): UseQueryResult<StdPriceClientsType[]> => {
-    return useQuery<StdPriceClientsType[]>({
+  ): UseQueryResult<CurrencyWisePrice[]> => {
+    return useQuery<CurrencyWisePrice[]>({
       queryKey: [queryKeys.PRICE_LIST_STANDARD_PRICE, id],
       queryFn: async () => {
         const response = await instance.get(

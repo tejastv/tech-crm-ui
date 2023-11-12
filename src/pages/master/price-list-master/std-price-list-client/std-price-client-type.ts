@@ -1,4 +1,4 @@
-export interface StdPriceClientsType {
+export interface CurrencyWisePrice {
   srNo?: number;
   countryId: number;
   currencyId: number;
