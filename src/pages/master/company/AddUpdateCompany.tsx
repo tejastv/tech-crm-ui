@@ -118,9 +118,9 @@ export const AddUpdateCompany: React.FC = () => {
         );
         addCompanyFormFields.city.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (stateData) {
@@ -134,9 +134,9 @@ export const AddUpdateCompany: React.FC = () => {
         );
         addCompanyFormFields.state.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (countryData) {
@@ -150,9 +150,9 @@ export const AddUpdateCompany: React.FC = () => {
         );
         addCompanyFormFields.country.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       addCompanyFormFields.nameField.config.setData =
@@ -180,7 +180,7 @@ export const AddUpdateCompany: React.FC = () => {
       addCompanyFormFields.regno.config.setData =
         companyMasterData.companyRegNo;
       addCompanyFormFields.companyType.config.setData =
-        +companyMasterData.companyType;
+        companyMasterData.companyType.toString();
       addCompanyFormFields.incorporationDate.config.setData =
         companyMasterData.incorporationDate;
       addCompanyFormFields.bankers.config.setData = companyMasterData.bankers;
@@ -199,8 +199,8 @@ export const AddUpdateCompany: React.FC = () => {
 
   const handleSelectChange = (selectedOption: any) => {
     if (selectedOption) {
-      setSelectedStateId(selectedOption.data.stateId)
-      setSelectedCountryId(selectedOption.data.countryId)
+      setSelectedStateId(selectedOption.data.stateId);
+      setSelectedCountryId(selectedOption.data.countryId);
     }
   };
 
@@ -215,9 +215,9 @@ export const AddUpdateCompany: React.FC = () => {
     );
     addCompanyFormFields.state.config.setData = data
       ? {
-        label: data.label,
-        value: data.value,
-      }
+          label: data.label,
+          value: data.value,
+        }
       : [];
   }
 
@@ -232,9 +232,9 @@ export const AddUpdateCompany: React.FC = () => {
     );
     addCompanyFormFields.country.config.setData = data
       ? {
-        label: data.label,
-        value: data.value,
-      }
+          label: data.label,
+          value: data.value,
+        }
       : [];
   }
 
@@ -255,17 +255,21 @@ export const AddUpdateCompany: React.FC = () => {
                     <Input config={addCompanyFormFields.nameField.config} />
                     <Input config={addCompanyFormFields.addressField.config} />
                     <Input config={addCompanyFormFields.zip.config} />
-                    <Select config={addCompanyFormFields.city.config} onChangeHandler={handleSelectChange} />
+                    <Select
+                      config={addCompanyFormFields.city.config}
+                      onChangeHandler={handleSelectChange}
+                    />
                     <Select config={addCompanyFormFields.state.config} />
                     <Select config={addCompanyFormFields.country.config} />
-                    <Input config={addCompanyFormFields.officeAddressField.config} />
+                    <Input
+                      config={addCompanyFormFields.officeAddressField.config}
+                    />
                     <Input config={addCompanyFormFields.telNo.config} />
                     <Input config={addCompanyFormFields.faxNo.config} />
                     <Input config={addCompanyFormFields.emailField.config} />
                     <Input config={addCompanyFormFields.website.config} />
                     <Input config={addCompanyFormFields.contactPerson.config} />
                     <Input config={addCompanyFormFields.designation.config} />
-
                   </div>
                 </div>
                 <div className="col-md-6 col-xs-12">
