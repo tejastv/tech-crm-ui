@@ -65,7 +65,7 @@ export const City: React.FC = () => {
   const { mutateAsync: deleteCity } = deleteCityMutation();
 
   const deleteCityClick = async (cityData: any) => {
-    var confirmation = confirm("Are you sure to delete it?");
+    let confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
       await deleteCity(cityData.id);
     }
@@ -74,12 +74,13 @@ export const City: React.FC = () => {
   const editCityClick = (cityData: any) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", cityData.cityId));
   };
+  console.log(cityData);
 
   const tableConfig: TableType<CityType> = {
     config: {
       tableName: "City",
       columns: columns,
-      tableData: cityData || [],
+      tableData: cityData ? cityData : [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -100,7 +101,7 @@ export const City: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

@@ -1,9 +1,16 @@
 import { useAxios } from "@hooks/useAxios";
+<<<<<<< HEAD
 import { AddUpdateStdPriceType, StdPriceType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { UseQueryResult, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ApiResponseType } from "@shared/index";
 import { useNavigate } from "react-router-dom";
+=======
+import { StdPriceType, UpdateLsStandardPrice } from "@master/index";
+import { apiUrls, queryKeys } from "@constants/index";
+import { UseQueryResult, useMutation, useQuery } from "@tanstack/react-query";
+import { ApiResponseType } from "@shared/index";
+>>>>>>> 86ad2ea880f5ddd356a32b18a93bf1eccd378edb
 
 export const useStdPriceApiCallHook = () => {
   const { instance } = useAxios();  
@@ -12,7 +19,7 @@ export const useStdPriceApiCallHook = () => {
 
   const getStdPriceData = (id: string): UseQueryResult<StdPriceType[]> => {
     return useQuery<StdPriceType[]>({
-      queryKey: [queryKeys.STDPRICE_DATA, id],
+      queryKey: [queryKeys.LOCALSOURCE_STANDARD_PRCE, id],
       queryFn: async () => {
         const response = await instance.get(
           apiUrls.GET_UPDATE_DELETE_STDPRICE.replace("{id}", id)
@@ -24,6 +31,7 @@ export const useStdPriceApiCallHook = () => {
     });
   };
 
+<<<<<<< HEAD
   const addStdPrice = async (
     stdPriceData: AddUpdateStdPriceType
   ): Promise<ApiResponseType<StdPriceType>> => {
@@ -55,10 +63,22 @@ export const useStdPriceApiCallHook = () => {
         "" + updateStdPriceData.currencyId
       ),
       updateStdPriceData
+=======
+  const updateStandardPrice = async (
+    updateStandardPrice: Array<UpdateLsStandardPrice>
+  ): Promise<ApiResponseType<any>> => {
+    const response = await instance.post(
+      apiUrls.UPDATE_LOCALSOURCE_STANDARD_PRICE.replace(
+        "{id}",
+        "" + updateStandardPrice[0].currency_id
+      ),
+      updateStandardPrice
+>>>>>>> 86ad2ea880f5ddd356a32b18a93bf1eccd378edb
     );
     return response.data.data;
   };
 
+<<<<<<< HEAD
   const updateStdPriceMutation = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateStdPriceType) => updateStdPriceData(updatedItem),
@@ -87,13 +107,21 @@ export const useStdPriceApiCallHook = () => {
         queryClient.invalidateQueries({ queryKey: [queryKeys.STD_PRICE_DATA] });
       },
     });
+=======
+  const updateStandardPriceMutation = () => {
+    const mutation = useMutation(updateStandardPrice);
+>>>>>>> 86ad2ea880f5ddd356a32b18a93bf1eccd378edb
     return mutation;
   };
 
   return {
     getStdPriceData,
+<<<<<<< HEAD
     addStdPriceMutation,
     updateStdPriceMutation,
     deleteStdPriceMutation
+=======
+    updateStandardPriceMutation,
+>>>>>>> 86ad2ea880f5ddd356a32b18a93bf1eccd378edb
   };
 };

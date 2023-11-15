@@ -113,16 +113,18 @@ const priceClientCurrency: FormFieldType = createFormConfig(
   "Currency",
   "select",
   PriceClientCurrencyValidation,
-  "Select Currency",
-  []
+  "Currency",
+  [],
+  true
 );
 const priceGroup: FormFieldType = createFormConfig(
   "priceGroup",
   "Group",
   "select",
   PriceGroupValidation,
-  "Select Group",
-  []
+  "Group",
+  [],
+  true
 );
 const priceGroup2: FormFieldType = createFormConfig(
   "priceGroup2",

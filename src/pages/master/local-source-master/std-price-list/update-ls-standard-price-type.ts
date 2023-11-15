@@ -1,10 +1,8 @@
-export interface StdPriceType {
+export interface UpdateLsStandardPrice {
+  currency_id?: number;
   countryId: number;
-  currencyId: number;
-  countryName: string;
   price: number;
   priceHighDel: number;
-  otherCharges: number;
   priceOnline: number;
   priceSuperFlash: number;
   priceSME: number;

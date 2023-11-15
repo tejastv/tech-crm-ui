@@ -34,6 +34,8 @@ export const CompanyMaster: React.FC = () => {
     },
   };
 
+  console.log(isLoading);
+
   const columns: ColumnDef<CompanyType>[] = [
     {
       id: "action",
@@ -134,7 +136,6 @@ export const CompanyMaster: React.FC = () => {
   };
 
   const editCompanyClick = (companyData: any) => {
-    console.log(companyData);
     navigate(COMMON_ROUTES.EDIT.replace(":id", companyData.companyId));
   };
 
@@ -163,7 +164,7 @@ export const CompanyMaster: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

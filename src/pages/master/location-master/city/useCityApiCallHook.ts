@@ -3,16 +3,16 @@ import { AddUpdateCityType, CityType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
+  QueryClient,
   UseQueryResult,
   useMutation,
   useQuery,
-  useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 export const useCityApiCallHook = () => {
   const { instance } = useAxios();
-  const queryClient = useQueryClient();
+  const queryClient = new QueryClient();
   const navigate = useNavigate();
 
   const getCity = (): UseQueryResult<CityType[]> => {
@@ -20,14 +20,20 @@ export const useCityApiCallHook = () => {
       queryKey: [queryKeys.CITY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CITY);
-        const data = response.data.data.sort((a: { cityName: string; }, b: { cityName: any; }) => a.cityName.localeCompare(b.cityName));
+        const data = response.data.data.sort(
+          (a: { cityName: string }, b: { cityName: any }) =>
+            a.cityName.localeCompare(b.cityName)
+        );
         return data;
       },
       staleTime: Infinity,
     });
   };
 
-  const getCityData = (id: string): UseQueryResult<CityType> => {
+  const getCityData = (
+    id: string,
+    condition?: any
+  ): UseQueryResult<CityType> => {
     return useQuery<CityType>({
       queryKey: [queryKeys.CITY_DATA, id],
       queryFn: async () => {
@@ -36,7 +42,7 @@ export const useCityApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };

@@ -17,8 +17,9 @@ export const useAllEnquiriesApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [queryParam, setQueryParam] = useState<{ [key: string]: string | undefined }>({});
-  
+  const [queryParam, setQueryParam] = useState<{
+    [key: string]: string | undefined;
+  }>({});
 
   const callFormConfig = {
     headers: {
@@ -45,13 +46,16 @@ export const useAllEnquiriesApiCallHook = () => {
       queryKey: [queryKeys.ENQUIRY_DATA, queryParam],
       queryFn: async () => {
         const baseUrl = apiUrls.GET_ADD_ALL_ENQUIRY_SEARCH;
-        const queryParams = [];       
+        const queryParams = [];
         for (const key in queryParam) {
           if (queryParam[key] !== undefined) {
             queryParams.push(`${key}=${queryParam[key]!}`);
           }
         }
-        const fullUrl = queryParams.length > 0 ? `${baseUrl}?${queryParams.join('&')}` : baseUrl;
+        const fullUrl =
+          queryParams.length > 0
+            ? `${baseUrl}?${queryParams.join("&")}`
+            : baseUrl;
         const response = await instance.get(fullUrl, callFormConfig);
         return response.data.data;
       },
@@ -61,8 +65,7 @@ export const useAllEnquiriesApiCallHook = () => {
 
   const getEnquiryBasedOnSearchParam = (params: any) => {
     setQueryParam(params);
-
-  }
+  };
 
   const getEnquiryData = (id: string): UseQueryResult<AllEnquiriesType> => {
     return useQuery<AllEnquiriesType>({

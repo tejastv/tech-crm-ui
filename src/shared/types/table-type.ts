@@ -16,6 +16,6 @@ export interface TableType<T> {
     pagination?: PeginationConfigType;
     showItemCountDropdown?: boolean;
     onDeleteClick?: (data: any) => void;
-    onEditClick?: (data: any) => void;
+    onEditClick?: (data: any, other?: any) => void;
   };
 }

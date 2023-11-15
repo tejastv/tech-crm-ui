@@ -3,7 +3,6 @@ export interface ClientType {
   segmentName: string;
   currencyName: string;
   groupName: string;
-
   cityName: unknown;
   city: string;
   stateName: string;
