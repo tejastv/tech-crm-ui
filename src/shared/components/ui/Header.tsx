@@ -661,13 +661,7 @@ export const Header: React.FC = () => {
                         </Link>
                       </li>
 
-                      <li className="sidebar-item">
-                        {" "}
-                        <a className="sidebar-link" href="enquiry_search.php">
-                          <i className="mdi mdi-creation"></i>
-                          <span className="hide-menu ">Enquiry Search</span>
-                        </a>
-                      </li>
+                      
                       <li className="sidebar-item">
                         {" "}
                         <a

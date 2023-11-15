@@ -7,19 +7,19 @@ const GET_UPDATE_DELETE_CONTINENT = "location/continent/{id}";
 const GET_UPDATE_DELETE_COUNTRY = "location/country/{id}";
 const GET_UPDATE_DELETE_STATE = "location/state/{id}";
 
-const GET_ADD_SEGMENT = "entity/segment";
-const GET_UPDATE_DELETE_SEGMENT = "entity/segment/{id}";
+const GET_ADD_SEGMENT = "/segment";
+const GET_UPDATE_DELETE_SEGMENT = "/segment/{id}";
 
 const GET_ADD_EXECUTIVE = "utility/executive";
 const GET_UPDATE_DELETE_EXECUTIVE = "utility/executive/{id}";
 
-const GET_ADD_LOCALSOURCE = "entity/localSource";
-const GET_UPDATE_DELETE_LOCALSOURCE = "entity/localSource/{id}";
+const GET_ADD_LOCALSOURCE = "/localSource";
+const GET_UPDATE_DELETE_LOCALSOURCE = "/localSource/{id}";
 
 const GET_ADD_CURRENCY = "utility/currency";
 const GET_UPDATE_DELETE_CURRENCY = "utility/currency/{id}";
-const GET_ADD_COMPANY_MASTER = "entity/companyMaster";
-const GET_UPDATE_DELETE_COMPANY_MASTER = "entity/companyMaster/{id}";
+const GET_ADD_COMPANY_MASTER = "/companyMaster";
+const GET_UPDATE_DELETE_COMPANY_MASTER = "/companyMaster/{id}";
 
 const GET_ADD_FIN_YEAR = "utility/finYear";
 const GET_UPDATE_DELETE_FIN_YEAR = "utility/finYear/{id}";
@@ -27,16 +27,16 @@ const GET_UPDATE_DELETE_FIN_YEAR = "utility/finYear/{id}";
 const GET_ADD_INDUSTRY = "utility/industry";
 const GET_UPDATE_DELETE_INDUSTRY = "utility/industry/{id}";
 
-const GET_ADD_ACTUAL_BUYER = "entity/actualBuyer";
-const GET_UPDATE_DELETE_ACTUAL_BUYER = "entity/actualBuyer/{id}";
+const GET_ADD_ACTUAL_BUYER = "/actualBuyer";
+const GET_UPDATE_DELETE_ACTUAL_BUYER = "/actualBuyer/{id}";
 
 const GET_CITY_WISE_GROUP =
-  "entity/priceListGroupWise/getClientGroupByCity/{id}";
+  "/priceListGroupWise/getClientGroupByCity/{id}";
 const GET_GROUP_WISE_CURRENCY =
-  "entity/priceListGroupWise/getCurrencyByGroup/{id}";
+  "/priceListGroupWise/getCurrencyByGroup/{id}";
 
-const GET_PRICE_LIST_STD_DATA = "entity/priceListGroupWise/currency/{id}";
-const GET_PRICE_LIST_DATA = "entity/priceListGroupWise/getPriceByGroupId/{id}";
+const GET_PRICE_LIST_STD_DATA = "/priceListGroupWise/currency/{id}";
+const GET_PRICE_LIST_DATA = "/priceListGroupWise/getPriceByGroupId/{id}";
 
 const GET_ADD_CALL_TYPE = "utility/callType";
 const GET_UPDATE_DELETE_CALL_TYPE = "utility/callType/{id}";
@@ -56,8 +56,8 @@ const GET_UPDATE_DELETE_USER = "user/{id}";
 const GET_ADD_PAYMENTMODE = "utility/paymentMode";
 const GET_UPDATE_DELETE_PAYMENTMODE = "utility/paymentMode/{id}";
 
-const GET_ADD_SUPPLIER_MASTER = "entity/supplierMaster";
-const GET_UPDATE_DELETE_SUPPLIER_MASTER = "entity/supplierMaster/{id}";
+const GET_ADD_SUPPLIER_MASTER = "/supplierMaster";
+const GET_UPDATE_DELETE_SUPPLIER_MASTER = "/supplierMaster/{id}";
 
 const GET_ADD_BANKMASTER_DRAWN = "utility/bankMaster";
 const GET_UPDATE_DELETE_BANKMASTER_DRAWN = "utility/bankMaster/{id}";
@@ -67,25 +67,25 @@ const GET_UPDATE_DELETE_BANKMASTER_DEPOSIT = "utility/bankDetails/{id}";
 
 // Std Price
 const GET_ADD_STDPRICE_LOCALSOURCE = "stdPriceListForLocalSource/updatingStdPriceListForLocalSource/currency/{currencyId}/country/{countryId}"
-const GET_UPDATE_DELETE_STDPRICE = "entity/stdPriceListForLocalSource/{id}";
-const GET_UPDATE_DELETE_STDPRICE_CLIENTS = "entity/stdPriceListForClients/{id}";
+const GET_UPDATE_DELETE_STDPRICE = "/stdPriceListForLocalSource/{id}";
+const GET_UPDATE_DELETE_STDPRICE_CLIENTS = "/stdPriceListForClients/{id}";
 const GET_CLIENT_WISE_CURRENCY_AND_GROUP =
-  "entity/priceListForClient/getCurrencyAndGroup/{id}";
-const GET_CLIENT_BY_CITY_ID = "entity/priceListForClient/city/{id}";
+  "/priceListForClient/getCurrencyAndGroup/{id}";
+const GET_CLIENT_BY_CITY_ID = "/priceListForClient/city/{id}";
 
-const GET_ADD_CLIENT_GROUP = "entity/clientGroup";
-const GET_UPDATE_DELETE_CLIENT_GROUP = "entity/clientGroup/{id}";
+const GET_ADD_CLIENT_GROUP = "/clientGroup";
+const GET_UPDATE_DELETE_CLIENT_GROUP = "/clientGroup/{id}";
 const UPDATE_CLIENT_GROUP =
-  "entity/clientGroup/{ClientGroupId}/clintGroupIdToMove/{clintGroupIdToMove}";
+  "/clientGroup/{ClientGroupId}/clintGroupIdToMove/{clintGroupIdToMove}";
 
 const GET_ADD_SOURCE = "utility/sourceMaster";
 const GET_UPDATE_DELETE_SOURCE = "utility/sourceMaster/{id}";
 
 const GET_LAST_FIN_YEAR = "utility/finYear/lastFinYear";
 
-const GET_ADD_CLIENT = "entity/client";
-const GET_UPDATE_DELETE_CLIENT = "entity/client/{id}";
-const GET_CLIENT_GROUP_BASED_ON_ID = "entity/client/clientGroup/{id}";
+const GET_ADD_CLIENT = "/client";
+const GET_UPDATE_DELETE_CLIENT = "/client/{id}";
+const GET_CLIENT_GROUP_BASED_ON_ID = "/client/clientGroup/{id}";
 
 // Transaction Master
 
@@ -93,7 +93,7 @@ const GET_ADD_ALL_ENQUIRY = "transaction/enquiry";
 const GET_UPDATE_DELETE_ALL_ENQUIRY = "transaction/enquiry/{id}";
 const GET_ADD_ALL_ENQUIRY_SEARCH = "transaction/allEnquiryAndSearch";
 const GET_PRICE =
-  "entity/priceListForClient/client/{client_id}/country/{country_id}/serviceType/{serviceTypeId}";
+  "/priceListForClient/client/{client_id}/country/{country_id}/serviceType/{serviceTypeId}";
 
 const GET_ADD_SERVICETYPE = "transaction/serviceType";
 const GET_ADD_ENQTYPE = "transaction/enquiryStatus";

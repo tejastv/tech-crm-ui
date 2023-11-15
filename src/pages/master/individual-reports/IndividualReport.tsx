@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
-    ActionButtons,
+  ActionButtons,
   BorderLayout,
   Button,
   Card,
@@ -13,7 +13,6 @@ import {
   Radio,
   Select,
   SingleCheckbox,
- 
 } from "@shared/index";
 
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
@@ -34,637 +33,1120 @@ export const IndividualReport: React.FC = () => {
     formclieckUpdateConfig: {
       heading: "Click to Enter / Update / View Price List",
     },
-    
   };
-
 
   const methods = useForm();
 
-
   return (
     <>
-    
       <Card config={cardConfig.formLayoutConfig}>
         <FormProvider {...methods}>
+          {/* Inquiry Details*/}
+          <CardLayOut>
+            <Button
+              className="btn btn-link"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseOne"
+            >
+              <i className="fa fa-plus"></i>INQUIRY DETAILS
+            </Button>
 
-            {/* Inquiry Details*/}
-      <CardLayOut >
-        <Button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne">
-                <i className="fa fa-plus"></i>INQUIRY DETAILS</Button>
-        
-      <form noValidate autoComplete="off" className="p-t-20">
-      {/* <div className="collapse" id="collapseOne" aria-labelledby="headingOne"> */}
-	      <div className="card">
-        <div className="card-body"> 
-        <div className="row">
-                  <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.preparedFor.config} />
-                    </div>
-
+            <form noValidate autoComplete="off" className="p-t-20">
+              {/* <div className="collapse" id="collapseOne" aria-labelledby="headingOne"> */}
+              <div className="card">
+                <div className="card-body">
+                  <div className="row">
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.yourRefNo.config} />
-                    </div>
-
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.reportNo.config} />
-                    </div>
-
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.inquiryDate.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.preparedFor.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.reportDate.config} />
-                    </div>
-                    
-        </div>
-        </div>
-        </div>		
-	
-        </form>
-      </CardLayOut>
-
-      {/* RESIDENCE VERIFICATION */} 
-      <CardLayOut >
-        <Button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne">
-                <i className="fa fa-plus"></i>RESIDENCE VERIFICATION</Button>
-        
-        <form noValidate autoComplete="off" className="p-t-20">
-        <div className="card">
-        <div className="card-body">  
-        <div className="row">
-          <div className="col-md-12">
-          <h4 className="text-red-custom1">Applicant Details</h4>
-          </div>
-                  <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rName.config} />
+                      <Input
+                        config={addIndividualReportFormFields.yourRefNo.config}
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rRelationshipWithApplicant.config} />
+                      <Input
+                        config={addIndividualReportFormFields.reportNo.config}
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rMobileNumber.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.inquiryDate.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rPersonMet.config} />
+                      <Input
+                        config={addIndividualReportFormFields.reportDate.config}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </CardLayOut>
+
+          {/* RESIDENCE VERIFICATION */}
+          <CardLayOut>
+            <Button
+              className="btn btn-link"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseOne"
+            >
+              <i className="fa fa-plus"></i>RESIDENCE VERIFICATION
+            </Button>
+
+            <form noValidate autoComplete="off" className="p-t-20">
+              <div className="card">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <h4 className="text-red-custom1">Applicant Details</h4>
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={addIndividualReportFormFields.rName.config}
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rPersonMetMobileNo.config} />
-                    </div>
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rRelationshipWithApplicantCoAplication.config} />
-                    </div>
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rEmail.config} />
-                    </div>
-                    <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.rGender.config} />
-                    </div>
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rMaritalStatus.config} />
-                    </div>
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rEducation.config} />
-                    </div>
-                    <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.rEducationProofProvided.config} />
-                    </div>
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rNoofFamilyMembers.config} />
-                    </div>
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rDependentMembers.config} />
-                    </div>
-
-             </div>
-        <div className="row">
-          <div className="col-md-12">
-          <h4 className="text-red-custom2">Residential Property Details</h4>
-          </div>
-                  <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rAddressVisited.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields
+                            .rRelationshipWithApplicant.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rNearestLandMark.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rMobileNumber.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.rPropertyStatus.config} />
+                      <Input
+                        config={addIndividualReportFormFields.rPersonMet.config}
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rNameofTheOwner.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rPersonMetMobileNo
+                            .config
+                        }
+                      />
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields
+                            .rRelationshipWithApplicantCoAplication.config
+                        }
+                      />
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={addIndividualReportFormFields.rEmail.config}
+                      />
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Radio
+                        config={addIndividualReportFormFields.rGender.config}
+                      />
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rMaritalStatus.config
+                        }
+                      />
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={addIndividualReportFormFields.rEducation.config}
+                      />
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.rEducationProofProvided
+                            .config
+                        }
+                      />
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rNoofFamilyMembers
+                            .config
+                        }
+                      />
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rDependentMembers.config
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-12">
+                      <h4 className="text-red-custom2">
+                        Residential Property Details
+                      </h4>
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rAddressVisited.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rRelationshipWithApplicantCoAplication.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rNearestLandMark.config
+                        }
+                      />
+                    </div>
+
+                    <div className="col-md-4 col-xs-12">
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.rPropertyStatus.config
+                        }
+                      />
+                    </div>
+
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rNameofTheOwner.config
+                        }
+                      />
+                    </div>
+
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields
+                            .rRelationshipWithApplicantCoAplication.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.rTypeofUnit.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.rTypeofUnit.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.rConstructionType.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.rConstructionType.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rArea.config} />
+                      <Input
+                        config={addIndividualReportFormFields.rArea.config}
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rNoofFloors.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rNoofFloors.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rFloorsLocation.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rFloorsLocation.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rDurationofStay.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rDurationofStay.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rFrom.config} />
+                      <Input
+                        config={addIndividualReportFormFields.rFrom.config}
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rTo.config} />
+                      <Input
+                        config={addIndividualReportFormFields.rTo.config}
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.rDoorNamePlate.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.rDoorNamePlate.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.rClassofLocality.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.rClassofLocality.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.rAccessbility.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.rAccessbility.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.rPropertyInteriors.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.rPropertyInteriors
+                            .config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.rPropertyExteriors.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.rPropertyExteriors
+                            .config
+                        }
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.rWall.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.rWall.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.rSofa.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.rSofa.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.rCarpet.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.rCarpet.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.rRefrigerator.config} />
+                      <SingleCheckbox
+                        config={
+                          addIndividualReportFormFields.rRefrigerator.config
+                        }
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.rDining.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.rDining.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.rPhone.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.rPhone.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.rTv.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.rTv.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.rMusicSystem.config} />
+                      <SingleCheckbox
+                        config={
+                          addIndividualReportFormFields.rMusicSystem.config
+                        }
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.rComputer.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.rComputer.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.rAc.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.rAc.config}
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rDateOfvisit.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rDateOfvisit.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.rTimeOfvisit.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.rTimeOfvisit.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.rPhotograph.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.rPhotograph.config
+                        }
+                      />
                     </div>
-                    </div>
-                    <hr></hr>
-        <Button className="btn btn-primary btn-sm" type="button">
-                Add Co-Applicant  </Button>
-                &nbsp;&nbsp;&nbsp;
-								
-        <Button className="btn btn-danger btn-sm" type="button">
-        Remove Co-Applicant  </Button>
-        
-             
-             </div>       
-        </div>
-        </form>
-      </CardLayOut>
-      {/* 3RD */}
-      <CardLayOut >
-        <Button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne">
-                <i className="fa fa-plus"></i>BUSINESS VERIFICATION</Button>
-        
-        <form noValidate autoComplete="off" className="p-t-20">
-        <div className="card">
-        <div className="card-body">  
-        <div className="row">
-        
-                  <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bName.config} />
+                  </div>
+                  <hr></hr>
+                  <Button className="btn btn-primary btn-sm" type="button">
+                    Add Co-Applicant{" "}
+                  </Button>
+                  &nbsp;&nbsp;&nbsp;
+                  <Button className="btn btn-danger btn-sm" type="button">
+                    Remove Co-Applicant{" "}
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </CardLayOut>
+          {/* 3RD */}
+          <CardLayOut>
+            <Button
+              className="btn btn-link"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseOne"
+            >
+              <i className="fa fa-plus"></i>BUSINESS VERIFICATION
+            </Button>
+
+            <form noValidate autoComplete="off" className="p-t-20">
+              <div className="card">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={addIndividualReportFormFields.bName.config}
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bCompnayName.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bCompnayName.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bAddressVisited.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bAddressVisited.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bNearestLandMark.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bNearestLandMark.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.btypeOfCompany.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.btypeOfCompany.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bPersonMet.config} />
+                      <Input
+                        config={addIndividualReportFormFields.bPersonMet.config}
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bDesignation.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bDesignation.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bContactNo.config} />
+                      <Input
+                        config={addIndividualReportFormFields.bContactNo.config}
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bNoofEmployees.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bNoofEmployees.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bCompanyEmail.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bCompanyEmail.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bWebsite.config} />
+                      <Input
+                        config={addIndividualReportFormFields.bWebsite.config}
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bDateOfvisit.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bDateOfvisit.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bTimeOfvisit.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bTimeOfvisit.config
+                        }
+                      />
                     </div>
-
-             </div>
-        <div className="row">
-          <div className="col-md-12">
-          <h4 className="text-red-custom3">Employement / Business Verification</h4>
-          </div>
-                  <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bEmployeesNo.config} />
-                    </div>
-
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bEmpDesignation.config} />
-                    </div>
-
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bNatureofEmployement.config} />
-                    </div>
-
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bDateOfJoining.config} />
-                    </div>
-
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bPresentSalary.config} />
+                  </div>
+                  <div className="row">
+                    <div className="col-md-12">
+                      <h4 className="text-red-custom3">
+                        Employement / Business Verification
+                      </h4>
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bSalaryModeofPayment.config} />
-                    </div>
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bPersonContacted.config} />
-                    </div>
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bEmp2Designation.config} />
-                    </div>
-                    <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.bContactNumber.config} />
-                    </div>
-                    
-                    </div>
-                    <hr></hr>
-        <Button className="btn btn-primary btn-sm" type="button">
-                Add Co-Applicant  </Button>
-                &nbsp;&nbsp;&nbsp;
-								
-        <Button className="btn btn-danger btn-sm" type="button">
-        Remove Co-Applicant  </Button>
-        
-             
-             </div>       
-        </div>
-        </form>
-      </CardLayOut>
-      
-      <CardLayOut >
-        <Button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne">
-                <i className="fa fa-plus"></i>PROPERTY VERIFICATION</Button>
-       
-                <form noValidate autoComplete="off" className="p-t-20">
-        <div className="card">
-        <div className="card-body">  
-        <div className="row">
-          <div className="col-md-12">
-          <h4 className="text-red-custom1">Applicant Details</h4>
-          </div>
-                  <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proName.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bEmployeesNo.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proRelationshipWithApplicant.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bEmpDesignation.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proMobileNumber.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bNatureofEmployement
+                            .config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proPersonMet.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bDateOfJoining.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.pPersonMetMobileNo.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bPresentSalary.config
+                        }
+                      />
                     </div>
-                    
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bSalaryModeofPayment
+                            .config
+                        }
+                      />
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bPersonContacted.config
+                        }
+                      />
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bEmp2Designation.config
+                        }
+                      />
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields.bContactNumber.config
+                        }
+                      />
+                    </div>
+                  </div>
+                  <hr></hr>
+                  <Button className="btn btn-primary btn-sm" type="button">
+                    Add Co-Applicant{" "}
+                  </Button>
+                  &nbsp;&nbsp;&nbsp;
+                  <Button className="btn btn-danger btn-sm" type="button">
+                    Remove Co-Applicant{" "}
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </CardLayOut>
 
-             </div>
-        <div className="row">
-          <div className="col-md-12">
-          <h4 className="text-red-custom2">Residential Property Details</h4>
-          </div>
-                  <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proAddressVisited.config} />
+          <CardLayOut>
+            <Button
+              className="btn btn-link"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseOne"
+            >
+              <i className="fa fa-plus"></i>PROPERTY VERIFICATION
+            </Button>
+
+            <form noValidate autoComplete="off" className="p-t-20">
+              <div className="card">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <h4 className="text-red-custom1">Applicant Details</h4>
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={addIndividualReportFormFields.proName.config}
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proNearestLandMark.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields
+                            .proRelationshipWithApplicant.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.proPropertyStatus.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.proMobileNumber.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proNameofTheOwner.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.proPersonMet.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proPropertyRelationshipwithApplicant.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.pPersonMetMobileNo
+                            .config
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-12">
+                      <h4 className="text-red-custom2">
+                        Residential Property Details
+                      </h4>
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.proTypeofUnit.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.proAddressVisited.config
+                        }
+                      />
+                    </div>
+
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields.proNearestLandMark
+                            .config
+                        }
+                      />
+                    </div>
+
+                    <div className="col-md-4 col-xs-12">
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.proPropertyStatus.config
+                        }
+                      />
+                    </div>
+
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields.proNameofTheOwner.config
+                        }
+                      />
+                    </div>
+
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields
+                            .proPropertyRelationshipwithApplicant.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.proConstructionType.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.proTypeofUnit.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proArea.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.proConstructionType
+                            .config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proNoofFloors.config} />
+                      <Input
+                        config={addIndividualReportFormFields.proArea.config}
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proFloorsLocation.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.proNoofFloors.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proDurationofStay.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.proFloorsLocation.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proFrom.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.proDurationofStay.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proTo.config} />
+                      <Input
+                        config={addIndividualReportFormFields.proFrom.config}
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.proDoorNamePlate.config} />
+                      <Input
+                        config={addIndividualReportFormFields.proTo.config}
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.proClassofLocality.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.proDoorNamePlate.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.proAccessbility.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.proClassofLocality
+                            .config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.proPropertyInteriors.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.proAccessbility.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.proPropertyExteriors.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.proPropertyInteriors
+                            .config
+                        }
+                      />
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.proPropertyExteriors
+                            .config
+                        }
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.proWall.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.proWall.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.proSofa.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.proSofa.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.proCarpet.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.proCarpet.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.proRefrigerator.config} />
+                      <SingleCheckbox
+                        config={
+                          addIndividualReportFormFields.proRefrigerator.config
+                        }
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.proDining.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.proDining.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.proPhone.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.proPhone.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.proTv.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.proTv.config}
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.proMusicSystem.config} />
+                      <SingleCheckbox
+                        config={
+                          addIndividualReportFormFields.proMusicSystem.config
+                        }
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.proComputer.config} />
+                      <SingleCheckbox
+                        config={
+                          addIndividualReportFormFields.proComputer.config
+                        }
+                      />
                     </div>
                     <div className="col-md-1 col-xs-12">
-                    <SingleCheckbox config={addIndividualReportFormFields.proAc.config} />
+                      <SingleCheckbox
+                        config={addIndividualReportFormFields.proAc.config}
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proDateOfvisit.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.proDateOfvisit.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.proTimeOfvisit.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.proTimeOfvisit.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.proPhotograph.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.proPhotograph.config
+                        }
+                      />
                     </div>
+                  </div>
+                  <hr></hr>
+                  <Button className="btn btn-primary btn-sm" type="button">
+                    Add Co-Applicant{" "}
+                  </Button>
+                  &nbsp;&nbsp;&nbsp;
+                  <Button className="btn btn-danger btn-sm" type="button">
+                    Remove Co-Applicant{" "}
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </CardLayOut>
+
+          <CardLayOut>
+            <Button
+              className="btn btn-link"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseOne"
+            >
+              <i className="fa fa-plus"></i>KYC VERIFICATION
+            </Button>
+
+            <form noValidate autoComplete="off" className="p-t-20">
+              <div className="card">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <label>PAN Card</label>
                     </div>
-                    <hr></hr>
-        <Button className="btn btn-primary btn-sm" type="button">
-                Add Co-Applicant  </Button>
-                &nbsp;&nbsp;&nbsp;
-								
-        <Button className="btn btn-danger btn-sm" type="button">
-        Remove Co-Applicant  </Button>
-        
-             
-             </div>       
-        </div>
-        </form>
-      </CardLayOut>
-      
-      <CardLayOut >
-        <Button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne">
-                <i className="fa fa-plus"></i>KYC VERIFICATION</Button>
-                
-        <form noValidate autoComplete="off" className="p-t-20">
-        <div className="card">
-        <div className="card-body"> 
-        <div className="row">
-          <div className="col-md-12">
-          <label>PAN Card</label>
-          </div>
-                  <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.panNumber.config} />
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={addIndividualReportFormFields.panNumber.config}
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.panName.config} />
+                      <Input
+                        config={addIndividualReportFormFields.panName.config}
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.panDateOfBirth.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.panDateOfBirth.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.panAddressAsPerVisirMatch.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields
+                            .panAddressAsPerVisirMatch.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.panOriginalSeen.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.panOriginalSeen.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.panVerified.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.panVerified.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.panVerificaionResult.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.panVerificaionResult
+                            .config
+                        }
+                      />
                     </div>
-                    
-        </div>
-        <hr></hr>
-       
-        <div className="row">
-          <div className="col-md-12">
-          <label>Aadhar Card</label>
-          </div>
-                  <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.adharNumber.config} />
+                  </div>
+                  <hr></hr>
+                  <div className="row">
+                    <div className="col-md-12">
+                      <label>Aadhar Card</label>
+                    </div>
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={
+                          addIndividualReportFormFields.adharNumber.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.adharName.config} />
+                      <Input
+                        config={addIndividualReportFormFields.adharName.config}
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.adharDateOfBirth.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.adharDateOfBirth.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.adharAddressAsPerVisirMatch.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields
+                            .adharAddressAsPerVisirMatch.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.adharOriginalSeen.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.adharOriginalSeen.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.adharVerified.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.adharVerified.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Radio config={addIndividualReportFormFields.adharVerificaionResult.config} />
+                      <Radio
+                        config={
+                          addIndividualReportFormFields.adharVerificaionResult
+                            .config
+                        }
+                      />
                     </div>
-                    
-        </div>
+                  </div>
+                  <hr></hr>
+                  <Button className="btn btn-primary btn-sm" type="button">
+                    Add Co-Applicant KYC
+                  </Button>
+                  &nbsp;&nbsp;&nbsp;
+                  <Button className="btn btn-danger btn-sm" type="button">
+                    Remove Co-Applicant KYC
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </CardLayOut>
 
-        <hr></hr>
-        <Button className="btn btn-primary btn-sm" type="button">
-                Add Co-Applicant KYC</Button>
-                &nbsp;&nbsp;&nbsp;
-								
-        <Button className="btn btn-danger btn-sm" type="button">
-        Remove Co-Applicant KYC</Button>
-        
-        </div>
-        </div>
-        </form>
-      </CardLayOut>
-      
-      {/* PHOTOS/IMAGE */}
+          {/* PHOTOS/IMAGE */}
 
-      <CardLayOut >
-      <Button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne">
-                <i className="fa fa-plus"></i>PHOTOS/IMAGE</Button>
-        
-        <form noValidate autoComplete="off" className="p-t-20">
- 
-		    <div className="card">
-        <div className="card-body"> 
-        <div className="row">
-                  
-                    <Input config={addIndividualReportFormFields.residencePhotos.config} />
-                    
-                    <Input config={addIndividualReportFormFields.propertyPhotos.config} />
-                    
-                    <Input config={addIndividualReportFormFields.adharVerification.config} />
-                  
-                    <Input config={addIndividualReportFormFields.otherPhotos.config} />  
-        </div>
-        </div>
-		    </div>
-  
-        </form>
-      </CardLayOut>
-      
-      <CardLayOut >
-      <Button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne">
-                <i className="fa fa-plus"></i>ITR VERIFICATION</Button>
+          <CardLayOut>
+            <Button
+              className="btn btn-link"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseOne"
+            >
+              <i className="fa fa-plus"></i>PHOTOS/IMAGE
+            </Button>
 
-        <form noValidate autoComplete="off" className="p-t-20">
-        <div className="card">
-        <div className="card-body"> 
-        <div className="row">
-                  <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.name.config} />
+            <form noValidate autoComplete="off" className="p-t-20">
+              <div className="card">
+                <div className="card-body">
+                  <div className="row">
+                    <Input
+                      config={
+                        addIndividualReportFormFields.residencePhotos.config
+                      }
+                    />
+
+                    <Input
+                      config={
+                        addIndividualReportFormFields.propertyPhotos.config
+                      }
+                    />
+
+                    <Input
+                      config={
+                        addIndividualReportFormFields.adharVerification.config
+                      }
+                    />
+
+                    <Input
+                      config={addIndividualReportFormFields.otherPhotos.config}
+                    />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </CardLayOut>
+
+          <CardLayOut>
+            <Button
+              className="btn btn-link"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseOne"
+            >
+              <i className="fa fa-plus"></i>ITR VERIFICATION
+            </Button>
+
+            <form noValidate autoComplete="off" className="p-t-20">
+              <div className="card">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-md-4 col-xs-12">
+                      <Input
+                        config={addIndividualReportFormFields.name.config}
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.pan.config} />
+                      <Input
+                        config={addIndividualReportFormFields.pan.config}
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.formNo.config} />
+                      <Input
+                        config={addIndividualReportFormFields.formNo.config}
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.assessmentYear.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.assessmentYear.config
+                        }
+                      />
                     </div>
 
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.acknowledgementNo.config} />
+                      <Input
+                        config={
+                          addIndividualReportFormFields.acknowledgementNo.config
+                        }
+                      />
                     </div>
                     <div className="col-md-4 col-xs-12">
-                    <Input config={addIndividualReportFormFields.verified.config} />
+                      <Input
+                        config={addIndividualReportFormFields.verified.config}
+                      />
                     </div>
-                    
-        </div>
-        </div>
-        </div>
-
-        </form>
-      </CardLayOut>
-      
-          
+                  </div>
+                </div>
+              </div>
+            </form>
+          </CardLayOut>
         </FormProvider>
         <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
+          <ActionButtons />
+        </BorderLayout>
       </Card>
     </>
   );

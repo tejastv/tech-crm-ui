@@ -345,9 +345,9 @@ const osEmailOptions = [
 ];
 
 const discountOptions = [
-  { value: "in", label: "in %" },
-  { value: "perRep", label: "Per Report" },
-  { value: "NA", label: "NO Discount" },
+  { value: "Y", label: "in %" },
+  { value: "P", label: "Per Report" },
+  { value: "N", label: "NO Discount" },
 ];
 const clientName: FormFieldType = createFormConfig(
   "clientName",
@@ -445,7 +445,7 @@ const stateClient: FormFieldType = createFormConfig(
   []
 );
 const statecodeClient: FormFieldType = createFormConfig(
-  "stateCode",
+  "stateCodeN",
   "State Code",
   "text",
   StateValidation,
@@ -575,7 +575,9 @@ const discountBlank: FormFieldType = createFormConfig(
   " ",
   "text",
   DiscountValidation,
-  "discount"
+  "discount",
+  [],
+  true
 );
 const toAdjust: FormFieldType = createFormConfig(
   "toAdjust",
