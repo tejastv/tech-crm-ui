@@ -19,13 +19,8 @@ import {
 } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
-<<<<<<< HEAD
-import { COMMON_ROUTES } from "@constants/route-constants";
-import { useNavigate } from "react-router-dom";
-=======
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "@constants/query-keys";
->>>>>>> 86ad2ea880f5ddd356a32b18a93bf1eccd378edb
 
 export const StdPrice: React.FC = () => {
   const queryClient = useQueryClient(); // Get the queryClient instance
@@ -46,15 +41,9 @@ export const StdPrice: React.FC = () => {
   const [currency, setCurrency] = useState("0");
   const { getCurrency } = useCurrencyApiCallHook();
   const { data: currencyData } = getCurrency();
-<<<<<<< HEAD
-  const { getStdPriceData ,deleteStdPriceMutation} = useStdPriceApiCallHook();
-  const { mutateAsync: deleteLocalSource } = deleteStdPriceMutation();
-  const navigate = useNavigate();
-=======
   const { getStdPriceData, updateStandardPriceMutation } =
     useStdPriceApiCallHook();
   const { mutateAsync: updateStandardPrice } = updateStandardPriceMutation();
->>>>>>> 86ad2ea880f5ddd356a32b18a93bf1eccd378edb
 
   if (currencyData) {
     addStdPriceFormFields.stdcurrencey.config.options = selectOptionsMaker(
@@ -296,14 +285,6 @@ export const StdPrice: React.FC = () => {
     }
   };
 
-<<<<<<< HEAD
-  const editStdPriceClick = (stdPriceData: any) => {
-    console.log(stdPriceData);
-    navigate(COMMON_ROUTES.EDIT.replace(":id", stdPriceData.currencyId));
-  };
-  const { data: stdPriceData, isLoading } =
-    getStdPriceData(currency);
-=======
   const cellMapDataHandler = (row: any, id: any, value: any) => {
     let cellMap = tableData[row.id];
     if (!cellMap) {
@@ -337,7 +318,6 @@ export const StdPrice: React.FC = () => {
   };
 
   const { data: stdPriceData, isFetching } = getStdPriceData(currency);
->>>>>>> 86ad2ea880f5ddd356a32b18a93bf1eccd378edb
 
   const tableConfig: TableType<StdPriceType> = {
     config: {
@@ -357,7 +337,7 @@ export const StdPrice: React.FC = () => {
         tableMetaDataShow: false,
       },
       onDeleteClick: deleteStdPriceClick,
-      onEditClick: editStdPriceClick,
+      onEditClick: onDataEditClick,
     },
   };
 

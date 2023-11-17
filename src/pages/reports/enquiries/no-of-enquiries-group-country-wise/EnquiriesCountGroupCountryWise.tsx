@@ -8,6 +8,9 @@ import {
   Button,
   Table,
   TableType,
+  Checkbox,
+  SingleCheckbox,
+  Radio,
 } from "@shared/index";
 import {
   enquiriesCountGroupCountryWiseFormFields,
@@ -471,7 +474,24 @@ export const EnquiriesCountGroupCountryWise: React.FC = () => {
           <BorderLayout heading={cardConfig.formListConfig.heading}>
             <div className="row">
               <div className="col-2 ex1">
-                <p>Select will come</p>
+                <Checkbox
+                  config={enquiriesCountGroupCountryWiseFormFields.year.config}
+                />
+
+                <SingleCheckbox
+                  config={
+                    enquiriesCountGroupCountryWiseFormFields.selectAll.config
+                  }
+                />
+
+                <Button
+                  type="button"
+                  className="btn btn-danger  waves-effect waves-light mr-2 mb-2"
+                  // onClick={routeHandler}
+                >
+                  {" "}
+                  Fill Month
+                </Button>
               </div>
               <div className="col-4 ex1">
                 <Table config={firstTableConfig.config}>
@@ -495,7 +515,14 @@ export const EnquiriesCountGroupCountryWise: React.FC = () => {
             </div>
             <div className="row">
               <div className="col-2 ex1">
-                <p>Select will come</p>
+                <SingleCheckbox
+                  config={
+                    enquiriesCountGroupCountryWiseFormFields.selectAll.config
+                  }
+                />
+                <Checkbox
+                  config={enquiriesCountGroupCountryWiseFormFields.year.config}
+                />
               </div>
               <div className="col-4 ex1">
                 <Table config={thirdTableConfig.config}>

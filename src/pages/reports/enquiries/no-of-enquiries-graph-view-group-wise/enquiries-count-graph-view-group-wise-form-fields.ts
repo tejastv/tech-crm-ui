@@ -19,7 +19,12 @@ const Client = {
     message: "{label} field is rquired",
   },
 } as ValidationType;
-
+const ClientwiseSeperate = {
+  required: {
+    value: true,
+    message: "{label} field is rquired",
+  },
+} as ValidationType;
 const Month = {
   required: {
     value: true,
@@ -27,12 +32,6 @@ const Month = {
   },
 } as ValidationType;
 const Year = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-} as ValidationType;
-const option = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -72,10 +71,6 @@ const yearOptions = [
   { value: "2009", label: "2009" },
 ];
 
-const Options = [
-  { value: "Report Count", label: "Report Count" },
-  { value: "Report Value", label: "Report Value" },
-];
 const group: FormFieldType = createFormConfig(
   "groupID",
   "Group",
@@ -99,6 +94,14 @@ const client: FormFieldType = createFormConfig(
   Client,
   "",
   [{ value: "all", label: "All" }]
+);
+
+const clientwiseSeperate: FormFieldType = createFormConfig(
+  "clientwiseseperate",
+  "Clientwise Seperate",
+  "checkbox",
+  ClientwiseSeperate,
+  ""
 );
 
 const month: FormFieldType = createFormConfig(
@@ -127,23 +130,14 @@ const year: FormFieldType = createFormConfig(
   yearOptions
 );
 
-const options: FormFieldType = createFormConfig(
-  "options",
-  "Options",
-  "radio", // Change "select" to "checkbox"
-  option,
-  "",
-  Options
-);
-
-export const enquiriesCountGroupCountryWiseFormFields = {
+export const enquiriesCountGraphViewGroupWiseFormFields = {
   group,
   city,
   client,
+  clientwiseSeperate,
   year,
   month,
   selectAll,
   monthOptions,
   yearOptions,
-  options,
 };
