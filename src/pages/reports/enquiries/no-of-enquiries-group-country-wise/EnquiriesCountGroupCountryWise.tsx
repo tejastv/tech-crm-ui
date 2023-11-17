@@ -521,7 +521,7 @@ export const EnquiriesCountGroupCountryWise: React.FC = () => {
                   }
                 />
                 <Checkbox
-                  config={enquiriesCountGroupCountryWiseFormFields.year.config}
+                  config={enquiriesCountGroupCountryWiseFormFields.month.config}
                 />
               </div>
               <div className="col-4 ex1">

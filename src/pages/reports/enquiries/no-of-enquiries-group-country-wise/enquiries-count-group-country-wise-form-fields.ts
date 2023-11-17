@@ -72,10 +72,6 @@ const yearOptions = [
   { value: "2009", label: "2009" },
 ];
 
-const Options = [
-  { value: "Report Count", label: "Report Count" },
-  { value: "Report Value", label: "Report Value" },
-];
 const group: FormFieldType = createFormConfig(
   "groupID",
   "Group",
@@ -127,15 +123,6 @@ const year: FormFieldType = createFormConfig(
   yearOptions
 );
 
-const options: FormFieldType = createFormConfig(
-  "options",
-  "Options",
-  "radio", // Change "select" to "checkbox"
-  option,
-  "",
-  Options
-);
-
 export const enquiriesCountGroupCountryWiseFormFields = {
   group,
   city,
@@ -145,5 +132,4 @@ export const enquiriesCountGroupCountryWiseFormFields = {
   selectAll,
   monthOptions,
   yearOptions,
-  options,
 };
