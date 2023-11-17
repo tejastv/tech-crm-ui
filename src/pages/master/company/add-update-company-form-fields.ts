@@ -399,10 +399,10 @@ const checkBoxField: FormFieldType = {
 };
 
 const companyOptions = [
-  { value: 1, label: "Proprietorship" },
-  { value: 2, label: "Partnership" },
-  { value: 3, label: "Pvt Ltd" },
-  { value: 4, label: "Public Ltd" },
+  { value: "1", label: "Proprietorship" },
+  { value: "2", label: "Partnership" },
+  { value: "3", label: "Pvt Ltd" },
+  { value: "4", label: "Public Ltd" },
 ];
 
 const companyType: FormFieldType = {
