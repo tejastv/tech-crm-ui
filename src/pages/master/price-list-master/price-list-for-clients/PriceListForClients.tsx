@@ -28,7 +28,7 @@ export const PriceListForClients: React.FC = () => {
   const { getCity } = useCityApiCallHook();
 
   const { data: cityData } = getCity();
-  const [city, setCity] = useState<number>(-2);
+  // const [city, setCity] = useState<number>(-2);
   // const [group, setGroup] = useState<number>(-2);
   const [client, setClient] = useState<ClientType>({} as ClientType);
   let [tableCellData, setTableCellData] = useState({} as any);
@@ -36,6 +36,7 @@ export const PriceListForClients: React.FC = () => {
   let [cityWiseClient, setCityWiseClient] = useState<Array<any>>([] as any);
   let [isLoading, setIsLoading] = useState<boolean>(false);
   let [tableHeading, setTableHeading] = useState<string>("");
+  let [apiUrl, setApiUrl] = useState<string>("");
 
   const cardConfig = {
     formLayoutConfig: {
@@ -67,7 +68,7 @@ export const PriceListForClients: React.FC = () => {
 
   const cityChangeHandler = (selectedOption: any) => {
     if (selectedOption) {
-      setCity(selectedOption.value);
+      // setCity(selectedOption.value);
       getCityWiseClient(selectedOption);
     }
   };
@@ -139,6 +140,12 @@ export const PriceListForClients: React.FC = () => {
       setIsLoading(true);
       setClient(selectedOption.data);
       getClientWisePrice(selectedOption.data);
+      setApiUrl(
+        apiUrls.CLIENT_WISE_PRICE.replace(
+          "{id}",
+          "" + selectedOption.data.clientID
+        )
+      );
     }
   };
 
@@ -150,23 +157,61 @@ export const PriceListForClients: React.FC = () => {
 
   const onGetPriceFromOtherGroupFormSubmit =
     getPriceFromOtherGroupForm.handleSubmit((data, e): void => {
+      console.log(data);
+      let url = "";
+      setTableData([]);
       setIsLoading(true);
       if (e?.target.name == "stdPrice") {
         let confirmation = confirm(
           "Do you want fatch price from Standard Price?"
         );
         if (confirmation) {
-          setTableData([]);
+          url = apiUrls.CLIENT_WISE_PRICE.replace(
+            "{id}",
+            "" + data.Priceclient.value
+          );
           getCurrencyWisePrice(client);
         }
       } else if (e?.target.name == "fromGroup") {
         let confirmation = confirm("Do you want fatch price from Group?");
         if (confirmation) {
-          setTableData([]);
+          url = apiUrls.GET_GROUP_WISE_PRICE.replace(
+            "{id}",
+            "" + data.Priceclient.value
+          );
           getGroupWisePrice(client);
         }
       }
+      setApiUrl(url);
     });
+
+  const onSaveBtnClickHandler = async () => {
+    let cellData = Object.values(tableCellData);
+    let clonedTableData: any = [];
+    if (cellData.length > 0) {
+      clonedTableData = [...tableData];
+      clonedTableData.forEach((data: any) => {
+        cellData.forEach((cell: any) => {
+          if (data.countryId === cell.countryId) {
+            data.price = cell.price;
+            data.priceHighDel = cell.priceHighDel;
+            data.priceOnline = cell.priceOnline;
+            data.priceSME = cell.priceSME;
+            data.priceSuperFlash = cell.priceSuperFlash;
+          }
+        });
+      });
+    }
+    if (clonedTableData.length > 0) {
+      setIsLoading(true);
+      setTableData([]);
+      const response = await instance.post(apiUrl, clonedTableData);
+      const data = response.data.data;
+      if (data) {
+        getClientWisePrice(client);
+      }
+    }
+  };
 
   const columns: ColumnDef<ClientWisePriceType>[] = [
     {
@@ -460,7 +505,9 @@ export const PriceListForClients: React.FC = () => {
                   </div>
                   <div className="col-md-2">
                     <Button
-                      type={"submit"}
+                      type="button"
+                      name="saveAll"
+                      onClick={onSaveBtnClickHandler}
                       className={"btn btn-danger btn-sm w-100"}
                     >
                       <i className="far fa-save"></i> Save All
@@ -477,8 +524,10 @@ export const PriceListForClients: React.FC = () => {
               {tableHeading}
             </label>
           )}
-          {tableData.length > 0 && (
-            <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
+          {tableData.length > 0 ? (
+            <Table config={tableConfig.config} />
+          ) : (
+            isLoading && <Loader />
           )}
         </BorderLayout>
       </Card>

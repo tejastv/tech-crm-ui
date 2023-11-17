@@ -1,19 +1,19 @@
 import { useAxios } from "@hooks/useAxios";
 import {
   ClientWisePriceType,
-  CurrencyAndGroupType,
+  // CurrencyAndGroupType,
   CurrencyWisePrice,
 } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import {
   UseQueryResult,
   useQuery,
-  useQueryClient,
+  // useQueryClient,
 } from "@tanstack/react-query";
 
 export const usePriceListForClientsApiCallHook = () => {
   const { instance } = useAxios();
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   // const getStdPriceClientsData = (
   //   id: string
