@@ -1,7 +1,7 @@
 import { useAxios } from "@hooks/useAxios";
 import { CompanyType, AddUpdateCompanyType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType, PaginationType } from "@shared/index";
+import { ApiResponseType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 

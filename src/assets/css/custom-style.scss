@@ -49,7 +49,7 @@ hr {
 
 .loader-wrapper {
   display: flex;
-  position: fixed;
+  position: relative;
   z-index: 99;
   background: #f8f9fa75;
   width: 100%;
