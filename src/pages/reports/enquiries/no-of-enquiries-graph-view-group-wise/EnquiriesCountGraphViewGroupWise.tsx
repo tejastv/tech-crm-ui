@@ -21,8 +21,7 @@ import { enquiriesCountGraphViewGroupWiseFormFields } from "./enquiries-count-gr
 
 const cardConfig = {
   formLayoutConfig: {
-    mainHeading:
-      "No of Enquiry with Graph - Group wise - Client wise - Country wise",
+    mainHeading: "No of Enquiry with Graph - Group wise",
     heading: "Entry",
   },
   formListConfig: {
