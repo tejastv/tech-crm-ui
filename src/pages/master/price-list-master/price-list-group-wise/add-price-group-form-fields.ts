@@ -90,7 +90,8 @@ const priceGroupCurrency: FormFieldType = createFormConfig(
   "select",
   PriceGroupCurrencyValidation,
   "Select Currency",
-  []
+  [],
+  true
 );
 const priceGroupCurrency2: FormFieldType = createFormConfig(
   "Pricegroupcurrencey",
