@@ -383,7 +383,8 @@ const fourthTableConfig: TableType<EnquiryCountGroupCountryWiseType> = {
     tableName: "Fourth Table",
     columns: fourthTableColumns,
     tableData: [],
-    // tableData: companyData ? companyData : [],
+    // tableData: companyData ? companyData : [],\
+
     copyBtn: false,
     csvBtn: false,
     excelBtn: false,

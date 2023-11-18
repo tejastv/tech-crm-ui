@@ -482,20 +482,6 @@ export const EnquiriesCountGraphViewGroupWise: React.FC = () => {
           <BorderLayout heading={cardConfig.formListConfig.heading}>
             <div className="row">
               <div className="col-2 ex1">
-                {/* {enquiriesCountGraphViewGroupWiseFormFields.monthOptions.map(
-                  (option) => (
-                    <div key={option.value}> */}
-                {/* <input
-                        type="checkbox"
-                        id={`month_${option.value}`}
-                        name="months"
-                        value={option.value}
-                        // Add any additional attributes or event handlers as needed
-                      />
-                      <label htmlFor={`month_${option.value}`}>
-                        {option.label}
-                      </label> */}
-
                 <Checkbox
                   config={
                     enquiriesCountGraphViewGroupWiseFormFields.year.config

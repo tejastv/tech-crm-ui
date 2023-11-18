@@ -126,6 +126,7 @@ const year: FormFieldType = createFormConfig(
 export const enquiriesCountGroupCountryWiseFormFields = {
   group,
   city,
+
   client,
   year,
   month,

@@ -132,6 +132,7 @@ const year: FormFieldType = createFormConfig(
 
 export const enquiriesCountGraphViewGroupWiseFormFields = {
   group,
+
   city,
   client,
   clientwiseSeperate,

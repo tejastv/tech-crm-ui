@@ -441,6 +441,7 @@ export const EnquiriesCountGraphView: React.FC = () => {
               >
                 <i className="fas fa-times-circle pr-1"></i> Cancel
               </Button>
+              /
             </div>
           </BorderLayout>
         </form>

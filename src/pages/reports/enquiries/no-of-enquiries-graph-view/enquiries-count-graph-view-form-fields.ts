@@ -113,6 +113,7 @@ export const enquiriesCountGraphViewFormFields = {
   city,
   client,
   year,
+
   month,
   selectAll,
   monthOptions,
