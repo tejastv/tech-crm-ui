@@ -157,7 +157,6 @@ export const PriceListForClients: React.FC = () => {
 
   const onGetPriceFromOtherGroupFormSubmit =
     getPriceFromOtherGroupForm.handleSubmit((data, e): void => {
-      console.log(data);
       let url = "";
       setTableData([]);
       setIsLoading(true);
@@ -247,7 +246,7 @@ export const PriceListForClients: React.FC = () => {
 
         // If the initialValue is changed external, sync it up with our state
         React.useEffect(() => {
-          setValue(initialValue);
+          setValue(initialValue || 0);
         }, [initialValue]);
 
         return (
@@ -278,7 +277,7 @@ export const PriceListForClients: React.FC = () => {
 
         // If the initialValue is changed external, sync it up with our state
         React.useEffect(() => {
-          setValue(initialValue || "");
+          setValue(initialValue || 0);
         }, [initialValue]);
 
         return (
@@ -309,7 +308,7 @@ export const PriceListForClients: React.FC = () => {
 
         // If the initialValue is changed external, sync it up with our state
         React.useEffect(() => {
-          setValue(initialValue || "");
+          setValue(initialValue || 0);
         }, [initialValue]);
 
         return (
@@ -340,7 +339,7 @@ export const PriceListForClients: React.FC = () => {
 
         // If the initialValue is changed external, sync it up with our state
         React.useEffect(() => {
-          setValue(initialValue || "");
+          setValue(initialValue || 0);
         }, [initialValue]);
 
         return (
@@ -371,7 +370,7 @@ export const PriceListForClients: React.FC = () => {
 
         // If the initialValue is changed external, sync it up with our state
         React.useEffect(() => {
-          setValue(initialValue || "");
+          setValue(initialValue || 0);
         }, [initialValue]);
 
         return (

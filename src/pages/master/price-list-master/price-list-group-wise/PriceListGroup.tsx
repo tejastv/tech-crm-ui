@@ -94,7 +94,7 @@ export const PriceListGroup: React.FC = () => {
 
   if (group) {
     addPriceGroupFormFields.priceGroupCurrency.config.setData =
-      group.currencyID;
+      group.currencyName;
   }
 
   const getGroupWisePrice = async (clientObj: ClientType) => {
@@ -200,7 +200,7 @@ export const PriceListGroup: React.FC = () => {
 
         // If the initialValue is changed external, sync it up with our state
         React.useEffect(() => {
-          setValue(initialValue || "");
+          setValue(initialValue || 0);
         }, [initialValue]);
 
         return (
@@ -231,7 +231,7 @@ export const PriceListGroup: React.FC = () => {
 
         // If the initialValue is changed external, sync it up with our state
         React.useEffect(() => {
-          setValue(initialValue || "");
+          setValue(initialValue || 0);
         }, [initialValue]);
 
         return (
@@ -262,7 +262,7 @@ export const PriceListGroup: React.FC = () => {
 
         // If the initialValue is changed external, sync it up with our state
         React.useEffect(() => {
-          setValue(initialValue || "");
+          setValue(initialValue || 0);
         }, [initialValue]);
 
         return (
@@ -293,7 +293,7 @@ export const PriceListGroup: React.FC = () => {
 
         // If the initialValue is changed external, sync it up with our state
         React.useEffect(() => {
-          setValue(initialValue || "");
+          setValue(initialValue || 0);
         }, [initialValue]);
 
         return (
@@ -324,7 +324,7 @@ export const PriceListGroup: React.FC = () => {
 
         // If the initialValue is changed external, sync it up with our state
         React.useEffect(() => {
-          setValue(initialValue || "");
+          setValue(initialValue || 0);
         }, [initialValue]);
 
         return (

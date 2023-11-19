@@ -74,7 +74,6 @@ export const City: React.FC = () => {
   const editCityClick = (cityData: any) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", cityData.cityId));
   };
-  console.log(cityData);
 
   const tableConfig: TableType<CityType> = {
     config: {
