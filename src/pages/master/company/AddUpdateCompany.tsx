@@ -180,7 +180,7 @@ export const AddUpdateCompany: React.FC = () => {
       addCompanyFormFields.regno.config.setData =
         companyMasterData.companyRegNo;
       addCompanyFormFields.companyType.config.setData =
-        companyMasterData.companyType.toString();
+        companyMasterData.companyType?.toString();
       addCompanyFormFields.incorporationDate.config.setData =
         companyMasterData.incorporationDate;
       addCompanyFormFields.bankers.config.setData = companyMasterData.bankers;
