@@ -20,14 +20,20 @@ export const useContinentApiCallHook = () => {
       queryKey: [queryKeys.CONTINENT_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CONTINENT);
-        const data = response.data.data.sort((a: { continent: string; }, b: { continent: any; }) => a.continent.localeCompare(b.continent));
-        return data
+        const data = response.data.data.sort(
+          (a: { continent: string }, b: { continent: any }) =>
+            a.continent.localeCompare(b.continent)
+        );
+        return data;
       },
       staleTime: Infinity,
     });
   };
 
-  const getContinentData = (id: string): UseQueryResult<ContinentType> => {
+  const getContinentData = (
+    id: string,
+    condition?: any
+  ): UseQueryResult<ContinentType> => {
     return useQuery<ContinentType>({
       queryKey: [queryKeys.CONTINENT_DATA, id],
       queryFn: async () => {
@@ -36,7 +42,7 @@ export const useContinentApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
@@ -55,8 +61,8 @@ export const useContinentApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateContinentType) => addContinent(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.CONTINENT_DATA],
           });
           navigate("..");

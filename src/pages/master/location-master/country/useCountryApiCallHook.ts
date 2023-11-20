@@ -20,14 +20,20 @@ export const useCountryApiCallHook = () => {
       queryKey: [queryKeys.COUNTRY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_COUNTRY);
-        const data = response.data.data.sort((a: { countryName: string; }, b: { countryName: any; }) => a.countryName.localeCompare(b.countryName));
+        const data = response.data.data.sort(
+          (a: { countryName: string }, b: { countryName: any }) =>
+            a.countryName.localeCompare(b.countryName)
+        );
         return data;
       },
       staleTime: Infinity,
     });
   };
 
-  const getCountryData = (id: string): UseQueryResult<CountryType> => {
+  const getCountryData = (
+    id: string,
+    condition: any
+  ): UseQueryResult<CountryType> => {
     return useQuery<CountryType>({
       queryKey: [queryKeys.COUNTRY_DATA, id],
       queryFn: async () => {
@@ -36,7 +42,7 @@ export const useCountryApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };

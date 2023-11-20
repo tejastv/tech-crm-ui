@@ -69,11 +69,11 @@ export const AddUpdateCity: React.FC = () => {
           "stateId",
           "stateName"
         );
-        clonedCityData.stateId = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
+        data.length
+          ? (clonedCityData.stateId = {
+              label: data[0].label,
+              value: data[0].value,
+            })
           : [];
       }
       reset(clonedCityData);

@@ -61,7 +61,7 @@ export const City: React.FC = () => {
     },
   ];
 
-  const { data: cityData, isLoading } = getCity();
+  const { data: cityData, isFetching } = getCity();
   const { mutateAsync: deleteCity } = deleteCityMutation();
 
   const deleteCityClick = async (cityData: any) => {
@@ -100,7 +100,7 @@ export const City: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

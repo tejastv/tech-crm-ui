@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Continent: React.FC = () => {
   const { getContinent, deleteContinentMutation } = useContinentApiCallHook();
-  const { data: continentData, isLoading } = getContinent();
+  const { data: continentData, isFetching } = getContinent();
   const { mutateAsync: deleteContinent } = deleteContinentMutation();
   const navigate = useNavigate();
 
@@ -88,7 +88,7 @@ export const Continent: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

@@ -31,7 +31,10 @@ export const useStateApiCallHook = () => {
     });
   };
 
-  const getStateData = (id: string): UseQueryResult<StateType> => {
+  const getStateData = (
+    id: string,
+    conditions: any
+  ): UseQueryResult<StateType> => {
     return useQuery<StateType>({
       queryKey: [queryKeys.STATE_DATA, id],
       queryFn: async () => {
@@ -40,7 +43,7 @@ export const useStateApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: conditions, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };

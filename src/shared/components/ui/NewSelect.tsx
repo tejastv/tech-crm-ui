@@ -22,14 +22,16 @@ export const NewSelect: React.FC<{
 }> = (props) => {
   const inputErrors = findInputError(props.errors, props.config.config.name);
   const isInvalid = isFormInvalid(inputErrors);
-  const { field } = useController({
+  const {
+    field: { onChange, value, ref, ...field },
+  } = useController({
     control: props.control,
     name: props.config.config.name,
   });
   const handleSelectChange = (selectedOption: any) => {
     // Update the form value with the selected data
+    onChange(selectedOption);
     if (props.onChange) {
-      field.onChange(selectedOption);
       props.onChange(selectedOption);
     }
   };
@@ -72,6 +74,7 @@ export const NewSelect: React.FC<{
                   <AliceSelect
                     // isClearable
                     {...field}
+                    defaultValue={[]}
                     options={props.config.config.options}
                     placeholder={props.config.config.placeholder}
                     onChange={handleSelectChange} // Pass the onChange handler

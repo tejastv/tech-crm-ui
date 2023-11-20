@@ -6,6 +6,8 @@ import {
   BorderLayout,
   Card,
   Input,
+  NewInput,
+  NewSelect,
   Select,
 } from "@shared/index";
 import {
@@ -19,7 +21,14 @@ import { useParams } from "react-router-dom";
 import { returnObjectBasedOnID } from "@utils/returnObjectBasedOnID";
 
 export const AddUpdateCountry: React.FC = () => {
-  const methods = useForm<AddUpdateCountryType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm<AddUpdateCountryType>();
   const params = useParams();
   const { addCountryMutation, updateCountryMutation, getCountryData } =
     useCountryApiCallHook();
@@ -37,15 +46,7 @@ export const AddUpdateCountry: React.FC = () => {
     },
   };
 
-  const { data: continentData, isSuccess: getContinentSuccess } =
-    getContinent();
-
-  if (continentData) {
-    addCoutryFormFields.continentCountryField.config.options =
-      selectOptionsMaker(continentData, "id", "continent");
-  }
-
-  const onSubmit = methods.handleSubmit((countryData): void => {
+  const onSubmit = handleSubmit((countryData): void => {
     let data: any = { ...countryData };
     data.continentId = +data.continentId["value"];
     if (params.id && countryData) {
@@ -55,66 +56,83 @@ export const AddUpdateCountry: React.FC = () => {
     }
   });
 
-  if (params.id) {
-    const { data: countryData, isSuccess: countryDataSuccess } = getCountryData(
-      "" + params.id
-    );
-    if (countryDataSuccess) {
-      if (getContinentSuccess) {
-        let id = countryData?.continentId;
-        let data: any = returnObjectBasedOnID(
-          continentData,
-          "id",
-          id,
-          "id",
-          "continent"
-        );
-        addCoutryFormFields.continentCountryField.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-      addCoutryFormFields.countryField.config.setData = countryData.countryName;
-      addCoutryFormFields.countryCodeField.config.setData =countryData.countryCode;
-      // addCoutryFormFields.countrylocalSourceField.config.setData =countryData.countrylocalSource;
+  const { data: countryData } = getCountryData(
+    "" + params.id,
+    params.id != undefined
+  );
+
+  const { data: continentData } = getContinent();
+
+  useEffect(() => {
+    let clonedCountryData = { ...countryData };
+    if (countryData && continentData) {
+      let id = countryData?.continentId;
+      let data: any = returnObjectBasedOnID(
+        continentData,
+        "id",
+        id,
+        "id",
+        "continent"
+      );
+      data.length
+        ? (clonedCountryData.continentId = {
+            label: data[0].label,
+            value: data[0].value,
+          })
+        : [];
     }
-  } else {
-    useEffect(() => {
-      methods.reset();
-    }, []);
-  }
+    reset(clonedCountryData);
+  }, [params.id, countryData, continentData]);
+
+  useEffect(() => {
+    if (continentData) {
+      addCoutryFormFields.continentCountryField.config.options =
+        selectOptionsMaker(continentData, "id", "continent");
+    }
+  }, [continentData?.length]);
+
+  useEffect(() => {
+    reset();
+  }, [!params.id]);
 
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <Input config={addCoutryFormFields.countryField.config} />
-                  <Select
-                    config={addCoutryFormFields.continentCountryField.config}
-                  />
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  <Input config={addCoutryFormFields.countryCodeField.config} />
-                  {/* <Input config={addCoutryFormFields.countrylocalSourceField.config} /> */}
-                </div>
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addCoutryFormFields.countryField}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addCoutryFormFields.continentCountryField}
+                />
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
+              <div className="col-md-6 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addCoutryFormFields.countryCodeField}
+                />
+                {/* <Input config={addCoutryFormFields.countrylocalSourceField.config} /> */}
+              </div>
+            </div>
+          </BorderLayout>
+          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <ActionButtons />
+          </BorderLayout>
+        </form>
       </Card>
     </>
   );

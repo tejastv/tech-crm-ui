@@ -47,6 +47,7 @@ export const NewInput: React.FC<{
               <Form.Control
                 id={props.config.config.id}
                 disabled={props.config.config.isDisabled}
+                defaultValue={""}
                 type={
                   props.config.config.type &&
                   props.config.config.type.startsWith("file")
