@@ -84,10 +84,6 @@ export const AddUpdateCity: React.FC = () => {
     reset();
   }, [!params.id]);
 
-  const getDataHandler = (data: any) => {
-    console.log(data);
-  };
-
   const onSubmit = handleSubmit((cityData): void => {
     let data: any = { ...cityData };
     data.stateId = +data.stateId["value"];
@@ -130,7 +126,6 @@ export const AddUpdateCity: React.FC = () => {
                   errors={errors}
                   register={register}
                   control={control}
-                  onChange={getDataHandler}
                   config={addCityFormFields.state}
                 />
                 {/* <Select config={addCityFormFields.state.config} /> */}

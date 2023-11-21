@@ -23,7 +23,7 @@ export const NewSelect: React.FC<{
   const inputErrors = findInputError(props.errors, props.config.config.name);
   const isInvalid = isFormInvalid(inputErrors);
   const {
-    field: { onChange, value, ref, ...field },
+    field: { onChange },
   } = useController({
     control: props.control,
     name: props.config.config.name,

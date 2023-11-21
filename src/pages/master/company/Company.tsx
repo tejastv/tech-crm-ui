@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 export const CompanyMaster: React.FC = () => {
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
-  const { data: companyData, isLoading } = getCompany();
+  const { data: companyData, isFetching } = getCompany();
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
 
@@ -33,8 +33,6 @@ export const CompanyMaster: React.FC = () => {
       heading: "List",
     },
   };
-
-  console.log(isLoading);
 
   const columns: ColumnDef<CompanyType>[] = [
     {
@@ -164,7 +162,7 @@ export const CompanyMaster: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

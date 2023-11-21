@@ -204,18 +204,12 @@ const zip: FormFieldType = {
   },
 };
 
-const cityOptions = [
-  { value: "Mumbai", label: "Mumbai" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
 const city: FormFieldType = {
   config: {
     name: "cityId",
     label: "City",
     id: "city",
-    options: selectOptionsMaker(cityOptions, "value", "label"),
+    options: [],
     placeholder: "Select city",
     validation: {
       required: {
@@ -230,18 +224,12 @@ const city: FormFieldType = {
   },
 };
 
-const stateOptions = [
-  { value: "Maharashtra", label: "Maharashtra" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
 const state: FormFieldType = {
   config: {
     name: "stateId",
     label: "State",
     id: "state",
-    options: selectOptionsMaker(stateOptions, "value", "label"),
+    options: [],
     placeholder: "Select State",
     validation: {
       required: {
@@ -256,19 +244,13 @@ const state: FormFieldType = {
   },
 };
 
-const countryOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
 const country: FormFieldType = {
   config: {
     name: "countryId",
     label: "Country",
     id: "country",
-    options: selectOptionsMaker(countryOptions, "value", "label"),
-    placeholder: "Country field is rquired",
+    options: [],
+    placeholder: "Select Country",
     validation: {
       required: {
         value: true,
@@ -575,11 +557,8 @@ export const addCompanyFormFields = {
   contactPerson,
   designation,
   zip,
-  cityOptions,
   city,
-  stateOptions,
   state,
-  countryOptions,
   country,
   hscode,
   givenName,

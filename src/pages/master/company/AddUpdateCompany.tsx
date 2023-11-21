@@ -8,6 +8,8 @@ import {
   Card,
   DatePicker,
   Input,
+  NewInput,
+  NewSelect,
   Radio,
   Select,
 } from "@shared/index";
@@ -19,6 +21,9 @@ import {
   useCityApiCallHook,
   useStateApiCallHook,
   useCountryApiCallHook,
+  CityType,
+  StateType,
+  CountryType,
 } from "@master/index";
 
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
@@ -26,7 +31,14 @@ import { useParams } from "react-router-dom";
 import { returnObjectBasedOnID, cleanupObject } from "@utils/index";
 
 export const AddUpdateCompany: React.FC = () => {
-  const methods = useForm<AddUpdateCompanyType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm<AddUpdateCompanyType>();
   const params = useParams();
   const { addCompanyMutation, updateCompanyMutation, getCompanyData } =
     useCompanyApiCallHook();
@@ -37,6 +49,9 @@ export const AddUpdateCompany: React.FC = () => {
   const { getCountry } = useCountryApiCallHook();
   const [selectedStateId, setSelectedStateId] = useState();
   const [selectedCountryId, setSelectedCountryId] = useState();
+  const [cityOptions, setCityOptions] = useState<CityType[]>();
+  const [stateOptions, setStateOptions] = useState<StateType[]>();
+  const [countryOptions, setCountryOptions] = useState<CountryType[]>();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -50,39 +65,164 @@ export const AddUpdateCompany: React.FC = () => {
 
   // city api call
   const { data: cityData } = getCity();
-  if (cityData) {
-    addCompanyFormFields.city.config.options = selectOptionsMaker(
-      cityData,
-      "cityId",
-      "cityName",
-      true
-    );
+
+  useEffect(() => {
+    if (cityData) {
+      setCityOptions(cityData);
+    }
+  }, [cityData?.length]);
+
+  if (cityOptions?.length) {
+    let options = selectOptionsMaker(cityOptions, "cityId", "cityName", true);
+    addCompanyFormFields.city.config.options = options;
   }
 
   // state api call
   const { data: stateData } = getState();
 
-  if (stateData) {
-    addCompanyFormFields.state.config.options = selectOptionsMaker(
-      stateData,
+  useEffect(() => {
+    if (stateData) {
+      setStateOptions(stateData);
+    }
+  }, [stateData?.length]);
+
+  if (stateOptions?.length) {
+    let options = selectOptionsMaker(
+      stateOptions,
       "stateId",
       "stateName",
       true
     );
+    addCompanyFormFields.state.config.options = options;
   }
 
   // country api call
   const { data: countryData } = getCountry();
 
-  if (countryData) {
-    addCompanyFormFields.country.config.options = selectOptionsMaker(
-      countryData,
+  useEffect(() => {
+    if (countryData) {
+      setCountryOptions(countryData);
+    }
+  }, [countryData?.length]);
+
+  if (countryOptions?.length) {
+    let options = selectOptionsMaker(
+      countryOptions,
       "countryId",
       "countryName"
     );
+    addCompanyFormFields.country.config.options = options;
   }
 
-  const onSubmit = methods.handleSubmit((companyData) => {
+  const { data: companyMasterData } = getCompanyData(
+    "" + params.id,
+    params.id != undefined
+  );
+
+  useEffect(() => {
+    if (companyMasterData) {
+      let clonedCompanyData = { ...companyMasterData };
+      if (companyMasterData && cityData) {
+        let id = companyMasterData?.cityId;
+        let data: any = returnObjectBasedOnID(
+          cityData,
+          "cityId",
+          id,
+          "cityId",
+          "cityName"
+        );
+        data.length
+          ? (clonedCompanyData.cityId = {
+              label: data[0].label,
+              value: data[0].value,
+            })
+          : [];
+      }
+      if (companyMasterData && stateData) {
+        let id = companyMasterData?.stateId;
+        let data: any = returnObjectBasedOnID(
+          stateData,
+          "stateId",
+          id,
+          "stateId",
+          "stateName"
+        );
+        data.length
+          ? (clonedCompanyData.stateId = {
+              label: data[0].label,
+              value: data[0].value,
+            })
+          : [];
+      }
+      if (companyMasterData && countryData) {
+        let id = companyMasterData?.countryId;
+        let data: any = returnObjectBasedOnID(
+          countryData,
+          "countryId",
+          id,
+          "countryId",
+          "countryName"
+        );
+        data.length
+          ? (clonedCompanyData.countryId = {
+              label: data[0].label,
+              value: data[0].value,
+            })
+          : [];
+      }
+      reset(clonedCompanyData);
+    }
+  }, [params.id, companyMasterData, countryData, stateData, cityData]);
+
+  useEffect(() => {
+    reset();
+  }, [!params.id]);
+
+  const handleSelectChange = (selectedOption: any) => {
+    if (selectedOption) {
+      console.log(selectedOption);
+      if (addCompanyFormFields.state.config.name === "stateId") {
+        // setValue(addCompanyFormFields.state.config.name, {value: selectedOption.data.stateId, label: selectedOption.data.stateName});
+      }
+      // setSelectedCountryId(selectedOption.data.countryId);
+    }
+  };
+
+  if (selectedStateId && stateData) {
+    let id = selectedStateId;
+    let data: any = returnObjectBasedOnID(
+      stateData,
+      "stateId",
+      id,
+      "stateId",
+      "stateName"
+    );
+    addCompanyFormFields.state.config.setData = data
+      ? {
+          label: data[0].label,
+          value: data[0].value,
+        }
+      : [];
+  }
+
+  if (selectedCountryId && countryData) {
+    let id = selectedCountryId;
+    let data: any = returnObjectBasedOnID(
+      countryData,
+      "countryId",
+      id,
+      "countryId",
+      "countryName"
+    );
+    addCompanyFormFields.country.config.setData = data
+      ? {
+          label: data[0].label,
+          value: data[0].value,
+        }
+      : [];
+  }
+
+  const onSubmit = handleSubmit((companyData) => {
     let data: any = { ...cleanupObject(companyData) };
     if (data.cityId) {
       data.cityId = +data.cityId["value"];
@@ -104,200 +244,161 @@ export const AddUpdateCompany: React.FC = () => {
     }
   });
 
-  if (params.id) {
-    const { data: companyMasterData } = getCompanyData("" + params.id);
-    if (companyMasterData) {
-      if (cityData) {
-        let id = companyMasterData?.cityId;
-        let data: any = returnObjectBasedOnID(
-          cityData,
-          "cityId",
-          id,
-          "cityId",
-          "cityName"
-        );
-        addCompanyFormFields.city.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-      if (stateData) {
-        let id = companyMasterData?.stateId;
-        let data: any = returnObjectBasedOnID(
-          stateData,
-          "stateId",
-          id,
-          "stateId",
-          "stateName"
-        );
-        addCompanyFormFields.state.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-      if (countryData) {
-        let id = companyMasterData?.countryId;
-        let data: any = returnObjectBasedOnID(
-          countryData,
-          "countryId",
-          id,
-          "countryId",
-          "countryName"
-        );
-        addCompanyFormFields.country.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-      addCompanyFormFields.nameField.config.setData =
-        companyMasterData.companyName;
-      addCompanyFormFields.addressField.config.setData =
-        companyMasterData.address;
-      addCompanyFormFields.officeAddressField.config.setData =
-        companyMasterData.regdOffice;
-      addCompanyFormFields.telNo.config.setData = companyMasterData.phone;
-      addCompanyFormFields.faxNo.config.setData = companyMasterData.fax;
-      addCompanyFormFields.emailField.config.setData = companyMasterData.email;
-      addCompanyFormFields.website.config.setData = companyMasterData.website;
-      addCompanyFormFields.contactPerson.config.setData =
-        companyMasterData.contactPerson;
-      addCompanyFormFields.designation.config.setData =
-        companyMasterData.designation;
-      addCompanyFormFields.zip.config.setData = companyMasterData.zip;
-      addCompanyFormFields.hscode.config.setData = companyMasterData.hsCode;
-      addCompanyFormFields.givenName.config.setData =
-        companyMasterData.givenName;
-      addCompanyFormFields.referenceno.config.setData =
-        companyMasterData.ourRefNo;
-      addCompanyFormFields.financialyear.config.setData =
-        companyMasterData.financialYear;
-      addCompanyFormFields.regno.config.setData =
-        companyMasterData.companyRegNo;
-      addCompanyFormFields.companyType.config.setData =
-        companyMasterData.companyType?.toString();
-      addCompanyFormFields.incorporationDate.config.setData =
-        companyMasterData.incorporationDate;
-      addCompanyFormFields.bankers.config.setData = companyMasterData.bankers;
-      addCompanyFormFields.notes.config.setData = companyMasterData.notes;
-      addCompanyFormFields.cmie.config.setData = companyMasterData.cmie;
-      addCompanyFormFields.rocStatus.config.setData =
-        companyMasterData.rocStatus;
-      addCompanyFormFields.recodes.config.setData = companyMasterData.records;
-      addCompanyFormFields.recfin.config.setData = companyMasterData.recFin;
-    }
-  } else {
-    useEffect(() => {
-      methods.reset();
-    }, []);
-  }
-
-  const handleSelectChange = (selectedOption: any) => {
-    if (selectedOption) {
-      setSelectedStateId(selectedOption.data.stateId);
-      setSelectedCountryId(selectedOption.data.countryId);
-    }
-  };
-
-  if (selectedStateId && stateData) {
-    let id = selectedStateId;
-    let data: any = returnObjectBasedOnID(
-      stateData,
-      "stateId",
-      id,
-      "stateId",
-      "stateName"
-    );
-    addCompanyFormFields.state.config.setData = data
-      ? {
-          label: data.label,
-          value: data.value,
-        }
-      : [];
-  }
-
-  if (selectedCountryId && countryData) {
-    let id = selectedCountryId;
-    let data: any = returnObjectBasedOnID(
-      countryData,
-      "countryId",
-      id,
-      "countryId",
-      "countryName"
-    );
-    addCompanyFormFields.country.config.setData = data
-      ? {
-          label: data.label,
-          value: data.value,
-        }
-      : [];
-  }
-
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <Input config={addCompanyFormFields.nameField.config} />
-                    <Input config={addCompanyFormFields.addressField.config} />
-                    <Input config={addCompanyFormFields.zip.config} />
-                    <Select
-                      config={addCompanyFormFields.city.config}
-                      onChangeHandler={handleSelectChange}
-                    />
-                    <Select config={addCompanyFormFields.state.config} />
-                    <Select config={addCompanyFormFields.country.config} />
-                    <Input
-                      config={addCompanyFormFields.officeAddressField.config}
-                    />
-                    <Input config={addCompanyFormFields.telNo.config} />
-                    <Input config={addCompanyFormFields.faxNo.config} />
-                    <Input config={addCompanyFormFields.emailField.config} />
-                    <Input config={addCompanyFormFields.website.config} />
-                    <Input config={addCompanyFormFields.contactPerson.config} />
-                    <Input config={addCompanyFormFields.designation.config} />
-                  </div>
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <Input config={addCompanyFormFields.hscode.config} />
-                    <Input config={addCompanyFormFields.givenName.config} />
-                    <Input config={addCompanyFormFields.referenceno.config} />
-                    <Input config={addCompanyFormFields.financialyear.config} />
-                    <Input config={addCompanyFormFields.regno.config} />
-                    <Radio config={addCompanyFormFields.companyType.config} />
-                    <DatePicker
-                      config={addCompanyFormFields.incorporationDate.config}
-                    />
-                    <Input config={addCompanyFormFields.bankers.config} />
-                    <Input config={addCompanyFormFields.notes.config} />
-                    <Input config={addCompanyFormFields.cmie.config} />
-                    <Input config={addCompanyFormFields.rocStatus.config} />
-                    <Input config={addCompanyFormFields.recodes.config} />
-                    <Input config={addCompanyFormFields.recfin.config} />
-                  </div>
+        {/* <FormProvider {...methods}> */}
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <div className="card-body">
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.nameField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.addressField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.zip}
+                  />
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    onChange={handleSelectChange}
+                    config={addCompanyFormFields.city}
+                  />
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={addCompanyFormFields.state}
+                  />
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={addCompanyFormFields.country}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.officeAddressField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.telNo}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.faxNo}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.emailField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.website}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.contactPerson}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.designation}
+                  />
                 </div>
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
+              <div className="col-md-6 col-xs-12">
+                <div className="card-body">
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.hscode}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.givenName}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.referenceno}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.financialyear}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.regno}
+                  />
+                  {/* <Radio config={addCompanyFormFields.companyType.config} /> */}
+                  {/* <DatePicker
+                    config={addCompanyFormFields.incorporationDate.config}
+                  /> */}
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.bankers}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.notes}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.cmie}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.rocStatus}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.recodes}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.recfin}
+                  />
+                </div>
+              </div>
+            </div>
+          </BorderLayout>
+          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <ActionButtons />
+          </BorderLayout>
+        </form>
+        {/* </FormProvider> */}
       </Card>
     </>
   );
