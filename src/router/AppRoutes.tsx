@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import { RequireAuth } from "@guards/index";
 import { Login } from "@auth/index";
-import { Components, NotFound } from "@shared/index";
+import { NotFound } from "@shared/index";
 import { MainLayout } from "@layout/index";
 import {
   COMPONENTS,
@@ -37,7 +37,7 @@ const AppRoutes = () => {
       <Route path={ROOT} element={<MainLayout />}>
         {/* Auth Module */}
         <Route path={LOGIN} element={<Login />} />
-        <Route path={COMPONENTS} element={<Components />} />
+
         <Route element={<RequireAuth />}>
           <Route index element={<Navigate to={DASHBOARD} />} />
           <Route

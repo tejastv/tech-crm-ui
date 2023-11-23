@@ -87,8 +87,6 @@ export { FinYear } from "./information-master-2/fin-year/FinYear";
 export { AddUpdateUser } from "./information-master-2/user-master/AddUpdateUser";
 export { User } from "./information-master-2/user-master/User";
 
-export { IndividualReport } from "./individual-reports/IndividualReport";
-
 //Form Fields
 export { addClientFormFields } from "./client-master/client/add-client-form-fields";
 export { addStateFormFields } from "./location-master/state/add-state-form-fields";
@@ -128,9 +126,6 @@ export { addSiteStatusFormFields } from "./information-master-2/site-status/add-
 export { addExecutiveFormFields } from "./information-master-2/executive/add-executive-form-field";
 export { addFinYearFormFields } from "./information-master-2/fin-year/add-finyear-form-fields";
 export { addUserFormFields } from "./information-master-2/user-master/add-user-form-fields";
-
-export { addIndividualReportFormFields } from "./individual-reports/add-individual-report-form-fields";
-
 
 // Models
 

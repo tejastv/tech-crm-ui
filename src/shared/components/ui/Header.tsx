@@ -595,18 +595,8 @@ export const Header: React.FC = () => {
                           <span className="hide-menu ">User Wise Activity</span>
                         </a>
                       </li>
-                      <li className="sidebar-item">
-                            {" "}
-                            <Link
-                              className="sidebar-link"
-                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INDIVIDUAL_REPORT_MASTER_ROUTES.INDIVIDUALREPORT}`}
-                              
-                            >
-                              <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">Mirainform Report</span>
-                            </Link>
-                          </li>
-                        {/* <li className="sidebar-item">
+
+                      {/* <li className="sidebar-item">
                           <a
                             className="sidebar-link"
                             href="mirainform_report.php"
@@ -656,7 +646,6 @@ export const Header: React.FC = () => {
                         </Link>
                       </li>
 
-                      
                       <li className="sidebar-item">
                         {" "}
                         <a

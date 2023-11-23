@@ -159,74 +159,80 @@ export const InvoiceGenerateGst: React.FC = () => {
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
-                <div className="col-4 col-xs-12">
+                <div className="col-6 col-xs-12">
                   <div className="card-body">
                     <Select
                       config={invoiceGenGstFormFields.clientField.config}
                     />
-                    <div className="mb-2">
-                      <div className="col-md-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm"}
-                        >
-                          View
-                        </Button>
-                      </div>
-                    </div>
+                  </div>
+                </div>
+                <div className="col-6 col-xs-12">
+                  <div className="card-body">
+                    <Input
+                      config={invoiceGenGstFormFields.countryField.config}
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-4 col-xs-12">
                     <Input
                       config={invoiceGenGstFormFields.currencyField.config}
                     />
-
+                  </div>
+                  <div className="col-4 col-xs-12">
+                    <Select
+                      config={invoiceGenGstFormFields.stateField.config}
+                    />
+                  </div>
+                  <div className="col-4 col-xs-12">
                     <Input config={invoiceGenGstFormFields.gstnField.config} />
+                  </div>
+                  <div className="col-md-14 col-xs-12 text-right">
+                    {/* <SingleCheckbox
+                      config={invoiceGenGstFormFields.gstField.config}
+                    /> */}
+                  </div>
+                  {/* // currency , Staste ad GST */}
+                </div>
+                <div className="row">
+                  <div className="col-4 col-xs-12">
                     <Input
                       config={invoiceGenGstFormFields.actualBuyreField.config}
                     />
                   </div>
-                </div>
-                {/* 2 Column */}
-                <div className="col-4 col-xs-12">
-                  <div className="card-body">
-                    <Input
-                      config={invoiceGenGstFormFields.fromdateField.config}
-                    />
-
-                    <Input
-                      config={invoiceGenGstFormFields.countryField.config}
-                    />
-
+                  <div className="col-4 col-xs-12">
                     <Select
                       config={invoiceGenGstFormFields.stateField.config}
                     />
-
-                    <Input config={invoiceGenGstFormFields.codeField.config} />
-
-                    <label
-                      htmlFor=""
-                      className="col-sm-7 control-label col-form-label"
-                    ></label>
-
+                  </div>
+                  <div className="col-4 col-xs-12">
+                    <Input config={invoiceGenGstFormFields.gstnField.config} />
                     <div className="col-md-14 col-xs-12 text-right">
                       <SingleCheckbox
                         config={invoiceGenGstFormFields.gstField.config}
                       />
                     </div>
                   </div>
+                  {/* // Actual Buyer , Staste ad GST */}
                 </div>
-                {/* 3 column */}
-                <div className="col-4 col-xs-12">
-                  <div className="card-body">
+                <div className="row">
+                  <div className="col-4 col-xs-12">
+                    <Input
+                      config={invoiceGenGstFormFields.fromdateField.config}
+                    />
+                  </div>
+                  <div className="col-4 col-xs-12">
                     <Input
                       config={invoiceGenGstFormFields.todateeField.config}
                     />
-
-                    <Input
-                      config={invoiceGenGstFormFields.symbolField.config}
-                    />
-
-                    <Input
-                      config={invoiceGenGstFormFields.currencyField.config}
-                    />
+                  </div>
+                  {/* // From Date,ToDate View button */}
+                  <div className="col-4 col-xs-12">
+                    {/* <div className="col-md-14 col-xs-12 text-right"> */}
+                    <Button type="button" className={"btn btn-danger btn-sm"}>
+                      Get Enqires
+                    </Button>
+                    {/* </div> */}
                   </div>
                 </div>
 
