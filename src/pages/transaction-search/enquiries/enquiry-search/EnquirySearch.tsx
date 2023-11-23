@@ -495,7 +495,7 @@ export const EnquirySearch: React.FC = () => {
             </form>
           </FormProvider>
 
-          {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+          {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
         </BorderLayout>
       </div>
     </>

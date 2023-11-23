@@ -8,6 +8,8 @@ import {
   Button,
   Table,
   TableType,
+  Checkbox,
+  SingleCheckbox,
 } from "@shared/index";
 import {
   enquiriesCountGraphViewFormFields,
@@ -360,7 +362,22 @@ export const EnquiriesCountGraphView: React.FC = () => {
           <BorderLayout heading={cardConfig.formListConfig.heading}>
             <div className="row">
               <div className="col-2 ex1">
-                <p>Select will come</p>
+                <Checkbox
+                  config={enquiriesCountGraphViewFormFields.year.config}
+                />
+
+                <SingleCheckbox
+                  config={enquiriesCountGraphViewFormFields.selectAll.config}
+                />
+
+                <Button
+                  type="button"
+                  className="btn btn-danger  waves-effect waves-light mr-2 mb-2"
+                  // onClick={routeHandler}
+                >
+                  {" "}
+                  Fill Month
+                </Button>
               </div>
               <div className="col-4 ex1">
                 <Table config={firstTableConfig.config}>
@@ -384,7 +401,12 @@ export const EnquiriesCountGraphView: React.FC = () => {
             </div>
             <div className="row">
               <div className="col-2 ex1">
-                <p>Select will come</p>
+                <SingleCheckbox
+                  config={enquiriesCountGraphViewFormFields.selectAll.config}
+                />
+                <Checkbox
+                  config={enquiriesCountGraphViewFormFields.month.config}
+                />
               </div>
               <div className="col-4 ex1" />
               <div className="col-6 ex1">
@@ -419,6 +441,7 @@ export const EnquiriesCountGraphView: React.FC = () => {
               >
                 <i className="fas fa-times-circle pr-1"></i> Cancel
               </Button>
+              /
             </div>
           </BorderLayout>
         </form>

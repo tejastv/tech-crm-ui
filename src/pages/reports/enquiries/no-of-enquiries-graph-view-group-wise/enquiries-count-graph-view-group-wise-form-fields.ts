@@ -19,7 +19,12 @@ const Client = {
     message: "{label} field is rquired",
   },
 } as ValidationType;
-
+const ClientwiseSeperate = {
+  required: {
+    value: true,
+    message: "{label} field is rquired",
+  },
+} as ValidationType;
 const Month = {
   required: {
     value: true,
@@ -27,12 +32,6 @@ const Month = {
   },
 } as ValidationType;
 const Year = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-} as ValidationType;
-const option = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -97,6 +96,14 @@ const client: FormFieldType = createFormConfig(
   [{ value: "all", label: "All" }]
 );
 
+const clientwiseSeperate: FormFieldType = createFormConfig(
+  "clientwiseseperate",
+  "Clientwise Seperate",
+  "checkbox",
+  ClientwiseSeperate,
+  ""
+);
+
 const month: FormFieldType = createFormConfig(
   "monthID",
   "Month",
@@ -123,11 +130,12 @@ const year: FormFieldType = createFormConfig(
   yearOptions
 );
 
-export const enquiriesCountGroupCountryWiseFormFields = {
+export const enquiriesCountGraphViewGroupWiseFormFields = {
   group,
-  city,
 
+  city,
   client,
+  clientwiseSeperate,
   year,
   month,
   selectAll,

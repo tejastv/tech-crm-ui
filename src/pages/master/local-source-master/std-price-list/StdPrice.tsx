@@ -101,6 +101,11 @@ export const StdPrice: React.FC = () => {
 
   const columns: ColumnDef<StdPriceType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -273,6 +278,12 @@ export const StdPrice: React.FC = () => {
       header: () => <>Price SME</>,
     },
   ];
+  const deleteStdPriceClick = (stdPriceData: any) => {
+    var conformation = confirm("Are you sure to delete it?");
+    if (conformation) {
+      deleteLocalSource(stdPriceData.countryID);
+    }
+  };
 
   const cellMapDataHandler = (row: any, id: any, value: any) => {
     let cellMap = tableData[row.id];
@@ -325,6 +336,8 @@ export const StdPrice: React.FC = () => {
         nextPreviousBtnShow: false,
         tableMetaDataShow: false,
       },
+      onDeleteClick: deleteStdPriceClick,
+      onEditClick: onDataEditClick,
     },
   };
 

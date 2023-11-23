@@ -153,6 +153,7 @@ export const apiUrls = {
   // =========
 
   // Std Price
+
   GET_LAST_FIN_YEAR,
   GET_ADD_CLIENT,
   GET_UPDATE_DELETE_CLIENT,
