@@ -5,15 +5,15 @@ export const returnObjectBasedOnID = (
   arrayIdKey: string,
   whomToCompare: number,
   arrayValueKey: string,
-  arrayLabelKry: string
+  arrayLabelKey: string
 ) => {
   let foundObj;
   let foundArray: any = [];
   if (array && array.length > 0) {
     foundObj = array.find((data: any) => data[arrayIdKey] === whomToCompare);
     if (foundObj) {
-      foundArray = selectOptionsMaker([foundObj], arrayValueKey, arrayLabelKry);
+      foundArray = selectOptionsMaker([foundObj], arrayValueKey, arrayLabelKey);
     }
   }
-  return foundArray.length > 0 ? foundArray[0] : [];
+  return foundArray.length > 0 ? [foundArray[0]] : [];
 };

@@ -1,4 +1,4 @@
 export interface ContinentType {
-  id: number;
+  id: string;
   continent: string;
 }

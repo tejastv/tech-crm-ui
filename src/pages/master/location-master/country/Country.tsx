@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Country: React.FC = () => {
   const { getCountry, deleteCountryMutation } = useCountryApiCallHook();
-  const { data: countryData, isLoading } = getCountry();
+  const { data: countryData, isFetching } = getCountry();
   const { mutateAsync: deleteCountry } = deleteCountryMutation();
   const navigate = useNavigate();
 
@@ -107,7 +107,7 @@ export const Country: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

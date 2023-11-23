@@ -28,7 +28,9 @@ export const NewInput: React.FC<{
               htmlFor={props.config.config.name}
             >
               {props.config.config.label}{" "}
-              {props.config.config.validation?.required.value && <span>*</span>}
+              {props.config.config?.validation?.required.value && (
+                <span>*</span>
+              )}
             </Form.Label>
           )}
           <div className="col-sm-9">
@@ -47,6 +49,7 @@ export const NewInput: React.FC<{
               <Form.Control
                 id={props.config.config.id}
                 disabled={props.config.config.isDisabled}
+                defaultValue={""}
                 type={
                   props.config.config.type &&
                   props.config.config.type.startsWith("file")

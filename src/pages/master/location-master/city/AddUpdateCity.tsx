@@ -69,11 +69,11 @@ export const AddUpdateCity: React.FC = () => {
           "stateId",
           "stateName"
         );
-        clonedCityData.stateId = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
+        data.length
+          ? (clonedCityData.stateId = {
+              label: data[0].label,
+              value: data[0].value,
+            })
           : [];
       }
       reset(clonedCityData);
@@ -83,10 +83,6 @@ export const AddUpdateCity: React.FC = () => {
   useEffect(() => {
     reset();
   }, [!params.id]);
-
-  const getDataHandler = (data: any) => {
-    console.log(data);
-  };
 
   const onSubmit = handleSubmit((cityData): void => {
     let data: any = { ...cityData };
@@ -130,7 +126,6 @@ export const AddUpdateCity: React.FC = () => {
                   errors={errors}
                   register={register}
                   control={control}
-                  onChange={getDataHandler}
                   config={addCityFormFields.state}
                 />
                 {/* <Select config={addCityFormFields.state.config} /> */}

@@ -25,6 +25,9 @@ export { TableCell } from "./components/ui/TableCell";
 export { EditCell } from "./components/ui/EditCell";
 export { NewInput } from "./components/ui/NewInput";
 export { NewSelect } from "./components/ui/NewSelect";
+export { NewDatePicker } from "./components/ui/NewDatePicker";
+export { NewRadio } from "./components/ui/NewRadio";
+export { NewCheckbox } from "./components/ui/NewCheckbox";
 
 // Types
 export * from "./types/button-type";

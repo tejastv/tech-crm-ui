@@ -29,7 +29,7 @@ export const useCompanyApiCallHook = () => {
     });
   };
 
-  const getCompanyData = (id: string) => {
+  const getCompanyData = (id: string, condition: any) => {
     return useQuery<CompanyType>({
       queryKey: [queryKeys.COMPANY_MASTER_DATA, id],
       queryFn: async () => {
@@ -38,7 +38,7 @@ export const useCompanyApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
@@ -85,8 +85,8 @@ export const useCompanyApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateCompanyType) => updateCompanyData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.COMPANY_MASTER_DATA],
           });
           navigate("..");
