@@ -23,6 +23,7 @@
       "@shared/*": ["shared/*"],
       "@guards/*": ["guards/*"],
       "@layout/*": ["layout/*"],
+      "@constants/*": ["constants/*"],
       "@context/*": ["context/*"],
       "@hooks/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
@@ -30,9 +31,21 @@
       "@auth/*": ["pages/auth/*"],
       "@dashboard/*": ["pages/dashboard/*"],
       "@master/*": ["pages/master/*"],
+      "@transaction-search/*": ["pages/transaction-search/*"],
+      "@profoma/*": ["pages/profoma/*"],
+      "@reports/*": ["pages/reports/*"],
+      "@invoices/*": ["pages/invoices/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx", "tests/**/*.ts", "tests/**/*.tsx"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    ".eslintrc.cjs"
+  ],
   "exclude": ["node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

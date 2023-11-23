@@ -1,10 +1,8 @@
-import { MaxLeangthType } from "./max-leangth-type";
-import { MinLeangthType } from "./min-length-type";
-import { PatternType } from "./pattern-type";
+import { MaxLeangthType, MinLeangthType, PatternType } from "@shared/index";
 
 export interface ValidationType {
   required: {
-    value: true;
+    value: boolean;
     message: string;
   };
   pattern?: PatternType;
