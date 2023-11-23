@@ -2,17 +2,22 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import logoImage from "@assets/images/logo.png";
-import { removeLocalStorageData } from "@utils/index";
 import { useAuth } from "@hooks/index";
-import { LOGIN, MASTER_ROUTES } from "constants";
+import {
+  DASHBOARD,
+  LOGIN,
+  MASTER_ROUTES,
+  PROFOMA_ROUTES,
+  REPORT_ROUTES,
+  TRANSACTION_ROUTES,
+} from "@constants/index";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { logout } = useAuth();
 
   const logoutHandler = (): void => {
-    removeLocalStorageData("auth", "user");
-    setAuth("");
+    logout();
     navigate(LOGIN);
   };
   return (
@@ -26,7 +31,7 @@ export const Header: React.FC = () => {
             >
               <i className="ti-menu ti-close"></i>
             </a>
-            <a className="navbar-brand">
+            <Link to={DASHBOARD} className="navbar-brand">
               <span className="logo-text">
                 <img src={logoImage} alt="homepage" className="dark-logo" />
                 <img
@@ -36,7 +41,7 @@ export const Header: React.FC = () => {
                   alt="homepage"
                 />
               </span>
-            </a>
+            </Link>
             <a
               className="topbartoggler d-block d-md-none waves-effect waves-light nav-toggler"
               href="#"
@@ -98,7 +103,7 @@ export const Header: React.FC = () => {
                           <li className="sidebar-item">
                             <Link
                               className="sidebar-link"
-                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_GROUP}`}
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENT_MASTER_ROUTE}${MASTER_ROUTES.CLIENT_MASTER_ROUTES.CLIENTGROUP}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Client Group</span>
@@ -131,51 +136,50 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="price_list_for_clients.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_ROUTE}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.STD_PRICE_CLIENT}`}
                             >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">
-                                Price List(for Clients)
-                              </span>
-                            </a>
+                              <span className="hide-menu ">Standard Price</span>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="price_list_group_wise.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_ROUTE}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_CLIENT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
-                                Price List(Group wise)
+                                Price List (Clients)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="std_price_list_for_clients.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_ROUTE}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_GROUP}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
-                                Std.Price List(for Clients)
+                                Price List (Group)
                               </span>
-                            </a>
+                            </Link>
                           </li>
+
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="actual_buyer_master.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.PRICE_LIST_MASTER_ROUTE}${MASTER_ROUTES.PRICE_LIST_MASTER_ROUTES.ACTUALBUYER}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Actual Buyer Master
                               </span>
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </li>
@@ -195,34 +199,48 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="city.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_ROUTE}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.CITY}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">City</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="state.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_ROUTE}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.STATE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">State</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="country.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_ROUTE}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.COUNTRY}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Country</span>
-                            </a>
+                              {/* </Link> */}
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="continent.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.LOCATION_MASTER_ROUTE}${MASTER_ROUTES.LOCATION_MASTER_ROUTES.CONTINENT}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Continent</span>
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </li>
+                      {/* Working */}
                       <li className="sidebar-item">
                         {" "}
                         <a
@@ -231,7 +249,7 @@ export const Header: React.FC = () => {
                           aria-expanded="false"
                         >
                           <i className="mdi mdi-collage"></i>
-                          <span className="hide-menu">Local Source Master</span>
+                          <span className="hide-menu">LocalSource Master</span>
                         </a>
                         <ul
                           aria-expanded="false"
@@ -239,34 +257,33 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="local_source.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Local Source</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="price_list_local_source.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.STDPRICE}`}
                             >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">
-                                Price list(for local source){" "}
-                              </span>
-                            </a>
+                              <span className="hide-menu ">Standard Price</span>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="std_price_list_local_source.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTE}${MASTER_ROUTES.LOCALSOURCEM_MASTER_ROUTES.PRICE}`}
                             >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">
-                                Std. Price List(for Local Source)
-                              </span>
-                            </a>
+                              <span className="hide-menu ">Price List</span>
+                            </Link>
                           </li>
                         </ul>
                       </li>
@@ -288,63 +305,69 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="payment_mode.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.INFORMATION_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.PAYMENTMODE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Payment Mode</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="bank_master_drawn_on.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.INFORMATION_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.BANKDRAWN}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
-                                Bank Master(Drawn on)
+                                Bank Master(Drawn On)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="bank_master_deposit.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.INFORMATION_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.BANKDEPOSIT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
-                                Bank Master(Deposit)
+                                Bank Master (Deposit)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="source.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.INFORMATION_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.SOURCE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Source</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="currency_master.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.INFORMATION_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.CURRENCY}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Currency</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="supplier_master.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.INFORMATION_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_MASTER_ROUTES.SUPPLIER}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Supplier Master
                               </span>
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </li>
@@ -366,66 +389,87 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="executive.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.EXECUTIVE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Executive</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="fin_year.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.FINYEAR}`}
+                            >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">Fin. year</span>
-                            </a>
+                              <span className="hide-menu ">Fin. Year</span>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="industry.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INDUSTRY}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Industry</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="calltype.php">
-                              <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">Call type</span>
-                            </a>
-                          </li>
-                          <li className="sidebar-item">
-                            {" "}
-                            <a
+                            <Link
                               className="sidebar-link"
-                              href="purpose_master.php"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.CALLTYPE}`}
+                            >
+                              <i className="mdi mdi-creation"></i>
+                              <span className="hide-menu ">Call Type</span>
+                            </Link>
+                          </li>
+                          <li className="sidebar-item">
+                            {" "}
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.PURPOSE}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Purpose Master</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="creditdays.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.CREDITDAYS}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Credit Days</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="site_status.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.SITESTATUS}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Site Status</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link" href="user_rights.php">
+                            <Link
+                              className="sidebar-link"
+                              to={`${MASTER_ROUTES.MASTER}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.INFORMATION_2_MASTER_ROUTE}${MASTER_ROUTES.INFORMATION_2_MASTER_ROUTES.USER}`}
+                            >
                               <i className="mdi mdi-creation"></i>
-                              <span className="hide-menu ">Users Master</span>
-                            </a>
+                              <span className="hide-menu ">User Master</span>
+                            </Link>
                           </li>
                         </ul>
                       </li>
-                      <li className="sidebar-item">
+                      {/* <li className="sidebar-item">
                         {" "}
                         <a
                           className="sidebar-link has-arrow waves-effect waves-dark"
@@ -540,7 +584,7 @@ export const Header: React.FC = () => {
                             </a>
                           </li>
                         </ul>
-                      </li>
+                      </li> */}
                       <li className="sidebar-item">
                         <a
                           className="sidebar-link"
@@ -573,22 +617,33 @@ export const Header: React.FC = () => {
                     </a>
                     <ul className="collapse first-level">
                       <li className="sidebar-item">
-                        {" "}
-                        <a
+                        <Link
                           className="sidebar-link"
-                          href="add_enquiry_detail.php"
+                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.NEWENQUIRY_TRANSACTION_ROUTES.NEWENQUIRY}`}
                         >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Add New Enquiry</span>
-                        </a>
+                        </Link>
                       </li>
                       <li className="sidebar-item">
-                        {" "}
-                        <a className="sidebar-link" href="enq_details.php">
+                        <Link
+                          className="sidebar-link"
+                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYDETAILS_TRANSACTION_ROUTES.ENQUIRYDETAILS}`}
+                        >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">All Enquiries</span>
-                        </a>
+                        </Link>
                       </li>
+                      <li className="sidebar-item">
+                        <Link
+                          className="sidebar-link"
+                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYDETAILS_TRANSACTION_ROUTES.ENQUIRYDETAILS}?category=search`}
+                        >
+                          <i className="mdi mdi-creation"></i>
+                          <span className="hide-menu ">Enquiry Search</span>
+                        </Link>
+                      </li>
+
                       <li className="sidebar-item">
                         {" "}
                         <a className="sidebar-link" href="enquiry_search.php">
@@ -630,23 +685,24 @@ export const Header: React.FC = () => {
                         </a>
                       </li>
                       <li className="sidebar-item">
-                        {" "}
-                        <a
+                        <Link
                           className="sidebar-link"
-                          href="purchase_bills_of_suppliers.php"
+                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.PURCHASEBILLS_TRANSACTION_ROUTES.PURCHASEBILLS_MASTER}`}
                         >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">
                             Purchase Bills(of Suppliers)
                           </span>
-                        </a>
+                        </Link>
                       </li>
                       <li className="sidebar-item">
-                        {" "}
-                        <a className="sidebar-link" href="bulk_enquiries.php">
+                        <Link
+                          className="sidebar-link"
+                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ADDBULKENQUIRIES_TRANSACTION_ROUTES.ADDBULKENQUIRIES}`}
+                        >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Add Bulk Enquiries</span>
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </li>
@@ -662,21 +718,22 @@ export const Header: React.FC = () => {
                     </a>
                     <ul aria-expanded="false" className="collapse first-level">
                       <li className="sidebar-item">
-                        {" "}
-                        <a className="sidebar-link" href="enq_details_pi.php">
+                        <Link
+                          className="sidebar-link"
+                          to={`${PROFOMA_ROUTES.PROFOMA}${PROFOMA_ROUTES.ENQPI_PROFOMA_ROUTES.ENQPI}`}
+                        >
                           <i className="mdi mdi-creation"></i>
-                          <span className="hide-menu ">Enq. (PI)</span>
-                        </a>
+                          <span className="hide-menu ">Enq.(PI) </span>
+                        </Link>
                       </li>
                       <li className="sidebar-item">
-                        {" "}
-                        <a
+                        <Link
                           className="sidebar-link"
-                          href="generate_invoice_pi.php"
+                          to={`${PROFOMA_ROUTES.PROFOMA}${PROFOMA_ROUTES.GENERATEPI_PROFOMA_ROUTES.GENERATEPI}`}
                         >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Generate PI</span>
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </li>
@@ -706,52 +763,48 @@ export const Header: React.FC = () => {
                           className="collapse second-level"
                         >
                           <li className="sidebar-item">
-                            {" "}
-                            <a
-                              className="sidebar-link "
-                              href="report_no_of_enquiries.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${REPORT_ROUTES.REPORT}${REPORT_ROUTES.NUMBER_OF_ENQUIRIES_ROUTES.NUMBER_OF_ENQUIRIES}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 No. of Enquiries
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
-                            {" "}
-                            <a
-                              className="sidebar-link "
-                              href="report_no_of_enquiries_group_country_wise.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${REPORT_ROUTES.REPORT}${REPORT_ROUTES.NUMBER_OF_ENQUIRIES_GROUP_COUNTRY_WISE_ROUTES.NUMBER_OF_ENQUIRIES_GROUP_COUNTRY_WISE}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 No. of Enquiries - Group - Country
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
-                            {" "}
-                            <a
-                              className="sidebar-link "
-                              href="report_no_of_enquiries_graph.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${REPORT_ROUTES.REPORT}${REPORT_ROUTES.NUMBER_OF_ENQUIRIES_GRAPH_VIEW_ROUTES.NUMBER_OF_ENQUIRIES_GRAPH_VIEW}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 No. of Enquiries(Graph)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
-                            {" "}
-                            <a
-                              className="sidebar-link "
-                              href="report_no_of_enquiries_graph_groupwise.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${REPORT_ROUTES.REPORT}${REPORT_ROUTES.NUMBER_OF_ENQUIRIES_GRAPH_VIEW_GROUP_WISE_ROUTES.NUMBER_OF_ENQUIRIES_GRAPH_VIEW_GROUP_WISE}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 No. of Enquiries(Graph)-Group wise
                               </span>
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </li>

@@ -11,24 +11,33 @@ import Form from "react-bootstrap/Form";
 
 import { FormFieldType } from "@shared/index";
 import { findInputError, isFormInvalid } from "@utils/index";
+import { useEffect } from "react";
 
 export const DatePicker = (props: FormFieldType) => {
   const {
     register,
     formState: { errors },
+    setValue,
   } = useFormContext();
   const inputErrors = findInputError(errors, props.config.name);
   const isInvalid = isFormInvalid(inputErrors);
+  useEffect(() => {
+    if (props.config.setData) {
+      setValue(props.config.name, props.config.setData);
+    }
+  }, [props.config.setData]);
   return (
     <div className="row">
       <div className="col-12">
         <div className="form-group row">
-          <Form.Label
-            className="col-sm-3 control-label col-form-label"
-            htmlFor={props.config.name}
-          >
-            {props.config.label}
-          </Form.Label>
+          {props.config.label && (
+            <Form.Label
+              className="col-sm-3 control-label col-form-label"
+              htmlFor={props.config.name}
+            >
+              {props.config.label} {props.config.validation?.required.value && <span>*</span>}
+            </Form.Label>
+          )}
           <div className="col-sm-9">
             <Form.Control
               id={props.config.id}

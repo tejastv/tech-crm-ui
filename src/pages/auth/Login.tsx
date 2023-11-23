@@ -6,27 +6,43 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@hooks/index";
 
 //Types
-import { LoginRequest } from "@auth/index";
 
 //Constants
 import { DASHBOARD } from "../../constants";
 
 //Assets
 import logoImage from "@assets/images/logo.png";
-import { setLocalStorageData } from "@utils/index";
+import { useForm } from "react-hook-form";
+
+type LoginForm = {
+  username: string;
+  password: string;
+  rememberMe: string;
+};
 
 export const Login: React.FC = () => {
-  const { setAuth } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginForm>();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent): void => {
-    event.preventDefault();
-    const user: LoginRequest = {
-      userName: "Tejas",
-      password: "tejastv",
-    };
-    setAuth({ user });
-    setLocalStorageData("auth", "user", user);
+  const onSubmit = (data: LoginForm): void => {
+    // event.preventDefault();
+    // const user: LoginRequest = {
+    //   userName: "Tejas",
+    //   password: "tejastv",
+    // };
+    console.log(data);
+    login({
+      email: "tejastv@gmail.com",
+      id: "1",
+      name: "Tejas",
+      authToken: "alskdniundi12uni1j2ndi1ndi12nd",
+    });
+    // setLocalStorageData("auth", "user", user);
     navigate(DASHBOARD, { replace: true });
   };
 
@@ -46,7 +62,7 @@ export const Login: React.FC = () => {
               <form
                 className="form-horizontal m-t-20"
                 id="loginform"
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmit(onSubmit)}
               >
                 <div className="input-group mb-3">
                   <div className="input-group-prepend">
@@ -55,14 +71,19 @@ export const Login: React.FC = () => {
                     </span>
                   </div>
                   <input
-                    className="form-control form-control-lg"
+                    className={`form-control form-control-lg ${
+                      errors.username ? "is-invalid" : ""
+                    }`}
                     placeholder="Username"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                     type="email"
                     id="email"
-                    name="username"
+                    {...register("username", { required: false })}
                   />
+                  <div className="invalid-feedback">
+                    {errors.username?.message}
+                  </div>
                 </div>
                 <div className="input-group mb-3">
                   <div className="input-group-prepend">
@@ -71,14 +92,19 @@ export const Login: React.FC = () => {
                     </span>
                   </div>
                   <input
-                    className="form-control form-control-lg"
+                    className={`form-control form-control-lg ${
+                      errors.password ? "is-invalid" : ""
+                    }`}
                     placeholder="Password"
                     aria-label="Password"
                     aria-describedby="basic-addon1"
                     type="password"
                     id="password"
-                    name="password"
+                    {...register("password", { required: false })}
                   />
+                  <div className="invalid-feedback">
+                    {errors.password?.message}
+                  </div>
                 </div>
 
                 <div className="form-group row">
@@ -86,9 +112,9 @@ export const Login: React.FC = () => {
                     <div className="custom-control custom-checkbox">
                       <input
                         type="checkbox"
-                        name="remember"
                         className="custom-control-input"
-                        id="customCheck1"
+                        id="acceptTerms"
+                        {...register("rememberMe")}
                       />
                       <label className="custom-control-label">
                         Remember me

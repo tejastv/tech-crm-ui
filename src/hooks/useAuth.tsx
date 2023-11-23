@@ -1,7 +1,25 @@
-import { useContext } from "react";
-import { AuthContext } from "../context";
+import { useEffect } from "react";
+import { useUser, useLocalStorage } from "@hooks/index";
+import { User } from "./useUser";
 
-// Create a custom hook to consume the AuthContext in components
 export const useAuth = () => {
-  return useContext(AuthContext);
+  const { user, addUser, removeUser } = useUser();
+  const { getItem } = useLocalStorage();
+
+  useEffect(() => {
+    const user = getItem("user");
+    if (user) {
+      addUser(JSON.parse(user) as User);
+    }
+  }, []);
+
+  const login = (user: User) => {
+    addUser(user);
+  };
+
+  const logout = () => {
+    removeUser();
+  };
+
+  return { user, login, logout };
 };
