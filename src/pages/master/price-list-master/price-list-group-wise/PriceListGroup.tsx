@@ -388,36 +388,24 @@ export const PriceListGroup: React.FC = () => {
             <FormProvider {...getPriceFromOtherGroupForm}>
               <form noValidate autoComplete="off">
                 <div className="row mb-3">
-                  <div className="col-md-4 col-xs-12">
+                  <div className="col-md col-xs-12">
                     <Select
                       config={addPriceGroupFormFields.pricegroupcity.config}
                       onChangeHandler={cityChangeHandler}
                     />
                   </div>
-                  <div className="col-md-4 col-xs-12">
+                  <div className="col-md col-xs-12">
                     <Select
                       config={addPriceGroupFormFields.priceGroupSelect.config}
                       onChangeHandler={groupChangeHandler}
                     />
                   </div>
-                  <div className="col-md-4 col-xs-12">
+                  <div className="col-md col-xs-12">
                     <Input
                       config={addPriceGroupFormFields.priceGroupCurrency.config}
                     />
-                    {/* <div className="row justify-content-end">
-                      <div className="col-md-12 col-xs-12 text-right">
-                        <Button
-                          type={"submit"}
-                          className={"btn btn-danger btn-sm mb-2"}
-                        >
-                          <i className="far fa-save"></i>Get Std. Price
-                        </Button>
-                      </div>
-                    </div> */}
                   </div>
-                </div>
-                <div className="row justify-content-end">
-                  <div className="col-md-2">
+                  <div className="col-md-auto col-xs-12">
                     <Button
                       type="submit"
                       className={"btn btn-danger btn-sm w-100"}
@@ -427,6 +415,8 @@ export const PriceListGroup: React.FC = () => {
                       <i className="far fa-save"></i> Get Std. Price
                     </Button>
                   </div>
+                </div>
+                <div className="row justify-content-end">
                   {/* <div className="col-md-2">
                     <Button
                       type="submit"
