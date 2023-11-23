@@ -8,10 +8,12 @@ import {
   Card,
   DatePicker,
   Input,
+  NewDatePicker,
   NewInput,
   NewSelect,
   Radio,
   Select,
+  NewRadio,
 } from "@shared/index";
 
 import {
@@ -171,6 +173,13 @@ export const AddUpdateCompany: React.FC = () => {
           : [];
       }
       reset(clonedCompanyData);
+
+      // if (addCompanyFormFields.companyType.config.name == "companyType") {
+      //   setValue(
+      //     addCompanyFormFields.companyType.config.name,
+      //     companyMasterData.companyType
+      //   );
+      // }
     }
   }, [params.id, companyMasterData, countryData, stateData, cityData]);
 
@@ -237,11 +246,11 @@ export const AddUpdateCompany: React.FC = () => {
       data.companyType = +data.companyType;
     }
     console.log(data);
-    if (params.id && data) {
-      updateCompany({ id: params.id, ...data });
-    } else {
-      addCompany(data);
-    }
+    // if (params.id && data) {
+    //   updateCompany({ id: params.id, ...data });
+    // } else {
+    //   addCompany(data);
+    // }
   });
 
   return (
@@ -356,10 +365,17 @@ export const AddUpdateCompany: React.FC = () => {
                     register={register}
                     config={addCompanyFormFields.regno}
                   />
-                  {/* <Radio config={addCompanyFormFields.companyType.config} /> */}
-                  {/* <DatePicker
-                    config={addCompanyFormFields.incorporationDate.config}
-                  /> */}
+                  <NewRadio
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={addCompanyFormFields.companyType}
+                  />
+                  <NewDatePicker
+                    errors={errors}
+                    register={register}
+                    config={addCompanyFormFields.incorporationDate}
+                  />
                   <NewInput
                     errors={errors}
                     register={register}

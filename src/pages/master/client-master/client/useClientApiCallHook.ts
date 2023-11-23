@@ -27,7 +27,7 @@ export const useClientApiCallHook = () => {
   };
 
   const getClientData = (
-    id: number,
+    id: string,
     condition: any = true
   ): UseQueryResult<ClientType> => {
     return useQuery<ClientType>({

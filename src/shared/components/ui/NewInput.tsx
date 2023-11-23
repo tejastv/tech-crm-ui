@@ -28,7 +28,9 @@ export const NewInput: React.FC<{
               htmlFor={props.config.config.name}
             >
               {props.config.config.label}{" "}
-              {props.config.config.validation?.required.value && <span>*</span>}
+              {props.config.config?.validation?.required.value && (
+                <span>*</span>
+              )}
             </Form.Label>
           )}
           <div className="col-sm-9">
