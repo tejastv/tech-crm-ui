@@ -37,7 +37,7 @@ export const PriceListGroup: React.FC = () => {
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Price List (Client)",
+      mainHeading: "Price List (Group)",
       heading: "Filter",
     },
     formButtonsConfig: {
