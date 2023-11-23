@@ -4,15 +4,12 @@ import {
   Card,
   NewCheckbox,
   DivLayout,
-  Input,
   NewInput,
   NewRadio,
   NewSelect,
-  Radio,
-  Select,
 } from "@shared/index";
 import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   AddUpdateClientType,
@@ -36,7 +33,11 @@ import {
   useStateApiCallHook,
 } from "@master/index";
 
-import { cleanupObject, returnObjectBasedOnID } from "@utils/index";
+import {
+  cleanupObject,
+  returnFormatedObjectElseEmptyArray,
+  returnObjectBasedOnID,
+} from "@utils/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
 
@@ -50,7 +51,6 @@ export const AddUpdateClient: React.FC = () => {
     formState: { errors },
   } = useForm<AddUpdateClientType>();
   const params = useParams();
-  const [stateCode, setStateCode] = useState();
   const { addClientMutation, updateClientMutation, getClientData } =
     useClientApiCallHook();
   const { mutate: addClient } = addClientMutation();
@@ -97,8 +97,12 @@ export const AddUpdateClient: React.FC = () => {
   };
 
   useEffect(() => {
-    addClientFormFields.monthlyIvoice.config.setData = "N";
-    addClientFormFields.osemail.config.setData = "N";
+    if (addClientFormFields.monthlyIvoice.config.name === "monthlyInvoice") {
+      setValue(addClientFormFields.monthlyIvoice.config.name, "N");
+    }
+    if (addClientFormFields.osemail.config.name === "osListPrInteger") {
+      setValue(addClientFormFields.osemail.config.name, "N");
+    }
   }, []);
 
   // city api call
@@ -257,272 +261,114 @@ export const AddUpdateClient: React.FC = () => {
   useEffect(() => {
     if (clientMasterData) {
       let clonedClientMasterData = { ...clientMasterData };
+      if (clientMasterData) {
+        if (cityOptions?.length) {
+          clonedClientMasterData.cityID = returnFormatedObjectElseEmptyArray(
+            clientMasterData.cityID,
+            clientMasterData,
+            "cityID",
+            "cityName"
+          );
+        }
+        if (stateOptions?.length) {
+          clonedClientMasterData.stateID = returnFormatedObjectElseEmptyArray(
+            clientMasterData.stateID,
+            clientMasterData,
+            "stateID",
+            "stateName"
+          );
+        }
+        if (countryOptions?.length) {
+          clonedClientMasterData.countryID = returnFormatedObjectElseEmptyArray(
+            clientMasterData.countryID,
+            clientMasterData,
+            "countryID",
+            "countryName"
+          );
+        }
+        if (currencyOptions?.length) {
+          clonedClientMasterData.currencyID =
+            returnFormatedObjectElseEmptyArray(
+              clientMasterData.currencyID,
+              clientMasterData,
+              "currencyID",
+              "currencyName"
+            );
+        }
+        if (executiveOptions?.length) {
+          clonedClientMasterData.executive_id =
+            returnFormatedObjectElseEmptyArray(
+              clientMasterData.executive_id,
+              clientMasterData,
+              "executive_id",
+              "executive"
+            );
+        }
+        if (clientGroupOptions?.length) {
+          clonedClientMasterData.groupId = returnFormatedObjectElseEmptyArray(
+            clientMasterData.groupId,
+            clientMasterData,
+            "groupId",
+            "groupName"
+          );
+        }
+        if (executiveOptions?.length) {
+          clonedClientMasterData.segmentId = returnFormatedObjectElseEmptyArray(
+            clientMasterData.segmentId,
+            clientMasterData,
+            "segmentId",
+            "segmentName"
+          );
+        }
+        clonedClientMasterData.billONActualBuyer =
+          clientMasterData.billONActualBuyer === "Y" ? true : false;
+        if (creditOptions?.length) {
+          let id = clientMasterData?.crDays;
+          let data: any = returnObjectBasedOnID(
+            creditOptions,
+            "creditPeriodId",
+            id,
+            "creditPeriodId",
+            "creditPeriod"
+          );
+          data.length
+            ? (clonedClientMasterData.crDays = {
+                label: data[0].label,
+                value: data[0].value,
+              })
+            : [];
+        }
+      }
+      // console.log(clonedClientMasterData);
+      reset(clonedClientMasterData);
     }
-    // reset();
   }, [
     params.id,
     clientMasterData,
-    cityData,
-    stateData,
-    countryData,
-    creditDaysData,
-    currencyData,
-    executiveData,
-    clientGroupData,
-    segmentData,
+    cityOptions,
+    stateOptions,
+    countryOptions,
+    creditOptions,
+    currencyOptions,
+    executiveOptions,
+    clientGroupOptions,
+    segmentOptions,
   ]);
 
   useEffect(() => {
     reset();
   }, [!params.id]);
 
-  const onSubmit = handleSubmit((clientData) => {
-    let data: any = { ...cleanupObject(clientData) };
-    delete data.state;
-    data["ourRefNo"] = "String";
-    data["adjustfromDate"] = new Date().toISOString();
-    data["autoSendOutstanding"] = "Y";
-    data["enteredBy"] = 0;
-    data["individualReport"] = "1";
-    data["locked"] = "Y";
-    data["nickName"] = "String";
-    data["staxApplicable"] = "Y";
-    data.adjustPerEnq = data.adjustPerEnq && parseFloat(data.adjustPerEnq);
-    data.adjustPerEnq_PI =
-      data.adjustPerEnq_PI && parseFloat(data.adjustPerEnq_PI);
-    data.balToAdjust = data.balToAdjust && parseFloat(data.balToAdjust);
-    data.balToAdjust_PI =
-      data.balToAdjust_PI && parseFloat(data.balToAdjust_PI);
-    data.discount = data.discount && parseFloat(data.discount);
-    data.toAdjust = data.toAdjust && parseFloat(data.toAdjust);
-    data.toAdjust_PI = data.toAdjust_PI && parseFloat(data.toAdjust_PI);
-    data.disType = data.disType && data.disType.toString();
-    data.gstYN = data.gstYN && data.gstYN.toString();
-    data.monthlyInvoice = data.monthlyInvoice && data.monthlyInvoice.toString();
-    data.osListPrInteger =
-      data.osListPrInteger && data.osListPrInteger.toString();
-    if (!data.billONActualBuyer) {
-      data.billONActualBuyer = "N";
-    }
-    if (data.cityID) {
-      data.cityID = +data.cityID["value"];
-    }
-    if (data.stateID) {
-      data.stateID = +data.stateID["value"];
-    }
-    if (data.countryID) {
-      data.countryID = +data.countryID["value"];
-    }
-    if (data.crDays) {
-      data.crDays = +data.crDays["value"];
-    }
-    if (data.currencyID) {
-      data.currencyID = +data.currencyID["value"];
-    }
-    if (data.executive_id) {
-      data.executive_id = +data.executive_id["value"];
-    }
-    if (data.groupId) {
-      data.groupId = +data.groupId["value"];
-    }
-    if (data.segmentId) {
-      data.segmentId = +data.segmentId["value"];
-    }
-    console.log(data);
-    if (params.id && data) {
-      updateClient({ id: params.id, ...data });
-      console.log(data);
-    } else {
-      addClient(data);
-    }
-  });
-
-  // if (params.id) {
-  //   const { data: clientMasterData } = getClientData(+params.id);
-  //   if (clientMasterData) {
-  //     if (cityData) {
-  //       let id = clientMasterData?.cityID;
-  //       let data: any = returnObjectBasedOnID(
-  //         cityData,
-  //         "cityId",
-  //         id,
-  //         "cityId",
-  //         "cityName"
-  //       );
-  //       addClientFormFields.cityClient.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-  //     if (stateData) {
-  //       let id = clientMasterData?.stateID;
-  //       let data: any = returnObjectBasedOnID(
-  //         stateData,
-  //         "stateId",
-  //         id,
-  //         "stateId",
-  //         "stateName"
-  //       );
-  //       addClientFormFields.stateClient.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //       addClientFormFields.statecodeClient.config.setData = data.value;
-  //     }
-  //     if (countryData) {
-  //       let id = clientMasterData?.countryID;
-  //       let data: any = returnObjectBasedOnID(
-  //         countryData,
-  //         "countryId",
-  //         id,
-  //         "countryId",
-  //         "countryName"
-  //       );
-  //       addClientFormFields.countryClient.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-  //     if (creditDaysData) {
-  //       let id = clientMasterData?.crDays;
-  //       let data: any = returnObjectBasedOnID(
-  //         creditDaysData,
-  //         "creditPeriod",
-  //         id,
-  //         "creditPeriod",
-  //         "creditPeriod"
-  //       );
-
-  //       addClientFormFields.cityClient.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-  //     if (currencyData) {
-  //       let id = clientMasterData?.currencyID;
-  //       let data: any = returnObjectBasedOnID(
-  //         currencyData,
-  //         "currencyId",
-  //         id,
-  //         "currencyId",
-  //         "currencyType"
-  //       );
-  //       addClientFormFields.clientCurrencey.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-  //     if (executiveData) {
-  //       let id = clientMasterData?.executive_id;
-  //       let data: any = returnObjectBasedOnID(
-  //         executiveData,
-  //         "executiveID",
-  //         id,
-  //         "executiveID",
-  //         "executive"
-  //       );
-  //       addClientFormFields.executive.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-  //     if (clientGroupData) {
-  //       let id = clientMasterData?.groupId;
-  //       let data: any = returnObjectBasedOnID(
-  //         clientGroupData,
-  //         "groupId",
-  //         id,
-  //         "groupId",
-  //         "groupName"
-  //       );
-  //       addClientFormFields.groupClient.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-  //     if (segmentData) {
-  //       let id = clientMasterData?.segmentId;
-  //       let data: any = returnObjectBasedOnID(
-  //         segmentData,
-  //         "segmentId",
-  //         id,
-  //         "segmentId",
-  //         "segmentName"
-  //       );
-  //       addClientFormFields.segmentClient.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-
-  //     addClientFormFields.clientName.config.setData =
-  //       clientMasterData.clientName;
-  //     addClientFormFields.clientGst.config.setData = clientMasterData.gstYN;
-  //     addClientFormFields.gstn.config.setData = clientMasterData.gstn;
-  //     addClientFormFields.addressClient.config.setData =
-  //       clientMasterData.address;
-  //     addClientFormFields.telnoClient.config.setData = clientMasterData.phone;
-  //     addClientFormFields.faxnoClient.config.setData = clientMasterData.fax;
-  //     addClientFormFields.emailClient.config.setData = clientMasterData.email;
-  //     addClientFormFields.websiteClient.config.setData =
-  //       clientMasterData.website;
-  //     addClientFormFields.contactClient.config.setData =
-  //       clientMasterData.contactPerson;
-  //     addClientFormFields.designationClient.config.setData =
-  //       clientMasterData.designation;
-  //     addClientFormFields.zipClient.config.setData = clientMasterData.zip;
-  //     addClientFormFields.instuction.config.setData = clientMasterData.email;
-  //     addClientFormFields.remarks.config.setData = clientMasterData.remarks;
-  //     addClientFormFields.monthlyIvoice.config.setData =
-  //       clientMasterData.monthlyInvoice;
-  //     addClientFormFields.osemail.config.setData =
-  //       clientMasterData.osListPrInteger;
-  //     addClientFormFields.discount.config.setData = clientMasterData.disType;
-  //     addClientFormFields.discountBlank.config.setData =
-  //       clientMasterData.discount;
-  //     addClientFormFields.toAdjust.config.setData = clientMasterData.toAdjust;
-  //     addClientFormFields.baltoAdjust.config.setData =
-  //       clientMasterData.balToAdjust;
-  //     addClientFormFields.adjustenquiry.config.setData =
-  //       clientMasterData.adjustPerEnq;
-  //     addClientFormFields.toAdjustproforma.config.setData =
-  //       clientMasterData.toAdjust_PI;
-  //     addClientFormFields.billonactual.config.setData =
-  //       clientMasterData.billONActualBuyer;
-  //     addClientFormFields.baltoAdjustproformaproforma.config.setData =
-  //       clientMasterData.balToAdjust_PI;
-  //     addClientFormFields.adjustenquiryproforma.config.setData =
-  //       clientMasterData.adjustPerEnq_PI;
-  //   }
-  // } else {
-  //   useEffect(() => {
-  //     methods.reset();
-  //   }, []);
-  // }
-
   const handleSelectChange = (selectedOption: any) => {
     if (selectedOption) {
-      setStateCode(selectedOption.data.stateCodeN);
+      if (addClientFormFields.statecodeClient.config.name === "stateCode") {
+        setValue(
+          addClientFormFields.statecodeClient.config.name,
+          selectedOption.data.stateCodeN
+        );
+      }
     }
   };
-
-  addClientFormFields.statecodeClient.config.setData = stateCode;
 
   const handleSelectCity = (selectedOption: any) => {
     if (selectedOption) {
@@ -566,10 +412,72 @@ export const AddUpdateClient: React.FC = () => {
       : [];
   }
 
+  const onSubmit = handleSubmit((clientData) => {
+    let data: any = { ...cleanupObject(clientData) };
+    delete data.state;
+    data["ourRefNo"] = "String";
+    data["adjustfromDate"] = new Date().toISOString();
+    data["autoSendOutstanding"] = "Y";
+    data["enteredBy"] = 0;
+    data["individualReport"] = "1";
+    data["locked"] = "Y";
+    data["nickName"] = "String";
+    data["staxApplicable"] = "Y";
+    data.adjustPerEnq = data.adjustPerEnq && parseFloat(data.adjustPerEnq);
+    data.adjustPerEnq_PI =
+      data.adjustPerEnq_PI && parseFloat(data.adjustPerEnq_PI);
+    data.balToAdjust = data.balToAdjust && parseFloat(data.balToAdjust);
+    data.balToAdjust_PI =
+      data.balToAdjust_PI && parseFloat(data.balToAdjust_PI);
+    data.discount = data.discount && parseFloat(data.discount);
+    data.toAdjust = data.toAdjust && parseFloat(data.toAdjust);
+    data.toAdjust_PI = data.toAdjust_PI && parseFloat(data.toAdjust_PI);
+    data.disType = data.disType && data.disType.toString();
+    data.gstYN = data.gstYN && data.gstYN.toString();
+    data.monthlyInvoice = data.monthlyInvoice && data.monthlyInvoice.toString();
+    data.osListPrInteger =
+      data.osListPrInteger && data.osListPrInteger.toString();
+    if (eval(data.billONActualBuyer)) {
+      data.billONActualBuyer = "Y";
+    } else {
+      data.billONActualBuyer = "N";
+    }
+    if (data.cityID) {
+      data.cityID = +data.cityID["value"];
+    }
+    if (data.stateID) {
+      data.stateID = +data.stateID["value"];
+    }
+    if (data.countryID) {
+      data.countryID = +data.countryID["value"];
+    }
+    if (data.crDays) {
+      data.crDays = +data.crDays["value"];
+    }
+    if (data.currencyID) {
+      data.currencyID = +data.currencyID["value"];
+    }
+    if (data.executive_id) {
+      data.executive_id = +data.executive_id["value"];
+    }
+    if (data.groupId) {
+      data.groupId = +data.groupId["value"];
+    }
+    if (data.segmentId) {
+      data.segmentId = +data.segmentId["value"];
+    }
+    console.log(data);
+    if (params.id && data) {
+      updateClient({ id: params.id, ...data });
+      console.log(data);
+    } else {
+      addClient(data);
+    }
+  });
+
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        {/* <FormProvider {...methods}> */}
         <form
           onSubmit={onSubmit}
           noValidate
@@ -661,18 +569,9 @@ export const AddUpdateClient: React.FC = () => {
                     register={register}
                     config={addClientFormFields.designationClient}
                   />
-
-                  {/* <div className="row "> */}
-                  {/* <div className="col-md-5"> */}
-
-                  {/* </div> */}
-                  {/* </div> */}
-
-                  {/* <h6 className="card-title m-t-20 md-2"> */}
                   <DivLayout
                     heading={cardConfig.formclieckUpdateConfig.heading}
                   />
-                  {/* </h6> */}
                   <NewSelect
                     errors={errors}
                     register={register}
@@ -782,7 +681,6 @@ export const AddUpdateClient: React.FC = () => {
             <ActionButtons />
           </BorderLayout>
         </form>
-        {/* </FormProvider> */}
       </Card>
     </>
   );
