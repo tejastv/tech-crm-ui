@@ -259,90 +259,87 @@ export const AddUpdateClient: React.FC = () => {
   useEffect(() => {
     if (clientMasterData) {
       let clonedClientMasterData = { ...clientMasterData };
-      if (clientMasterData) {
-        if (cityOptions?.length) {
-          clonedClientMasterData.cityID = returnFormatedObjectElseEmptyArray(
-            clientMasterData.cityID,
-            clientMasterData,
-            "cityID",
-            "cityName"
-          );
-        }
-        if (stateOptions?.length) {
-          clonedClientMasterData.stateID = returnFormatedObjectElseEmptyArray(
-            clientMasterData.stateID,
-            clientMasterData,
-            "stateID",
-            "stateName"
-          );
-        }
-        if (countryOptions?.length) {
-          clonedClientMasterData.countryID = returnFormatedObjectElseEmptyArray(
-            clientMasterData.countryID,
-            clientMasterData,
-            "countryID",
-            "countryName"
-          );
-        }
-        if (currencyOptions?.length) {
-          clonedClientMasterData.currencyID =
-            returnFormatedObjectElseEmptyArray(
-              clientMasterData.currencyID,
-              clientMasterData,
-              "currencyID",
-              "currencyName"
-            );
-        }
-        if (executiveOptions?.length) {
-          let id = clientMasterData?.executive_id;
-          let data: any = returnObjectBasedOnID(
-            executiveOptions,
-            "executiveID",
-            id,
-            "executiveID",
-            "executive"
-          );
-          data.length
-            ? (clonedClientMasterData.executive_id = {
-                label: data[0].label,
-                value: data[0].value,
-              })
-            : [];
-        }
-        if (clientGroupOptions?.length) {
-          clonedClientMasterData.groupId = returnFormatedObjectElseEmptyArray(
-            clientMasterData.groupId,
-            clientMasterData,
-            "groupId",
-            "groupName"
-          );
-        }
-        if (executiveOptions?.length) {
-          clonedClientMasterData.segmentId = returnFormatedObjectElseEmptyArray(
-            clientMasterData.segmentId,
-            clientMasterData,
-            "segmentId",
-            "segmentName"
-          );
-        }
-        clonedClientMasterData.billONActualBuyer =
-          clientMasterData.billONActualBuyer === "Y" ? true : false;
-        if (creditOptions?.length) {
-          let id = clientMasterData?.crDays;
-          let data: any = returnObjectBasedOnID(
-            creditOptions,
-            "creditPeriodId",
-            id,
-            "creditPeriodId",
-            "creditPeriod"
-          );
-          data.length
-            ? (clonedClientMasterData.crDays = {
-                label: data[0].label,
-                value: data[0].value,
-              })
-            : [];
-        }
+      if (cityOptions?.length) {
+        clonedClientMasterData.cityID = returnFormatedObjectElseEmptyArray(
+          clientMasterData.cityID,
+          clientMasterData,
+          "cityID",
+          "cityName"
+        );
+      }
+      if (stateOptions?.length) {
+        clonedClientMasterData.stateID = returnFormatedObjectElseEmptyArray(
+          clientMasterData.stateID,
+          clientMasterData,
+          "stateID",
+          "stateName"
+        );
+      }
+      if (countryOptions?.length) {
+        clonedClientMasterData.countryID = returnFormatedObjectElseEmptyArray(
+          clientMasterData.countryID,
+          clientMasterData,
+          "countryID",
+          "countryName"
+        );
+      }
+      if (currencyOptions?.length) {
+        clonedClientMasterData.currencyID = returnFormatedObjectElseEmptyArray(
+          clientMasterData.currencyID,
+          clientMasterData,
+          "currencyID",
+          "currencyName"
+        );
+      }
+      if (executiveOptions?.length) {
+        let id = clientMasterData?.executive_id;
+        let data: any = returnObjectBasedOnID(
+          executiveOptions,
+          "executiveID",
+          id,
+          "executiveID",
+          "executive"
+        );
+        data.length
+          ? (clonedClientMasterData.executive_id = {
+              label: data[0].label,
+              value: data[0].value,
+            })
+          : [];
+      }
+      if (clientGroupOptions?.length) {
+        clonedClientMasterData.groupId = returnFormatedObjectElseEmptyArray(
+          clientMasterData.groupId,
+          clientMasterData,
+          "groupId",
+          "groupName"
+        );
+      }
+      if (executiveOptions?.length) {
+        clonedClientMasterData.segmentId = returnFormatedObjectElseEmptyArray(
+          clientMasterData.segmentId,
+          clientMasterData,
+          "segmentId",
+          "segmentName"
+        );
+      }
+      clonedClientMasterData.billONActualBuyer =
+        clientMasterData.billONActualBuyer === "Y" ? true : false;
+      if (creditOptions?.length) {
+        let id = clientMasterData?.crDays;
+        let data: any = returnObjectBasedOnID(
+          creditOptions,
+          "creditPeriodId",
+          id,
+          "creditPeriodId",
+          "creditPeriod"
+        );
+        data.length
+          ? (clonedClientMasterData.crDays = {
+              label: data[0].label,
+              value: data[0].value,
+            })
+          : [];
       }
       // console.log(clonedClientMasterData);
       reset(clonedClientMasterData);

@@ -88,7 +88,6 @@ export const AddEnquiry: React.FC = () => {
   const [clientId, setClientId] = useState<number>(-2);
   const [serviceTypeId, setServiceTypeId] = useState<number>(-2);
   const [countryId, setCountryId] = useState<number>(-2);
-  const [isCompanyChange, setIsCompanyChange] = useState<boolean>(false);
 
   const [cityOptions, setCityOptions] = useState<CityType[]>();
   const [stateOptions, setStateOptions] = useState<StateType[]>();
@@ -407,6 +406,11 @@ export const AddEnquiry: React.FC = () => {
     params.id != undefined
   );
 
+  const { data: paticularClientData, isFetching } = getClientData(
+    "" + clientId,
+    clientId != -2
+  );
+
   const { data: refNo } = getRefNo(params.id === undefined);
 
   useEffect(() => {
@@ -420,7 +424,7 @@ export const AddEnquiry: React.FC = () => {
   useEffect(() => {
     if (enqData) {
       let clonedEnqDataData = { ...enqData };
-      if (cityOptions) {
+      if (cityOptions?.length) {
         let id = clonedEnqDataData?.cityId;
         let data: any = returnObjectBasedOnID(
           cityOptions,
@@ -436,7 +440,7 @@ export const AddEnquiry: React.FC = () => {
             })
           : [];
       }
-      if (stateOptions) {
+      if (stateOptions?.length) {
         let id = clonedEnqDataData?.stateId;
         let data: any = returnObjectBasedOnID(
           stateOptions,
@@ -452,7 +456,7 @@ export const AddEnquiry: React.FC = () => {
             })
           : [];
       }
-      if (countryOptions) {
+      if (countryOptions?.length) {
         let id = clonedEnqDataData?.countryId;
         let data: any = returnObjectBasedOnID(
           countryOptions,
@@ -467,8 +471,9 @@ export const AddEnquiry: React.FC = () => {
               value: data[0].value,
             })
           : [];
+        setCountryId(clonedEnqDataData?.countryId);
       }
-      if (clientOptions) {
+      if (clientOptions?.length) {
         let id = clonedEnqDataData?.clientID;
         let data: any = returnObjectBasedOnID(
           clientOptions,
@@ -483,8 +488,9 @@ export const AddEnquiry: React.FC = () => {
               value: data[0].value,
             })
           : [];
+        setClientId(clonedEnqDataData?.clientID);
       }
-      if (finYearOptions) {
+      if (finYearOptions?.length) {
         let id = clonedEnqDataData?.fyearId;
         let data: any = returnObjectBasedOnID(
           finYearOptions,
@@ -500,7 +506,7 @@ export const AddEnquiry: React.FC = () => {
             })
           : [];
       }
-      if (sourceOptions) {
+      if (sourceOptions?.length) {
         let id = clonedEnqDataData?.sourceID;
         let data: any = returnObjectBasedOnID(
           sourceOptions,
@@ -516,7 +522,7 @@ export const AddEnquiry: React.FC = () => {
             })
           : [];
       }
-      if (localSourceOptions) {
+      if (localSourceOptions?.length) {
         let id = clonedEnqDataData?.localSourceId;
         let data: any = returnObjectBasedOnID(
           localSourceOptions,
@@ -532,7 +538,7 @@ export const AddEnquiry: React.FC = () => {
             })
           : [];
       }
-      if (companyOptions) {
+      if (companyOptions?.length) {
         let id = clonedEnqDataData?.companyID;
         let data: any = returnObjectBasedOnID(
           companyOptions,
@@ -548,7 +554,7 @@ export const AddEnquiry: React.FC = () => {
             })
           : [];
       }
-      if (serviceOptions) {
+      if (serviceOptions?.length) {
         let id = clonedEnqDataData?.serviceTypeID;
         let data: any = returnObjectBasedOnID(
           serviceOptions,
@@ -563,8 +569,9 @@ export const AddEnquiry: React.FC = () => {
               value: data[0].value,
             })
           : [];
+        setServiceTypeId(clonedEnqDataData?.serviceTypeID);
       }
-      if (enqStatusOptions) {
+      if (enqStatusOptions?.length) {
         let id = clonedEnqDataData?.enqStatusID;
         let data: any = returnObjectBasedOnID(
           enqStatusOptions,
@@ -580,7 +587,7 @@ export const AddEnquiry: React.FC = () => {
             })
           : [];
       }
-      if (actualBuyerOptions) {
+      if (actualBuyerOptions?.length) {
         let id = clonedEnqDataData?.actualBuyerId;
         let data: any = returnObjectBasedOnID(
           actualBuyerOptions,
@@ -614,20 +621,19 @@ export const AddEnquiry: React.FC = () => {
   ]);
 
   const onServiceTypeChangeHandler = (serviceTypeData: any) => {
-    setIsCompanyChange(false);
-    setServiceTypeId(serviceTypeData?.value);
+    if (serviceTypeData) {
+      setServiceTypeId(serviceTypeData?.value);
+    }
   };
 
   const onCountryChangeHandler = (countryData: any) => {
     if (countryData) {
-      setIsCompanyChange(false);
       setCountryId(countryData?.value);
     }
   };
 
   const onClientChangeHandler = (selectedOption: any) => {
     if (selectedOption) {
-      setIsCompanyChange(false);
       setClientId(selectedOption.value);
     }
   };
@@ -638,7 +644,9 @@ export const AddEnquiry: React.FC = () => {
   );
 
   if (priceData) {
-    addEnquiryFormFields.priceenquiry.config.setData = priceData?.data;
+    if (addEnquiryFormFields.priceenquiry.config.name === "reportPrice") {
+      setValue(addEnquiryFormFields.priceenquiry.config.name, priceData);
+    }
   }
 
   const columns: ColumnDef<any>[] = [
@@ -677,7 +685,7 @@ export const AddEnquiry: React.FC = () => {
     config: {
       tableName: "State",
       columns: columns,
-      tableData: clientData ? [clientData] : [],
+      tableData: paticularClientData ? [paticularClientData] : [],
       copyBtn: false,
       csvBtn: false,
       excelBtn: false,
@@ -749,7 +757,6 @@ export const AddEnquiry: React.FC = () => {
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        {/* <FormProvider {...methods}> */}
         <form
           onSubmit={onSubmit}
           noValidate
@@ -889,12 +896,11 @@ export const AddEnquiry: React.FC = () => {
                 />
                 <div className="row mb-2 justify-content-end">
                   <div className="col-md-4 col-xs-12 text-right">
-                    <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+                    <Button type="button" className="btn btn-danger btn-sm">
                       <i className="far fa-save"></i> Get Price
                     </Button>
                   </div>
                 </div>
-
                 <NewInput
                   errors={errors}
                   register={register}
@@ -927,7 +933,6 @@ export const AddEnquiry: React.FC = () => {
                   control={control}
                   config={addEnquiryFormFields.localsourceenquiry}
                 />
-
                 <NewSelect
                   errors={errors}
                   register={register}
@@ -962,7 +967,6 @@ export const AddEnquiry: React.FC = () => {
                   config={addEnquiryFormFields.instructionenquiry}
                 />
               </div>
-
               <div className="col-md-3   col-xs-12">
                 <div className="row">
                   {/* <div className="col-md-8 col-xs-12 text-right">
@@ -982,7 +986,7 @@ export const AddEnquiry: React.FC = () => {
                   register={register} config={addEnquiryFormFields.priceenquiry} /> */}
               </div>
               <div className="col-md-6 col-xs-12">
-                <Table config={tableConfig.config}></Table>
+                {!isFetching && <Table config={tableConfig.config}></Table>}
               </div>
               <div className="card-title">
                 <InputWithText
@@ -1011,7 +1015,7 @@ export const AddEnquiry: React.FC = () => {
                 />
                 <div className="row">
                   <div className="col-md-12 col-xs-12 text-right">
-                    <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+                    <Button type="button" className="btn btn-danger btn-sm">
                       <i className="far fa-save"></i> View Adjust
                     </Button>
                   </div>
@@ -1035,7 +1039,6 @@ export const AddEnquiry: React.FC = () => {
             <ActionButtons />
           </BorderLayout>
         </form>
-        {/* </FormProvider> */}
       </Card>
     </>
   );

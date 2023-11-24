@@ -90,7 +90,7 @@ export const useAddEnquiryApiCallHook = () => {
   };
 
   const getPrice = (ids: any, condition: any) => {
-    return useQuery<PriceType>({
+    return useQuery<number>({
       queryKey: [
         queryKeys.PRICE_DATA,
         ids.countryId + ids.clientId + ids.serviceTypeId,
