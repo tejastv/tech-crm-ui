@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateUserType, UserType } from "@master/index";
+import { UserType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -41,7 +41,7 @@ export const useUserApiCallHook = () => {
   };
 
   const addUser = async (
-    userData: AddUpdateUserType
+    userData: Partial<UserType>
   ): Promise<ApiResponseType<UserType>> => {
     const response = await instance.post(apiUrls.GET_ADD_USER, userData);
     return response.data.data;
@@ -49,7 +49,7 @@ export const useUserApiCallHook = () => {
 
   const addUserMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateUserType) => addUser(updatedItem),
+      (updatedItem: Partial<UserType>) => addUser(updatedItem),
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
@@ -63,7 +63,7 @@ export const useUserApiCallHook = () => {
   };
 
   const updateUserData = async (
-    updateUserData: AddUpdateUserType
+    updateUserData: Partial<UserType>
   ): Promise<ApiResponseType<UserType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_USER.replace("{id}", "" + updateUserData.id),
@@ -74,7 +74,7 @@ export const useUserApiCallHook = () => {
 
   const updateUserMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateUserType) => updateUserData(updatedItem),
+      (updatedItem: Partial<UserType>) => updateUserData(updatedItem),
       {
         onSuccess: () => {
           queryClient.invalidateQueries({

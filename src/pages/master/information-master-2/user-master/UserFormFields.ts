@@ -42,23 +42,23 @@ const PasswordValidation = {
   }
 } as ValidationType;
 
-const username: FormFieldType = createFormConfig(
-  "username",
+const userName: FormFieldType = createFormConfig(
+  "userName",
   "User Name",
   "text",
   UserValidation,
   "User Name"
 );
-const usertype: FormFieldType = createFormConfig(
-  "usertype",
+const userType: FormFieldType = createFormConfig(
+  "userType",
   "User Type",
   "select",
   UserTypeValidation,
   "User Type",
-  [ {value: "Administrator",label: "Administrator"},{value: "Super user",label: "Super user"},{value: "Basic user",label: "Basic user"}]
+  [ {value: "Administrator",label: "Administrator"},{value: "Super user",label: "Super User"},{value: "Basic user",label: "Basic User"}]
 );
 const login: FormFieldType = createFormConfig(
-  "login",
+  "loginId",
   "Login Id",
   "text",
   LoginValidation,
@@ -73,8 +73,8 @@ const password: FormFieldType = createFormConfig(
 );
 
 export const addUserFormFields = {
-  username,
-  usertype,
+  userName,
+  userType,
   login,
   password,
 };

@@ -9,7 +9,8 @@ import {
   Select,
 } from "@shared/index";
 import {
-  AddUpdateUserType,
+  FormUserType,
+  UserType,
   addUserFormFields,
   useUserApiCallHook,
 } from "@master/index";
@@ -30,7 +31,7 @@ export const AddUpdateUser: React.FC = () => {
     },
   };
 
-  const methods = useForm<AddUpdateUserType>();
+  const methods = useForm<FormUserType>();
   const { addUserMutation, updateUserMutation } =
     useUserApiCallHook();
     // getUserData
@@ -38,24 +39,29 @@ export const AddUpdateUser: React.FC = () => {
   const { mutateAsync: updateUser } = updateUserMutation();
 
   if (params.id) {
-    // const { data: userData, isSuccess: userDataSuccess } = getUserData(
-    //   "" + params.id
-    // );
-    // if (userDataSuccess) {
-    //   // addUserFormFields.creditdays.config.setData = userData.creditPeriod;
-    // }
+    
   } else {
     useEffect(() => {
       methods.reset();
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((userData): void => {
-    let data: any = { ...userData };
+  const mapFormUsertoUser = (formUserData:FormUserType) =>{
+    let userData: Partial<UserType> = {
+      "user": formUserData.loginId, 
+      "password": formUserData.password,
+      "username": formUserData.userName,
+      "usertype": formUserData.userType.value
+    }
+    return userData;
+  } 
+
+  const onSubmit = methods.handleSubmit((formUserData): void => {
+    let userData:Partial<UserType> =  mapFormUsertoUser(formUserData);
     if (params.id && userData) {
-      updateUser({ id: +params.id, ...data });
+      updateUser({ id: +params.id, ...userData});
     } else {
-      addUser(data);
+      addUser(userData);
     }
   });
 
@@ -72,8 +78,8 @@ export const AddUpdateUser: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={addUserFormFields.username.config} />
-                  <Select config={addUserFormFields.usertype.config} />
+                  <Input config={addUserFormFields.userName.config} />
+                  <Select config={addUserFormFields.userType.config} />
                 </div>
 
                 <div className="col-md-6 col-xs-12">
