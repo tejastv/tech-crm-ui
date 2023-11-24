@@ -41,8 +41,9 @@ export interface AddUpdateClientType {
   crDays: number;
   gstn: string;
   gstYN: string;
-  billONActualBuyer: string;
+  billONActualBuyer: string | boolean;
   autoSendOutstanding: string;
   locked: string;
   email: string;
+  stateCode: number;
 }
