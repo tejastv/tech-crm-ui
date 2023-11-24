@@ -1,5 +1,10 @@
 import { FormFieldType, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
+const userTypeData : any = {
+  "Administrator" : {value: "Administrator",label: "Administrator"},
+  "Super user" : {value: "Super user",label: "Super User"},
+  "Basic user" : {value: "Basic user",label: "Basic User"}
+}
 const UserValidation = {
   required: {
     value: true,
@@ -55,7 +60,7 @@ const userType: FormFieldType = createFormConfig(
   "select",
   UserTypeValidation,
   "User Type",
-  [ {value: "Administrator",label: "Administrator"},{value: "Super user",label: "Super User"},{value: "Basic user",label: "Basic User"}]
+  Object.values(userTypeData)
 );
 const login: FormFieldType = createFormConfig(
   "loginId",
@@ -77,4 +82,5 @@ export const addUserFormFields = {
   userType,
   login,
   password,
+  userTypeData
 };

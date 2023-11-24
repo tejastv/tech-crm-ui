@@ -14,10 +14,12 @@ import {
   addUserFormFields,
   useUserApiCallHook,
 } from "@master/index";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export const AddUpdateUser: React.FC = () => {
   const params = useParams();
+  const {state:userData} = useLocation();
+  
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: params.id ? "Update User" : "Add User",
@@ -38,14 +40,6 @@ export const AddUpdateUser: React.FC = () => {
   const { mutateAsync: addUser } = addUserMutation();
   const { mutateAsync: updateUser } = updateUserMutation();
 
-  if (params.id) {
-    
-  } else {
-    useEffect(() => {
-      methods.reset();
-    }, []);
-  }
-
   const mapFormUsertoUser = (formUserData:FormUserType) =>{
     let userData: Partial<UserType> = {
       "user": formUserData.loginId, 
@@ -54,7 +48,22 @@ export const AddUpdateUser: React.FC = () => {
       "usertype": formUserData.userType.value
     }
     return userData;
-  } 
+  }
+  
+  const mapUsertoFormUser = (userData:UserType) =>{
+    let formUserData: Partial<FormUserType> = {
+      "loginId": userData.user, 
+      "password": userData.password,
+      "userName": userData.username,
+      "userType": addUserFormFields.userTypeData[userData.usertype]
+    }
+    return formUserData;
+  }
+
+  useEffect(() => {
+      if(params.id)
+        methods.reset(mapUsertoFormUser(userData));
+    }, [params.id]);
 
   const onSubmit = methods.handleSubmit((formUserData): void => {
     let userData:Partial<UserType> =  mapFormUsertoUser(formUserData);
