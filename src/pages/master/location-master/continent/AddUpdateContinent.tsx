@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
+import { ActionButtons, BorderLayout, Card, NewInput } from "@shared/index";
 import {
   AddUpdateContinentType,
   addContinentFormFields,
@@ -10,7 +10,12 @@ import {
 import { useParams } from "react-router-dom";
 
 export const AddUpdateContinent: React.FC = () => {
-  const methods = useForm<AddUpdateContinentType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<AddUpdateContinentType>();
   const { addContinentMutation, getContinentData, updateContinentMutation } =
     useContinentApiCallHook();
   const { mutateAsync: addContinent } = addContinentMutation();
@@ -27,20 +32,20 @@ export const AddUpdateContinent: React.FC = () => {
     },
   };
 
-  if (params.id) {
-    const { data: continentData, isSuccess: continentDataSuccess } =
-      getContinentData("" + params.id);
-    if (continentDataSuccess) {
-      addContinentFormFields.continentField.config.setData =
-        continentData?.continent;
-    }
-  } else {
-    useEffect(() => {
-      methods.reset();
-    }, []);
-  }
+  const { data: continentData } = getContinentData(
+    "" + params.id,
+    params.id != undefined
+  );
 
-  const onSubmit = methods.handleSubmit((continentData): void => {
+  useEffect(() => {
+    reset(continentData);
+  }, [continentData]);
+
+  useEffect(() => {
+    reset();
+  }, [!params.id]);
+
+  const onSubmit = handleSubmit((continentData): void => {
     if (params.id && continentData) {
       updateContinent({ id: params.id, ...continentData });
     } else {
@@ -51,27 +56,27 @@ export const AddUpdateContinent: React.FC = () => {
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <Input
-                    config={addContinentFormFields.continentField.config}
-                  />
-                </div>
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addContinentFormFields.continentField}
+                />
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
+            </div>
+          </BorderLayout>
+          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <ActionButtons />
+          </BorderLayout>
+        </form>
       </Card>
     </>
   );

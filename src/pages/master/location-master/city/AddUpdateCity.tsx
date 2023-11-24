@@ -1,7 +1,15 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input, Select } from "@shared/index";
+import {
+  ActionButtons,
+  BorderLayout,
+  Card,
+  // Input,
+  NewInput,
+  NewSelect,
+  // Select,
+} from "@shared/index";
 import {
   AddUpdateCityType,
   addCityFormFields,
@@ -12,14 +20,19 @@ import { useParams } from "react-router-dom";
 import { returnObjectBasedOnID, selectOptionsMaker } from "@utils/index";
 
 export const AddUpdateCity: React.FC = () => {
-  const methods = useForm<AddUpdateCityType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm<AddUpdateCityType>();
   const { addCityMutation, getCityData, updateCityMutation } =
     useCityApiCallHook();
   const { mutateAsync: addCity } = addCityMutation();
   const { mutateAsync: updateCity } = updateCityMutation();
   const params = useParams();
   const { getState } = useStateApiCallHook();
-
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: params.id ? "Update City" : "Add City",
@@ -28,7 +41,6 @@ export const AddUpdateCity: React.FC = () => {
     formActionsConfig: {
       heading: "Action Buttons",
     },
-    
   };
 
   const { data: stateData } = getState();
@@ -39,67 +51,40 @@ export const AddUpdateCity: React.FC = () => {
       "stateName"
     );
   }
-  // if (stateData) {
-  //   let id = EnquiryMasterData?.stateId;
-  //   let data: any = returnObjectBasedOnID(
-  //     stateData,
-  //     "stateId",
-  //     id,
-  //     "stateId",
-  //     "state"
-  //   );
-  //   addCityFormFields.state.config.setData = data
-  //     ? {
-  //         label: data.label,
-  //         value: data.value,
-  //       }
-  //     : [];
-  // }
-  // useEffect(() => {
-  //   methods.reset();
-  // }, []);
+
+  const { data: cityData } = getCityData(
+    "" + params.id,
+    params.id != undefined
+  );
+
   useEffect(() => {
-    // This code will run when the component is about to unmount
-    return () => {
-      methods.reset();
-      // Place your cleanup code here
-      console.log("Component is unmounting. Cleanup can be performed here.");
-    };
-  }, []);
-
-  if (params.id) {
-    const { data: cityData, isSuccess: cityDataSuccess } = getCityData(
-      "" + params.id
-    );
-
-    if (stateData) {
-      let id = cityData?.stateId;
-      let data: any = returnObjectBasedOnID(
-        stateData,
-        "stateId",
-        id,
-        "stateId",
-        "stateName"
-      );
-      addCityFormFields.state.config.setData = data
-        ? {
-            label: data.label,
-            value: data.value,
-          }
-        : [];
+    if (cityData) {
+      let clonedCityData = { ...cityData };
+      if (stateData) {
+        let id = cityData?.stateId;
+        let data: any = returnObjectBasedOnID(
+          stateData,
+          "stateId",
+          id,
+          "stateId",
+          "stateName"
+        );
+        data.length
+          ? (clonedCityData.stateId = {
+              label: data[0].label,
+              value: data[0].value,
+            })
+          : [];
+      }
+      reset(clonedCityData);
     }
-    if (cityDataSuccess) {
-      addCityFormFields.cityField.config.setData = cityData?.cityName;
-      addCityFormFields.osPrintField.config.setData = cityData?.oscopies;
+  }, [cityData, params.id, stateData]);
 
-    }
-  } else {
-    useEffect(() => {
-      methods.reset();
-    }, []);
-  }
+  useEffect(() => {
+    reset();
+  }, [!params.id]);
 
-  const onSubmit = methods.handleSubmit((cityData): void => {
+  const onSubmit = handleSubmit((cityData): void => {
     let data: any = { ...cityData };
     data.stateId = +data.stateId["value"];
     if (params.id && cityData) {
@@ -112,31 +97,45 @@ export const AddUpdateCity: React.FC = () => {
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <Input config={addCityFormFields.cityField.config} />
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  <Input config={addCityFormFields.osPrintField.config} />
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  <Select config={addCityFormFields.state.config} />
-                </div>
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addCityFormFields.cityField}
+                />
+                {/* <Input config={addCityFormFields.cityField.config} /> */}
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
+              <div className="col-md-6 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addCityFormFields.osPrintField}
+                />
+                {/* <Input config={addCityFormFields.osPrintField.config} /> */}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addCityFormFields.state}
+                />
+                {/* <Select config={addCityFormFields.state.config} /> */}
+              </div>
+            </div>
+          </BorderLayout>
+          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <ActionButtons />
+          </BorderLayout>
+        </form>
       </Card>
     </>
   );

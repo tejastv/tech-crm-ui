@@ -67,7 +67,7 @@ export const Segment: React.FC = () => {
     config: {
       tableName: "Segment",
       columns: columns,
-      tableData: segmentData ? segmentData : [],
+      tableData: segmentData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -88,9 +88,7 @@ export const Segment: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

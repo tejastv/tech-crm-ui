@@ -38,7 +38,7 @@ const countryField: FormFieldType = createFormConfig(
   "Country",
   "text",
   countryFieldValidation,
-  ""
+  "Enter Country Name"
 );
 
 const countryCodeField: FormFieldType = createFormConfig(
@@ -46,7 +46,7 @@ const countryCodeField: FormFieldType = createFormConfig(
   "Country Code",
   "text",
   countryCodeFieldValidation,
-  ""
+  "Enter Country Code"
 );
 
 const continentCountryField: FormFieldType = {

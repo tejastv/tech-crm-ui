@@ -126,7 +126,7 @@ export const Supplier: React.FC = () => {
     config: {
       tableName: "Supplier Master",
       columns: columns,
-      tableData: supplierMasterData ? supplierMasterData : [],
+      tableData: supplierMasterData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -147,9 +147,7 @@ export const Supplier: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

@@ -61,16 +61,11 @@ export const City: React.FC = () => {
     },
   ];
 
-  const { data: cityData, isLoading } = getCity();
+  const { data: cityData, isFetching } = getCity();
   const { mutateAsync: deleteCity } = deleteCityMutation();
 
-  // if (isLoading) {
-  //   console.log("inn");
-  //   notify();
-  // }
-
   const deleteCityClick = async (cityData: any) => {
-    var confirmation = confirm("Are you sure to delete it?");
+    let confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
       await deleteCity(cityData.id);
     }
@@ -105,9 +100,7 @@ export const City: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

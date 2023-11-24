@@ -68,7 +68,7 @@ export const PurposeMaster: React.FC = () => {
     config: {
       tableName: "Purpose",
       columns: columns,
-      tableData: purposeMasterData ? purposeMasterData : [],
+      tableData: purposeMasterData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -89,9 +89,7 @@ export const PurposeMaster: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

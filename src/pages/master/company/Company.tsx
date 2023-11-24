@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 export const CompanyMaster: React.FC = () => {
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
-  const { data: companyData, isLoading } = getCompany();
+  const { data: companyData, isFetching } = getCompany();
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
 
@@ -134,7 +134,6 @@ export const CompanyMaster: React.FC = () => {
   };
 
   const editCompanyClick = (companyData: any) => {
-    console.log(companyData);
     navigate(COMMON_ROUTES.EDIT.replace(":id", companyData.companyId));
   };
 
@@ -142,7 +141,7 @@ export const CompanyMaster: React.FC = () => {
     config: {
       tableName: "Company Master",
       columns: columns,
-      tableData: companyData ? companyData : [],
+      tableData: companyData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -163,7 +162,7 @@ export const CompanyMaster: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

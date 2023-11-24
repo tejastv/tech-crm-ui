@@ -79,7 +79,7 @@ export const BankMasterDeposit: React.FC = () => {
     config: {
       tableName: "Bank Master(Deposit)",
       columns: columns,
-      tableData: BankMasterDepositData ? BankMasterDepositData : [],
+      tableData: BankMasterDepositData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -100,9 +100,7 @@ export const BankMasterDeposit: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

@@ -94,7 +94,7 @@ export const AddPrice: React.FC = () => {
           </form>
         </FormProvider>
         <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-          {/* <Table></Table> */}
+          {/* {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />} */}
         </BorderLayout>
       </Card>
     </>

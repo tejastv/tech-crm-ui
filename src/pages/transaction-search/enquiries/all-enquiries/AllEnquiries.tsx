@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 
 import {
@@ -444,7 +444,7 @@ export const Enquiries: React.FC = () => {
     config: {
       tableName: "Enquiry",
       columns: columns,
-      tableData: enquiriesData ? enquiriesData : [],
+      tableData: enquiriesData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -522,9 +522,7 @@ export const Enquiries: React.FC = () => {
           </FormProvider>
         )}
 
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+{!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

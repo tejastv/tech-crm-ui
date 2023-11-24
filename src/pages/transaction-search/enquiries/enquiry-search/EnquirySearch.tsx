@@ -12,7 +12,6 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "@constants/index";
-import { CompanyType, useCompanyApiCallHook } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
@@ -34,6 +33,7 @@ export const EnquirySearch: React.FC = () => {
   const config = {
     breadcrumbConfig: {
       pageHeading: "Enquiry Details",
+      buttons: [],
     },
     borderLayoutConfig: {
       heading: "List",
@@ -399,27 +399,25 @@ export const EnquirySearch: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Group Price</>,
     },
-
-
   ];
 
-  const deleteCompanyClick = (companyData: any) => {
+  const deleteCompanyClick = (enquiriesData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
-      deleteEnquiry(companyData.companyId);
+      deleteEnquiry(enquiriesData.companyId);
     }
   };
 
-  const editCompanyClick = (companyData: any) => {
-    console.log(companyData);
-    navigate(COMMON_ROUTES.EDIT.replace(":id", companyData.companyId));
+  const editCompanyClick = (enquiriesData: any) => {
+    console.log(enquiriesData);
+    navigate(COMMON_ROUTES.EDIT.replace(":id", enquiriesData.companyId));
   };
 
   const tableConfig: TableType<AllEnquiriesType> = {
     config: {
       tableName: "Enqury Search",
       columns: columns,
-      tableData: enquiriesData ? enquiriesData : [],      
+      tableData: enquiriesData || [],
       copyBtn: true,
       csvBtn: false,
       excelBtn: true,
@@ -497,7 +495,7 @@ export const EnquirySearch: React.FC = () => {
             </form>
           </FormProvider>
 
-          <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
+          {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
         </BorderLayout>
       </div>
     </>

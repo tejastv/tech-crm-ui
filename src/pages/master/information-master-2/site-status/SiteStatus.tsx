@@ -68,7 +68,7 @@ export const SiteStatus: React.FC = () => {
     config: {
       tableName: "Site Status",
       columns: columns,
-      tableData: siteStatusData ? siteStatusData : [],
+      tableData: siteStatusData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -89,9 +89,7 @@ export const SiteStatus: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>
-          {isLoading ? <Loader /> : null}
-        </Table>
+      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

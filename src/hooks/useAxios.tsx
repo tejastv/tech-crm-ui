@@ -12,7 +12,9 @@ export const useAxios = () => {
   const { errorMessageToaster, successMessageToaster } = useToaster();
 
   const defaultBaseUrl = `${import.meta.env.VITE_BASE_URL}`;
-  const transactionMasterBaseUrl = `${import.meta.env.VITE_BASE_URL_TRANSACTION_MASTER}`;
+  const transactionMasterBaseUrl = `${
+    import.meta.env.VITE_BASE_URL_TRANSACTION_MASTER
+  }`;
 
   const instance = axios.create({
     baseURL: defaultBaseUrl,
@@ -68,9 +70,14 @@ export const useAxios = () => {
       if (error.response?.status === STATUS_CODES.CODE_500) {
         errorMessageToaster(error.response?.data.error, "single");
       }
+      if (error.response?.status === STATUS_CODES.CODE_404) {
+        errorMessageToaster(error.response?.data.error, "single");
+      }
       if (error.response?.status === STATUS_CODES.CODE_401) {
         removeItem("user");
         navigate("/login");
+      } else {
+        errorMessageToaster(error.message, "single");
       }
       return Promise.reject(error);
     }
