@@ -132,7 +132,7 @@ export const AddEnqPi: React.FC = () => {
     addEnqPiFormFields.stateField.config.options = selectOptionsMaker(
       stateData,
       "stateId",
-      "state"
+      "stateName"
     );
   }
 
@@ -156,6 +156,7 @@ export const AddEnqPi: React.FC = () => {
 
   const { data: fYearData } = getFinYear();
   if (fYearData) {
+    console.log(fYearData)
     addEnqPiFormFields.fYearField.config.options = selectOptionsMaker(
       fYearData,
       "finYear",
