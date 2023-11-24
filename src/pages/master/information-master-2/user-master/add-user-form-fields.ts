@@ -54,7 +54,8 @@ const usertype: FormFieldType = createFormConfig(
   "User Type",
   "select",
   UserTypeValidation,
-  "User Type"
+  "User Type",
+  [ {value: "Administrator",label: "Administrator"},{value: "Super user",label: "Super user"},{value: "Basic user",label: "Basic user"}]
 );
 const login: FormFieldType = createFormConfig(
   "login",

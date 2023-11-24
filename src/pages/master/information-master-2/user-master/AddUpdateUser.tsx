@@ -77,8 +77,8 @@ export const AddUpdateUser: React.FC = () => {
                 </div>
 
                 <div className="col-md-6 col-xs-12">
-                  <Input config={addUserFormFields.username.config} />
-                  <Input config={addUserFormFields.usertype.config} />
+                  <Input config={addUserFormFields.login.config} />
+                  <Input config={addUserFormFields.password.config} />
                 </div>
               </div>
               <BorderLayout heading={cardConfig.formTableConfig.heading}>
