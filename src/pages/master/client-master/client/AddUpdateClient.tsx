@@ -51,6 +51,7 @@ export const AddUpdateClient: React.FC = () => {
     formState: { errors },
   } = useForm<AddUpdateClientType>();
   const params = useParams();
+
   const { addClientMutation, updateClientMutation, getClientData } =
     useClientApiCallHook();
   const { mutate: addClient } = addClientMutation();
@@ -63,9 +64,6 @@ export const AddUpdateClient: React.FC = () => {
   const { getExecutive } = useExecutiveApiCallHook();
   const { getClientGroup } = useClientGroupApiCallHook();
   const { getSegment } = useSegmentApiCallHook();
-
-  const [selectedStateId, setSelectedStateId] = useState();
-  const [selectedCountryId, setSelectedCountryId] = useState();
 
   const [cityOptions, setCityOptions] = useState<CityType[]>();
   const [stateOptions, setStateOptions] = useState<StateType[]>();
@@ -296,13 +294,20 @@ export const AddUpdateClient: React.FC = () => {
             );
         }
         if (executiveOptions?.length) {
-          clonedClientMasterData.executive_id =
-            returnFormatedObjectElseEmptyArray(
-              clientMasterData.executive_id,
-              clientMasterData,
-              "executive_id",
-              "executive"
-            );
+          let id = clientMasterData?.executive_id;
+          let data: any = returnObjectBasedOnID(
+            executiveOptions,
+            "executiveID",
+            id,
+            "executiveID",
+            "executive"
+          );
+          data.length
+            ? (clonedClientMasterData.executive_id = {
+                label: data[0].label,
+                value: data[0].value,
+              })
+            : [];
         }
         if (clientGroupOptions?.length) {
           clonedClientMasterData.groupId = returnFormatedObjectElseEmptyArray(
@@ -372,45 +377,30 @@ export const AddUpdateClient: React.FC = () => {
 
   const handleSelectCity = (selectedOption: any) => {
     if (selectedOption) {
-      setSelectedStateId(selectedOption.data.stateId);
-      setSelectedCountryId(selectedOption.data.countryId);
+      if (addClientFormFields.stateClient.config.name === "stateID") {
+        setValue(
+          addClientFormFields.stateClient.config.name,
+          returnFormatedObjectElseEmptyArray(
+            selectedOption.data.stateId,
+            selectedOption.data,
+            "stateId",
+            "stateName"
+          )
+        );
+      }
+      if (addClientFormFields.countryClient.config.name === "countryID") {
+        setValue(
+          addClientFormFields.countryClient.config.name,
+          returnFormatedObjectElseEmptyArray(
+            selectedOption.data.countryId,
+            selectedOption.data,
+            "countryId",
+            "countryName"
+          )
+        );
+      }
     }
   };
-
-  if (selectedStateId && stateData) {
-    let id = selectedStateId;
-    let data: any = returnObjectBasedOnID(
-      stateData,
-      "stateId",
-      id,
-      "stateId",
-      "stateName"
-    );
-    addClientFormFields.stateClient.config.setData = data
-      ? {
-          label: data.label,
-          value: data.value,
-        }
-      : [];
-    addClientFormFields.statecodeClient.config.setData = data.value;
-  }
-
-  if (selectedCountryId && countryData) {
-    let id = selectedCountryId;
-    let data: any = returnObjectBasedOnID(
-      countryData,
-      "countryId",
-      id,
-      "countryId",
-      "countryName"
-    );
-    addClientFormFields.countryClient.config.setData = data
-      ? {
-          label: data.label,
-          value: data.value,
-        }
-      : [];
-  }
 
   const onSubmit = handleSubmit((clientData) => {
     let data: any = { ...cleanupObject(clientData) };
@@ -476,212 +466,210 @@ export const AddUpdateClient: React.FC = () => {
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <form
-          onSubmit={onSubmit}
-          noValidate
-          autoComplete="off"
-          className="p-t-20"
-        >
-          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-            <div className="row">
-              <div className="col-md-6 col-xs-12">
-                <div className="card-body">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.clientName}
-                  />
-                  <NewRadio
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.clientGst}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.gstn}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.addressClient}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.cityClient}
-                    onChange={handleSelectCity}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.zipClient}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.stateClient}
-                    onChange={handleSelectChange}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.statecodeClient}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.countryClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.telnoClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.faxnoClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.emailClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.websiteClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.contactClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.designationClient}
-                  />
-                  <DivLayout
-                    heading={cardConfig.formclieckUpdateConfig.heading}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.crDay}
-                  />
-                  <NewCheckbox
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.billonactual}
-                  />
-                </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <div className="card-body">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.clientName}
+                />
+                <NewRadio
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.clientGst}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.gstn}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.addressClient}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.cityClient}
+                  onChange={handleSelectCity}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.zipClient}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.stateClient}
+                  onChange={handleSelectChange}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.statecodeClient}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.countryClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.telnoClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.faxnoClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.emailClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.websiteClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.contactClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.designationClient}
+                />
+                <DivLayout
+                  heading={cardConfig.formclieckUpdateConfig.heading}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.crDay}
+                />
+                <NewCheckbox
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.billonactual}
+                />
               </div>
-              <div className="col-md-6 col-xs-12">
-                <div className="card-body">
-                  {/* <NewInput errors={errors}
+            </div>
+            <div className="col-md-6 col-xs-12">
+              <div className="card-body">
+                {/* <NewInput errors={errors}
                     register={register} config={addClientFormFields.id} />
                     <NewSelect errors={errors}
                     register={register}
                     control={control}
                       config={addClientFormFields.clientIdSelect}
                     /> */}
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.clientCurrencey}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.executive}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.instuction}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.groupClient}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.segmentClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.remarks}
-                  />
-                  <NewRadio
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.monthlyIvoice}
-                  />
-                  <NewRadio
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.osemail}
-                  />
-                  {/* <h6 className="card-title m-t-20"> */}
-                  <DivLayout heading={cardConfig.formAdjustConfig.heading} />
-                  {/* </h6> */}
-                  <NewRadio
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.discount}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.discountBlank}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.toAdjust}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.baltoAdjust}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.adjustenquiry}
-                  />
-                  {/* <h6 className="card-title m-t-20"> */}
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.clientCurrencey}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.executive}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.instuction}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.groupClient}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.segmentClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.remarks}
+                />
+                <NewRadio
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.monthlyIvoice}
+                />
+                <NewRadio
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.osemail}
+                />
+                {/* <h6 className="card-title m-t-20"> */}
+                <DivLayout heading={cardConfig.formAdjustConfig.heading} />
+                {/* </h6> */}
+                <NewRadio
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.discount}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.discountBlank}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.toAdjust}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.baltoAdjust}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.adjustenquiry}
+                />
+                {/* <h6 className="card-title m-t-20"> */}
 
-                  {/* </h6> */}
-                </div>
+                {/* </h6> */}
               </div>
             </div>
-          </BorderLayout>
-          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-            <ActionButtons />
-          </BorderLayout>
-        </form>
-      </Card>
-    </>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

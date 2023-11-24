@@ -37,7 +37,7 @@ export const NewInput: React.FC<{
             {props.config.config.multiline ? (
               <Form.Control
                 as="textarea"
-                rows={1}
+                rows={3}
                 placeholder={props.config.config.placeholder}
                 id={props.config.config.id}
                 {...props.register(

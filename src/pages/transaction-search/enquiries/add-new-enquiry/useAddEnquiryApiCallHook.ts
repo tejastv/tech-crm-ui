@@ -32,12 +32,17 @@ export const useAddEnquiryApiCallHook = () => {
     return useQuery<EnqType[]>({
       queryKey: [queryKeys.ENQSTATUS_DATA],
       queryFn: async () => {
-        const response = await instance.get(apiUrls.GET_ADD_ENQSTATUS,callFormConfig);
-       const data = response.data.data.sort((a: { enquiryStatus: string; }, b: { enquiryStatus: any; }) => a.enquiryStatus.localeCompare(b.enquiryStatus));
+        const response = await instance.get(
+          apiUrls.GET_ADD_ENQSTATUS,
+          callFormConfig
+        );
+        const data = response.data.data.sort(
+          (a: { enquiryStatus: string }, b: { enquiryStatus: any }) =>
+            a.enquiryStatus.localeCompare(b.enquiryStatus)
+        );
         return data;
       },
       staleTime: Infinity,
-  
     });
   };
 
@@ -49,17 +54,32 @@ export const useAddEnquiryApiCallHook = () => {
           apiUrls.GET_ADD_SERVICETYPE,
           callFormConfig
         );
-        const data = response.data.data.sort((a: { serviceType: string; }, b: { serviceType: any; }) => a.serviceType.localeCompare(b.serviceType));
+        const data = response.data.data.sort(
+          (a: { serviceType: string }, b: { serviceType: any }) =>
+            a.serviceType.localeCompare(b.serviceType)
+        );
         return data;
       },
       staleTime: Infinity,
     });
   };
 
-  //   ref no
-  const getRefNo = async (): Promise<RefNoType> => {
-    const response = await instance.get(apiUrls.GET_ADD_REFNO, callFormConfig);
-    return response.data;
+  // ref no
+  const getRefNo = (condition: any): UseQueryResult<string> => {
+    return useQuery<string>({
+      queryKey: [queryKeys.REFNO_DATA],
+      queryFn: async () => {
+        const response = await instance.get(
+          apiUrls.GET_ADD_REFNO,
+          callFormConfig
+        );
+        return response.data.data;
+      },
+      enabled: condition,
+      staleTime: 0,
+      cacheTime: 0,
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+    });
   };
 
   const getClientDetails = async (id: string): Promise<RefNoType> => {
