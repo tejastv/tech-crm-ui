@@ -5,7 +5,4 @@ export interface UserType {
   password: string;
   rights: string;
   user: string;
-  email:string;
 }
-
-
