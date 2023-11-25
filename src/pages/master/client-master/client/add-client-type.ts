@@ -6,8 +6,8 @@ export interface AddUpdateClientType {
   address: string;
   cityID: number;
   zip: string;
-  stateID: number;
-  countryID: number;
+  stateID: any;
+  countryID: any;
   phone: string;
   fax: string;
   website: string;

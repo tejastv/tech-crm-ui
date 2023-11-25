@@ -67,7 +67,10 @@ export const useAllEnquiriesApiCallHook = () => {
     setQueryParam(params);
   };
 
-  const getEnquiryData = (id: string): UseQueryResult<AllEnquiriesType> => {
+  const getEnquiryData = (
+    id: string,
+    condition?: any
+  ): UseQueryResult<AllEnquiriesType> => {
     return useQuery<AllEnquiriesType>({
       queryKey: [queryKeys.ENQUIRY_DATA, id],
       queryFn: async () => {
@@ -77,7 +80,7 @@ export const useAllEnquiriesApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
