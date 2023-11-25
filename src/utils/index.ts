@@ -7,4 +7,4 @@ export * from "./selectOptionsMaker";
 export * from "./createFormConfig";
 export * from "./titleCase";
 export * from "./dateFormatter.ts";
-
+export * from "./returnFormatedObjectElseEmptyArray.ts";

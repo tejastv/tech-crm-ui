@@ -321,13 +321,7 @@ const GstOption = [
 ];
 
 const biilOnActualBuyerOptions = [
-  { value: "Y", label: "Bill on Actual Buyer" },
-];
-
-const crDayOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
+  { value: true, label: "Bill on Actual Buyer" },
 ];
 
 // Right Field start
@@ -468,7 +462,7 @@ const crDay: FormFieldType = createFormConfig(
   "select",
   CrDayValidation,
   "Select Cr. days",
-  crDayOptions
+  []
 );
 
 const billonactual: FormFieldType = createFormConfig(

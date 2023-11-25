@@ -1,18 +1,14 @@
 // AddUpdateCompany.tsx
 import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   ActionButtons,
   BorderLayout,
   Card,
-  DatePicker,
-  Input,
   NewDatePicker,
   NewInput,
   NewSelect,
-  Radio,
-  Select,
   NewRadio,
 } from "@shared/index";
 
@@ -30,7 +26,11 @@ import {
 
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
-import { returnObjectBasedOnID, cleanupObject } from "@utils/index";
+import {
+  returnObjectBasedOnID,
+  cleanupObject,
+  returnFormatedObjectElseEmptyArray,
+} from "@utils/index";
 
 export const AddUpdateCompany: React.FC = () => {
   const {
@@ -49,8 +49,6 @@ export const AddUpdateCompany: React.FC = () => {
   const { getCity } = useCityApiCallHook();
   const { getState } = useStateApiCallHook();
   const { getCountry } = useCountryApiCallHook();
-  const [selectedStateId, setSelectedStateId] = useState();
-  const [selectedCountryId, setSelectedCountryId] = useState();
   const [cityOptions, setCityOptions] = useState<CityType[]>();
   const [stateOptions, setStateOptions] = useState<StateType[]>();
   const [countryOptions, setCountryOptions] = useState<CountryType[]>();
@@ -173,13 +171,6 @@ export const AddUpdateCompany: React.FC = () => {
           : [];
       }
       reset(clonedCompanyData);
-
-      // if (addCompanyFormFields.companyType.config.name == "companyType") {
-      //   setValue(
-      //     addCompanyFormFields.companyType.config.name,
-      //     companyMasterData.companyType
-      //   );
-      // }
     }
   }, [params.id, companyMasterData, countryData, stateData, cityData]);
 
@@ -191,45 +182,29 @@ export const AddUpdateCompany: React.FC = () => {
     if (selectedOption) {
       console.log(selectedOption);
       if (addCompanyFormFields.state.config.name === "stateId") {
-        // setValue(addCompanyFormFields.state.config.name, {value: selectedOption.data.stateId, label: selectedOption.data.stateName});
+        setValue(
+          addCompanyFormFields.state.config.name,
+          returnFormatedObjectElseEmptyArray(
+            selectedOption.data.stateId,
+            selectedOption.data,
+            "stateId",
+            "stateName"
+          )
+        );
       }
-      // setSelectedCountryId(selectedOption.data.countryId);
+      if (addCompanyFormFields.country.config.name === "countryId") {
+        setValue(
+          addCompanyFormFields.country.config.name,
+          returnFormatedObjectElseEmptyArray(
+            selectedOption.data.countryId,
+            selectedOption.data,
+            "countryId",
+            "countryName"
+          )
+        );
+      }
     }
   };
-
-  if (selectedStateId && stateData) {
-    let id = selectedStateId;
-    let data: any = returnObjectBasedOnID(
-      stateData,
-      "stateId",
-      id,
-      "stateId",
-      "stateName"
-    );
-    addCompanyFormFields.state.config.setData = data
-      ? {
-          label: data[0].label,
-          value: data[0].value,
-        }
-      : [];
-  }
-
-  if (selectedCountryId && countryData) {
-    let id = selectedCountryId;
-    let data: any = returnObjectBasedOnID(
-      countryData,
-      "countryId",
-      id,
-      "countryId",
-      "countryName"
-    );
-    addCompanyFormFields.country.config.setData = data
-      ? {
-          label: data[0].label,
-          value: data[0].value,
-        }
-      : [];
-  }
 
   const onSubmit = handleSubmit((companyData) => {
     let data: any = { ...cleanupObject(companyData) };
@@ -246,17 +221,16 @@ export const AddUpdateCompany: React.FC = () => {
       data.companyType = +data.companyType;
     }
     console.log(data);
-    // if (params.id && data) {
-    //   updateCompany({ id: params.id, ...data });
-    // } else {
-    //   addCompany(data);
-    // }
+    if (params.id && data) {
+      updateCompany({ id: params.id, ...data });
+    } else {
+      addCompany(data);
+    }
   });
 
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        {/* <FormProvider {...methods}> */}
         <form
           onSubmit={onSubmit}
           noValidate
@@ -414,7 +388,6 @@ export const AddUpdateCompany: React.FC = () => {
             <ActionButtons />
           </BorderLayout>
         </form>
-        {/* </FormProvider> */}
       </Card>
     </>
   );

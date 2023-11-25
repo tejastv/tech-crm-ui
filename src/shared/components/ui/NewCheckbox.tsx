@@ -49,11 +49,16 @@ export const NewCheckbox: React.FC<{
                         className="custom-checkbox"
                         value={option.value}
                         onChange={(e) => {
-                          field.onChange(e.target.value);
+                          let value: any = e.target.value;
+                          if (typeof eval(value) === "boolean") {
+                            value = e.target.checked;
+                          }
+                          field.onChange(value);
                           if (props.onChange) {
-                            props.onChange(e.target.value);
+                            props.onChange(value);
                           }
                         }}
+                        defaultChecked={field.value === option.value}
                       />
                     )}
                   ></Controller>

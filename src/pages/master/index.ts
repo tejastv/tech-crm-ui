@@ -125,7 +125,7 @@ export { addCreditDaysFormFields } from "./information-master-2/credit-days/add-
 export { addSiteStatusFormFields } from "./information-master-2/site-status/add-sitestatus-form-fields";
 export { addExecutiveFormFields } from "./information-master-2/executive/add-executive-form-field";
 export { addFinYearFormFields } from "./information-master-2/fin-year/add-finyear-form-fields";
-export { addUserFormFields } from "./information-master-2/user-master/add-user-form-fields";
+export { addUserFormFields } from "./information-master-2/user-master/UserFormFields";
 
 // Models
 
@@ -209,8 +209,8 @@ export * from "./information-master-2/purpose-master/purpose-master-type";
 export * from "./information-master-2/site-status/add-update-sitestatus-type";
 export * from "./information-master-2/site-status/sitestatus-type";
 
-export * from "./information-master-2/user-master/add-update-user-type";
-export * from "./information-master-2/user-master/user-type";
+export * from "./information-master-2/user-master/FormUserType";
+export * from "./information-master-2/user-master/UserType";
 
 // location master
 export * from "./location-master/city/city-type";

@@ -2,7 +2,7 @@ export interface AddUpdateEnquiryType {
   id?: string;
   companyenquiry: string;
   fyearId: any;
-  refNo: number;
+  refNo: string;
   sourceenquiry: string;
   givenAddress: string;
   telnoenquiry: string;
@@ -10,49 +10,44 @@ export interface AddUpdateEnquiryType {
   email: string;
   website: string;
   phone: string;
-  contactPerson:string;
-
+  contactPerson: string;
   designation: string;
-  cityId: string;
+  cityId: any;
   zip: string;
-  stateId: string;
-
-  countryId: string;
-
+  stateId: any;
+  countryId: any;
   blank: string;
-
-  bankers:string
+  bankers: string;
   givenname: string;
   records: string;
   enqtype: string;
-  localsourceId: string;
-  serviceTypeID: string;
+  localsourceId: number;
+  serviceTypeID: number;
   dueDate: string;
   printstatus: string;
-  enqStatusID: string;
+  enqStatusID: number;
   svisit: string;
   notesforenquiry: string;
   notesforadj: string;
   instruction: string;
-  adjustment:string;
-  industryId:string;
+  adjustment: any;
+  industryId: number;
   clientRefNo: string;
-  clientID: string;
-  requestNo: string;
+  clientID: number;
+  requestNo: any;
   clientIdenquiry: string;
-  actualBuyerId: string;
-  disType:string;
+  actualBuyerId: number;
+  disType: string;
   priceenquiry: string;
-  disPer:string ;
-  discount: string;
-  reportComission: string;
+  disPer: any;
+  discount: any;
+  reportComission: any;
   refnote: string;
   actualbuyeraddnote: string;
   discountcommissionnote: string;
-  noteForComission:string;
-  lineOfBusiness:string;
-  typeofEnquiry:string;
-  reportPrice:string;
-  reportFilename:string;
-
+  noteForComission: string;
+  lineOfBusiness: string;
+  typeofEnquiry: string;
+  reportPrice: number;
+  reportFilename: string;
 }

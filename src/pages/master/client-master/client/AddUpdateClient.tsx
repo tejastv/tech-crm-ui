@@ -4,15 +4,12 @@ import {
   Card,
   NewCheckbox,
   DivLayout,
-  Input,
   NewInput,
   NewRadio,
   NewSelect,
-  Radio,
-  Select,
 } from "@shared/index";
 import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   AddUpdateClientType,
@@ -36,7 +33,11 @@ import {
   useStateApiCallHook,
 } from "@master/index";
 
-import { cleanupObject, returnObjectBasedOnID } from "@utils/index";
+import {
+  cleanupObject,
+  returnFormatedObjectElseEmptyArray,
+  returnObjectBasedOnID,
+} from "@utils/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
 
@@ -50,7 +51,7 @@ export const AddUpdateClient: React.FC = () => {
     formState: { errors },
   } = useForm<AddUpdateClientType>();
   const params = useParams();
-  const [stateCode, setStateCode] = useState();
+
   const { addClientMutation, updateClientMutation, getClientData } =
     useClientApiCallHook();
   const { mutate: addClient } = addClientMutation();
@@ -63,9 +64,6 @@ export const AddUpdateClient: React.FC = () => {
   const { getExecutive } = useExecutiveApiCallHook();
   const { getClientGroup } = useClientGroupApiCallHook();
   const { getSegment } = useSegmentApiCallHook();
-
-  const [selectedStateId, setSelectedStateId] = useState();
-  const [selectedCountryId, setSelectedCountryId] = useState();
 
   const [cityOptions, setCityOptions] = useState<CityType[]>();
   const [stateOptions, setStateOptions] = useState<StateType[]>();
@@ -97,8 +95,12 @@ export const AddUpdateClient: React.FC = () => {
   };
 
   useEffect(() => {
-    addClientFormFields.monthlyIvoice.config.setData = "N";
-    addClientFormFields.osemail.config.setData = "N";
+    if (addClientFormFields.monthlyIvoice.config.name === "monthlyInvoice") {
+      setValue(addClientFormFields.monthlyIvoice.config.name, "N");
+    }
+    if (addClientFormFields.osemail.config.name === "osListPrInteger") {
+      setValue(addClientFormFields.osemail.config.name, "N");
+    }
   }, []);
 
   // city api call
@@ -257,24 +259,145 @@ export const AddUpdateClient: React.FC = () => {
   useEffect(() => {
     if (clientMasterData) {
       let clonedClientMasterData = { ...clientMasterData };
+      if (cityOptions?.length) {
+        clonedClientMasterData.cityID = returnFormatedObjectElseEmptyArray(
+          clientMasterData.cityID,
+          clientMasterData,
+          "cityID",
+          "cityName"
+        );
+      }
+      if (stateOptions?.length) {
+        clonedClientMasterData.stateID = returnFormatedObjectElseEmptyArray(
+          clientMasterData.stateID,
+          clientMasterData,
+          "stateID",
+          "stateName"
+        );
+      }
+      if (countryOptions?.length) {
+        clonedClientMasterData.countryID = returnFormatedObjectElseEmptyArray(
+          clientMasterData.countryID,
+          clientMasterData,
+          "countryID",
+          "countryName"
+        );
+      }
+      if (currencyOptions?.length) {
+        clonedClientMasterData.currencyID = returnFormatedObjectElseEmptyArray(
+          clientMasterData.currencyID,
+          clientMasterData,
+          "currencyID",
+          "currencyName"
+        );
+      }
+      if (executiveOptions?.length) {
+        let id = clientMasterData?.executive_id;
+        let data: any = returnObjectBasedOnID(
+          executiveOptions,
+          "executiveID",
+          id,
+          "executiveID",
+          "executive"
+        );
+        data.length
+          ? (clonedClientMasterData.executive_id = {
+              label: data[0].label,
+              value: data[0].value,
+            })
+          : [];
+      }
+      if (clientGroupOptions?.length) {
+        clonedClientMasterData.groupId = returnFormatedObjectElseEmptyArray(
+          clientMasterData.groupId,
+          clientMasterData,
+          "groupId",
+          "groupName"
+        );
+      }
+      if (executiveOptions?.length) {
+        clonedClientMasterData.segmentId = returnFormatedObjectElseEmptyArray(
+          clientMasterData.segmentId,
+          clientMasterData,
+          "segmentId",
+          "segmentName"
+        );
+      }
+      clonedClientMasterData.billONActualBuyer =
+        clientMasterData.billONActualBuyer === "Y" ? true : false;
+      if (creditOptions?.length) {
+        let id = clientMasterData?.crDays;
+        let data: any = returnObjectBasedOnID(
+          creditOptions,
+          "creditPeriodId",
+          id,
+          "creditPeriodId",
+          "creditPeriod"
+        );
+        data.length
+          ? (clonedClientMasterData.crDays = {
+              label: data[0].label,
+              value: data[0].value,
+            })
+          : [];
+      }
+      // console.log(clonedClientMasterData);
+      reset(clonedClientMasterData);
     }
-    // reset();
   }, [
     params.id,
     clientMasterData,
-    cityData,
-    stateData,
-    countryData,
-    creditDaysData,
-    currencyData,
-    executiveData,
-    clientGroupData,
-    segmentData,
+    cityOptions,
+    stateOptions,
+    countryOptions,
+    creditOptions,
+    currencyOptions,
+    executiveOptions,
+    clientGroupOptions,
+    segmentOptions,
   ]);
 
   useEffect(() => {
     reset();
   }, [!params.id]);
+
+  const handleSelectChange = (selectedOption: any) => {
+    if (selectedOption) {
+      if (addClientFormFields.statecodeClient.config.name === "stateCode") {
+        setValue(
+          addClientFormFields.statecodeClient.config.name,
+          selectedOption.data.stateCodeN
+        );
+      }
+    }
+  };
+
+  const handleSelectCity = (selectedOption: any) => {
+    if (selectedOption) {
+      if (addClientFormFields.stateClient.config.name === "stateID") {
+        setValue(
+          addClientFormFields.stateClient.config.name,
+          returnFormatedObjectElseEmptyArray(
+            selectedOption.data.stateId,
+            selectedOption.data,
+            "stateId",
+            "stateName"
+          )
+        );
+      }
+      if (addClientFormFields.countryClient.config.name === "countryID") {
+        setValue(
+          addClientFormFields.countryClient.config.name,
+          returnFormatedObjectElseEmptyArray(
+            selectedOption.data.countryId,
+            selectedOption.data,
+            "countryId",
+            "countryName"
+          )
+        );
+      }
+    }
+  };
 
   const onSubmit = handleSubmit((clientData) => {
     let data: any = { ...cleanupObject(clientData) };
@@ -301,7 +424,9 @@ export const AddUpdateClient: React.FC = () => {
     data.monthlyInvoice = data.monthlyInvoice && data.monthlyInvoice.toString();
     data.osListPrInteger =
       data.osListPrInteger && data.osListPrInteger.toString();
-    if (!data.billONActualBuyer) {
+    if (eval(data.billONActualBuyer)) {
+      data.billONActualBuyer = "Y";
+    } else {
       data.billONActualBuyer = "N";
     }
     if (data.cityID) {
@@ -337,453 +462,211 @@ export const AddUpdateClient: React.FC = () => {
     }
   });
 
-  // if (params.id) {
-  //   const { data: clientMasterData } = getClientData(+params.id);
-  //   if (clientMasterData) {
-  //     if (cityData) {
-  //       let id = clientMasterData?.cityID;
-  //       let data: any = returnObjectBasedOnID(
-  //         cityData,
-  //         "cityId",
-  //         id,
-  //         "cityId",
-  //         "cityName"
-  //       );
-  //       addClientFormFields.cityClient.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-  //     if (stateData) {
-  //       let id = clientMasterData?.stateID;
-  //       let data: any = returnObjectBasedOnID(
-  //         stateData,
-  //         "stateId",
-  //         id,
-  //         "stateId",
-  //         "stateName"
-  //       );
-  //       addClientFormFields.stateClient.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //       addClientFormFields.statecodeClient.config.setData = data.value;
-  //     }
-  //     if (countryData) {
-  //       let id = clientMasterData?.countryID;
-  //       let data: any = returnObjectBasedOnID(
-  //         countryData,
-  //         "countryId",
-  //         id,
-  //         "countryId",
-  //         "countryName"
-  //       );
-  //       addClientFormFields.countryClient.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-  //     if (creditDaysData) {
-  //       let id = clientMasterData?.crDays;
-  //       let data: any = returnObjectBasedOnID(
-  //         creditDaysData,
-  //         "creditPeriod",
-  //         id,
-  //         "creditPeriod",
-  //         "creditPeriod"
-  //       );
-
-  //       addClientFormFields.cityClient.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-  //     if (currencyData) {
-  //       let id = clientMasterData?.currencyID;
-  //       let data: any = returnObjectBasedOnID(
-  //         currencyData,
-  //         "currencyId",
-  //         id,
-  //         "currencyId",
-  //         "currencyType"
-  //       );
-  //       addClientFormFields.clientCurrencey.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-  //     if (executiveData) {
-  //       let id = clientMasterData?.executive_id;
-  //       let data: any = returnObjectBasedOnID(
-  //         executiveData,
-  //         "executiveID",
-  //         id,
-  //         "executiveID",
-  //         "executive"
-  //       );
-  //       addClientFormFields.executive.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-  //     if (clientGroupData) {
-  //       let id = clientMasterData?.groupId;
-  //       let data: any = returnObjectBasedOnID(
-  //         clientGroupData,
-  //         "groupId",
-  //         id,
-  //         "groupId",
-  //         "groupName"
-  //       );
-  //       addClientFormFields.groupClient.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-  //     if (segmentData) {
-  //       let id = clientMasterData?.segmentId;
-  //       let data: any = returnObjectBasedOnID(
-  //         segmentData,
-  //         "segmentId",
-  //         id,
-  //         "segmentId",
-  //         "segmentName"
-  //       );
-  //       addClientFormFields.segmentClient.config.setData = data
-  //         ? {
-  //           label: data.label,
-  //           value: data.value,
-  //         }
-  //         : [];
-  //     }
-
-  //     addClientFormFields.clientName.config.setData =
-  //       clientMasterData.clientName;
-  //     addClientFormFields.clientGst.config.setData = clientMasterData.gstYN;
-  //     addClientFormFields.gstn.config.setData = clientMasterData.gstn;
-  //     addClientFormFields.addressClient.config.setData =
-  //       clientMasterData.address;
-  //     addClientFormFields.telnoClient.config.setData = clientMasterData.phone;
-  //     addClientFormFields.faxnoClient.config.setData = clientMasterData.fax;
-  //     addClientFormFields.emailClient.config.setData = clientMasterData.email;
-  //     addClientFormFields.websiteClient.config.setData =
-  //       clientMasterData.website;
-  //     addClientFormFields.contactClient.config.setData =
-  //       clientMasterData.contactPerson;
-  //     addClientFormFields.designationClient.config.setData =
-  //       clientMasterData.designation;
-  //     addClientFormFields.zipClient.config.setData = clientMasterData.zip;
-  //     addClientFormFields.instuction.config.setData = clientMasterData.email;
-  //     addClientFormFields.remarks.config.setData = clientMasterData.remarks;
-  //     addClientFormFields.monthlyIvoice.config.setData =
-  //       clientMasterData.monthlyInvoice;
-  //     addClientFormFields.osemail.config.setData =
-  //       clientMasterData.osListPrInteger;
-  //     addClientFormFields.discount.config.setData = clientMasterData.disType;
-  //     addClientFormFields.discountBlank.config.setData =
-  //       clientMasterData.discount;
-  //     addClientFormFields.toAdjust.config.setData = clientMasterData.toAdjust;
-  //     addClientFormFields.baltoAdjust.config.setData =
-  //       clientMasterData.balToAdjust;
-  //     addClientFormFields.adjustenquiry.config.setData =
-  //       clientMasterData.adjustPerEnq;
-  //     addClientFormFields.toAdjustproforma.config.setData =
-  //       clientMasterData.toAdjust_PI;
-  //     addClientFormFields.billonactual.config.setData =
-  //       clientMasterData.billONActualBuyer;
-  //     addClientFormFields.baltoAdjustproformaproforma.config.setData =
-  //       clientMasterData.balToAdjust_PI;
-  //     addClientFormFields.adjustenquiryproforma.config.setData =
-  //       clientMasterData.adjustPerEnq_PI;
-  //   }
-  // } else {
-  //   useEffect(() => {
-  //     methods.reset();
-  //   }, []);
-  // }
-
-  const handleSelectChange = (selectedOption: any) => {
-    if (selectedOption) {
-      setStateCode(selectedOption.data.stateCodeN);
-    }
-  };
-
-  addClientFormFields.statecodeClient.config.setData = stateCode;
-
-  const handleSelectCity = (selectedOption: any) => {
-    if (selectedOption) {
-      setSelectedStateId(selectedOption.data.stateId);
-      setSelectedCountryId(selectedOption.data.countryId);
-    }
-  };
-
-  if (selectedStateId && stateData) {
-    let id = selectedStateId;
-    let data: any = returnObjectBasedOnID(
-      stateData,
-      "stateId",
-      id,
-      "stateId",
-      "stateName"
-    );
-    addClientFormFields.stateClient.config.setData = data
-      ? {
-          label: data.label,
-          value: data.value,
-        }
-      : [];
-    addClientFormFields.statecodeClient.config.setData = data.value;
-  }
-
-  if (selectedCountryId && countryData) {
-    let id = selectedCountryId;
-    let data: any = returnObjectBasedOnID(
-      countryData,
-      "countryId",
-      id,
-      "countryId",
-      "countryName"
-    );
-    addClientFormFields.countryClient.config.setData = data
-      ? {
-          label: data.label,
-          value: data.value,
-        }
-      : [];
-  }
-
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        {/* <FormProvider {...methods}> */}
-        <form
-          onSubmit={onSubmit}
-          noValidate
-          autoComplete="off"
-          className="p-t-20"
-        >
-          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-            <div className="row">
-              <div className="col-md-6 col-xs-12">
-                <div className="card-body">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.clientName}
-                  />
-                  <NewRadio
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.clientGst}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.gstn}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.addressClient}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.cityClient}
-                    onChange={handleSelectCity}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.zipClient}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.stateClient}
-                    onChange={handleSelectChange}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.statecodeClient}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.countryClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.telnoClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.faxnoClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.emailClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.websiteClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.contactClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.designationClient}
-                  />
-
-                  {/* <div className="row "> */}
-                  {/* <div className="col-md-5"> */}
-
-                  {/* </div> */}
-                  {/* </div> */}
-
-                  {/* <h6 className="card-title m-t-20 md-2"> */}
-                  <DivLayout
-                    heading={cardConfig.formclieckUpdateConfig.heading}
-                  />
-                  {/* </h6> */}
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.crDay}
-                  />
-                  <NewCheckbox
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.billonactual}
-                  />
-                </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <div className="card-body">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.clientName}
+                />
+                <NewRadio
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.clientGst}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.gstn}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.addressClient}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.cityClient}
+                  onChange={handleSelectCity}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.zipClient}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.stateClient}
+                  onChange={handleSelectChange}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.statecodeClient}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.countryClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.telnoClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.faxnoClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.emailClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.websiteClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.contactClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.designationClient}
+                />
+                <DivLayout
+                  heading={cardConfig.formclieckUpdateConfig.heading}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.crDay}
+                />
+                <NewCheckbox
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.billonactual}
+                />
               </div>
-              <div className="col-md-6 col-xs-12">
-                <div className="card-body">
-                  {/* <NewInput errors={errors}
+            </div>
+            <div className="col-md-6 col-xs-12">
+              <div className="card-body">
+                {/* <NewInput errors={errors}
                     register={register} config={addClientFormFields.id} />
                     <NewSelect errors={errors}
                     register={register}
                     control={control}
                       config={addClientFormFields.clientIdSelect}
                     /> */}
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.clientCurrencey}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.executive}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.instuction}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.groupClient}
-                  />
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.segmentClient}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.remarks}
-                  />
-                  <NewRadio
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.monthlyIvoice}
-                  />
-                  <NewRadio
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.osemail}
-                  />
-                  {/* <h6 className="card-title m-t-20"> */}
-                  <DivLayout heading={cardConfig.formAdjustConfig.heading} />
-                  {/* </h6> */}
-                  <NewRadio
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={addClientFormFields.discount}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.discountBlank}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.toAdjust}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.baltoAdjust}
-                  />
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={addClientFormFields.adjustenquiry}
-                  />
-                  {/* <h6 className="card-title m-t-20"> */}
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.clientCurrencey}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.executive}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.instuction}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.groupClient}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.segmentClient}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.remarks}
+                />
+                <NewRadio
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.monthlyIvoice}
+                />
+                <NewRadio
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.osemail}
+                />
+                {/* <h6 className="card-title m-t-20"> */}
+                <DivLayout heading={cardConfig.formAdjustConfig.heading} />
+                {/* </h6> */}
+                <NewRadio
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientFormFields.discount}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.discountBlank}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.toAdjust}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.baltoAdjust}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addClientFormFields.adjustenquiry}
+                />
+                {/* <h6 className="card-title m-t-20"> */}
 
-                  {/* </h6> */}
-                </div>
+                {/* </h6> */}
               </div>
             </div>
-          </BorderLayout>
-          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-            <ActionButtons />
-          </BorderLayout>
-        </form>
-        {/* </FormProvider> */}
-      </Card>
-    </>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

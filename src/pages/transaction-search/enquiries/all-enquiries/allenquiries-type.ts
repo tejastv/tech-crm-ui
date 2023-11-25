@@ -1,11 +1,11 @@
 export interface AllEnquiriesType {
   fyearId: any;
-  actualBuyerId: number;
+  actualBuyerId: any;
   adjustment: number;
   bankers: string;
   bookNo: string;
   bulk_enquiry_id: number;
-  cityId: number;
+  cityId: any;
   cityName: string;
   givenName: string;
   noteforadj: string;
@@ -17,7 +17,7 @@ export interface AllEnquiriesType {
   clientDesignation: string;
   clientEmail: string;
   clientFax: string;
-  clientID: number;
+  clientID: any;
   clientName: string;
   clientPhone: string;
   clientPrice: number;
@@ -25,10 +25,10 @@ export interface AllEnquiriesType {
   clientState: string;
   clientZip: string;
   cmie: string;
-  companyID: number;
+  companyID: any;
   companyName: string;
   contactPerson: string;
-  countryId: number;
+  countryId: any;
   countryName: string;
   creditamount: string;
   designation: string;
@@ -38,14 +38,14 @@ export interface AllEnquiriesType {
   dueDate: string;
   email: string;
   enqID: number;
-  enqStatusID: number;
+  enqStatusID: any;
   enquiryStatus: string;
   enteredBy: number;
   enteredDate: string;
   executiveId: number;
   executiveName: string;
   fax: string;
-  financialYear: string;
+  financialYear: any;
   fyear: string;
   givenAddress: string;
   groupName: string;
@@ -66,7 +66,7 @@ export interface AllEnquiriesType {
   recdDate: string;
   recFin: string;
   records: string;
-  refNo: number;
+  refNo: string;
   remarks: string;
   reportComission: number;
   reportDate: string;
@@ -74,16 +74,15 @@ export interface AllEnquiriesType {
   reportPrice: number;
   requestNo: number;
   rockStatus: string;
-  serviceTypeID: number;
+  serviceTypeID: any;
   serviceTypeName: string;
   siteStatus: string;
   siteStatusId: number;
   sourceID: number;
   sourceName: string;
-  stateId: number;
+  stateId: any;
   stateName: string;
-  typeofEnquiry: string;
+  typeofEnquiry: any;
   website: string;
   zip: string;
-
 }

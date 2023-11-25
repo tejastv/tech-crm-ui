@@ -11,18 +11,14 @@ export const useCompanyApiCallHook = () => {
   const navigate = useNavigate();
 
   const getCompany = () => {
-    console.log("response");
     return useQuery<CompanyType[]>({
       queryKey: [queryKeys.COMPANY_MASTER_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_COMPANY_MASTER);
-        console.log(response.data.data.records);
         const data = response.data.data.records.sort(
           (a: { companyName: string }, b: { companyName: any }) =>
             a.companyName.localeCompare(b.companyName)
         );
-        console.log(data);
-
         return data;
       },
       staleTime: Infinity,
