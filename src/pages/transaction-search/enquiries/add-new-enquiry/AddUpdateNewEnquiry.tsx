@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   BorderLayout,
   Card,
-  Input,
-  Select,
   Button,
   InputWithText,
   ActionButtons,
@@ -471,7 +469,7 @@ export const AddEnquiry: React.FC = () => {
               value: data[0].value,
             })
           : [];
-        setCountryId(clonedEnqDataData?.countryId);
+        // setCountryId(clonedEnqDataData?.countryId);
       }
       if (clientOptions?.length) {
         let id = clonedEnqDataData?.clientID;
@@ -488,7 +486,7 @@ export const AddEnquiry: React.FC = () => {
               value: data[0].value,
             })
           : [];
-        setClientId(clonedEnqDataData?.clientID);
+        // setClientId(clonedEnqDataData?.clientID);
       }
       if (finYearOptions?.length) {
         let id = clonedEnqDataData?.fyearId;
@@ -569,7 +567,7 @@ export const AddEnquiry: React.FC = () => {
               value: data[0].value,
             })
           : [];
-        setServiceTypeId(clonedEnqDataData?.serviceTypeID);
+        // setServiceTypeId(clonedEnqDataData?.serviceTypeID);
       }
       if (enqStatusOptions?.length) {
         let id = clonedEnqDataData?.enqStatusID;
