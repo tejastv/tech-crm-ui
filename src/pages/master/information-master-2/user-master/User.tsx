@@ -78,7 +78,7 @@ export const User: React.FC = () => {
   };
 
   const editUserClick = (userData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", userData.id));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", userData.id),{state:userData});
   };
 
   const tableConfig: TableType<UserType> = {
