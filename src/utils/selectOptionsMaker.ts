@@ -7,16 +7,13 @@ export function selectOptionsMaker(
   otherDataAllowed?: boolean
 ) {
   return array.map((option: Generic) => {
-
     const result: any = {
       value: option[value],
       label: option[label],
     };
-
     if (otherDataAllowed) {
       result["data"] = option;
     }
-
     return result;
   });
 }
@@ -28,17 +25,15 @@ export function selectOptionsMapMaker(
   otherDataAllowed?: boolean
 ) {
   return array.map((option: Generic) => {
-    
     const result: any = {
       value: option[value],
       label: option[label],
     };
-
     if (otherDataAllowed) {
       result["data"] = option;
     }
     let obj = {
-      [result.value] : result
+      [result.value]: result,
     };
     return obj;
   });
