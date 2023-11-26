@@ -11,12 +11,13 @@ import {
   Select,
 } from "@shared/index";
 import {
-  AddUpdateStateType,
+  StateFormType,
+  StateType,
   addStateFormFields,
   useCountryApiCallHook,
   useStateApiCallHook,
 } from "@master/index";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { returnObjectBasedOnID, selectOptionsMaker } from "@utils/index";
 
 export const AddUpdateState: React.FC = () => {
@@ -26,10 +27,11 @@ export const AddUpdateState: React.FC = () => {
     reset,
     control,
     formState: { errors },
-  } = useForm<AddUpdateStateType>();
+  } = useForm<StateFormType>();
   const { addStateMutation, updateStateMutation, getStateData } =
     useStateApiCallHook();
   const params = useParams();
+  const { state: localStateData } = useLocation();
   const { mutateAsync: addState } = addStateMutation();
   const { mutateAsync: updateState } = updateStateMutation();
   const { getCountry } = useCountryApiCallHook();
@@ -54,23 +56,34 @@ export const AddUpdateState: React.FC = () => {
   useEffect(() => {
     let clonedStateData = { ...stateData };
     if (countryData && stateData) {
-      let id = stateData?.countryId;
-      let data: any = returnObjectBasedOnID(
-        countryData,
-        "countryId",
-        id,
-        "countryId",
-        "countryName"
-      );
-      data.length
-        ? (clonedStateData.countryId = {
-            label: data[0].label,
-            value: data[0].value,
-          })
-        : [];
+      // let id = stateData?.countryId;
+      // let data: any = returnObjectBasedOnID(
+      //   countryData,
+      //   "countryId",
+      //   id,
+      //   "countryId",
+      //   "countryName"
+      // );
+      // data.length
+      //   ? (clonedStateData.countryId = {
+      //       label: data[0].label,
+      //       value: data[0].value,
+      //     })
+      //   : [];
     }
-    reset(clonedStateData);
-  }, [params.id, countryData, stateData]);
+    reset(mapUsertoFormUser(userData);
+  }, [params.id, localStateData, countryData, stateData]);
+
+  const mapUsertoFormUser = (stateData: StateType) => {
+    let formUserData: Partial<StateFormType> = {
+      loginId: stateData.user,
+      password: stateData.password,
+      userName: stateData.username,
+      userType: addUserFormFields.userTypeData[stateData.usertype],
+    };
+    return formUserData;
+  };
+
 
   useEffect(() => {
     reset();
@@ -86,61 +99,68 @@ export const AddUpdateState: React.FC = () => {
     }
   }, [countryData?.length]);
 
+  const mapFormUsertoUser = (formUserData: StateFormType) => {
+    let stateData: Partial<StateType> = {
+      state: formUserData.state,
+      stateCodeN: formUserData.stateCodeN,
+      stateCodeA: formUserData.stateCodeA,
+    };
+    if (formUserData.countryId) {
+      stateData.countryId = formUserData.countryId.value;
+    }
+    return stateData;
+  };
+
   const onSubmit = handleSubmit((stateData): void => {
-    let data: any = { ...stateData };
-    data.countryId = +data.countryId["value"];
-    if (params.id && stateData) {
-      updateState({ id: params.id, ...data });
+    let stateReqData: Partial<StateType> = mapFormUsertoUser(stateData);
+    if (params.id && stateReqData) {
+      updateState({ id: params.id, ...stateReqData });
     } else {
-      addState(data);
+      addState(stateReqData);
     }
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        {/* <FormProvider {...methods}> */}
-        <form
-          onSubmit={onSubmit}
-          noValidate
-          autoComplete="off"
-          className="p-t-20"
-        >
-          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-            <div className="row">
-              <div className="col-md-6 col-xs-12">
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addStateFormFields.stateField}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addStateFormFields.numbericCodeField}
-                />
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addStateFormFields.stateCodeField}
-                />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addStateFormFields.country}
-                />
-              </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addStateFormFields.stateField}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addStateFormFields.numbericCodeField}
+              />
             </div>
-          </BorderLayout>
-          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-            <ActionButtons />
-          </BorderLayout>
-        </form>
-        {/* </FormProvider> */}
-      </Card>
-    </>
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addStateFormFields.stateCodeField}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addStateFormFields.country}
+              />
+            </div>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

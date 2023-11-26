@@ -1,5 +1,7 @@
+import { Options } from "@shared/index";
+
 export interface FormUserType {
-  userType: {value:string,label:string};
+  userType: Options;
   userName: string;
   loginId: string;
   password: string;

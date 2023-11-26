@@ -406,7 +406,7 @@ const companyenquiry: FormFieldType = createFormConfig(
   []
 );
 const yearenquiry: FormFieldType = createFormConfig(
-  "financialYear",
+  "fYear",
   "Year",
   "year",
   YearEnquiry,

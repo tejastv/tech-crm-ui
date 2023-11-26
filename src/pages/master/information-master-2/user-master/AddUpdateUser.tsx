@@ -78,51 +78,49 @@ export const AddUpdateUser: React.FC = () => {
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <form
-          onSubmit={onSubmit}
-          noValidate
-          autoComplete="off"
-          className="p-t-20"
-        >
-          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-            <div className="row">
-              <div className="col-md-6 col-xs-12">
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addUserFormFields.userName}
-                />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addUserFormFields.userType}
-                />
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addUserFormFields.login}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addUserFormFields.password}
-                />
-              </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addUserFormFields.userName}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addUserFormFields.userType}
+              />
             </div>
-            <BorderLayout heading={cardConfig.formTableConfig.heading}>
-              {/* <Table/> */}
-            </BorderLayout>
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addUserFormFields.login}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addUserFormFields.password}
+              />
+            </div>
+          </div>
+          <BorderLayout heading={cardConfig.formTableConfig.heading}>
+            {/* <Table/> */}
           </BorderLayout>
-          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-            <ActionButtons />
-          </BorderLayout>
-        </form>
-      </Card>
-    </>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

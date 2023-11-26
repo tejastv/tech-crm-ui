@@ -77,8 +77,10 @@ export const State: React.FC = () => {
     }
   };
 
-  const editStateClick = (continentData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", continentData.stateId));
+  const editStateClick = (stateData: any) => {
+    navigate(COMMON_ROUTES.EDIT.replace(":id", stateData.stateId), {
+      state: stateData,
+    });
   };
 
   const tableConfig: TableType<StateType> = {

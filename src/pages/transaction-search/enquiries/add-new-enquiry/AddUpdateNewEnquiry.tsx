@@ -371,7 +371,10 @@ export const AddEnquiry: React.FC = () => {
             companyData.data,
             "cityId",
             "cityName"
-          )
+          ),
+          {
+            shouldValidate: true,
+          }
         );
       }
       if (addEnquiryFormFields.stateenquiry.config.name == "stateId") {
@@ -382,7 +385,10 @@ export const AddEnquiry: React.FC = () => {
             companyData.data,
             "stateId",
             "state"
-          )
+          ),
+          {
+            shouldValidate: true,
+          }
         );
       }
       if (addEnquiryFormFields.countryenquiry.config.name == "countryId") {
@@ -393,7 +399,10 @@ export const AddEnquiry: React.FC = () => {
             companyData.data,
             "countryId",
             "countryName"
-          )
+          ),
+          {
+            shouldValidate: true,
+          }
         );
       }
     }
@@ -740,10 +749,12 @@ export const AddEnquiry: React.FC = () => {
     if (data.localSourceId) {
       data.localSourceId = data.localSourceId["value"];
     }
+    if (data.fYear) {
+      data.fYear = data.fYear["value"];
+    }
     data["bulk_enquiry_id"] = 0;
     delete data.svisit;
     delete data.clientidenquiry;
-    // console.log(data);
     // console.log(data);
     if (params.id && data) {
       updateEnquiry({ id: params.id, ...data });
@@ -753,221 +764,220 @@ export const AddEnquiry: React.FC = () => {
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <form
-          onSubmit={onSubmit}
-          noValidate
-          autoComplete="off"
-          className="p-t-20"
-        >
-          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-            <div className="row">
-              <div className="col-md-6 col-xs-12">
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.companyenquiry}
-                  onChange={companyOnChangeHandler}
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.companyenquiry}
+                onChange={companyOnChangeHandler}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.yearenquiry}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.refnoenquiry}
+              />
+              <small className="enquirynote text-right">
+                <InputWithText config={addEnquiryFormFields.refnote.config} />
+              </small>
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.sourceenquiry}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.givenaddressEnquiry}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.cityenquiry}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.stateenquiry}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.countryenquiry}
+                onChange={onCountryChangeHandler}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.zipenquiry}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.telnoenquiry}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.faxnoenquiry}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.emailenquiry}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.websiteenquiry}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.contactenquiry}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.designationenquiry}
+              />
+            </div>
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.clientrefenquiry}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.clientenquiry}
+                onChange={onClientChangeHandler}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.requestnoenquiry}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.clientIdenquiry}
+              />
+              <Link to={""} className="card-title">
+                <InputWithText
+                  config={addEnquiryFormFields.actualbuyeraddnote.config}
                 />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.yearenquiry}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.refnoenquiry}
-                />
-                <small className="enquirynote text-right">
-                  <InputWithText config={addEnquiryFormFields.refnote.config} />
-                </small>
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.sourceenquiry}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.givenaddressEnquiry}
-                />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.cityenquiry}
-                />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.stateenquiry}
-                />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.countryenquiry}
-                  onChange={onCountryChangeHandler}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.zipenquiry}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.telnoenquiry}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.faxnoenquiry}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.emailenquiry}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.websiteenquiry}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.contactenquiry}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.designationenquiry}
-                />
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.clientrefenquiry}
-                />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.clientenquiry}
-                  onChange={onClientChangeHandler}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.requestnoenquiry}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.clientIdenquiry}
-                />
-                <Link to={""} className="card-title">
-                  <InputWithText
-                    config={addEnquiryFormFields.actualbuyeraddnote.config}
-                  />
-                </Link>
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.actualbureyenquiry}
-                />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.servicetype}
-                  onChange={onServiceTypeChangeHandler}
-                />
-                <div className="row mb-2 justify-content-end">
-                  <div className="col-md-4 col-xs-12 text-right">
-                    <Button type="button" className="btn btn-danger btn-sm">
-                      <i className="far fa-save"></i> Get Price
-                    </Button>
-                  </div>
+              </Link>
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.actualbureyenquiry}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.servicetype}
+                onChange={onServiceTypeChangeHandler}
+              />
+              <div className="row mb-2 justify-content-end">
+                <div className="col-md-4 col-xs-12 text-right">
+                  <Button type="button" className="btn btn-danger btn-sm">
+                    <i className="far fa-save"></i> Get Price
+                  </Button>
                 </div>
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.priceenquiry}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.givenname}
-                />
-                <NewDatePicker
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.recdon}
-                />
-                <NewDatePicker
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.dueon}
-                />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.enqtype}
-                />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.localsourceenquiry}
-                />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.printstatus}
-                />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.enqstatus}
-                />
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addEnquiryFormFields.svisit}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.notesforenquiry}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.notesforadj}
-                />
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.instructionenquiry}
-                />
               </div>
-              <div className="col-md-3   col-xs-12">
-                <div className="row">
-                  {/* <div className="col-md-8 col-xs-12 text-right">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.priceenquiry}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.givenname}
+              />
+              <NewDatePicker
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.recdon}
+              />
+              <NewDatePicker
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.dueon}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqtype}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.localsourceenquiry}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.printstatus}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqstatus}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.svisit}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.notesforenquiry}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.notesforadj}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.instructionenquiry}
+              />
+            </div>
+            <div className="col-md-3 col-xs-12">
+              <div className="row">
+                {/* <div className="col-md-8 col-xs-12 text-right">
                       <Link to={""} className="card-title">
                         <InputWithText
                           config={
@@ -976,68 +986,67 @@ export const AddEnquiry: React.FC = () => {
                         />
                       </Link>
                     </div> */}
-                  {/* <div className="col-md-4 col-xs-12 text-right">
+                {/* <div className="col-md-4 col-xs-12 text-right">
                       <i className="fa fa-refresh"></i>
                     </div> */}
-                </div>
-                {/* <NewInput errors={errors}
+              </div>
+              {/* <NewInput errors={errors}
                   register={register} config={addEnquiryFormFields.priceenquiry} /> */}
-              </div>
-              <div className="col-md-6 col-xs-12">
-                {!isFetching && <Table config={tableConfig.config}></Table>}
-              </div>
-              <div className="card-title">
-                <InputWithText
-                  config={addEnquiryFormFields.discountcommissionnote.config}
-                />
-              </div>
-              <div className="col-3">
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.disenquiry}
-                />
-              </div>
-              <div className="col-3">
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.discountenquiry}
-                />
-              </div>
-              <div className="col-3">
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.adjustenquiry}
-                />
-                <div className="row">
-                  <div className="col-md-12 col-xs-12 text-right">
-                    <Button type="button" className="btn btn-danger btn-sm">
-                      <i className="far fa-save"></i> View Adjust
-                    </Button>
-                  </div>
+            </div>
+            <div className="col-md-6 col-xs-12">
+              {!isFetching && <Table config={tableConfig.config}></Table>}
+            </div>
+            <div className="card-title">
+              <InputWithText
+                config={addEnquiryFormFields.discountcommissionnote.config}
+              />
+            </div>
+            <div className="col-3">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.disenquiry}
+              />
+            </div>
+            <div className="col-3">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.discountenquiry}
+              />
+            </div>
+            <div className="col-3">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.adjustenquiry}
+              />
+              <div className="row">
+                <div className="col-md-12 col-xs-12 text-right">
+                  <Button type="button" className="btn btn-danger btn-sm">
+                    <i className="far fa-save"></i> View Adjust
+                  </Button>
                 </div>
-              </div>
-              <div className="col-3">
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addEnquiryFormFields.commenquiry}
-                />
-              </div>
-              <div className="card-title col-12">
-                <InputWithText
-                  config={addEnquiryFormFields.discounttypenote.config}
-                />
               </div>
             </div>
-          </BorderLayout>
-          <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-            <ActionButtons />
-          </BorderLayout>
-        </form>
-      </Card>
-    </>
+            <div className="col-3">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.commenquiry}
+              />
+            </div>
+            <div className="card-title col-12">
+              <InputWithText
+                config={addEnquiryFormFields.discounttypenote.config}
+              />
+            </div>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

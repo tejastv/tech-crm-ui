@@ -214,11 +214,11 @@ export * from "./information-master-2/user-master/UserType";
 
 // location master
 export * from "./location-master/city/city-type";
-export * from "./location-master/state/state-type";
+export * from "./location-master/state/StateType";
 export * from "./location-master/continent/continent-type";
 export * from "./location-master/country/country-type";
 export * from "./location-master/city/add-update-city-type";
-export * from "./location-master/state/add-update-state-type";
+export * from "./location-master/state/StateFormType";
 export * from "./location-master/continent/add-update-continent-type";
 export * from "./location-master/country/add-update-country-type";
 export * from "./price-list-master/price-list-group-wise/city-wise-group-type";
