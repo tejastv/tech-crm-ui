@@ -562,7 +562,10 @@ const givenAddressField: FormFieldType = createFormConfig(
   "Given Address",
   "textarea",
   givenAddressValidation,
-  "Enter Address"
+  "Enter Address",
+  [],
+  false,
+  true
 );
 const telNoField: FormFieldType = createFormConfig(
   "telNo",
