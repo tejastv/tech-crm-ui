@@ -54,36 +54,42 @@ export const AddUpdateState: React.FC = () => {
   );
 
   useEffect(() => {
-    let clonedStateData = { ...stateData };
-    if (countryData && stateData) {
-      // let id = stateData?.countryId;
-      // let data: any = returnObjectBasedOnID(
-      //   countryData,
-      //   "countryId",
-      //   id,
-      //   "countryId",
-      //   "countryName"
-      // );
-      // data.length
-      //   ? (clonedStateData.countryId = {
-      //       label: data[0].label,
-      //       value: data[0].value,
-      //     })
-      //   : [];
+    let clonedStateData;
+    if (Object.values(localStateData).length > 0) {
+      clonedStateData = localStateData;
+    } else if (stateData && Object.values(stateData).length > 0) {
+      clonedStateData = stateData;
     }
-    reset(mapUsertoFormUser(userData);
+    if (countryData && (stateData || localStateData)) {
+      let id = stateData?.countryId;
+      let data: any = returnObjectBasedOnID(
+        countryData,
+        "countryId",
+        id,
+        "countryId",
+        "countryName"
+      );
+      data.length
+        ? (clonedStateData.countryId = {
+            label: data[0].label,
+            value: data[0].value,
+          })
+        : [];
+    }
+    reset(mapUsertoFormUser(clonedStateData));
   }, [params.id, localStateData, countryData, stateData]);
 
   const mapUsertoFormUser = (stateData: StateType) => {
-    let formUserData: Partial<StateFormType> = {
-      loginId: stateData.user,
-      password: stateData.password,
-      userName: stateData.username,
-      userType: addUserFormFields.userTypeData[stateData.usertype],
+    let formStateData: Partial<StateType> = {
+      state: stateData.state,
+      stateCodeN: stateData.stateCodeN,
+      stateCodeA: stateData.stateCodeA,
     };
-    return formUserData;
+    if (stateData.countryId) {
+      stateData.countryId = stateData.countryId;
+    }
+    return formStateData;
   };
-
 
   useEffect(() => {
     reset();
