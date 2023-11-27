@@ -78,7 +78,6 @@ export const Country: React.FC = () => {
   };
 
   const editCountryClick = (countryData: any) => {
-    console.log(countryData);
     navigate(COMMON_ROUTES.EDIT.replace(":id", countryData.countryId));
   };
 
@@ -86,7 +85,7 @@ export const Country: React.FC = () => {
     config: {
       tableName: "Country",
       columns: columns,
-      tableData: countryData || [],
+      tableData: (countryData && Object.values(countryData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

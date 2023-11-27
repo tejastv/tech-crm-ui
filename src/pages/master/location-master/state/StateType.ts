@@ -1,4 +1,5 @@
 export interface StateType {
+  id?: number;
   stateName: string;
   countryName: string;
   countryId: number;

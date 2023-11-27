@@ -23,8 +23,9 @@ export function selectOptionsMapMaker(
   value: string,
   label: string,
   otherDataAllowed?: boolean
-) {
-  return array.map((option: Generic) => {
+): any {
+  const optionsMap: any = {};
+  array.forEach((option: Generic) => {
     const result: any = {
       value: option[value],
       label: option[label],
@@ -32,9 +33,7 @@ export function selectOptionsMapMaker(
     if (otherDataAllowed) {
       result["data"] = option;
     }
-    let obj = {
-      [result.value]: result,
-    };
-    return obj;
+    optionsMap[result.value] = option;
   });
+  return optionsMap;
 }

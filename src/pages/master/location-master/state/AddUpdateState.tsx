@@ -1,16 +1,14 @@
-import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   ActionButtons,
   BorderLayout,
   Card,
-  Input,
   NewInput,
   NewSelect,
-  Select,
 } from "@shared/index";
 import {
+  CountryType,
   StateFormType,
   StateType,
   addStateFormFields,
@@ -18,7 +16,7 @@ import {
   useStateApiCallHook,
 } from "@master/index";
 import { useLocation, useParams } from "react-router-dom";
-import { returnObjectBasedOnID, selectOptionsMaker } from "@utils/index";
+import { selectOptionsMaker } from "@utils/index";
 
 export const AddUpdateState: React.FC = () => {
   const {
@@ -35,6 +33,7 @@ export const AddUpdateState: React.FC = () => {
   const { mutateAsync: addState } = addStateMutation();
   const { mutateAsync: updateState } = updateStateMutation();
   const { getCountry } = useCountryApiCallHook();
+  const [countryOptions, setCountryOptions] = useState<CountryType[]>();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -46,68 +45,63 @@ export const AddUpdateState: React.FC = () => {
     },
   };
 
-  const { data: countryData } = getCountry();
-
   const { data: stateData } = getStateData(
     "" + params.id,
-    params.id != undefined
+    !localStateData && params.id !== undefined
   );
 
-  useEffect(() => {
-    let clonedStateData;
-    if (Object.values(localStateData).length > 0) {
-      clonedStateData = localStateData;
-    } else if (stateData && Object.values(stateData).length > 0) {
-      clonedStateData = stateData;
-    }
-    if (countryData && (stateData || localStateData)) {
-      let id = stateData?.countryId;
-      let data: any = returnObjectBasedOnID(
-        countryData,
-        "countryId",
-        id,
-        "countryId",
-        "countryName"
-      );
-      data.length
-        ? (clonedStateData.countryId = {
-            label: data[0].label,
-            value: data[0].value,
-          })
-        : [];
-    }
-    reset(mapUsertoFormUser(clonedStateData));
-  }, [params.id, localStateData, countryData, stateData]);
+  const { data: countryData } = getCountry();
 
-  const mapUsertoFormUser = (stateData: StateType) => {
-    let formStateData: Partial<StateType> = {
-      state: stateData.state,
+  useEffect(() => {
+    if (countryData) {
+      setCountryOptions(Object.values(countryData));
+    }
+  }, [countryData && Object.values(countryData).length]);
+
+  if (countryOptions?.length) {
+    let options = selectOptionsMaker(
+      countryOptions,
+      "countryId",
+      "countryName"
+    );
+    addStateFormFields.country.config.options = options;
+  }
+
+  useEffect(() => {
+    if (params.id) {
+      if (stateData && Object.values(stateData).length > 0) {
+        reset(mapFromStateData(stateData));
+      }
+    }
+  }, [params.id, countryOptions, stateData]);
+
+  useEffect(() => {
+    if (params.id) {
+      if (localStateData !== null) {
+        reset(mapFromStateData(localStateData));
+      }
+    }
+  }, [params.id, countryOptions, localStateData]);
+
+  const mapFromStateData = (stateData: StateType) => {
+    let formStateData: Partial<StateFormType> = {
+      stateName: stateData.stateName,
       stateCodeN: stateData.stateCodeN,
       stateCodeA: stateData.stateCodeA,
     };
-    if (stateData.countryId) {
-      stateData.countryId = stateData.countryId;
+    if (countryData && stateData?.countryId) {
+      let country = countryData[stateData.countryId];
+      formStateData.countryId = {
+        label: country.countryName,
+        value: country.countryId,
+      };
     }
     return formStateData;
   };
 
-  useEffect(() => {
-    reset();
-  }, [!params.id]);
-
-  useEffect(() => {
-    if (countryData) {
-      addStateFormFields.country.config.options = selectOptionsMaker(
-        countryData,
-        "countryId",
-        "countryName"
-      );
-    }
-  }, [countryData?.length]);
-
-  const mapFormUsertoUser = (formUserData: StateFormType) => {
+  const mapFromStateForm = (formUserData: StateFormType) => {
     let stateData: Partial<StateType> = {
-      state: formUserData.state,
+      stateName: formUserData.stateName,
       stateCodeN: formUserData.stateCodeN,
       stateCodeA: formUserData.stateCodeA,
     };
@@ -118,9 +112,9 @@ export const AddUpdateState: React.FC = () => {
   };
 
   const onSubmit = handleSubmit((stateData): void => {
-    let stateReqData: Partial<StateType> = mapFormUsertoUser(stateData);
+    let stateReqData: Partial<StateType> = mapFromStateForm(stateData);
     if (params.id && stateReqData) {
-      updateState({ id: params.id, ...stateReqData });
+      updateState({ id: +params.id, ...stateReqData });
     } else {
       addState(stateReqData);
     }

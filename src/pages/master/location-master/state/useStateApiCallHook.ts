@@ -49,7 +49,7 @@ export const useStateApiCallHook = () => {
   };
 
   const addState = async (
-    stateData: Partial<StateFormType>
+    stateData: Partial<StateType>
   ): Promise<ApiResponseType<StateType>> => {
     const response = await instance.post(apiUrls.GET_ADD_STATE, stateData);
     return response.data.data;
@@ -57,7 +57,7 @@ export const useStateApiCallHook = () => {
 
   const addStateMutation = () => {
     const mutation = useMutation(
-      (updatedItem: Partial<StateFormType>) => addState(updatedItem),
+      (updatedItem: Partial<StateType>) => addState(updatedItem),
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
@@ -71,7 +71,7 @@ export const useStateApiCallHook = () => {
   };
 
   const updateState = async (
-    updateStateData: Partial<StateFormType>
+    updateStateData: Partial<StateType>
   ): Promise<ApiResponseType<StateType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_STATE.replace("{id}", "" + updateStateData.id),
@@ -82,7 +82,7 @@ export const useStateApiCallHook = () => {
 
   const updateStateMutation = () => {
     const mutation = useMutation(
-      (updatedItem: Partial<StateFormType>) => updateState(updatedItem),
+      (updatedItem: Partial<StateType>) => updateState(updatedItem),
       {
         onSuccess: () => {
           queryClient.invalidateQueries({

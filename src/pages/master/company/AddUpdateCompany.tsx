@@ -101,9 +101,9 @@ export const AddUpdateCompany: React.FC = () => {
 
   useEffect(() => {
     if (countryData) {
-      setCountryOptions(countryData);
+      setCountryOptions(Object.values(countryData));
     }
-  }, [countryData?.length]);
+  }, [countryData && Object.values(countryData).length]);
 
   if (countryOptions?.length) {
     let options = selectOptionsMaker(
