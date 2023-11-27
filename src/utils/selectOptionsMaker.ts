@@ -11,11 +11,29 @@ export function selectOptionsMaker(
       value: option[value],
       label: option[label],
     };
-
     if (otherDataAllowed) {
       result["data"] = option;
     }
-
     return result;
   });
+}
+
+export function selectOptionsMapMaker(
+  array: Array<Generic>,
+  value: string,
+  label: string,
+  otherDataAllowed?: boolean
+): any {
+  const optionsMap: any = {};
+  array.forEach((option: Generic) => {
+    const result: any = {
+      value: option[value],
+      label: option[label],
+    };
+    if (otherDataAllowed) {
+      result["data"] = option;
+    }
+    optionsMap[result.value] = option;
+  });
+  return optionsMap;
 }

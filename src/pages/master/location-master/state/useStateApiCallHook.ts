@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { StateType, AddUpdateStateType } from "@master/index";
+import { StateType, StateFormType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 
 import { ApiResponseType } from "@shared/index";
@@ -49,7 +49,7 @@ export const useStateApiCallHook = () => {
   };
 
   const addState = async (
-    stateData: AddUpdateStateType
+    stateData: Partial<StateType>
   ): Promise<ApiResponseType<StateType>> => {
     const response = await instance.post(apiUrls.GET_ADD_STATE, stateData);
     return response.data.data;
@@ -57,7 +57,7 @@ export const useStateApiCallHook = () => {
 
   const addStateMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateStateType) => addState(updatedItem),
+      (updatedItem: Partial<StateType>) => addState(updatedItem),
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
@@ -71,7 +71,7 @@ export const useStateApiCallHook = () => {
   };
 
   const updateState = async (
-    updateStateData: AddUpdateStateType
+    updateStateData: Partial<StateType>
   ): Promise<ApiResponseType<StateType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_STATE.replace("{id}", "" + updateStateData.id),
@@ -82,7 +82,7 @@ export const useStateApiCallHook = () => {
 
   const updateStateMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateStateType) => updateState(updatedItem),
+      (updatedItem: Partial<StateType>) => updateState(updatedItem),
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
