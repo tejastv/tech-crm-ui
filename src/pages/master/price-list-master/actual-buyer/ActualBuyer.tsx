@@ -142,7 +142,7 @@ export const ActualBuyer: React.FC = () => {
     config: {
       tableName: "ActualBuyer",
       columns: columns,
-      tableData: actualBuyerData || [],
+      tableData: (actualBuyerData && Object.values(actualBuyerData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -163,7 +163,7 @@ export const ActualBuyer: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

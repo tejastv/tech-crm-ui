@@ -9,6 +9,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useSourceApiCallHook = () => {
   const { instance } = useAxios();
@@ -20,7 +21,13 @@ export const useSourceApiCallHook = () => {
       queryKey: [queryKeys.SOURCE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_SOURCE);
-        return response.data.data;
+        let mapedData = selectOptionsMapMaker(
+          response.data.data,
+          "sourceID",
+          "source"
+        );
+        return mapedData;
+        // return response.data.data;
       },
       staleTime: Infinity,
     });

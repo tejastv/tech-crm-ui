@@ -108,9 +108,9 @@ export const AddUpdateClient: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
-      setCityOptions(cityData);
+      setCityOptions(Object.values(cityData));
     }
-  }, [cityData?.length]);
+  }, [cityData?.length && Object.values(cityData).length]);
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "cityId", "cityName", true);

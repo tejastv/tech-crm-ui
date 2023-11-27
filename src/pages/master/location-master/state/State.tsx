@@ -87,7 +87,7 @@ export const State: React.FC = () => {
     config: {
       tableName: "State",
       columns: columns,
-      tableData: stateData ? stateData : [],
+      tableData: (stateData && Object.values(stateData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

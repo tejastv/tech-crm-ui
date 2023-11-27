@@ -9,6 +9,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useContinentApiCallHook = () => {
   const { instance } = useAxios();
@@ -24,7 +25,8 @@ export const useContinentApiCallHook = () => {
           (a: { continent: string }, b: { continent: any }) =>
             a.continent.localeCompare(b.continent)
         );
-        return data;
+        let mapedData = selectOptionsMapMaker(data, "id", "continent");
+        return mapedData;
       },
       staleTime: Infinity,
     });

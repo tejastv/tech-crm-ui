@@ -4,6 +4,7 @@ import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useLocalSourceApiCallHook = () => {
   const { instance } = useAxios();
@@ -17,8 +18,16 @@ export const useLocalSourceApiCallHook = () => {
       queryKey: [queryKeys.LOCALSOURCE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_LOCALSOURCE);
-        const data = response.data.data.sort((a: { localSource: string; }, b: { localSource: any; }) => a.localSource.localeCompare(b.localSource));
-        return data;
+        const data = response.data.data.sort(
+          (a: { localSource: string }, b: { localSource: any }) =>
+            a.localSource.localeCompare(b.localSource)
+        );
+        let mapedData = selectOptionsMapMaker(
+          data,
+          "localSourceId",
+          "localSource"
+        );
+        return mapedData;
       },
       staleTime: Infinity,
     });
@@ -41,7 +50,10 @@ export const useLocalSourceApiCallHook = () => {
   const addLocalSource = async (
     localsourceData: AddUpdateLocalSourceType
   ): Promise<ApiResponseType<LocalSourceType>> => {
-    const response = await instance.post(apiUrls.GET_ADD_LOCALSOURCE, localsourceData);
+    const response = await instance.post(
+      apiUrls.GET_ADD_LOCALSOURCE,
+      localsourceData
+    );
     return response.data.data;
   };
 
@@ -75,7 +87,8 @@ export const useLocalSourceApiCallHook = () => {
 
   const updateLocalSourceMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateLocalSourceType) => updateLocalSourceData(updatedItem),
+      (updatedItem: AddUpdateLocalSourceType) =>
+        updateLocalSourceData(updatedItem),
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
@@ -98,7 +111,9 @@ export const useLocalSourceApiCallHook = () => {
   const deleteLocalSourceMutation = () => {
     const mutation = useMutation((id: string) => deleteLocalSource(id), {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.LOCALSOURCE_DATA] });
+        queryClient.invalidateQueries({
+          queryKey: [queryKeys.LOCALSOURCE_DATA],
+        });
       },
     });
     return mutation;

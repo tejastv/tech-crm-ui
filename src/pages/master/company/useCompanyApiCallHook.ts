@@ -4,6 +4,7 @@ import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useCompanyApiCallHook = () => {
   const { instance } = useAxios();
@@ -19,7 +20,9 @@ export const useCompanyApiCallHook = () => {
           (a: { companyName: string }, b: { companyName: any }) =>
             a.companyName.localeCompare(b.companyName)
         );
-        return data;
+        let mapedData = selectOptionsMapMaker(data, "companyId", "companyName");
+        // return data;
+        return mapedData;
       },
       staleTime: Infinity,
     });

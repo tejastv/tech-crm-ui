@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -11,6 +11,7 @@ import {
 } from "@shared/index";
 import {
   AddUpdateExecutiveType,
+  CityType,
   addExecutiveFormFields,
   useCityApiCallHook,
   useExecutiveApiCallHook,
@@ -39,13 +40,19 @@ export const AddUpdateExecutive: React.FC = () => {
     },
   };
 
+  const [cityOptions, setCityOptions] = useState<CityType[]>();
+
   const { data: cityData } = getCity();
-  if (cityData) {
-    addExecutiveFormFields.cityInformation2.config.options = selectOptionsMaker(
-      cityData,
-      "id",
-      "cityName"
-    );
+
+  useEffect(() => {
+    if (cityData) {
+      setCityOptions(Object.values(cityData));
+    }
+  }, [cityData?.length && Object.values(cityData).length]);
+
+  if (cityOptions?.length) {
+    let options = selectOptionsMaker(cityOptions, "id", "cityName");
+    addExecutiveFormFields.cityInformation2.config.options = options;
   }
 
   const { data: stateData } = getState();

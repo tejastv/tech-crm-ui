@@ -1,5 +1,5 @@
 // AddCompany.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -12,6 +12,7 @@ import {
 } from "@shared/index";
 import {
   AddUpdateActualBuyerType,
+  CityType,
   addActualBuyersFormFields,
   useActualBuyerApiCallHook,
   useCityApiCallHook,
@@ -49,9 +50,17 @@ export const AddUpdateActualBuyer: React.FC = () => {
   const { getCountry } = useCountryApiCallHook();
   const { data: countryData } = getCountry();
 
-  if (cityData) {
-    addActualBuyersFormFields.cityactualbuyer.config.options =
-      selectOptionsMaker(cityData, "id", "cityName");
+  const [cityOptions, setCityOptions] = useState<CityType[]>();
+
+  useEffect(() => {
+    if (cityData) {
+      setCityOptions(Object.values(cityData));
+    }
+  }, [cityData?.length && Object.values(cityData).length]);
+
+  if (cityOptions?.length) {
+    let options = selectOptionsMaker(cityOptions, "id", "cityName");
+    addActualBuyersFormFields.cityactualbuyer.config.options = options;
   }
 
   if (stateData) {

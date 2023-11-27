@@ -10,6 +10,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useStateApiCallHook = () => {
   const { instance } = useAxios();
@@ -25,7 +26,8 @@ export const useStateApiCallHook = () => {
           (a: { stateName: string }, b: { stateName: any }) =>
             a.stateName.localeCompare(b.stateName)
         );
-        return data;
+        let mapedData = selectOptionsMapMaker(data, "stateId", "stateName");
+        return mapedData;
       },
       staleTime: Infinity,
     });

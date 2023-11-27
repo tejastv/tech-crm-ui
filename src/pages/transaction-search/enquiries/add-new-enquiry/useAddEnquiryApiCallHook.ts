@@ -16,6 +16,7 @@ import {
 } from "@tanstack/react-query";
 import { ApiResponseType } from "@shared/index";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useAddEnquiryApiCallHook = () => {
   const { instance } = useAxios();
@@ -40,7 +41,12 @@ export const useAddEnquiryApiCallHook = () => {
           (a: { enquiryStatus: string }, b: { enquiryStatus: any }) =>
             a.enquiryStatus.localeCompare(b.enquiryStatus)
         );
-        return data;
+        let mapedData = selectOptionsMapMaker(
+          data,
+          "enquiryStatusID",
+          "enquiryStatus"
+        );
+        return mapedData;
       },
       staleTime: Infinity,
     });
@@ -58,7 +64,12 @@ export const useAddEnquiryApiCallHook = () => {
           (a: { serviceType: string }, b: { serviceType: any }) =>
             a.serviceType.localeCompare(b.serviceType)
         );
-        return data;
+        let mapedData = selectOptionsMapMaker(
+          data,
+          "serviceTypeID",
+          "serviceType"
+        );
+        return mapedData;
       },
       staleTime: Infinity,
     });

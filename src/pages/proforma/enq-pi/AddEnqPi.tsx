@@ -90,11 +90,11 @@ export const AddEnqPi: React.FC = () => {
 
   const { data: CountryData } = getCountry();
   if (CountryData) {
-    addEnqPiFormFields.countryField.config.options = selectOptionsMaker(
-      CountryData,
-      "countryId",
-      "countryName"
-    );
+    // addEnqPiFormFields.countryField.config.options = selectOptionsMaker(
+    //   CountryData,
+    //   "countryId",
+    //   "countryName"
+    // );
   }
 
   const { data: ClientData } = getClient();
@@ -233,11 +233,11 @@ export const AddEnqPi: React.FC = () => {
   } else {
     useEffect(() => {
       methods.reset();
-      getRefNo().then((refNo: any) => {
-        if (refNo) {
-          setRefNo(refNo.data);
-        }
-      });
+      // getRefNo().then((refNo: any) => {
+      //   if (refNo) {
+      //     setRefNo(refNo.data);
+      //   }
+      // });
     }, []);
   }
 

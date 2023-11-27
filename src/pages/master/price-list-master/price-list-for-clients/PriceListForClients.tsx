@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -12,6 +12,7 @@ import {
   Loader,
 } from "@shared/index";
 import {
+  CityType,
   ClientType,
   ClientWisePriceType,
   addPriceClientFormFields,
@@ -57,13 +58,21 @@ export const PriceListForClients: React.FC = () => {
     },
   };
 
-  if (cityData) {
-    let cityArray = selectOptionsMaker(cityData, "cityId", "cityName");
-    cityArray.unshift({
+  const [cityOptions, setCityOptions] = useState<CityType[]>();
+
+  useEffect(() => {
+    if (cityData) {
+      setCityOptions(Object.values(cityData));
+    }
+  }, [cityData?.length && Object.values(cityData).length]);
+
+  if (cityOptions?.length) {
+    let options = selectOptionsMaker(cityOptions, "cityId", "cityName");
+    options.unshift({
       label: "All",
       value: -1,
     });
-    addPriceClientFormFields.pricecity.config.options = cityArray;
+    addPriceClientFormFields.pricecity.config.options = options;
   }
 
   const cityChangeHandler = (selectedOption: any) => {
