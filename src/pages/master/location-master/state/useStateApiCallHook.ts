@@ -2,7 +2,7 @@ import { useAxios } from "@hooks/useAxios";
 import { StateType, StateFormType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
@@ -17,8 +17,8 @@ export const useStateApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getState = (): UseQueryResult<StateType[]> => {
-    return useQuery<StateType[]>({
+  const getState = (): UseQueryResult<MapType<StateType>> => {
+    return useQuery<MapType<StateType>>({
       queryKey: [queryKeys.STATE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_STATE);

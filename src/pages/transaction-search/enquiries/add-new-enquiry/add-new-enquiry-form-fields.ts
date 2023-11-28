@@ -1,4 +1,4 @@
-import { FormFieldType, Note, ValidationType } from "@shared/index";
+import { FormFieldType, MapType, Note, Options, ValidationType } from "@shared/index";
 import { createFormConfig, createNoteConfig } from "@utils/index";
 
 const CompanyEnquiry = {
@@ -550,7 +550,7 @@ const enqRecdon: FormFieldType = createFormConfig(
   formattedDate
 );
 
-const enqTypeData: any = {
+const enqTypeData: MapType<Options> = {
   new: { value: "new", label: "NEW" },
   renew: { value: "renew", label: "RENEWAL" },
 };
@@ -588,16 +588,19 @@ const enqDueOn: FormFieldType = createFormConfig(
   DueOnValidation,
   "date"
 );
+
+const enqPrintStatusData: MapType<Options> = {
+  "Not Received": { value: "Not Received", label: "Not Received" },
+  Received: { label: "Received", value: "Received" },
+}
+
 const enqPrintStatus: FormFieldType = createFormConfig(
   "pmtstatus",
   "Print Status",
   "select",
   PrintStatusValidationValidation,
   "Select Print Status",
-  {
-    "Not Received": { value: "Not Received", label: "Not Received" },
-    Received: { label: "Received", value: "Received" },
-  }
+  enqPrintStatusData
 );
 const enqStatus: FormFieldType = createFormConfig(
   "enqStatusID",
@@ -776,4 +779,6 @@ export const addEnquiryFormFields = {
   enqActualBuyerAddNote,
   enqDiscountCommissionNote,
   enqDiscountTypeNote,
+  enqPrintStatusData,
+  enqTypeData
 };

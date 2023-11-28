@@ -448,7 +448,9 @@ export const Enquiries: React.FC = () => {
   };
 
   const editEnquiryClick = (enquiriesData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", enquiriesData.enqID));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", enquiriesData.enqID), {
+      state: enquiriesData,
+    });
   };
 
   const tableConfig: TableType<AllEnquiriesType> = {

@@ -45,6 +45,7 @@ export * from "./types/forms-type/options-type";
 export * from "./types/forms-type/pattern-type";
 export * from "./types/forms-type/validations-type";
 export * from "./types/forms-type/max-leangth-type";
+export * from "./types/forms-type/MapType";
 export * from "./types/table-type";
 export * from "./types/note-type";
 export * from "./types/forms-type/min-length-type";

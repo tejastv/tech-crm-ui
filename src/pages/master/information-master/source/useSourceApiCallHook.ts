@@ -1,7 +1,7 @@
 import { useAxios } from "@hooks/useAxios";
 import { AddUpdateSourceType, SourceType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
@@ -16,8 +16,8 @@ export const useSourceApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getSource = (): UseQueryResult<SourceType[]> => {
-    return useQuery<SourceType[]>({
+  const getSource = (): UseQueryResult<MapType<SourceType>> => {
+    return useQuery<MapType<SourceType>>({
       queryKey: [queryKeys.SOURCE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_SOURCE);

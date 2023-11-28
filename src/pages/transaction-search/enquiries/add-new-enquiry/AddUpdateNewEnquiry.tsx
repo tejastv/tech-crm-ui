@@ -21,7 +21,7 @@ import {
   useAllEnquiriesApiCallHook,
   AllEnquiriesType,
 } from "@transaction-search/index";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   ActualBuyerType,
@@ -59,8 +59,10 @@ export const AddEnquiry: React.FC = () => {
     handleSubmit,
     control,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<EnqueryFormType>();
+  const { state: localEnqData } = useLocation();
   const { updateEnquiryMutation, getEnquiryData } =
     useAllEnquiriesApiCallHook();
   const {
@@ -212,19 +214,23 @@ export const AddEnquiry: React.FC = () => {
     }
   }, [actualBuyerData]);
 
-  if (actualBuyerData?.length) {
-    let options = selectOptionsMaker(actualBuyerData, "partyId", "partyName");
+  if (actualBuyerOptions?.length) {
+    let options = selectOptionsMaker(
+      actualBuyerOptions,
+      "partyId",
+      "partyName"
+    );
     addEnquiryFormFields.enqActualBuyer.config.options = options;
   }
 
   // Source api call
-  const { data: surceData } = getSource();
+  const { data: sourceData } = getSource();
 
   useEffect(() => {
-    if (surceData) {
-      setSourceOptions(Object.values(surceData));
+    if (sourceData) {
+      setSourceOptions(Object.values(sourceData));
     }
-  }, [surceData]);
+  }, [sourceData]);
 
   if (sourceOptions?.length) {
     let options = selectOptionsMaker(sourceOptions, "sourceID", "source");
@@ -389,7 +395,7 @@ export const AddEnquiry: React.FC = () => {
 
   const { data: enqData } = getEnquiryData(
     "" + params.id,
-    params.id != undefined
+    !localEnqData && params.id !== undefined
   );
 
   const { data: paticularClientData, isFetching } = getClientData(
@@ -406,205 +412,6 @@ export const AddEnquiry: React.FC = () => {
       }
     }
   }, [refNo]);
-
-  useEffect(() => {
-    if (enqData) {
-      // let clonedEnqDataData = { ...enqData };
-      // if (cityOptions?.length) {
-      //   let id = clonedEnqDataData?.cityId;
-      //   let data: any = returnObjectBasedOnID(
-      //     cityOptions,
-      //     "id",
-      //     id,
-      //     "id",
-      //     "cityName"
-      //   );
-      //   data.length
-      //     ? (clonedEnqDataData.cityId = {
-      //         label: data[0].label,
-      //         value: data[0].value,
-      //       })
-      //     : [];
-      // }
-      // if (stateOptions?.length) {
-      //   let id = clonedEnqDataData?.stateId;
-      //   let data: any = returnObjectBasedOnID(
-      //     stateOptions,
-      //     "stateId",
-      //     id,
-      //     "stateId",
-      //     "stateName"
-      //   );
-      //   data.length
-      //     ? (clonedEnqDataData.stateId = {
-      //         label: data[0].label,
-      //         value: data[0].value,
-      //       })
-      //     : [];
-      // }
-      // if (countryOptions?.length) {
-      //   let id = clonedEnqDataData?.countryId;
-      //   let data: any = returnObjectBasedOnID(
-      //     countryOptions,
-      //     "countryId",
-      //     id,
-      //     "countryId",
-      //     "countryName"
-      //   );
-      //   data.length
-      //     ? (clonedEnqDataData.countryId = {
-      //         label: data[0].label,
-      //         value: data[0].value,
-      //       })
-      //     : [];
-      //   // setCountryId(clonedEnqDataData?.countryId);
-      // }
-      // if (clientOptions?.length) {
-      //   let id = clonedEnqDataData?.clientID;
-      //   let data: any = returnObjectBasedOnID(
-      //     clientOptions,
-      //     "clientID",
-      //     id,
-      //     "clientID",
-      //     "clientName"
-      //   );
-      //   data.length
-      //     ? (clonedEnqDataData.clientID = {
-      //         label: data[0].label,
-      //         value: data[0].value,
-      //       })
-      //     : [];
-      //   // setClientId(clonedEnqDataData?.clientID);
-      // }
-      // if (finYearOptions?.length) {
-      //   let id = clonedEnqDataData?.fyearId;
-      //   let data: any = returnObjectBasedOnID(
-      //     finYearOptions,
-      //     "id",
-      //     id,
-      //     "id",
-      //     "finYear"
-      //   );
-      //   data.length
-      //     ? (clonedEnqDataData.financialYear = {
-      //         label: data[0].label,
-      //         value: data[0].value,
-      //       })
-      //     : [];
-      // }
-      // if (sourceOptions?.length) {
-      //   let id = clonedEnqDataData?.sourceID;
-      //   let data: any = returnObjectBasedOnID(
-      //     sourceOptions,
-      //     "sourceID",
-      //     id,
-      //     "sourceID",
-      //     "source"
-      //   );
-      //   data.length
-      //     ? (clonedEnqDataData.sourceID = {
-      //         label: data[0].label,
-      //         value: data[0].value,
-      //       })
-      //     : [];
-      // }
-      // if (localSourceOptions?.length) {
-      //   let id = clonedEnqDataData?.localSourceId;
-      //   let data: any = returnObjectBasedOnID(
-      //     localSourceOptions,
-      //     "localSourceId",
-      //     id,
-      //     "localSourceId",
-      //     "localSource"
-      //   );
-      //   data.length
-      //     ? (clonedEnqDataData.localSourceId = {
-      //         label: data[0].label,
-      //         value: data[0].value,
-      //       })
-      //     : [];
-      // }
-      // if (companyOptions?.length) {
-      //   let id = clonedEnqDataData?.companyID;
-      //   let data: any = returnObjectBasedOnID(
-      //     companyOptions,
-      //     "companyId",
-      //     id,
-      //     "companyId",
-      //     "companyName"
-      //   );
-      //   data.length
-      //     ? (clonedEnqDataData.companyID = {
-      //         label: data[0].label,
-      //         value: data[0].value,
-      //       })
-      //     : [];
-      // }
-      // if (serviceOptions?.length) {
-      //   let id = clonedEnqDataData?.serviceTypeID;
-      //   let data: any = returnObjectBasedOnID(
-      //     serviceOptions,
-      //     "serviceTypeID",
-      //     id,
-      //     "serviceTypeID",
-      //     "serviceType"
-      //   );
-      //   data.length
-      //     ? (clonedEnqDataData.serviceTypeID = {
-      //         label: data[0].label,
-      //         value: data[0].value,
-      //       })
-      //     : [];
-      //   // setServiceTypeId(clonedEnqDataData?.serviceTypeID);
-      // }
-      // if (enqStatusOptions?.length) {
-      //   let id = clonedEnqDataData?.enqStatusID;
-      //   let data: any = returnObjectBasedOnID(
-      //     enqStatusOptions,
-      //     "enquiryStatusID",
-      //     id,
-      //     "enquiryStatusID",
-      //     "enquiryStatus"
-      //   );
-      //   data.length
-      //     ? (clonedEnqDataData.typeofEnquiry = {
-      //         label: data[0].label,
-      //         value: data[0].value,
-      //       })
-      //     : [];
-      // }
-      // if (actualBuyerOptions?.length) {
-      //   let id = clonedEnqDataData?.actualBuyerId;
-      //   let data: any = returnObjectBasedOnID(
-      //     actualBuyerOptions,
-      //     "partyId",
-      //     id,
-      //     "partyId",
-      //     "partyName"
-      //   );
-      //   data.length
-      //     ? (clonedEnqDataData.actualBuyerId = {
-      //         label: data[0].label,
-      //         value: data[0].value,
-      //       })
-      //     : [];
-      // }
-      // reset(clonedEnqDataData);
-    }
-  }, [
-    enqData,
-    cityOptions,
-    stateOptions,
-    countryOptions,
-    clientOptions,
-    finYearOptions,
-    sourceOptions,
-    localSourceOptions,
-    companyOptions,
-    serviceOptions,
-    enqStatusOptions,
-    actualBuyerOptions,
-  ]);
 
   const onServiceTypeChangeHandler = (serviceTypeData: any) => {
     if (serviceTypeData) {
@@ -686,91 +493,268 @@ export const AddEnquiry: React.FC = () => {
     },
   };
 
-  const mapEnqRequest = (formEnqData: EnqueryFormType) => {
-    let enqFormData: Partial<AllEnquiriesType> = {
-      refNo: formEnqData.refNo,
-      bookNo: formEnqData.bookNo,
-      recdDate: formEnqData.recdDate,
-      dueDate: formEnqData.dueDate,
-      clientRefNo: formEnqData.clientRefNo,
-      notes: formEnqData.notes,
-      pmtstatus: formEnqData.pmtstatus.value,
-      creditamount: formEnqData.creditamount,
-      reportDate: formEnqData.reportDate,
-      givenAddress: formEnqData.givenAddress,
-      zip: formEnqData.zip,
-      rockStatus: formEnqData.rockStatus,
-      records: formEnqData.records,
-      recFin: formEnqData.recFin,
-      phone: formEnqData.phone,
-      fax: formEnqData.fax,
-      website: formEnqData.website,
-      contactPerson: formEnqData.contactPerson,
-      designation: formEnqData.designation,
-      financialYear: formEnqData.financialYear,
-      bankers: formEnqData.bankers,
-      requestNo: formEnqData.requestNo,
-      instruction: formEnqData.instruction,
-      reportFilename: formEnqData.reportFilename,
-      reportPrice: formEnqData.reportPrice,
-      reportComission: formEnqData.reportComission,
-      typeofEnquiry: formEnqData.typeofEnquiry.value,
-      lineOfBusiness: formEnqData.lineOfBusiness,
-      noteForComission: formEnqData.noteForComission,
-      disPer: formEnqData.disPer,
-      discount: formEnqData.discount,
-      adjustment: formEnqData.adjustment,
-      disType: formEnqData.disType,
-      bulk_enquiry_id: formEnqData.bulk_enquiry_id
-        ? formEnqData.bulk_enquiry_id
+  useEffect(() => {
+    if (params.id) {
+      if (enqData && Object.values(enqData).length > 0) {
+        reset(mapEnqDataToEnqForm(enqData));
+      }
+    }
+  }, [
+    params.id,
+    cityOptions,
+    stateOptions,
+    countryOptions,
+    clientOptions,
+    finYearOptions,
+    sourceOptions,
+    localSourceOptions,
+    companyOptions,
+    serviceOptions,
+    enqStatusOptions,
+    actualBuyerOptions,
+    enqData,
+  ]);
+
+  useEffect(() => {
+    if (params.id) {
+      if (localEnqData !== null) {
+        reset(mapEnqDataToEnqForm(localEnqData));
+      }
+    }
+  }, [
+    params.id,
+    cityOptions,
+    stateOptions,
+    countryOptions,
+    clientOptions,
+    finYearOptions,
+    sourceOptions,
+    localSourceOptions,
+    companyOptions,
+    serviceOptions,
+    enqStatusOptions,
+    actualBuyerOptions,
+    localEnqData,
+  ]);
+
+  const mapEnqRequest = (enqFormData: EnqueryFormType) => {
+    let enqData: Partial<AllEnquiriesType> = {
+      refNo: enqFormData.refNo,
+      bookNo: enqFormData.bookNo,
+      recdDate: enqFormData.recdDate,
+      dueDate: enqFormData.dueDate,
+      clientRefNo: enqFormData.clientRefNo,
+      notes: enqFormData.notes,
+      creditamount: enqFormData.creditamount,
+      reportDate: enqFormData.reportDate,
+      givenAddress: enqFormData.givenAddress,
+      zip: enqFormData.zip,
+      rockStatus: enqFormData.rockStatus,
+      records: enqFormData.records,
+      recFin: enqFormData.recFin,
+      phone: enqFormData.phone,
+      fax: enqFormData.fax,
+      website: enqFormData.website,
+      contactPerson: enqFormData.contactPerson,
+      designation: enqFormData.designation,
+      financialYear: enqFormData.financialYear,
+      bankers: enqFormData.bankers,
+      requestNo: enqFormData.requestNo,
+      instruction: enqFormData.instruction,
+      reportFilename: enqFormData.reportFilename,
+      reportPrice: enqFormData.reportPrice,
+      reportComission: enqFormData.reportComission,
+      lineOfBusiness: enqFormData.lineOfBusiness,
+      noteForComission: enqFormData.noteForComission,
+      disPer: enqFormData.disPer,
+      discount: enqFormData.discount,
+      adjustment: enqFormData.adjustment,
+      disType: enqFormData.disType,
+      bulk_enquiry_id: enqFormData.bulk_enquiry_id
+        ? enqFormData.bulk_enquiry_id
         : 0,
-      locked: formEnqData.locked,
-      givenName: formEnqData.givenName,
-      cmie: formEnqData.cmie,
-      email: formEnqData.email,
+      locked: enqFormData.locked,
+      givenName: enqFormData.givenName,
+      cmie: enqFormData.cmie,
+      email: enqFormData.email,
     };
-    if (countryData && formEnqData?.companyID) {
-      enqFormData.companyID = formEnqData.companyID.value;
+    if (countryData && enqFormData?.companyID) {
+      enqData.companyID = enqFormData.companyID.value;
     }
-    if (countryData && formEnqData?.serviceTypeID) {
-      enqFormData.serviceTypeID = formEnqData.serviceTypeID.value;
+    if (countryData && enqFormData?.serviceTypeID) {
+      enqData.serviceTypeID = enqFormData.serviceTypeID.value;
     }
-    if (countryData && formEnqData?.clientID) {
-      enqFormData.clientID = formEnqData.clientID.value;
+    if (countryData && enqFormData?.clientID) {
+      enqData.clientID = enqFormData.clientID.value;
     }
-    if (countryData && formEnqData?.sourceID) {
-      enqFormData.sourceID = formEnqData.sourceID.value;
+    if (countryData && enqFormData?.sourceID) {
+      enqData.sourceID = enqFormData.sourceID.value;
     }
-    if (countryData && formEnqData?.enqStatusID) {
-      enqFormData.enqStatusID = formEnqData.enqStatusID.value;
+    if (countryData && enqFormData?.enqStatusID) {
+      enqData.enqStatusID = enqFormData.enqStatusID.value;
     }
-    if (countryData && formEnqData?.cityId) {
-      enqFormData.cityId = formEnqData.cityId.value;
+    if (countryData && enqFormData?.cityId) {
+      enqData.cityId = enqFormData.cityId.value;
     }
-    if (countryData && formEnqData?.stateId) {
-      enqFormData.stateId = formEnqData.stateId.value;
+    if (countryData && enqFormData?.stateId) {
+      enqData.stateId = enqFormData.stateId.value;
     }
-    if (countryData && formEnqData?.countryId) {
-      enqFormData.countryId = formEnqData.countryId.value;
+    if (countryData && enqFormData?.countryId) {
+      enqData.countryId = enqFormData.countryId.value;
     }
-    if (countryData && formEnqData?.actualBuyerId) {
-      enqFormData.actualBuyerId = formEnqData.actualBuyerId.value;
+    if (countryData && enqFormData?.actualBuyerId) {
+      enqData.actualBuyerId = enqFormData.actualBuyerId.value;
     }
-    if (countryData && formEnqData?.siteStatusId) {
-      enqFormData.siteStatusId = formEnqData.siteStatusId.value;
+    if (countryData && enqFormData?.siteStatusId) {
+      enqData.siteStatusId = enqFormData.siteStatusId.value;
     }
-    if (countryData && formEnqData?.fYear) {
-      enqFormData.fyear = formEnqData.fYear.value;
+    if (countryData && enqFormData?.fYear) {
+      enqData.fyear = enqFormData.fYear.value;
+    }
+    if (countryData && enqFormData?.pmtstatus) {
+      enqData.pmtstatus = enqFormData.pmtstatus.value;
+    }
+    if (countryData && enqFormData?.typeofEnquiry) {
+      enqData.typeofEnquiry = enqFormData.typeofEnquiry.value;
     }
     // industryId: formEnqData.industryId.value,
     // localSourceId: formEnqData.localSourceId.value,
-    return cleanupObject(enqFormData);
+    return cleanupObject(enqData);
   };
 
-  // const mapUsertoFormUser = (enqData: AllEnquiriesType) => {
-  //   let formUserData: Partial<EnqueryFormType> = {};
-  //   return formUserData;
-  // };
+  const mapEnqDataToEnqForm = (enqData: AllEnquiriesType) => {
+    let enqFormData: Partial<EnqueryFormType> = {
+      refNo: enqData.refNo,
+      bookNo: enqData.bookNo,
+      recdDate: enqData.recdDate,
+      dueDate: enqData.dueDate,
+      clientRefNo: enqData.clientRefNo,
+      notes: enqData.notes,
+      creditamount: enqData.creditamount,
+      reportDate: enqData.reportDate,
+      givenAddress: enqData.givenAddress,
+      zip: enqData.zip,
+      rockStatus: enqData.rockStatus,
+      records: enqData.records,
+      recFin: enqData.recFin,
+      phone: enqData.phone,
+      fax: enqData.fax,
+      website: enqData.website,
+      contactPerson: enqData.contactPerson,
+      designation: enqData.designation,
+      financialYear: enqData.financialYear,
+      bankers: enqData.bankers,
+      requestNo: enqData.requestNo,
+      instruction: enqData.instruction,
+      reportFilename: enqData.reportFilename,
+      reportPrice: enqData.reportPrice,
+      reportComission: enqData.reportComission,
+      lineOfBusiness: enqData.lineOfBusiness,
+      noteForComission: enqData.noteForComission,
+      disPer: enqData.disPer,
+      discount: enqData.discount,
+      adjustment: enqData.adjustment,
+      disType: enqData.disType,
+      bulk_enquiry_id: enqData.bulk_enquiry_id ? enqData.bulk_enquiry_id : 0,
+      locked: enqData.locked,
+      givenName: enqData.givenName,
+      cmie: enqData.cmie,
+      email: enqData.email,
+    };
+    if (companyData && enqData?.companyID) {
+      let data = companyData[enqData.companyID];
+      enqFormData.companyID = {
+        label: data.companyName,
+        value: data.companyId,
+      };
+    }
+    if (serviceData && enqData?.serviceTypeID) {
+      let data = serviceData[enqData.serviceTypeID];
+      enqFormData.serviceTypeID = {
+        label: data.serviceType,
+        value: data.serviceTypeID,
+      };
+    }
+    if (countryData && clientData?.clientID) {
+      let data = clientData[enqData.clientID];
+      enqFormData.clientID = {
+        label: data.clientName,
+        value: data.clientID,
+      };
+    }
+    if (sourceData && enqData?.sourceID) {
+      let data = sourceData[enqData.sourceID];
+      enqFormData.sourceID = {
+        label: data.source,
+        value: data.sourceID,
+      };
+    }
+    if (enqStatusData && enqData?.enqStatusID) {
+      let data = enqStatusData[enqData.enqStatusID];
+      enqFormData.enqStatusID = {
+        label: data.enquiryStatus,
+        value: data.enquiryStatusID,
+      };
+    }
+    if (cityData && enqData?.cityId) {
+      let data = cityData[enqData.cityId];
+      enqFormData.cityId = {
+        label: data.cityName,
+        value: data.cityId,
+      };
+    }
+    if (stateData && enqData?.stateId) {
+      let data = stateData[enqData.stateId];
+      enqFormData.stateId = {
+        label: data.stateName,
+        value: data.stateId,
+      };
+    }
+    if (countryData && enqData?.countryId) {
+      let data = countryData[enqData.countryId];
+      enqFormData.countryId = {
+        label: data.countryName,
+        value: data.countryId,
+      };
+    }
+    if (actualBuyerData && enqData?.actualBuyerId) {
+      let data = actualBuyerData[enqData.actualBuyerId];
+      enqFormData.actualBuyerId = {
+        label: data.partyName,
+        value: data.partyId,
+      };
+    }
+    // if (countryData && enqData?.siteStatusId) {
+    //   let data = actualBuyerData[enqData.siteStatusId];
+    //   enqFormData.siteStatusId = {
+    //     label: data.partyName,
+    //     value: data.partyId,
+    //   };
+    //   .value;
+    // }
+    if (fYearData && enqData?.fyear) {
+      let data = fYearData[enqData.fyear];
+      enqFormData.fYear = {
+        label: data.finYear,
+        value: data.finYear,
+      };
+    }
+    if (enqData?.pmtstatus) {
+      let data = addEnquiryFormFields.enqPrintStatusData[enqData.pmtstatus];
+      enqFormData.pmtstatus = {
+        label: data.label,
+        value: data.value,
+      };
+    }
+    if (enqData?.typeofEnquiry) {
+      let data = addEnquiryFormFields.enqTypeData[enqData.typeofEnquiry];
+      enqFormData.typeofEnquiry = {
+        label: data.label,
+        value: data.value,
+      };
+    }
+    return enqFormData;
+  };
 
   const onSubmit = handleSubmit((enquiryData): void => {
     let reqObj: Partial<AllEnquiriesType> = mapEnqRequest(enquiryData);

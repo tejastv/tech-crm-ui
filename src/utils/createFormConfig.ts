@@ -6,7 +6,7 @@ export function createFormConfig(
   type: string,
   validationConfig: ValidationType,
   placeholder: string,
-  options?: { [key: string]: Options },
+  options?: { [key: string | number]: Options },
   disabled: boolean = false,
   multiline: boolean = false
 ): FormFieldType {

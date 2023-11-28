@@ -1,7 +1,7 @@
 import { useAxios } from "@hooks/useAxios";
 import { AddUpdateClientType, ClientType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType, PaginationType } from "@shared/index";
+import { ApiResponseType, MapType, PaginationType } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
@@ -16,8 +16,8 @@ export const useClientApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getClient = (): UseQueryResult<ClientType[]> => {
-    return useQuery<ClientType[]>({
+  const getClient = (): UseQueryResult<MapType<ClientType>> => {
+    return useQuery<MapType<ClientType>>({
       queryKey: [queryKeys.CLIENT_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CLIENT);

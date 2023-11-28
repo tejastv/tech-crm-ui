@@ -12,7 +12,7 @@ export const useCompanyApiCallHook = () => {
   const navigate = useNavigate();
 
   const getCompany = () => {
-    return useQuery<CompanyType[]>({
+    return useQuery<{[key: string | number]: CompanyType}>({
       queryKey: [queryKeys.COMPANY_MASTER_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_COMPANY_MASTER);

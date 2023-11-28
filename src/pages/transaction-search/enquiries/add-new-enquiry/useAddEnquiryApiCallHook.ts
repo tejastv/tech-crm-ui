@@ -14,7 +14,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import { useNavigate } from "react-router-dom";
 import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
@@ -29,8 +29,8 @@ export const useAddEnquiryApiCallHook = () => {
     },
   };
 
-  const getEnqStatus = (): UseQueryResult<EnqType[]> => {
-    return useQuery<EnqType[]>({
+  const getEnqStatus = (): UseQueryResult<MapType<EnqType>> => {
+    return useQuery<MapType<EnqType>>({
       queryKey: [queryKeys.ENQSTATUS_DATA],
       queryFn: async () => {
         const response = await instance.get(

@@ -1,7 +1,7 @@
 import { useAxios } from "@hooks/useAxios";
 import { CountryType, AddUpdateCountryType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
@@ -16,8 +16,8 @@ export const useCountryApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getCountry = (): UseQueryResult<CountryType[]> => {
-    return useQuery<CountryType[]>({
+  const getCountry = (): UseQueryResult<MapType<CountryType>> => {
+    return useQuery<MapType<CountryType>>({
       queryKey: [queryKeys.COUNTRY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_COUNTRY);

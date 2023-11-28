@@ -16,8 +16,8 @@ export const useCityApiCallHook = () => {
   const queryClient = new QueryClient();
   const navigate = useNavigate();
 
-  const getCity = (): UseQueryResult<CityType[]> => {
-    return useQuery<CityType[]>({
+  const getCity = (): UseQueryResult<{[key: string | number]: CityType}> => {
+    return useQuery<{[key: string | number]: CityType}>({
       queryKey: [queryKeys.CITY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CITY);
