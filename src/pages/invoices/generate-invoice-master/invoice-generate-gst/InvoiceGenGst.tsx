@@ -159,81 +159,83 @@ export const InvoiceGenerateGst: React.FC = () => {
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
-                <div className="col-6 col-xs-12">
-                  <div className="card-body">
-                    <Select
-                      config={invoiceGenGstFormFields.clientField.config}
-                    />
-                  </div>
+                <div className="col-md-6 col-xs-12">
+                  <Select config={invoiceGenGstFormFields.clientField.config} />
                 </div>
-                <div className="col-6 col-xs-12">
-                  <div className="card-body">
-                    <Input
-                      config={invoiceGenGstFormFields.countryField.config}
-                    />
-                  </div>
+                <div className="col-md-6 col-xs-12">
+                  <Input config={invoiceGenGstFormFields.countryField.config} />
                 </div>
                 <div className="row">
-                  <div className="col-4 col-xs-12">
+                  <div className="col-md-4 col-xs-12">
                     <Input
                       config={invoiceGenGstFormFields.currencyField.config}
                     />
                   </div>
-                  <div className="col-4 col-xs-12">
+                  <div className="col-md-4 col-xs-12">
                     <Select
                       config={invoiceGenGstFormFields.stateField.config}
                     />
                   </div>
-                  <div className="col-4 col-xs-12">
+                  <div className="col-md-4 col-xs-12">
                     <Input config={invoiceGenGstFormFields.gstnField.config} />
                   </div>
-                  <div className="col-md-14 col-xs-12 text-right">
-                    {/* <SingleCheckbox
+                  <div className="col-md-4">
+                    <SingleCheckbox
                       config={invoiceGenGstFormFields.gstField.config}
-                    /> */}
+                    />
                   </div>
                   {/* // currency , Staste ad GST */}
                 </div>
+                <hr />
                 <div className="row">
-                  <div className="col-4 col-xs-12">
+                  <div className="col-md-3 col-xs-12">
                     <Input
                       config={invoiceGenGstFormFields.actualBuyreField.config}
                     />
                   </div>
-                  <div className="col-4 col-xs-12">
+                  <div className="col-md-3 col-xs-12">
                     <Select
-                      config={invoiceGenGstFormFields.stateField.config}
+                      config={
+                        invoiceGenGstFormFields.stateActualBuyreField.config
+                      }
                     />
                   </div>
-                  <div className="col-4 col-xs-12">
-                    <Input config={invoiceGenGstFormFields.gstnField.config} />
-                    <div className="col-md-14 col-xs-12 text-right">
-                      <SingleCheckbox
-                        config={invoiceGenGstFormFields.gstField.config}
-                      />
-                    </div>
+                  <div className="col-md-3 col-xs-12">
+                    <Input
+                      config={
+                        invoiceGenGstFormFields.gstnActualBuyreField.config
+                      }
+                    />
+                  </div>
+                  <div className="col-md-3 ">
+                    <SingleCheckbox
+                      config={
+                        invoiceGenGstFormFields.gstActualBuyreField.config
+                      }
+                    />
                   </div>
                   {/* // Actual Buyer , Staste ad GST */}
                 </div>
+                {/* <div className="card-body"> */}
+                <hr />
                 <div className="row">
-                  <div className="col-4 col-xs-12">
+                  <div className="col-md-4 col-xs-12">
                     <Input
                       config={invoiceGenGstFormFields.fromdateField.config}
                     />
                   </div>
-                  <div className="col-4 col-xs-12">
+                  <div className="col-md-4 col-xs-12">
                     <Input
                       config={invoiceGenGstFormFields.todateeField.config}
                     />
                   </div>
                   {/* // From Date,ToDate View button */}
-                  <div className="col-4 col-xs-12">
-                    {/* <div className="col-md-14 col-xs-12 text-right"> */}
+                  <div className="col-md-4 col-xs-12">
                     <Button type="button" className={"btn btn-danger btn-sm"}>
                       Get Enqires
                     </Button>
-                    {/* </div> */}
                   </div>
+                  {/* </div>   */}
                 </div>
 
                 {/* Table */}
@@ -284,25 +286,18 @@ export const InvoiceGenerateGst: React.FC = () => {
                         </Button>
                       </div>
                     </div>
-                    {/* <div className="col-sm-6 "> */}
+
                     <Input config={invoiceGenGstFormFields.stField.config} />
 
-                    {/* </div> */}
-                    {/* <div className="col-sm-6 "> */}
                     <Input
                       config={invoiceGenGstFormFields.cgstperField.config}
                     />
-                    {/* </div> */}
 
-                    {/* <div className="col-sm-6 "> */}
                     <Input
                       config={invoiceGenGstFormFields.stamountField.config}
                     />
 
-                    {/* </div> */}
-                    {/* <div className="col-sm-6 "> */}
                     <Input config={invoiceGenGstFormFields.cgstField.config} />
-                    {/* </div> */}
                   </div>
                 </div>
 

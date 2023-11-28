@@ -11,10 +11,10 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { addGeneratePiFormFields, GeneratePiType } from "@profoma/index";
+import { InvoiceGenGstType, invoiceGenGstFormFields } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const AddGeneratePi: React.FC = () => {
+export const InvoiceListService: React.FC = () => {
   //   const methods = useForm<AddUpdatePurchaseType>();
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
@@ -22,7 +22,7 @@ export const AddGeneratePi: React.FC = () => {
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Genereate Invoice (PI)",
+      mainHeading: "Invoice List (Service Tax)",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -56,7 +56,7 @@ export const AddGeneratePi: React.FC = () => {
   //       methods.reset();
   //     }, []);
   //   }
-  const columns: ColumnDef<GeneratePiType>[] = [
+  const columns: ColumnDef<InvoiceGenGstType>[] = [
     {
       id: "srNo",
       // cell: (info) => info.getValue(),
@@ -123,7 +123,7 @@ export const AddGeneratePi: React.FC = () => {
     },
   ];
 
-  const tableConfig: TableType<GeneratePiType> = {
+  const tableConfig: TableType<InvoiceGenGstType> = {
     config: {
       tableName: "generate Pi",
       columns: columns,
@@ -159,45 +159,34 @@ export const AddGeneratePi: React.FC = () => {
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
-                <div className="col-6 col-xs-12">
-                  <Select config={addGeneratePiFormFields.clientField.config} />
+                <div className="col-3">
+                  Fyear All Client DateWise Specific Client DateWise
                 </div>
+              </div>
+              <div className="row">
                 <div className="col-6 col-xs-12">
-                  <Input config={addGeneratePiFormFields.countryField.config} />
-                </div>
-                <div className="row">
-                  <div className="col-3 col-xs-12">
-                    <Input
-                      config={addGeneratePiFormFields.currencyField.config}
-                    />
-                  </div>
-                  <div className="col-3 col-xs-12">
-                    <Select
-                      config={addGeneratePiFormFields.stateField.config}
-                    />
-                  </div>
-                  <div className="col-3 col-xs-12">
-                    <Input config={addGeneratePiFormFields.gstnField.config} />
-                  </div>
-                  <div className="col-3">
-                    <SingleCheckbox
-                      config={addGeneratePiFormFields.gstField.config}
-                    />
-                  </div>
-                  {/* // currency , State ad GST */}
+                  <Select config={invoiceGenGstFormFields.clientField.config} />
                 </div>
 
-                {/* <div className="card-body"> */}
+                <div className="row">
+                  <div className="col-3">
+                    <SingleCheckbox
+                      config={invoiceGenGstFormFields.gstField.config}
+                    />
+                  </div>
+                </div>
+                <hr />
+
                 <hr />
                 <div className="row">
                   <div className="col-4 col-xs-12">
                     <Input
-                      config={addGeneratePiFormFields.fromdateField.config}
+                      config={invoiceGenGstFormFields.fromdateField.config}
                     />
                   </div>
                   <div className="col-4 col-xs-12">
                     <Input
-                      config={addGeneratePiFormFields.todateeField.config}
+                      config={invoiceGenGstFormFields.todateeField.config}
                     />
                   </div>
                   {/* // From Date,ToDate View button */}
@@ -220,29 +209,29 @@ export const AddGeneratePi: React.FC = () => {
                   <div className="card-body">
                     {/* <div className="col-sm-6 "> */}
                     <Select
-                      config={addGeneratePiFormFields.fyearField.config}
+                      config={invoiceGenGstFormFields.fyearField.config}
                     />
 
                     {/* </div> */}
                     {/* <div className="col-sm-6 "> */}
                     <Input
-                      config={addGeneratePiFormFields.invoicenoField.config}
+                      config={invoiceGenGstFormFields.invoicenoField.config}
                     />
                     <div className="col-md-14 col-xs-12 text-right">
                       <SingleCheckbox
-                        config={addGeneratePiFormFields.manualField.config}
+                        config={invoiceGenGstFormFields.manualField.config}
                       />
                     </div>
                     {/* </div> */}
                     {/* <div className="col-sm-6 "> */}
                     <Input
-                      config={addGeneratePiFormFields.amountField.config}
+                      config={invoiceGenGstFormFields.amountField.config}
                     />
 
                     {/* </div> */}
                     {/* <div className="col-sm-5 "> */}
                     <Input
-                      config={addGeneratePiFormFields.disamountField.config}
+                      config={invoiceGenGstFormFields.disamountField.config}
                     />
 
                     {/* </div> */}
@@ -256,81 +245,6 @@ export const AddGeneratePi: React.FC = () => {
                           Get Dis
                         </Button>
                       </div>
-                    </div>
-
-                    <Input config={addGeneratePiFormFields.stField.config} />
-
-                    <Input
-                      config={addGeneratePiFormFields.cgstperField.config}
-                    />
-
-                    <Input
-                      config={addGeneratePiFormFields.stamountField.config}
-                    />
-
-                    <Input config={addGeneratePiFormFields.cgstField.config} />
-                  </div>
-                </div>
-
-                <div className="col-md-4 col-xs-12">
-                  <div className="card-body">
-                    {/* <div className="col-sm-7 "> */}
-                    <Input config={addGeneratePiFormFields.dateField.config} />
-                    {/* </div> */}
-
-                    {/* <div className="col-sm-5 "> */}
-                    <SingleCheckbox
-                      config={addGeneratePiFormFields.donotField.config}
-                    />
-                    {/* </div> */}
-
-                    {/* <div className="col-sm-12"> */}
-                    <Input
-                      config={addGeneratePiFormFields.subtotalField.config}
-                    />
-                    {/* </div> */}
-
-                    {/* <div className="col-sm-6 "> */}
-                    <Input
-                      config={addGeneratePiFormFields.sgstperField.config}
-                    />
-                    {/* </div> */}
-
-                    {/* <div className="col-sm-6 "> */}
-                    <Input
-                      config={addGeneratePiFormFields.igstperField.config}
-                    />
-                    {/* </div> */}
-                    {/* <div className="col-sm-6 "> */}
-                    <Input config={addGeneratePiFormFields.sgstField.config} />
-                    {/* </div> */}
-
-                    {/* <div className="col-sm-6 "> */}
-                    <Input config={addGeneratePiFormFields.igstField.config} />
-                    {/* </div> */}
-                  </div>
-                </div>
-
-                <div className="col-md-3 col-xs-12">
-                  <div className="card-body">
-                    {/* <div className="col-sm-12 "> */}
-                    <Input config={addGeneratePiFormFields.staxField.config} />
-                    {/* </div>  */}
-                    {/* <div className="col-sm-12 "> */}
-                    <Input config={addGeneratePiFormFields.ecessField.config} />
-                    {/* </div>  */}
-                    {/* <div className="col-sm-12 "> */}
-                    <Input
-                      config={addGeneratePiFormFields.krishicessField.config}
-                    />
-                    {/* </div>  */}
-                    {/* <div className="col-sm-9 "> */}
-                    <Input config={addGeneratePiFormFields.totalField.config} />
-                    {/* </div>  */}
-                    <div className="col-md-14 col-xs-12 text-right">
-                      <Button type="button" className={"btn btn-danger btn-sm"}>
-                        calculate
-                      </Button>
                     </div>
                   </div>
                 </div>

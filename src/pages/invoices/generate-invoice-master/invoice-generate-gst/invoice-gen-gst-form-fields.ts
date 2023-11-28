@@ -3,7 +3,7 @@ import { createFormConfig } from "@utils/index";
 
 const currencyValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   maxLength: {
@@ -14,7 +14,18 @@ const currencyValidation = {
 
 const gstnValidation = {
   required: {
-    value: true,
+    value: false,
+    message: "{label} field is rquired",
+  },
+  pattern: {
+    value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+    message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
+  },
+} as ValidationType;
+
+const gstnActualBuyreValidation = {
+  required: {
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -25,7 +36,7 @@ const gstnValidation = {
 
 const actualbuyreValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -35,7 +46,7 @@ const actualbuyreValidation = {
 } as ValidationType;
 const FromDateValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -47,7 +58,7 @@ const FromDateValidation = {
 
 const CountryValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
   pattern: {
@@ -58,21 +69,21 @@ const CountryValidation = {
 
 const CodeValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
 
 const gstValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
 
 const ToDateValidation = {
   required: {
-    value: true,
+    value: false,
     message: "{label} field is rquired",
   },
 } as ValidationType;
@@ -328,6 +339,13 @@ const gstnField: FormFieldType = createFormConfig(
   gstnValidation,
   ""
 );
+const gstnActualBuyreField: FormFieldType = createFormConfig(
+  "gstn",
+  "GSTN",
+  "text",
+  gstnActualBuyreValidation,
+  ""
+);
 const actualBuyreField: FormFieldType = createFormConfig(
   "actualbuyre",
   "Actual Buyre",
@@ -369,7 +387,23 @@ const stateField: FormFieldType = {
     placeholder: "Select State ",
     validation: {
       required: {
-        value: true,
+        value: false,
+        message: "Select State",
+      },
+    },
+  },
+};
+
+const stateActualBuyreField: FormFieldType = {
+  config: {
+    name: "stateActualBuyre",
+    label: "State ",
+    id: "stateActualBuyre",
+    options: [],
+    placeholder: "Select State ",
+    validation: {
+      required: {
+        value: false,
         message: "Select State",
       },
     },
@@ -385,6 +419,13 @@ const codeField: FormFieldType = createFormConfig(
 );
 const gstField: FormFieldType = createFormConfig(
   "gst",
+  "Gst Yes/No",
+  "text",
+  gstValidation,
+  ""
+);
+const gstActualBuyreField: FormFieldType = createFormConfig(
+  "gstActualBuyre",
   "Gst Yes/No",
   "text",
   gstValidation,
@@ -580,12 +621,16 @@ export const invoiceGenGstFormFields = {
   clientField,
   currencyField,
   gstnField,
+  gstnActualBuyreField,
   actualBuyreField,
   fromdateField,
   countryField,
   stateField,
+  stateActualBuyreField,
+
   codeField,
   gstField,
+  gstActualBuyreField,
   todateeField,
   symbolField,
   currencyinwordField,

@@ -27,7 +27,7 @@ export const GenerateInvoiceActualBuyre: React.FC = () => {
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Genereate Invoice (Actual Buyre)",
+      mainHeading: "Genereate Invoice (Actual Buyre)- Actual BUyre GST",
       heading: "Entry",
     },
     tableOneConfig: {
@@ -244,7 +244,7 @@ export const GenerateInvoiceActualBuyre: React.FC = () => {
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
-                <div className="col-6 col-xs-12">
+                <div className="col-md-6 col-xs-12">
                   <div className="card-body">
                     <Radio
                       config={generateInvoiceAutoFormFields.action.config}
@@ -266,7 +266,7 @@ export const GenerateInvoiceActualBuyre: React.FC = () => {
                   </div>
                 </div>
                 {/* 2 Column */}
-                <div className="col-6 col-xs-12">
+                <div className="col-md-6 col-xs-12">
                   <div className="card-body">
                     <Input
                       config={

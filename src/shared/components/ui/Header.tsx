@@ -1011,7 +1011,7 @@ export const Header: React.FC = () => {
                           <li className="sidebar-item">
                             <Link
                               className="sidebar-link"
-                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_GENERATE_GST_ROUTES.INVOICE_GENERATE_GST}`}
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.GENERATE_INVOICE_MASTER_ROUTE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.INVOICE_GENERATE_GST}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
@@ -1022,7 +1022,7 @@ export const Header: React.FC = () => {
                           <li className="sidebar-item">
                             <Link
                               className="sidebar-link"
-                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_GENERATE_AUTO_GST_ROUTES.INVOICE_GENERATE_AUTO_GST}`}
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.GENERATE_INVOICE_MASTER_ROUTE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.INVOICE_GENERATE_AUTO_GST}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
@@ -1033,7 +1033,7 @@ export const Header: React.FC = () => {
                           <li className="sidebar-item">
                             <Link
                               className="sidebar-link"
-                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_GENERATE_ACTUAL_BUYRE_GST_ROUTES.INVOICE_GENERATE_ACTUAL_BUYRE_GST}`}
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.GENERATE_INVOICE_MASTER_ROUTE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.INVOICE_GENERATE_ACTUAL_BUYRE_GST}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
@@ -1061,106 +1061,109 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_list.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Invoice List</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_detail_report.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_REPORT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice Detail Report
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_detail_report_pro.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_REPORT_PRO}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice Detail Report PRO
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_detail_report_grpwise.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_REPORT_GROUP_WISE}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice Detail Report(Group wise)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_list_with_tds.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST_TDS}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice List (With TDS)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link " href="#">
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST_SERVICE_TAX}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice List(With Service Tax)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_list_proforma.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST_PERFOMA}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice List(Proforma)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_list_executive_wise.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST_EXCE_WISE}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice List(Exec. wise)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_settled.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_SETTLED_}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice Settled
                               </span>
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </li>

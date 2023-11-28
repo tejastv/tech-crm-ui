@@ -3,23 +3,18 @@ import { FormProvider, useForm } from "react-hook-form";
 import {
   BorderLayout,
   Card,
-  Input,
-  ActionButtons,
   Select,
-  SingleCheckbox,
   Button,
   Table,
-  Radio,
   TableType,
 } from "@shared/index";
 import {
-  GenerateInvoiceAutoType,
   InvoiceGenGstType,
-  generateInvoiceAutoFormFields,
+  invoiceDetailGroupWiseFormFields,
 } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const InvoiceGenerateAuto: React.FC = () => {
+export const InvoiceDetailGroupWise: React.FC = () => {
   //   const methods = useForm<AddUpdatePurchaseType>();
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
@@ -27,15 +22,8 @@ export const InvoiceGenerateAuto: React.FC = () => {
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Genereate Invoice (Auto GST)",
+      mainHeading: "Invoice Detailed Report - Group wise",
       heading: "Entry",
-    },
-    tableOneConfig: {
-      mainHeading: "Generated Invoice List",
-      // heading: "Entry",
-    },
-    tableTwoConfig: {
-      mainHeading: "Skipped Invoice List",
     },
     formActionsConfig: {
       heading: "Action Button",
@@ -76,111 +64,21 @@ export const InvoiceGenerateAuto: React.FC = () => {
     },
     {
       // accessorFn: (row) => row.state,
-      id: "Client Name",
+      id: "invoice np",
       // cell: (info) => info.getValue(),
-      header: () => <>Ref No</>,
+      header: () => <>Invoice No</>,
     },
     {
       // accessorFn: (row) => row.state,
-      id: "Client Name",
+      id: "Invoice Date",
       // cell: (info) => info.getValue(),
-      header: () => <>Client Ref No</>,
+      header: () => <>Invoice Date</>,
     },
     {
       // accessorFn: (row) => row.state,
-      id: "Client Name",
-      // cell: (info) => info.getValue(),
-      header: () => <>Order Date</>,
-    },
-    {
-      // accessorFn: (row) => row.state,
-      id: "Client Name",
-      // cell: (info) => info.getValue(),
-      header: () => <>Company</>,
-    },
-    {
-      // accessorFn: (row) => row.state,
-      id: "Client Name",
-      // cell: (info) => info.getValue(),
-      header: () => <>Country</>,
-    },
-    {
-      // accessorFn: (row) => row.state,
-      id: "Client Name",
-      // cell: (info) => info.getValue(),
-      header: () => <>Price</>,
-    },
-    {
-      // accessorFn: (row) => row.stateCodeN,
-      id: "Address",
+      id: "Report Name",
       // cell: (info) => info.getValue(),
       header: () => <>Report Date</>,
-    },
-
-    {
-      // accessorFn: (row) => row.stateCodeA,
-      id: "Country Name",
-      // cell: (info) => info.getValue(),
-      header: () => <>Dis.</>,
-    },
-
-    {
-      // accessorFn: (row) => row.stateCodeA,
-      id: "Country Name",
-      // cell: (info) => info.getValue(),
-      header: () => <>Comm.</>,
-    },
-    {
-      id: "Instruction",
-      // cell: (info) => info.getValue(),
-      header: () => <>Adjust</>,
-    },
-    {
-      // accessorFn: (row) => row.stateCodeA,
-      id: "Country Name",
-      // cell: (info) => info.getValue(),
-      header: () => <>Service</>,
-    },
-    {
-      // accessorFn: (row) => row.stateCodeA,
-      id: "Country Name",
-      // cell: (info) => info.getValue(),
-      header: () => <>E.Type</>,
-    },
-  ];
-
-  const tableConfig: TableType<InvoiceGenGstType> = {
-    config: {
-      tableName: "generate Invoice Auto",
-      columns: columns,
-      tableData: [],
-      copyBtn: false,
-      csvBtn: false,
-      excelBtn: false,
-      pdfBtn: false,
-      printBtn: false,
-      globalSearchBox: true,
-      pagination: {
-        pageSize: 10,
-        nextPreviousBtnShow: true,
-        tableMetaDataShow: true,
-      },
-    },
-  };
-
-  // 2nd Table
-
-  const columnsTwo: ColumnDef<GenerateInvoiceAutoType>[] = [
-    {
-      id: "srNo",
-      // cell: (info) => info.getValue(),
-      header: () => <>SRNO</>,
-    },
-    {
-      // accessorFn: (row) => row.state,
-      id: "Client Name",
-      // cell: (info) => info.getValue(),
-      header: () => <>Ref No</>,
     },
     {
       // accessorFn: (row) => row.state,
@@ -192,26 +90,38 @@ export const InvoiceGenerateAuto: React.FC = () => {
       // accessorFn: (row) => row.state,
       id: "Client Name",
       // cell: (info) => info.getValue(),
-      header: () => <> Client GSTN</>,
+      header: () => <>Client ref.</>,
     },
     {
       // accessorFn: (row) => row.state,
       id: "Client Name",
       // cell: (info) => info.getValue(),
-      header: () => <>Report On</>,
+      header: () => <>Report Country</>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "Client Name",
+      // accessorFn: (row) => row.stateCodeN,
+      id: "Address",
       // cell: (info) => info.getValue(),
-      header: () => <>Ref No</>,
+      header: () => <>Amount</>,
+    },
+    {
+      // accessorFn: (row) => row.stateCodeA,
+      id: "Country Name",
+      // cell: (info) => info.getValue(),
+      header: () => <>CGST/SGST/IGST</>,
+    },
+    {
+      // accessorFn: (row) => row.stateCodeA,
+      id: "Country Name",
+      // cell: (info) => info.getValue(),
+      header: () => <>Total</>,
     },
   ];
 
-  const tableTwoConfig: TableType<GenerateInvoiceAutoType> = {
+  const tableConfig: TableType<InvoiceGenGstType> = {
     config: {
-      tableName: "generate Invoice Auto",
-      columns: columnsTwo,
+      tableName: "generate Pi",
+      columns: columns,
       tableData: [],
       copyBtn: false,
       csvBtn: false,
@@ -221,8 +131,8 @@ export const InvoiceGenerateAuto: React.FC = () => {
       globalSearchBox: true,
       pagination: {
         pageSize: 10,
-        nextPreviousBtnShow: true,
-        tableMetaDataShow: true,
+        nextPreviousBtnShow: false,
+        tableMetaDataShow: false,
       },
     },
   };
@@ -244,14 +154,31 @@ export const InvoiceGenerateAuto: React.FC = () => {
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
-                <div className="col-md-6 col-xs-12">
+                <div className="col-md-3">
                   <div className="card-body">
-                    <Radio
-                      config={generateInvoiceAutoFormFields.action.config}
-                    />
-
                     <Select
-                      config={generateInvoiceAutoFormFields.client.config}
+                      config={
+                        invoiceDetailGroupWiseFormFields.fyearField.config
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-3 col-xs-12">
+                  <div className="card-body">
+                    <Select
+                      config={
+                        invoiceDetailGroupWiseFormFields.fromdateField.config
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="col-md-3 col-xs-12">
+                  <div className="card-body">
+                    <Select
+                      config={
+                        invoiceDetailGroupWiseFormFields.todateeField.config
+                      }
                     />
                     <div className="mb-2">
                       <div className="col-md-14 col-xs-12 text-right">
@@ -259,43 +186,65 @@ export const InvoiceGenerateAuto: React.FC = () => {
                           type="button"
                           className={"btn btn-danger btn-sm"}
                         >
-                          Generate
+                          Get
                         </Button>
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* 2 Column */}
-                <div className="col-md-6 col-xs-12">
+
+                <div className="col-md-3">
                   <div className="card-body">
-                    <Input
+                    <Select
                       config={
-                        generateInvoiceAutoFormFields.fromdateField.config
+                        invoiceDetailGroupWiseFormFields.groupField.config
                       }
                     />
-                    <Input
-                      config={generateInvoiceAutoFormFields.todateeField.config}
-                    />
+                    <div className="mb-2 mt-3">
+                      <div className="col-md-14 col-xs-12 text-right">
+                        <Button
+                          type="button"
+                          className={"btn btn-danger btn-sm"}
+                        >
+                          Referesh/View
+                        </Button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                <BorderLayout heading={cardConfig.tableOneConfig.mainHeading}>
-                  {/* Table */}
-                  <div className="col-md-12 col-xs-12">
-                    <div className="card-body">
-                      <Table config={tableConfig.config}>null</Table>
-                    </div>
-                  </div>
-                </BorderLayout>
-                <BorderLayout heading={cardConfig.tableTwoConfig.mainHeading}>
-                  <div className="col-md-12 col-xs-12">
-                    <div className="card-body">
-                      <Table config={tableTwoConfig.config}>null</Table>
-                    </div>
-                  </div>
-                </BorderLayout>
               </div>
+
+              {/* Table */}
+              <div className="col-md-12 col-xs-12">
+                <div className="card-body">
+                  <Table config={tableConfig.config}>null</Table>
+                </div>
+              </div>
+              {/* </div> */}
             </BorderLayout>
+            <div className="card-body">
+              <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+                <div className="mb-2 mt-3">
+                  <div className="col-md-14 col-xs-12 text-right">
+                    <Button
+                      type="button"
+                      className={"btn btn-danger btn-sm mr-1"}
+                    >
+                      <i className="far fa-save"></i>
+                      Export Invoice List
+                    </Button>
+
+                    <Button
+                      type="button"
+                      className={"btn btn-secondary btn-sm"}
+                    >
+                      <i className="fa fa-close"></i>
+                      Cancel
+                    </Button>
+                  </div>
+                </div>
+              </BorderLayout>
+            </div>
           </form>
         </FormProvider>
       </Card>
