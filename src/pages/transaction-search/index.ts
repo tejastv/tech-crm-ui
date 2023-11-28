@@ -5,8 +5,6 @@ export { addEnquiryFormFields } from "./enquiries/add-new-enquiry/add-new-enquir
 export { Enquiries } from "./enquiries/all-enquiries/AllEnquiries";
 export { allEnquiryFormFields } from "./enquiries/all-enquiries/all-enquiry-form-field";
 
-
-
 export { EnquirySearch } from "./enquiries/enquiry-search/EnquirySearch";
 
 export { PurchaseBills } from "./purchase-bills/PurchaseBills";
@@ -17,13 +15,13 @@ export { AddBulkEnquiries } from "./add-bulk-enquiries/AddBulkEnquiries";
 export { addEnquirySearchFormFields } from "./enquiries/enquiry-search/add-enquiry-search-form-field";
 export { addBulkEnquiriesFormFields } from "./add-bulk-enquiries/add-bulk-enquires-form-field";
 
-export * from "./enquiries/add-new-enquiry/add-update-new-emquiry-type";
-export * from "./enquiries/add-new-enquiry/new-enquiry-type";
+export * from "./enquiries/add-new-enquiry/EnqueryFormType";
+export * from "./enquiries/add-new-enquiry/EnquiryType";
 
-export * from "./enquiries/all-enquiries/allenquiries-type";
-export * from "./enquiries/add-new-enquiry/service-type";
+export * from "./enquiries/all-enquiries/AllEnquiriesType";
+export * from "./enquiries/add-new-enquiry/ServiceType";
 export * from "./enquiries/add-new-enquiry/enq-type";
-export * from "./enquiries/add-new-enquiry/ref-no-type";
+export * from "./enquiries/add-new-enquiry/RefNoType";
 export * from "./enquiries/add-new-enquiry/price-type";
 
 export { useAllEnquiriesApiCallHook } from "./enquiries/useAllEnquiriesApiCallHook";

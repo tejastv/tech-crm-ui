@@ -12,6 +12,7 @@ import {
 import {
   AddUpdateExecutiveType,
   CityType,
+  StateType,
   addExecutiveFormFields,
   useCityApiCallHook,
   useExecutiveApiCallHook,
@@ -55,10 +56,19 @@ export const AddUpdateExecutive: React.FC = () => {
     addExecutiveFormFields.cityInformation2.config.options = options;
   }
 
+  // state api call
   const { data: stateData } = getState();
-  if (stateData) {
-    addExecutiveFormFields.stateInformation2.config.options =
-      selectOptionsMaker(stateData, "stateId", "state");
+  const [stateOptions, setStateOptions] = useState<StateType[]>();
+
+  useEffect(() => {
+    if (stateData) {
+      setStateOptions(stateData);
+    }
+  }, [stateData?.length && Object.values(stateData).length]);
+
+  if (stateOptions?.length) {
+    let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
+    addExecutiveFormFields.stateInformation2.config.options = options;
   }
 
   if (params.id) {

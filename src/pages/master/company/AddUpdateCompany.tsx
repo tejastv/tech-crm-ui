@@ -84,7 +84,7 @@ export const AddUpdateCompany: React.FC = () => {
     if (stateData) {
       setStateOptions(stateData);
     }
-  }, [stateData?.length]);
+  }, [stateData?.length && Object.values(stateData).length]);
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(
@@ -182,26 +182,24 @@ export const AddUpdateCompany: React.FC = () => {
     if (selectedOption) {
       console.log(selectedOption);
       if (addCompanyFormFields.state.config.name === "stateId") {
-        setValue(
-          addCompanyFormFields.state.config.name,
-          returnFormatedObjectElseEmptyArray(
-            selectedOption.data.stateId,
-            selectedOption.data,
-            "stateId",
-            "stateName"
-          )
+        let data = returnFormatedObjectElseEmptyArray(
+          selectedOption.data.stateId,
+          selectedOption.data,
+          "stateId",
+          "stateName"
         );
+        data.length > 0 &&
+          setValue(addCompanyFormFields.state.config.name, data[0]);
       }
       if (addCompanyFormFields.country.config.name === "countryId") {
-        setValue(
-          addCompanyFormFields.country.config.name,
-          returnFormatedObjectElseEmptyArray(
-            selectedOption.data.countryId,
-            selectedOption.data,
-            "countryId",
-            "countryName"
-          )
+        let data = returnFormatedObjectElseEmptyArray(
+          selectedOption.data.countryId,
+          selectedOption.data,
+          "countryId",
+          "countryName"
         );
+        data.length > 0 &&
+          setValue(addCompanyFormFields.country.config.name, data[0]);
       }
     }
   };

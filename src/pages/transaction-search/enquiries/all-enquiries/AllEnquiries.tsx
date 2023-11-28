@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 
 import {
   BorderLayout,
   Button,
-  Input,
+  NewInput,
   Loader,
   PageBreadcrumb,
-  Select,
+  NewSelect,
   Table,
   TableType,
 } from "@shared/index";
@@ -18,8 +18,8 @@ import {
   useAllEnquiriesApiCallHook,
 } from "@pages/transaction-search";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useClientApiCallHook } from "@pages/master";
-import { FormProvider, useForm } from "react-hook-form";
+import { ClientType, useClientApiCallHook } from "@pages/master";
+import { useForm } from "react-hook-form";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { cleanupObject } from "@utils/cleanUpObject";
 import { formatDateString } from "@utils/dateFormatter";
@@ -31,10 +31,16 @@ export const Enquiries: React.FC = () => {
   const { data: enquiriesData, isLoading } = getEnquiries();
   const navigate = useNavigate();
   const { getClient } = useClientApiCallHook();
-  const methods = useForm<AllEnquiriesType>();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<AllEnquiriesType>();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get("category");
+  const [clientOptions, setClientOptions] = useState<ClientType[]>();
 
   const config = {
     breadcrumbConfig: {
@@ -190,12 +196,12 @@ export const Enquiries: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>Enq. Status</>,
     },
-    {
-      accessorFn: (row) => row.localSourceId,
-      id: "localSource",
-      cell: (info) => info.getValue(),
-      header: () => <>Local Source</>,
-    },
+    // {
+    //   accessorFn: (row) => row.localSourceId,
+    //   id: "localSource",
+    //   cell: (info) => info.getValue(),
+    //   header: () => <>Local Source</>,
+    // },
     {
       accessorFn: (row) => row.clientRefNo,
       id: "clientRefNo",
@@ -422,13 +428,18 @@ export const Enquiries: React.FC = () => {
 
   // client api call
   const { data: clientData } = getClient();
-  if (clientData) {
-    allEnquiryFormFields.clientnameField.config.options = selectOptionsMaker(
-      clientData,
-      "clientID",
-      "clientName"
-    );
+
+  useEffect(() => {
+    if (clientData) {
+      setClientOptions(Object.values(clientData));
+    }
+  }, [clientData]);
+
+  if (clientOptions?.length) {
+    let options = selectOptionsMaker(clientOptions, "clientID", "clientName");
+    allEnquiryFormFields.clientnameField.config.options = options;
   }
+
   const deleteEnquiryClick = (enquiriesData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
@@ -461,7 +472,7 @@ export const Enquiries: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((searchData) => {
+  const onSubmit = handleSubmit((searchData) => {
     let data: any = { ...cleanupObject(searchData) };
     if (data.clientId) {
       data.clientId = +data.clientId["value"];
@@ -490,39 +501,48 @@ export const Enquiries: React.FC = () => {
       )}
       <BorderLayout heading={config.borderLayoutConfig.heading}>
         {category === "search" && ( // Conditional rendering
-          <FormProvider {...methods}>
-            <form
-              onSubmit={onSubmit}
-              noValidate
-              autoComplete="off"
-              className="p-t-20"
-            >
-              <div className="row">
-                <div className="col-md-3 col-xs-12">
-                  <Select
-                    config={allEnquiryFormFields.clientnameField.config}
-                  />
-                </div>
-
-                <div className="col-md-3 col-xs-12">
-                  <Input config={allEnquiryFormFields.fromdateField.config} />
-                </div>
-
-                <div className="col-md-3 col-xs-12">
-                  <Input config={allEnquiryFormFields.todateeField.config} />
-                </div>
-
-                <div className="col-md-3 col-xs-12 text-left">
-                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i> Search
-                  </Button>
-                </div>
+          <form
+            onSubmit={onSubmit}
+            noValidate
+            autoComplete="off"
+            className="p-t-20"
+          >
+            <div className="row">
+              <div className="col-md-3 col-xs-12">
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={allEnquiryFormFields.clientnameField}
+                />
               </div>
-            </form>
-          </FormProvider>
+
+              <div className="col-md-3 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={allEnquiryFormFields.fromdateField}
+                />
+              </div>
+
+              <div className="col-md-3 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={allEnquiryFormFields.todateeField}
+                />
+              </div>
+
+              <div className="col-md-3 col-xs-12 text-left">
+                <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+                  <i className="far fa-save"></i> Search
+                </Button>
+              </div>
+            </div>
+          </form>
         )}
 
-{!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

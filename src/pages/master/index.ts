@@ -231,7 +231,7 @@ export * from "./local-source-master/std-price-list/update-ls-standard-price-typ
 export * from "./price-list-master/price-list-for-clients/client-wise-price-type";
 
 // Transaction master
-export * from "../transaction-search/enquiries/all-enquiries/allenquiries-type";
+export * from "../transaction-search/enquiries/all-enquiries/AllEnquiriesType";
 
 //Services/ Hooks
 

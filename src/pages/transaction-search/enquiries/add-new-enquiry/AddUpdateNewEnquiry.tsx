@@ -13,12 +13,13 @@ import {
   NewDatePicker,
 } from "@shared/index";
 import {
-  AddUpdateEnquiryType,
+  EnqueryFormType,
   EnqType,
   ServiceType,
   addEnquiryFormFields,
   useAddEnquiryApiCallHook,
   useAllEnquiriesApiCallHook,
+  AllEnquiriesType,
 } from "@transaction-search/index";
 import { Link, useParams } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
@@ -56,11 +57,10 @@ export const AddEnquiry: React.FC = () => {
   const {
     register,
     handleSubmit,
-    reset,
     control,
     setValue,
     formState: { errors },
-  } = useForm<AddUpdateEnquiryType>();
+  } = useForm<EnqueryFormType>();
   const { updateEnquiryMutation, getEnquiryData } =
     useAllEnquiriesApiCallHook();
   const {
@@ -136,31 +136,26 @@ export const AddEnquiry: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
-      setCityOptions(cityData);
+      setCityOptions(Object.values(cityData));
     }
-  }, [cityData?.length]);
+  }, [cityData]);
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "cityId", "cityName", true);
-    addEnquiryFormFields.cityenquiry.config.options = options;
+    addEnquiryFormFields.enqCity.config.options = options;
   }
 
   // state api call
   const { data: stateData } = getState();
   useEffect(() => {
     if (stateData) {
-      setStateOptions(stateData);
+      setStateOptions(Object.values(stateData));
     }
-  }, [stateData?.length]);
+  }, [stateData]);
 
   if (stateOptions?.length) {
-    let options = selectOptionsMaker(
-      stateOptions,
-      "stateId",
-      "stateName",
-      true
-    );
-    addEnquiryFormFields.stateenquiry.config.options = options;
+    let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
+    addEnquiryFormFields.enqState.config.options = options;
   }
 
   // country api call
@@ -168,9 +163,9 @@ export const AddEnquiry: React.FC = () => {
 
   useEffect(() => {
     if (countryData) {
-      setCountryOptions(Object.values(countryData));
+      setCountryOptions(Object.values(Object.values(countryData)));
     }
-  }, [countryData && Object.values(countryData).length]);
+  }, [countryData]);
 
   if (countryOptions?.length) {
     let options = selectOptionsMaker(
@@ -178,7 +173,7 @@ export const AddEnquiry: React.FC = () => {
       "countryId",
       "countryName"
     );
-    addEnquiryFormFields.countryenquiry.config.options = options;
+    addEnquiryFormFields.enqCountry.config.options = options;
   }
 
   //  Client api call
@@ -186,13 +181,13 @@ export const AddEnquiry: React.FC = () => {
 
   useEffect(() => {
     if (clientData) {
-      setClientOptions(clientData);
+      setClientOptions(Object.values(clientData));
     }
-  }, [clientData?.length]);
+  }, [clientData]);
 
   if (clientOptions?.length) {
     let options = selectOptionsMaker(clientOptions, "clientID", "clientName");
-    addEnquiryFormFields.clientenquiry.config.options = options;
+    addEnquiryFormFields.enqClient.config.options = options;
   }
 
   //  Fyear  api call
@@ -200,26 +195,26 @@ export const AddEnquiry: React.FC = () => {
 
   useEffect(() => {
     if (fYearData) {
-      setFinYearOptions(fYearData);
+      setFinYearOptions(Object.values(fYearData));
     }
-  }, [fYearData?.length]);
+  }, [fYearData]);
 
   if (finYearOptions?.length) {
     let options = selectOptionsMaker(finYearOptions, "finYear", "finYear");
-    addEnquiryFormFields.yearenquiry.config.options = options;
+    addEnquiryFormFields.enqFinYear.config.options = options;
   }
 
   //  Actual buyer api call
   const { data: actualBuyerData } = getActualBuyer();
   useEffect(() => {
     if (actualBuyerData) {
-      setActualBuyerOptions(actualBuyerData);
+      setActualBuyerOptions(Object.values(actualBuyerData));
     }
-  }, [actualBuyerData?.length]);
+  }, [actualBuyerData]);
 
   if (actualBuyerData?.length) {
     let options = selectOptionsMaker(actualBuyerData, "partyId", "partyName");
-    addEnquiryFormFields.actualbureyenquiry.config.options = options;
+    addEnquiryFormFields.enqActualBuyer.config.options = options;
   }
 
   // Source api call
@@ -227,13 +222,13 @@ export const AddEnquiry: React.FC = () => {
 
   useEffect(() => {
     if (surceData) {
-      setSourceOptions(surceData);
+      setSourceOptions(Object.values(surceData));
     }
-  }, [surceData?.length]);
+  }, [surceData]);
 
   if (sourceOptions?.length) {
     let options = selectOptionsMaker(sourceOptions, "sourceID", "source");
-    addEnquiryFormFields.sourceenquiry.config.options = options;
+    addEnquiryFormFields.enqSource.config.options = options;
   }
 
   // Local Source api call
@@ -241,9 +236,9 @@ export const AddEnquiry: React.FC = () => {
 
   useEffect(() => {
     if (localSourceData) {
-      setLocalSourceOptions(localSourceData);
+      setLocalSourceOptions(Object.values(localSourceData));
     }
-  }, [localSourceData?.length]);
+  }, [localSourceData]);
 
   if (localSourceOptions?.length) {
     let options = selectOptionsMaker(
@@ -251,7 +246,7 @@ export const AddEnquiry: React.FC = () => {
       "localSourceId",
       "localSource"
     );
-    addEnquiryFormFields.localsourceenquiry.config.options = options;
+    addEnquiryFormFields.enqLocalSource.config.options = options;
   }
 
   // Company api call
@@ -259,9 +254,9 @@ export const AddEnquiry: React.FC = () => {
 
   useEffect(() => {
     if (companyData) {
-      setCompanyOptions(companyData);
+      setCompanyOptions(Object.values(companyData));
     }
-  }, [companyData?.length]);
+  }, [companyData]);
 
   if (companyOptions?.length) {
     let options = selectOptionsMaker(
@@ -270,7 +265,7 @@ export const AddEnquiry: React.FC = () => {
       "companyName",
       true
     );
-    addEnquiryFormFields.companyenquiry.config.options = options;
+    addEnquiryFormFields.enqCompanyName.config.options = options;
   }
 
   // Service Type api call
@@ -278,9 +273,9 @@ export const AddEnquiry: React.FC = () => {
 
   useEffect(() => {
     if (serviceData) {
-      setServiceOptions(serviceData);
+      setServiceOptions(Object.values(serviceData));
     }
-  }, [serviceData?.length]);
+  }, [serviceData]);
 
   if (serviceOptions?.length) {
     let options = selectOptionsMaker(
@@ -288,7 +283,7 @@ export const AddEnquiry: React.FC = () => {
       "serviceTypeID",
       "serviceType"
     );
-    addEnquiryFormFields.servicetype.config.options = options;
+    addEnquiryFormFields.enqServiceType.config.options = options;
   }
 
   // enq Status api call
@@ -296,9 +291,9 @@ export const AddEnquiry: React.FC = () => {
 
   useEffect(() => {
     if (enqStatusData) {
-      setEnqStatusOptions(enqStatusData);
+      setEnqStatusOptions(Object.values(enqStatusData));
     }
-  }, [enqStatusData?.length]);
+  }, [enqStatusData]);
 
   if (enqStatusOptions?.length) {
     let options = selectOptionsMaker(
@@ -306,104 +301,88 @@ export const AddEnquiry: React.FC = () => {
       "enquiryStatusID",
       "enquiryStatus"
     );
-    addEnquiryFormFields.enqstatus.config.options = options;
+    addEnquiryFormFields.enqStatus.config.options = options;
   }
 
   const companyOnChangeHandler = (companyData: any) => {
     if (companyData.data) {
-      if (
-        addEnquiryFormFields.givenaddressEnquiry.config.name == "givenAddress"
-      ) {
+      if (addEnquiryFormFields.enqGivenAddress.config.name == "givenAddress") {
         setValue(
-          addEnquiryFormFields.givenaddressEnquiry.config.name,
+          addEnquiryFormFields.enqGivenAddress.config.name,
           companyData.data.address
         );
       }
-      if (addEnquiryFormFields.zipenquiry.config.name == "zip") {
-        setValue(
-          addEnquiryFormFields.zipenquiry.config.name,
-          companyData.data.zip
-        );
+      if (addEnquiryFormFields.enqZip.config.name == "zip") {
+        setValue(addEnquiryFormFields.enqZip.config.name, companyData.data.zip);
       }
-      if (addEnquiryFormFields.telnoenquiry.config.name == "phone") {
+      if (addEnquiryFormFields.enqTelePhone.config.name == "phone") {
         setValue(
-          addEnquiryFormFields.telnoenquiry.config.name,
+          addEnquiryFormFields.enqTelePhone.config.name,
           companyData.data.phone
         );
       }
-      if (addEnquiryFormFields.faxnoenquiry.config.name == "fax") {
-        setValue(
-          addEnquiryFormFields.faxnoenquiry.config.name,
-          companyData.data.fax
-        );
+      if (addEnquiryFormFields.enqFax.config.name == "fax") {
+        setValue(addEnquiryFormFields.enqFax.config.name, companyData.data.fax);
       }
-      if (addEnquiryFormFields.emailenquiry.config.name == "email") {
+      if (addEnquiryFormFields.enqEmail.config.name == "email") {
         setValue(
-          addEnquiryFormFields.emailenquiry.config.name,
+          addEnquiryFormFields.enqEmail.config.name,
           companyData.data.email
         );
       }
-      if (addEnquiryFormFields.websiteenquiry.config.name == "website") {
+      if (addEnquiryFormFields.enqWebsite.config.name == "website") {
         setValue(
-          addEnquiryFormFields.websiteenquiry.config.name,
+          addEnquiryFormFields.enqWebsite.config.name,
           companyData.data.website
         );
       }
-      if (addEnquiryFormFields.contactenquiry.config.name == "contactPerson") {
+      if (addEnquiryFormFields.enqContact.config.name == "contactPerson") {
         setValue(
-          addEnquiryFormFields.contactenquiry.config.name,
+          addEnquiryFormFields.enqContact.config.name,
           companyData.data.contactPerson
         );
       }
-      if (
-        addEnquiryFormFields.designationenquiry.config.name == "designation"
-      ) {
+      if (addEnquiryFormFields.enqDesignation.config.name == "designation") {
         setValue(
-          addEnquiryFormFields.designationenquiry.config.name,
+          addEnquiryFormFields.enqDesignation.config.name,
           companyData.data.designation
         );
       }
-      if (addEnquiryFormFields.cityenquiry.config.name == "cityId") {
-        setValue(
-          addEnquiryFormFields.cityenquiry.config.name,
-          returnFormatedObjectElseEmptyArray(
-            companyData.data.cityId,
-            companyData.data,
-            "cityId",
-            "cityName"
-          ),
-          {
-            shouldValidate: true,
-          }
+      if (addEnquiryFormFields.enqCity.config.name == "cityId") {
+        let data = returnFormatedObjectElseEmptyArray(
+          companyData.data.cityId,
+          companyData.data,
+          "cityId",
+          "cityName"
         );
+        data.length > 0 &&
+          setValue(addEnquiryFormFields.enqCity.config.name, data[0], {
+            shouldValidate: true,
+          });
       }
-      if (addEnquiryFormFields.stateenquiry.config.name == "stateId") {
-        setValue(
-          addEnquiryFormFields.stateenquiry.config.name,
-          returnFormatedObjectElseEmptyArray(
-            companyData.data.stateId,
-            companyData.data,
-            "stateId",
-            "state"
-          ),
-          {
-            shouldValidate: true,
-          }
+      if (addEnquiryFormFields.enqState.config.name == "stateId") {
+        let data = returnFormatedObjectElseEmptyArray(
+          companyData.data.stateId,
+          companyData.data,
+          "stateId",
+          "state"
         );
+        data.length > 0 &&
+          setValue(addEnquiryFormFields.enqState.config.name, data[0], {
+            shouldValidate: true,
+          });
       }
-      if (addEnquiryFormFields.countryenquiry.config.name == "countryId") {
-        setValue(
-          addEnquiryFormFields.countryenquiry.config.name,
-          returnFormatedObjectElseEmptyArray(
-            companyData.data.countryId,
-            companyData.data,
-            "countryId",
-            "countryName"
-          ),
-          {
-            shouldValidate: true,
-          }
+      if (addEnquiryFormFields.enqCountry.config.name == "countryId") {
+        let data = returnFormatedObjectElseEmptyArray(
+          companyData.data.countryId,
+          companyData.data,
+          "countryId",
+          "countryName"
         );
+        data.length > 0 &&
+          setValue(addEnquiryFormFields.enqCountry.config.name, data[0], {
+            shouldValidate: true,
+          });
       }
     }
   };
@@ -422,195 +401,195 @@ export const AddEnquiry: React.FC = () => {
 
   useEffect(() => {
     if (refNo) {
-      if (addEnquiryFormFields.refnoenquiry.config.name == "refNo") {
-        setValue(addEnquiryFormFields.refnoenquiry.config.name, refNo);
+      if (addEnquiryFormFields.enqRefNo.config.name == "refNo") {
+        setValue(addEnquiryFormFields.enqRefNo.config.name, refNo);
       }
     }
   }, [refNo]);
 
   useEffect(() => {
     if (enqData) {
-      let clonedEnqDataData = { ...enqData };
-      if (cityOptions?.length) {
-        let id = clonedEnqDataData?.cityId;
-        let data: any = returnObjectBasedOnID(
-          cityOptions,
-          "id",
-          id,
-          "id",
-          "cityName"
-        );
-        data.length
-          ? (clonedEnqDataData.cityId = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
-      }
-      if (stateOptions?.length) {
-        let id = clonedEnqDataData?.stateId;
-        let data: any = returnObjectBasedOnID(
-          stateOptions,
-          "stateId",
-          id,
-          "stateId",
-          "stateName"
-        );
-        data.length
-          ? (clonedEnqDataData.stateId = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
-      }
-      if (countryOptions?.length) {
-        let id = clonedEnqDataData?.countryId;
-        let data: any = returnObjectBasedOnID(
-          countryOptions,
-          "countryId",
-          id,
-          "countryId",
-          "countryName"
-        );
-        data.length
-          ? (clonedEnqDataData.countryId = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
-        // setCountryId(clonedEnqDataData?.countryId);
-      }
-      if (clientOptions?.length) {
-        let id = clonedEnqDataData?.clientID;
-        let data: any = returnObjectBasedOnID(
-          clientOptions,
-          "clientID",
-          id,
-          "clientID",
-          "clientName"
-        );
-        data.length
-          ? (clonedEnqDataData.clientID = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
-        // setClientId(clonedEnqDataData?.clientID);
-      }
-      if (finYearOptions?.length) {
-        let id = clonedEnqDataData?.fyearId;
-        let data: any = returnObjectBasedOnID(
-          finYearOptions,
-          "id",
-          id,
-          "id",
-          "finYear"
-        );
-        data.length
-          ? (clonedEnqDataData.financialYear = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
-      }
-      if (sourceOptions?.length) {
-        let id = clonedEnqDataData?.sourceID;
-        let data: any = returnObjectBasedOnID(
-          sourceOptions,
-          "sourceID",
-          id,
-          "sourceID",
-          "source"
-        );
-        data.length
-          ? (clonedEnqDataData.financialYear = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
-      }
-      if (localSourceOptions?.length) {
-        let id = clonedEnqDataData?.localSourceId;
-        let data: any = returnObjectBasedOnID(
-          localSourceOptions,
-          "localSourceId",
-          id,
-          "localSourceId",
-          "localSource"
-        );
-        data.length
-          ? (clonedEnqDataData.localSourceId = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
-      }
-      if (companyOptions?.length) {
-        let id = clonedEnqDataData?.companyID;
-        let data: any = returnObjectBasedOnID(
-          companyOptions,
-          "companyId",
-          id,
-          "companyId",
-          "companyName"
-        );
-        data.length
-          ? (clonedEnqDataData.companyID = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
-      }
-      if (serviceOptions?.length) {
-        let id = clonedEnqDataData?.serviceTypeID;
-        let data: any = returnObjectBasedOnID(
-          serviceOptions,
-          "serviceTypeID",
-          id,
-          "serviceTypeID",
-          "serviceType"
-        );
-        data.length
-          ? (clonedEnqDataData.serviceTypeID = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
-        // setServiceTypeId(clonedEnqDataData?.serviceTypeID);
-      }
-      if (enqStatusOptions?.length) {
-        let id = clonedEnqDataData?.enqStatusID;
-        let data: any = returnObjectBasedOnID(
-          enqStatusOptions,
-          "enquiryStatusID",
-          id,
-          "enquiryStatusID",
-          "enquiryStatus"
-        );
-        data.length
-          ? (clonedEnqDataData.typeofEnquiry = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
-      }
-      if (actualBuyerOptions?.length) {
-        let id = clonedEnqDataData?.actualBuyerId;
-        let data: any = returnObjectBasedOnID(
-          actualBuyerOptions,
-          "partyId",
-          id,
-          "partyId",
-          "partyName"
-        );
-        data.length
-          ? (clonedEnqDataData.actualBuyerId = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
-      }
-      reset(clonedEnqDataData);
+      // let clonedEnqDataData = { ...enqData };
+      // if (cityOptions?.length) {
+      //   let id = clonedEnqDataData?.cityId;
+      //   let data: any = returnObjectBasedOnID(
+      //     cityOptions,
+      //     "id",
+      //     id,
+      //     "id",
+      //     "cityName"
+      //   );
+      //   data.length
+      //     ? (clonedEnqDataData.cityId = {
+      //         label: data[0].label,
+      //         value: data[0].value,
+      //       })
+      //     : [];
+      // }
+      // if (stateOptions?.length) {
+      //   let id = clonedEnqDataData?.stateId;
+      //   let data: any = returnObjectBasedOnID(
+      //     stateOptions,
+      //     "stateId",
+      //     id,
+      //     "stateId",
+      //     "stateName"
+      //   );
+      //   data.length
+      //     ? (clonedEnqDataData.stateId = {
+      //         label: data[0].label,
+      //         value: data[0].value,
+      //       })
+      //     : [];
+      // }
+      // if (countryOptions?.length) {
+      //   let id = clonedEnqDataData?.countryId;
+      //   let data: any = returnObjectBasedOnID(
+      //     countryOptions,
+      //     "countryId",
+      //     id,
+      //     "countryId",
+      //     "countryName"
+      //   );
+      //   data.length
+      //     ? (clonedEnqDataData.countryId = {
+      //         label: data[0].label,
+      //         value: data[0].value,
+      //       })
+      //     : [];
+      //   // setCountryId(clonedEnqDataData?.countryId);
+      // }
+      // if (clientOptions?.length) {
+      //   let id = clonedEnqDataData?.clientID;
+      //   let data: any = returnObjectBasedOnID(
+      //     clientOptions,
+      //     "clientID",
+      //     id,
+      //     "clientID",
+      //     "clientName"
+      //   );
+      //   data.length
+      //     ? (clonedEnqDataData.clientID = {
+      //         label: data[0].label,
+      //         value: data[0].value,
+      //       })
+      //     : [];
+      //   // setClientId(clonedEnqDataData?.clientID);
+      // }
+      // if (finYearOptions?.length) {
+      //   let id = clonedEnqDataData?.fyearId;
+      //   let data: any = returnObjectBasedOnID(
+      //     finYearOptions,
+      //     "id",
+      //     id,
+      //     "id",
+      //     "finYear"
+      //   );
+      //   data.length
+      //     ? (clonedEnqDataData.financialYear = {
+      //         label: data[0].label,
+      //         value: data[0].value,
+      //       })
+      //     : [];
+      // }
+      // if (sourceOptions?.length) {
+      //   let id = clonedEnqDataData?.sourceID;
+      //   let data: any = returnObjectBasedOnID(
+      //     sourceOptions,
+      //     "sourceID",
+      //     id,
+      //     "sourceID",
+      //     "source"
+      //   );
+      //   data.length
+      //     ? (clonedEnqDataData.sourceID = {
+      //         label: data[0].label,
+      //         value: data[0].value,
+      //       })
+      //     : [];
+      // }
+      // if (localSourceOptions?.length) {
+      //   let id = clonedEnqDataData?.localSourceId;
+      //   let data: any = returnObjectBasedOnID(
+      //     localSourceOptions,
+      //     "localSourceId",
+      //     id,
+      //     "localSourceId",
+      //     "localSource"
+      //   );
+      //   data.length
+      //     ? (clonedEnqDataData.localSourceId = {
+      //         label: data[0].label,
+      //         value: data[0].value,
+      //       })
+      //     : [];
+      // }
+      // if (companyOptions?.length) {
+      //   let id = clonedEnqDataData?.companyID;
+      //   let data: any = returnObjectBasedOnID(
+      //     companyOptions,
+      //     "companyId",
+      //     id,
+      //     "companyId",
+      //     "companyName"
+      //   );
+      //   data.length
+      //     ? (clonedEnqDataData.companyID = {
+      //         label: data[0].label,
+      //         value: data[0].value,
+      //       })
+      //     : [];
+      // }
+      // if (serviceOptions?.length) {
+      //   let id = clonedEnqDataData?.serviceTypeID;
+      //   let data: any = returnObjectBasedOnID(
+      //     serviceOptions,
+      //     "serviceTypeID",
+      //     id,
+      //     "serviceTypeID",
+      //     "serviceType"
+      //   );
+      //   data.length
+      //     ? (clonedEnqDataData.serviceTypeID = {
+      //         label: data[0].label,
+      //         value: data[0].value,
+      //       })
+      //     : [];
+      //   // setServiceTypeId(clonedEnqDataData?.serviceTypeID);
+      // }
+      // if (enqStatusOptions?.length) {
+      //   let id = clonedEnqDataData?.enqStatusID;
+      //   let data: any = returnObjectBasedOnID(
+      //     enqStatusOptions,
+      //     "enquiryStatusID",
+      //     id,
+      //     "enquiryStatusID",
+      //     "enquiryStatus"
+      //   );
+      //   data.length
+      //     ? (clonedEnqDataData.typeofEnquiry = {
+      //         label: data[0].label,
+      //         value: data[0].value,
+      //       })
+      //     : [];
+      // }
+      // if (actualBuyerOptions?.length) {
+      //   let id = clonedEnqDataData?.actualBuyerId;
+      //   let data: any = returnObjectBasedOnID(
+      //     actualBuyerOptions,
+      //     "partyId",
+      //     id,
+      //     "partyId",
+      //     "partyName"
+      //   );
+      //   data.length
+      //     ? (clonedEnqDataData.actualBuyerId = {
+      //         label: data[0].label,
+      //         value: data[0].value,
+      //       })
+      //     : [];
+      // }
+      // reset(clonedEnqDataData);
     }
   }, [
     enqData,
@@ -651,8 +630,8 @@ export const AddEnquiry: React.FC = () => {
   );
 
   if (priceData) {
-    if (addEnquiryFormFields.priceenquiry.config.name === "reportPrice") {
-      setValue(addEnquiryFormFields.priceenquiry.config.name, priceData);
+    if (addEnquiryFormFields.enqPrice.config.name === "reportPrice") {
+      setValue(addEnquiryFormFields.enqPrice.config.name, priceData);
     }
   }
 
@@ -707,59 +686,99 @@ export const AddEnquiry: React.FC = () => {
     },
   };
 
-  const onSubmit = handleSubmit((enquiryData): void => {
-    let data: any = { ...cleanupObject(enquiryData) };
+  const mapEnqRequest = (formEnqData: EnqueryFormType) => {
+    let enqFormData: Partial<AllEnquiriesType> = {
+      refNo: formEnqData.refNo,
+      bookNo: formEnqData.bookNo,
+      recdDate: formEnqData.recdDate,
+      dueDate: formEnqData.dueDate,
+      clientRefNo: formEnqData.clientRefNo,
+      notes: formEnqData.notes,
+      pmtstatus: formEnqData.pmtstatus.value,
+      creditamount: formEnqData.creditamount,
+      reportDate: formEnqData.reportDate,
+      givenAddress: formEnqData.givenAddress,
+      zip: formEnqData.zip,
+      rockStatus: formEnqData.rockStatus,
+      records: formEnqData.records,
+      recFin: formEnqData.recFin,
+      phone: formEnqData.phone,
+      fax: formEnqData.fax,
+      website: formEnqData.website,
+      contactPerson: formEnqData.contactPerson,
+      designation: formEnqData.designation,
+      financialYear: formEnqData.financialYear,
+      bankers: formEnqData.bankers,
+      requestNo: formEnqData.requestNo,
+      instruction: formEnqData.instruction,
+      reportFilename: formEnqData.reportFilename,
+      reportPrice: formEnqData.reportPrice,
+      reportComission: formEnqData.reportComission,
+      typeofEnquiry: formEnqData.typeofEnquiry.value,
+      lineOfBusiness: formEnqData.lineOfBusiness,
+      noteForComission: formEnqData.noteForComission,
+      disPer: formEnqData.disPer,
+      discount: formEnqData.discount,
+      adjustment: formEnqData.adjustment,
+      disType: formEnqData.disType,
+      bulk_enquiry_id: formEnqData.bulk_enquiry_id
+        ? formEnqData.bulk_enquiry_id
+        : 0,
+      locked: formEnqData.locked,
+      givenName: formEnqData.givenName,
+      cmie: formEnqData.cmie,
+      email: formEnqData.email,
+    };
+    if (countryData && formEnqData?.companyID) {
+      enqFormData.companyID = formEnqData.companyID.value;
+    }
+    if (countryData && formEnqData?.serviceTypeID) {
+      enqFormData.serviceTypeID = formEnqData.serviceTypeID.value;
+    }
+    if (countryData && formEnqData?.clientID) {
+      enqFormData.clientID = formEnqData.clientID.value;
+    }
+    if (countryData && formEnqData?.sourceID) {
+      enqFormData.sourceID = formEnqData.sourceID.value;
+    }
+    if (countryData && formEnqData?.enqStatusID) {
+      enqFormData.enqStatusID = formEnqData.enqStatusID.value;
+    }
+    if (countryData && formEnqData?.cityId) {
+      enqFormData.cityId = formEnqData.cityId.value;
+    }
+    if (countryData && formEnqData?.stateId) {
+      enqFormData.stateId = formEnqData.stateId.value;
+    }
+    if (countryData && formEnqData?.countryId) {
+      enqFormData.countryId = formEnqData.countryId.value;
+    }
+    if (countryData && formEnqData?.actualBuyerId) {
+      enqFormData.actualBuyerId = formEnqData.actualBuyerId.value;
+    }
+    if (countryData && formEnqData?.siteStatusId) {
+      enqFormData.siteStatusId = formEnqData.siteStatusId.value;
+    }
+    if (countryData && formEnqData?.fYear) {
+      enqFormData.fyear = formEnqData.fYear.value;
+    }
+    // industryId: formEnqData.industryId.value,
+    // localSourceId: formEnqData.localSourceId.value,
+    return cleanupObject(enqFormData);
+  };
 
-    if (data.companyID) {
-      data.companyID = +data.companyID["value"];
-    }
-    if (data.financialYear) {
-      data.financialYear = "" + data.financialYear["value"];
-    }
-    if (data.sourceID) {
-      data.sourceID = +data.sourceID["value"];
-    }
-    if (data.cityId) {
-      data.cityId = data.cityId["value"];
-    }
-    if (data.stateId) {
-      data.stateId = data.stateId["value"];
-    }
-    if (data.countryId) {
-      data.countryId = data.countryId["value"];
-    }
-    if (data.typeofEnquiry) {
-      data.typeofEnquiry = "" + data.typeofEnquiry["value"];
-    }
-    if (data.serviceTypeID) {
-      data.serviceTypeID = +data.serviceTypeID["value"];
-    }
-    if (data.pmtstatus) {
-      data.pmtstatus = "" + data.pmtstatus["value"];
-    }
-    if (data.enqStatusID) {
-      data.enqStatusID = +data.enqStatusID["value"];
-    }
-    if (data.clientID) {
-      data.clientID = +data.clientID["value"];
-    }
-    if (data.actualBuyerId) {
-      data.actualBuyerId = +data.actualBuyerId["value"];
-    }
-    if (data.localSourceId) {
-      data.localSourceId = data.localSourceId["value"];
-    }
-    if (data.fYear) {
-      data.fYear = data.fYear["value"];
-    }
-    data["bulk_enquiry_id"] = 0;
-    delete data.svisit;
-    delete data.clientidenquiry;
-    // console.log(data);
-    if (params.id && data) {
-      updateEnquiry({ id: params.id, ...data });
+  // const mapUsertoFormUser = (enqData: AllEnquiriesType) => {
+  //   let formUserData: Partial<EnqueryFormType> = {};
+  //   return formUserData;
+  // };
+
+  const onSubmit = handleSubmit((enquiryData): void => {
+    let reqObj: Partial<AllEnquiriesType> = mapEnqRequest(enquiryData);
+    console.log(reqObj);
+    if (params.id && reqObj) {
+      updateEnquiry({ id: +params.id, ...reqObj });
     } else {
-      addEnquiry(data);
+      addEnquiry(reqObj);
     }
   });
 
@@ -778,128 +797,130 @@ export const AddEnquiry: React.FC = () => {
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.companyenquiry}
+                config={addEnquiryFormFields.enqCompanyName}
                 onChange={companyOnChangeHandler}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.yearenquiry}
+                config={addEnquiryFormFields.enqFinYear}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.refnoenquiry}
+                config={addEnquiryFormFields.enqRefNo}
               />
               <small className="enquirynote text-right">
-                <InputWithText config={addEnquiryFormFields.refnote.config} />
+                <InputWithText
+                  config={addEnquiryFormFields.enqRefNote.config}
+                />
               </small>
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.sourceenquiry}
+                config={addEnquiryFormFields.enqSource}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.givenaddressEnquiry}
+                config={addEnquiryFormFields.enqGivenAddress}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.cityenquiry}
+                config={addEnquiryFormFields.enqCity}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.stateenquiry}
+                config={addEnquiryFormFields.enqState}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.countryenquiry}
+                config={addEnquiryFormFields.enqCountry}
                 onChange={onCountryChangeHandler}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.zipenquiry}
+                config={addEnquiryFormFields.enqZip}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.telnoenquiry}
+                config={addEnquiryFormFields.enqTelePhone}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.faxnoenquiry}
+                config={addEnquiryFormFields.enqFax}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.emailenquiry}
+                config={addEnquiryFormFields.enqEmail}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.websiteenquiry}
+                config={addEnquiryFormFields.enqWebsite}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.contactenquiry}
+                config={addEnquiryFormFields.enqContact}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.designationenquiry}
+                config={addEnquiryFormFields.enqDesignation}
               />
             </div>
             <div className="col-md-6 col-xs-12">
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.clientrefenquiry}
+                config={addEnquiryFormFields.enqClientRef}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.clientenquiry}
+                config={addEnquiryFormFields.enqClient}
                 onChange={onClientChangeHandler}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.requestnoenquiry}
+                config={addEnquiryFormFields.enqRequestNo}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.clientIdenquiry}
+                config={addEnquiryFormFields.enqClientId}
               />
               <Link to={""} className="card-title">
                 <InputWithText
-                  config={addEnquiryFormFields.actualbuyeraddnote.config}
+                  config={addEnquiryFormFields.enqActualBuyerAddNote.config}
                 />
               </Link>
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.actualbureyenquiry}
+                config={addEnquiryFormFields.enqActualBuyer}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.servicetype}
+                config={addEnquiryFormFields.enqServiceType}
                 onChange={onServiceTypeChangeHandler}
               />
               <div className="row mb-2 justify-content-end">
@@ -912,22 +933,22 @@ export const AddEnquiry: React.FC = () => {
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.priceenquiry}
+                config={addEnquiryFormFields.enqPrice}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.givenname}
+                config={addEnquiryFormFields.enqGivenName}
               />
               <NewDatePicker
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.recdon}
+                config={addEnquiryFormFields.enqRecdon}
               />
               <NewDatePicker
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.dueon}
+                config={addEnquiryFormFields.enqDueOn}
               />
               <NewSelect
                 errors={errors}
@@ -939,40 +960,40 @@ export const AddEnquiry: React.FC = () => {
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.localsourceenquiry}
+                config={addEnquiryFormFields.enqLocalSource}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.printstatus}
+                config={addEnquiryFormFields.enqPrintStatus}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.enqstatus}
+                config={addEnquiryFormFields.enqStatus}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={addEnquiryFormFields.svisit}
+                config={addEnquiryFormFields.enqSvisit}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.notesforenquiry}
+                config={addEnquiryFormFields.enqNotesForEnquiry}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.notesforadj}
+                config={addEnquiryFormFields.enqNotesForAdj}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.instructionenquiry}
+                config={addEnquiryFormFields.enqInstruction}
               />
             </div>
             <div className="col-md-3 col-xs-12">
@@ -981,7 +1002,7 @@ export const AddEnquiry: React.FC = () => {
                       <Link to={""} className="card-title">
                         <InputWithText
                           config={
-                            addEnquiryFormFields.actualbuyeraddnote
+                            addEnquiryFormFields.enqActualBuyerAddNote
                           }
                         />
                       </Link>
@@ -991,35 +1012,35 @@ export const AddEnquiry: React.FC = () => {
                     </div> */}
               </div>
               {/* <NewInput errors={errors}
-                  register={register} config={addEnquiryFormFields.priceenquiry} /> */}
+                  register={register} config={addEnquiryFormFields.enqPrice} /> */}
             </div>
             <div className="col-md-6 col-xs-12">
               {!isFetching && <Table config={tableConfig.config}></Table>}
             </div>
             <div className="card-title">
               <InputWithText
-                config={addEnquiryFormFields.discountcommissionnote.config}
+                config={addEnquiryFormFields.enqDiscountCommissionNote.config}
               />
             </div>
             <div className="col-3">
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.disenquiry}
+                config={addEnquiryFormFields.enqDis}
               />
             </div>
             <div className="col-3">
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.discountenquiry}
+                config={addEnquiryFormFields.enqDiscount}
               />
             </div>
             <div className="col-3">
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.adjustenquiry}
+                config={addEnquiryFormFields.enqAdjust}
               />
               <div className="row">
                 <div className="col-md-12 col-xs-12 text-right">
@@ -1033,12 +1054,12 @@ export const AddEnquiry: React.FC = () => {
               <NewInput
                 errors={errors}
                 register={register}
-                config={addEnquiryFormFields.commenquiry}
+                config={addEnquiryFormFields.enqReportComm}
               />
             </div>
             <div className="card-title col-12">
               <InputWithText
-                config={addEnquiryFormFields.discounttypenote.config}
+                config={addEnquiryFormFields.enqDiscountTypeNote.config}
               />
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { useAxios } from "@hooks/useAxios";
 import {
-  AddUpdateEnquiryType,
+  EnqueryFormType,
   AllEnquiriesType,
   EnqType,
   PriceType,
@@ -120,7 +120,7 @@ export const useAddEnquiryApiCallHook = () => {
   };
 
   const addEnquiry = async (
-    enquiryData: AddUpdateEnquiryType
+    enquiryData: Partial<AllEnquiriesType>
   ): Promise<ApiResponseType<AllEnquiriesType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_ALL_ENQUIRY,
@@ -132,7 +132,7 @@ export const useAddEnquiryApiCallHook = () => {
 
   const addEnquiryMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateEnquiryType) => addEnquiry(updatedItem),
+      (updatedItem: Partial<AllEnquiriesType>) => addEnquiry(updatedItem),
       {
         onSuccess: () => {
           queryClient.invalidateQueries({

@@ -1,8 +1,10 @@
+import { Options } from "@shared/index";
+
 export const returnFormatedObjectElseEmptyArray = (
   condition: any,
   data: any,
   valueKey: string,
   lebelKey: string
-): any | Array<any> => {
-  return condition ? { label: data[lebelKey], value: data[valueKey] } : [];
+): Array<Options> => {
+  return condition ? [{ label: data[lebelKey], value: data[valueKey] }] : [];
 };

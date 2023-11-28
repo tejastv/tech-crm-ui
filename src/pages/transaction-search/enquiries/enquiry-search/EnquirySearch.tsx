@@ -16,7 +16,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import {
-  AddUpdateEnquiryType,
+  EnqueryFormType,
   AllEnquiriesType,
   addEnquirySearchFormFields,
   useAllEnquiriesApiCallHook,
@@ -28,7 +28,7 @@ export const EnquirySearch: React.FC = () => {
   const { mutateAsync: deleteEnquiry } = deleteEnquiryMutation();
 
   const navigate = useNavigate();
-  const methods = useForm<AddUpdateEnquiryType>();
+  const methods = useForm<EnqueryFormType>();
 
   const config = {
     breadcrumbConfig: {
@@ -495,7 +495,7 @@ export const EnquirySearch: React.FC = () => {
             </form>
           </FormProvider>
 
-          {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+          {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
         </BorderLayout>
       </div>
     </>

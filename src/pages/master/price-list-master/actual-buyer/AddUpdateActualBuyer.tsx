@@ -13,6 +13,8 @@ import {
 import {
   AddUpdateActualBuyerType,
   CityType,
+  CountryType,
+  StateType,
   addActualBuyersFormFields,
   useActualBuyerApiCallHook,
   useCityApiCallHook,
@@ -63,14 +65,36 @@ export const AddUpdateActualBuyer: React.FC = () => {
     addActualBuyersFormFields.cityactualbuyer.config.options = options;
   }
 
-  if (stateData) {
-    addActualBuyersFormFields.stateactualbuyer.config.options =
-      selectOptionsMaker(stateData, "stateId", "state");
+  // state api call
+  const [stateOptions, setStateOptions] = useState<StateType[]>();
+
+  useEffect(() => {
+    if (stateData) {
+      setStateOptions(stateData);
+    }
+  }, [stateData?.length && Object.values(stateData).length]);
+
+  if (stateOptions?.length) {
+    let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
+    addActualBuyersFormFields.stateactualbuyer.config.options = options;
   }
 
-  if (countryData) {
-    addActualBuyersFormFields.countryactualbuyer.config.options =
-      selectOptionsMaker(countryData, "countryId", "countryName");
+  // country api call
+  const [countryOptions, setCountryOptions] = useState<CountryType[]>();
+
+  useEffect(() => {
+    if (countryData) {
+      setCountryOptions(Object.values(countryData));
+    }
+  }, [countryData && Object.values(countryData).length]);
+
+  if (countryOptions?.length) {
+    let options = selectOptionsMaker(
+      countryOptions,
+      "countryId",
+      "countryName"
+    );
+    addActualBuyersFormFields.countryactualbuyer.config.options = options;
   }
 
   if (clientData) {

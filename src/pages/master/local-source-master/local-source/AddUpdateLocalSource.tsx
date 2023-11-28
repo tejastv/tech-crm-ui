@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -14,6 +14,7 @@ import {
   useLocalSourceApiCallHook,
   useCountryApiCallHook,
   useCurrencyApiCallHook,
+  CountryType,
 } from "@master/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
@@ -22,8 +23,11 @@ import { returnObjectBasedOnID } from "@utils/returnObjectBasedOnID";
 export const AddUpdateLocalSource: React.FC = () => {
   const methods = useForm<AddUpdateLocalSourceType>();
   const params = useParams();
-  const { addLocalSourceMutation, updateLocalSourceMutation, getLocalSourceData } =
-    useLocalSourceApiCallHook();
+  const {
+    addLocalSourceMutation,
+    updateLocalSourceMutation,
+    getLocalSourceData,
+  } = useLocalSourceApiCallHook();
   const { mutateAsync: addLocalSource } = addLocalSourceMutation();
   const { mutateAsync: updateLocalSource } = updateLocalSourceMutation();
   const { getCountry } = useCountryApiCallHook();
@@ -39,20 +43,30 @@ export const AddUpdateLocalSource: React.FC = () => {
     },
   };
 
-  const { data: countryData, isSuccess: getCountrySuccess } =
-    getCountry();
-    
-    if (countryData) {
-      addLocalSrouceFormFields.sourcecountryField.config.options =
-      selectOptionsMaker(countryData, "countryId", "countryName");
-    }
+  const { data: countryData, isSuccess: getCountrySuccess } = getCountry();
 
-  const { data: currencyData, isSuccess: getCurrencySuccess } =
-    getCurrency();
-    if (currencyData) {
+  const [countryOptions, setCountryOptions] = useState<CountryType[]>();
+
+  useEffect(() => {
+    if (countryData) {
+      setCountryOptions(Object.values(countryData));
+    }
+  }, [countryData && Object.values(countryData).length]);
+
+  if (countryOptions?.length) {
+    let options = selectOptionsMaker(
+      countryOptions,
+      "countryId",
+      "countryName"
+    );
+    addLocalSrouceFormFields.sourcecountryField.config.options = options;
+  }
+
+  const { data: currencyData, isSuccess: getCurrencySuccess } = getCurrency();
+  if (currencyData) {
     addLocalSrouceFormFields.localsourcecurrenceyField.config.options =
       selectOptionsMaker(currencyData, "currencyId", "currencyType");
-    }
+  }
 
   const onSubmit = methods.handleSubmit((localsourceData) => {
     let data: any = { ...localsourceData };
@@ -66,9 +80,8 @@ export const AddUpdateLocalSource: React.FC = () => {
   });
 
   if (params.id) {
-    const { data: localsourceData, isSuccess: localsourceDataSuccess } = getLocalSourceData(
-      "" + params.id
-    );
+    const { data: localsourceData, isSuccess: localsourceDataSuccess } =
+      getLocalSourceData("" + params.id);
     if (localsourceDataSuccess) {
       if (getCountrySuccess && getCurrencySuccess) {
         let id = localsourceData?.countryId;
@@ -87,22 +100,27 @@ export const AddUpdateLocalSource: React.FC = () => {
           "currencyId",
           "currencyType"
         );
-        addLocalSrouceFormFields.sourcecountryField.config.setData = countrynamedata
-          ? {
-              label: countrynamedata.label,
-              value: countrynamedata.value,
-            }
-          : [];
-        addLocalSrouceFormFields.localsourcecurrenceyField.config.setData = currencydata
-          ? {
-              label: currencydata.label,
-              value: currencydata.value,
-            }
-          : [];
+        addLocalSrouceFormFields.sourcecountryField.config.setData =
+          countrynamedata
+            ? {
+                label: countrynamedata.label,
+                value: countrynamedata.value,
+              }
+            : [];
+        addLocalSrouceFormFields.localsourcecurrenceyField.config.setData =
+          currencydata
+            ? {
+                label: currencydata.label,
+                value: currencydata.value,
+              }
+            : [];
       }
-      addLocalSrouceFormFields.localSourceField.config.setData = localsourceData.localSource;
-      addLocalSrouceFormFields.emailField.config.setData = localsourceData.email;
-      addLocalSrouceFormFields.emailCCField.config.setData = localsourceData.emailCc;
+      addLocalSrouceFormFields.localSourceField.config.setData =
+        localsourceData.localSource;
+      addLocalSrouceFormFields.emailField.config.setData =
+        localsourceData.email;
+      addLocalSrouceFormFields.emailCCField.config.setData =
+        localsourceData.emailCc;
     }
   } else {
     useEffect(() => {
@@ -127,17 +145,26 @@ export const AddUpdateLocalSource: React.FC = () => {
                     <Input
                       config={addLocalSrouceFormFields.localSourceField.config}
                     />
-                    <Input config={addLocalSrouceFormFields.emailField.config} />
-                    <Input config={addLocalSrouceFormFields.emailCCField.config} />
+                    <Input
+                      config={addLocalSrouceFormFields.emailField.config}
+                    />
+                    <Input
+                      config={addLocalSrouceFormFields.emailCCField.config}
+                    />
                   </div>
                 </div>
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
                     <Select
-                      config={addLocalSrouceFormFields.localsourcecurrenceyField.config}
+                      config={
+                        addLocalSrouceFormFields.localsourcecurrenceyField
+                          .config
+                      }
                     />
                     <Select
-                      config={addLocalSrouceFormFields.sourcecountryField.config}
+                      config={
+                        addLocalSrouceFormFields.sourcecountryField.config
+                      }
                     />
                   </div>
                 </div>

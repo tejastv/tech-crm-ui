@@ -6,7 +6,7 @@ export function createFormConfig(
   type: string,
   validationConfig: ValidationType,
   placeholder: string,
-  options?: Array<Options>,
+  options?: { [key: string]: Options },
   disabled: boolean = false,
   multiline: boolean = false
 ): FormFieldType {
@@ -20,7 +20,8 @@ export function createFormConfig(
   formField.config["isDisabled"] = disabled;
   formField.config["label"] = lable;
   if (multiline) formField.config["multiline"] = multiline;
-  if (options && options.length > 0) formField.config["options"] = options;
+  if (options && Object.values(options).length > 0)
+    formField.config["options"] = Object.values(options);
   formField.config["validation"] = validationConfig;
   formField.config["validation"].required.message = formField.config[
     "validation"

@@ -25,6 +25,9 @@ import {
   useCompanyApiCallHook,
   useFinYearApiCallHook,
   CompanyType,
+  CityType,
+  CountryType,
+  StateType,
 } from "@master/index";
 import {
   cleanupObject,
@@ -71,30 +74,53 @@ export const AddEnqPi: React.FC = () => {
   });
 
   const { data: cityData } = getCity();
-  if (cityData) {
-    addEnqPiFormFields.cityField.config.options = selectOptionsMaker(
-      cityData,
-      "id",
-      "cityName"
-    );
+
+  const [cityOptions, setCityOptions] = useState<CityType[]>();
+
+  useEffect(() => {
+    if (cityData) {
+      setCityOptions(Object.values(cityData));
+    }
+  }, [cityData?.length && Object.values(cityData).length]);
+
+  if (cityOptions?.length) {
+    let options = selectOptionsMaker(cityOptions, "cityId", "cityName");
+    addEnqPiFormFields.cityField.config.options = options;
   }
 
   const { data: stateData } = getState();
-  if (stateData) {
-    addEnqPiFormFields.stateField.config.options = selectOptionsMaker(
-      stateData,
-      "stateId",
-      "stateName"
-    );
+
+  // state api call
+  const [stateOptions, setStateOptions] = useState<StateType[]>();
+
+  useEffect(() => {
+    if (stateData) {
+      setStateOptions(stateData);
+    }
+  }, [stateData?.length && Object.values(stateData).length]);
+
+  if (stateOptions?.length) {
+    let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
+    addEnqPiFormFields.stateField.config.options = options;
   }
 
-  const { data: CountryData } = getCountry();
-  if (CountryData) {
-    // addEnqPiFormFields.countryField.config.options = selectOptionsMaker(
-    //   CountryData,
-    //   "countryId",
-    //   "countryName"
-    // );
+  // country api call
+  const { data: countryData } = getCountry();
+  const [countryOptions, setCountryOptions] = useState<CountryType[]>();
+
+  useEffect(() => {
+    if (countryData) {
+      setCountryOptions(Object.values(countryData));
+    }
+  }, [countryData && Object.values(countryData).length]);
+
+  if (countryOptions?.length) {
+    let options = selectOptionsMaker(
+      countryOptions,
+      "countryId",
+      "countryName"
+    );
+    addEnqPiFormFields.countryField.config.options = options;
   }
 
   const { data: ClientData } = getClient();
@@ -203,9 +229,9 @@ export const AddEnqPi: React.FC = () => {
             ]
           : [];
     }
-    if (CountryData) {
+    if (countryData) {
       let data: any = returnObjectBasedOnID(
-        CountryData,
+        countryData,
         "countryId",
         dataObj?.countryId,
         "countryId",

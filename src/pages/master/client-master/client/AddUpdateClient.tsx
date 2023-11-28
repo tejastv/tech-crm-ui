@@ -123,7 +123,7 @@ export const AddUpdateClient: React.FC = () => {
     if (stateData) {
       setStateOptions(stateData);
     }
-  }, [stateData?.length]);
+  }, [stateData?.length && Object.values(stateData).length]);
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(
@@ -260,36 +260,48 @@ export const AddUpdateClient: React.FC = () => {
     if (clientMasterData) {
       let clonedClientMasterData = { ...clientMasterData };
       if (cityOptions?.length) {
-        clonedClientMasterData.cityID = returnFormatedObjectElseEmptyArray(
+        let data = returnFormatedObjectElseEmptyArray(
           clientMasterData.cityID,
           clientMasterData,
           "cityID",
           "cityName"
         );
+        if (data.length > 0) {
+          clonedClientMasterData.cityID = data[0];
+        }
       }
       if (stateOptions?.length) {
-        clonedClientMasterData.stateID = returnFormatedObjectElseEmptyArray(
+        let data = returnFormatedObjectElseEmptyArray(
           clientMasterData.stateID,
           clientMasterData,
           "stateID",
           "stateName"
         );
+        if (data.length > 0) {
+          clonedClientMasterData.stateID = data[0];
+        }
       }
       if (countryOptions?.length) {
-        clonedClientMasterData.countryID = returnFormatedObjectElseEmptyArray(
+        let data = returnFormatedObjectElseEmptyArray(
           clientMasterData.countryID,
           clientMasterData,
           "countryID",
           "countryName"
         );
+        if (data.length > 0) {
+          clonedClientMasterData.countryID = data[0];
+        }
       }
       if (currencyOptions?.length) {
-        clonedClientMasterData.currencyID = returnFormatedObjectElseEmptyArray(
+        let data = returnFormatedObjectElseEmptyArray(
           clientMasterData.currencyID,
           clientMasterData,
           "currencyID",
           "currencyName"
         );
+        if (data.length > 0) {
+          clonedClientMasterData.currencyID = data[0];
+        }
       }
       if (executiveOptions?.length) {
         let id = clientMasterData?.executive_id;
@@ -300,28 +312,34 @@ export const AddUpdateClient: React.FC = () => {
           "executiveID",
           "executive"
         );
-        data.length
-          ? (clonedClientMasterData.executive_id = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
+        if (data.length > 0) {
+          clonedClientMasterData.executive_id = {
+            label: data[0].label,
+            value: data[0].value,
+          };
+        }
       }
       if (clientGroupOptions?.length) {
-        clonedClientMasterData.groupId = returnFormatedObjectElseEmptyArray(
+        let data = returnFormatedObjectElseEmptyArray(
           clientMasterData.groupId,
           clientMasterData,
           "groupId",
           "groupName"
         );
+        if (data.length > 0) {
+          clonedClientMasterData.groupId = data[0];
+        }
       }
       if (executiveOptions?.length) {
-        clonedClientMasterData.segmentId = returnFormatedObjectElseEmptyArray(
+        let data = returnFormatedObjectElseEmptyArray(
           clientMasterData.segmentId,
           clientMasterData,
           "segmentId",
           "segmentName"
         );
+        if (data.length > 0) {
+          clonedClientMasterData.segmentId = data[0];
+        }
       }
       clonedClientMasterData.billONActualBuyer =
         clientMasterData.billONActualBuyer === "Y" ? true : false;
@@ -334,12 +352,12 @@ export const AddUpdateClient: React.FC = () => {
           "creditPeriodId",
           "creditPeriod"
         );
-        data.length
-          ? (clonedClientMasterData.crDays = {
-              label: data[0].label,
-              value: data[0].value,
-            })
-          : [];
+        if (data.length > 0) {
+          clonedClientMasterData.crDays = {
+            label: data[0].label,
+            value: data[0].value,
+          };
+        }
       }
       // console.log(clonedClientMasterData);
       reset(clonedClientMasterData);

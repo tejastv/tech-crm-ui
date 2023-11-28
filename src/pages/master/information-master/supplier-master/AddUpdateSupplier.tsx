@@ -18,6 +18,8 @@ import {
   useCountryApiCallHook,
   useCurrencyApiCallHook,
   CityType,
+  CountryType,
+  StateType,
 } from "@master/index";
 
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
@@ -67,23 +69,42 @@ export const AddSupplier: React.FC = () => {
   // state api call
   const { data: stateData } = getState();
 
-  if (stateData) {
-    addSupplierFormFields.stateSupplier.config.options = selectOptionsMaker(
-      stateData,
+  const [stateOptions, setStateOptions] = useState<StateType[]>();
+
+  useEffect(() => {
+    if (stateData) {
+      setStateOptions(stateData);
+    }
+  }, [stateData?.length && Object.values(stateData).length]);
+
+  if (stateOptions?.length) {
+    let options = selectOptionsMaker(
+      stateOptions,
       "stateId",
-      "state"
+      "stateName",
+      true
     );
+    addSupplierFormFields.stateSupplier.config.options = options;
   }
 
   // country api call
-  const { data: CountryData } = getCountry();
+  const { data: countryData } = getCountry();
 
-  if (CountryData) {
-    addSupplierFormFields.countrySupplier.config.options = selectOptionsMaker(
-      CountryData,
+  const [countryOptions, setCountryOptions] = useState<CountryType[]>();
+
+  useEffect(() => {
+    if (countryData) {
+      setCountryOptions(Object.values(countryData));
+    }
+  }, [countryData && Object.values(countryData).length]);
+
+  if (countryOptions?.length) {
+    let options = selectOptionsMaker(
+      countryOptions,
       "countryId",
       "countryName"
     );
+    addSupplierFormFields.countrySupplier.config.options = options;
   }
 
   const { data: CurrencyData } = getCurrency();
@@ -157,10 +178,10 @@ export const AddSupplier: React.FC = () => {
             }
           : [];
       }
-      if (CountryData) {
+      if (countryData) {
         let id = supplierMasterData?.countryID;
         let data: any = returnObjectBasedOnID(
-          CountryData,
+          countryData,
           "countryId",
           id,
           "countryId",

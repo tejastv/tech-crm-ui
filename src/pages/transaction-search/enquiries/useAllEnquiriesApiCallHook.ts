@@ -9,7 +9,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-import { AddUpdateEnquiryType } from "@transaction-search/index";
+import { EnqueryFormType } from "@transaction-search/index";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -86,7 +86,7 @@ export const useAllEnquiriesApiCallHook = () => {
   };
 
   const updateEnquiry = async (
-    updateStateData: AddUpdateEnquiryType
+    updateStateData: Partial<AllEnquiriesType>
   ): Promise<ApiResponseType<AllEnquiriesType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_STATE.replace("{id}", "" + updateStateData.id),
@@ -98,7 +98,7 @@ export const useAllEnquiriesApiCallHook = () => {
 
   const updateEnquiryMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateEnquiryType) => updateEnquiry(updatedItem),
+      (updatedItem: Partial<AllEnquiriesType>) => updateEnquiry(updatedItem),
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
