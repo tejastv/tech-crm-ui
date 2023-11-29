@@ -1,4 +1,4 @@
-import { FormFieldType, ValidationType } from "@shared/index";
+import { FormFieldType, MapType, Options, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
 
 const FromDateValidation = {
@@ -60,15 +60,14 @@ const fyearField: FormFieldType = {
   },
 };
 
-const ActionOption = [
-  { value: "Y", label: "All Client Datewise" },
-  { value: "N", label: "Specific Client Datewise" },
-];
-
-const InvoicesOption = [
-  { value: "Y", label: "Invoices with TDS Certificate" },
-  { value: "N", label: "Invoices without TDS Certificate" },
-];
+const ActionOption: MapType<Options> = {
+  new: { value: "new", label: "All Client Datewise" },
+  renew: { value: "renew", label: "Specific Client Datewise" },
+};
+const InvoicesOption: MapType<Options> = {
+  new: { value: "new", label: "All Client Datewise" },
+  renew: { value: "renew", label: "Specific Client Datewise" },
+};
 
 const allClientDatewiseField: FormFieldType = createFormConfig(
   "allClientDatewise",

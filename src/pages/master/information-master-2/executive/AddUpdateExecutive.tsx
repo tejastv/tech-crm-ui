@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -11,6 +11,8 @@ import {
 } from "@shared/index";
 import {
   AddUpdateExecutiveType,
+  CityType,
+  StateType,
   addExecutiveFormFields,
   useCityApiCallHook,
   useExecutiveApiCallHook,
@@ -39,19 +41,34 @@ export const AddUpdateExecutive: React.FC = () => {
     },
   };
 
+  const [cityOptions, setCityOptions] = useState<CityType[]>();
+
   const { data: cityData } = getCity();
-  if (cityData) {
-    addExecutiveFormFields.cityInformation2.config.options = selectOptionsMaker(
-      cityData,
-      "id",
-      "cityName"
-    );
+
+  useEffect(() => {
+    if (cityData) {
+      setCityOptions(Object.values(cityData));
+    }
+  }, [cityData?.length && Object.values(cityData).length]);
+
+  if (cityOptions?.length) {
+    let options = selectOptionsMaker(cityOptions, "id", "cityName");
+    addExecutiveFormFields.cityInformation2.config.options = options;
   }
 
+  // state api call
   const { data: stateData } = getState();
-  if (stateData) {
-    addExecutiveFormFields.stateInformation2.config.options =
-      selectOptionsMaker(stateData, "stateId", "state");
+  const [stateOptions, setStateOptions] = useState<StateType[]>();
+
+  useEffect(() => {
+    if (stateData) {
+      setStateOptions(stateData);
+    }
+  }, [stateData?.length && Object.values(stateData).length]);
+
+  if (stateOptions?.length) {
+    let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
+    addExecutiveFormFields.stateInformation2.config.options = options;
   }
 
   if (params.id) {

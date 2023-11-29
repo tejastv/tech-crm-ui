@@ -7,8 +7,11 @@ import {
   Button,
   Table,
   TableType,
+  NewSelect,
+  NewInput,
 } from "@shared/index";
 import {
+  InvoiceDetailGroupWiseType,
   InvoiceGenGstType,
   invoiceDetailGroupWiseFormFields,
 } from "@invoices/index";
@@ -19,7 +22,14 @@ export const InvoiceDetailGroupWise: React.FC = () => {
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
-
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<InvoiceDetailGroupWiseType>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Invoice Detailed Report - Group wise",
@@ -118,9 +128,9 @@ export const InvoiceDetailGroupWise: React.FC = () => {
     },
   ];
 
-  const tableConfig: TableType<InvoiceGenGstType> = {
+  const tableConfig: TableType<InvoiceDetailGroupWiseType> = {
     config: {
-      tableName: "generate Pi",
+      tableName: "Invoice Detail Group Wise",
       columns: columns,
       tableData: [],
       copyBtn: false,
@@ -156,29 +166,30 @@ export const InvoiceDetailGroupWise: React.FC = () => {
               <div className="row">
                 <div className="col-md-3">
                   <div className="card-body">
-                    <Select
-                      config={
-                        invoiceDetailGroupWiseFormFields.fyearField.config
-                      }
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceDetailGroupWiseFormFields.fyearField}
                     />
                   </div>
                 </div>
 
                 <div className="col-md-3 col-xs-12">
                   <div className="card-body">
-                    <Select
-                      config={
-                        invoiceDetailGroupWiseFormFields.fromdateField.config
-                      }
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceDetailGroupWiseFormFields.fromdateField}
                     />
                   </div>
                 </div>
                 <div className="col-md-3 col-xs-12">
                   <div className="card-body">
-                    <Select
-                      config={
-                        invoiceDetailGroupWiseFormFields.todateeField.config
-                      }
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceDetailGroupWiseFormFields.todateeField}
                     />
                     <div className="mb-2">
                       <div className="col-md-14 col-xs-12 text-right">
@@ -195,10 +206,11 @@ export const InvoiceDetailGroupWise: React.FC = () => {
 
                 <div className="col-md-3">
                   <div className="card-body">
-                    <Select
-                      config={
-                        invoiceDetailGroupWiseFormFields.groupField.config
-                      }
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceDetailGroupWiseFormFields.groupField}
                     />
                     <div className="mb-2 mt-3">
                       <div className="col-md-14 col-xs-12 text-right">

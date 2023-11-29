@@ -32,9 +32,9 @@
       "@dashboard/*": ["pages/dashboard/*"],
       "@master/*": ["pages/master/*"],
       "@transaction-search/*": ["pages/transaction-search/*"],
-      "@profoma/*": ["pages/profoma/*"],
+      "@proforma/*": ["pages/proforma/*"],
       "@reports/*": ["pages/reports/*"],
-      "@invoices/*": ["pages/invoices/*"]
+      "@invoices/*": ["pages/invoices"]
     }
   },
   "include": [
@@ -44,7 +44,8 @@
     "src/**/*.jsx",
     "tests/**/*.ts",
     "tests/**/*.tsx",
-    ".eslintrc.cjs"
+    ".eslintrc.cjs",
+    "src/pages/proforma/useProformaApiCallHook.ts"
   ],
   "exclude": ["node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]

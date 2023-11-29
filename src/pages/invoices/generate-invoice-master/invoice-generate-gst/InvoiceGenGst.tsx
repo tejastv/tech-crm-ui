@@ -10,6 +10,8 @@ import {
   Button,
   Table,
   TableType,
+  NewInput,
+  NewSelect,
 } from "@shared/index";
 import { InvoiceGenGstType, invoiceGenGstFormFields } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
@@ -19,7 +21,14 @@ export const InvoiceGenerateGst: React.FC = () => {
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
-
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<InvoiceGenGstType>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Genereate Invoice",
@@ -160,24 +169,42 @@ export const InvoiceGenerateGst: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Select config={invoiceGenGstFormFields.clientField.config} />
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceGenGstFormFields.clientField}
+                  />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input config={invoiceGenGstFormFields.countryField.config} />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.countryField}
+                  />
                 </div>
                 <div className="row">
                   <div className="col-md-4 col-xs-12">
-                    <Input
-                      config={invoiceGenGstFormFields.currencyField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.currencyField}
                     />
                   </div>
                   <div className="col-md-4 col-xs-12">
-                    <Select
-                      config={invoiceGenGstFormFields.stateField.config}
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceGenGstFormFields.stateField}
                     />
                   </div>
                   <div className="col-md-4 col-xs-12">
-                    <Input config={invoiceGenGstFormFields.gstnField.config} />
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.gstnField}
+                    />
                   </div>
                   <div className="col-md-4">
                     <SingleCheckbox
@@ -189,22 +216,25 @@ export const InvoiceGenerateGst: React.FC = () => {
                 <hr />
                 <div className="row">
                   <div className="col-md-3 col-xs-12">
-                    <Input
-                      config={invoiceGenGstFormFields.actualBuyreField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.actualBuyreField}
                     />
                   </div>
                   <div className="col-md-3 col-xs-12">
-                    <Select
-                      config={
-                        invoiceGenGstFormFields.stateActualBuyreField.config
-                      }
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceGenGstFormFields.stateActualBuyreField}
                     />
                   </div>
                   <div className="col-md-3 col-xs-12">
-                    <Input
-                      config={
-                        invoiceGenGstFormFields.gstnActualBuyreField.config
-                      }
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.gstnActualBuyreField}
                     />
                   </div>
                   <div className="col-md-3 ">
@@ -220,13 +250,17 @@ export const InvoiceGenerateGst: React.FC = () => {
                 <hr />
                 <div className="row">
                   <div className="col-md-4 col-xs-12">
-                    <Input
-                      config={invoiceGenGstFormFields.fromdateField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.fromdateField}
                     />
                   </div>
                   <div className="col-md-4 col-xs-12">
-                    <Input
-                      config={invoiceGenGstFormFields.todateeField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.todateeField}
                     />
                   </div>
                   {/* // From Date,ToDate View button */}
@@ -248,14 +282,19 @@ export const InvoiceGenerateGst: React.FC = () => {
                 <div className="col-md-5 col-xs-12">
                   <div className="card-body">
                     {/* <div className="col-sm-6 "> */}
-                    <Select
-                      config={invoiceGenGstFormFields.fyearField.config}
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceGenGstFormFields.fyearField}
                     />
 
                     {/* </div> */}
                     {/* <div className="col-sm-6 "> */}
-                    <Input
-                      config={invoiceGenGstFormFields.invoicenoField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.invoicenoField}
                     />
                     <div className="col-md-14 col-xs-12 text-right">
                       <SingleCheckbox
@@ -264,14 +303,18 @@ export const InvoiceGenerateGst: React.FC = () => {
                     </div>
                     {/* </div> */}
                     {/* <div className="col-sm-6 "> */}
-                    <Input
-                      config={invoiceGenGstFormFields.amountField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.amountField}
                     />
 
                     {/* </div> */}
                     {/* <div className="col-sm-5 "> */}
-                    <Input
-                      config={invoiceGenGstFormFields.disamountField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.disamountField}
                     />
 
                     {/* </div> */}
@@ -287,24 +330,38 @@ export const InvoiceGenerateGst: React.FC = () => {
                       </div>
                     </div>
 
-                    <Input config={invoiceGenGstFormFields.stField.config} />
-
-                    <Input
-                      config={invoiceGenGstFormFields.cgstperField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.stField}
+                    />
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.cgstperField}
+                    />
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.stamountField}
                     />
 
-                    <Input
-                      config={invoiceGenGstFormFields.stamountField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.cgstField}
                     />
-
-                    <Input config={invoiceGenGstFormFields.cgstField.config} />
                   </div>
                 </div>
 
                 <div className="col-md-4 col-xs-12">
                   <div className="card-body">
                     {/* <div className="col-sm-7 "> */}
-                    <Input config={invoiceGenGstFormFields.dateField.config} />
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.dateField}
+                    />
                     {/* </div> */}
 
                     {/* <div className="col-sm-5 "> */}
@@ -314,48 +371,61 @@ export const InvoiceGenerateGst: React.FC = () => {
                     {/* </div> */}
 
                     {/* <div className="col-sm-12"> */}
-                    <Input
-                      config={invoiceGenGstFormFields.subtotalField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.subtotalField}
                     />
-                    {/* </div> */}
 
-                    {/* <div className="col-sm-6 "> */}
-                    <Input
-                      config={invoiceGenGstFormFields.sgstperField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.sgstperField}
                     />
-                    {/* </div> */}
 
-                    {/* <div className="col-sm-6 "> */}
-                    <Input
-                      config={invoiceGenGstFormFields.igstperField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.igstperField}
                     />
-                    {/* </div> */}
-                    {/* <div className="col-sm-6 "> */}
-                    <Input config={invoiceGenGstFormFields.sgstField.config} />
-                    {/* </div> */}
 
-                    {/* <div className="col-sm-6 "> */}
-                    <Input config={invoiceGenGstFormFields.igstField.config} />
-                    {/* </div> */}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.sgstField}
+                    />
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.igstField}
+                    />
                   </div>
                 </div>
 
                 <div className="col-md-3 col-xs-12">
                   <div className="card-body">
-                    {/* <div className="col-sm-12 "> */}
-                    <Input config={invoiceGenGstFormFields.staxField.config} />
-                    {/* </div>  */}
-                    {/* <div className="col-sm-12 "> */}
-                    <Input config={invoiceGenGstFormFields.ecessField.config} />
-                    {/* </div>  */}
-                    {/* <div className="col-sm-12 "> */}
-                    <Input
-                      config={invoiceGenGstFormFields.krishicessField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.staxField}
                     />
-                    {/* </div>  */}
-                    {/* <div className="col-sm-9 "> */}
-                    <Input config={invoiceGenGstFormFields.totalField.config} />
-                    {/* </div>  */}
+
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.ecessField}
+                    />
+
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.krishicessField}
+                    />
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceGenGstFormFields.totalField}
+                    />
                     <div className="col-md-14 col-xs-12 text-right">
                       <Button type="button" className={"btn btn-danger btn-sm"}>
                         calculate

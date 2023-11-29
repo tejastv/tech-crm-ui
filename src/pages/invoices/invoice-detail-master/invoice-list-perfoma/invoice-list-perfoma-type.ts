@@ -1,9 +1,11 @@
+import { Options } from "@shared/index";
+
 export interface InvoiceListPerfomaType {
-  fyearField: string;
+  fyearField: Options;
   fromdateField: string;
   todateeField: string;
-  cityField: string;
-  ClientField: string;
+  cityField: Options;
+  ClientField: Options;
   allClientDatewiseField: string;
   specificClientDatewiseField: string;
 

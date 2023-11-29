@@ -6,12 +6,11 @@ import { Login } from "@auth/index";
 import { NotFound } from "@shared/index";
 import { MainLayout } from "@layout/index";
 import {
-  COMPONENTS,
   DASHBOARD,
   INVOICE_ROUTES,
   LOGIN,
   MASTER_ROUTES,
-  PROFOMA_ROUTES,
+  PROFORMA_ROUTES,
   REPORT_ROUTES,
   ROOT,
   TRANSACTION_ROUTES,
@@ -22,11 +21,9 @@ import ReportsRoutes from "@pages/reports/ReportsRoutes";
 const Dashboard = React.lazy(() => import("../pages/dashboard/Dashboard"));
 const MasterRoutes = React.lazy(() => import("../pages/master/MasterRoutes"));
 const TransactionRoutes = React.lazy(
-  () => import("../pages/transaction-search/TrasactionRoutes")
+  () => import("../pages/transaction-search/TransactionRoutes")
 );
-const ProfomaRoutes = React.lazy(
-  () => import("../pages/profoma/ProfomaRoutes")
-);
+const ProformaRoutes = React.lazy(() => import("@proforma/ProformaRoutes"));
 const InvoicesRoutes = React.lazy(
   () => import("../pages/invoices/InvoiceRoutes")
 );
@@ -65,10 +62,10 @@ const AppRoutes = () => {
             }
           ></Route>
           <Route
-            path={PROFOMA_ROUTES.PROFOMA_PARENT_ROUTE}
+            path={PROFORMA_ROUTES.PROFORMA_PARENT_ROUTE}
             element={
               <React.Suspense>
-                <ProfomaRoutes />
+                <ProformaRoutes />
               </React.Suspense>
             }
           ></Route>

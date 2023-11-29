@@ -10,6 +10,8 @@ import {
   Table,
   Radio,
   TableType,
+  NewSelect,
+  NewInput,
 } from "@shared/index";
 import { InvoiceListType, invoiceListFormFields } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
@@ -19,7 +21,14 @@ export const InvoiceList: React.FC = () => {
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
-
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<InvoiceListType>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Invoice List",
@@ -150,7 +159,12 @@ export const InvoiceList: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-3">
-                  <Select config={invoiceListFormFields.fyearField.config} />
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceListFormFields.fyearField}
+                  />
 
                   <Radio
                     config={invoiceListFormFields.allClientDatewiseField.config}
@@ -159,17 +173,26 @@ export const InvoiceList: React.FC = () => {
                 <div className="col-md-6">
                   <div className="row">
                     <div className="col-md-6 col-xs-12">
-                      <Input
-                        config={invoiceListFormFields.fromdateField.config}
+                      <NewInput
+                        errors={errors}
+                        register={register}
+                        config={invoiceListFormFields.fromdateField}
                       />
                     </div>
                     <div className="col-md-6 col-xs-12">
-                      <Input
-                        config={invoiceListFormFields.todateeField.config}
+                      <NewInput
+                        errors={errors}
+                        register={register}
+                        config={invoiceListFormFields.todateeField}
                       />
                     </div>
                     <div className="col-md-12 col-xs-12">
-                      <Select config={invoiceListFormFields.cityField.config} />
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceListFormFields.cityField}
+                      />
                       <div className="mb-2">
                         <div className="col-md-14 col-xs-12 text-right">
                           <Button
@@ -180,8 +203,11 @@ export const InvoiceList: React.FC = () => {
                           </Button>
                         </div>
                       </div>
-                      <Select
-                        config={invoiceListFormFields.ClientField.config}
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceListFormFields.ClientField}
                       />
                     </div>
                   </div>

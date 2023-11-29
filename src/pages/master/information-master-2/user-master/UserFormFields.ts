@@ -1,5 +1,10 @@
 import { FormFieldType, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
+const userTypeData: any = {
+  Administrator: { value: "Administrator", label: "Administrator" },
+  "Super user": { value: "Super user", label: "Super User" },
+  "Basic user": { value: "Basic user", label: "Basic User" },
+};
 const UserValidation = {
   required: {
     value: true,
@@ -28,7 +33,8 @@ const LoginValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9_]+$/,
-    message: "Invalid username format. Please use only letters, numbers, and underscores.",
+    message:
+      "Invalid username format. Please use only letters, numbers, and underscores.",
   },
 } as ValidationType;
 const PasswordValidation = {
@@ -38,26 +44,28 @@ const PasswordValidation = {
   },
   pattern: {
     value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-    message: "Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character",
-  }
+    message:
+      "Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character",
+  },
 } as ValidationType;
 
-const username: FormFieldType = createFormConfig(
-  "username",
+const userName: FormFieldType = createFormConfig(
+  "userName",
   "User Name",
   "text",
   UserValidation,
   "User Name"
 );
-const usertype: FormFieldType = createFormConfig(
-  "usertype",
+const userType: FormFieldType = createFormConfig(
+  "userType",
   "User Type",
   "select",
   UserTypeValidation,
-  "User Type"
+  "User Type",
+  Object.values(userTypeData)
 );
 const login: FormFieldType = createFormConfig(
-  "login",
+  "loginId",
   "Login Id",
   "text",
   LoginValidation,
@@ -66,14 +74,15 @@ const login: FormFieldType = createFormConfig(
 const password: FormFieldType = createFormConfig(
   "password",
   "Password",
-  "text",
+  "password",
   PasswordValidation,
   "Password"
 );
 
 export const addUserFormFields = {
-  username,
-  usertype,
+  userName,
+  userType,
   login,
   password,
+  userTypeData,
 };

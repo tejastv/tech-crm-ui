@@ -103,6 +103,10 @@ const GET_ADD_ENQTYPE = "transaction/enquiryStatus";
 const GET_ADD_ENQSTATUS = "transaction/enquiryStatus";
 const GET_ADD_REFNO = "transaction/getRefNo";
 
+// Proforma
+const GET_ENQUIRY_PI = "transaction/enquiryPi";
+const UPDATE_DELETE_ENQUIRY_PI = "transaction/enquiryPi/{id}";
+
 export const apiUrls = {
   GET_ADD_CONTINENT,
   GET_ADD_COUNTRY,
@@ -181,4 +185,7 @@ export const apiUrls = {
   CLIENT_WISE_PRICE,
   GET_GROUP_WISE_PRICE,
   GET_CITY_WISE_CLIENT_GROUP,
+
+  GET_ENQUIRY_PI,
+  UPDATE_DELETE_ENQUIRY_PI,
 };

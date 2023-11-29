@@ -4,17 +4,19 @@ import {
   BorderLayout,
   Card,
   Input,
-  ActionButtons,
   Select,
-  SingleCheckbox,
   Button,
   Table,
   Radio,
   TableType,
+  NewSelect,
+  NewInput,
 } from "@shared/index";
 import {
+  GenerateInvoiceActualBuyreType,
   GenerateInvoiceAutoType,
   InvoiceGenGstType,
+  generateInvoiceActualBuyreFormFields,
   generateInvoiceAutoFormFields,
 } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
@@ -24,7 +26,14 @@ export const GenerateInvoiceActualBuyre: React.FC = () => {
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
-
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<GenerateInvoiceActualBuyreType>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Genereate Invoice (Actual Buyre)- Actual BUyre GST",
@@ -247,11 +256,16 @@ export const GenerateInvoiceActualBuyre: React.FC = () => {
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
                     <Radio
-                      config={generateInvoiceAutoFormFields.action.config}
+                      config={
+                        generateInvoiceActualBuyreFormFields.action.config
+                      }
                     />
 
-                    <Select
-                      config={generateInvoiceAutoFormFields.client.config}
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={generateInvoiceActualBuyreFormFields.client}
                     />
                     <div className="mb-2">
                       <div className="col-md-14 col-xs-12 text-right">
@@ -268,13 +282,17 @@ export const GenerateInvoiceActualBuyre: React.FC = () => {
                 {/* 2 Column */}
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
-                    <Input
+                    <NewInput
+                      errors={errors}
+                      register={register}
                       config={
-                        generateInvoiceAutoFormFields.fromdateField.config
+                        generateInvoiceActualBuyreFormFields.fromdateField
                       }
                     />
-                    <Input
-                      config={generateInvoiceAutoFormFields.todateeField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={generateInvoiceActualBuyreFormFields.todateeField}
                     />
                   </div>
                 </div>

@@ -92,7 +92,7 @@ export const LocalSource: React.FC = () => {
     config: {
       tableName: "Local Source",
       columns: columns,
-      tableData: localsourceData || [],
+      tableData: (localsourceData && Object.values(localsourceData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -113,7 +113,7 @@ export const LocalSource: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

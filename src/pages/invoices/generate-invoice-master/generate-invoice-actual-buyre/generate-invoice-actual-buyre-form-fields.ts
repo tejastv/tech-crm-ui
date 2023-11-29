@@ -1,4 +1,4 @@
-import { FormFieldType, ValidationType } from "@shared/index";
+import { FormFieldType, MapType, Options, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
 
 const ActionValidation = {
@@ -37,11 +37,11 @@ const ToDateValidation = {
   },
 } as ValidationType;
 
-const ActionOption = [
-  { value: "Y", label: "Daily" },
-  { value: "N", label: "Monthly" },
-  { value: "S", label: "All" },
-];
+const ActionOption: MapType<Options> = {
+  new: { value: "Y", label: "Daily" },
+  renew: { value: "N", label: "Monthly" },
+  rerenew: { value: "S", label: "All" },
+};
 const action: FormFieldType = createFormConfig(
   "action",
   "Action",

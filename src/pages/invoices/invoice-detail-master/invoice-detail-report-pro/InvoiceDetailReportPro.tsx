@@ -10,6 +10,8 @@ import {
   Table,
   Radio,
   TableType,
+  NewSelect,
+  NewInput,
 } from "@shared/index";
 import {
   InvoiceDetailReportProType,
@@ -22,7 +24,14 @@ export const InvoiceDetailReportPro: React.FC = () => {
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
-
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<InvoiceDetailReportProType>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Invoice Detailed Report (PRO)",
@@ -189,8 +198,11 @@ export const InvoiceDetailReportPro: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-3">
-                  <Select
-                    config={invoiceDetailReportProFormFields.fyearField.config}
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceDetailReportProFormFields.fyearField}
                   />
 
                   <Radio
@@ -203,24 +215,25 @@ export const InvoiceDetailReportPro: React.FC = () => {
                 <div className="col-md-6">
                   <div className="row">
                     <div className="col-md-6 col-xs-12">
-                      <Input
-                        config={
-                          invoiceDetailReportProFormFields.fromdateField.config
-                        }
+                      <NewInput
+                        errors={errors}
+                        register={register}
+                        config={invoiceDetailReportProFormFields.fromdateField}
                       />
                     </div>
                     <div className="col-md-6 col-xs-12">
-                      <Input
-                        config={
-                          invoiceDetailReportProFormFields.todateeField.config
-                        }
+                      <NewInput
+                        errors={errors}
+                        register={register}
+                        config={invoiceDetailReportProFormFields.todateeField}
                       />
                     </div>
                     <div className="col-md-12 col-xs-12">
-                      <Select
-                        config={
-                          invoiceDetailReportProFormFields.cityField.config
-                        }
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceDetailReportProFormFields.cityField}
                       />
                       <div className="mb-2">
                         <div className="col-md-14 col-xs-12 text-right">
@@ -232,10 +245,11 @@ export const InvoiceDetailReportPro: React.FC = () => {
                           </Button>
                         </div>
                       </div>
-                      <Select
-                        config={
-                          invoiceDetailReportProFormFields.ClientField.config
-                        }
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceDetailReportProFormFields.ClientField}
                       />
                     </div>
                   </div>

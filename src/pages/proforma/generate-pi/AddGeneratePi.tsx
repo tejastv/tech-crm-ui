@@ -11,7 +11,7 @@ import {
   Table,
   TableType,
 } from "@shared/index";
-import { addGeneratePiFormFields, GeneratePiType } from "@profoma/index";
+import { addGeneratePiFormFields, GeneratePiType } from "@proforma/index";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const AddGeneratePi: React.FC = () => {
@@ -22,7 +22,7 @@ export const AddGeneratePi: React.FC = () => {
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Genereate Invoice (PI)",
+      mainHeading: "Generate Invoice (PI)",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -159,54 +159,72 @@ export const AddGeneratePi: React.FC = () => {
           >
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
-                <div className="col-6 col-xs-12">
-                  <Select config={addGeneratePiFormFields.clientField.config} />
+                <div className="col-4 col-xs-12">
+                  <div className="card-body">
+                    <Select
+                      config={addGeneratePiFormFields.clientField.config}
+                    />
+                    <div className="mb-2">
+                      <div className="col-md-14 col-xs-12 text-right">
+                        <Button
+                          type="button"
+                          className={"btn btn-danger btn-sm"}
+                        >
+                          View
+                        </Button>
+                      </div>
+                    </div>
+                    <Input
+                      config={addGeneratePiFormFields.currencyField.config}
+                    />
+
+                    <Input config={addGeneratePiFormFields.gstnField.config} />
+                  </div>
                 </div>
-                <div className="col-6 col-xs-12">
-                  <Input config={addGeneratePiFormFields.countryField.config} />
+                {/* 2 Column */}
+                <div className="col-4 col-xs-12">
+                  <div className="card-body">
+                    <Input
+                      config={addGeneratePiFormFields.fromdateField.config}
+                    />
+
+                    <Input
+                      config={addGeneratePiFormFields.countryField.config}
+                    />
+
+                    <Select
+                      config={addGeneratePiFormFields.stateField.config}
+                    />
+
+                    <Input config={addGeneratePiFormFields.codeField.config} />
+
+                    <label
+                      htmlFor=""
+                      className="col-sm-7 control-label col-form-label"
+                    ></label>
+
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <SingleCheckbox
+                        config={addGeneratePiFormFields.gstField.config}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="row">
-                  <div className="col-3 col-xs-12">
+                {/* 3 column */}
+                <div className="col-4 col-xs-12">
+                  <div className="card-body">
+                    <Input
+                      config={addGeneratePiFormFields.todateeField.config}
+                    />
+
+                    <Input
+                      config={addGeneratePiFormFields.symbolField.config}
+                    />
+
                     <Input
                       config={addGeneratePiFormFields.currencyField.config}
                     />
                   </div>
-                  <div className="col-3 col-xs-12">
-                    <Select
-                      config={addGeneratePiFormFields.stateField.config}
-                    />
-                  </div>
-                  <div className="col-3 col-xs-12">
-                    <Input config={addGeneratePiFormFields.gstnField.config} />
-                  </div>
-                  <div className="col-3">
-                    <SingleCheckbox
-                      config={addGeneratePiFormFields.gstField.config}
-                    />
-                  </div>
-                  {/* // currency , State ad GST */}
-                </div>
-
-                {/* <div className="card-body"> */}
-                <hr />
-                <div className="row">
-                  <div className="col-4 col-xs-12">
-                    <Input
-                      config={addGeneratePiFormFields.fromdateField.config}
-                    />
-                  </div>
-                  <div className="col-4 col-xs-12">
-                    <Input
-                      config={addGeneratePiFormFields.todateeField.config}
-                    />
-                  </div>
-                  {/* // From Date,ToDate View button */}
-                  <div className="col-4 col-xs-12">
-                    <Button type="button" className={"btn btn-danger btn-sm"}>
-                      Get Enqires
-                    </Button>
-                  </div>
-                  {/* </div>   */}
                 </div>
 
                 {/* Table */}
@@ -257,18 +275,25 @@ export const AddGeneratePi: React.FC = () => {
                         </Button>
                       </div>
                     </div>
-
+                    {/* <div className="col-sm-6 "> */}
                     <Input config={addGeneratePiFormFields.stField.config} />
 
+                    {/* </div> */}
+                    {/* <div className="col-sm-6 "> */}
                     <Input
                       config={addGeneratePiFormFields.cgstperField.config}
                     />
+                    {/* </div> */}
 
+                    {/* <div className="col-sm-6 "> */}
                     <Input
                       config={addGeneratePiFormFields.stamountField.config}
                     />
 
+                    {/* </div> */}
+                    {/* <div className="col-sm-6 "> */}
                     <Input config={addGeneratePiFormFields.cgstField.config} />
+                    {/* </div> */}
                   </div>
                 </div>
 

@@ -10,6 +10,8 @@ import {
   Radio,
   TableType,
   SingleCheckbox,
+  NewSelect,
+  NewInput,
 } from "@shared/index";
 import {
   InvoiceListExceWiseType,
@@ -22,7 +24,14 @@ export const InvoiceListExceWise: React.FC = () => {
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
-
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<InvoiceListExceWiseType>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Invoice List Exce Wise",
@@ -316,8 +325,11 @@ export const InvoiceListExceWise: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-3">
-                  <Select
-                    config={invoiceListExceWiseFormFields.fyearField.config}
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceListExceWiseFormFields.fyearField}
                   />
 
                   <Radio
@@ -330,22 +342,25 @@ export const InvoiceListExceWise: React.FC = () => {
                 <div className="col-md-6">
                   <div className="row">
                     <div className="col-md-6 col-xs-12">
-                      <Input
-                        config={
-                          invoiceListExceWiseFormFields.fromdateField.config
-                        }
+                      <NewInput
+                        errors={errors}
+                        register={register}
+                        config={invoiceListExceWiseFormFields.fromdateField}
                       />
                     </div>
                     <div className="col-md-6 col-xs-12">
-                      <Input
-                        config={
-                          invoiceListExceWiseFormFields.todateeField.config
-                        }
+                      <NewInput
+                        errors={errors}
+                        register={register}
+                        config={invoiceListExceWiseFormFields.todateeField}
                       />
                     </div>
                     <div className="col-md-12 col-xs-12">
-                      <Select
-                        config={invoiceListExceWiseFormFields.cityField.config}
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceListExceWiseFormFields.cityField}
                       />
                       <div className="mb-2">
                         <div className="col-md-14 col-xs-12 text-right">
@@ -357,10 +372,11 @@ export const InvoiceListExceWise: React.FC = () => {
                           </Button>
                         </div>
                       </div>
-                      <Select
-                        config={
-                          invoiceListExceWiseFormFields.excecutiveField.config
-                        }
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceListExceWiseFormFields.excecutiveField}
                       />
                     </div>
                   </div>
@@ -380,7 +396,6 @@ export const InvoiceListExceWise: React.FC = () => {
                         </div>
                       </div>
                       <div className="col-md-6   col-xs-12">
-                        {" "}
                         <SingleCheckbox
                           config={
                             invoiceListExceWiseFormFields.markAllField.config
@@ -388,10 +403,11 @@ export const InvoiceListExceWise: React.FC = () => {
                         />
                       </div>
                       <div className="col-md-12 col-xs-12">
-                        <Input
-                          config={
-                            invoiceListExceWiseFormFields.emailField.config
-                          }
+                        <NewSelect
+                          errors={errors}
+                          register={register}
+                          control={control}
+                          config={invoiceListExceWiseFormFields.emailField}
                         />
                       </div>
                     </div>

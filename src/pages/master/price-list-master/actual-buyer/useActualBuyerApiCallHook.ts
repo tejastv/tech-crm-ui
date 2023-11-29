@@ -1,7 +1,7 @@
 import { useAxios } from "@hooks/useAxios";
 import { AddUpdateActualBuyerType, ActualBuyerType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
@@ -9,18 +9,24 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useActualBuyerApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getActualBuyer = (): UseQueryResult<ActualBuyerType[]> => {
-    return useQuery<ActualBuyerType[]>({
+  const getActualBuyer = (): UseQueryResult<MapType<ActualBuyerType>> => {
+    return useQuery<MapType<ActualBuyerType>>({
       queryKey: [queryKeys.ACTUAL_BUYER_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_ACTUAL_BUYER);
-        return response.data.data;
+        let mapedData = selectOptionsMapMaker(
+          response.data.data,
+          "partyId",
+          "partyName"
+        );
+        return mapedData;
       },
       staleTime: Infinity,
     });

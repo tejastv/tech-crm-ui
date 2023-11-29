@@ -9,6 +9,8 @@ import {
   Table,
   Radio,
   TableType,
+  NewSelect,
+  NewInput,
 } from "@shared/index";
 import {
   InvoiceListPerfomaType,
@@ -21,7 +23,14 @@ export const InvoiceListPerfoma: React.FC = () => {
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
-
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<InvoiceListPerfomaType>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Invoice List Perfoma",
@@ -261,8 +270,11 @@ export const InvoiceListPerfoma: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-3">
-                  <Select
-                    config={invoiceListPerfomaFormFields.fyearField.config}
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceListPerfomaFormFields.fyearField}
                   />
 
                   <Radio
@@ -274,22 +286,25 @@ export const InvoiceListPerfoma: React.FC = () => {
                 <div className="col-md-6">
                   <div className="row">
                     <div className="col-md-6 col-xs-12">
-                      <Input
-                        config={
-                          invoiceListPerfomaFormFields.fromdateField.config
-                        }
+                      <NewInput
+                        errors={errors}
+                        register={register}
+                        config={invoiceListPerfomaFormFields.fromdateField}
                       />
                     </div>
                     <div className="col-md-6 col-xs-12">
-                      <Input
-                        config={
-                          invoiceListPerfomaFormFields.todateeField.config
-                        }
+                      <NewInput
+                        errors={errors}
+                        register={register}
+                        config={invoiceListPerfomaFormFields.todateeField}
                       />
                     </div>
                     <div className="col-md-12 col-xs-12">
-                      <Select
-                        config={invoiceListPerfomaFormFields.cityField.config}
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceListPerfomaFormFields.cityField}
                       />
                       <div className="mb-2">
                         <div className="col-md-14 col-xs-12 text-right">
@@ -301,8 +316,11 @@ export const InvoiceListPerfoma: React.FC = () => {
                           </Button>
                         </div>
                       </div>
-                      <Select
-                        config={invoiceListPerfomaFormFields.ClientField.config}
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceListPerfomaFormFields.ClientField}
                       />
                     </div>
                   </div>

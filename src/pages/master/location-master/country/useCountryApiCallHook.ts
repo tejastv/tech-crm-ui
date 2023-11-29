@@ -1,7 +1,7 @@
 import { useAxios } from "@hooks/useAxios";
 import { CountryType, AddUpdateCountryType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
@@ -9,14 +9,15 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useCountryApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getCountry = (): UseQueryResult<CountryType[]> => {
-    return useQuery<CountryType[]>({
+  const getCountry = (): UseQueryResult<MapType<CountryType>> => {
+    return useQuery<MapType<CountryType>>({
       queryKey: [queryKeys.COUNTRY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_COUNTRY);
@@ -24,7 +25,8 @@ export const useCountryApiCallHook = () => {
           (a: { countryName: string }, b: { countryName: any }) =>
             a.countryName.localeCompare(b.countryName)
         );
-        return data;
+        let mapedData = selectOptionsMapMaker(data, "countryId", "countryName");
+        return mapedData;
       },
       staleTime: Infinity,
     });

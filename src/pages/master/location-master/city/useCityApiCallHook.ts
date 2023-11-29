@@ -9,14 +9,15 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useCityApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = new QueryClient();
   const navigate = useNavigate();
 
-  const getCity = (): UseQueryResult<CityType[]> => {
-    return useQuery<CityType[]>({
+  const getCity = (): UseQueryResult<{[key: string | number]: CityType}> => {
+    return useQuery<{[key: string | number]: CityType}>({
       queryKey: [queryKeys.CITY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CITY);
@@ -24,7 +25,8 @@ export const useCityApiCallHook = () => {
           (a: { cityName: string }, b: { cityName: any }) =>
             a.cityName.localeCompare(b.cityName)
         );
-        return data;
+        let mapedData = selectOptionsMapMaker(data, "cityId", "cityName");
+        return mapedData;
       },
       staleTime: Infinity,
     });

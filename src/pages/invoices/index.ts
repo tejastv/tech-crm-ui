@@ -29,6 +29,8 @@ export { InvoiceSetteld } from "./invoice-detail-master/invoice-setteld/InvoiceS
 
 export * from "./generate-invoice-master/invoice-generate-gst/invoice-gen-gst-type";
 export * from "./generate-invoice-master/generate-invoice-auto/add-generate-invoice-auto-type";
+export * from "./generate-invoice-master/generate-invoice-actual-buyre/generate-invoice-actual-buyre-type";
+export * from "./invoice-detail-master/invoice-detail-group-wise/invoice-detail-group-wise-type";
 export * from "./invoice-detail-master/invoice-list/invoice-list-type";
 export * from "./invoice-detail-master/invoice-detail-report/invoice-detail-report-type";
 export * from "./invoice-detail-master/invoice-detail-report-pro/invoice-detail-report-pro-type";

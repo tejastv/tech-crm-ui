@@ -46,7 +46,7 @@ const CountryValidation = {
 } as ValidationType;
 
 const stateField: FormFieldType = createFormConfig(
-  "state",
+  "stateName",
   "State",
   "text",
   stateFieldValidation,
@@ -79,5 +79,5 @@ export const addStateFormFields = {
   stateField,
   stateCodeField,
   numbericCodeField,
-  country
+  country,
 };

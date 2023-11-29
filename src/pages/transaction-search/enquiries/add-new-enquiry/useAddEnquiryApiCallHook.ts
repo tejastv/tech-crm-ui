@@ -1,6 +1,6 @@
 import { useAxios } from "@hooks/useAxios";
 import {
-  AddUpdateEnquiryType,
+  EnqueryFormType,
   AllEnquiriesType,
   EnqType,
   PriceType,
@@ -14,8 +14,9 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useAddEnquiryApiCallHook = () => {
   const { instance } = useAxios();
@@ -28,16 +29,26 @@ export const useAddEnquiryApiCallHook = () => {
     },
   };
 
-  const getEnqStatus = (): UseQueryResult<EnqType[]> => {
-    return useQuery<EnqType[]>({
+  const getEnqStatus = (): UseQueryResult<MapType<EnqType>> => {
+    return useQuery<MapType<EnqType>>({
       queryKey: [queryKeys.ENQSTATUS_DATA],
       queryFn: async () => {
-        const response = await instance.get(apiUrls.GET_ADD_ENQSTATUS,callFormConfig);
-       const data = response.data.data.sort((a: { enquiryStatus: string; }, b: { enquiryStatus: any; }) => a.enquiryStatus.localeCompare(b.enquiryStatus));
-        return data;
+        const response = await instance.get(
+          apiUrls.GET_ADD_ENQSTATUS,
+          callFormConfig
+        );
+        const data = response.data.data.sort(
+          (a: { enquiryStatus: string }, b: { enquiryStatus: any }) =>
+            a.enquiryStatus.localeCompare(b.enquiryStatus)
+        );
+        let mapedData = selectOptionsMapMaker(
+          data,
+          "enquiryStatusID",
+          "enquiryStatus"
+        );
+        return mapedData;
       },
       staleTime: Infinity,
-  
     });
   };
 
@@ -49,17 +60,37 @@ export const useAddEnquiryApiCallHook = () => {
           apiUrls.GET_ADD_SERVICETYPE,
           callFormConfig
         );
-        const data = response.data.data.sort((a: { serviceType: string; }, b: { serviceType: any; }) => a.serviceType.localeCompare(b.serviceType));
-        return data;
+        const data = response.data.data.sort(
+          (a: { serviceType: string }, b: { serviceType: any }) =>
+            a.serviceType.localeCompare(b.serviceType)
+        );
+        let mapedData = selectOptionsMapMaker(
+          data,
+          "serviceTypeID",
+          "serviceType"
+        );
+        return mapedData;
       },
       staleTime: Infinity,
     });
   };
 
-  //   ref no
-  const getRefNo = async (): Promise<RefNoType> => {
-    const response = await instance.get(apiUrls.GET_ADD_REFNO, callFormConfig);
-    return response.data;
+  // ref no
+  const getRefNo = (condition: any): UseQueryResult<string> => {
+    return useQuery<string>({
+      queryKey: [queryKeys.REFNO_DATA],
+      queryFn: async () => {
+        const response = await instance.get(
+          apiUrls.GET_ADD_REFNO,
+          callFormConfig
+        );
+        return response.data.data;
+      },
+      enabled: condition,
+      staleTime: 0,
+      cacheTime: 0,
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+    });
   };
 
   const getClientDetails = async (id: string): Promise<RefNoType> => {
@@ -70,7 +101,7 @@ export const useAddEnquiryApiCallHook = () => {
   };
 
   const getPrice = (ids: any, condition: any) => {
-    return useQuery<PriceType>({
+    return useQuery<number>({
       queryKey: [
         queryKeys.PRICE_DATA,
         ids.countryId + ids.clientId + ids.serviceTypeId,
@@ -89,7 +120,7 @@ export const useAddEnquiryApiCallHook = () => {
   };
 
   const addEnquiry = async (
-    enquiryData: AddUpdateEnquiryType
+    enquiryData: Partial<AllEnquiriesType>
   ): Promise<ApiResponseType<AllEnquiriesType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_ALL_ENQUIRY,
@@ -101,7 +132,7 @@ export const useAddEnquiryApiCallHook = () => {
 
   const addEnquiryMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateEnquiryType) => addEnquiry(updatedItem),
+      (updatedItem: Partial<AllEnquiriesType>) => addEnquiry(updatedItem),
       {
         onSuccess: () => {
           queryClient.invalidateQueries({

@@ -1,5 +1,5 @@
 // AddCompany.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -12,6 +12,9 @@ import {
 } from "@shared/index";
 import {
   AddUpdateActualBuyerType,
+  CityType,
+  CountryType,
+  StateType,
   addActualBuyersFormFields,
   useActualBuyerApiCallHook,
   useCityApiCallHook,
@@ -49,19 +52,49 @@ export const AddUpdateActualBuyer: React.FC = () => {
   const { getCountry } = useCountryApiCallHook();
   const { data: countryData } = getCountry();
 
-  if (cityData) {
-    addActualBuyersFormFields.cityactualbuyer.config.options =
-      selectOptionsMaker(cityData, "id", "cityName");
+  const [cityOptions, setCityOptions] = useState<CityType[]>();
+
+  useEffect(() => {
+    if (cityData) {
+      setCityOptions(Object.values(cityData));
+    }
+  }, [cityData?.length && Object.values(cityData).length]);
+
+  if (cityOptions?.length) {
+    let options = selectOptionsMaker(cityOptions, "id", "cityName");
+    addActualBuyersFormFields.cityactualbuyer.config.options = options;
   }
 
-  if (stateData) {
-    addActualBuyersFormFields.stateactualbuyer.config.options =
-      selectOptionsMaker(stateData, "stateId", "state");
+  // state api call
+  const [stateOptions, setStateOptions] = useState<StateType[]>();
+
+  useEffect(() => {
+    if (stateData) {
+      setStateOptions(stateData);
+    }
+  }, [stateData?.length && Object.values(stateData).length]);
+
+  if (stateOptions?.length) {
+    let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
+    addActualBuyersFormFields.stateactualbuyer.config.options = options;
   }
 
-  if (countryData) {
-    addActualBuyersFormFields.countryactualbuyer.config.options =
-      selectOptionsMaker(countryData, "countryId", "countryName");
+  // country api call
+  const [countryOptions, setCountryOptions] = useState<CountryType[]>();
+
+  useEffect(() => {
+    if (countryData) {
+      setCountryOptions(Object.values(countryData));
+    }
+  }, [countryData && Object.values(countryData).length]);
+
+  if (countryOptions?.length) {
+    let options = selectOptionsMaker(
+      countryOptions,
+      "countryId",
+      "countryName"
+    );
+    addActualBuyersFormFields.countryactualbuyer.config.options = options;
   }
 
   if (clientData) {

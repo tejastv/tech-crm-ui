@@ -1,4 +1,4 @@
-import { FormFieldType, Note, ValidationType } from "@shared/index";
+import { FormFieldType, MapType, Note, Options, ValidationType } from "@shared/index";
 import { createFormConfig, createNoteConfig } from "@utils/index";
 
 const CompanyEnquiry = {
@@ -397,136 +397,136 @@ const CommEnquiryValidation = {
   },
 } as ValidationType;
 
-const companyenquiry: FormFieldType = createFormConfig(
+const enqCompanyName: FormFieldType = createFormConfig(
   "companyID",
   "Company",
   "select",
   CompanyEnquiry,
   "Select Company",
-  []
+  {}
 );
-const yearenquiry: FormFieldType = createFormConfig(
-  "financialYear",
+const enqFinYear: FormFieldType = createFormConfig(
+  "fYear",
   "Year",
   "year",
   YearEnquiry,
   "Select Year"
 );
-const refnoenquiry: FormFieldType = createFormConfig(
+const enqRefNo: FormFieldType = createFormConfig(
   "refNo",
   "Ref No",
   "text",
   refnoEnquiry,
   "",
-  [],
+  {},
   true
 );
-const sourceenquiry: FormFieldType = createFormConfig(
+const enqSource: FormFieldType = createFormConfig(
   "sourceID",
   "Source",
   "select",
   SourceEnquiry,
   "Select Source",
-  []
+  {}
 );
 
-const givenaddressEnquiry: FormFieldType = createFormConfig(
+const enqGivenAddress: FormFieldType = createFormConfig(
   "givenAddress",
   "Address",
   "textarea",
   GivenaddressValidation,
   "Enter Address"
 );
-const telnoenquiry: FormFieldType = createFormConfig(
+const enqTelePhone: FormFieldType = createFormConfig(
   "phone",
   "Tel No.",
   "text",
   telNoEnquiryValidation,
   "Enter Tel No."
 );
-const faxnoenquiry: FormFieldType = createFormConfig(
+const enqFax: FormFieldType = createFormConfig(
   "fax",
   "Fax No.",
   "text",
   FaxNoEnquiryValidation,
   "Enter Fax No."
 );
-const emailenquiry: FormFieldType = createFormConfig(
+const enqEmail: FormFieldType = createFormConfig(
   "email",
   "E-Mail",
   "Email",
   EmailEnquiryValidation,
   "Enter E-mail"
 );
-const websiteenquiry: FormFieldType = createFormConfig(
+const enqWebsite: FormFieldType = createFormConfig(
   "website",
   "Website",
   "text",
   WebsiteEnquiryValidation,
   "Enter WebSite"
 );
-const contactenquiry: FormFieldType = createFormConfig(
+const enqContact: FormFieldType = createFormConfig(
   "contactPerson",
   "Contact",
   "text",
   ContactEnquiryValidation,
   "Enter Contact"
 );
-const designationenquiry: FormFieldType = createFormConfig(
+const enqDesignation: FormFieldType = createFormConfig(
   "designation",
   "Designation",
   "text",
   DesignationEnquiryValidation,
   "Enter Designation"
 );
-const cityenquiry: FormFieldType = createFormConfig(
+const enqCity: FormFieldType = createFormConfig(
   "cityId",
   "City",
   "select",
   CityEnquiryValidation,
   "Select City",
-  []
+  {}
 );
-const zipenquiry: FormFieldType = createFormConfig(
+const enqZip: FormFieldType = createFormConfig(
   "zip",
   "Zip",
   "text",
   ZipEnquiryValidation,
   "Enter Zip"
 );
-const stateenquiry: FormFieldType = createFormConfig(
+const enqState: FormFieldType = createFormConfig(
   "stateId",
   "State",
   "select",
   StateEnquiryValidation,
   "Select State",
-  []
+  {}
 );
-const statecodeenquiry: FormFieldType = createFormConfig(
+const enqStateCode: FormFieldType = createFormConfig(
   "state",
   "State Code",
   "text",
   StateEnquiryValidation,
   ""
 );
-const countryenquiry: FormFieldType = createFormConfig(
+const enqCountry: FormFieldType = createFormConfig(
   "countryId",
   "Country",
   "select",
   CountryEnquiryValidation,
   "Select Country",
-  []
+  {}
 );
 
 // Right Side Fields
-const blankenquiry: FormFieldType = createFormConfig(
+const enqBlank: FormFieldType = createFormConfig(
   "blank",
   "",
   "text",
   blankValidation,
   ""
 );
-const givenname: FormFieldType = createFormConfig(
+const enqGivenName: FormFieldType = createFormConfig(
   "givenName",
   "Given Name",
   "text",
@@ -542,7 +542,7 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
-const recdon: FormFieldType = createFormConfig(
+const enqRecdon: FormFieldType = createFormConfig(
   "recdDate",
   "Enq. Date/Recd. On",
   "date",
@@ -550,178 +550,175 @@ const recdon: FormFieldType = createFormConfig(
   formattedDate
 );
 
-const enqType = [
-  {
-    label: "NEW",
-    value: "true",
-  },
-  {
-    label: "RENEWAL",
-    value: "false",
-  },
-];
+const enqTypeData: MapType<Options> = {
+  new: { value: "new", label: "NEW" },
+  renew: { value: "renew", label: "RENEWAL" },
+};
 
 const enqtype: FormFieldType = createFormConfig(
   "typeofEnquiry",
   "Enq. Type",
   "select",
   EnqValidation, // Replace with your validation function
-  "",
-  enqType,
+  "Select Enq. Type",
+  enqTypeData,
   true // Default value set to "NEW"
 );
 
-const localsourceenquiry: FormFieldType = createFormConfig(
+const enqLocalSource: FormFieldType = createFormConfig(
   "localSourceId",
   "Local Source",
   "select",
   localsourceenquiryValidation,
   "Select Local Source",
-  []
+  {}
 );
-const servicetype: FormFieldType = createFormConfig(
+const enqServiceType: FormFieldType = createFormConfig(
   "serviceTypeID",
   "Service Type",
   "select",
   ServiceTypeValidation,
   "Select Service",
-  []
+  {}
 );
-const dueon: FormFieldType = createFormConfig(
+const enqDueOn: FormFieldType = createFormConfig(
   "dueDate",
   "Due On",
   "date",
   DueOnValidation,
   "date"
 );
-const printstatus: FormFieldType = createFormConfig(
+
+const enqPrintStatusData: MapType<Options> = {
+  "Not Received": { value: "Not Received", label: "Not Received" },
+  Received: { label: "Received", value: "Received" },
+}
+
+const enqPrintStatus: FormFieldType = createFormConfig(
   "pmtstatus",
   "Print Status",
   "select",
   PrintStatusValidationValidation,
   "Select Print Status",
-  [
-    { value: "Not Received", label: "Not Received" },
-    { label: "Received", value: "Received" },
-  ]
+  enqPrintStatusData
 );
-const enqstatus: FormFieldType = createFormConfig(
+const enqStatus: FormFieldType = createFormConfig(
   "enqStatusID",
   "Enq. Status",
   "select",
   EnqStatusValidation,
   "Select Enq. Status",
-  []
+  {}
 );
 
-const svisit: FormFieldType = createFormConfig(
+const enqSvisit: FormFieldType = createFormConfig(
   "svisit",
   "S.Visit",
   "select",
   svisitValidation,
   "Select S.Visit",
-  [
-    { value: "0", label: "NA" },
-    { value: "1", label: "Pending to Visit" },
-    { value: "2", label: "Visited" },
-  ]
+  {
+    0: { value: "0", label: "NA" },
+    1: { value: "1", label: "Pending to Visit" },
+    2: { value: "2", label: "Visited" },
+  }
 );
-const notesforenquiry: FormFieldType = createFormConfig(
+const enqNotesForEnquiry: FormFieldType = createFormConfig(
   "notes",
   "Notes for Enquiry ",
   "textarea",
   NotesforEnqValidation,
   "Notes For Enquiry"
 );
-const notesforadj: FormFieldType = createFormConfig(
+const enqNotesForAdj: FormFieldType = createFormConfig(
   "noteForComission",
   "Notes for Comma/Adj",
   "text",
   NotesForAdjValidation,
   "Notes For Comma/Adj "
 );
-const instructionenquiry: FormFieldType = createFormConfig(
+const enqInstruction: FormFieldType = createFormConfig(
   "instruction",
   "Instruction ",
   "text",
   instructionEnquiryValidation,
   "Instruction"
 );
-const adjustenquiry: FormFieldType = createFormConfig(
+const enqAdjust: FormFieldType = createFormConfig(
   "adjustment",
   "Adjust",
   "text",
   AdjustEnqValidation,
   "Adjust",
-  [],
+  {},
   true
 );
 
-const clientrefenquiry: FormFieldType = createFormConfig(
+const enqClientRef: FormFieldType = createFormConfig(
   "clientRefNo",
   "Client Ref",
   "text",
   ClientRefEnquiryValidation,
   "Client Ref"
 );
-const clientenquiry: FormFieldType = createFormConfig(
+const enqClient: FormFieldType = createFormConfig(
   "clientID",
   "Client",
   "select",
   ClientEnquiryValidation,
   "Select Client"
 );
-const requestnoenquiry: FormFieldType = createFormConfig(
+const enqRequestNo: FormFieldType = createFormConfig(
   "requestNo",
   "Request No.",
   "text",
   RequestNoValidation,
   "Request No."
 );
-const clientIdenquiry: FormFieldType = createFormConfig(
+const enqClientId: FormFieldType = createFormConfig(
   "clientidenquiry",
   "Client Id",
   "text",
   ClientIdEnquiryValidation,
   "Client Id",
-  [],
+  {},
   true
 );
-const actualbureyenquiry: FormFieldType = createFormConfig(
+const enqActualBuyer: FormFieldType = createFormConfig(
   "actualBuyerId",
   "Actual Buyer",
   "select",
   ActualBuyerEnquiryValidation,
   "Actual Buyer",
-  [{ label: "Direct", value: "1" }]
+  { 1: { label: "Direct", value: "1" } }
 );
-const priceenquiry: FormFieldType = createFormConfig(
+const enqPrice: FormFieldType = createFormConfig(
   "reportPrice",
   "Price",
   "text",
   PriceeEnquiryEnquiryValidation,
   "Price",
-  []
+  {}
 );
-const disenquiry: FormFieldType = createFormConfig(
+const enqDis: FormFieldType = createFormConfig(
   "disPer",
   "Dis.%",
   "text",
   DisEnquiryValidation,
   "Dis.%",
-  [],
+  {},
   true
 );
-const discountenquiry: FormFieldType = createFormConfig(
+const enqDiscount: FormFieldType = createFormConfig(
   "discount",
   "Discount",
   "text",
   DiscountEnquiryValidation,
   "Discount",
-  [],
+  {},
   true
 );
-const commenquiry: FormFieldType = createFormConfig(
+const enqReportComm: FormFieldType = createFormConfig(
   "reportComission",
   "Comm.",
   "text",
@@ -729,57 +726,59 @@ const commenquiry: FormFieldType = createFormConfig(
   "Comm."
 );
 
-const refnote: Note = createNoteConfig("Note: Ref. No is Auto");
-const actualbuyeraddnote: Note = createNoteConfig("Add New Actual Buyer");
-const discountcommissionnote: Note = createNoteConfig(
+const enqRefNote: Note = createNoteConfig("Note: Ref. No is Auto");
+const enqActualBuyerAddNote: Note = createNoteConfig("Add New Actual Buyer");
+const enqDiscountCommissionNote: Note = createNoteConfig(
   "Discount / Commission Details"
 );
-const discounttypenote: Note = createNoteConfig(
+const enqDiscountTypeNote: Note = createNoteConfig(
   "Discount Type - | % of Discount - | Discounted Value -"
 );
 
 export const addEnquiryFormFields = {
-  companyenquiry,
-  yearenquiry,
-  refnoenquiry,
-  sourceenquiry,
-  givenaddressEnquiry,
-  telnoenquiry,
-  faxnoenquiry,
-  emailenquiry,
-  websiteenquiry,
-  contactenquiry,
-  designationenquiry,
-  cityenquiry,
-  zipenquiry,
-  stateenquiry,
-  statecodeenquiry,
-  countryenquiry,
-  givenname,
-  blankenquiry,
-  recdon,
+  enqCompanyName,
+  enqFinYear,
+  enqRefNo,
+  enqSource,
+  enqGivenAddress,
+  enqTelePhone,
+  enqFax,
+  enqEmail,
+  enqWebsite,
+  enqContact,
+  enqDesignation,
+  enqCity,
+  enqZip,
+  enqState,
+  enqStateCode,
+  enqCountry,
+  enqGivenName,
+  enqBlank,
+  enqRecdon,
   enqtype,
-  localsourceenquiry,
-  servicetype,
-  dueon,
-  printstatus,
-  enqstatus,
-  svisit,
-  notesforenquiry,
-  notesforadj,
-  instructionenquiry,
-  adjustenquiry,
-  clientrefenquiry,
-  clientenquiry,
-  requestnoenquiry,
-  clientIdenquiry,
-  actualbureyenquiry,
-  priceenquiry,
-  disenquiry,
-  discountenquiry,
-  commenquiry,
-  refnote,
-  actualbuyeraddnote,
-  discountcommissionnote,
-  discounttypenote,
+  enqLocalSource,
+  enqServiceType,
+  enqDueOn,
+  enqPrintStatus,
+  enqStatus,
+  enqSvisit,
+  enqNotesForEnquiry,
+  enqNotesForAdj,
+  enqInstruction,
+  enqAdjust,
+  enqClientRef,
+  enqClient,
+  enqRequestNo,
+  enqClientId,
+  enqActualBuyer,
+  enqPrice,
+  enqDis,
+  enqDiscount,
+  enqReportComm,
+  enqRefNote,
+  enqActualBuyerAddNote,
+  enqDiscountCommissionNote,
+  enqDiscountTypeNote,
+  enqPrintStatusData,
+  enqTypeData
 };

@@ -1,9 +1,11 @@
-export interface InvoiceGenGstType {
-  clientField: string;
+import { Options } from "@shared/index";
+
+export interface InvoiceDetailGroupWiseType {
+  groupField: Options;
 
   fromdateField: string;
 
   todateeField: string;
 
-  fyearField: string;
+  fyearField: Options;
 }

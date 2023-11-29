@@ -11,6 +11,8 @@ import {
   Table,
   Radio,
   TableType,
+  NewInput,
+  NewSelect,
 } from "@shared/index";
 import {
   GenerateInvoiceAutoType,
@@ -24,7 +26,14 @@ export const InvoiceGenerateAuto: React.FC = () => {
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
-
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<GenerateInvoiceAutoType>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Genereate Invoice (Auto GST)",
@@ -68,7 +77,7 @@ export const InvoiceGenerateAuto: React.FC = () => {
   //       methods.reset();
   //     }, []);
   //   }
-  const columns: ColumnDef<InvoiceGenGstType>[] = [
+  const columns: ColumnDef<GenerateInvoiceAutoType>[] = [
     {
       id: "srNo",
       // cell: (info) => info.getValue(),
@@ -149,7 +158,7 @@ export const InvoiceGenerateAuto: React.FC = () => {
     },
   ];
 
-  const tableConfig: TableType<InvoiceGenGstType> = {
+  const tableConfig: TableType<GenerateInvoiceAutoType> = {
     config: {
       tableName: "generate Invoice Auto",
       columns: columns,
@@ -250,8 +259,11 @@ export const InvoiceGenerateAuto: React.FC = () => {
                       config={generateInvoiceAutoFormFields.action.config}
                     />
 
-                    <Select
-                      config={generateInvoiceAutoFormFields.client.config}
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={generateInvoiceAutoFormFields.client}
                     />
                     <div className="mb-2">
                       <div className="col-md-14 col-xs-12 text-right">
@@ -268,13 +280,15 @@ export const InvoiceGenerateAuto: React.FC = () => {
                 {/* 2 Column */}
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
-                    <Input
-                      config={
-                        generateInvoiceAutoFormFields.fromdateField.config
-                      }
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={generateInvoiceAutoFormFields.fromdateField}
                     />
-                    <Input
-                      config={generateInvoiceAutoFormFields.todateeField.config}
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={generateInvoiceAutoFormFields.todateeField}
                     />
                   </div>
                 </div>

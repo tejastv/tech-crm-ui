@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -16,7 +16,10 @@ import {
   useCityApiCallHook,
   useStateApiCallHook,
   useCountryApiCallHook,
-  useCurrencyApiCallHook
+  useCurrencyApiCallHook,
+  CityType,
+  CountryType,
+  StateType,
 } from "@master/index";
 
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
@@ -26,7 +29,11 @@ import { returnObjectBasedOnID, cleanupObject } from "@utils/index";
 export const AddSupplier: React.FC = () => {
   const methods = useForm<AddUpdateSupplierMasterType>();
   const params = useParams();
-  const { addSupplierMasterMutation, updateSupplierMasterMutation, getSupplierMasterData } = useSupplierMasterApiCallHook();
+  const {
+    addSupplierMasterMutation,
+    updateSupplierMasterMutation,
+    getSupplierMasterData,
+  } = useSupplierMasterApiCallHook();
   const { mutate: addSupplierMaster } = addSupplierMasterMutation();
   const { mutate: updateSupplierMaster } = updateSupplierMasterMutation();
   const { getCity } = useCityApiCallHook();
@@ -44,36 +51,60 @@ export const AddSupplier: React.FC = () => {
     },
   };
 
+  const [cityOptions, setCityOptions] = useState<CityType[]>();
+
   const { data: cityData } = getCity();
 
-  if (cityData) {
-    addSupplierFormFields.citySupplier.config.options = selectOptionsMaker(
-      cityData,
-      "id",
-      "cityName"
-    );
+  useEffect(() => {
+    if (cityData) {
+      setCityOptions(Object.values(cityData));
+    }
+  }, [cityData?.length && Object.values(cityData).length]);
+
+  if (cityOptions?.length) {
+    let options = selectOptionsMaker(cityOptions, "id", "cityName");
+    addSupplierFormFields.citySupplier.config.options = options;
   }
 
   // state api call
   const { data: stateData } = getState();
 
-  if (stateData) {
-    addSupplierFormFields.stateSupplier.config.options = selectOptionsMaker(
-      stateData,
+  const [stateOptions, setStateOptions] = useState<StateType[]>();
+
+  useEffect(() => {
+    if (stateData) {
+      setStateOptions(stateData);
+    }
+  }, [stateData?.length && Object.values(stateData).length]);
+
+  if (stateOptions?.length) {
+    let options = selectOptionsMaker(
+      stateOptions,
       "stateId",
-      "state"
+      "stateName",
+      true
     );
+    addSupplierFormFields.stateSupplier.config.options = options;
   }
 
   // country api call
-  const { data: CountryData } = getCountry();
+  const { data: countryData } = getCountry();
 
-  if (CountryData) {
-    addSupplierFormFields.countrySupplier.config.options = selectOptionsMaker(
-      CountryData,
+  const [countryOptions, setCountryOptions] = useState<CountryType[]>();
+
+  useEffect(() => {
+    if (countryData) {
+      setCountryOptions(Object.values(countryData));
+    }
+  }, [countryData && Object.values(countryData).length]);
+
+  if (countryOptions?.length) {
+    let options = selectOptionsMaker(
+      countryOptions,
       "countryId",
       "countryName"
     );
+    addSupplierFormFields.countrySupplier.config.options = options;
   }
 
   const { data: CurrencyData } = getCurrency();
@@ -126,9 +157,9 @@ export const AddSupplier: React.FC = () => {
         );
         addSupplierFormFields.citySupplier.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       if (stateData) {
@@ -142,15 +173,15 @@ export const AddSupplier: React.FC = () => {
         );
         addSupplierFormFields.stateSupplier.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
-      if (CountryData) {
+      if (countryData) {
         let id = supplierMasterData?.countryID;
         let data: any = returnObjectBasedOnID(
-          CountryData,
+          countryData,
           "countryId",
           id,
           "countryId",
@@ -158,9 +189,9 @@ export const AddSupplier: React.FC = () => {
         );
         addSupplierFormFields.countrySupplier.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
 
@@ -175,9 +206,9 @@ export const AddSupplier: React.FC = () => {
         );
         addSupplierFormFields.CurrenceySupplier.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       addSupplierFormFields.nameSupplier.config.setData =
@@ -186,10 +217,14 @@ export const AddSupplier: React.FC = () => {
         supplierMasterData.nickName;
       addSupplierFormFields.addressSupplier.config.setData =
         supplierMasterData.address;
-      addSupplierFormFields.telnoSupplier.config.setData = supplierMasterData.phone;
-      addSupplierFormFields.faxnoSupplier.config.setData = supplierMasterData.fax;
-      addSupplierFormFields.emailSupplier.config.setData = supplierMasterData.email;
-      addSupplierFormFields.websiteSupplier.config.setData = supplierMasterData.website;
+      addSupplierFormFields.telnoSupplier.config.setData =
+        supplierMasterData.phone;
+      addSupplierFormFields.faxnoSupplier.config.setData =
+        supplierMasterData.fax;
+      addSupplierFormFields.emailSupplier.config.setData =
+        supplierMasterData.email;
+      addSupplierFormFields.websiteSupplier.config.setData =
+        supplierMasterData.website;
       addSupplierFormFields.contactSupplier.config.setData =
         supplierMasterData.contactPerson;
       addSupplierFormFields.designationSupplier.config.setData =

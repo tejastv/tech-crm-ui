@@ -10,6 +10,8 @@ import {
   Radio,
   TableType,
   Checkbox,
+  NewSelect,
+  NewInput,
 } from "@shared/index";
 import { InvoiceListTdsType, invoiceListTDSFormFields } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
@@ -19,7 +21,14 @@ export const InvoiceListTDS: React.FC = () => {
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
-
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<InvoiceListTdsType>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Invoice List TDS",
@@ -170,8 +179,12 @@ export const InvoiceListTDS: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-3">
-                  <Select config={invoiceListTDSFormFields.fyearField.config} />
-
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceListTDSFormFields.fyearField}
+                  />
                   <Radio
                     config={
                       invoiceListTDSFormFields.allClientDatewiseField.config
@@ -181,13 +194,17 @@ export const InvoiceListTDS: React.FC = () => {
                 <div className="col-md-6">
                   <div className="row">
                     <div className="col-md-6 col-xs-12">
-                      <Input
-                        config={invoiceListTDSFormFields.fromdateField.config}
+                      <NewInput
+                        errors={errors}
+                        register={register}
+                        config={invoiceListTDSFormFields.fromdateField}
                       />
                     </div>
                     <div className="col-md-6 col-xs-12">
-                      <Input
-                        config={invoiceListTDSFormFields.todateeField.config}
+                      <NewInput
+                        errors={errors}
+                        register={register}
+                        config={invoiceListTDSFormFields.todateeField}
                       />
                     </div>
                     <div className="col-md-6 col-xs-12">
@@ -196,8 +213,11 @@ export const InvoiceListTDS: React.FC = () => {
                       />
                     </div>
                     <div className="col-md-6 col-xs-12">
-                      <Select
-                        config={invoiceListTDSFormFields.cityField.config}
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceListTDSFormFields.cityField}
                       />
                       <div className="mb-2">
                         <div className="col-md-14 col-xs-12 text-right">
@@ -211,13 +231,19 @@ export const InvoiceListTDS: React.FC = () => {
                       </div>
                     </div>
                     <div className="col-md-6 col-xs-12">
-                      <Select
-                        config={invoiceListTDSFormFields.ClientField.config}
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceListTDSFormFields.ClientField}
                       />
                     </div>
                     <div className="col-md-6 col-xs-12">
-                      <Select
-                        config={invoiceListTDSFormFields.CurrencyField.config}
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceListTDSFormFields.CurrencyField}
                       />
                     </div>
                   </div>
@@ -255,12 +281,18 @@ export const InvoiceListTDS: React.FC = () => {
                   </div>
                 </div>
                 <div className="col-md-4 col-xs-12 ">
-                  <Input
-                    config={invoiceListTDSFormFields.certiAmtField.config}
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceListTDSFormFields.certiAmtField}
                   />
                 </div>
                 <div className="col-md-4 col-xs-12 ">
-                  <Input config={invoiceListTDSFormFields.tdsField.config} />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceListTDSFormFields.tdsField}
+                  />
                 </div>
               </div>
             </BorderLayout>

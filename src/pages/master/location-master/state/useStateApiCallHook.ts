@@ -1,8 +1,8 @@
 import { useAxios } from "@hooks/useAxios";
-import { StateType, AddUpdateStateType } from "@master/index";
+import { StateType, StateFormType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
@@ -10,14 +10,15 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useStateApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getState = (): UseQueryResult<StateType[]> => {
-    return useQuery<StateType[]>({
+  const getState = (): UseQueryResult<MapType<StateType>> => {
+    return useQuery<MapType<StateType>>({
       queryKey: [queryKeys.STATE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_STATE);
@@ -25,7 +26,8 @@ export const useStateApiCallHook = () => {
           (a: { stateName: string }, b: { stateName: any }) =>
             a.stateName.localeCompare(b.stateName)
         );
-        return data;
+        let mapedData = selectOptionsMapMaker(data, "stateId", "stateName");
+        return mapedData;
       },
       staleTime: Infinity,
     });
@@ -49,7 +51,7 @@ export const useStateApiCallHook = () => {
   };
 
   const addState = async (
-    stateData: AddUpdateStateType
+    stateData: Partial<StateType>
   ): Promise<ApiResponseType<StateType>> => {
     const response = await instance.post(apiUrls.GET_ADD_STATE, stateData);
     return response.data.data;
@@ -57,7 +59,7 @@ export const useStateApiCallHook = () => {
 
   const addStateMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateStateType) => addState(updatedItem),
+      (updatedItem: Partial<StateType>) => addState(updatedItem),
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
@@ -71,7 +73,7 @@ export const useStateApiCallHook = () => {
   };
 
   const updateState = async (
-    updateStateData: AddUpdateStateType
+    updateStateData: Partial<StateType>
   ): Promise<ApiResponseType<StateType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_STATE.replace("{id}", "" + updateStateData.id),
@@ -82,7 +84,7 @@ export const useStateApiCallHook = () => {
 
   const updateStateMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateStateType) => updateState(updatedItem),
+      (updatedItem: Partial<StateType>) => updateState(updatedItem),
       {
         onSuccess: () => {
           queryClient.invalidateQueries({

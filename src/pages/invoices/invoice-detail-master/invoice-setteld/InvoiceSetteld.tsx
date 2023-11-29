@@ -9,11 +9,12 @@ import {
   Table,
   Radio,
   TableType,
-  Checkbox,
+  NewSelect,
+  NewInput,
 } from "@shared/index";
+
 import {
   InvoiceListSetteldType,
-  InvoiceListTdsType,
   invoiceListSetteldFormFields,
 } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
@@ -23,7 +24,14 @@ export const InvoiceSetteld: React.FC = () => {
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
-
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<InvoiceListSetteldType>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Invoice List Setteld",
@@ -156,10 +164,12 @@ export const InvoiceSetteld: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-3">
-                  <Select
-                    config={invoiceListSetteldFormFields.fyearField.config}
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceListSetteldFormFields.fyearField}
                   />
-
                   <Radio
                     config={
                       invoiceListSetteldFormFields.allClientDatewiseField.config
@@ -169,23 +179,26 @@ export const InvoiceSetteld: React.FC = () => {
                 <div className="col-md-6">
                   <div className="row">
                     <div className="col-md-6 col-xs-12">
-                      <Input
-                        config={
-                          invoiceListSetteldFormFields.fromdateField.config
-                        }
+                      <NewInput
+                        errors={errors}
+                        register={register}
+                        config={invoiceListSetteldFormFields.fromdateField}
                       />
                     </div>
                     <div className="col-md-6 col-xs-12">
-                      <Input
-                        config={
-                          invoiceListSetteldFormFields.todateeField.config
-                        }
+                      <NewInput
+                        errors={errors}
+                        register={register}
+                        config={invoiceListSetteldFormFields.todateeField}
                       />
                     </div>
 
                     <div className="col-md-6 col-xs-12">
-                      <Select
-                        config={invoiceListSetteldFormFields.cityField.config}
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceListSetteldFormFields.cityField}
                       />
                       <div className="mb-2">
                         <div className="col-md-14 col-xs-12 text-right">
@@ -199,8 +212,11 @@ export const InvoiceSetteld: React.FC = () => {
                       </div>
                     </div>
                     <div className="col-md-6 col-xs-12">
-                      <Select
-                        config={invoiceListSetteldFormFields.ClientField.config}
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceListSetteldFormFields.ClientField}
                       />
                     </div>
                   </div>
@@ -219,10 +235,11 @@ export const InvoiceSetteld: React.FC = () => {
                       </div>
                     </div>
                     <div className="col-md-12 col-xs-12">
-                      <Select
-                        config={
-                          invoiceListSetteldFormFields.CurrencyField.config
-                        }
+                      <NewSelect
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceListSetteldFormFields.CurrencyField}
                       />
                     </div>
                   </div>
@@ -235,27 +252,31 @@ export const InvoiceSetteld: React.FC = () => {
                   </div>
                 </div>
                 <div className="col-md-3 col-xs-12 ">
-                  <Input
-                    config={
-                      invoiceListSetteldFormFields.totalAmountField.config
-                    }
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceListSetteldFormFields.totalAmountField}
                   />
                 </div>
                 <div className="col-md-3 col-xs-12 ">
-                  <Input
-                    config={invoiceListSetteldFormFields.recivedField.config}
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceListSetteldFormFields.recivedField}
                   />
                 </div>
                 <div className="col-md-3 col-xs-12 ">
-                  <Input
-                    config={invoiceListSetteldFormFields.tdsField.config}
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceListSetteldFormFields.tdsField}
                   />
                 </div>
                 <div className="col-md-3 col-xs-12 ">
-                  <Input
-                    config={
-                      invoiceListSetteldFormFields.outstandingField.config
-                    }
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceListSetteldFormFields.outstandingField}
                   />
                 </div>
               </div>

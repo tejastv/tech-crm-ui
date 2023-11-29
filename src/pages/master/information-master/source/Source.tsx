@@ -74,7 +74,7 @@ export const Source: React.FC = () => {
     config: {
       tableName: "Source",
       columns: columns,
-      tableData: sourceData || [],
+      tableData: (sourceData && Object.values(sourceData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -95,7 +95,7 @@ export const Source: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

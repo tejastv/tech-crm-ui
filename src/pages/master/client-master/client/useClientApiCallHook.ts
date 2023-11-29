@@ -1,7 +1,7 @@
 import { useAxios } from "@hooks/useAxios";
 import { AddUpdateClientType, ClientType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType, PaginationType } from "@shared/index";
+import { ApiResponseType, MapType, PaginationType } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
@@ -9,18 +9,25 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useClientApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getClient = (): UseQueryResult<ClientType[]> => {
-    return useQuery<ClientType[]>({
+  const getClient = (): UseQueryResult<MapType<ClientType>> => {
+    return useQuery<MapType<ClientType>>({
       queryKey: [queryKeys.CLIENT_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CLIENT);
-        return response.data.data.records;
+        let mapedData = selectOptionsMapMaker(
+          response.data.data.records,
+          "clientID",
+          "clientName"
+        );
+        return mapedData;
+        // return response.data.data.records;
       },
       staleTime: Infinity,
     });

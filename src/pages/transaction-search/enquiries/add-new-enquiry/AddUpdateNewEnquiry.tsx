@@ -1,26 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   BorderLayout,
   Card,
-  Input,
-  Select,
   Button,
   InputWithText,
   ActionButtons,
   Table,
   TableType,
+  NewSelect,
+  NewInput,
+  NewDatePicker,
 } from "@shared/index";
 import {
-  AddUpdateEnquiryType,
+  EnqueryFormType,
+  EnqType,
+  ServiceType,
   addEnquiryFormFields,
   useAddEnquiryApiCallHook,
   useAllEnquiriesApiCallHook,
+  AllEnquiriesType,
 } from "@transaction-search/index";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 import {
+  ActualBuyerType,
+  CityType,
+  ClientType,
   CompanyType,
+  CountryType,
+  FinYearType,
+  LocalSourceType,
+  SourceType,
+  StateType,
+  useActualBuyerApiCallHook,
   useCityApiCallHook,
   useClientApiCallHook,
   useCompanyApiCallHook,
@@ -32,7 +45,7 @@ import {
 } from "@pages/master";
 import {
   cleanupObject,
-  returnObjectBasedOnID,
+  returnFormatedObjectElseEmptyArray,
   selectOptionsMaker,
 } from "@utils/index";
 // import {useStateApiCallHook } from "@pages/master";
@@ -40,7 +53,15 @@ import {
 export const AddEnquiry: React.FC = () => {
   // const { getState } = useStateApiCallHook();
   // const { data: stateData, isLoading } = getState();
-  const methods = useForm<AddUpdateEnquiryType>();
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<EnqueryFormType>();
+  const { state: localEnqData } = useLocation();
   const { updateEnquiryMutation, getEnquiryData } =
     useAllEnquiriesApiCallHook();
   const {
@@ -50,6 +71,7 @@ export const AddEnquiry: React.FC = () => {
     getPrice,
     addEnquiryMutation,
   } = useAddEnquiryApiCallHook();
+  const { getActualBuyer } = useActualBuyerApiCallHook();
   const params = useParams();
   const { mutateAsync: addEnquiry } = addEnquiryMutation();
   const { mutateAsync: updateEnquiry } = updateEnquiryMutation();
@@ -65,8 +87,21 @@ export const AddEnquiry: React.FC = () => {
   const [clientId, setClientId] = useState<number>(-2);
   const [serviceTypeId, setServiceTypeId] = useState<number>(-2);
   const [countryId, setCountryId] = useState<number>(-2);
-  const [refNo, setRefNo] = useState<any>();
-  const [isCompanyChange, setIsCompanyChange] = useState<boolean>(false);
+
+  const [cityOptions, setCityOptions] = useState<CityType[]>();
+  const [stateOptions, setStateOptions] = useState<StateType[]>();
+  const [countryOptions, setCountryOptions] = useState<CountryType[]>();
+  const [clientOptions, setClientOptions] = useState<ClientType[]>();
+  const [finYearOptions, setFinYearOptions] = useState<FinYearType[]>();
+  const [sourceOptions, setSourceOptions] = useState<SourceType[]>();
+  const [localSourceOptions, setLocalSourceOptions] =
+    useState<LocalSourceType[]>();
+  const [companyOptions, setCompanyOptions] = useState<CompanyType[]>();
+  const [serviceOptions, setServiceOptions] = useState<ServiceType[]>();
+  const [enqStatusOptions, setEnqStatusOptions] = useState<EnqType[]>();
+  const [actualBuyerOptions, setActualBuyerOptions] =
+    useState<ActualBuyerType[]>();
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Enquiry",
@@ -99,425 +134,298 @@ export const AddEnquiry: React.FC = () => {
 
   // city api call
   const { data: cityData } = getCity();
-  if (cityData) {
-    addEnquiryFormFields.cityenquiry.config.options = selectOptionsMaker(
-      cityData,
-      "id",
-      "cityName"
-    );
+
+  useEffect(() => {
+    if (cityData) {
+      setCityOptions(Object.values(cityData));
+    }
+  }, [cityData]);
+
+  if (cityOptions?.length) {
+    let options = selectOptionsMaker(cityOptions, "cityId", "cityName", true);
+    addEnquiryFormFields.enqCity.config.options = options;
   }
 
   // state api call
   const { data: stateData } = getState();
-  if (stateData) {
-    addEnquiryFormFields.stateenquiry.config.options = selectOptionsMaker(
-      stateData,
-      "stateId",
-      "stateName"
-    );
+  useEffect(() => {
+    if (stateData) {
+      setStateOptions(Object.values(stateData));
+    }
+  }, [stateData]);
+
+  if (stateOptions?.length) {
+    let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
+    addEnquiryFormFields.enqState.config.options = options;
   }
 
   // country api call
-  const { data: CountryData } = getCountry();
-  if (CountryData) {
-    addEnquiryFormFields.countryenquiry.config.options = selectOptionsMaker(
-      CountryData,
+  const { data: countryData } = getCountry();
+
+  useEffect(() => {
+    if (countryData) {
+      setCountryOptions(Object.values(Object.values(countryData)));
+    }
+  }, [countryData]);
+
+  if (countryOptions?.length) {
+    let options = selectOptionsMaker(
+      countryOptions,
       "countryId",
       "countryName"
     );
+    addEnquiryFormFields.enqCountry.config.options = options;
   }
 
   //  Client api call
-  const { data: ClientData } = getClient();
-  if (ClientData) {
-    addEnquiryFormFields.clientenquiry.config.options = selectOptionsMaker(
-      ClientData,
-      "clientID",
-      "clientName"
-    );
+  const { data: clientData } = getClient();
+
+  useEffect(() => {
+    if (clientData) {
+      setClientOptions(Object.values(clientData));
+    }
+  }, [clientData]);
+
+  if (clientOptions?.length) {
+    let options = selectOptionsMaker(clientOptions, "clientID", "clientName");
+    addEnquiryFormFields.enqClient.config.options = options;
   }
+
   //  Fyear  api call
   const { data: fYearData } = getFinYear();
-  if (fYearData) {
-    addEnquiryFormFields.yearenquiry.config.options = selectOptionsMaker(
-      fYearData,
-      "finYear",
-      "finYear"
-    );
+
+  useEffect(() => {
+    if (fYearData) {
+      setFinYearOptions(Object.values(fYearData));
+    }
+  }, [fYearData]);
+
+  if (finYearOptions?.length) {
+    let options = selectOptionsMaker(finYearOptions, "finYear", "finYear");
+    addEnquiryFormFields.enqFinYear.config.options = options;
   }
+
   //  Actual buyer api call
-  // const { data: ActualBuyerData } = getActualBuyer();
-  // if (ActualBuyerData) {
-  //   addEnquiryFormFields.actualbureyenquiry.config.options = selectOptionsMaker(
-  //     ActualBuyerData,
-  //     "partyId",
-  //     "partyName"
-  //   );
-  // }
+  const { data: actualBuyerData } = getActualBuyer();
+  useEffect(() => {
+    if (actualBuyerData) {
+      setActualBuyerOptions(Object.values(actualBuyerData));
+    }
+  }, [actualBuyerData]);
+
+  if (actualBuyerOptions?.length) {
+    let options = selectOptionsMaker(
+      actualBuyerOptions,
+      "partyId",
+      "partyName"
+    );
+    addEnquiryFormFields.enqActualBuyer.config.options = options;
+  }
 
   // Source api call
-  const { data: SourceData } = getSource();
-  if (SourceData) {
-    addEnquiryFormFields.sourceenquiry.config.options = selectOptionsMaker(
-      SourceData,
-      "sourceID",
-      "source"
-    );
+  const { data: sourceData } = getSource();
+
+  useEffect(() => {
+    if (sourceData) {
+      setSourceOptions(Object.values(sourceData));
+    }
+  }, [sourceData]);
+
+  if (sourceOptions?.length) {
+    let options = selectOptionsMaker(sourceOptions, "sourceID", "source");
+    addEnquiryFormFields.enqSource.config.options = options;
   }
 
   // Local Source api call
-  const { data: LocalSourceData } = getLocalSource();
-  if (LocalSourceData) {
-    addEnquiryFormFields.localsourceenquiry.config.options = selectOptionsMaker(
-      LocalSourceData,
+  const { data: localSourceData } = getLocalSource();
+
+  useEffect(() => {
+    if (localSourceData) {
+      setLocalSourceOptions(Object.values(localSourceData));
+    }
+  }, [localSourceData]);
+
+  if (localSourceOptions?.length) {
+    let options = selectOptionsMaker(
+      localSourceOptions,
       "localSourceId",
       "localSource"
     );
+    addEnquiryFormFields.enqLocalSource.config.options = options;
   }
 
   // Company api call
   const { data: companyData } = getCompany();
-  if (companyData) {
-    addEnquiryFormFields.companyenquiry.config.options = selectOptionsMaker(
-      companyData,
+
+  useEffect(() => {
+    if (companyData) {
+      setCompanyOptions(Object.values(companyData));
+    }
+  }, [companyData]);
+
+  if (companyOptions?.length) {
+    let options = selectOptionsMaker(
+      companyOptions,
       "companyId",
       "companyName",
       true
     );
+    addEnquiryFormFields.enqCompanyName.config.options = options;
   }
 
   // Service Type api call
-  const { data: ServiceData } = getServiceType();
-  if (ServiceData) {
-    addEnquiryFormFields.servicetype.config.options = selectOptionsMaker(
-      ServiceData,
+  const { data: serviceData } = getServiceType();
+
+  useEffect(() => {
+    if (serviceData) {
+      setServiceOptions(Object.values(serviceData));
+    }
+  }, [serviceData]);
+
+  if (serviceOptions?.length) {
+    let options = selectOptionsMaker(
+      serviceOptions,
       "serviceTypeID",
       "serviceType"
     );
+    addEnquiryFormFields.enqServiceType.config.options = options;
   }
 
   // enq Status api call
-  const { data: enqstatusData } = getEnqStatus();
-  if (enqstatusData) {
-    addEnquiryFormFields.enqstatus.config.options = selectOptionsMaker(
-      enqstatusData,
+  const { data: enqStatusData } = getEnqStatus();
+
+  useEffect(() => {
+    if (enqStatusData) {
+      setEnqStatusOptions(Object.values(enqStatusData));
+    }
+  }, [enqStatusData]);
+
+  if (enqStatusOptions?.length) {
+    let options = selectOptionsMaker(
+      enqStatusOptions,
       "enquiryStatusID",
       "enquiryStatus"
     );
+    addEnquiryFormFields.enqStatus.config.options = options;
   }
-
-  const [slectedCompanyData, setCompanyData] = useState<CompanyType>();
 
   const companyOnChangeHandler = (companyData: any) => {
     if (companyData.data) {
-      setIsCompanyChange(true);
-      setCompanyData(companyData.data);
-    }
-  };
-
-  if (isCompanyChange) {
-    let dataObj = cleanupObject(slectedCompanyData);
-    addEnquiryFormFields.givenaddressEnquiry.config.setData = dataObj?.address;
-    addEnquiryFormFields.zipenquiry.config.setData = dataObj?.zip;
-    addEnquiryFormFields.telnoenquiry.config.setData = dataObj?.phone;
-    addEnquiryFormFields.faxnoenquiry.config.setData = dataObj?.fax;
-    if (cityData) {
-      let data: any = returnObjectBasedOnID(
-        cityData,
-        "id",
-        dataObj?.cityId,
-        "id",
-        "cityName"
-      );
-      addEnquiryFormFields.cityenquiry.config.setData =
-        data.length > 0
-          ? [
-              {
-                label: data?.label,
-                value: data?.value,
-              },
-            ]
-          : [];
-    }
-    if (stateData) {
-      let data: any = returnObjectBasedOnID(
-        stateData,
-        "stateId",
-        dataObj?.stateId,
-        "stateId",
-        "state"
-      );
-      addEnquiryFormFields.stateenquiry.config.setData =
-        data.length > 0
-          ? [
-              {
-                label: dataObj?.state,
-                value: dataObj?.stateId,
-              },
-            ]
-          : [];
-    }
-    if (CountryData) {
-      let data: any = returnObjectBasedOnID(
-        CountryData,
-        "countryId",
-        dataObj?.countryId,
-        "countryId",
-        "countryName"
-      );
-      addEnquiryFormFields.countryenquiry.config.setData =
-        data.length > 0
-          ? [
-              {
-                label: dataObj?.countryName,
-                value: dataObj?.countryId,
-              },
-            ]
-          : [];
-    }
-
-    addEnquiryFormFields.emailenquiry.config.setData = dataObj?.email;
-    addEnquiryFormFields.websiteenquiry.config.setData = dataObj?.website;
-    addEnquiryFormFields.contactenquiry.config.setData = dataObj?.contactPerson;
-    addEnquiryFormFields.designationenquiry.config.setData =
-      dataObj?.designation;
-  }
-
-  addEnquiryFormFields.refnoenquiry.config.setData = refNo;
-
-  if (params.id) {
-    const { data: EnquiryMasterData } = getEnquiryData("" + params.id);
-    if (EnquiryMasterData) {
-      if (cityData) {
-        let id = EnquiryMasterData?.cityId;
-        let data: any = returnObjectBasedOnID(
-          cityData,
-          "id",
-          id,
-          "id",
+      if (addEnquiryFormFields.enqGivenAddress.config.name == "givenAddress") {
+        setValue(
+          addEnquiryFormFields.enqGivenAddress.config.name,
+          companyData.data.address
+        );
+      }
+      if (addEnquiryFormFields.enqZip.config.name == "zip") {
+        setValue(addEnquiryFormFields.enqZip.config.name, companyData.data.zip);
+      }
+      if (addEnquiryFormFields.enqTelePhone.config.name == "phone") {
+        setValue(
+          addEnquiryFormFields.enqTelePhone.config.name,
+          companyData.data.phone
+        );
+      }
+      if (addEnquiryFormFields.enqFax.config.name == "fax") {
+        setValue(addEnquiryFormFields.enqFax.config.name, companyData.data.fax);
+      }
+      if (addEnquiryFormFields.enqEmail.config.name == "email") {
+        setValue(
+          addEnquiryFormFields.enqEmail.config.name,
+          companyData.data.email
+        );
+      }
+      if (addEnquiryFormFields.enqWebsite.config.name == "website") {
+        setValue(
+          addEnquiryFormFields.enqWebsite.config.name,
+          companyData.data.website
+        );
+      }
+      if (addEnquiryFormFields.enqContact.config.name == "contactPerson") {
+        setValue(
+          addEnquiryFormFields.enqContact.config.name,
+          companyData.data.contactPerson
+        );
+      }
+      if (addEnquiryFormFields.enqDesignation.config.name == "designation") {
+        setValue(
+          addEnquiryFormFields.enqDesignation.config.name,
+          companyData.data.designation
+        );
+      }
+      if (addEnquiryFormFields.enqCity.config.name == "cityId") {
+        let data = returnFormatedObjectElseEmptyArray(
+          companyData.data.cityId,
+          companyData.data,
+          "cityId",
           "cityName"
         );
-        addEnquiryFormFields.cityenquiry.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
+        data.length > 0 &&
+          setValue(addEnquiryFormFields.enqCity.config.name, data[0], {
+            shouldValidate: true,
+          });
       }
-      if (stateData) {
-        let id = EnquiryMasterData?.stateId;
-        let data: any = returnObjectBasedOnID(
-          stateData,
-          "stateId",
-          id,
+      if (addEnquiryFormFields.enqState.config.name == "stateId") {
+        let data = returnFormatedObjectElseEmptyArray(
+          companyData.data.stateId,
+          companyData.data,
           "stateId",
           "state"
         );
-        addEnquiryFormFields.stateenquiry.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
+        data.length > 0 &&
+          setValue(addEnquiryFormFields.enqState.config.name, data[0], {
+            shouldValidate: true,
+          });
       }
-      if (CountryData) {
-        let id = EnquiryMasterData?.countryId;
-        let data: any = returnObjectBasedOnID(
-          CountryData,
-          "countryId",
-          id,
+      if (addEnquiryFormFields.enqCountry.config.name == "countryId") {
+        let data = returnFormatedObjectElseEmptyArray(
+          companyData.data.countryId,
+          companyData.data,
           "countryId",
           "countryName"
         );
-        addEnquiryFormFields.countryenquiry.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
+        data.length > 0 &&
+          setValue(addEnquiryFormFields.enqCountry.config.name, data[0], {
+            shouldValidate: true,
+          });
       }
-      if (ClientData) {
-        let id = EnquiryMasterData?.clientID;
-        let data: any = returnObjectBasedOnID(
-          ClientData,
-          "clientId",
-          id,
-          "clientId",
-          "clientName"
-        );
-        addEnquiryFormFields.clientenquiry.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-
-      if (fYearData) {
-        let id = EnquiryMasterData?.fyearId;
-        let data: any = returnObjectBasedOnID(
-          fYearData,
-          "id",
-          id,
-          "id",
-          "finYear"
-        );
-        addEnquiryFormFields.yearenquiry.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-      // if (ActualBuyerData) {
-      //   let id = EnquiryMasterData?.actualBuyerId;
-      //   let data: any = returnObjectBasedOnID(
-      //     ActualBuyerData,
-      //     "partyId",
-      //     id,
-      //     "partyId",
-      //     "partyName"
-      //   );
-      //   addEnquiryFormFields.actualbureyenquiry.config.setData = data
-      //     ? {
-      //         label: data.label,
-      //         value: data.value,
-      //       }
-      //     : [];
-      // }
-      if (SourceData) {
-        let id = EnquiryMasterData?.sourceID;
-        let data: any = returnObjectBasedOnID(
-          SourceData,
-          "sourceID",
-          id,
-          "sourceID",
-          "source"
-        );
-        addEnquiryFormFields.sourceenquiry.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-      if (LocalSourceData) {
-        let id = EnquiryMasterData?.localSourceId;
-        let data: any = returnObjectBasedOnID(
-          LocalSourceData,
-          "localSourceId",
-          id,
-          "localSourceId",
-          "localSource"
-        );
-        addEnquiryFormFields.localsourceenquiry.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-
-      if (companyData) {
-        let id = EnquiryMasterData?.companyID;
-        let data: any = returnObjectBasedOnID(
-          companyData,
-          "companyId",
-          id,
-          "companyId",
-          "companyName"
-        );
-        addEnquiryFormFields.companyenquiry.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-      if (ServiceData) {
-        let id = EnquiryMasterData?.serviceTypeID;
-        let data: any = returnObjectBasedOnID(
-          ServiceData,
-          "serviceTypeID",
-          id,
-          "serviceTypeID",
-          "serviceTypeName"
-        );
-        addEnquiryFormFields.companyenquiry.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-      if (enqstatusData) {
-        let id = EnquiryMasterData?.enqStatusID;
-        let data: any = returnObjectBasedOnID(
-          enqstatusData,
-          "enquiryStatusID",
-          id,
-          "enquiryStatusID",
-          "enquiryStatus"
-        );
-        addEnquiryFormFields.companyenquiry.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-      addEnquiryFormFields.zipenquiry.config.setData = EnquiryMasterData.zip;
-      addEnquiryFormFields.telnoenquiry.config.setData =
-        EnquiryMasterData.phone;
-      addEnquiryFormFields.givenaddressEnquiry.config.setData =
-        EnquiryMasterData.givenAddress;
-      addEnquiryFormFields.faxnoenquiry.config.setData = EnquiryMasterData.fax;
-      addEnquiryFormFields.emailenquiry.config.setData =
-        EnquiryMasterData.email;
-      addEnquiryFormFields.websiteenquiry.config.setData =
-        EnquiryMasterData.website;
-      addEnquiryFormFields.contactenquiry.config.setData =
-        EnquiryMasterData.contactPerson;
-      addEnquiryFormFields.designationenquiry.config.setData =
-        EnquiryMasterData.designation;
-      addEnquiryFormFields.givenname.config.setData =
-        EnquiryMasterData.givenName;
-      addEnquiryFormFields.notesforenquiry.config.setData =
-        EnquiryMasterData.noteforenq;
-      addEnquiryFormFields.notesforadj.config.setData =
-        EnquiryMasterData.noteforadj;
-      addEnquiryFormFields.clientrefenquiry.config.setData =
-        EnquiryMasterData.clientRefNo;
     }
-  } else {
-    useEffect(() => {
-      methods.reset();
-      getRefNo().then((refno: any) => {
-        if (refno) {
-          setRefNo(refno.data);
-        }
-      });
-    }, []);
-  }
+  };
 
-  const { data: clientData } = getClientData(clientId, clientId != -2);
-  addEnquiryFormFields.clientIdenquiry.config.setData = clientId;
+  const { data: enqData } = getEnquiryData(
+    "" + params.id,
+    !localEnqData && params.id !== undefined
+  );
+
+  const { data: paticularClientData, isFetching } = getClientData(
+    "" + clientId,
+    clientId != -2
+  );
+
+  const { data: refNo } = getRefNo(params.id === undefined);
+
+  useEffect(() => {
+    if (refNo) {
+      if (addEnquiryFormFields.enqRefNo.config.name == "refNo") {
+        setValue(addEnquiryFormFields.enqRefNo.config.name, refNo);
+      }
+    }
+  }, [refNo]);
 
   const onServiceTypeChangeHandler = (serviceTypeData: any) => {
-    setIsCompanyChange(false);
-    setServiceTypeId(serviceTypeData?.value);
+    if (serviceTypeData) {
+      setServiceTypeId(serviceTypeData?.value);
+    }
   };
 
   const onCountryChangeHandler = (countryData: any) => {
     if (countryData) {
-      setIsCompanyChange(false);
       setCountryId(countryData?.value);
     }
   };
 
   const onClientChangeHandler = (selectedOption: any) => {
     if (selectedOption) {
-      setIsCompanyChange(false);
       setClientId(selectedOption.value);
     }
   };
@@ -528,7 +436,9 @@ export const AddEnquiry: React.FC = () => {
   );
 
   if (priceData) {
-    addEnquiryFormFields.priceenquiry.config.setData = priceData?.data;
+    if (addEnquiryFormFields.enqPrice.config.name === "reportPrice") {
+      setValue(addEnquiryFormFields.enqPrice.config.name, priceData);
+    }
   }
 
   const columns: ColumnDef<any>[] = [
@@ -567,7 +477,7 @@ export const AddEnquiry: React.FC = () => {
     config: {
       tableName: "State",
       columns: columns,
-      tableData: clientData ? [clientData] : [],
+      tableData: paticularClientData ? [paticularClientData] : [],
       copyBtn: false,
       csvBtn: false,
       excelBtn: false,
@@ -582,218 +492,565 @@ export const AddEnquiry: React.FC = () => {
     },
   };
 
-  const onSubmit = methods.handleSubmit((enquiryData): void => {
-    let data: any = { ...cleanupObject(enquiryData) };
+  useEffect(() => {
+    if (params.id) {
+      if (enqData && Object.values(enqData).length > 0) {
+        reset(mapEnqDataToEnqForm(enqData));
+      }
+    }
+  }, [
+    params.id,
+    cityOptions,
+    stateOptions,
+    countryOptions,
+    clientOptions,
+    finYearOptions,
+    sourceOptions,
+    localSourceOptions,
+    companyOptions,
+    serviceOptions,
+    enqStatusOptions,
+    actualBuyerOptions,
+    enqData,
+  ]);
 
-    if (data.companyID) {
-      data.companyID = +data.companyID["value"];
+  useEffect(() => {
+    if (params.id) {
+      if (localEnqData !== null) {
+        reset(mapEnqDataToEnqForm(localEnqData));
+      }
     }
-    if (data.financialYear) {
-      data.financialYear = "" + data.financialYear["value"];
+  }, [
+    params.id,
+    cityOptions,
+    stateOptions,
+    countryOptions,
+    clientOptions,
+    finYearOptions,
+    sourceOptions,
+    localSourceOptions,
+    companyOptions,
+    serviceOptions,
+    enqStatusOptions,
+    actualBuyerOptions,
+    localEnqData,
+  ]);
+
+  const mapEnqRequest = (enqFormData: EnqueryFormType) => {
+    let enqData: Partial<AllEnquiriesType> = {
+      refNo: enqFormData.refNo,
+      bookNo: enqFormData.bookNo,
+      recdDate: enqFormData.recdDate,
+      dueDate: enqFormData.dueDate,
+      clientRefNo: enqFormData.clientRefNo,
+      notes: enqFormData.notes,
+      creditamount: enqFormData.creditamount,
+      reportDate: enqFormData.reportDate,
+      givenAddress: enqFormData.givenAddress,
+      zip: enqFormData.zip,
+      rockStatus: enqFormData.rockStatus,
+      records: enqFormData.records,
+      recFin: enqFormData.recFin,
+      phone: enqFormData.phone,
+      fax: enqFormData.fax,
+      website: enqFormData.website,
+      contactPerson: enqFormData.contactPerson,
+      designation: enqFormData.designation,
+      financialYear: enqFormData.financialYear,
+      bankers: enqFormData.bankers,
+      requestNo: enqFormData.requestNo,
+      instruction: enqFormData.instruction,
+      reportFilename: enqFormData.reportFilename,
+      reportPrice: enqFormData.reportPrice,
+      reportComission: enqFormData.reportComission,
+      lineOfBusiness: enqFormData.lineOfBusiness,
+      noteForComission: enqFormData.noteForComission,
+      disPer: enqFormData.disPer,
+      discount: enqFormData.discount,
+      adjustment: enqFormData.adjustment,
+      disType: enqFormData.disType,
+      bulk_enquiry_id: enqFormData.bulk_enquiry_id
+        ? enqFormData.bulk_enquiry_id
+        : 0,
+      locked: enqFormData.locked,
+      givenName: enqFormData.givenName,
+      cmie: enqFormData.cmie,
+      email: enqFormData.email,
+    };
+    if (countryData && enqFormData?.companyID) {
+      enqData.companyID = enqFormData.companyID.value;
     }
-    if (data.sourceID) {
-      data.sourceID = +data.sourceID["value"];
+    if (countryData && enqFormData?.serviceTypeID) {
+      enqData.serviceTypeID = enqFormData.serviceTypeID.value;
     }
-    if (data.cityId) {
-      data.cityId = data.cityId["value"];
+    if (countryData && enqFormData?.clientID) {
+      enqData.clientID = enqFormData.clientID.value;
     }
-    if (data.stateId) {
-      data.stateId = data.stateId["value"];
+    if (countryData && enqFormData?.sourceID) {
+      enqData.sourceID = enqFormData.sourceID.value;
     }
-    if (data.countryId) {
-      data.countryId = data.countryId["value"];
+    if (countryData && enqFormData?.enqStatusID) {
+      enqData.enqStatusID = enqFormData.enqStatusID.value;
     }
-    if (data.typeofEnquiry) {
-      data.typeofEnquiry = "" + data.typeofEnquiry["value"];
+    if (countryData && enqFormData?.cityId) {
+      enqData.cityId = enqFormData.cityId.value;
     }
-    if (data.serviceTypeID) {
-      data.serviceTypeID = +data.serviceTypeID["value"];
+    if (countryData && enqFormData?.stateId) {
+      enqData.stateId = enqFormData.stateId.value;
     }
-    if (data.pmtstatus) {
-      data.pmtstatus = "" + data.pmtstatus["value"];
+    if (countryData && enqFormData?.countryId) {
+      enqData.countryId = enqFormData.countryId.value;
     }
-    if (data.enqStatusID) {
-      data.enqStatusID = +data.enqStatusID["value"];
+    if (countryData && enqFormData?.actualBuyerId) {
+      enqData.actualBuyerId = enqFormData.actualBuyerId.value;
     }
-    if (data.clientID) {
-      data.clientID = +data.clientID["value"];
+    if (countryData && enqFormData?.siteStatusId) {
+      enqData.siteStatusId = enqFormData.siteStatusId.value;
     }
-    if (data.actualBuyerId) {
-      data.actualBuyerId = +data.actualBuyerId["value"];
+    if (countryData && enqFormData?.fYear) {
+      enqData.fyear = enqFormData.fYear.value;
     }
-    if (data.localSourceId) {
-      data.localSourceId = data.localSourceId["value"];
+    if (countryData && enqFormData?.pmtstatus) {
+      enqData.pmtstatus = enqFormData.pmtstatus.value;
     }
-    data["bulk_enquiry_id"] = 0;
-    delete data.svisit;
-    delete data.clientidenquiry;
-    // console.log(data);
-    // console.log(data);
-    if (params.id && data) {
-      updateEnquiry({ id: params.id, ...data });
+    if (countryData && enqFormData?.typeofEnquiry) {
+      enqData.typeofEnquiry = enqFormData.typeofEnquiry.value;
+    }
+    // industryId: formEnqData.industryId.value,
+    // localSourceId: formEnqData.localSourceId.value,
+    return cleanupObject(enqData);
+  };
+
+  const mapEnqDataToEnqForm = (enqData: AllEnquiriesType) => {
+    let enqFormData: Partial<EnqueryFormType> = {
+      refNo: enqData.refNo,
+      bookNo: enqData.bookNo,
+      recdDate: enqData.recdDate,
+      dueDate: enqData.dueDate,
+      clientRefNo: enqData.clientRefNo,
+      notes: enqData.notes,
+      creditamount: enqData.creditamount,
+      reportDate: enqData.reportDate,
+      givenAddress: enqData.givenAddress,
+      zip: enqData.zip,
+      rockStatus: enqData.rockStatus,
+      records: enqData.records,
+      recFin: enqData.recFin,
+      phone: enqData.phone,
+      fax: enqData.fax,
+      website: enqData.website,
+      contactPerson: enqData.contactPerson,
+      designation: enqData.designation,
+      financialYear: enqData.financialYear,
+      bankers: enqData.bankers,
+      requestNo: enqData.requestNo,
+      instruction: enqData.instruction,
+      reportFilename: enqData.reportFilename,
+      reportPrice: enqData.reportPrice,
+      reportComission: enqData.reportComission,
+      lineOfBusiness: enqData.lineOfBusiness,
+      noteForComission: enqData.noteForComission,
+      disPer: enqData.disPer,
+      discount: enqData.discount,
+      adjustment: enqData.adjustment,
+      disType: enqData.disType,
+      bulk_enquiry_id: enqData.bulk_enquiry_id ? enqData.bulk_enquiry_id : 0,
+      locked: enqData.locked,
+      givenName: enqData.givenName,
+      cmie: enqData.cmie,
+      email: enqData.email,
+    };
+    if (companyData && enqData?.companyID) {
+      let data = companyData[enqData.companyID];
+      enqFormData.companyID = {
+        label: data.companyName,
+        value: data.companyId,
+      };
+    }
+    if (serviceData && enqData?.serviceTypeID) {
+      let data = serviceData[enqData.serviceTypeID];
+      enqFormData.serviceTypeID = {
+        label: data.serviceType,
+        value: data.serviceTypeID,
+      };
+    }
+    if (countryData && clientData?.clientID) {
+      let data = clientData[enqData.clientID];
+      enqFormData.clientID = {
+        label: data.clientName,
+        value: data.clientID,
+      };
+    }
+    if (sourceData && enqData?.sourceID) {
+      let data = sourceData[enqData.sourceID];
+      enqFormData.sourceID = {
+        label: data.source,
+        value: data.sourceID,
+      };
+    }
+    if (enqStatusData && enqData?.enqStatusID) {
+      let data = enqStatusData[enqData.enqStatusID];
+      enqFormData.enqStatusID = {
+        label: data.enquiryStatus,
+        value: data.enquiryStatusID,
+      };
+    }
+    if (cityData && enqData?.cityId) {
+      let data = cityData[enqData.cityId];
+      enqFormData.cityId = {
+        label: data.cityName,
+        value: data.cityId,
+      };
+    }
+    if (stateData && enqData?.stateId) {
+      let data = stateData[enqData.stateId];
+      enqFormData.stateId = {
+        label: data.stateName,
+        value: data.stateId,
+      };
+    }
+    if (countryData && enqData?.countryId) {
+      let data = countryData[enqData.countryId];
+      enqFormData.countryId = {
+        label: data.countryName,
+        value: data.countryId,
+      };
+    }
+    if (actualBuyerData && enqData?.actualBuyerId) {
+      let data = actualBuyerData[enqData.actualBuyerId];
+      enqFormData.actualBuyerId = {
+        label: data.partyName,
+        value: data.partyId,
+      };
+    }
+    // if (countryData && enqData?.siteStatusId) {
+    //   let data = actualBuyerData[enqData.siteStatusId];
+    //   enqFormData.siteStatusId = {
+    //     label: data.partyName,
+    //     value: data.partyId,
+    //   };
+    //   .value;
+    // }
+    if (fYearData && enqData?.fyear) {
+      let data = fYearData[enqData.fyear];
+      enqFormData.fYear = {
+        label: data.finYear,
+        value: data.finYear,
+      };
+    }
+    if (enqData?.pmtstatus) {
+      let data = addEnquiryFormFields.enqPrintStatusData[enqData.pmtstatus];
+      enqFormData.pmtstatus = {
+        label: data.label,
+        value: data.value,
+      };
+    }
+    if (enqData?.typeofEnquiry) {
+      let data = addEnquiryFormFields.enqTypeData[enqData.typeofEnquiry];
+      enqFormData.typeofEnquiry = {
+        label: data.label,
+        value: data.value,
+      };
+    }
+    return enqFormData;
+  };
+
+  const onSubmit = handleSubmit((enquiryData): void => {
+    let reqObj: Partial<AllEnquiriesType> = mapEnqRequest(enquiryData);
+    console.log(reqObj);
+    if (params.id && reqObj) {
+      updateEnquiry({ id: +params.id, ...reqObj });
     } else {
-      addEnquiry(data);
+      addEnquiry(reqObj);
     }
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqCompanyName}
+                onChange={companyOnChangeHandler}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqFinYear}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqRefNo}
+              />
+              <small className="enquirynote text-right">
+                <InputWithText
+                  config={addEnquiryFormFields.enqRefNote.config}
+                />
+              </small>
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqSource}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqGivenAddress}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqCity}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqState}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqCountry}
+                onChange={onCountryChangeHandler}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqZip}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqTelePhone}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqFax}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqEmail}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqWebsite}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqContact}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqDesignation}
+              />
+            </div>
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqClientRef}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqClient}
+                onChange={onClientChangeHandler}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqRequestNo}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqClientId}
+              />
+              <Link to={""} className="card-title">
+                <InputWithText
+                  config={addEnquiryFormFields.enqActualBuyerAddNote.config}
+                />
+              </Link>
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqActualBuyer}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqServiceType}
+                onChange={onServiceTypeChangeHandler}
+              />
+              <div className="row mb-2 justify-content-end">
+                <div className="col-md-4 col-xs-12 text-right">
+                  <Button type="button" className="btn btn-danger btn-sm">
+                    <i className="far fa-save"></i> Get Price
+                  </Button>
+                </div>
+              </div>
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqPrice}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqGivenName}
+              />
+              <NewDatePicker
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqRecdon}
+              />
+              <NewDatePicker
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqDueOn}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqtype}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqLocalSource}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqPrintStatus}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqStatus}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addEnquiryFormFields.enqSvisit}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqNotesForEnquiry}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqNotesForAdj}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqInstruction}
+              />
+            </div>
+            <div className="col-md-3 col-xs-12">
               <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <Select
-                    config={addEnquiryFormFields.companyenquiry.config}
-                    onChangeHandler={companyOnChangeHandler}
-                  />
-                  <Select config={addEnquiryFormFields.yearenquiry.config} />
-                  <Input config={addEnquiryFormFields.refnoenquiry.config} />
-                  <small className="enquirynote text-right">
-                    <InputWithText
-                      config={addEnquiryFormFields.refnote.config}
-                    />
-                  </small>
-                  <Select config={addEnquiryFormFields.sourceenquiry.config} />
-                  <Input
-                    config={addEnquiryFormFields.givenaddressEnquiry.config}
-                  />
-                  <Select config={addEnquiryFormFields.cityenquiry.config} />
-                  <Select config={addEnquiryFormFields.stateenquiry.config} />
-                  <Select
-                    config={addEnquiryFormFields.countryenquiry.config}
-                    onChangeHandler={onCountryChangeHandler}
-                  />
-                  <Input config={addEnquiryFormFields.zipenquiry.config} />
-                  <Input config={addEnquiryFormFields.telnoenquiry.config} />
-                  <Input config={addEnquiryFormFields.faxnoenquiry.config} />
-                  <Input config={addEnquiryFormFields.emailenquiry.config} />
-                  <Input config={addEnquiryFormFields.websiteenquiry.config} />
-                  <Input config={addEnquiryFormFields.contactenquiry.config} />
-                  <Input
-                    config={addEnquiryFormFields.designationenquiry.config}
-                  />
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  <Input
-                    config={addEnquiryFormFields.clientrefenquiry.config}
-                  />
-                  <Select
-                    config={addEnquiryFormFields.clientenquiry.config}
-                    onChangeHandler={onClientChangeHandler}
-                  />
-                  <Input
-                    config={addEnquiryFormFields.requestnoenquiry.config}
-                  />
-                  <Input config={addEnquiryFormFields.clientIdenquiry.config} />
-                  <Link to={""} className="card-title">
-                    <InputWithText
-                      config={addEnquiryFormFields.actualbuyeraddnote.config}
-                    />
-                  </Link>
-                  <Select
-                    config={addEnquiryFormFields.actualbureyenquiry.config}
-                  />
-                  <Select
-                    config={addEnquiryFormFields.servicetype.config}
-                    onChangeHandler={onServiceTypeChangeHandler}
-                  />
-                  <div className="row mb-2 justify-content-end">
-                    <div className="col-md-4 col-xs-12 text-right">
-                      <Button
-                        type={"submit"}
-                        className={"btn btn-danger btn-sm"}
-                      >
-                        <i className="far fa-save"></i> Get Price
-                      </Button>
-                    </div>
-                  </div>
-
-                  <Input config={addEnquiryFormFields.priceenquiry.config} />
-                  <Input config={addEnquiryFormFields.givenname.config} />
-                  <Input config={addEnquiryFormFields.recdon.config} />
-                  <Input config={addEnquiryFormFields.dueon.config} />
-                  <Select config={addEnquiryFormFields.enqtype.config} />
-                  <Select
-                    config={addEnquiryFormFields.localsourceenquiry.config}
-                  />
-
-                  <Select config={addEnquiryFormFields.printstatus.config} />
-                  <Select config={addEnquiryFormFields.enqstatus.config} />
-                  <Select config={addEnquiryFormFields.svisit.config} />
-                  <Input config={addEnquiryFormFields.notesforenquiry.config} />
-                  <Input config={addEnquiryFormFields.notesforadj.config} />
-                  <Input
-                    config={addEnquiryFormFields.instructionenquiry.config}
-                  />
-                </div>
-
-                <div className="col-md-3   col-xs-12">
-                  <div className="row">
-                    {/* <div className="col-md-8 col-xs-12 text-right">
+                {/* <div className="col-md-8 col-xs-12 text-right">
                       <Link to={""} className="card-title">
                         <InputWithText
                           config={
-                            addEnquiryFormFields.actualbuyeraddnote.config
+                            addEnquiryFormFields.enqActualBuyerAddNote
                           }
                         />
                       </Link>
                     </div> */}
-                    {/* <div className="col-md-4 col-xs-12 text-right">
+                {/* <div className="col-md-4 col-xs-12 text-right">
                       <i className="fa fa-refresh"></i>
                     </div> */}
-                  </div>
-                  {/* <Input config={addEnquiryFormFields.priceenquiry.config} /> */}
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  <Table config={tableConfig.config}></Table>
-                </div>
-                <div className="card-title">
-                  <InputWithText
-                    config={addEnquiryFormFields.discountcommissionnote.config}
-                  />
-                </div>
-                <div className="col-3">
-                  <Input config={addEnquiryFormFields.disenquiry.config} />
-                </div>
-                <div className="col-3">
-                  <Input config={addEnquiryFormFields.discountenquiry.config} />
-                </div>
-                <div className="col-3">
-                  <Input config={addEnquiryFormFields.adjustenquiry.config} />
-                  <div className="row">
-                    <div className="col-md-12 col-xs-12 text-right">
-                      <Button
-                        type={"submit"}
-                        className={"btn btn-danger btn-sm"}
-                      >
-                        <i className="far fa-save"></i> View Adjust
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-3">
-                  <Input config={addEnquiryFormFields.commenquiry.config} />
-                </div>
-                <div className="card-title col-12">
-                  <InputWithText
-                    config={addEnquiryFormFields.discounttypenote.config}
-                  />
+              </div>
+              {/* <NewInput errors={errors}
+                  register={register} config={addEnquiryFormFields.enqPrice} /> */}
+            </div>
+            <div className="col-md-6 col-xs-12">
+              {!isFetching && <Table config={tableConfig.config}></Table>}
+            </div>
+            <div className="card-title">
+              <InputWithText
+                config={addEnquiryFormFields.enqDiscountCommissionNote.config}
+              />
+            </div>
+            <div className="col-3">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqDis}
+              />
+            </div>
+            <div className="col-3">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqDiscount}
+              />
+            </div>
+            <div className="col-3">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqAdjust}
+              />
+              <div className="row">
+                <div className="col-md-12 col-xs-12 text-right">
+                  <Button type="button" className="btn btn-danger btn-sm">
+                    <i className="far fa-save"></i> View Adjust
+                  </Button>
                 </div>
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
-      </Card>
-    </>
+            </div>
+            <div className="col-3">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addEnquiryFormFields.enqReportComm}
+              />
+            </div>
+            <div className="card-title col-12">
+              <InputWithText
+                config={addEnquiryFormFields.enqDiscountTypeNote.config}
+              />
+            </div>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

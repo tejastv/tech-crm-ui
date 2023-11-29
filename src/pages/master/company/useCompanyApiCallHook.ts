@@ -4,6 +4,7 @@ import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useCompanyApiCallHook = () => {
   const { instance } = useAxios();
@@ -11,19 +12,17 @@ export const useCompanyApiCallHook = () => {
   const navigate = useNavigate();
 
   const getCompany = () => {
-    console.log("response");
-    return useQuery<CompanyType[]>({
+    return useQuery<{[key: string | number]: CompanyType}>({
       queryKey: [queryKeys.COMPANY_MASTER_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_COMPANY_MASTER);
-        console.log(response.data.data.records);
         const data = response.data.data.records.sort(
           (a: { companyName: string }, b: { companyName: any }) =>
             a.companyName.localeCompare(b.companyName)
         );
-        console.log(data);
-
-        return data;
+        let mapedData = selectOptionsMapMaker(data, "companyId", "companyName");
+        // return data;
+        return mapedData;
       },
       staleTime: Infinity,
     });
