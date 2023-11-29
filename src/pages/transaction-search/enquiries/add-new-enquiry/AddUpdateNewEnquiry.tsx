@@ -48,18 +48,15 @@ import {
   returnFormatedObjectElseEmptyArray,
   selectOptionsMaker,
 } from "@utils/index";
-// import {useStateApiCallHook } from "@pages/master";
 
 export const AddEnquiry: React.FC = () => {
-  // const { getState } = useStateApiCallHook();
-  // const { data: stateData, isLoading } = getState();
   const {
     register,
     handleSubmit,
     control,
     setValue,
     reset,
-    setError,
+    getValues,
     formState: { errors },
   } = useForm<EnqueryFormType>();
   const { state: localEnqData } = useLocation();
@@ -102,6 +99,12 @@ export const AddEnquiry: React.FC = () => {
   const [enqStatusOptions, setEnqStatusOptions] = useState<EnqType[]>();
   const [actualBuyerOptions, setActualBuyerOptions] =
     useState<ActualBuyerType[]>();
+  const [getPriceFlag, setGetPriceFlag] = useState<any>({
+    flag: false,
+    clientId: null,
+    serviceTypeId: null,
+    countryId: null,
+  });
 
   const cardConfig = {
     formLayoutConfig: {
@@ -398,6 +401,13 @@ export const AddEnquiry: React.FC = () => {
     !localEnqData && params.id !== undefined
   );
 
+  const getClientValue = (clientId: number) => {
+    console.log(clientId);
+    if (clientId) {
+      setClientId(clientId);
+    }
+  };
+
   const { data: paticularClientData, isFetching } = getClientData(
     "" + clientId,
     clientId != -2
@@ -413,35 +423,35 @@ export const AddEnquiry: React.FC = () => {
     }
   }, [refNo]);
 
-  const onServiceTypeChangeHandler = (serviceTypeData: any) => {
-    if (serviceTypeData) {
-      setServiceTypeId(serviceTypeData?.value);
-    }
-  };
-
-  const onCountryChangeHandler = (countryData: any) => {
-    if (countryData) {
-      setCountryId(countryData?.value);
-    }
-  };
-
-  const onClientChangeHandler = (selectedOption: any) => {
-    if (selectedOption) {
-      setClientId(selectedOption.value);
-    }
-  };
-
   const getPriceHandler = () => {
+    let obj: any = {};
     if (addEnquiryFormFields.enqCountry.config.name === "countryId") {
-      setError(addEnquiryFormFields.enqCountry.config.name, {
-        message: "Country is required",
-      });
+      obj["countryId"] = getValues(addEnquiryFormFields.enqCountry.config.name);
+    }
+    if (addEnquiryFormFields.enqClient.config.name === "clientID") {
+      obj["clientID"] = getValues(addEnquiryFormFields.enqClient.config.name);
+    }
+    if (addEnquiryFormFields.enqServiceType.config.name === "serviceTypeID") {
+      obj["serviceTypeID"] = getValues(
+        addEnquiryFormFields.enqServiceType.config.name
+      );
+    }
+    if (obj.countryId && obj.clientID && obj.serviceTypeID) {
+      setGetPriceFlag({ flag: true, ...obj });
+      // console.log("true", { flag: true, ...obj });
+    } else {
+      setGetPriceFlag({ flag: false });
+      // console.log("false", { flag: false });
     }
   };
 
   const { data: priceData } = getPrice(
-    { clientId, serviceTypeId, countryId },
-    clientId != -2 && serviceTypeId != -2 && countryId != -2
+    {
+      clientId: getPriceFlag.clientID?.value,
+      serviceTypeId: getPriceFlag.serviceTypeID?.value,
+      countryId: getPriceFlag.countryId?.value,
+    },
+    getPriceFlag.flag
   );
 
   if (priceData !== undefined) {
@@ -626,8 +636,10 @@ export const AddEnquiry: React.FC = () => {
     if (countryData && enqFormData?.typeofEnquiry) {
       enqData.typeofEnquiry = enqFormData.typeofEnquiry.value;
     }
+    if (countryData && enqFormData?.localSourceId) {
+      enqData.localSourceId = enqFormData.localSourceId.value;
+    }
     // industryId: formEnqData.industryId.value,
-    // localSourceId: formEnqData.localSourceId.value,
     return cleanupObject(enqData);
   };
 
@@ -681,10 +693,11 @@ export const AddEnquiry: React.FC = () => {
     if (clientData && enqData?.clientID) {
       let data = clientData[enqData.clientID];
       data &&
-        (enqFormData.clientID = {
+        ((enqFormData.clientID = {
           label: data.clientName,
           value: data.clientID,
-        });
+        }),
+        getClientValue(data.clientID));
     }
     if (serviceData && enqData?.serviceTypeID) {
       let data = serviceData[enqData.serviceTypeID];
@@ -774,14 +787,14 @@ export const AddEnquiry: React.FC = () => {
           value: data.value,
         });
     }
-    // if (countryData && enqData?.siteStatusId) {
-    //   let data = actualBuyerData[enqData.siteStatusId];
-    //   enqFormData.siteStatusId = {
-    //     label: data.partyName,
-    //     value: data.partyId,
-    //   };
-    //   .value;
-    // }
+    if (localSourceData && enqData?.localSourceId) {
+      let data = localSourceData[enqData.localSourceId];
+      data &&
+        (enqFormData.localSourceId = {
+          label: data.localSource,
+          value: data.localSourceId,
+        });
+    }
     return enqFormData;
   };
 
@@ -857,7 +870,6 @@ export const AddEnquiry: React.FC = () => {
                 register={register}
                 control={control}
                 config={addEnquiryFormFields.enqCountry}
-                onChange={onCountryChangeHandler}
               />
               <NewInput
                 errors={errors}
@@ -906,7 +918,7 @@ export const AddEnquiry: React.FC = () => {
                 register={register}
                 control={control}
                 config={addEnquiryFormFields.enqClient}
-                onChange={onClientChangeHandler}
+                onChange={(e) => getClientValue(e.value)}
               />
               <NewInput
                 errors={errors}
@@ -934,7 +946,6 @@ export const AddEnquiry: React.FC = () => {
                 register={register}
                 control={control}
                 config={addEnquiryFormFields.enqServiceType}
-                onChange={onServiceTypeChangeHandler}
               />
               <div className="row mb-2 justify-content-end">
                 <div className="col-md-4 col-xs-12 text-right">

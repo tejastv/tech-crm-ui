@@ -80,6 +80,7 @@ export interface AllEnquiriesType {
   printStatus: string;
   clientPrice: string;
   localSource: string;
+  localSourceId?: string;
   cityName: string;
   clientName: string;
   sourceName: string;
