@@ -121,7 +121,7 @@ export const AddUpdateClient: React.FC = () => {
   const { data: stateData } = getState();
   useEffect(() => {
     if (stateData) {
-      setStateOptions(stateData);
+      setStateOptions(Object.values(stateData));
     }
   }, [stateData?.length && Object.values(stateData).length]);
 

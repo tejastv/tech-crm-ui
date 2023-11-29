@@ -16,8 +16,8 @@ export const useCityApiCallHook = () => {
   const queryClient = new QueryClient();
   const navigate = useNavigate();
 
-  const getCity = (): UseQueryResult<{[key: string | number]: CityType}> => {
-    return useQuery<{[key: string | number]: CityType}>({
+  const getCity = (): UseQueryResult<{ [key: string | number]: CityType }> => {
+    return useQuery<{ [key: string | number]: CityType }>({
       queryKey: [queryKeys.CITY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CITY);
@@ -60,8 +60,10 @@ export const useCityApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateCityType) => addCity(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
+            queryKey: [queryKeys.CITY_DATA],
+          });
           navigate("..");
         },
       }
@@ -83,8 +85,10 @@ export const useCityApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateCityType) => updateCityData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
+            queryKey: [queryKeys.CITY_DATA],
+          });
           navigate("..");
         },
       }
@@ -101,8 +105,10 @@ export const useCityApiCallHook = () => {
 
   const deleteCityMutation = () => {
     const mutation = useMutation((id: string) => deleteCity(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.CITY_DATA],
+        });
       },
     });
     return mutation;

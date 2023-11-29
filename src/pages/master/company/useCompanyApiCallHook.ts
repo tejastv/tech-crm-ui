@@ -12,7 +12,7 @@ export const useCompanyApiCallHook = () => {
   const navigate = useNavigate();
 
   const getCompany = () => {
-    return useQuery<{[key: string | number]: CompanyType}>({
+    return useQuery<{ [key: string | number]: CompanyType }>({
       queryKey: [queryKeys.COMPANY_MASTER_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_COMPANY_MASTER);
@@ -56,8 +56,8 @@ export const useCompanyApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateCompanyType) => addCompany(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.COMPANY_MASTER_DATA],
           });
           navigate("..");
@@ -85,7 +85,7 @@ export const useCompanyApiCallHook = () => {
       (updatedItem: AddUpdateCompanyType) => updateCompanyData(updatedItem),
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries({
+          await await queryClient.invalidateQueries({
             queryKey: [queryKeys.COMPANY_MASTER_DATA],
           });
           navigate("..");
@@ -104,8 +104,8 @@ export const useCompanyApiCallHook = () => {
 
   const deleteCompanyMutation = () => {
     const mutation = useMutation((id: string) => deleteCompany(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.COMPANY_MASTER_DATA],
         });
       },

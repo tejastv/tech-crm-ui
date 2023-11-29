@@ -79,8 +79,8 @@ export const useFinYearApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateFinYearType) => addFinYear(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.FIN_YEAR_DATA],
           });
           navigate("..");
@@ -107,8 +107,8 @@ export const useFinYearApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateFinYearType) => updateFinYearData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.FIN_YEAR_DATA],
           });
           navigate("..");
@@ -129,8 +129,10 @@ export const useFinYearApiCallHook = () => {
 
   const deleteFinYearMutation = () => {
     const mutation = useMutation((id: string) => deleteFinYear(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.FIN_YEAR_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.FIN_YEAR_DATA],
+        });
       },
     });
     return mutation;

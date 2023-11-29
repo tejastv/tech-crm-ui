@@ -28,7 +28,7 @@ export const Enquiries: React.FC = () => {
   const { getEnquiries, getEnquiryBasedOnSearchParam, deleteEnquiryMutation } =
     useAllEnquiriesApiCallHook();
   const { mutateAsync: deleteEnquiry } = deleteEnquiryMutation();
-  const { data: enquiriesData, isLoading } = getEnquiries();
+  const { data: enquiriesData, isFetching } = getEnquiries();
   const navigate = useNavigate();
   const { getClient } = useClientApiCallHook();
   const {
@@ -449,7 +449,7 @@ export const Enquiries: React.FC = () => {
 
   const editEnquiryClick = (enquiriesData: any) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", enquiriesData.enqID), {
-      state: enquiriesData,
+      state: null,
     });
   };
 
@@ -543,8 +543,7 @@ export const Enquiries: React.FC = () => {
             </div>
           </form>
         )}
-
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

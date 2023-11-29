@@ -61,8 +61,8 @@ export const useLocalSourceApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateLocalSourceType) => addLocalSource(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.LOCALSOURCE_DATA],
           });
           navigate("..");
@@ -90,8 +90,8 @@ export const useLocalSourceApiCallHook = () => {
       (updatedItem: AddUpdateLocalSourceType) =>
         updateLocalSourceData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.LOCALSOURCE_DATA],
           });
           navigate("..");
@@ -110,8 +110,8 @@ export const useLocalSourceApiCallHook = () => {
 
   const deleteLocalSourceMutation = () => {
     const mutation = useMutation((id: string) => deleteLocalSource(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.LOCALSOURCE_DATA],
         });
       },

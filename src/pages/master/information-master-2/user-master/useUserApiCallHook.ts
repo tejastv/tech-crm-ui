@@ -51,8 +51,8 @@ export const useUserApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: Partial<UserType>) => addUser(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.USER_DATA],
           });
           navigate("..");
@@ -76,8 +76,8 @@ export const useUserApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: Partial<UserType>) => updateUserData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.USER_DATA],
           });
           navigate("..");
@@ -96,8 +96,8 @@ export const useUserApiCallHook = () => {
 
   const deleteUserMutation = () => {
     const mutation = useMutation((id: string) => deleteUser(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.USER_DATA],
         });
       },

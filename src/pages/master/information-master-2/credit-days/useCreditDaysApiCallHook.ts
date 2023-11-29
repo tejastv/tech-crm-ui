@@ -20,7 +20,10 @@ export const useCreditDaysApiCallHook = () => {
       queryKey: [queryKeys.CREDIT_DAYS_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CREDIT_DAYS);
-        const data = response.data.data.sort((a: { creditPeriod: number; }, b: { creditPeriod: number; }) => a.creditPeriod - b.creditPeriod);
+        const data = response.data.data.sort(
+          (a: { creditPeriod: number }, b: { creditPeriod: number }) =>
+            a.creditPeriod - b.creditPeriod
+        );
         return data;
       },
       staleTime: Infinity,
@@ -55,8 +58,8 @@ export const useCreditDaysApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateCreditDaysType) => addCreditDays(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.CREDIT_DAYS_DATA],
           });
           navigate("..");
@@ -84,8 +87,8 @@ export const useCreditDaysApiCallHook = () => {
       (updatedItem: AddUpdateCreditDaysType) =>
         updateCreditDaysData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.CREDIT_DAYS_DATA],
           });
           navigate("..");
@@ -106,8 +109,8 @@ export const useCreditDaysApiCallHook = () => {
 
   const deleteCreditDaysMutation = () => {
     const mutation = useMutation((id: string) => deleteCreditDays(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.CREDIT_DAYS_DATA],
         });
       },

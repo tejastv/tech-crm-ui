@@ -8,8 +8,6 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-
-import { EnqueryFormType } from "@transaction-search/index";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -26,20 +24,6 @@ export const useAllEnquiriesApiCallHook = () => {
       callFrom: "transaction",
     },
   };
-
-  // const getEnquiries = (): UseQueryResult<AllEnquiriesType[]> => {
-  //   return useQuery<AllEnquiriesType[]>({
-  //     queryKey: [queryKeys.ENQUIRY_DATA],
-  //     queryFn: async () => {
-  //       const response = await instance.get(
-  //         apiUrls.GET_ADD_ALL_ENQUIRY,
-  //         callFormConfig
-  //       );
-  //       return response.data.data;
-  //     },
-  //     staleTime: Infinity,
-  //   });
-  // };
 
   const getEnquiries = (): UseQueryResult<AllEnquiriesType[]> => {
     return useQuery<AllEnquiriesType[]>({
@@ -86,11 +70,14 @@ export const useAllEnquiriesApiCallHook = () => {
   };
 
   const updateEnquiry = async (
-    updateStateData: Partial<AllEnquiriesType>
+    updateEnqData: Partial<AllEnquiriesType>
   ): Promise<ApiResponseType<AllEnquiriesType>> => {
     const response = await instance.put(
-      apiUrls.GET_UPDATE_DELETE_STATE.replace("{id}", "" + updateStateData.id),
-      updateStateData,
+      apiUrls.GET_UPDATE_DELETE_ALL_ENQUIRY.replace(
+        "{id}",
+        "" + updateEnqData.id
+      ),
+      updateEnqData,
       callFormConfig
     );
     return response.data.data;
@@ -100,9 +87,9 @@ export const useAllEnquiriesApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: Partial<AllEnquiriesType>) => updateEnquiry(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
-            queryKey: [queryKeys.STATE_DATA],
+        onSuccess: async () => {
+          await await queryClient.invalidateQueries({
+            queryKey: [queryKeys.ENQUIRY_DATA],
           });
           navigate("..");
         },
@@ -123,8 +110,8 @@ export const useAllEnquiriesApiCallHook = () => {
 
   const deleteEnquiryMutation = () => {
     const mutation = useMutation((id: string) => deleteEnquiry(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.ENQUIRY_DATA],
         });
       },

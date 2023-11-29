@@ -83,9 +83,6 @@ export const AddEnquiry: React.FC = () => {
   const { getFinYear } = useFinYearApiCallHook();
 
   const [clientId, setClientId] = useState<number>(-2);
-  const [serviceTypeId, setServiceTypeId] = useState<number>(-2);
-  const [countryId, setCountryId] = useState<number>(-2);
-
   const [cityOptions, setCityOptions] = useState<CityType[]>();
   const [stateOptions, setStateOptions] = useState<StateType[]>();
   const [countryOptions, setCountryOptions] = useState<CountryType[]>();
@@ -402,7 +399,7 @@ export const AddEnquiry: React.FC = () => {
   );
 
   const getClientValue = (clientId: number) => {
-    console.log(clientId);
+    // console.log(clientId);
     if (clientId) {
       setClientId(clientId);
     }

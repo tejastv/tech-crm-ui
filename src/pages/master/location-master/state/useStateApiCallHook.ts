@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { StateType, StateFormType } from "@master/index";
+import { StateType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 
 import { ApiResponseType, MapType } from "@shared/index";
@@ -61,8 +61,8 @@ export const useStateApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: Partial<StateType>) => addState(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.STATE_DATA],
           });
           navigate("..");
@@ -86,8 +86,8 @@ export const useStateApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: Partial<StateType>) => updateState(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.STATE_DATA],
           });
           navigate("..");
@@ -106,8 +106,10 @@ export const useStateApiCallHook = () => {
 
   const deleteContinentMutation = () => {
     const mutation = useMutation((id: string) => deleteState(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.STATE_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.STATE_DATA],
+        });
       },
     });
     return mutation;

@@ -20,7 +20,10 @@ export const useBankMasterDepositApiCallHook = () => {
       queryKey: [queryKeys.BANKMASTER_DEPOSIT_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_BANKMASTER_DEPOSIT);
-        const data = response.data.data.sort((a: { bankName: string; }, b: { bankName: any; }) => a.bankName.localeCompare(b.bankName));
+        const data = response.data.data.sort(
+          (a: { bankName: string }, b: { bankName: any }) =>
+            a.bankName.localeCompare(b.bankName)
+        );
         return data;
       },
       staleTime: Infinity,
@@ -57,8 +60,8 @@ export const useBankMasterDepositApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddBankDepositType) => addBankMasterDeposit(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.BANKMASTER_DEPOSIT_DATA],
           });
           navigate("..");
@@ -86,8 +89,8 @@ export const useBankMasterDepositApiCallHook = () => {
       (updatedItem: AddBankDepositType) =>
         updateBankMasterDepositData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.BANKMASTER_DEPOSIT_DATA],
           });
           navigate("..");
@@ -108,8 +111,8 @@ export const useBankMasterDepositApiCallHook = () => {
 
   const deleteBankMasterDepositMutation = () => {
     const mutation = useMutation((id: string) => deleteBankMasterDeposit(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.BANKMASTER_DEPOSIT_DATA],
         });
       },

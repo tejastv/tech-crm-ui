@@ -20,7 +20,10 @@ export const useIndustryApiCallHook = () => {
       queryKey: [queryKeys.INDUSTRY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_INDUSTRY);
-        const data = response.data.data.sort((a: { industryName: string; }, b: { industryName: any; }) => a.industryName.localeCompare(b.industryName));
+        const data = response.data.data.sort(
+          (a: { industryName: string }, b: { industryName: any }) =>
+            a.industryName.localeCompare(b.industryName)
+        );
         return data;
       },
       staleTime: Infinity,
@@ -55,8 +58,8 @@ export const useIndustryApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateIndustryType) => addIndustry(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.INDUSTRY_DATA],
           });
           navigate("..");
@@ -83,8 +86,8 @@ export const useIndustryApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateIndustryType) => updateIndustryData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.INDUSTRY_DATA],
           });
           navigate("..");
@@ -105,8 +108,10 @@ export const useIndustryApiCallHook = () => {
 
   const deleteIndustryMutation = () => {
     const mutation = useMutation((id: string) => deleteIndustry(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.INDUSTRY_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.INDUSTRY_DATA],
+        });
       },
     });
     return mutation;

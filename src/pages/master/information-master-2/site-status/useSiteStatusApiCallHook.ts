@@ -20,7 +20,10 @@ export const useSiteStatusApiCallHook = () => {
       queryKey: [queryKeys.SITE_STATUS_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_SITE_STATUS);
-        const data = response.data.data.sort((a: { siteStatus: string; }, b: { siteStatus: any; }) => a.siteStatus.localeCompare(b.siteStatus));
+        const data = response.data.data.sort(
+          (a: { siteStatus: string }, b: { siteStatus: any }) =>
+            a.siteStatus.localeCompare(b.siteStatus)
+        );
         return data;
       },
       staleTime: Infinity,
@@ -55,8 +58,8 @@ export const useSiteStatusApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateSiteStatusType) => addSiteStatus(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.SITE_STATUS_DATA],
           });
           navigate("..");
@@ -84,8 +87,8 @@ export const useSiteStatusApiCallHook = () => {
       (updatedItem: AddUpdateSiteStatusType) =>
         updateSiteStatusData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.SITE_STATUS_DATA],
           });
           navigate("..");
@@ -106,8 +109,8 @@ export const useSiteStatusApiCallHook = () => {
 
   const deleteSiteStatusMutation = () => {
     const mutation = useMutation((id: string) => deleteSiteStatus(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.SITE_STATUS_DATA],
         });
       },

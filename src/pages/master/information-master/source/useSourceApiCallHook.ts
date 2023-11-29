@@ -58,8 +58,8 @@ export const useSourceApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateSourceType) => addSource(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.SOURCE_DATA],
           });
           navigate("..");
@@ -86,8 +86,8 @@ export const useSourceApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateSourceType) => updateSourceData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.SOURCE_DATA],
           });
           navigate("..");
@@ -108,8 +108,10 @@ export const useSourceApiCallHook = () => {
 
   const deleteSourceMutation = () => {
     const mutation = useMutation((id: string) => deleteSource(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.SOURCE_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.SOURCE_DATA],
+        });
       },
     });
     return mutation;
