@@ -518,6 +518,8 @@ export const AddEnquiry: React.FC = () => {
   useEffect(() => {
     if (params.id) {
       if (localEnqData !== null) {
+        console.log(localEnqData);
+
         reset(mapEnqDataToEnqForm(localEnqData));
       }
     }
@@ -668,6 +670,13 @@ export const AddEnquiry: React.FC = () => {
         value: data.companyId,
       };
     }
+    if (clientData && enqData?.clientID) {
+      let data = clientData[enqData.clientID];
+      enqFormData.clientID = {
+        label: data.clientName,
+        value: data.clientID,
+      };
+    }
     if (serviceData && enqData?.serviceTypeID) {
       let data = serviceData[enqData.serviceTypeID];
       enqFormData.serviceTypeID = {
@@ -724,14 +733,6 @@ export const AddEnquiry: React.FC = () => {
         value: data.partyId,
       };
     }
-    // if (countryData && enqData?.siteStatusId) {
-    //   let data = actualBuyerData[enqData.siteStatusId];
-    //   enqFormData.siteStatusId = {
-    //     label: data.partyName,
-    //     value: data.partyId,
-    //   };
-    //   .value;
-    // }
     if (fYearData && enqData?.fyear) {
       let data = fYearData[enqData.fyear];
       enqFormData.fYear = {
@@ -753,6 +754,14 @@ export const AddEnquiry: React.FC = () => {
         value: data.value,
       };
     }
+    // if (countryData && enqData?.siteStatusId) {
+    //   let data = actualBuyerData[enqData.siteStatusId];
+    //   enqFormData.siteStatusId = {
+    //     label: data.partyName,
+    //     value: data.partyId,
+    //   };
+    //   .value;
+    // }
     return enqFormData;
   };
 
