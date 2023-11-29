@@ -1,7 +1,7 @@
 import { useAxios } from "@hooks/useAxios";
 import { LocalSourceType, AddUpdateLocalSourceType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
@@ -14,7 +14,7 @@ export const useLocalSourceApiCallHook = () => {
   const getLocalSource = () => {
     // const response = await instance.get(apiUrls.GET_ADD_COUNTRY);
     // return response.data.data;
-    return useQuery<LocalSourceType[]>({
+    return useQuery<MapType<LocalSourceType>>({
       queryKey: [queryKeys.LOCALSOURCE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_LOCALSOURCE);
