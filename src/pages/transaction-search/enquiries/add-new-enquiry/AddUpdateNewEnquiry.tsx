@@ -433,9 +433,11 @@ export const AddEnquiry: React.FC = () => {
 
   const getPriceHandler = () => {
     if (addEnquiryFormFields.enqCountry.config.name === "countryId") {
-      setError(addEnquiryFormFields.enqCountry.config.name, {message: "Country is required"});
+      setError(addEnquiryFormFields.enqCountry.config.name, {
+        message: "Country is required",
+      });
     }
-  }
+  };
 
   const { data: priceData } = getPrice(
     { clientId, serviceTypeId, countryId },
@@ -670,94 +672,107 @@ export const AddEnquiry: React.FC = () => {
     };
     if (companyData && enqData?.companyID) {
       let data = companyData[enqData.companyID];
-      data && (enqFormData.companyID = {
-        label: data.companyName,
-        value: data.companyId,
-      });
+      data &&
+        (enqFormData.companyID = {
+          label: data.companyName,
+          value: data.companyId,
+        });
     }
     if (clientData && enqData?.clientID) {
       let data = clientData[enqData.clientID];
-      data && (enqFormData.clientID = {
-        label: data.clientName,
-        value: data.clientID,
-      });
+      data &&
+        (enqFormData.clientID = {
+          label: data.clientName,
+          value: data.clientID,
+        });
     }
     if (serviceData && enqData?.serviceTypeID) {
       let data = serviceData[enqData.serviceTypeID];
-      data && (enqFormData.serviceTypeID = {
-        label: data.serviceType,
-        value: data.serviceTypeID,
-      });
+      data &&
+        (enqFormData.serviceTypeID = {
+          label: data.serviceType,
+          value: data.serviceTypeID,
+        });
     }
     if (countryData && clientData?.clientID) {
       let data = clientData[enqData.clientID];
-      data && (enqFormData.clientID = {
-        label: data.clientName,
-        value: data.clientID,
-      });
+      data &&
+        (enqFormData.clientID = {
+          label: data.clientName,
+          value: data.clientID,
+        });
     }
     if (sourceData && enqData?.sourceID) {
       let data = sourceData[enqData.sourceID];
-      data && (enqFormData.sourceID = {
-        label: data.source,
-        value: data.sourceID,
-      });
+      data &&
+        (enqFormData.sourceID = {
+          label: data.source,
+          value: data.sourceID,
+        });
     }
     if (enqStatusData && enqData?.enqStatusID) {
       let data = enqStatusData[enqData.enqStatusID];
-      data && (enqFormData.enqStatusID = {
-        label: data.enquiryStatus,
-        value: data.enquiryStatusID,
-      });
+      data &&
+        (enqFormData.enqStatusID = {
+          label: data.enquiryStatus,
+          value: data.enquiryStatusID,
+        });
     }
     if (cityData && enqData?.cityId) {
       let data = cityData[enqData.cityId];
-      data && (enqFormData.cityId = {
-        label: data.cityName,
-        value: data.cityId,
-      });
+      data &&
+        (enqFormData.cityId = {
+          label: data.cityName,
+          value: data.cityId,
+        });
     }
     if (stateData && enqData?.stateId) {
       let data = stateData[enqData.stateId];
-      data && (enqFormData.stateId = {
-        label: data.stateName,
-        value: data.stateId,
-      });
+      data &&
+        (enqFormData.stateId = {
+          label: data.stateName,
+          value: data.stateId,
+        });
     }
     if (countryData && enqData?.countryId) {
       let data = countryData[enqData.countryId];
-      data && (enqFormData.countryId = {
-        label: data.countryName,
-        value: data.countryId,
-      });
+      data &&
+        (enqFormData.countryId = {
+          label: data.countryName,
+          value: data.countryId,
+        });
     }
     if (actualBuyerData && enqData?.actualBuyerId) {
       let data = actualBuyerData[enqData.actualBuyerId];
-      data && (enqFormData.actualBuyerId = {
-        label: data.partyName,
-        value: data.partyId,
-      });
+      data &&
+        (enqFormData.actualBuyerId = {
+          label: data.partyName,
+          value: data.partyId,
+        });
     }
     if (fYearData && enqData?.fyear) {
       let data = fYearData[enqData.fyear];
-      data && (enqFormData.fYear = {
-        label: data.finYear,
-        value: data.finYear,
-      });
+      data &&
+        (enqFormData.fYear = {
+          label: data.finYear,
+          value: data.finYear,
+        });
     }
     if (enqData?.pmtstatus) {
       let data = addEnquiryFormFields.enqPrintStatusData[enqData.pmtstatus];
-      data && (enqFormData.pmtstatus = {
-        label: data.label,
-        value: data.value,
-      });
+      data &&
+        (enqFormData.pmtstatus = {
+          label: data.label,
+          value: data.value,
+        });
     }
     if (enqData?.typeofEnquiry) {
       let data = addEnquiryFormFields.enqTypeData[enqData.typeofEnquiry];
-      data && (enqFormData.typeofEnquiry = {
-        label: data.label,
-        value: data.value,
-      });
+      data &&
+        (enqFormData.typeofEnquiry = {
+          label: data.label,
+          value: data.value,
+        });
     }
     // if (countryData && enqData?.siteStatusId) {
     //   let data = actualBuyerData[enqData.siteStatusId];
@@ -923,7 +938,11 @@ export const AddEnquiry: React.FC = () => {
               />
               <div className="row mb-2 justify-content-end">
                 <div className="col-md-4 col-xs-12 text-right">
-                  <Button onClick={getPriceHandler} type="button" className="btn btn-danger btn-sm">
+                  <Button
+                    onClick={getPriceHandler}
+                    type="button"
+                    className="btn btn-danger btn-sm"
+                  >
                     <i className="far fa-save"></i> Get Price
                   </Button>
                 </div>
