@@ -59,6 +59,7 @@ export const AddEnquiry: React.FC = () => {
     control,
     setValue,
     reset,
+    setError,
     formState: { errors },
   } = useForm<EnqueryFormType>();
   const { state: localEnqData } = useLocation();
@@ -430,12 +431,18 @@ export const AddEnquiry: React.FC = () => {
     }
   };
 
+  const getPriceHandler = () => {
+    if (addEnquiryFormFields.enqCountry.config.name === "countryId") {
+      setError(addEnquiryFormFields.enqCountry.config.name, {message: "Country is required"});
+    }
+  }
+
   const { data: priceData } = getPrice(
     { clientId, serviceTypeId, countryId },
     clientId != -2 && serviceTypeId != -2 && countryId != -2
   );
 
-  if (priceData) {
+  if (priceData !== undefined) {
     if (addEnquiryFormFields.enqPrice.config.name === "reportPrice") {
       setValue(addEnquiryFormFields.enqPrice.config.name, priceData);
     }
@@ -517,6 +524,7 @@ export const AddEnquiry: React.FC = () => {
   useEffect(() => {
     if (params.id) {
       if (localEnqData !== null) {
+        console.log(localEnqData);
         reset(mapEnqDataToEnqForm(localEnqData));
       }
     }
@@ -625,8 +633,8 @@ export const AddEnquiry: React.FC = () => {
     let enqFormData: Partial<EnqueryFormType> = {
       refNo: enqData.refNo,
       bookNo: enqData.bookNo,
-      recdDate: enqData.recdDate,
-      dueDate: enqData.dueDate,
+      recdDate: enqData.recdDate && enqData.recdDate.split("T")[0],
+      dueDate: enqData.dueDate && enqData.dueDate.split("T")[0],
       clientRefNo: enqData.clientRefNo,
       notes: enqData.notes,
       creditamount: enqData.creditamount,
@@ -662,66 +670,94 @@ export const AddEnquiry: React.FC = () => {
     };
     if (companyData && enqData?.companyID) {
       let data = companyData[enqData.companyID];
-      enqFormData.companyID = {
+      data && (enqFormData.companyID = {
         label: data.companyName,
         value: data.companyId,
-      };
+      });
+    }
+    if (clientData && enqData?.clientID) {
+      let data = clientData[enqData.clientID];
+      data && (enqFormData.clientID = {
+        label: data.clientName,
+        value: data.clientID,
+      });
     }
     if (serviceData && enqData?.serviceTypeID) {
       let data = serviceData[enqData.serviceTypeID];
-      enqFormData.serviceTypeID = {
+      data && (enqFormData.serviceTypeID = {
         label: data.serviceType,
         value: data.serviceTypeID,
-      };
+      });
     }
     if (countryData && clientData?.clientID) {
       let data = clientData[enqData.clientID];
-      enqFormData.clientID = {
+      data && (enqFormData.clientID = {
         label: data.clientName,
         value: data.clientID,
-      };
+      });
     }
     if (sourceData && enqData?.sourceID) {
       let data = sourceData[enqData.sourceID];
-      enqFormData.sourceID = {
+      data && (enqFormData.sourceID = {
         label: data.source,
         value: data.sourceID,
-      };
+      });
     }
     if (enqStatusData && enqData?.enqStatusID) {
       let data = enqStatusData[enqData.enqStatusID];
-      enqFormData.enqStatusID = {
+      data && (enqFormData.enqStatusID = {
         label: data.enquiryStatus,
         value: data.enquiryStatusID,
-      };
+      });
     }
     if (cityData && enqData?.cityId) {
       let data = cityData[enqData.cityId];
-      enqFormData.cityId = {
+      data && (enqFormData.cityId = {
         label: data.cityName,
         value: data.cityId,
-      };
+      });
     }
     if (stateData && enqData?.stateId) {
       let data = stateData[enqData.stateId];
-      enqFormData.stateId = {
+      data && (enqFormData.stateId = {
         label: data.stateName,
         value: data.stateId,
-      };
+      });
     }
     if (countryData && enqData?.countryId) {
       let data = countryData[enqData.countryId];
-      enqFormData.countryId = {
+      data && (enqFormData.countryId = {
         label: data.countryName,
         value: data.countryId,
-      };
+      });
     }
     if (actualBuyerData && enqData?.actualBuyerId) {
       let data = actualBuyerData[enqData.actualBuyerId];
-      enqFormData.actualBuyerId = {
+      data && (enqFormData.actualBuyerId = {
         label: data.partyName,
         value: data.partyId,
-      };
+      });
+    }
+    if (fYearData && enqData?.fyear) {
+      let data = fYearData[enqData.fyear];
+      data && (enqFormData.fYear = {
+        label: data.finYear,
+        value: data.finYear,
+      });
+    }
+    if (enqData?.pmtstatus) {
+      let data = addEnquiryFormFields.enqPrintStatusData[enqData.pmtstatus];
+      data && (enqFormData.pmtstatus = {
+        label: data.label,
+        value: data.value,
+      });
+    }
+    if (enqData?.typeofEnquiry) {
+      let data = addEnquiryFormFields.enqTypeData[enqData.typeofEnquiry];
+      data && (enqFormData.typeofEnquiry = {
+        label: data.label,
+        value: data.value,
+      });
     }
     // if (countryData && enqData?.siteStatusId) {
     //   let data = actualBuyerData[enqData.siteStatusId];
@@ -731,27 +767,6 @@ export const AddEnquiry: React.FC = () => {
     //   };
     //   .value;
     // }
-    if (fYearData && enqData?.fyear) {
-      let data = fYearData[enqData.fyear];
-      enqFormData.fYear = {
-        label: data.finYear,
-        value: data.finYear,
-      };
-    }
-    if (enqData?.pmtstatus) {
-      let data = addEnquiryFormFields.enqPrintStatusData[enqData.pmtstatus];
-      enqFormData.pmtstatus = {
-        label: data.label,
-        value: data.value,
-      };
-    }
-    if (enqData?.typeofEnquiry) {
-      let data = addEnquiryFormFields.enqTypeData[enqData.typeofEnquiry];
-      enqFormData.typeofEnquiry = {
-        label: data.label,
-        value: data.value,
-      };
-    }
     return enqFormData;
   };
 
@@ -908,7 +923,7 @@ export const AddEnquiry: React.FC = () => {
               />
               <div className="row mb-2 justify-content-end">
                 <div className="col-md-4 col-xs-12 text-right">
-                  <Button type="button" className="btn btn-danger btn-sm">
+                  <Button onClick={getPriceHandler} type="button" className="btn btn-danger btn-sm">
                     <i className="far fa-save"></i> Get Price
                   </Button>
                 </div>

@@ -112,7 +112,7 @@ export const useAddEnquiryApiCallHook = () => {
             .replace("{country_id}", ids.countryId)
             .replace("{serviceTypeId}", ids.serviceTypeId)
         );
-        return response.data;
+        return response.data.data;
       },
       enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
