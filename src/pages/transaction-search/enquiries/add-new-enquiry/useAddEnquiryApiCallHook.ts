@@ -1,9 +1,7 @@
 import { useAxios } from "@hooks/useAxios";
 import {
-  EnqueryFormType,
-  AllEnquiriesType,
+  EnquiriesType,
   EnqStatusType,
-  PriceType,
   RefNoType,
   ServiceType,
 } from "@transaction-search/index";
@@ -120,8 +118,8 @@ export const useAddEnquiryApiCallHook = () => {
   };
 
   const addEnquiry = async (
-    enquiryData: Partial<AllEnquiriesType>
-  ): Promise<ApiResponseType<AllEnquiriesType>> => {
+    enquiryData: Partial<EnquiriesType>
+  ): Promise<ApiResponseType<EnquiriesType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_ALL_ENQUIRY,
       enquiryData,
@@ -132,13 +130,42 @@ export const useAddEnquiryApiCallHook = () => {
 
   const addEnquiryMutation = () => {
     const mutation = useMutation(
-      (updatedItem: Partial<AllEnquiriesType>) => addEnquiry(updatedItem),
+      (updatedItem: Partial<EnquiriesType>) => addEnquiry(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
             queryKey: [queryKeys.ENQUIRY_DATA],
           });
           navigate("/transaction/enquiry-details");
+        },
+      }
+    );
+    return mutation;
+  };
+
+  const updateEnquiry = async (
+    updateEnqData: Partial<EnquiriesType>
+  ): Promise<ApiResponseType<EnquiriesType>> => {
+    const response = await instance.put(
+      apiUrls.GET_UPDATE_DELETE_ALL_ENQUIRY.replace(
+        "{id}",
+        "" + updateEnqData.id
+      ),
+      updateEnqData,
+      callFormConfig
+    );
+    return response.data.data;
+  };
+
+  const updateEnquiryMutation = () => {
+    const mutation = useMutation(
+      (updatedItem: Partial<EnquiriesType>) => updateEnquiry(updatedItem),
+      {
+        onSuccess: async () => {
+          await await queryClient.invalidateQueries({
+            queryKey: [queryKeys.ENQUIRY_DATA],
+          });
+          navigate("..");
         },
       }
     );
@@ -152,5 +179,6 @@ export const useAddEnquiryApiCallHook = () => {
     getRefNo,
     getClientDetails,
     getPrice,
+    updateEnquiryMutation,
   };
 };

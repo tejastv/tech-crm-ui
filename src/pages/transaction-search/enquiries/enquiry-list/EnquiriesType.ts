@@ -1,4 +1,4 @@
-export interface AllEnquiriesType {
+export interface EnquiriesType {
   id?: number;
   refNo: string;
   clientRef: string;

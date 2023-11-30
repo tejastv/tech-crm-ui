@@ -13,9 +13,9 @@ import {
 } from "@shared/index";
 import { COMMON_ROUTES, TRANSACTION_ROUTES } from "@constants/index";
 import {
-  AllEnquiriesType,
-  allEnquiryFormFields,
-  useAllEnquiriesApiCallHook,
+  EnquiriesType,
+  enqSearchFormFields,
+  useEnquiriesApiCallHook,
 } from "@pages/transaction-search";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ClientType, useClientApiCallHook } from "@pages/master";
@@ -26,7 +26,7 @@ import { formatDateString } from "@utils/dateFormatter";
 
 export const Enquiries: React.FC = () => {
   const { getEnquiries, getEnquiryBasedOnSearchParam, deleteEnquiryMutation } =
-    useAllEnquiriesApiCallHook();
+    useEnquiriesApiCallHook();
   const { mutateAsync: deleteEnquiry } = deleteEnquiryMutation();
   const { data: enquiriesData, isFetching } = getEnquiries();
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export const Enquiries: React.FC = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<AllEnquiriesType>();
+  } = useForm<EnquiriesType>();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get("category");
@@ -64,7 +64,7 @@ export const Enquiries: React.FC = () => {
     },
   };
 
-  const columns: ColumnDef<AllEnquiriesType>[] = [
+  const columns: ColumnDef<EnquiriesType>[] = [
     {
       id: "action",
       cell: (info) => info.getValue(),
@@ -437,7 +437,7 @@ export const Enquiries: React.FC = () => {
 
   if (clientOptions?.length) {
     let options = selectOptionsMaker(clientOptions, "clientID", "clientName");
-    allEnquiryFormFields.clientnameField.config.options = options;
+    enqSearchFormFields.clientnameField.config.options = options;
   }
 
   const deleteEnquiryClick = (enquiriesData: any) => {
@@ -453,7 +453,7 @@ export const Enquiries: React.FC = () => {
     });
   };
 
-  const tableConfig: TableType<AllEnquiriesType> = {
+  const tableConfig: TableType<EnquiriesType> = {
     config: {
       tableName: "Enquiry",
       columns: columns,
@@ -515,7 +515,7 @@ export const Enquiries: React.FC = () => {
                   errors={errors}
                   register={register}
                   control={control}
-                  config={allEnquiryFormFields.clientnameField}
+                  config={enqSearchFormFields.clientnameField}
                 />
               </div>
 
@@ -523,7 +523,7 @@ export const Enquiries: React.FC = () => {
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={allEnquiryFormFields.fromdateField}
+                  config={enqSearchFormFields.fromdateField}
                 />
               </div>
 
@@ -531,7 +531,7 @@ export const Enquiries: React.FC = () => {
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={allEnquiryFormFields.todateeField}
+                  config={enqSearchFormFields.todateeField}
                 />
               </div>
 

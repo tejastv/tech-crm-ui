@@ -18,8 +18,8 @@ import {
   ServiceType,
   enqFormFields,
   useAddEnquiryApiCallHook,
-  useAllEnquiriesApiCallHook,
-  AllEnquiriesType,
+  useEnquiriesApiCallHook,
+  EnquiriesType,
 } from "@transaction-search/index";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
@@ -60,14 +60,14 @@ export const AddEnquiry: React.FC = () => {
     formState: { errors },
   } = useForm<EnqueryFormType>();
   const { state: localEnqData } = useLocation();
-  const { updateEnquiryMutation, getEnquiryData } =
-    useAllEnquiriesApiCallHook();
+  const { getEnquiryData } = useEnquiriesApiCallHook();
   const {
     getEnqStatus,
     getRefNo,
     getServiceType,
     getPrice,
     addEnquiryMutation,
+    updateEnquiryMutation,
   } = useAddEnquiryApiCallHook();
   const { getActualBuyer } = useActualBuyerApiCallHook();
   const params = useParams();
@@ -550,7 +550,7 @@ export const AddEnquiry: React.FC = () => {
   ]);
 
   const mapEnqRequest = (enqFormData: EnqueryFormType) => {
-    let enqData: Partial<AllEnquiriesType> = {
+    let enqData: Partial<EnquiriesType> = {
       refNo: enqFormData.refNo,
       bookNo: enqFormData.bookNo,
       recdDate: enqFormData.recdDate,
@@ -636,7 +636,7 @@ export const AddEnquiry: React.FC = () => {
     return cleanupObject(enqData);
   };
 
-  const mapEnqDataToEnqForm = (enqData: AllEnquiriesType) => {
+  const mapEnqDataToEnqForm = (enqData: EnquiriesType) => {
     let enqFormData: Partial<EnqueryFormType> = {
       refNo: enqData.refNo,
       bookNo: enqData.bookNo,
@@ -792,7 +792,7 @@ export const AddEnquiry: React.FC = () => {
   };
 
   const onSubmit = handleSubmit((enquiryData): void => {
-    let reqObj: Partial<AllEnquiriesType> = mapEnqRequest(enquiryData);
+    let reqObj: Partial<EnquiriesType> = mapEnqRequest(enquiryData);
     console.log(reqObj);
     if (params.id && reqObj) {
       updateEnquiry({ id: +params.id, ...reqObj });

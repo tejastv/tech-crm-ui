@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { Enquiries, AddEnquiry } from "@pages/transaction-search";
 import { COMMON_ROUTES } from "@constants/index";
 
-const AllEnquiriesIndex: React.FC = () => {
+const EnquiriesIndex: React.FC = () => {
   return (
     <Routes>
       <Route index element={<Enquiries />}></Route>
@@ -14,4 +14,4 @@ const AllEnquiriesIndex: React.FC = () => {
   );
 };
 
-export default AllEnquiriesIndex;
+export default EnquiriesIndex;

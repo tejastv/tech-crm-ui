@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AllEnquiriesType } from "@master/index";
+import { EnquiriesType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -8,13 +8,12 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export const useAllEnquiriesApiCallHook = () => {
+export const useEnquiriesApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+
   const [queryParam, setQueryParam] = useState<{
     [key: string]: string | undefined;
   }>({});
@@ -25,8 +24,8 @@ export const useAllEnquiriesApiCallHook = () => {
     },
   };
 
-  const getEnquiries = (): UseQueryResult<AllEnquiriesType[]> => {
-    return useQuery<AllEnquiriesType[]>({
+  const getEnquiries = (): UseQueryResult<EnquiriesType[]> => {
+    return useQuery<EnquiriesType[]>({
       queryKey: [queryKeys.ENQUIRY_DATA, queryParam],
       queryFn: async () => {
         const baseUrl = apiUrls.GET_ADD_ALL_ENQUIRY_SEARCH;
@@ -54,8 +53,8 @@ export const useAllEnquiriesApiCallHook = () => {
   const getEnquiryData = (
     id: string,
     condition?: any
-  ): UseQueryResult<AllEnquiriesType> => {
-    return useQuery<AllEnquiriesType>({
+  ): UseQueryResult<EnquiriesType> => {
+    return useQuery<EnquiriesType>({
       queryKey: [queryKeys.ENQUIRY_DATA, id],
       queryFn: async () => {
         const response = await instance.get(
@@ -69,38 +68,9 @@ export const useAllEnquiriesApiCallHook = () => {
     });
   };
 
-  const updateEnquiry = async (
-    updateEnqData: Partial<AllEnquiriesType>
-  ): Promise<ApiResponseType<AllEnquiriesType>> => {
-    const response = await instance.put(
-      apiUrls.GET_UPDATE_DELETE_ALL_ENQUIRY.replace(
-        "{id}",
-        "" + updateEnqData.id
-      ),
-      updateEnqData,
-      callFormConfig
-    );
-    return response.data.data;
-  };
-
-  const updateEnquiryMutation = () => {
-    const mutation = useMutation(
-      (updatedItem: Partial<AllEnquiriesType>) => updateEnquiry(updatedItem),
-      {
-        onSuccess: async () => {
-          await await queryClient.invalidateQueries({
-            queryKey: [queryKeys.ENQUIRY_DATA],
-          });
-          navigate("..");
-        },
-      }
-    );
-    return mutation;
-  };
-
   const deleteEnquiry = async (
     id: string
-  ): Promise<ApiResponseType<AllEnquiriesType>> => {
+  ): Promise<ApiResponseType<EnquiriesType>> => {
     const response = await instance.delete(
       apiUrls.GET_UPDATE_DELETE_ALL_ENQUIRY.replace("{id}", id),
       callFormConfig
@@ -121,7 +91,6 @@ export const useAllEnquiriesApiCallHook = () => {
 
   return {
     getEnquiryData,
-    updateEnquiryMutation,
     getEnquiries,
     deleteEnquiryMutation,
     getEnquiryBasedOnSearchParam,

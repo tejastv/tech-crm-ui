@@ -231,7 +231,7 @@ export * from "./local-source-master/std-price-list/update-ls-standard-price-typ
 export * from "./price-list-master/price-list-for-clients/client-wise-price-type";
 
 // Transaction master
-export * from "../transaction-search/enquiries/all-enquiries/AllEnquiriesType";
+export * from "../transaction-search/enquiries/enquiry-list/EnquiriesType";
 
 //Services/ Hooks
 
@@ -269,5 +269,4 @@ export { useClientApiCallHook } from "./client-master/client/useClientApiCallHoo
 export { useStdPriceClientsApiCallHook } from "./price-list-master/std-price-list-client/useStdPriceClientsApiCallHook";
 export { usePriceListGroupApiCallHook } from "./price-list-master/price-list-group-wise/usePriceListGroupApiCallHook";
 export { useActualBuyerApiCallHook } from "./price-list-master/actual-buyer/useActualBuyerApiCallHook";
-export { useAllEnquiriesApiCallHook } from "../transaction-search/enquiries/useAllEnquiriesApiCallHook";
 export { usePriceListForClientsApiCallHook } from "./price-list-master/price-list-for-clients/usePriceListForClientsApiCallHook";
