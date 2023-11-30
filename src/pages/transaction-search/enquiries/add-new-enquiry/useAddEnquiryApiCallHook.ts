@@ -2,7 +2,7 @@ import { useAxios } from "@hooks/useAxios";
 import {
   EnqueryFormType,
   AllEnquiriesType,
-  EnqType,
+  EnqStatusType,
   PriceType,
   RefNoType,
   ServiceType,
@@ -29,8 +29,8 @@ export const useAddEnquiryApiCallHook = () => {
     },
   };
 
-  const getEnqStatus = (): UseQueryResult<MapType<EnqType>> => {
-    return useQuery<MapType<EnqType>>({
+  const getEnqStatus = (): UseQueryResult<MapType<EnqStatusType>> => {
+    return useQuery<MapType<EnqStatusType>>({
       queryKey: [queryKeys.ENQSTATUS_DATA],
       queryFn: async () => {
         const response = await instance.get(
