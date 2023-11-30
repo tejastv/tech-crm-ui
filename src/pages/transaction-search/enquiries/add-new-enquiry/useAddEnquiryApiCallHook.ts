@@ -134,8 +134,8 @@ export const useAddEnquiryApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: Partial<AllEnquiriesType>) => addEnquiry(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.ENQUIRY_DATA],
           });
           navigate("/transaction/enquiry-details");

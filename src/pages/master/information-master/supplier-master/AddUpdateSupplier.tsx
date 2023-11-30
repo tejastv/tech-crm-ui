@@ -73,7 +73,7 @@ export const AddSupplier: React.FC = () => {
 
   useEffect(() => {
     if (stateData) {
-      setStateOptions(stateData);
+      setStateOptions(Object.values(stateData));
     }
   }, [stateData?.length && Object.values(stateData).length]);
 
@@ -146,10 +146,10 @@ export const AddSupplier: React.FC = () => {
   if (params.id) {
     const { data: supplierMasterData } = getSupplierMasterData("" + params.id);
     if (supplierMasterData) {
-      if (cityData) {
+      if (cityOptions) {
         let id = supplierMasterData?.cityID;
         let data: any = returnObjectBasedOnID(
-          cityData,
+          cityOptions,
           "id",
           id,
           "id",
@@ -162,10 +162,10 @@ export const AddSupplier: React.FC = () => {
             }
           : [];
       }
-      if (stateData) {
+      if (stateOptions) {
         let id = supplierMasterData?.stateID;
         let data: any = returnObjectBasedOnID(
-          stateData,
+          stateOptions,
           "stateId",
           id,
           "stateId",
@@ -178,10 +178,10 @@ export const AddSupplier: React.FC = () => {
             }
           : [];
       }
-      if (countryData) {
+      if (countryOptions) {
         let id = supplierMasterData?.countryID;
         let data: any = returnObjectBasedOnID(
-          countryData,
+          countryOptions,
           "countryId",
           id,
           "countryId",
@@ -238,55 +238,45 @@ export const AddSupplier: React.FC = () => {
   }
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <Input config={addSupplierFormFields.nameSupplier.config} />
-                  <Input config={addSupplierFormFields.nickname.config} />
-                  <Input
-                    config={addSupplierFormFields.addressSupplier.config}
-                  />
-                  <Input config={addSupplierFormFields.telnoSupplier.config} />
-                  <Input config={addSupplierFormFields.faxnoSupplier.config} />
-                  <Input config={addSupplierFormFields.emailSupplier.config} />
-                  <Input
-                    config={addSupplierFormFields.websiteSupplier.config}
-                  />
-                  <Input
-                    config={addSupplierFormFields.contactSupplier.config}
-                  />
-                  <Input
-                    config={addSupplierFormFields.designationSupplier.config}
-                  />
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  <Select config={addSupplierFormFields.citySupplier.config} />
-                  <Input config={addSupplierFormFields.zipSupplier.config} />
-                  <Select config={addSupplierFormFields.stateSupplier.config} />
-                  <Select
-                    config={addSupplierFormFields.countrySupplier.config}
-                  />
-                  <Select
-                    config={addSupplierFormFields.CurrenceySupplier.config}
-                  />
-                </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <Input config={addSupplierFormFields.nameSupplier.config} />
+                <Input config={addSupplierFormFields.nickname.config} />
+                <Input config={addSupplierFormFields.addressSupplier.config} />
+                <Input config={addSupplierFormFields.telnoSupplier.config} />
+                <Input config={addSupplierFormFields.faxnoSupplier.config} />
+                <Input config={addSupplierFormFields.emailSupplier.config} />
+                <Input config={addSupplierFormFields.websiteSupplier.config} />
+                <Input config={addSupplierFormFields.contactSupplier.config} />
+                <Input
+                  config={addSupplierFormFields.designationSupplier.config}
+                />
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
-      </Card>
-    </>
+              <div className="col-md-6 col-xs-12">
+                <Select config={addSupplierFormFields.citySupplier.config} />
+                <Input config={addSupplierFormFields.zipSupplier.config} />
+                <Select config={addSupplierFormFields.stateSupplier.config} />
+                <Select config={addSupplierFormFields.countrySupplier.config} />
+                <Select
+                  config={addSupplierFormFields.CurrenceySupplier.config}
+                />
+              </div>
+            </div>
+          </BorderLayout>
+          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <ActionButtons />
+          </BorderLayout>
+        </form>
+      </FormProvider>
+    </Card>
   );
 };

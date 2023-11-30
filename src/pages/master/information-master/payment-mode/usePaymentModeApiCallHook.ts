@@ -20,7 +20,10 @@ export const usePaymentModeApiCallHook = () => {
       queryKey: [queryKeys.PAYMENTMODE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_PAYMENTMODE);
-        const data = response.data.data.sort((a: { paymentMode: string; }, b: { paymentMode: any; }) => a.paymentMode.localeCompare(b.paymentMode));
+        const data = response.data.data.sort(
+          (a: { paymentMode: string }, b: { paymentMode: any }) =>
+            a.paymentMode.localeCompare(b.paymentMode)
+        );
         return data;
       },
       staleTime: Infinity,
@@ -55,8 +58,8 @@ export const usePaymentModeApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddPaymentModeType) => addPaymentMode(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.PAYMENTMODE_DATA],
           });
           navigate("..");
@@ -83,8 +86,8 @@ export const usePaymentModeApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddPaymentModeType) => updatePaymentModeData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.PAYMENTMODE_DATA],
           });
           navigate("..");
@@ -105,8 +108,8 @@ export const usePaymentModeApiCallHook = () => {
 
   const deletePaymentModeMutation = () => {
     const mutation = useMutation((id: string) => deletePaymentMode(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.PAYMENTMODE_DATA],
         });
       },

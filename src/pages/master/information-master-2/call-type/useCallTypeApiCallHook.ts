@@ -20,7 +20,10 @@ export const useCallTypeApiCallHook = () => {
       queryKey: [queryKeys.CALL_TYPE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CALL_TYPE);
-        const data = response.data.data.sort((a: { typeName: string; }, b: { typeName: any; }) => a.typeName.localeCompare(b.typeName));
+        const data = response.data.data.sort(
+          (a: { typeName: string }, b: { typeName: any }) =>
+            a.typeName.localeCompare(b.typeName)
+        );
         return data;
       },
       staleTime: Infinity,
@@ -55,8 +58,8 @@ export const useCallTypeApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateCallTypeType) => addCallType(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.CALL_TYPE_DATA],
           });
           navigate("..");
@@ -83,8 +86,8 @@ export const useCallTypeApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateCallTypeType) => updateCallTypeData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.CALL_TYPE_DATA],
           });
           navigate("..");
@@ -105,8 +108,10 @@ export const useCallTypeApiCallHook = () => {
 
   const deleteCallTypeMutation = () => {
     const mutation = useMutation((id: string) => deleteCallType(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.CALL_TYPE_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.CALL_TYPE_DATA],
+        });
       },
     });
     return mutation;

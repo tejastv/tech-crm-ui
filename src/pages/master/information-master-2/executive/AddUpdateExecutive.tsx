@@ -62,7 +62,7 @@ export const AddUpdateExecutive: React.FC = () => {
 
   useEffect(() => {
     if (stateData) {
-      setStateOptions(stateData);
+      setStateOptions(Object.values(stateData));
     }
   }, [stateData?.length && Object.values(stateData).length]);
 
@@ -80,10 +80,10 @@ export const AddUpdateExecutive: React.FC = () => {
         executiveData?.executive;
       addExecutiveFormFields.emailInformation2.config.setData =
         executiveData?.email;
-      if (cityData) {
+      if (cityOptions) {
         let id = executiveData?.cityId;
         let data: any = returnObjectBasedOnID(
-          cityData,
+          cityOptions,
           "id",
           id,
           "id",
@@ -96,10 +96,10 @@ export const AddUpdateExecutive: React.FC = () => {
             }
           : [];
       }
-      if (stateData) {
+      if (stateOptions) {
         let id = executiveData?.stateId;
         let data: any = returnObjectBasedOnID(
-          stateData,
+          stateOptions,
           "stateId",
           id,
           "stateId",

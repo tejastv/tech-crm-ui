@@ -395,7 +395,7 @@ export const AddEnquiry: React.FC = () => {
   );
 
   const getClientValue = (clientId: number) => {
-    console.log(clientId);
+    // console.log(clientId);
     if (clientId) {
       setClientId(clientId);
     }

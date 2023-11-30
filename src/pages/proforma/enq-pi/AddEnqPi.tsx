@@ -95,7 +95,7 @@ export const AddEnqPi: React.FC = () => {
 
   useEffect(() => {
     if (stateData) {
-      setStateOptions(stateData);
+      setStateOptions(Object.values(stateData));
     }
   }, [stateData?.length && Object.values(stateData).length]);
 

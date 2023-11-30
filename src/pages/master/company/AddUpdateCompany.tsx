@@ -82,7 +82,7 @@ export const AddUpdateCompany: React.FC = () => {
 
   useEffect(() => {
     if (stateData) {
-      setStateOptions(stateData);
+      setStateOptions(Object.values(stateData));
     }
   }, [stateData?.length && Object.values(stateData).length]);
 
@@ -122,10 +122,10 @@ export const AddUpdateCompany: React.FC = () => {
   useEffect(() => {
     if (companyMasterData) {
       let clonedCompanyData = { ...companyMasterData };
-      if (companyMasterData && cityData) {
+      if (companyMasterData && cityOptions) {
         let id = companyMasterData?.cityId;
         let data: any = returnObjectBasedOnID(
-          cityData,
+          cityOptions,
           "cityId",
           id,
           "cityId",
@@ -138,10 +138,10 @@ export const AddUpdateCompany: React.FC = () => {
             })
           : [];
       }
-      if (companyMasterData && stateData) {
+      if (companyMasterData && stateOptions) {
         let id = companyMasterData?.stateId;
         let data: any = returnObjectBasedOnID(
-          stateData,
+          stateOptions,
           "stateId",
           id,
           "stateId",
@@ -154,10 +154,10 @@ export const AddUpdateCompany: React.FC = () => {
             })
           : [];
       }
-      if (companyMasterData && countryData) {
+      if (companyMasterData && countryOptions) {
         let id = companyMasterData?.countryId;
         let data: any = returnObjectBasedOnID(
-          countryData,
+          countryOptions,
           "countryId",
           id,
           "countryId",
@@ -172,7 +172,7 @@ export const AddUpdateCompany: React.FC = () => {
       }
       reset(clonedCompanyData);
     }
-  }, [params.id, companyMasterData, countryData, stateData, cityData]);
+  }, [params.id, companyMasterData, cityOptions, stateOptions, countryOptions]);
 
   useEffect(() => {
     reset();

@@ -20,7 +20,10 @@ export const useBankMasterDrawnApiCallHook = () => {
       queryKey: [queryKeys.BANKMASTER_DRAWN_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_BANKMASTER_DRAWN);
-        const data = response.data.data.sort((a: { bankName: string; }, b: { bankName: any; }) => a.bankName.localeCompare(b.bankName));
+        const data = response.data.data.sort(
+          (a: { bankName: string }, b: { bankName: any }) =>
+            a.bankName.localeCompare(b.bankName)
+        );
         return data;
       },
       staleTime: Infinity,
@@ -57,8 +60,8 @@ export const useBankMasterDrawnApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddBankdrawnonType) => addBankMasterDrawnOn(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.BANKMASTER_DRAWN_DATA],
           });
           navigate("..");
@@ -86,8 +89,8 @@ export const useBankMasterDrawnApiCallHook = () => {
       (updatedItem: AddBankdrawnonType) =>
         updateBankMasterDrawnOnData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.BANKMASTER_DRAWN_DATA],
           });
           navigate("..");
@@ -108,8 +111,8 @@ export const useBankMasterDrawnApiCallHook = () => {
 
   const deleteBankMasterDrawnOnMutation = () => {
     const mutation = useMutation((id: string) => deleteBankMasterDrawnOn(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.BANKMASTER_DRAWN_DATA],
         });
       },

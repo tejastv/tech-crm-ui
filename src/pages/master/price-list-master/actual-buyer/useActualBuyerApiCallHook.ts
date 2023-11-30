@@ -60,8 +60,8 @@ export const useActualBuyerApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateActualBuyerType) => addActualBuyer(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.ACTUAL_BUYER_DATA],
           });
           navigate("..");
@@ -89,8 +89,8 @@ export const useActualBuyerApiCallHook = () => {
       (updatedItem: AddUpdateActualBuyerType) =>
         updateActualBuyerData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.ACTUAL_BUYER_DATA],
           });
           navigate("..");
@@ -111,8 +111,8 @@ export const useActualBuyerApiCallHook = () => {
 
   const deleteActualBuyerMutation = () => {
     const mutation = useMutation((id: string) => deleteActualBuyer(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.ACTUAL_BUYER_DATA],
         });
       },

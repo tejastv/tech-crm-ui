@@ -1,6 +1,11 @@
 import { apiUrls, queryKeys } from "@constants/index";
 import { useAxios } from "@hooks/useAxios";
-import { UseQueryResult, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { GeneratePiType } from ".";
 import { ApiResponseType } from "@shared/index";
 
@@ -17,16 +22,21 @@ export const useProformaApiCallHook = () => {
 
   const getEnquiryPi = (): UseQueryResult<Array<GeneratePiType>> => {
     return useQuery<Array<GeneratePiType>>({
-      queryKey: [queryKeys.GET_ENQUIRY_PI],
+      queryKey: [queryKeys],
       queryFn: async () => {
-        const response = await instance.get(apiUrls.GET_ENQUIRY_PI, callFormConfig);
+        const response = await instance.get(
+          apiUrls.GET_ENQUIRY_PI,
+          callFormConfig
+        );
         return response.data.data;
       },
       staleTime: Infinity,
     });
   };
 
-  const deleteProforma = async (id: string): Promise<ApiResponseType<GeneratePiType>> => {
+  const deleteProforma = async (
+    id: string
+  ): Promise<ApiResponseType<GeneratePiType>> => {
     const response = await instance.delete(
       apiUrls.UPDATE_DELETE_ENQUIRY_PI.replace("{id}", id),
       callFormConfig
@@ -36,8 +46,8 @@ export const useProformaApiCallHook = () => {
 
   const deleteProformaMutation = () => {
     const mutation = useMutation((id: string) => deleteProforma(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.GET_ENQUIRY_PI] });
+      onSuccess: async () => {
+        // await queryClient.invalidateQueries({ queryKey: [queryKeys.GET_ENQUIRY_PI] });
       },
     });
     return mutation;
@@ -45,6 +55,6 @@ export const useProformaApiCallHook = () => {
 
   return {
     getEnquiryPi,
-    deleteProformaMutation
+    deleteProformaMutation,
   };
 };

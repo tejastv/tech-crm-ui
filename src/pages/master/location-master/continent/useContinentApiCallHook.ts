@@ -64,7 +64,7 @@ export const useContinentApiCallHook = () => {
       (updatedItem: AddUpdateContinentType) => addContinent(updatedItem),
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries({
+          await await queryClient.invalidateQueries({
             queryKey: [queryKeys.CONTINENT_DATA],
           });
           navigate("..");
@@ -91,8 +91,8 @@ export const useContinentApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateContinentType) => updateContinentData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.CONTINENT_DATA],
           });
           navigate("..");
@@ -111,8 +111,10 @@ export const useContinentApiCallHook = () => {
 
   const deleteContinentMutation = () => {
     const mutation = useMutation((id: string) => deleteContinent(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.CONTINENT_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.CONTINENT_DATA],
+        });
       },
     });
     return mutation;

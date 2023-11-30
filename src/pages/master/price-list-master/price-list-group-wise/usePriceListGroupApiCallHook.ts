@@ -107,8 +107,8 @@ export const usePriceListGroupApiCallHook = () => {
       (updatedItem: Array<UpdatePriceListForGroup>) =>
         updatePriceListForGroup(updatedItem),
       {
-        onSuccess: () => {
-          // queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
+        onSuccess: async () => {
+          // await queryClient.invalidateQueries({ queryKey: [queryKeys.CITY_DATA] });
           // navigate("..");
         },
       }

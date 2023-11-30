@@ -60,8 +60,8 @@ export const useCountryApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateCountryType) => addCountry(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.COUNTRY_DATA],
           });
           navigate("..");
@@ -88,8 +88,8 @@ export const useCountryApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateCountryType) => updateCountryData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.COUNTRY_DATA],
           });
           navigate("..");
@@ -108,8 +108,10 @@ export const useCountryApiCallHook = () => {
 
   const deleteCountryMutation = () => {
     const mutation = useMutation((id: string) => deleteCountry(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.COUNTRY_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.COUNTRY_DATA],
+        });
       },
     });
     return mutation;

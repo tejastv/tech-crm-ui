@@ -61,8 +61,8 @@ export const useClientApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateClientType) => addClient(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await await queryClient.invalidateQueries({
             queryKey: [queryKeys.CLIENT_DATA],
           });
           navigate("..");
@@ -89,8 +89,8 @@ export const useClientApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateClientType) => updateClientData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await await queryClient.invalidateQueries({
             queryKey: [queryKeys.CLIENT_DATA],
           });
           navigate("..");
@@ -111,8 +111,8 @@ export const useClientApiCallHook = () => {
 
   const deleteClientMutation = () => {
     const mutation = useMutation((id: string) => deleteClient(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.CLIENT_DATA],
         });
       },

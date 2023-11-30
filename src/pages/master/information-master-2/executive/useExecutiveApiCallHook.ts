@@ -20,7 +20,10 @@ export const useExecutiveApiCallHook = () => {
       queryKey: [queryKeys.EXECUTIVE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_EXECUTIVE);
-        const data = response.data.data.sort((a: { executive: string; }, b: { executive: any; }) => a.executive.localeCompare(b.executive));
+        const data = response.data.data.sort(
+          (a: { executive: string }, b: { executive: any }) =>
+            a.executive.localeCompare(b.executive)
+        );
         return data;
       },
       staleTime: Infinity,
@@ -55,8 +58,8 @@ export const useExecutiveApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateExecutiveType) => addExecutive(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.EXECUTIVE_DATA],
           });
           navigate("..");
@@ -83,8 +86,8 @@ export const useExecutiveApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateExecutiveType) => updateExecutiveData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.EXECUTIVE_DATA],
           });
           navigate("..");
@@ -105,8 +108,10 @@ export const useExecutiveApiCallHook = () => {
 
   const deleteExecutiveMutation = () => {
     const mutation = useMutation((id: string) => deleteExecutive(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.EXECUTIVE_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.EXECUTIVE_DATA],
+        });
       },
     });
     return mutation;
