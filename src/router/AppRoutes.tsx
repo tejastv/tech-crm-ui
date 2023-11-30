@@ -3,11 +3,11 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import { RequireAuth } from "@guards/index";
 import { Login } from "@auth/index";
-import { Components, NotFound } from "@shared/index";
+import { NotFound } from "@shared/index";
 import { MainLayout } from "@layout/index";
 import {
-  COMPONENTS,
   DASHBOARD,
+  INVOICE_ROUTES,
   LOGIN,
   MASTER_ROUTES,
   PROFORMA_ROUTES,
@@ -20,8 +20,13 @@ import ReportsRoutes from "@pages/reports/ReportsRoutes";
 
 const Dashboard = React.lazy(() => import("../pages/dashboard/Dashboard"));
 const MasterRoutes = React.lazy(() => import("../pages/master/MasterRoutes"));
-const TransactionRoutes = React.lazy(() => import("../pages/transaction-search/TransactionRoutes"));
+const TransactionRoutes = React.lazy(
+  () => import("../pages/transaction-search/TransactionRoutes")
+);
 const ProformaRoutes = React.lazy(() => import("@proforma/ProformaRoutes"));
+const InvoicesRoutes = React.lazy(
+  () => import("../pages/invoices/InvoiceRoutes")
+);
 
 const AppRoutes = () => {
   return (
@@ -29,7 +34,7 @@ const AppRoutes = () => {
       <Route path={ROOT} element={<MainLayout />}>
         {/* Auth Module */}
         <Route path={LOGIN} element={<Login />} />
-        <Route path={COMPONENTS} element={<Components />} />
+
         <Route element={<RequireAuth />}>
           <Route index element={<Navigate to={DASHBOARD} />} />
           <Route
@@ -71,7 +76,15 @@ const AppRoutes = () => {
                 <ReportsRoutes />
               </React.Suspense>
             }
-          />
+          ></Route>
+          <Route
+            path={INVOICE_ROUTES.INVOICE_PARENT_ROUTE}
+            element={
+              <React.Suspense>
+                <InvoicesRoutes />
+              </React.Suspense>
+            }
+          ></Route>
         </Route>
         {/* Fallback route for unknown paths */}
         <Route path={UNKNOWN} element={<NotFound />} />

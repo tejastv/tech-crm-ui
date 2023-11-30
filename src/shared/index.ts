@@ -54,9 +54,3 @@ export * from "./types/toaster-type";
 export * from "./types/api-response-type";
 export * from "./types/pegination-config-type";
 export * from "./types/pagination-type";
-
-///////////////////////////////////////////////////////////////
-//DEV
-export { Components } from "./components/ui/dev/Components";
-export * from "./components/ui/dev/form-fields";
-///////////////////////////////////////////////////////////////

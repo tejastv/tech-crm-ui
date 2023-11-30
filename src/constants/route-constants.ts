@@ -201,3 +201,21 @@ export const REPORT_ROUTES = {
       "no-of-enquiries-graph-view-group-wise",
   },
 };
+
+export const INVOICE_ROUTES = {
+  INVOICE_PARENT_ROUTE: "/invoice/*",
+  INVOICE: "/invoice/",
+
+  GENERATE_INVOICE_ROUTES: {
+    GENERATE_INVOICE_MASTER_PERENT_ROUTE: "/generate-invoice-master/*",
+    INVOICE_GENERATE_GST_PARENT_ROUTE: "/invoice-generate-gst/*",
+    INVOICE_GENERATE_AUTO_GST_PARENT_ROUTE: "/invoice-generate-auto-gst/*",
+    INVOICE_GENERATE_ACTUAL_BUYRE_GST_PARENT_ROUTE:
+      "/invoice-generate-actual-buyre-gst/*",
+
+    GENERATE_INVOICE_MASTER_ROUTE: "generate-invoice-master/",
+    INVOICE_GENERATE_GST: "invoice-generate-gst",
+    INVOICE_GENERATE_AUTO_GST: "invoice-generate-auto-gst",
+    INVOICE_GENERATE_ACTUAL_BUYRE_GST: "invoice-generate-actual-buyre-gst",
+  },
+};
