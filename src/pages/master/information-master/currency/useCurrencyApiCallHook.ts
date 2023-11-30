@@ -15,7 +15,10 @@ export const useCurrencyApiCallHook = () => {
       queryKey: [queryKeys.CURRENCY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CURRENCY);
-        const data = response.data.data.sort((a: { currencyType: string; }, b: { currencyType: any; }) => a.currencyType.localeCompare(b.currencyType));
+        const data = response.data.data.sort(
+          (a: { currencyType: string }, b: { currencyType: any }) =>
+            a.currencyType.localeCompare(b.currencyType)
+        );
         return data;
       },
       staleTime: Infinity,
@@ -41,7 +44,10 @@ export const useCurrencyApiCallHook = () => {
   const addCurrency = async (
     currencyData: AddUpdateCurrencyType
   ): Promise<ApiResponseType<CurrencyType>> => {
-    const response = await instance.post(apiUrls.GET_ADD_CURRENCY, currencyData);
+    const response = await instance.post(
+      apiUrls.GET_ADD_CURRENCY,
+      currencyData
+    );
     return response.data.data;
   };
 
@@ -49,8 +55,10 @@ export const useCurrencyApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateCurrencyType) => addCurrency(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: [queryKeys.CURRENCY_DATA] });
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
+            queryKey: [queryKeys.CURRENCY_DATA],
+          });
           navigate("..");
         },
       }
@@ -62,7 +70,10 @@ export const useCurrencyApiCallHook = () => {
     updateCurrencyData: AddUpdateCurrencyType
   ): Promise<ApiResponseType<CurrencyType>> => {
     const response = await instance.put(
-      apiUrls.GET_UPDATE_DELETE_CURRENCY.replace("{id}", "" + updateCurrencyData.id),
+      apiUrls.GET_UPDATE_DELETE_CURRENCY.replace(
+        "{id}",
+        "" + updateCurrencyData.id
+      ),
       updateCurrencyData
     );
     return response.data.data;
@@ -72,8 +83,10 @@ export const useCurrencyApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateCurrencyType) => updateCurrencyData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: [queryKeys.CURRENCY_DATA] });
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
+            queryKey: [queryKeys.CURRENCY_DATA],
+          });
           navigate("..");
         },
       }
@@ -81,7 +94,9 @@ export const useCurrencyApiCallHook = () => {
     return mutation;
   };
 
-  const deleteCity = async (id: string): Promise<ApiResponseType<CurrencyType>> => {
+  const deleteCity = async (
+    id: string
+  ): Promise<ApiResponseType<CurrencyType>> => {
     const response = await instance.delete(
       apiUrls.GET_UPDATE_DELETE_CURRENCY.replace("{id}", id)
     );
@@ -90,8 +105,10 @@ export const useCurrencyApiCallHook = () => {
 
   const deleteCurrencyMutation = () => {
     const mutation = useMutation((id: string) => deleteCity(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.CURRENCY_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.CURRENCY_DATA],
+        });
       },
     });
     return mutation;

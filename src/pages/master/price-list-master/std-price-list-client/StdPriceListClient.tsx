@@ -255,11 +255,11 @@ export const StdPriceListClient: React.FC = () => {
     let cellData: any = Object.values(tableData);
     if (cellData.length > 0) {
       cellData[0]["currency_id"] = +currency;
-      updateStandardPrice(cellData).then(() => {
+      updateStandardPrice(cellData).then(async () => {
         tableData = {};
         setTableData(tableData);
         console.log(tableData);
-        queryClient.invalidateQueries({
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.PRICE_LIST_STANDARD_PRICE, currency],
         });
       });

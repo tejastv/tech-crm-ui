@@ -20,7 +20,10 @@ export const usePurposeMasterApiCallHook = () => {
       queryKey: [queryKeys.PURPOSE_MASTER_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_PURPOSE_MASTER);
-        const data = response.data.data.sort((a: { purpose: string; }, b: { purpose: any; }) => a.purpose.localeCompare(b.purpose));
+        const data = response.data.data.sort(
+          (a: { purpose: string }, b: { purpose: any }) =>
+            a.purpose.localeCompare(b.purpose)
+        );
         return data;
       },
       staleTime: Infinity,
@@ -58,8 +61,8 @@ export const usePurposeMasterApiCallHook = () => {
       (updatedItem: AddUpdatePurposeMasterType) =>
         addPurposeMaster(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.PURPOSE_MASTER_DATA],
           });
           navigate("..");
@@ -87,8 +90,8 @@ export const usePurposeMasterApiCallHook = () => {
       (updatedItem: AddUpdatePurposeMasterType) =>
         updatePurposeMasterData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.PURPOSE_MASTER_DATA],
           });
           navigate("..");
@@ -109,8 +112,8 @@ export const usePurposeMasterApiCallHook = () => {
 
   const deletePurposeMasterMutation = () => {
     const mutation = useMutation((id: string) => deletePurposeMaster(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.PURPOSE_MASTER_DATA],
         });
       },

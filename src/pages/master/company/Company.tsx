@@ -141,7 +141,7 @@ export const CompanyMaster: React.FC = () => {
     config: {
       tableName: "Company Master",
       columns: columns,
-      tableData: companyData || [],
+      tableData: (companyData && Object.values(companyData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

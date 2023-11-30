@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import {
@@ -12,6 +12,7 @@ import {
 } from "@shared/index";
 import {
   AddUpdateCityType,
+  StateType,
   addCityFormFields,
   useCityApiCallHook,
   useStateApiCallHook,
@@ -33,6 +34,7 @@ export const AddUpdateCity: React.FC = () => {
   const { mutateAsync: updateCity } = updateCityMutation();
   const params = useParams();
   const { getState } = useStateApiCallHook();
+  const [stateOptions, setStateOptions] = useState<StateType[]>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: params.id ? "Update City" : "Add City",
@@ -44,12 +46,16 @@ export const AddUpdateCity: React.FC = () => {
   };
 
   const { data: stateData } = getState();
-  if (stateData) {
-    addCityFormFields.state.config.options = selectOptionsMaker(
-      stateData,
-      "stateId",
-      "stateName"
-    );
+
+  useEffect(() => {
+    if (stateData) {
+      setStateOptions(Object.values(stateData));
+    }
+  }, [stateData?.length && Object.values(stateData).length]);
+
+  if (stateOptions?.length) {
+    let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
+    addCityFormFields.state.config.options = options;
   }
 
   const { data: cityData } = getCityData(
@@ -60,10 +66,10 @@ export const AddUpdateCity: React.FC = () => {
   useEffect(() => {
     if (cityData) {
       let clonedCityData = { ...cityData };
-      if (stateData) {
+      if (stateOptions) {
         let id = cityData?.stateId;
         let data: any = returnObjectBasedOnID(
-          stateData,
+          stateOptions,
           "stateId",
           id,
           "stateId",

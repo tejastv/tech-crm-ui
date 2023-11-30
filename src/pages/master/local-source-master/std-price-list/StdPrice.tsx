@@ -297,8 +297,8 @@ export const StdPrice: React.FC = () => {
     let cellData: any = Object.values(tableData);
     if (cellData.length > 0) {
       cellData[0]["currency_id"] = +currency;
-      updateStandardPrice(cellData).then(() => {
-        queryClient.invalidateQueries({
+      updateStandardPrice(cellData).then(async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.LOCALSOURCE_STANDARD_PRCE, currency],
         });
         setTableData({});

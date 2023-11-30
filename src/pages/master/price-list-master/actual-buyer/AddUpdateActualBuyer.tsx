@@ -1,5 +1,5 @@
 // AddCompany.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -12,6 +12,10 @@ import {
 } from "@shared/index";
 import {
   AddUpdateActualBuyerType,
+  CityType,
+  ClientType,
+  CountryType,
+  StateType,
   addActualBuyersFormFields,
   useActualBuyerApiCallHook,
   useCityApiCallHook,
@@ -49,24 +53,61 @@ export const AddUpdateActualBuyer: React.FC = () => {
   const { getCountry } = useCountryApiCallHook();
   const { data: countryData } = getCountry();
 
-  if (cityData) {
-    addActualBuyersFormFields.cityactualbuyer.config.options =
-      selectOptionsMaker(cityData, "id", "cityName");
+  const [cityOptions, setCityOptions] = useState<CityType[]>();
+  const [clientOptions, setClientOptions] = useState<ClientType[]>();
+
+  useEffect(() => {
+    if (cityData) {
+      setCityOptions(Object.values(cityData));
+    }
+  }, [cityData?.length && Object.values(cityData).length]);
+
+  if (cityOptions?.length) {
+    let options = selectOptionsMaker(cityOptions, "id", "cityName");
+    addActualBuyersFormFields.cityactualbuyer.config.options = options;
   }
 
-  if (stateData) {
-    addActualBuyersFormFields.stateactualbuyer.config.options =
-      selectOptionsMaker(stateData, "stateId", "state");
+  // state api call
+  const [stateOptions, setStateOptions] = useState<StateType[]>();
+
+  useEffect(() => {
+    if (stateData) {
+      setStateOptions(Object.values(stateData));
+    }
+  }, [stateData?.length && Object.values(stateData).length]);
+
+  if (stateOptions?.length) {
+    let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
+    addActualBuyersFormFields.stateactualbuyer.config.options = options;
   }
 
-  if (countryData) {
-    addActualBuyersFormFields.countryactualbuyer.config.options =
-      selectOptionsMaker(countryData, "countryId", "countryName");
+  // country api call
+  const [countryOptions, setCountryOptions] = useState<CountryType[]>();
+
+  useEffect(() => {
+    if (countryData) {
+      setCountryOptions(Object.values(countryData));
+    }
+  }, [countryData && Object.values(countryData).length]);
+
+  if (countryOptions?.length) {
+    let options = selectOptionsMaker(
+      countryOptions,
+      "countryId",
+      "countryName"
+    );
+    addActualBuyersFormFields.countryactualbuyer.config.options = options;
   }
 
-  if (clientData) {
-    addActualBuyersFormFields.clientactualbuyer.config.options =
-      selectOptionsMaker(clientData, "clientID", "clientName");
+  useEffect(() => {
+    if (clientData) {
+      setClientOptions(Object.values(clientData));
+    }
+  }, [clientData]);
+
+  if (clientOptions?.length) {
+    let options = selectOptionsMaker(clientOptions, "clientID", "clientName");
+    addActualBuyersFormFields.clientactualbuyer.config.options = options;
   }
 
   const onSubmit = methods.handleSubmit((actualBuyerData): void => {
@@ -92,101 +133,87 @@ export const AddUpdateActualBuyer: React.FC = () => {
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <Select
-                      config={
-                        addActualBuyersFormFields.clientactualbuyer.config
-                      }
-                    />
-                    <Input
-                      config={addActualBuyersFormFields.nameactualbuyer.config}
-                    />
-                    <Input
-                      config={
-                        addActualBuyersFormFields.addressactualbuyer.config
-                      }
-                    />
-                    <Input
-                      config={addActualBuyersFormFields.telnoactualbuyer.config}
-                    />
-                    <Input
-                      config={addActualBuyersFormFields.emailactualbuyer.config}
-                    />
-                    <Input
-                      config={
-                        addActualBuyersFormFields.contactactualbuyer.config
-                      }
-                    />
-                    <Input
-                      config={
-                        addActualBuyersFormFields.designationactualbuyer.config
-                      }
-                    />
-                  </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <div className="card-body">
+                  <Select
+                    config={addActualBuyersFormFields.clientactualbuyer.config}
+                  />
+                  <Input
+                    config={addActualBuyersFormFields.nameactualbuyer.config}
+                  />
+                  <Input
+                    config={addActualBuyersFormFields.addressactualbuyer.config}
+                  />
+                  <Input
+                    config={addActualBuyersFormFields.telnoactualbuyer.config}
+                  />
+                  <Input
+                    config={addActualBuyersFormFields.emailactualbuyer.config}
+                  />
+                  <Input
+                    config={addActualBuyersFormFields.contactactualbuyer.config}
+                  />
+                  <Input
+                    config={
+                      addActualBuyersFormFields.designationactualbuyer.config
+                    }
+                  />
                 </div>
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <Select
-                      config={addActualBuyersFormFields.cityactualbuyer.config}
-                    />
-                    <Select
-                      config={addActualBuyersFormFields.stateactualbuyer.config}
-                    />
-                    <Input config={addActualBuyersFormFields.PIN.config} />
-                    <Select
-                      config={
-                        addActualBuyersFormFields.countryactualbuyer.config
-                      }
-                    />
-                    <Input
-                      config={addActualBuyersFormFields.faxnoactualbuyer.config}
-                    />
-                    <Input
-                      config={
-                        addActualBuyersFormFields.websiteactualbuyer.config
-                      }
-                    />
-                    <Input
-                      config={addActualBuyersFormFields.cstactualbuyer.config}
-                    />
-                    <Input
-                      config={addActualBuyersFormFields.gstnactualbuyer.config}
-                    />
-                    {/* <div className="col-md-12"> */}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <div className="card-body">
+                  <Select
+                    config={addActualBuyersFormFields.cityactualbuyer.config}
+                  />
+                  <Select
+                    config={addActualBuyersFormFields.stateactualbuyer.config}
+                  />
+                  <Input config={addActualBuyersFormFields.PIN.config} />
+                  <Select
+                    config={addActualBuyersFormFields.countryactualbuyer.config}
+                  />
+                  <Input
+                    config={addActualBuyersFormFields.faxnoactualbuyer.config}
+                  />
+                  <Input
+                    config={addActualBuyersFormFields.websiteactualbuyer.config}
+                  />
+                  <Input
+                    config={addActualBuyersFormFields.cstactualbuyer.config}
+                  />
+                  <Input
+                    config={addActualBuyersFormFields.gstnactualbuyer.config}
+                  />
+                  {/* <div className="col-md-12"> */}
 
-                    {/* <p
+                  {/* <p
                       id="name45"
                       className="form-text text-red text-red-custom"
                     > */}
-                    <InputWithText
-                      config={
-                        addActualBuyersFormFields.actualbuyergstnote.config
-                      }
-                    />
-                    {/* </p> */}
-                    {/* </div> */}
-                  </div>
+                  <InputWithText
+                    config={addActualBuyersFormFields.actualbuyergstnote.config}
+                  />
+                  {/* </p> */}
+                  {/* </div> */}
                 </div>
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
-      </Card>
-    </>
+            </div>
+          </BorderLayout>
+          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <ActionButtons />
+          </BorderLayout>
+        </form>
+      </FormProvider>
+    </Card>
   );
 };

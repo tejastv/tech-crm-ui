@@ -24,13 +24,17 @@ export const useClientGroupApiCallHook = () => {
       queryKey: [queryKeys.CLIENT_GROUP_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CLIENT_GROUP);
-        const data = response.data.data.sort((a: { groupName: string; }, b: { groupName: any; }) => {
-          if (a.groupName && b.groupName) {
-            return a.groupName.localeCompare(b.groupName, undefined, { sensitivity: 'base' });
-          } else {
-            return 0;
+        const data = response.data.data.sort(
+          (a: { groupName: string }, b: { groupName: any }) => {
+            if (a.groupName && b.groupName) {
+              return a.groupName.localeCompare(b.groupName, undefined, {
+                sensitivity: "base",
+              });
+            } else {
+              return 0;
+            }
           }
-        });
+        );
         return data;
       },
       staleTime: Infinity,
@@ -65,8 +69,8 @@ export const useClientGroupApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateClientGroupType) => addClientGroup(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.CLIENT_GROUP_DATA],
           });
           navigate("..");
@@ -97,8 +101,8 @@ export const useClientGroupApiCallHook = () => {
       (updatedItem: AddUpdateClientGroupType) =>
         updateClientGroupData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.CLIENT_GROUP_DATA],
           });
           navigate("..");
@@ -119,8 +123,8 @@ export const useClientGroupApiCallHook = () => {
 
   const deleteClientGroupMutation = () => {
     const mutation = useMutation((id: string) => deleteClientGroup(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.CLIENT_GROUP_DATA],
         });
       },

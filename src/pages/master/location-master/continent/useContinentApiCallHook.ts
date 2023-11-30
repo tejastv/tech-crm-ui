@@ -9,6 +9,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useContinentApiCallHook = () => {
   const { instance } = useAxios();
@@ -24,7 +25,8 @@ export const useContinentApiCallHook = () => {
           (a: { continent: string }, b: { continent: any }) =>
             a.continent.localeCompare(b.continent)
         );
-        return data;
+        let mapedData = selectOptionsMapMaker(data, "id", "continent");
+        return mapedData;
       },
       staleTime: Infinity,
     });
@@ -62,7 +64,7 @@ export const useContinentApiCallHook = () => {
       (updatedItem: AddUpdateContinentType) => addContinent(updatedItem),
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries({
+          await await queryClient.invalidateQueries({
             queryKey: [queryKeys.CONTINENT_DATA],
           });
           navigate("..");
@@ -89,8 +91,8 @@ export const useContinentApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateContinentType) => updateContinentData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.CONTINENT_DATA],
           });
           navigate("..");
@@ -109,8 +111,10 @@ export const useContinentApiCallHook = () => {
 
   const deleteContinentMutation = () => {
     const mutation = useMutation((id: string) => deleteContinent(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.CONTINENT_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.CONTINENT_DATA],
+        });
       },
     });
     return mutation;

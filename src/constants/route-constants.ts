@@ -155,17 +155,17 @@ export const TRANSACTION_ROUTES = {
   },
 };
 
-export const PROFOMA_ROUTES = {
-  PROFOMA_PARENT_ROUTE: "/profoma/*",
-  PROFOMA: "/profoma/",
+export const PROFORMA_ROUTES = {
+  PROFORMA_PARENT_ROUTE: "/proforma/*",
+  PROFORMA: "/proforma/",
 
-  GENERATEPI_PROFOMA_ROUTES: {
-    GENERATEPI_PROFOMA_PARENT_ROUTE: "/generate-pi/*",
-    GENERATEPI: "generate-pi",
+  GENERATE_PI_PROFORMA_ROUTES: {
+    GENERATE_PI_PROFORMA_PARENT_ROUTE: "/generate-pi/*",
+    GENERATE_PI: "generate-pi",
   },
-  ENQPI_PROFOMA_ROUTES: {
-    ENQPI_PROFOMA_PARENT_ROUTE: "/enq-pi/*",
-    ENQPI: "enq-pi",
+  ENQ_PI_PROFORMA_ROUTES: {
+    ENQ_PI_PROFORMA_PARENT_ROUTE: "/enq-pi/*",
+    ENQ_PI: "enq-pi",
   },
 };
 

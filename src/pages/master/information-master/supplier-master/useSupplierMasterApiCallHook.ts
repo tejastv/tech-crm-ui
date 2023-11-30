@@ -20,9 +20,11 @@ export const useSupplierMasterApiCallHook = () => {
       queryKey: [queryKeys.SUPPLIER_MASTER_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_SUPPLIER_MASTER);
-        const data = response.data.data.sort((a: { supplierName: string; }, b: { supplierName: any; }) => a.supplierName.localeCompare(b.supplierName));
+        const data = response.data.data.sort(
+          (a: { supplierName: string }, b: { supplierName: any }) =>
+            a.supplierName.localeCompare(b.supplierName)
+        );
         return data;
-
       },
       staleTime: Infinity,
     });
@@ -59,8 +61,8 @@ export const useSupplierMasterApiCallHook = () => {
       (updatedItem: AddUpdateSupplierMasterType) =>
         addSupplierMaster(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.SUPPLIER_MASTER_DATA],
           });
           navigate("..");
@@ -88,8 +90,8 @@ export const useSupplierMasterApiCallHook = () => {
       (updatedItem: AddUpdateSupplierMasterType) =>
         updateSupplierMasterData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.SUPPLIER_MASTER_DATA],
           });
           navigate("..");
@@ -110,8 +112,8 @@ export const useSupplierMasterApiCallHook = () => {
 
   const deleteSupplierMasterMutation = () => {
     const mutation = useMutation((id: string) => deleteSupplierMaster(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
           queryKey: [queryKeys.SUPPLIER_MASTER_DATA],
         });
       },

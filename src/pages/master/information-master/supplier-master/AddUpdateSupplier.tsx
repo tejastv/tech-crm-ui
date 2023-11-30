@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -16,7 +16,10 @@ import {
   useCityApiCallHook,
   useStateApiCallHook,
   useCountryApiCallHook,
-  useCurrencyApiCallHook
+  useCurrencyApiCallHook,
+  CityType,
+  CountryType,
+  StateType,
 } from "@master/index";
 
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
@@ -26,7 +29,11 @@ import { returnObjectBasedOnID, cleanupObject } from "@utils/index";
 export const AddSupplier: React.FC = () => {
   const methods = useForm<AddUpdateSupplierMasterType>();
   const params = useParams();
-  const { addSupplierMasterMutation, updateSupplierMasterMutation, getSupplierMasterData } = useSupplierMasterApiCallHook();
+  const {
+    addSupplierMasterMutation,
+    updateSupplierMasterMutation,
+    getSupplierMasterData,
+  } = useSupplierMasterApiCallHook();
   const { mutate: addSupplierMaster } = addSupplierMasterMutation();
   const { mutate: updateSupplierMaster } = updateSupplierMasterMutation();
   const { getCity } = useCityApiCallHook();
@@ -44,36 +51,60 @@ export const AddSupplier: React.FC = () => {
     },
   };
 
+  const [cityOptions, setCityOptions] = useState<CityType[]>();
+
   const { data: cityData } = getCity();
 
-  if (cityData) {
-    addSupplierFormFields.citySupplier.config.options = selectOptionsMaker(
-      cityData,
-      "id",
-      "cityName"
-    );
+  useEffect(() => {
+    if (cityData) {
+      setCityOptions(Object.values(cityData));
+    }
+  }, [cityData?.length && Object.values(cityData).length]);
+
+  if (cityOptions?.length) {
+    let options = selectOptionsMaker(cityOptions, "id", "cityName");
+    addSupplierFormFields.citySupplier.config.options = options;
   }
 
   // state api call
   const { data: stateData } = getState();
 
-  if (stateData) {
-    addSupplierFormFields.stateSupplier.config.options = selectOptionsMaker(
-      stateData,
+  const [stateOptions, setStateOptions] = useState<StateType[]>();
+
+  useEffect(() => {
+    if (stateData) {
+      setStateOptions(Object.values(stateData));
+    }
+  }, [stateData?.length && Object.values(stateData).length]);
+
+  if (stateOptions?.length) {
+    let options = selectOptionsMaker(
+      stateOptions,
       "stateId",
-      "state"
+      "stateName",
+      true
     );
+    addSupplierFormFields.stateSupplier.config.options = options;
   }
 
   // country api call
-  const { data: CountryData } = getCountry();
+  const { data: countryData } = getCountry();
 
-  if (CountryData) {
-    addSupplierFormFields.countrySupplier.config.options = selectOptionsMaker(
-      CountryData,
+  const [countryOptions, setCountryOptions] = useState<CountryType[]>();
+
+  useEffect(() => {
+    if (countryData) {
+      setCountryOptions(Object.values(countryData));
+    }
+  }, [countryData && Object.values(countryData).length]);
+
+  if (countryOptions?.length) {
+    let options = selectOptionsMaker(
+      countryOptions,
       "countryId",
       "countryName"
     );
+    addSupplierFormFields.countrySupplier.config.options = options;
   }
 
   const { data: CurrencyData } = getCurrency();
@@ -115,10 +146,10 @@ export const AddSupplier: React.FC = () => {
   if (params.id) {
     const { data: supplierMasterData } = getSupplierMasterData("" + params.id);
     if (supplierMasterData) {
-      if (cityData) {
+      if (cityOptions) {
         let id = supplierMasterData?.cityID;
         let data: any = returnObjectBasedOnID(
-          cityData,
+          cityOptions,
           "id",
           id,
           "id",
@@ -126,15 +157,15 @@ export const AddSupplier: React.FC = () => {
         );
         addSupplierFormFields.citySupplier.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
-      if (stateData) {
+      if (stateOptions) {
         let id = supplierMasterData?.stateID;
         let data: any = returnObjectBasedOnID(
-          stateData,
+          stateOptions,
           "stateId",
           id,
           "stateId",
@@ -142,15 +173,15 @@ export const AddSupplier: React.FC = () => {
         );
         addSupplierFormFields.stateSupplier.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
-      if (CountryData) {
+      if (countryOptions) {
         let id = supplierMasterData?.countryID;
         let data: any = returnObjectBasedOnID(
-          CountryData,
+          countryOptions,
           "countryId",
           id,
           "countryId",
@@ -158,9 +189,9 @@ export const AddSupplier: React.FC = () => {
         );
         addSupplierFormFields.countrySupplier.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
 
@@ -175,9 +206,9 @@ export const AddSupplier: React.FC = () => {
         );
         addSupplierFormFields.CurrenceySupplier.config.setData = data
           ? {
-            label: data.label,
-            value: data.value,
-          }
+              label: data.label,
+              value: data.value,
+            }
           : [];
       }
       addSupplierFormFields.nameSupplier.config.setData =
@@ -186,10 +217,14 @@ export const AddSupplier: React.FC = () => {
         supplierMasterData.nickName;
       addSupplierFormFields.addressSupplier.config.setData =
         supplierMasterData.address;
-      addSupplierFormFields.telnoSupplier.config.setData = supplierMasterData.phone;
-      addSupplierFormFields.faxnoSupplier.config.setData = supplierMasterData.fax;
-      addSupplierFormFields.emailSupplier.config.setData = supplierMasterData.email;
-      addSupplierFormFields.websiteSupplier.config.setData = supplierMasterData.website;
+      addSupplierFormFields.telnoSupplier.config.setData =
+        supplierMasterData.phone;
+      addSupplierFormFields.faxnoSupplier.config.setData =
+        supplierMasterData.fax;
+      addSupplierFormFields.emailSupplier.config.setData =
+        supplierMasterData.email;
+      addSupplierFormFields.websiteSupplier.config.setData =
+        supplierMasterData.website;
       addSupplierFormFields.contactSupplier.config.setData =
         supplierMasterData.contactPerson;
       addSupplierFormFields.designationSupplier.config.setData =
@@ -203,55 +238,45 @@ export const AddSupplier: React.FC = () => {
   }
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <Input config={addSupplierFormFields.nameSupplier.config} />
-                  <Input config={addSupplierFormFields.nickname.config} />
-                  <Input
-                    config={addSupplierFormFields.addressSupplier.config}
-                  />
-                  <Input config={addSupplierFormFields.telnoSupplier.config} />
-                  <Input config={addSupplierFormFields.faxnoSupplier.config} />
-                  <Input config={addSupplierFormFields.emailSupplier.config} />
-                  <Input
-                    config={addSupplierFormFields.websiteSupplier.config}
-                  />
-                  <Input
-                    config={addSupplierFormFields.contactSupplier.config}
-                  />
-                  <Input
-                    config={addSupplierFormFields.designationSupplier.config}
-                  />
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  <Select config={addSupplierFormFields.citySupplier.config} />
-                  <Input config={addSupplierFormFields.zipSupplier.config} />
-                  <Select config={addSupplierFormFields.stateSupplier.config} />
-                  <Select
-                    config={addSupplierFormFields.countrySupplier.config}
-                  />
-                  <Select
-                    config={addSupplierFormFields.CurrenceySupplier.config}
-                  />
-                </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <Input config={addSupplierFormFields.nameSupplier.config} />
+                <Input config={addSupplierFormFields.nickname.config} />
+                <Input config={addSupplierFormFields.addressSupplier.config} />
+                <Input config={addSupplierFormFields.telnoSupplier.config} />
+                <Input config={addSupplierFormFields.faxnoSupplier.config} />
+                <Input config={addSupplierFormFields.emailSupplier.config} />
+                <Input config={addSupplierFormFields.websiteSupplier.config} />
+                <Input config={addSupplierFormFields.contactSupplier.config} />
+                <Input
+                  config={addSupplierFormFields.designationSupplier.config}
+                />
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
-      </Card>
-    </>
+              <div className="col-md-6 col-xs-12">
+                <Select config={addSupplierFormFields.citySupplier.config} />
+                <Input config={addSupplierFormFields.zipSupplier.config} />
+                <Select config={addSupplierFormFields.stateSupplier.config} />
+                <Select config={addSupplierFormFields.countrySupplier.config} />
+                <Select
+                  config={addSupplierFormFields.CurrenceySupplier.config}
+                />
+              </div>
+            </div>
+          </BorderLayout>
+          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <ActionButtons />
+          </BorderLayout>
+        </form>
+      </FormProvider>
+    </Card>
   );
 };

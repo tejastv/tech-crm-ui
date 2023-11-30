@@ -260,7 +260,7 @@ export const Client: React.FC = () => {
     config: {
       tableName: "Client",
       columns: columns,
-      tableData: clientData ? clientData : [],
+      tableData: (clientData && Object.values(clientData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -281,7 +281,7 @@ export const Client: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

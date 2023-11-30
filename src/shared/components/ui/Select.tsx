@@ -25,7 +25,7 @@ export const Select = (props: FormFieldType) => {
   const handleSelectChange = (selectedOption: any) => {
     // Update the form value with the selected data
     if (props.onChangeHandler) {
-      props.onChangeHandler(selectedOption);
+      props.onChangeHandler(selectedOption.value);
     }
     setValue(props.config.name, selectedOption);
   };

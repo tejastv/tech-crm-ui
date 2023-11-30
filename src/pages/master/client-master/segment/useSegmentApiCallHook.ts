@@ -21,7 +21,10 @@ export const useSegmentApiCallHook = () => {
       queryKey: [queryKeys.SEGMENT_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_SEGMENT);
-        const data = response.data.data.sort((a: { segmentName: string; }, b: { segmentName: any; }) => a.segmentName.localeCompare(b.segmentName));
+        const data = response.data.data.sort(
+          (a: { segmentName: string }, b: { segmentName: any }) =>
+            a.segmentName.localeCompare(b.segmentName)
+        );
         return data;
       },
       staleTime: Infinity,
@@ -53,8 +56,10 @@ export const useSegmentApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateSegmentType) => addSegment(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: [queryKeys.SEGMENT_DATA] });
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
+            queryKey: [queryKeys.SEGMENT_DATA],
+          });
           navigate("..");
         },
       }
@@ -79,8 +84,10 @@ export const useSegmentApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateSegmentType) => updateSegmentData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: [queryKeys.SEGMENT_DATA] });
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
+            queryKey: [queryKeys.SEGMENT_DATA],
+          });
           navigate("..");
         },
       }
@@ -99,8 +106,10 @@ export const useSegmentApiCallHook = () => {
 
   const deleteSegmentMutation = () => {
     const mutation = useMutation((id: string) => deleteSegment(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.SEGMENT_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.SEGMENT_DATA],
+        });
       },
     });
     return mutation;

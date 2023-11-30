@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   ActionButtons,
   BorderLayout,
   Card,
-  Input,
   NewInput,
   NewSelect,
-  Select,
 } from "@shared/index";
 import {
   AddUpdateCountryType,
@@ -26,7 +24,6 @@ export const AddUpdateCountry: React.FC = () => {
     handleSubmit,
     reset,
     control,
-    setValue,
     formState: { errors },
   } = useForm<AddUpdateCountryType>();
   const params = useParams();
@@ -125,7 +122,6 @@ export const AddUpdateCountry: React.FC = () => {
                   register={register}
                   config={addCoutryFormFields.countryCodeField}
                 />
-                {/* <Input config={addCoutryFormFields.countrylocalSourceField.config} /> */}
               </div>
             </div>
           </BorderLayout>

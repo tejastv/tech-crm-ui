@@ -104,7 +104,7 @@ export const FinYear: React.FC = () => {
     config: {
       tableName: "Fin. Year",
       columns: columns,
-      tableData: finYearData || [],
+      tableData: (finYearData && Object.values(finYearData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -125,7 +125,7 @@ export const FinYear: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

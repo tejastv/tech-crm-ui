@@ -1,7 +1,7 @@
 import { useAxios } from "@hooks/useAxios";
 import { AddUpdateSourceType, SourceType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
@@ -9,18 +9,25 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useSourceApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getSource = (): UseQueryResult<SourceType[]> => {
-    return useQuery<SourceType[]>({
+  const getSource = (): UseQueryResult<MapType<SourceType>> => {
+    return useQuery<MapType<SourceType>>({
       queryKey: [queryKeys.SOURCE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_SOURCE);
-        return response.data.data;
+        let mapedData = selectOptionsMapMaker(
+          response.data.data,
+          "sourceID",
+          "source"
+        );
+        return mapedData;
+        // return response.data.data;
       },
       staleTime: Infinity,
     });
@@ -51,8 +58,8 @@ export const useSourceApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateSourceType) => addSource(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.SOURCE_DATA],
           });
           navigate("..");
@@ -79,8 +86,8 @@ export const useSourceApiCallHook = () => {
     const mutation = useMutation(
       (updatedItem: AddUpdateSourceType) => updateSourceData(updatedItem),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
             queryKey: [queryKeys.SOURCE_DATA],
           });
           navigate("..");
@@ -101,8 +108,10 @@ export const useSourceApiCallHook = () => {
 
   const deleteSourceMutation = () => {
     const mutation = useMutation((id: string) => deleteSource(id), {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.SOURCE_DATA] });
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: [queryKeys.SOURCE_DATA],
+        });
       },
     });
     return mutation;

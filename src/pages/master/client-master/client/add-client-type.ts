@@ -6,8 +6,8 @@ export interface AddUpdateClientType {
   address: string;
   cityID: number;
   zip: string;
-  stateID: number;
-  countryID: number;
+  stateID: any;
+  countryID: any;
   phone: string;
   fax: string;
   website: string;
@@ -41,8 +41,9 @@ export interface AddUpdateClientType {
   crDays: number;
   gstn: string;
   gstYN: string;
-  billONActualBuyer: string;
+  billONActualBuyer: string | boolean;
   autoSendOutstanding: string;
   locked: string;
   email: string;
+  stateCode: number;
 }
