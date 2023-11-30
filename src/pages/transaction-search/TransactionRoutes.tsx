@@ -3,9 +3,6 @@ import { Route, Routes } from "react-router-dom";
 
 import { TRANSACTION_ROUTES } from "@constants/index";
 
-const AddEnquiryIndex = React.lazy(
-  () => import("./enquiries/add-new-enquiry/NewEnquiryIndex")
-);
 const EnquiriesIndex = React.lazy(() => import("./enquiries/EnquiriesIndex"));
 const AddBulkEnquiries = React.lazy(
   () => import("./add-bulk-enquiries/AddBulkEnquiriesIndex")
@@ -17,14 +14,6 @@ const PurchaseBillsof = React.lazy(
 const TransactionRoutes = () => {
   return (
     <Routes>
-      <Route
-        path={
-          TRANSACTION_ROUTES.NEWENQUIRY_TRANSACTION_ROUTES
-            .NEWENQUIRY_TRANSACTION_PARENT_ROUTE
-        }
-        element={<AddEnquiryIndex />}
-      ></Route>
-
       <Route
         path={
           TRANSACTION_ROUTES.ENQUIRYDETAILS_TRANSACTION_ROUTES
