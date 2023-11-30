@@ -8,50 +8,40 @@ import {
   Button,
   InputWithText,
   ActionButtons,
-  Table,
-  TableType,
   SingleCheckbox,
 } from "@shared/index";
 import { addEnqPiFormFields } from "@proforma/index";
-import { ColumnDef } from "@tanstack/react-table";
 import {
-  ClientType,
   useCityApiCallHook,
   useStateApiCallHook,
   useCountryApiCallHook,
-  useSourceApiCallHook,
-  useLocalSourceApiCallHook,
-  useClientApiCallHook,
-  useCompanyApiCallHook,
+  // useSourceApiCallHook,
+  // useLocalSourceApiCallHook,
+  // useClientApiCallHook,
+  // useCompanyApiCallHook,
   useFinYearApiCallHook,
   CompanyType,
   CityType,
   CountryType,
   StateType,
 } from "@master/index";
-import {
-  cleanupObject,
-  returnObjectBasedOnID,
-  selectOptionsMaker,
-} from "@utils/index";
+import { cleanupObject, selectOptionsMaker } from "@utils/index";
 import { useAddEnquiryApiCallHook } from "@transaction-search/index";
 import { useParams } from "react-router-dom";
 
 export const AddEnqPi: React.FC = () => {
-  const { getEnqStatus, getRefNo, getServiceType, getPrice } =
-    useAddEnquiryApiCallHook();
+  const { getServiceType } = useAddEnquiryApiCallHook();
   const params = useParams();
   const { getCity } = useCityApiCallHook();
   const { getState } = useStateApiCallHook();
   const { getCountry } = useCountryApiCallHook();
-  const { getSource } = useSourceApiCallHook();
-  const { getLocalSource } = useLocalSourceApiCallHook();
-  const { getClient, getClientData } = useClientApiCallHook();
-  const { getCompany } = useCompanyApiCallHook();
+  // const { getSource } = useSourceApiCallHook();
+  // const { getLocalSource } = useLocalSourceApiCallHook();
+  // const { getClient } = useClientApiCallHook();
   const { getFinYear } = useFinYearApiCallHook();
   const [isCompanyChange, setIsCompanyChange] = useState<boolean>(false);
 
-  const [refNo, setRefNo] = useState<any>();
+  // const [refNo, setRefNo] = useState<any>();
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
@@ -97,7 +87,7 @@ export const AddEnqPi: React.FC = () => {
     if (stateData) {
       setStateOptions(Object.values(stateData));
     }
-  }, [stateData?.length && Object.values(stateData).length]);
+  }, [stateData && Object.values(stateData).length]);
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
@@ -123,14 +113,14 @@ export const AddEnqPi: React.FC = () => {
     addEnqPiFormFields.countryField.config.options = options;
   }
 
-  const { data: ClientData } = getClient();
-  if (ClientData) {
-    addEnqPiFormFields.clientField.config.options = selectOptionsMaker(
-      ClientData,
-      "clientID",
-      "clientName"
-    );
-  }
+  // const { data: ClientData } = getClient();
+  // if (ClientData) {
+  //   addEnqPiFormFields.clientField.config.options = selectOptionsMaker(
+  //     ClientData,
+  //     "clientID",
+  //     "clientName"
+  //   );
+  // }
 
   const { data: fYearData } = getFinYear();
   if (fYearData) {
@@ -141,33 +131,33 @@ export const AddEnqPi: React.FC = () => {
     );
   }
 
-  const { data: SourceData } = getSource();
-  if (SourceData) {
-    addEnqPiFormFields.sourceField.config.options = selectOptionsMaker(
-      SourceData,
-      "sourceID",
-      "source"
-    );
-  }
+  // const { data: SourceData } = getSource();
+  // if (SourceData) {
+  //   addEnqPiFormFields.sourceField.config.options = selectOptionsMaker(
+  //     SourceData,
+  //     "sourceID",
+  //     "source"
+  //   );
+  // }
 
-  const { data: LocalSourceData } = getLocalSource();
-  if (LocalSourceData) {
-    addEnqPiFormFields.localSourceField.config.options = selectOptionsMaker(
-      LocalSourceData,
-      "localSourceId",
-      "localSource"
-    );
-  }
+  // const { data: LocalSourceData } = getLocalSource();
+  // if (LocalSourceData) {
+  //   addEnqPiFormFields.localSourceField.config.options = selectOptionsMaker(
+  //     LocalSourceData,
+  //     "localSourceId",
+  //     "localSource"
+  //   );
+  // }
 
-  const { data: companyData } = getCompany();
-  if (companyData) {
-    addEnqPiFormFields.companyField.config.options = selectOptionsMaker(
-      companyData,
-      "companyId",
-      "companyName",
-      true
-    );
-  }
+  // const { data: companyData } = getCompany();
+  // if (companyData) {
+  //   addEnqPiFormFields.companyField.config.options = selectOptionsMaker(
+  //     companyData,
+  //     "companyId",
+  //     "companyName",
+  //     true
+  //   );
+  // }
 
   const { data: ServiceData } = getServiceType();
   if (ServiceData) {
@@ -193,60 +183,60 @@ export const AddEnqPi: React.FC = () => {
     addEnqPiFormFields.zipField.config.setData = dataObj?.zip;
     addEnqPiFormFields.telNoField.config.setData = dataObj?.phone;
     addEnqPiFormFields.faxNoField.config.setData = dataObj?.fax;
-    if (cityData) {
-      let data: any = returnObjectBasedOnID(
-        cityData,
-        "cityId",
-        dataObj?.cityId,
-        "cityId",
-        "cityName"
-      );
-      addEnqPiFormFields.cityField.config.setData =
-        data.length > 0
-          ? [
-              {
-                label: data?.label,
-                value: data?.value,
-              },
-            ]
-          : [];
-    }
-    if (stateData) {
-      let data: any = returnObjectBasedOnID(
-        stateData,
-        "stateId",
-        dataObj?.stateId,
-        "stateId",
-        "stateName"
-      );
-      addEnqPiFormFields.stateField.config.setData =
-        data.length > 0
-          ? [
-              {
-                label: dataObj?.stateName,
-                value: dataObj?.stateId,
-              },
-            ]
-          : [];
-    }
-    if (countryData) {
-      let data: any = returnObjectBasedOnID(
-        countryData,
-        "countryId",
-        dataObj?.countryId,
-        "countryId",
-        "countryName"
-      );
-      addEnqPiFormFields.countryField.config.setData =
-        data.length > 0
-          ? [
-              {
-                label: dataObj?.countryName,
-                value: dataObj?.countryId,
-              },
-            ]
-          : [];
-    }
+    // if (cityData) {
+    //   let data: any = returnObjectBasedOnID(
+    //     cityData,
+    //     "cityId",
+    //     dataObj?.cityId,
+    //     "cityId",
+    //     "cityName"
+    //   );
+    //   addEnqPiFormFields.cityField.config.setData =
+    //     data.length > 0
+    //       ? [
+    //           {
+    //             label: data?.label,
+    //             value: data?.value,
+    //           },
+    //         ]
+    //       : [];
+    // }
+    // if (stateData) {
+    //   let data: any = returnObjectBasedOnID(
+    //     stateData,
+    //     "stateId",
+    //     dataObj?.stateId,
+    //     "stateId",
+    //     "stateName"
+    //   );
+    //   addEnqPiFormFields.stateField.config.setData =
+    //     data.length > 0
+    //       ? [
+    //           {
+    //             label: dataObj?.stateName,
+    //             value: dataObj?.stateId,
+    //           },
+    //         ]
+    //       : [];
+    // }
+    // if (countryData) {
+    //   let data: any = returnObjectBasedOnID(
+    //     countryData,
+    //     "countryId",
+    //     dataObj?.countryId,
+    //     "countryId",
+    //     "countryName"
+    //   );
+    //   addEnqPiFormFields.countryField.config.setData =
+    //     data.length > 0
+    //       ? [
+    //           {
+    //             label: dataObj?.countryName,
+    //             value: dataObj?.countryId,
+    //           },
+    //         ]
+    //       : [];
+    // }
 
     addEnqPiFormFields.emailField.config.setData = dataObj?.email;
     addEnqPiFormFields.websiteField.config.setData = dataObj?.website;
@@ -254,7 +244,7 @@ export const AddEnqPi: React.FC = () => {
     addEnqPiFormFields.designationField.config.setData = dataObj?.designation;
   }
 
-  addEnqPiFormFields.refNoField.config.setData = refNo;
+  // addEnqPiFormFields.refNoField.config.setData = refNo;
   if (params.id) {
   } else {
     useEffect(() => {

@@ -51,7 +51,8 @@ const FaxNoValidation = {
   },
   pattern: {
     value: /^\+?[0-9\s\-()+.]*$/,
-    message: "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
+    message:
+      "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
   },
 } as ValidationType;
 
@@ -63,7 +64,7 @@ const EmailValidation = {
   pattern: {
     value:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      message: "Please Include an '@' and .com/in in the email address.",
+    message: "Please Include an '@' and .com/in in the email address.",
   },
 } as ValidationType;
 
@@ -151,36 +152,12 @@ const CurrencyValidation = {
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
-    message: "Invalid currency format. Please use a valid currency code (e.g., USD).",
+    message:
+      "Invalid currency format. Please use a valid currency code (e.g., USD).",
   },
 } as ValidationType;
 
 // Option Section
-
-const citySupplierOptions = [
-  { value: "Mumbai", label: "Mumbai" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const stateSupplierOptions = [
-  { value: "Maharashtra", label: "Maharashtra" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const countrySupplierOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-// Right Field start
-const CurrencyOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
 
 const nameSupplier: FormFieldType = createFormConfig(
   "supplierName",
@@ -254,7 +231,7 @@ const citySupplier: FormFieldType = createFormConfig(
   "select",
   CityValidation,
   "Select City",
-  citySupplierOptions
+  {}
 );
 const zipSupplier: FormFieldType = createFormConfig(
   "zip",
@@ -269,7 +246,7 @@ const stateSupplier: FormFieldType = createFormConfig(
   "select",
   StateValidation,
   "Select State",
-  stateSupplierOptions
+  {}
 );
 const countrySupplier: FormFieldType = createFormConfig(
   "countryID",
@@ -277,7 +254,7 @@ const countrySupplier: FormFieldType = createFormConfig(
   "select",
   CountryValidation,
   "Select Country",
-  countrySupplierOptions
+  {}
 );
 const CurrenceySupplier: FormFieldType = createFormConfig(
   "currencyID",
@@ -285,7 +262,7 @@ const CurrenceySupplier: FormFieldType = createFormConfig(
   "select",
   CurrencyValidation,
   "Select Currency",
-  CurrencyOptions
+  {}
 );
 
 export const addSupplierFormFields = {

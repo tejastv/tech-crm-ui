@@ -72,7 +72,7 @@ const country: FormFieldType = createFormConfig(
   "select",
   CountryValidation,
   "Select Country",
-  []
+  {}
 );
 
 export const addStateFormFields = {

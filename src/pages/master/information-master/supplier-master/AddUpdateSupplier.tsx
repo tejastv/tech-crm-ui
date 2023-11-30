@@ -75,7 +75,7 @@ export const AddSupplier: React.FC = () => {
     if (stateData) {
       setStateOptions(Object.values(stateData));
     }
-  }, [stateData?.length && Object.values(stateData).length]);
+  }, [stateData && Object.values(stateData).length]);
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(

@@ -173,7 +173,7 @@ const clientactualbuyer: FormFieldType = createFormConfig(
   "select",
   ClientActualBuyer,
   "Select Client",
-  []
+  {}
 );
 const nameactualbuyer: FormFieldType = createFormConfig(
   "partyName",
@@ -224,7 +224,7 @@ const cityactualbuyer: FormFieldType = createFormConfig(
   "select",
   CityValidation,
   "Select City",
-  []
+  {}
 );
 const stateactualbuyer: FormFieldType = createFormConfig(
   "stateId",
@@ -232,7 +232,7 @@ const stateactualbuyer: FormFieldType = createFormConfig(
   "select",
   StateValidation,
   "Select State",
-  []
+  {}
 );
 const PIN: FormFieldType = createFormConfig(
   "pin",
@@ -247,7 +247,7 @@ const countryactualbuyer: FormFieldType = createFormConfig(
   "select",
   CountryValidation,
   "Select Country",
-  []
+  {}
 );
 const faxnoactualbuyer: FormFieldType = createFormConfig(
   "faxNo",

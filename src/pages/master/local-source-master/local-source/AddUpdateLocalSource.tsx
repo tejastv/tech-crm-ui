@@ -43,7 +43,7 @@ export const AddUpdateLocalSource: React.FC = () => {
     },
   };
 
-  const { data: countryData, isSuccess: getCountrySuccess } = getCountry();
+  const { data: countryData } = getCountry();
 
   const [countryOptions, setCountryOptions] = useState<CountryType[]>();
 
@@ -83,11 +83,11 @@ export const AddUpdateLocalSource: React.FC = () => {
     const { data: localsourceData, isSuccess: localsourceDataSuccess } =
       getLocalSourceData("" + params.id);
     if (localsourceDataSuccess) {
-      if (getCountrySuccess && getCurrencySuccess) {
+      if (countryOptions && getCurrencySuccess) {
         let id = localsourceData?.countryId;
         let currencyId = localsourceData?.currencyId;
         let countrynamedata: any = returnObjectBasedOnID(
-          countryData,
+          countryOptions,
           "countryId",
           id,
           "countryId",
