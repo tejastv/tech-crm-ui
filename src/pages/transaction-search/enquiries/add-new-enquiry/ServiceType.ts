@@ -1,5 +1,4 @@
 export interface ServiceType {
-    serviceTypeID: string;
-    serviceType: string;
-
+  serviceTypeID: string;
+  serviceType: string;
 }

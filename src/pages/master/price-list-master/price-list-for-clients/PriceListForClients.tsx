@@ -64,7 +64,7 @@ export const PriceListForClients: React.FC = () => {
     if (cityData) {
       setCityOptions(Object.values(cityData));
     }
-  }, [cityData?.length && Object.values(cityData).length]);
+  }, [cityData && Object.values(cityData).length]);
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "cityId", "cityName");
