@@ -6,6 +6,7 @@ export { invoiceListFormFields } from "./invoice-detail-master/invoice-list/invo
 export { invoiceDetailReportFormFields } from "./invoice-detail-master/invoice-detail-report/invoice-detail-report-form-fields";
 export { invoiceDetailReportProFormFields } from "./invoice-detail-master/invoice-detail-report-pro/invoice-detail-report-pro-form-fields";
 export { invoiceDetailGroupWiseFormFields } from "./invoice-detail-master/invoice-detail-group-wise/invoice-detail-group-wise-form-fields";
+export { invoiceListTDSFormFields } from "./invoice-detail-master/invoice-list-tds/invoice-list-tds-form-fields";
 
 export { InvoiceGenerateGst } from "./generate-invoice-master/invoice-generate-gst/InvoiceGenGst";
 export { InvoiceGenerateAuto } from "./generate-invoice-master/generate-invoice-auto/GenerateInvoiceAuto";
@@ -15,6 +16,7 @@ export { InvoiceList } from "./invoice-detail-master/invoice-list/InvoiceList";
 export { InvoiceDetailReport } from "./invoice-detail-master/invoice-detail-report/InvoiceDetailReport";
 export { InvoiceDetailReportPro } from "./invoice-detail-master/invoice-detail-report-pro/InvoiceDetailReportPro";
 export { InvoiceDetailGroupWise } from "./invoice-detail-master/invoice-detail-group-wise/InvoiceDetailGroupWise";
+export { InvoiceListTDS } from "./invoice-detail-master/invoice-list-tds/InvioceListTdx";
 
 export * from "./generate-invoice-master/invoice-generate-gst/invoice-gen-gst-type";
 export * from "./generate-invoice-master/generate-invoice-auto/add-generate-invoice-auto-type";
@@ -24,3 +26,4 @@ export * from "./invoice-detail-master/invoice-list/invoice-list-type";
 export * from "./invoice-detail-master/invoice-detail-report/invoice-detail-report-type";
 export * from "./invoice-detail-master/invoice-detail-report-pro/invoice-detail-report-pro-type";
 export * from "./invoice-detail-master/invoice-detail-group-wise/invoice-detail-group-wise-type";
+export * from "./invoice-detail-master/invoice-list-tds/invoice-list-tds-type";
