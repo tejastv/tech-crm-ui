@@ -9,6 +9,11 @@ const GenerateInvoiceAutoIndex = React.lazy(
   () => import("./generate-invoice-auto/GenerateInvoiceAutoIndex")
 );
 
+const GenerateInvoiceActualBuyreIndex = React.lazy(
+  () =>
+    import("./generate-invoice-actual-buyre/GenerateInvoiceActualBuyreIndex")
+);
+
 const GenerateInvoiceRoutes = () => {
   return (
     <Routes>
@@ -25,6 +30,13 @@ const GenerateInvoiceRoutes = () => {
             .INVOICE_GENERATE_AUTO_GST_PARENT_ROUTE
         }
         element={<GenerateInvoiceAutoIndex />}
+      />
+      <Route
+        path={
+          INVOICE_ROUTES.GENERATE_INVOICE_ROUTES
+            .INVOICE_GENERATE_ACTUAL_BUYRE_GST_PARENT_ROUTE
+        }
+        element={<GenerateInvoiceActualBuyreIndex />}
       />
     </Routes>
   );
