@@ -310,19 +310,15 @@ export const StdPriceListClient: React.FC = () => {
                   />
                 </div>
               </div>
-              {currency !== "0" && (
-                <div className="row m-6 justify-content-end">
-                  <div className="col-mt- col-xs-12 text-end">
-                    <Button
-                      type="button"
-                      onClick={onDataEditClick}
-                      className={"btn btn-danger btn-sm"}
-                    >
-                      <i className="far fa-save"></i> Save
-                    </Button>
-                  </div>
-                </div>
-              )}
+              <div className="text-center">
+                <Button
+                  type="button"
+                  onClick={onDataEditClick}
+                  className={"btn btn-danger btn-sm"}
+                >
+                  <i className="far fa-save"></i> Save All
+                </Button>
+              </div>
             </BorderLayout>
           </form>
         </FormProvider>
