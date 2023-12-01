@@ -24,6 +24,11 @@ const InvoiceListTdxIndex = React.lazy(
 const InvoiceListPerfomaIndex = React.lazy(
   () => import("./invoice-list-perfoma/InvoiceListPerfomaIndex")
 );
+
+const InvoiceListExceWiseIndex = React.lazy(
+  () => import("./invoice-list-exce-wise/InvoiceListExceWiseIndex")
+);
+
 const InvoiceDetailMasterRoutes = () => {
   return (
     <Routes>
@@ -67,6 +72,13 @@ const InvoiceDetailMasterRoutes = () => {
             .INVOICE_LIST_PERFOMA_PARENT_ROUTE
         }
         element={<InvoiceListPerfomaIndex />}
+      />
+      <Route
+        path={
+          INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES
+            .INVOICE_LIST_EXCE_WISE_PARENT_ROUTE
+        }
+        element={<InvoiceListExceWiseIndex />}
       />
     </Routes>
   );

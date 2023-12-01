@@ -8,6 +8,7 @@ export { invoiceDetailReportProFormFields } from "./invoice-detail-master/invoic
 export { invoiceDetailGroupWiseFormFields } from "./invoice-detail-master/invoice-detail-group-wise/invoice-detail-group-wise-form-fields";
 export { invoiceListTDSFormFields } from "./invoice-detail-master/invoice-list-tds/invoice-list-tds-form-fields";
 export { invoiceListPerfomaFormFields } from "./invoice-detail-master/invoice-list-perfoma/invoice-list-perfoma-form-fields";
+export { invoiceListExceWiseFormFields } from "./invoice-detail-master/invoice-list-exce-wise/invoice-list-exce-wise-form-fields";
 
 export { InvoiceGenerateGst } from "./generate-invoice-master/invoice-generate-gst/InvoiceGenGst";
 export { InvoiceGenerateAuto } from "./generate-invoice-master/generate-invoice-auto/GenerateInvoiceAuto";
@@ -19,6 +20,7 @@ export { InvoiceDetailReportPro } from "./invoice-detail-master/invoice-detail-r
 export { InvoiceDetailGroupWise } from "./invoice-detail-master/invoice-detail-group-wise/InvoiceDetailGroupWise";
 export { InvoiceListTDS } from "./invoice-detail-master/invoice-list-tds/InvioceListTdx";
 export { InvoiceListPerfoma } from "./invoice-detail-master/invoice-list-perfoma/InvoiceListPerfoma";
+export { InvoiceListExceWise } from "./invoice-detail-master/invoice-list-exce-wise/InvoiceListExceWise";
 
 export * from "./generate-invoice-master/invoice-generate-gst/invoice-gen-gst-type";
 export * from "./generate-invoice-master/generate-invoice-auto/add-generate-invoice-auto-type";
@@ -30,3 +32,4 @@ export * from "./invoice-detail-master/invoice-detail-report-pro/invoice-detail-
 export * from "./invoice-detail-master/invoice-detail-group-wise/invoice-detail-group-wise-type";
 export * from "./invoice-detail-master/invoice-list-tds/invoice-list-tds-type";
 export * from "./invoice-detail-master/invoice-list-perfoma/invoice-list-perfoma-type";
+export * from "./invoice-detail-master/invoice-list-exce-wise/invoice-list-exce-wise-type";
