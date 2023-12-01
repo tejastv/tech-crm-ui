@@ -1020,7 +1020,10 @@ export const Header: React.FC = () => {
                             </Link>
                           </li>
                           <li className="sidebar-item">
-                            <Link className="sidebar-link" to={``}>
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.GENERATE_INVOICE_MASTER_ROUTE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.INVOICE_GENERATE_AUTO_GST}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Generate Invoice(Auto)GST
@@ -1028,7 +1031,10 @@ export const Header: React.FC = () => {
                             </Link>
                           </li>
                           <li className="sidebar-item">
-                            <Link className="sidebar-link" to={``}>
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.GENERATE_INVOICE_MASTER_ROUTE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.INVOICE_GENERATE_ACTUAL_BUYRE_GST}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Generate Invoice - Actual Buyer (Auto) - GST
