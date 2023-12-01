@@ -1061,14 +1061,20 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <Link className="sidebar-link" to={``}>
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Invoice List</span>
                             </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <Link className="sidebar-link" to={``}>
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_REPORT}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice Detail Report
@@ -1077,7 +1083,10 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <Link className="sidebar-link" to={``}>
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_REPORT_PRO}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice Detail Report PRO
@@ -1086,7 +1095,10 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <Link className="sidebar-link" to={``}>
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_REPORT_GROUP_WISE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice Detail Report(Group wise)
@@ -1095,7 +1107,10 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <Link className="sidebar-link" to={``}>
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST_TDS}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice List (With TDS)
@@ -1104,7 +1119,10 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <Link className="sidebar-link" to={``}>
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST_SERVICE_TAX}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice List(With Service Tax)
@@ -1113,7 +1131,10 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <Link className="sidebar-link" to={``}>
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST_PERFOMA}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice List(Proforma)
@@ -1122,7 +1143,10 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <Link className="sidebar-link" to={``}>
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST_EXCE_WISE}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice List(Exec. wise)
@@ -1131,7 +1155,10 @@ export const Header: React.FC = () => {
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <Link className="sidebar-link" to={``}>
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_SETTLED_}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice Settled
