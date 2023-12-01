@@ -17,7 +17,6 @@ import {
   GenerateInvoiceAutoType,
   InvoiceGenGstType,
   generateInvoiceActualBuyreFormFields,
-  generateInvoiceAutoFormFields,
 } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
 
