@@ -49,7 +49,8 @@ const PurchesDateValidation = {
   },
   pattern: {
     value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message: "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
+    message:
+      "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
   },
 } as ValidationType;
 const SellDateValidation = {
@@ -59,20 +60,10 @@ const SellDateValidation = {
   },
   pattern: {
     value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message: "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
+    message:
+      "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
   },
 } as ValidationType;
-
-const priceLocalSourceOptions = [
-  { value: "Mumbai", label: "200" },
-  { value: "strawberry", label: "300" },
-  { value: "vanilla", label: "400" },
-];
-const priceCurrencyOptions = [
-  { value: "Mumbai", label: "200" },
-  { value: "strawberry", label: "300" },
-  { value: "vanilla", label: "400" },
-];
 
 const priceLocalSource: FormFieldType = createFormConfig(
   "source",
@@ -80,7 +71,7 @@ const priceLocalSource: FormFieldType = createFormConfig(
   "slelect",
   PriceLocalsourceValidation,
   "Enter localSource",
-  priceLocalSourceOptions
+  {}
 );
 const priceCurrency: FormFieldType = createFormConfig(
   "PriceCurrencey",
@@ -88,7 +79,7 @@ const priceCurrency: FormFieldType = createFormConfig(
   "select",
   PriceCurrencyValidation,
   "Select Currency",
-  priceCurrencyOptions
+  {}
 );
 const purchesExchanegRate: FormFieldType = createFormConfig(
   "emailCC",

@@ -92,7 +92,7 @@ export const AddBulkEnquiries: React.FC = () => {
     config: {
       tableName: "Company Master",
       columns: columns,
-      tableData: companyData || [],
+      tableData: (companyData && Object.values(companyData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -145,7 +145,7 @@ export const AddBulkEnquiries: React.FC = () => {
             </form>
           </FormProvider>
 
-          {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+          {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
         </BorderLayout>
       </div>
     </>

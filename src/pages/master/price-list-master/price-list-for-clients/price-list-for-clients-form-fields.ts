@@ -90,7 +90,7 @@ const pricecity: FormFieldType = createFormConfig(
   "slelect",
   PriceCityValidation,
   "Select City",
-  []
+  {}
 );
 const priceClient: FormFieldType = createFormConfig(
   "Priceclient",
@@ -98,7 +98,7 @@ const priceClient: FormFieldType = createFormConfig(
   "select",
   PriceClientValidation,
   "Select Client",
-  []
+  {}
 );
 const priceClient2: FormFieldType = createFormConfig(
   "Priceclient2",
@@ -106,7 +106,7 @@ const priceClient2: FormFieldType = createFormConfig(
   "select",
   PriceClient2Validation,
   "Select Client",
-  []
+  {}
 );
 const priceClientCurrency: FormFieldType = createFormConfig(
   "Priceclientcurrencey",
@@ -114,7 +114,7 @@ const priceClientCurrency: FormFieldType = createFormConfig(
   "select",
   PriceClientCurrencyValidation,
   "Currency",
-  [],
+  {},
   true
 );
 const priceGroup: FormFieldType = createFormConfig(
@@ -123,7 +123,7 @@ const priceGroup: FormFieldType = createFormConfig(
   "select",
   PriceGroupValidation,
   "Group",
-  [],
+  {},
   true
 );
 const priceGroup2: FormFieldType = createFormConfig(
@@ -132,7 +132,7 @@ const priceGroup2: FormFieldType = createFormConfig(
   "select",
   PriceGroup2Validation,
   "Select Group",
-  []
+  {}
 );
 const priceCurrencyGroup: FormFieldType = createFormConfig(
   "Pricecurrenceygroup",
@@ -140,7 +140,7 @@ const priceCurrencyGroup: FormFieldType = createFormConfig(
   "select",
   PriceCurrencyGroupValidation,
   "Select Currency",
-  []
+  {}
 );
 const priceCurrencyClient: FormFieldType = createFormConfig(
   "PricecurrenceyClient",
@@ -148,7 +148,7 @@ const priceCurrencyClient: FormFieldType = createFormConfig(
   "select",
   PriceCurrencyClientValidation,
   "Select Currency",
-  []
+  {}
 );
 
 export const addPriceClientFormFields = {

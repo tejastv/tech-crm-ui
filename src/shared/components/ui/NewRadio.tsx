@@ -5,7 +5,7 @@
 |
 |  🐸 Returns:  JSX
 *-------------------------------------------------------------------*/
-import { Controller, useController } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import { MdError } from "react-icons/md";
 import Form from "react-bootstrap/Form";
 
@@ -21,17 +21,8 @@ export const NewRadio: React.FC<{
 }> = (props) => {
   const inputErrors = findInputError(props.errors, props.config.config.name);
   const isInvalid = isFormInvalid(inputErrors);
-  const { field } = useController({
-    control: props.control,
-    name: props.config.config.name,
-  });
-  // const handleSelectChange = (selectedOption: any) => {
-  //   // Update the form value with the selected data
-  //   onChange(selectedOption);
-  //   if (props.onChange) {
-  //     props.onChange(selectedOption);
-  //   }
-  // };
+  const options =
+    props.config.config.options && Object.values(props.config.config.options);
   return (
     <div className="row">
       <div className="col-12">
@@ -45,8 +36,8 @@ export const NewRadio: React.FC<{
           </Form.Label>
           <div className="col-sm-9">
             <div className="input-group">
-              {props.config.config.options &&
-                props.config.config.options.map((option, index) => {
+              {options &&
+                options.map((option, index) => {
                   return (
                     <Controller
                       key={index + "" + option.value}

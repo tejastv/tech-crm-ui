@@ -64,7 +64,7 @@ export const PriceListForClients: React.FC = () => {
     if (cityData) {
       setCityOptions(Object.values(cityData));
     }
-  }, [cityData?.length && Object.values(cityData).length]);
+  }, [cityData && Object.values(cityData).length]);
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "cityId", "cityName");
@@ -450,13 +450,13 @@ export const PriceListForClients: React.FC = () => {
                       onChangeHandler={cityChangeHandler}
                     />
                   </div>
-                  <div className="col-md-3 col-xs-12">
+                  <div className="col-md-4 col-xs-12">
                     <Select
                       config={addPriceClientFormFields.priceClient.config}
                       onChangeHandler={clientChangeHandler}
                     />
                   </div>
-                  <div className="col-md-3 col-xs-12">
+                  <div className="col-md-2 col-xs-12">
                     <Input
                       config={
                         addPriceClientFormFields.priceClientCurrency.config
@@ -490,7 +490,8 @@ export const PriceListForClients: React.FC = () => {
                     </div> */}
                   </div>
                 </div>
-                <div className="row justify-content-end">
+                <div className="row">
+                  <div className="col-md-7" />
                   <div className="col-md-2">
                     <Button
                       type="submit"
@@ -511,15 +512,19 @@ export const PriceListForClients: React.FC = () => {
                       <i className="far fa-save"></i> Get Price (From Group)
                     </Button>
                   </div>
-                  <div className="col-md-2">
-                    <Button
-                      type="button"
-                      name="saveAll"
-                      onClick={onSaveBtnClickHandler}
-                      className={"btn btn-danger btn-sm w-100"}
-                    >
-                      <i className="far fa-save"></i> Save All
-                    </Button>
+                </div>
+                <div className="row justify-content-space-between mt-3">
+                  <div className="offset-7 col-md-4">
+                    <div className="text-center">
+                      <Button
+                        type="button"
+                        name="saveAll"
+                        onClick={onSaveBtnClickHandler}
+                        className={"btn btn-danger btn-sm"}
+                      >
+                        <i className="far fa-save"></i> Save All
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </form>

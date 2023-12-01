@@ -62,7 +62,7 @@ const userType: FormFieldType = createFormConfig(
   "select",
   UserTypeValidation,
   "User Type",
-  Object.values(userTypeData)
+  userTypeData
 );
 const login: FormFieldType = createFormConfig(
   "loginId",

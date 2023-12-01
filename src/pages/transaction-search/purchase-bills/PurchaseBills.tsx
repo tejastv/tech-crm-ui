@@ -121,7 +121,7 @@ export const PurchaseBills: React.FC = () => {
     config: {
       tableName: "Company Master",
       columns: columns,
-      tableData: companyData || [],
+      tableData: (companyData && Object.values(companyData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -142,7 +142,7 @@ export const PurchaseBills: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

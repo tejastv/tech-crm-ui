@@ -15,9 +15,10 @@ import { useNavigate } from "react-router-dom";
 
 export const SearchEnqPi: React.FC = () => {
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
-  const { data: companyData, isLoading } = getCompany();
+  const { data, isLoading } = getCompany();
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
+  console.log(data);
 
   const config = {
     breadcrumbConfig: {
@@ -282,7 +283,7 @@ export const SearchEnqPi: React.FC = () => {
     config: {
       tableName: "Company Master",
       columns: columns,
-      tableData: companyData || [],
+      tableData: [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

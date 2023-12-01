@@ -1,18 +1,11 @@
 import { apiUrls, queryKeys } from "@constants/index";
 import { useAxios } from "@hooks/useAxios";
-import {
-  UseQueryResult,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { UseQueryResult, useMutation, useQuery } from "@tanstack/react-query";
 import { GeneratePiType } from ".";
 import { ApiResponseType } from "@shared/index";
 
 export const useProformaApiCallHook = () => {
   const { instance } = useAxios();
-  const queryClient = useQueryClient();
-  // const navigate = useNavigate();
 
   const callFormConfig = {
     headers: {

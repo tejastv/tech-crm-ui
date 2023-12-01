@@ -20,7 +20,8 @@ const city: FormFieldType = createFormConfig(
   "select",
   City,
   "",
-  [{ value: "all", label: "All" }]
+  {}
+  // [{ value: "all", label: "All" }]
 );
 const client: FormFieldType = createFormConfig(
   "clientID",
@@ -28,7 +29,8 @@ const client: FormFieldType = createFormConfig(
   "select",
   Client,
   "",
-  [{ value: "all", label: "All" }]
+  {}
+  // [{ value: "all", label: "All" }]
 );
 
 export const enquiriesCountGraphViewFormFields = {

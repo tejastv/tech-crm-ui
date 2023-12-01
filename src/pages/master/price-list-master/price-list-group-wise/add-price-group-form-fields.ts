@@ -66,7 +66,7 @@ const pricegroupcity: FormFieldType = createFormConfig(
   "slelect",
   PriceCityGroupValidation,
   "Select City",
-  []
+  {}
 );
 const priceGroupSelect: FormFieldType = createFormConfig(
   "priceGroup",
@@ -74,7 +74,7 @@ const priceGroupSelect: FormFieldType = createFormConfig(
   "select",
   PriceGroupValidation,
   "Select Group",
-  []
+  {}
 );
 const priceGroupSelect2: FormFieldType = createFormConfig(
   "priceGroup2",
@@ -82,7 +82,7 @@ const priceGroupSelect2: FormFieldType = createFormConfig(
   "select",
   PriceGroup2Validation,
   "Select Group",
-  []
+  {}
 );
 const priceGroupCurrency: FormFieldType = createFormConfig(
   "Pricegroupcurrencey",
@@ -90,7 +90,7 @@ const priceGroupCurrency: FormFieldType = createFormConfig(
   "select",
   PriceGroupCurrencyValidation,
   "Select Currency",
-  [],
+  {},
   true
 );
 const priceGroupCurrency2: FormFieldType = createFormConfig(
@@ -99,7 +99,7 @@ const priceGroupCurrency2: FormFieldType = createFormConfig(
   "select",
   PriceGroupCurrency2Validation,
   "Select Currency",
-  []
+  {}
 );
 
 export const addPriceGroupFormFields = {

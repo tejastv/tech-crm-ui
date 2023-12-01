@@ -313,36 +313,36 @@ const AdjustEnqPropfomaValidation = {
 } as ValidationType;
 
 // Option Section
-const GstOption = [
-  { value: "Y", label: "Yes" },
-  { value: "N", label: "No" },
-  { value: "S", label: "SEZ-IGST" },
-  { value: "Z", label: "SEZ-NO GST" },
-];
+const GstOption = {
+  Y: { value: "Y", label: "Yes" },
+  N: { value: "N", label: "No" },
+  S: { value: "S", label: "SEZ-IGST" },
+  Z: { value: "Z", label: "SEZ-NO GST" },
+};
 
-const biilOnActualBuyerOptions = [
-  { value: true, label: "Bill on Actual Buyer" },
-];
+const biilOnActualBuyerOptions = {
+  billOn: { value: true, label: "Bill on Actual Buyer" },
+};
 
 // Right Field start
 
-const invoiceOption = [
-  { value: "Y", label: "Monthly Invoice" },
-  {
+const invoiceOption = {
+  Y: { value: "Y", label: "Monthly Invoice" },
+  N: {
     value: "N",
     label: "Individual Report / Invoice",
   },
-];
-const osEmailOptions = [
-  { value: "Y", label: "Auto Send O/S by e-Mail" },
-  { value: "N", label: "OS List printed" },
-];
+};
+const osEmailOptions = {
+  Y: { value: "Y", label: "Auto Send O/S by e-Mail" },
+  N: { value: "N", label: "OS List printed" },
+};
 
-const discountOptions = [
-  { value: "in", label: "in %" },
-  { value: "perRep", label: "Per Report" },
-  { value: "NA", label: "NO Discount" },
-];
+const discountOptions = {
+  in: { value: "in", label: "in %" },
+  perRep: { value: "perRep", label: "Per Report" },
+  NA: { value: "NA", label: "NO Discount" },
+};
 const clientName: FormFieldType = createFormConfig(
   "clientName",
   "Name",
@@ -421,7 +421,7 @@ const cityClient: FormFieldType = createFormConfig(
   "select",
   CityValidation,
   "Select City",
-  []
+  {}
 );
 const zipClient: FormFieldType = createFormConfig(
   "zip",
@@ -436,7 +436,7 @@ const stateClient: FormFieldType = createFormConfig(
   "select",
   StateValidation,
   "Select State",
-  []
+  {}
 );
 const statecodeClient: FormFieldType = createFormConfig(
   "stateCode",
@@ -444,7 +444,7 @@ const statecodeClient: FormFieldType = createFormConfig(
   "text",
   StateValidation,
   "",
-  [],
+  {},
   true
 );
 const countryClient: FormFieldType = createFormConfig(
@@ -453,7 +453,7 @@ const countryClient: FormFieldType = createFormConfig(
   "select",
   CountryValidation,
   "Select Country",
-  []
+  {}
 );
 
 const crDay: FormFieldType = createFormConfig(
@@ -462,7 +462,7 @@ const crDay: FormFieldType = createFormConfig(
   "select",
   CrDayValidation,
   "Select Cr. days",
-  []
+  {}
 );
 
 const billonactual: FormFieldType = createFormConfig(
@@ -481,7 +481,7 @@ const id: FormFieldType = createFormConfig(
   "select",
   ClientIdValidation,
   "",
-  [],
+  {},
   true
 );
 const clientIdSelect: FormFieldType = createFormConfig(
@@ -490,7 +490,7 @@ const clientIdSelect: FormFieldType = createFormConfig(
   "select",
   ClientIdValidation,
   "Select Client",
-  []
+  {}
 );
 const clientCurrencey: FormFieldType = createFormConfig(
   "currencyID",
@@ -498,7 +498,7 @@ const clientCurrencey: FormFieldType = createFormConfig(
   "select",
   ClientCurrencyValidation,
   "Select Currency",
-  []
+  {}
 );
 const executive: FormFieldType = createFormConfig(
   "executive_id",
@@ -506,7 +506,7 @@ const executive: FormFieldType = createFormConfig(
   "select",
   ExecutiveValidation,
   "Select Executive",
-  []
+  {}
 );
 const instuction: FormFieldType = createFormConfig(
   "instruction",
@@ -521,7 +521,7 @@ const groupClient: FormFieldType = createFormConfig(
   "select",
   GroupValidation,
   "Select Group",
-  []
+  {}
 );
 const segmentClient: FormFieldType = createFormConfig(
   "segmentId",
@@ -529,7 +529,7 @@ const segmentClient: FormFieldType = createFormConfig(
   "select",
   SegmentValidation,
   "Select Segment",
-  []
+  {}
 );
 const remarks: FormFieldType = createFormConfig(
   "remarks",

@@ -49,7 +49,7 @@ import {
   selectOptionsMaker,
 } from "@utils/index";
 
-export const AddEnquiry: React.FC = () => {
+export const EnquiryForm: React.FC = () => {
   const {
     register,
     handleSubmit,

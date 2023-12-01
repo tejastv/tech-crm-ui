@@ -21,6 +21,8 @@ export const NewCheckbox: React.FC<{
 }> = (props) => {
   const inputErrors = findInputError(props.errors, props.config.config.name);
   const isInvalid = isFormInvalid(inputErrors);
+  const options =
+    props.config.config.options && Object.values(props.config.config.options);
   return (
     <div className="row">
       <div className="col-12">
@@ -33,8 +35,8 @@ export const NewCheckbox: React.FC<{
             {props.config.config.validation?.required.value && <span>*</span>}
           </Form.Label>
           <div className="col-sm-9">
-            {props.config.config.options &&
-              props.config.config.options.map((option, index) => {
+            {options &&
+              options.map((option, index) => {
                 return (
                   <Controller
                     name={props.config.config.name}
