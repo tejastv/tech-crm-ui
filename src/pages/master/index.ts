@@ -8,7 +8,7 @@ export { AddUpdateClient } from "./client-master/client/AddUpdateClient";
 
 // Client Segment master child pages
 export { GroupMaster } from "./client-master/client-group/ClientGroup";
-export { AddUpdateClientGroup } from "./client-master/client-group/AddUpdateClientGroup";
+export { ClientGroupForm } from "./client-master/client-group/ClientGroupForm";
 export { Segment } from "./client-master/segment/Segment";
 export { AddUpdateSegment } from "./client-master/segment/AddUpdateSegment";
 
@@ -88,11 +88,11 @@ export { AddUpdateUser } from "./information-master-2/user-master/AddUpdateUser"
 export { User } from "./information-master-2/user-master/User";
 
 //Form Fields
-export { addClientFormFields } from "./client-master/client/add-client-form-fields";
+export { clientFormFields } from "./client-master/client/clientFormFields";
 export { addStateFormFields } from "./location-master/state/add-state-form-fields";
 export { addCityFormFields } from "./location-master/city/add-city-form-fields";
 
-export { addClientGroupFormFields } from "./client-master/client-group/add-client-group-form-fields";
+export { addClientGroupFormFields } from "./client-master/client-group/addClientGroupFormFields";
 export { addSegmentFormFields } from "./client-master/segment/add-segment-form-fields";
 
 export { addCompanyFormFields } from "./company/add-update-company-form-fields";
@@ -137,8 +137,8 @@ export * from "./company/company-type";
 export * from "./client-master/client/client-type";
 export * from "./client-master/client/add-client-type";
 
-export * from "./client-master/client-group/add-update-client-group-type";
-export * from "./client-master/client-group/client-group-type";
+export * from "./client-master/client-group/ClientGroupFormType";
+export * from "./client-master/client-group/ClientGroupType";
 
 export * from "./client-master/segment/add-update-segment.type";
 export * from "./client-master/segment/segment-type";

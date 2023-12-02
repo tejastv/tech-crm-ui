@@ -132,7 +132,6 @@ export const EnquiryForm: React.FC = () => {
     }
   }, []);
 
-  // city api call
   const { data: cityData } = getCity();
 
   useEffect(() => {
@@ -146,7 +145,6 @@ export const EnquiryForm: React.FC = () => {
     enqFormFields.enqCity.config.options = options;
   }
 
-  // state api call
   const { data: stateData } = getState();
   useEffect(() => {
     if (stateData) {
@@ -159,7 +157,6 @@ export const EnquiryForm: React.FC = () => {
     enqFormFields.enqState.config.options = options;
   }
 
-  // country api call
   const { data: countryData } = getCountry();
 
   useEffect(() => {
