@@ -1,23 +1,21 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   BorderLayout,
   Card,
-  Input,
-  Select,
   Button,
   Table,
   Radio,
   TableType,
   NewSelect,
   NewInput,
+  NewRadio,
 } from "@shared/index";
 import {
   GenerateInvoiceActualBuyreType,
   GenerateInvoiceAutoType,
   InvoiceGenGstType,
   generateInvoiceActualBuyreFormFields,
-  generateInvoiceAutoFormFields,
 } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -244,78 +242,72 @@ export const GenerateInvoiceActualBuyre: React.FC = () => {
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <Radio
-                      config={
-                        generateInvoiceActualBuyreFormFields.action.config
-                      }
-                    />
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <div className="card-body">
+                  <NewRadio
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={generateInvoiceActualBuyreFormFields.action}
+                  />
 
-                    <NewSelect
-                      errors={errors}
-                      register={register}
-                      control={control}
-                      config={generateInvoiceActualBuyreFormFields.client}
-                    />
-                    <div className="mb-2">
-                      <div className="col-md-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm"}
-                        >
-                          Generate
-                        </Button>
-                      </div>
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={generateInvoiceActualBuyreFormFields.client}
+                  />
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        Generate
+                      </Button>
                     </div>
                   </div>
                 </div>
-                {/* 2 Column */}
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <NewInput
-                      errors={errors}
-                      register={register}
-                      config={
-                        generateInvoiceActualBuyreFormFields.fromdateField
-                      }
-                    />
-                    <NewInput
-                      errors={errors}
-                      register={register}
-                      config={generateInvoiceActualBuyreFormFields.todateeField}
-                    />
-                  </div>
-                </div>
-
-                <BorderLayout heading={cardConfig.tableOneConfig.mainHeading}>
-                  {/* Table */}
-                  <div className="col-md-12 col-xs-12">
-                    <div className="card-body">
-                      <Table config={tableConfig.config}>null</Table>
-                    </div>
-                  </div>
-                </BorderLayout>
-                <BorderLayout heading={cardConfig.tableTwoConfig.mainHeading}>
-                  <div className="col-md-12 col-xs-12">
-                    <div className="card-body">
-                      <Table config={tableTwoConfig.config}>null</Table>
-                    </div>
-                  </div>
-                </BorderLayout>
               </div>
-            </BorderLayout>
-          </form>
-        </FormProvider>
+              {/* 2 Column */}
+              <div className="col-md-6 col-xs-12">
+                <div className="card-body">
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={generateInvoiceActualBuyreFormFields.fromdateField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={generateInvoiceActualBuyreFormFields.todateeField}
+                  />
+                </div>
+              </div>
+
+              <BorderLayout heading={cardConfig.tableOneConfig.mainHeading}>
+                {/* Table */}
+                <div className="col-md-12 col-xs-12">
+                  <div className="card-body">
+                    <Table config={tableConfig.config}>null</Table>
+                  </div>
+                </div>
+              </BorderLayout>
+              <BorderLayout heading={cardConfig.tableTwoConfig.mainHeading}>
+                <div className="col-md-12 col-xs-12">
+                  <div className="card-body">
+                    <Table config={tableTwoConfig.config}>null</Table>
+                  </div>
+                </div>
+              </BorderLayout>
+            </div>
+          </BorderLayout>
+        </form>
       </Card>
     </>
   );
