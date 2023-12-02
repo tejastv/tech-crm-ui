@@ -1,7 +1,7 @@
 import { FormFieldType, MapType, Options, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
 
-const FromDateValidation = {
+const fromDateValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -13,7 +13,7 @@ const FromDateValidation = {
   },
 } as ValidationType;
 
-const ToDateValidation = {
+const toDateValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -32,30 +32,7 @@ const bobValidation = {
     message: "{label} field is rquired",
   },
 } as ValidationType;
-const ubValidation = {
-  required: {
-    value: false,
-    message: "{label} field is rquired",
-  },
-} as ValidationType;
-const boiValidation = {
-  required: {
-    value: false,
-    message: "{label} field is rquired",
-  },
-} as ValidationType;
-const southIndBankValidation = {
-  required: {
-    value: false,
-    message: "{label} field is rquired",
-  },
-} as ValidationType;
-const iobValidation = {
-  required: {
-    value: false,
-    message: "{label} field is rquired",
-  },
-} as ValidationType;
+
 const billAmtValidation = {
   required: {
     value: false,
@@ -75,7 +52,7 @@ const totalValidation = {
   },
 } as ValidationType;
 
-const fyearField: FormFieldType = {
+const fYearField: FormFieldType = {
   config: {
     name: "fyear",
     label: "F.Year ",
@@ -91,9 +68,17 @@ const fyearField: FormFieldType = {
   },
 };
 
-const ActionOption: MapType<Options> = {
+const actionOption: MapType<Options> = {
   new: { value: "new", label: "All Client Datewise" },
   renew: { value: "renew", label: "Specific Client Datewise" },
+};
+
+const actionOptiontwo: MapType<Options> = {
+  new: { value: "y", label: "BOB" },
+  renew: { value: "ub", label: "UB" },
+  rerenew: { value: "boi", label: "  BOI" },
+  ne: { value: "southIndianBank", label: "  SouthIndBank" },
+  newnew: { value: "Iob", label: "  IOB" },
 };
 
 const allClientDatewiseField: FormFieldType = createFormConfig(
@@ -102,7 +87,7 @@ const allClientDatewiseField: FormFieldType = createFormConfig(
   "radio",
   allClientDatewiseValidation,
   "",
-  ActionOption
+  actionOption
 );
 
 const myDate = new Date(); // Replace this with your actual date
@@ -118,7 +103,7 @@ const fromdateField: FormFieldType = createFormConfig(
   "fromDate",
   "From",
   "date",
-  FromDateValidation,
+  fromDateValidation,
   formattedDate
 );
 
@@ -126,7 +111,7 @@ const todateeField: FormFieldType = createFormConfig(
   "toDate",
   "To Date",
   "date",
-  ToDateValidation,
+  toDateValidation,
   formattedDate
 );
 const cityField: FormFieldType = {
@@ -145,7 +130,7 @@ const cityField: FormFieldType = {
   },
 };
 
-const ClientField: FormFieldType = {
+const clientField: FormFieldType = {
   config: {
     name: "client",
     label: "Client ",
@@ -163,42 +148,11 @@ const ClientField: FormFieldType = {
 
 const bobField: FormFieldType = createFormConfig(
   "bob",
-  "BOB",
+  "",
   "text",
   bobValidation,
-  ""
-);
-
-const ubField: FormFieldType = createFormConfig(
-  "ub",
-  "UB",
-  "text",
-  ubValidation,
-  ""
-);
-
-const boiField: FormFieldType = createFormConfig(
-  "boi",
-  "BOI",
-  "text",
-  boiValidation,
-  ""
-);
-
-const sourthIndBankField: FormFieldType = createFormConfig(
-  "southIndBank",
-  "SouthIndBank",
-  "text",
-  southIndBankValidation,
-  ""
-);
-
-const iobField: FormFieldType = createFormConfig(
-  "iob",
-  "IOB",
-  "text",
-  iobValidation,
-  ""
+  "",
+  actionOptiontwo
 );
 
 const billAmtField: FormFieldType = createFormConfig(
@@ -225,18 +179,13 @@ const totalField: FormFieldType = createFormConfig(
   ""
 );
 export const invoiceDetailReportFormFields = {
-  fyearField,
+  fYearField,
   fromdateField,
   todateeField,
   cityField,
-  ClientField,
+  clientField,
   allClientDatewiseField,
-
   bobField,
-  ubField,
-  boiField,
-  sourthIndBankField,
-  iobField,
   billAmtField,
   stAmtField,
   totalField,

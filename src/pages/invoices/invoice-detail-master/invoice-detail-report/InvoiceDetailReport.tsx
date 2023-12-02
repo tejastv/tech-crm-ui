@@ -12,6 +12,8 @@ import {
   TableType,
   NewSelect,
   NewInput,
+  NewRadio,
+  NewCheckbox,
 } from "@shared/index";
 import {
   InvoiceDetailReportType,
@@ -166,13 +168,21 @@ export const InvoiceDetailReport: React.FC = () => {
                     errors={errors}
                     register={register}
                     control={control}
-                    config={invoiceDetailReportFormFields.fyearField}
+                    config={invoiceDetailReportFormFields.fYearField}
                   />
 
                   <Radio
                     config={
                       invoiceDetailReportFormFields.allClientDatewiseField
                         .config
+                    }
+                  />
+                  <NewRadio
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={
+                      invoiceDetailReportFormFields.allClientDatewiseField
                     }
                   />
                 </div>
@@ -213,7 +223,7 @@ export const InvoiceDetailReport: React.FC = () => {
                         errors={errors}
                         register={register}
                         control={control}
-                        config={invoiceDetailReportFormFields.ClientField}
+                        config={invoiceDetailReportFormFields.clientField}
                       />
                     </div>
                   </div>
@@ -222,32 +232,11 @@ export const InvoiceDetailReport: React.FC = () => {
                 <div className="col-md-3">
                   <div className="row">
                     <div className="col-md-4">
-                      <SingleCheckbox
-                        config={invoiceDetailReportFormFields.bobField.config}
-                      />
-                    </div>
-                    <div className="col-md-3">
-                      <SingleCheckbox
-                        config={invoiceDetailReportFormFields.ubField.config}
-                      />
-                    </div>
-                    <div className="col-md-3">
-                      <SingleCheckbox
-                        config={invoiceDetailReportFormFields.boiField.config}
-                      />
-                    </div>
-
-                    <div className="col-md-3">
-                      <SingleCheckbox
-                        config={invoiceDetailReportFormFields.iobField.config}
-                      />
-                    </div>
-                    <div className="col-md-3">
-                      <SingleCheckbox
-                        config={
-                          invoiceDetailReportFormFields.sourthIndBankField
-                            .config
-                        }
+                      <NewCheckbox
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceDetailReportFormFields.bobField}
                       />
                     </div>
                     <div className="mb-2">

@@ -32,30 +32,7 @@ const bobValidation = {
     message: "{label} field is rquired",
   },
 } as ValidationType;
-const ubValidation = {
-  required: {
-    value: false,
-    message: "{label} field is rquired",
-  },
-} as ValidationType;
-const boiValidation = {
-  required: {
-    value: false,
-    message: "{label} field is rquired",
-  },
-} as ValidationType;
-const southIndBankValidation = {
-  required: {
-    value: false,
-    message: "{label} field is rquired",
-  },
-} as ValidationType;
-const iobValidation = {
-  required: {
-    value: false,
-    message: "{label} field is rquired",
-  },
-} as ValidationType;
+
 const billAmtValidation = {
   required: {
     value: false,
