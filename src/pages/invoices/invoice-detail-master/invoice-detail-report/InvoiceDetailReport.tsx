@@ -3,9 +3,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import {
   BorderLayout,
   Card,
-  Input,
-  Select,
-  SingleCheckbox,
   Button,
   Table,
   Radio,
@@ -192,14 +189,14 @@ export const InvoiceDetailReport: React.FC = () => {
                       <NewInput
                         errors={errors}
                         register={register}
-                        config={invoiceDetailReportFormFields.fromdateField}
+                        config={invoiceDetailReportFormFields.fromDateField}
                       />
                     </div>
                     <div className="col-md-6 col-xs-12">
                       <NewInput
                         errors={errors}
                         register={register}
-                        config={invoiceDetailReportFormFields.todateeField}
+                        config={invoiceDetailReportFormFields.toDateField}
                       />
                     </div>
                     <div className="col-md-12 col-xs-12">

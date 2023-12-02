@@ -3,15 +3,13 @@ import { FormProvider, useForm } from "react-hook-form";
 import {
   BorderLayout,
   Card,
-  Input,
-  Select,
-  SingleCheckbox,
   Button,
   Table,
-  Radio,
   TableType,
   NewSelect,
   NewInput,
+  NewCheckbox,
+  NewRadio,
 } from "@shared/index";
 import {
   InvoiceDetailReportProType,
@@ -202,13 +200,15 @@ export const InvoiceDetailReportPro: React.FC = () => {
                     errors={errors}
                     register={register}
                     control={control}
-                    config={invoiceDetailReportProFormFields.fyearField}
+                    config={invoiceDetailReportProFormFields.fYearField}
                   />
 
-                  <Radio
+                  <NewRadio
+                    errors={errors}
+                    register={register}
+                    control={control}
                     config={
                       invoiceDetailReportProFormFields.allClientDatewiseField
-                        .config
                     }
                   />
                 </div>
@@ -218,14 +218,14 @@ export const InvoiceDetailReportPro: React.FC = () => {
                       <NewInput
                         errors={errors}
                         register={register}
-                        config={invoiceDetailReportProFormFields.fromdateField}
+                        config={invoiceDetailReportProFormFields.fromDateField}
                       />
                     </div>
                     <div className="col-md-6 col-xs-12">
                       <NewInput
                         errors={errors}
                         register={register}
-                        config={invoiceDetailReportProFormFields.todateeField}
+                        config={invoiceDetailReportProFormFields.toDateField}
                       />
                     </div>
                     <div className="col-md-12 col-xs-12">
@@ -249,7 +249,7 @@ export const InvoiceDetailReportPro: React.FC = () => {
                         errors={errors}
                         register={register}
                         control={control}
-                        config={invoiceDetailReportProFormFields.ClientField}
+                        config={invoiceDetailReportProFormFields.clientField}
                       />
                     </div>
                   </div>
@@ -258,40 +258,14 @@ export const InvoiceDetailReportPro: React.FC = () => {
                 <div className="col-md-3">
                   <div className="row">
                     <div className="col-md-4">
-                      <SingleCheckbox
-                        config={
-                          invoiceDetailReportProFormFields.bobField.config
-                        }
-                      />
-                    </div>
-                    <div className="col-md-3">
-                      <SingleCheckbox
-                        config={invoiceDetailReportProFormFields.ubField.config}
-                      />
-                    </div>
-                    <div className="col-md-3">
-                      <SingleCheckbox
-                        config={
-                          invoiceDetailReportProFormFields.boiField.config
-                        }
+                      <NewCheckbox
+                        errors={errors}
+                        register={register}
+                        control={control}
+                        config={invoiceDetailReportProFormFields.bobField}
                       />
                     </div>
 
-                    <div className="col-md-3">
-                      <SingleCheckbox
-                        config={
-                          invoiceDetailReportProFormFields.iobField.config
-                        }
-                      />
-                    </div>
-                    <div className="col-md-3">
-                      <SingleCheckbox
-                        config={
-                          invoiceDetailReportProFormFields.sourthIndBankField
-                            .config
-                        }
-                      />
-                    </div>
                     <div className="mb-2">
                       <div className="col-md-14 col-xs-12 ">
                         <Button

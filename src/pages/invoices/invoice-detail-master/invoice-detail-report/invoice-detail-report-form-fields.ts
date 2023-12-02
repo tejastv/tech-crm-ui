@@ -99,7 +99,7 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
-const fromdateField: FormFieldType = createFormConfig(
+const fromDateField: FormFieldType = createFormConfig(
   "fromDate",
   "From",
   "date",
@@ -107,7 +107,7 @@ const fromdateField: FormFieldType = createFormConfig(
   formattedDate
 );
 
-const todateeField: FormFieldType = createFormConfig(
+const toDateField: FormFieldType = createFormConfig(
   "toDate",
   "To Date",
   "date",
@@ -180,8 +180,8 @@ const totalField: FormFieldType = createFormConfig(
 );
 export const invoiceDetailReportFormFields = {
   fYearField,
-  fromdateField,
-  todateeField,
+  fromDateField,
+  toDateField,
   cityField,
   clientField,
   allClientDatewiseField,
