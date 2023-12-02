@@ -19,7 +19,7 @@ import {
 import { useParams } from "react-router-dom";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
-export const AddUpdateClientGroup: React.FC = () => {
+export const ClientGroupForm: React.FC = () => {
   const params = useParams();
   const cardConfig = {
     formLayoutConfig: {
@@ -48,54 +48,61 @@ export const AddUpdateClientGroup: React.FC = () => {
   const { mutateAsync: addClientGroup } = addClientGroupMutation();
   const { mutateAsync: updateClientGroup } = updateClientGroupMutation();
 
-  if (params.id) {
-    const { data: clientGroupData, isSuccess: clientGroupDataSuccess } =
-      getClientGroupData("" + params.id);
-    const { data: clientGroupBasedOnIdData } = getClientGroupBasedOnIdData(
-      "" + params.id
-    );
-    const { data: clientGroupListData } = getClientGroup();
-    getClientGroupBasedOnIdData("" + params.id);
-    if (clientGroupBasedOnIdData) {
-      addClientGroupFormFields.searchClient.config.options,
-        (addClientGroupFormFields.searchClient.config.setData =
-          selectOptionsMaker(
-            clientGroupBasedOnIdData,
-            "clientID",
-            "clientName"
-          ));
-    }
-    if (clientGroupListData) {
-      // addClientGroupFormFields.moveToClient.config.options = selectOptionsMaker(
-      //   clientGroupListData,
-      //   "groupId",
-      //   "groupName"
-      // );
-    }
-    if (clientGroupDataSuccess) {
-      addClientGroupFormFields.clientGroupName.config.setData =
-        clientGroupData.groupName;
-      addClientGroupFormFields.showBOBDetails.config.setData =
-        clientGroupData.showBOBDetails;
-      addClientGroupFormFields.showBOIDetails.config.setData =
-        clientGroupData.showBOIDetails;
-      addClientGroupFormFields.showIOBDetails.config.setData =
-        clientGroupData.showIOBDetails;
-      addClientGroupFormFields.showSouthIndianBankDetails.config.setData =
-        clientGroupData.showSouthIndianBankDetails;
-      addClientGroupFormFields.showUnionBankDetails.config.setData =
-        clientGroupData.showUnionBankDetails;
-    }
-  } else {
-    useEffect(() => {
-      reset();
-    }, []);
-  }
+  // if (params.id) {
+  //   const { data: clientGroupData, isSuccess: clientGroupDataSuccess } =
+  //     getClientGroupData("" + params.id);
+  //   const { data: clientGroupBasedOnIdData } = getClientGroupBasedOnIdData(
+  //     "" + params.id
+  //   );
+  //   const { data: clientGroupListData } = getClientGroup();
+  //   getClientGroupBasedOnIdData("" + params.id);
+  //   if (clientGroupBasedOnIdData) {
+  //     addClientGroupFormFields.searchClient.config.options,
+  //       (addClientGroupFormFields.searchClient.config.setData =
+  //         selectOptionsMaker(
+  //           clientGroupBasedOnIdData,
+  //           "clientID",
+  //           "clientName"
+  //         ));
+  //   }
+  //   if (clientGroupListData) {
+  //     // addClientGroupFormFields.moveToClient.config.options = selectOptionsMaker(
+  //     //   clientGroupListData,
+  //     //   "groupId",
+  //     //   "groupName"
+  //     // );
+  //   }
+  //   if (clientGroupDataSuccess) {
+  //     addClientGroupFormFields.clientGroupName.config.setData =
+  //       clientGroupData.groupName;
+  //     addClientGroupFormFields.showBOBDetails.config.setData =
+  //       clientGroupData.showBOBDetails;
+  //     addClientGroupFormFields.showBOIDetails.config.setData =
+  //       clientGroupData.showBOIDetails;
+  //     addClientGroupFormFields.showIOBDetails.config.setData =
+  //       clientGroupData.showIOBDetails;
+  //     addClientGroupFormFields.showSouthIndianBankDetails.config.setData =
+  //       clientGroupData.showSouthIndianBankDetails;
+  //     addClientGroupFormFields.showUnionBankDetails.config.setData =
+  //       clientGroupData.showUnionBankDetails;
+  //   }
+  // } else {
+  //   useEffect(() => {
+  //     reset();
+  //   }, []);
+  // }
 
   const mapClientGroupToClientGroupForm = (
     clientGroupData: ClientGroupType
   ) => {
-    let clientGroupForm: Partial<ClientGroupFormType> = {};
+    let clientGroupForm: Partial<ClientGroupFormType> = {
+      groupName: clientGroupData.groupName,
+      showBOBDetails: clientGroupData.showBOBDetails,
+      showIDBIDetails: clientGroupData.showIDBIDetails,
+      showSBIDetails: clientGroupData.showSBIDetails,
+      showSouthIndianBankDetails: clientGroupData.showSouthIndianBankDetails,
+      showUnionBankDetails: clientGroupData.showUnionBankDetails,
+    };
     return clientGroupForm;
   };
 

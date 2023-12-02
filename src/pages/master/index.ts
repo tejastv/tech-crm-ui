@@ -8,7 +8,7 @@ export { AddUpdateClient } from "./client-master/client/AddUpdateClient";
 
 // Client Segment master child pages
 export { GroupMaster } from "./client-master/client-group/ClientGroup";
-export { AddUpdateClientGroup } from "./client-master/client-group/AddUpdateClientGroup";
+export { ClientGroupForm } from "./client-master/client-group/ClientGroupForm";
 export { Segment } from "./client-master/segment/Segment";
 export { AddUpdateSegment } from "./client-master/segment/AddUpdateSegment";
 

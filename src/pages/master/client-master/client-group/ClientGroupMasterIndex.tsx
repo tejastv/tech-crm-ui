@@ -1,21 +1,15 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { GroupMaster, AddUpdateClientGroup } from "@master/index";
+import { GroupMaster, ClientGroupForm } from "@master/index";
 import { COMMON_ROUTES } from "@constants/index";
 
 const CityMasterIndex: React.FC = () => {
   return (
     <Routes>
       <Route index element={<GroupMaster />}></Route>
-      <Route
-        path={COMMON_ROUTES.ADD}
-        element={<AddUpdateClientGroup />}
-      ></Route>
-      <Route
-        path={COMMON_ROUTES.EDIT}
-        element={<AddUpdateClientGroup />}
-      ></Route>
+      <Route path={COMMON_ROUTES.ADD} element={<ClientGroupForm />}></Route>
+      <Route path={COMMON_ROUTES.EDIT} element={<ClientGroupForm />}></Route>
     </Routes>
   );
 };
