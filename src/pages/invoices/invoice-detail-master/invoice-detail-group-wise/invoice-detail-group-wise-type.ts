@@ -3,9 +3,9 @@ import { Options } from "@shared/index";
 export interface InvoiceDetailGroupWiseType {
   groupField: Options;
 
-  fromdateField: string;
+  fromDateField: string;
 
-  todateeField: string;
+  toDateField: string;
 
   fyearField: Options;
 }
