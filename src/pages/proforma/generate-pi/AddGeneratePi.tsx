@@ -10,6 +10,9 @@ import {
   Button,
   Table,
   TableType,
+  NewCheckbox,
+  NewInput,
+  NewSelect,
 } from "@shared/index";
 import { addGeneratePiFormFields, GeneratePiType } from "@proforma/index";
 import { ColumnDef } from "@tanstack/react-table";
@@ -19,7 +22,14 @@ export const AddGeneratePi: React.FC = () => {
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
-
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm<GeneratePiType>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Generate Invoice (PI)",
@@ -150,224 +160,256 @@ export const AddGeneratePi: React.FC = () => {
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-4 col-xs-12">
-                  <div className="card-body">
-                    <Select
-                      config={addGeneratePiFormFields.clientField.config}
-                    />
-                    <div className="mb-2">
-                      <div className="col-md-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm"}
-                        >
-                          View
-                        </Button>
-                      </div>
-                    </div>
-                    <Input
-                      config={addGeneratePiFormFields.currencyField.config}
-                    />
-
-                    <Input config={addGeneratePiFormFields.gstnField.config} />
-                  </div>
-                </div>
-                {/* 2 Column */}
-                <div className="col-4 col-xs-12">
-                  <div className="card-body">
-                    <Input
-                      config={addGeneratePiFormFields.fromdateField.config}
-                    />
-
-                    <Input
-                      config={addGeneratePiFormFields.countryField.config}
-                    />
-
-                    <Select
-                      config={addGeneratePiFormFields.stateField.config}
-                    />
-
-                    <Input config={addGeneratePiFormFields.codeField.config} />
-
-                    <label
-                      htmlFor=""
-                      className="col-sm-7 control-label col-form-label"
-                    ></label>
-
-                    <div className="col-md-14 col-xs-12 text-right">
-                      <SingleCheckbox
-                        config={addGeneratePiFormFields.gstField.config}
-                      />
-                    </div>
-                  </div>
-                </div>
-                {/* 3 column */}
-                <div className="col-4 col-xs-12">
-                  <div className="card-body">
-                    <Input
-                      config={addGeneratePiFormFields.todateeField.config}
-                    />
-
-                    <Input
-                      config={addGeneratePiFormFields.symbolField.config}
-                    />
-
-                    <Input
-                      config={addGeneratePiFormFields.currencyField.config}
-                    />
-                  </div>
-                </div>
-
-                {/* Table */}
-                <div className="col-md-12 col-xs-12">
-                  <div className="card-body">
-                    <Table config={tableConfig.config}>null</Table>
-                  </div>
-                </div>
-
-                <div className="col-md-5 col-xs-12">
-                  <div className="card-body">
-                    {/* <div className="col-sm-6 "> */}
-                    <Select
-                      config={addGeneratePiFormFields.fyearField.config}
-                    />
-
-                    {/* </div> */}
-                    {/* <div className="col-sm-6 "> */}
-                    <Input
-                      config={addGeneratePiFormFields.invoicenoField.config}
-                    />
-                    <div className="col-md-14 col-xs-12 text-right">
-                      <SingleCheckbox
-                        config={addGeneratePiFormFields.manualField.config}
-                      />
-                    </div>
-                    {/* </div> */}
-                    {/* <div className="col-sm-6 "> */}
-                    <Input
-                      config={addGeneratePiFormFields.amountField.config}
-                    />
-
-                    {/* </div> */}
-                    {/* <div className="col-sm-5 "> */}
-                    <Input
-                      config={addGeneratePiFormFields.disamountField.config}
-                    />
-
-                    {/* </div> */}
-
-                    <div className="mb-2">
-                      <div className="col-md-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm"}
-                        >
-                          Get Dis
-                        </Button>
-                      </div>
-                    </div>
-                    {/* <div className="col-sm-6 "> */}
-                    <Input config={addGeneratePiFormFields.stField.config} />
-
-                    {/* </div> */}
-                    {/* <div className="col-sm-6 "> */}
-                    <Input
-                      config={addGeneratePiFormFields.cgstperField.config}
-                    />
-                    {/* </div> */}
-
-                    {/* <div className="col-sm-6 "> */}
-                    <Input
-                      config={addGeneratePiFormFields.stamountField.config}
-                    />
-
-                    {/* </div> */}
-                    {/* <div className="col-sm-6 "> */}
-                    <Input config={addGeneratePiFormFields.cgstField.config} />
-                    {/* </div> */}
-                  </div>
-                </div>
-
-                <div className="col-md-4 col-xs-12">
-                  <div className="card-body">
-                    {/* <div className="col-sm-7 "> */}
-                    <Input config={addGeneratePiFormFields.dateField.config} />
-                    {/* </div> */}
-
-                    {/* <div className="col-sm-5 "> */}
-                    <SingleCheckbox
-                      config={addGeneratePiFormFields.donotField.config}
-                    />
-                    {/* </div> */}
-
-                    {/* <div className="col-sm-12"> */}
-                    <Input
-                      config={addGeneratePiFormFields.subtotalField.config}
-                    />
-                    {/* </div> */}
-
-                    {/* <div className="col-sm-6 "> */}
-                    <Input
-                      config={addGeneratePiFormFields.sgstperField.config}
-                    />
-                    {/* </div> */}
-
-                    {/* <div className="col-sm-6 "> */}
-                    <Input
-                      config={addGeneratePiFormFields.igstperField.config}
-                    />
-                    {/* </div> */}
-                    {/* <div className="col-sm-6 "> */}
-                    <Input config={addGeneratePiFormFields.sgstField.config} />
-                    {/* </div> */}
-
-                    {/* <div className="col-sm-6 "> */}
-                    <Input config={addGeneratePiFormFields.igstField.config} />
-                    {/* </div> */}
-                  </div>
-                </div>
-
-                <div className="col-md-3 col-xs-12">
-                  <div className="card-body">
-                    {/* <div className="col-sm-12 "> */}
-                    <Input config={addGeneratePiFormFields.staxField.config} />
-                    {/* </div>  */}
-                    {/* <div className="col-sm-12 "> */}
-                    <Input config={addGeneratePiFormFields.ecessField.config} />
-                    {/* </div>  */}
-                    {/* <div className="col-sm-12 "> */}
-                    <Input
-                      config={addGeneratePiFormFields.krishicessField.config}
-                    />
-                    {/* </div>  */}
-                    {/* <div className="col-sm-9 "> */}
-                    <Input config={addGeneratePiFormFields.totalField.config} />
-                    {/* </div>  */}
+        {/* <FormProvider {...methods}> */}
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-4 col-xs-12">
+                <div className="card-body">
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={addGeneratePiFormFields.clientField}
+                  />
+                  <div className="mb-2">
                     <div className="col-md-14 col-xs-12 text-right">
                       <Button type="button" className={"btn btn-danger btn-sm"}>
-                        calculate
+                        View
                       </Button>
                     </div>
                   </div>
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.currencyField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.gstnField}
+                  />
                 </div>
               </div>
-            </BorderLayout>
-            <div className="card-body">
-              <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-                <ActionButtons />
-              </BorderLayout>
+              {/* 2 Column */}
+              <div className="col-4 col-xs-12">
+                <div className="card-body">
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.fromdateField}
+                  />
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.countryField}
+                  />
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={addGeneratePiFormFields.stateField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.codeField}
+                  />
+                  <label
+                    htmlFor=""
+                    className="col-sm-7 control-label col-form-label"
+                  ></label>
+
+                  <div className="col-md-14 col-xs-12 text-right">
+                    <NewCheckbox
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={addGeneratePiFormFields.gstField}
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* 3 column */}
+              <div className="col-4 col-xs-12">
+                <div className="card-body">
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.todateeField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.symbolField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.currencyField}
+                  />
+                </div>
+              </div>
+
+              {/* Table */}
+              <div className="col-md-12 col-xs-12">
+                <div className="card-body">
+                  <Table config={tableConfig.config}>null</Table>
+                </div>
+              </div>
+
+              <div className="col-md-5 col-xs-12">
+                <div className="card-body">
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={addGeneratePiFormFields.fyearField}
+                  />
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.invoicenoField}
+                  />
+                  <div className="col-md-14 col-xs-12 text-right">
+                    <NewCheckbox
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={addGeneratePiFormFields.manualField}
+                    />
+                  </div>
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.amountField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.disamountField}
+                  />
+
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        Get Dis
+                      </Button>
+                    </div>
+                  </div>
+                  {/* <div className="col-sm-6 "> */}
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.stField}
+                  />
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.cgstperField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.stamountField}
+                  />
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.cgstField}
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-4 col-xs-12">
+                <div className="card-body">
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.dateField}
+                  />
+                  <NewCheckbox
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={addGeneratePiFormFields.donotField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.subtotalField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.sgstperField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.igstField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.sgstField}
+                  />
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.igstField}
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-3 col-xs-12">
+                <div className="card-body">
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.staxField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.ecessField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.krishicessField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addGeneratePiFormFields.totalField}
+                  />
+                  <div className="col-md-14 col-xs-12 text-right">
+                    <Button type="button" className={"btn btn-danger btn-sm"}>
+                      calculate
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
-          </form>
-        </FormProvider>
+          </BorderLayout>
+          <div className="card-body">
+            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+              <ActionButtons />
+            </BorderLayout>
+          </div>
+        </form>
       </Card>
     </>
   );

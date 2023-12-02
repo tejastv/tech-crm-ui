@@ -1,14 +1,14 @@
 import { FormFieldType, MapType, Options, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
 
-const ActionValidation = {
+const actionValidation = {
   required: {
     value: true,
     message: "Please check the {label} box",
   },
 } as ValidationType;
 
-const ClientValidation = {
+const clientValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -19,7 +19,7 @@ const ClientValidation = {
   },
 } as ValidationType;
 
-const FromDateValidation = {
+const fromDateValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -30,14 +30,14 @@ const FromDateValidation = {
       "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
   },
 } as ValidationType;
-const ToDateValidation = {
+const toDateValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
 } as ValidationType;
 
-const ActionOption: MapType<Options> = {
+const actionOption: MapType<Options> = {
   new: { value: "Y", label: "Daily" },
   renew: { value: "N", label: "Monthly" },
   rerenew: { value: "S", label: "All" },
@@ -46,9 +46,9 @@ const action: FormFieldType = createFormConfig(
   "action",
   "Action",
   "radio",
-  ActionValidation,
+  actionValidation,
   "",
-  ActionOption
+  actionOption
 );
 const client: FormFieldType = {
   config: {
@@ -74,25 +74,25 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
-const fromdateField: FormFieldType = createFormConfig(
+const fromDateField: FormFieldType = createFormConfig(
   "fromDate",
   "From",
   "date",
-  FromDateValidation,
+  fromDateValidation,
   formattedDate
 );
 
-const todateeField: FormFieldType = createFormConfig(
+const toDateField: FormFieldType = createFormConfig(
   "toDate",
   "To Date",
   "date",
-  ToDateValidation,
+  toDateValidation,
   formattedDate
 );
 
 export const generateInvoiceAutoFormFields = {
   client,
   action,
-  fromdateField,
-  todateeField,
+  fromDateField,
+  toDateField,
 };

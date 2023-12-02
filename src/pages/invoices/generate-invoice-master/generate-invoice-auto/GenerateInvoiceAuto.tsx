@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   BorderLayout,
   Card,
-  Input,
-  ActionButtons,
-  Select,
-  SingleCheckbox,
   Button,
   Table,
   Radio,
@@ -16,7 +12,6 @@ import {
 } from "@shared/index";
 import {
   GenerateInvoiceAutoType,
-  InvoiceGenGstType,
   generateInvoiceAutoFormFields,
 } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
@@ -244,74 +239,67 @@ export const InvoiceGenerateAuto: React.FC = () => {
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <Radio
-                      config={generateInvoiceAutoFormFields.action.config}
-                    />
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <div className="card-body">
+                  <Radio config={generateInvoiceAutoFormFields.action.config} />
 
-                    <NewSelect
-                      errors={errors}
-                      register={register}
-                      control={control}
-                      config={generateInvoiceAutoFormFields.client}
-                    />
-                    <div className="mb-2">
-                      <div className="col-md-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm"}
-                        >
-                          Generate
-                        </Button>
-                      </div>
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={generateInvoiceAutoFormFields.client}
+                  />
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        Generate
+                      </Button>
                     </div>
                   </div>
                 </div>
-                {/* 2 Column */}
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <NewInput
-                      errors={errors}
-                      register={register}
-                      config={generateInvoiceAutoFormFields.fromdateField}
-                    />
-                    <NewInput
-                      errors={errors}
-                      register={register}
-                      config={generateInvoiceAutoFormFields.todateeField}
-                    />
-                  </div>
-                </div>
-
-                <BorderLayout heading={cardConfig.tableOneConfig.mainHeading}>
-                  {/* Table */}
-                  <div className="col-md-12 col-xs-12">
-                    <div className="card-body">
-                      <Table config={tableConfig.config}>null</Table>
-                    </div>
-                  </div>
-                </BorderLayout>
-                <BorderLayout heading={cardConfig.tableTwoConfig.mainHeading}>
-                  <div className="col-md-12 col-xs-12">
-                    <div className="card-body">
-                      <Table config={tableTwoConfig.config}>null</Table>
-                    </div>
-                  </div>
-                </BorderLayout>
               </div>
-            </BorderLayout>
-          </form>
-        </FormProvider>
+              {/* 2 Column */}
+              <div className="col-md-6 col-xs-12">
+                <div className="card-body">
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={generateInvoiceAutoFormFields.fromDateField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={generateInvoiceAutoFormFields.toDateField}
+                  />
+                </div>
+              </div>
+
+              <BorderLayout heading={cardConfig.tableOneConfig.mainHeading}>
+                {/* Table */}
+                <div className="col-md-12 col-xs-12">
+                  <div className="card-body">
+                    <Table config={tableConfig.config}>null</Table>
+                  </div>
+                </div>
+              </BorderLayout>
+              <BorderLayout heading={cardConfig.tableTwoConfig.mainHeading}>
+                <div className="col-md-12 col-xs-12">
+                  <div className="card-body">
+                    <Table config={tableTwoConfig.config}>null</Table>
+                  </div>
+                </div>
+              </BorderLayout>
+            </div>
+          </BorderLayout>
+        </form>
       </Card>
     </>
   );

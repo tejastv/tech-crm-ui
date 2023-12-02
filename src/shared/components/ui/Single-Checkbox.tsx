@@ -23,11 +23,13 @@ export const SingleCheckbox = (props: FormFieldType) => {
 
   const inputErrors = findInputError(errors, props.config.name);
   const isInvalid = isFormInvalid(inputErrors);
+
   useEffect(() => {
     if (props.config.setData) {
-      setValue(props.config.name, eval(props.config.setData));
+      setValue(props.config.name, props.config.setData());
     }
   }, [props.config.setData]);
+
   return (
     <div className="row">
       <div className="col-12">
@@ -40,15 +42,12 @@ export const SingleCheckbox = (props: FormFieldType) => {
                 <Form.Check
                   id={props.config.name}
                   type="checkbox"
-                  label={props.config.label} 
+                  label={props.config.label}
                   {...field}
                   {...register(props.config.name, props.config.validation)}
-                  onChange={(e: any) => {
-                    field.onChange(e.target.checked); // Toggle the field value
-                  }}
                 />
               )}
-            ></Controller>
+            />
             {isInvalid && (
               <Form.Text className="text-danger">
                 <MdError />
