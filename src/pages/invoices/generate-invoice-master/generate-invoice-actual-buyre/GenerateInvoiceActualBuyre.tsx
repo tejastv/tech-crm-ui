@@ -5,7 +5,6 @@ import {
   Card,
   Button,
   Table,
-  Radio,
   TableType,
   NewSelect,
   NewInput,
@@ -280,12 +279,12 @@ export const GenerateInvoiceActualBuyre: React.FC = () => {
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={generateInvoiceActualBuyreFormFields.fromdateField}
+                    config={generateInvoiceActualBuyreFormFields.fromDateField}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={generateInvoiceActualBuyreFormFields.todateeField}
+                    config={generateInvoiceActualBuyreFormFields.toDateField}
                   />
                 </div>
               </div>
