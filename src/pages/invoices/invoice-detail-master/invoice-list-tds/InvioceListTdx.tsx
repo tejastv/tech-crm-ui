@@ -6,7 +6,6 @@ import {
   Button,
   Table,
   TableType,
-  Checkbox,
   NewSelect,
   NewInput,
   NewRadio,

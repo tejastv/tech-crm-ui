@@ -1,7 +1,7 @@
 import { FormFieldType, MapType, Options, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
 
-const FromDateValidation = {
+const fromDateValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -13,7 +13,7 @@ const FromDateValidation = {
   },
 } as ValidationType;
 
-const ToDateValidation = {
+const toDateValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -26,7 +26,7 @@ const allClientDatewiseValidation = {
   },
 } as ValidationType;
 
-const fyearField: FormFieldType = {
+const fYearField: FormFieldType = {
   config: {
     name: "fyear",
     label: "F.Year ",
@@ -42,7 +42,7 @@ const fyearField: FormFieldType = {
   },
 };
 
-const ActionOption: MapType<Options> = {
+const actionOption: MapType<Options> = {
   new: { value: "new", label: "All Client Datewise" },
   renew: { value: "renew", label: "Specific Client Datewise" },
 };
@@ -53,7 +53,7 @@ const allClientDatewiseField: FormFieldType = createFormConfig(
   "radio",
   allClientDatewiseValidation,
   "",
-  ActionOption
+  actionOption
 );
 
 const myDate = new Date(); // Replace this with your actual date
@@ -65,19 +65,19 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
-const fromdateField: FormFieldType = createFormConfig(
+const fromDateField: FormFieldType = createFormConfig(
   "fromDate",
   "From",
   "date",
-  FromDateValidation,
+  fromDateValidation,
   formattedDate
 );
 
-const todateeField: FormFieldType = createFormConfig(
+const toDateField: FormFieldType = createFormConfig(
   "toDate",
   "To Date",
   "date",
-  ToDateValidation,
+  toDateValidation,
   formattedDate
 );
 const cityField: FormFieldType = {
@@ -96,7 +96,7 @@ const cityField: FormFieldType = {
   },
 };
 
-const ClientField: FormFieldType = {
+const clientField: FormFieldType = {
   config: {
     name: "client",
     label: "Client ",
@@ -113,10 +113,10 @@ const ClientField: FormFieldType = {
 };
 
 export const invoiceListPerfomaFormFields = {
-  fyearField,
-  fromdateField,
-  todateeField,
+  fYearField,
+  fromDateField,
+  toDateField,
   cityField,
-  ClientField,
+  clientField,
   allClientDatewiseField,
 };

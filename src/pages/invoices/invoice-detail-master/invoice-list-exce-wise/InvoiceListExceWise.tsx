@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   BorderLayout,
   Card,
-  Input,
-  Select,
   Button,
   Table,
-  Radio,
   TableType,
   SingleCheckbox,
   NewSelect,
   NewInput,
+  NewRadio,
+  NewCheckbox,
 } from "@shared/index";
 import {
   InvoiceListExceWiseType,
@@ -315,44 +314,91 @@ export const InvoiceListExceWise: React.FC = () => {
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-3">
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={invoiceListExceWiseFormFields.fyearField}
-                  />
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-3">
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={invoiceListExceWiseFormFields.fyearField}
+                />
 
-                  <Radio
-                    config={
-                      invoiceListExceWiseFormFields.allClientDatewiseField
-                        .config
-                    }
-                  />
-                </div>
-                <div className="col-md-6">
-                  <div className="row">
-                    <div className="col-md-6 col-xs-12">
-                      <NewInput
-                        errors={errors}
-                        register={register}
-                        config={invoiceListExceWiseFormFields.fromdateField}
-                      />
+                <NewRadio
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={invoiceListExceWiseFormFields.allClientDatewiseField}
+                />
+              </div>
+              <div className="col-md-6">
+                <div className="row">
+                  <div className="col-md-6 col-xs-12">
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceListExceWiseFormFields.fromDateField}
+                    />
+                  </div>
+                  <div className="col-md-6 col-xs-12">
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceListExceWiseFormFields.toDateField}
+                    />
+                  </div>
+                  <div className="col-md-12 col-xs-12">
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceListExceWiseFormFields.cityField}
+                    />
+                    <div className="mb-2">
+                      <div className="col-md-14 col-xs-12 text-right">
+                        <Button
+                          type="button"
+                          className={"btn btn-danger btn-sm "}
+                        >
+                          Get
+                        </Button>
+                      </div>
                     </div>
-                    <div className="col-md-6 col-xs-12">
-                      <NewInput
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceListExceWiseFormFields.excecutiveField}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-3">
+                <div className="row">
+                  <div className="card-body">
+                    <div className="mb-2">
+                      <div className="col-md-14 col-xs-12 ">
+                        <Button
+                          type="button"
+                          className={"btn btn-danger btn-sm"}
+                        >
+                          Refresh/View
+                        </Button>
+                      </div>
+                    </div>
+                    <div className="col-md-6   col-xs-12">
+                      <NewCheckbox
                         errors={errors}
                         register={register}
-                        config={invoiceListExceWiseFormFields.todateeField}
+                        control={control}
+                        config={invoiceListExceWiseFormFields.markAllField}
                       />
                     </div>
                     <div className="col-md-12 col-xs-12">
@@ -360,132 +406,72 @@ export const InvoiceListExceWise: React.FC = () => {
                         errors={errors}
                         register={register}
                         control={control}
-                        config={invoiceListExceWiseFormFields.cityField}
-                      />
-                      <div className="mb-2">
-                        <div className="col-md-14 col-xs-12 text-right">
-                          <Button
-                            type="button"
-                            className={"btn btn-danger btn-sm "}
-                          >
-                            Get
-                          </Button>
-                        </div>
-                      </div>
-                      <NewSelect
-                        errors={errors}
-                        register={register}
-                        control={control}
-                        config={invoiceListExceWiseFormFields.excecutiveField}
+                        config={invoiceListExceWiseFormFields.emailField}
                       />
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div className="col-md-3">
-                  <div className="row">
-                    <div className="card-body">
-                      <div className="mb-2">
-                        <div className="col-md-14 col-xs-12 ">
-                          <Button
-                            type="button"
-                            className={"btn btn-danger btn-sm"}
-                          >
-                            Refresh/View
-                          </Button>
-                        </div>
-                      </div>
-                      <div className="col-md-6   col-xs-12">
-                        <SingleCheckbox
-                          config={
-                            invoiceListExceWiseFormFields.markAllField.config
-                          }
-                        />
-                      </div>
-                      <div className="col-md-12 col-xs-12">
-                        <NewSelect
-                          errors={errors}
-                          register={register}
-                          control={control}
-                          config={invoiceListExceWiseFormFields.emailField}
-                        />
-                      </div>
+              {/* Table */}
+              <div className="col-md-12 col-xs-12">
+                <div className="card-body">
+                  <Table config={tableConfig.config}>null</Table>
+                </div>
+              </div>
+            </div>
+          </BorderLayout>
+          <div className="card-body">
+            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+              {/* <ActionButtons /> */}
+              <div className="row">
+                <div className="col-md-4"></div>
+                <div className="col-md-2 ">
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        <i className="far fa-save"></i>
+                        Currency Total
+                      </Button>
                     </div>
                   </div>
                 </div>
-
-                {/* Table */}
-                <div className="col-md-12 col-xs-12">
-                  <div className="card-body">
-                    <Table config={tableConfig.config}>null</Table>
+                <div className="col-md-2">
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        {" "}
+                        <i className="far fa-save"></i>
+                        Export Invoice with Detail to Word
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-2">
+                  <div className="mb-2">
+                    <div className="col-sm-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        {" "}
+                        <i className="far fa-save"></i>
+                        Export Invoice List
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-2">
+                  <div className="mb-2">
+                    <div className="col-sm-14 col-xs-12 float-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        <i className="far fa-window-close"></i>
+                        Cancel
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
             </BorderLayout>
-            <div className="card-body">
-              <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-                {/* <ActionButtons /> */}
-                <div className="row">
-                  <div className="col-md-4"></div>
-                  <div className="col-md-2 ">
-                    <div className="mb-2">
-                      <div className="col-md-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm"}
-                        >
-                          <i className="far fa-save"></i>
-                          Currency Total
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2">
-                    <div className="mb-2">
-                      <div className="col-md-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm"}
-                        >
-                          {" "}
-                          <i className="far fa-save"></i>
-                          Export Invoice with Detail to Word
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2">
-                    <div className="mb-2">
-                      <div className="col-sm-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm"}
-                        >
-                          {" "}
-                          <i className="far fa-save"></i>
-                          Export Invoice List
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-2">
-                    <div className="mb-2">
-                      <div className="col-sm-14 col-xs-12 float-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm"}
-                        >
-                          <i className="far fa-window-close"></i>
-                          Cancel
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </BorderLayout>
-            </div>
-          </form>
-        </FormProvider>
+          </div>
+        </form>
       </Card>
     </>
   );

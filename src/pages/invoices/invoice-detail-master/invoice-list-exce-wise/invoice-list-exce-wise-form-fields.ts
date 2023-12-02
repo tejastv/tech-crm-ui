@@ -1,7 +1,7 @@
 import { FormFieldType, MapType, Options, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
 
-const FromDateValidation = {
+const fromDateValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -13,7 +13,7 @@ const FromDateValidation = {
   },
 } as ValidationType;
 
-const ToDateValidation = {
+const toDateValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -48,7 +48,7 @@ const fyearField: FormFieldType = {
   },
 };
 
-const ActionOption: MapType<Options> = {
+const actionOption: MapType<Options> = {
   new: { value: "new", label: "All Client Datewise" },
   renew: { value: "renew", label: "Specific Client Datewise" },
 };
@@ -59,7 +59,7 @@ const allClientDatewiseField: FormFieldType = createFormConfig(
   "radio",
   allClientDatewiseValidation,
   "",
-  ActionOption
+  actionOption
 );
 
 const myDate = new Date(); // Replace this with your actual date
@@ -71,19 +71,19 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
-const fromdateField: FormFieldType = createFormConfig(
+const fromDateField: FormFieldType = createFormConfig(
   "fromDate",
   "From",
   "date",
-  FromDateValidation,
+  fromDateValidation,
   formattedDate
 );
 
-const todateeField: FormFieldType = createFormConfig(
+const toDateField: FormFieldType = createFormConfig(
   "toDate",
   "To Date",
   "date",
-  ToDateValidation,
+  toDateValidation,
   formattedDate
 );
 const cityField: FormFieldType = {
@@ -133,8 +133,8 @@ const emailField: FormFieldType = createFormConfig(
 );
 export const invoiceListExceWiseFormFields = {
   fyearField,
-  fromdateField,
-  todateeField,
+  fromDateField,
+  toDateField,
   cityField,
   excecutiveField,
   allClientDatewiseField,
