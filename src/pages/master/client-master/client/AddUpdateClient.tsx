@@ -21,7 +21,7 @@ import {
   ExecutiveType,
   SegmentType,
   StateType,
-  addClientFormFields,
+  clientFormFields,
   useCityApiCallHook,
   useClientApiCallHook,
   useClientGroupApiCallHook,
@@ -95,11 +95,11 @@ export const AddUpdateClient: React.FC = () => {
   };
 
   useEffect(() => {
-    if (addClientFormFields.monthlyIvoice.config.name === "monthlyInvoice") {
-      setValue(addClientFormFields.monthlyIvoice.config.name, "N");
+    if (clientFormFields.monthlyIvoice.config.name === "monthlyInvoice") {
+      setValue(clientFormFields.monthlyIvoice.config.name, "N");
     }
-    if (addClientFormFields.osemail.config.name === "osListPrInteger") {
-      setValue(addClientFormFields.osemail.config.name, "N");
+    if (clientFormFields.osemail.config.name === "osListPrInteger") {
+      setValue(clientFormFields.osemail.config.name, "N");
     }
   }, []);
 
@@ -114,7 +114,7 @@ export const AddUpdateClient: React.FC = () => {
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "cityId", "cityName", true);
-    addClientFormFields.cityClient.config.options = options;
+    clientFormFields.cityClient.config.options = options;
   }
 
   // state api call
@@ -132,7 +132,7 @@ export const AddUpdateClient: React.FC = () => {
       "stateName",
       true
     );
-    addClientFormFields.stateClient.config.options = options;
+    clientFormFields.stateClient.config.options = options;
   }
 
   // country api call
@@ -150,18 +150,18 @@ export const AddUpdateClient: React.FC = () => {
       "countryId",
       "countryName"
     );
-    addClientFormFields.countryClient.config.options = options;
+    clientFormFields.countryClient.config.options = options;
   }
 
   // CreditDays api call
   const { data: creditDaysData } = getCreditDays();
   // if (creditDaysData) {
-  //   const defaultCrDayOption = addClientFormFields.crDay.config.options.find(
+  //   const defaultCrDayOption = clientFormFields.crDay.config.options.find(
   //     (option) => option.label.toString() === "30"
   //   );
 
   //   if (defaultCrDayOption) {
-  //     addClientFormFields.crDay.config.setData = defaultCrDayOption;
+  //     clientFormFields.crDay.config.setData = defaultCrDayOption;
   //   }
   // }
   useEffect(() => {
@@ -176,7 +176,7 @@ export const AddUpdateClient: React.FC = () => {
       "creditPeriodId",
       "creditPeriod"
     );
-    addClientFormFields.crDay.config.options = options;
+    clientFormFields.crDay.config.options = options;
   }
 
   // currency api call
@@ -194,7 +194,7 @@ export const AddUpdateClient: React.FC = () => {
       "currencyId",
       "currencyType"
     );
-    addClientFormFields.clientCurrencey.config.options = options;
+    clientFormFields.clientCurrencey.config.options = options;
   }
 
   // Executive api call
@@ -212,7 +212,7 @@ export const AddUpdateClient: React.FC = () => {
       "executiveID",
       "executive"
     );
-    addClientFormFields.executive.config.options = options;
+    clientFormFields.executive.config.options = options;
   }
 
   // ClientGroup api call
@@ -220,7 +220,7 @@ export const AddUpdateClient: React.FC = () => {
 
   useEffect(() => {
     if (clientGroupData) {
-      setClientGroupOptions(clientGroupData);
+      setClientGroupOptions(Object.values(clientGroupData));
     }
   }, [clientGroupData?.length]);
 
@@ -230,7 +230,7 @@ export const AddUpdateClient: React.FC = () => {
       "groupId",
       "groupName"
     );
-    addClientFormFields.groupClient.config.options = options;
+    clientFormFields.groupClient.config.options = options;
   }
 
   // Segment api call
@@ -248,7 +248,7 @@ export const AddUpdateClient: React.FC = () => {
       "segmentId",
       "segmentName"
     );
-    addClientFormFields.segmentClient.config.options = options;
+    clientFormFields.segmentClient.config.options = options;
   }
 
   const { data: clientMasterData } = getClientData(
@@ -381,9 +381,9 @@ export const AddUpdateClient: React.FC = () => {
 
   const handleSelectChange = (selectedOption: any) => {
     if (selectedOption) {
-      if (addClientFormFields.statecodeClient.config.name === "stateCode") {
+      if (clientFormFields.statecodeClient.config.name === "stateCode") {
         setValue(
-          addClientFormFields.statecodeClient.config.name,
+          clientFormFields.statecodeClient.config.name,
           selectedOption.data.stateCodeN
         );
       }
@@ -392,9 +392,9 @@ export const AddUpdateClient: React.FC = () => {
 
   const handleSelectCity = (selectedOption: any) => {
     if (selectedOption) {
-      if (addClientFormFields.stateClient.config.name === "stateID") {
+      if (clientFormFields.stateClient.config.name === "stateID") {
         setValue(
-          addClientFormFields.stateClient.config.name,
+          clientFormFields.stateClient.config.name,
           returnFormatedObjectElseEmptyArray(
             selectedOption.data.stateId,
             selectedOption.data,
@@ -403,9 +403,9 @@ export const AddUpdateClient: React.FC = () => {
           )
         );
       }
-      if (addClientFormFields.countryClient.config.name === "countryID") {
+      if (clientFormFields.countryClient.config.name === "countryID") {
         setValue(
-          addClientFormFields.countryClient.config.name,
+          clientFormFields.countryClient.config.name,
           returnFormatedObjectElseEmptyArray(
             selectedOption.data.countryId,
             selectedOption.data,
@@ -495,83 +495,83 @@ export const AddUpdateClient: React.FC = () => {
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.clientName}
+                  config={clientFormFields.clientName}
                 />
                 <NewRadio
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.clientGst}
+                  config={clientFormFields.clientGst}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.gstn}
+                  config={clientFormFields.gstn}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.addressClient}
+                  config={clientFormFields.addressClient}
                 />
                 <NewSelect
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.cityClient}
+                  config={clientFormFields.cityClient}
                   onChange={handleSelectCity}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.zipClient}
+                  config={clientFormFields.zipClient}
                 />
                 <NewSelect
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.stateClient}
+                  config={clientFormFields.stateClient}
                   onChange={handleSelectChange}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.statecodeClient}
+                  config={clientFormFields.statecodeClient}
                 />
                 <NewSelect
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.countryClient}
+                  config={clientFormFields.countryClient}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.telnoClient}
+                  config={clientFormFields.telnoClient}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.faxnoClient}
+                  config={clientFormFields.faxnoClient}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.emailClient}
+                  config={clientFormFields.emailClient}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.websiteClient}
+                  config={clientFormFields.websiteClient}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.contactClient}
+                  config={clientFormFields.contactClient}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.designationClient}
+                  config={clientFormFields.designationClient}
                 />
                 <DivLayout
                   heading={cardConfig.formclieckUpdateConfig.heading}
@@ -580,70 +580,70 @@ export const AddUpdateClient: React.FC = () => {
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.crDay}
+                  config={clientFormFields.crDay}
                 />
                 <NewCheckbox
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.billonactual}
+                  config={clientFormFields.billonactual}
                 />
               </div>
             </div>
             <div className="col-md-6 col-xs-12">
               <div className="card-body">
                 {/* <NewInput errors={errors}
-                    register={register} config={addClientFormFields.id} />
+                    register={register} config={clientFormFields.id} />
                     <NewSelect errors={errors}
                     register={register}
                     control={control}
-                      config={addClientFormFields.clientIdSelect}
+                      config={clientFormFields.clientIdSelect}
                     /> */}
                 <NewSelect
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.clientCurrencey}
+                  config={clientFormFields.clientCurrencey}
                 />
                 <NewSelect
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.executive}
+                  config={clientFormFields.executive}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.instuction}
+                  config={clientFormFields.instuction}
                 />
                 <NewSelect
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.groupClient}
+                  config={clientFormFields.groupClient}
                 />
                 <NewSelect
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.segmentClient}
+                  config={clientFormFields.segmentClient}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.remarks}
+                  config={clientFormFields.remarks}
                 />
                 <NewRadio
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.monthlyIvoice}
+                  config={clientFormFields.monthlyIvoice}
                 />
                 <NewRadio
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.osemail}
+                  config={clientFormFields.osemail}
                 />
                 {/* <h6 className="card-title m-t-20"> */}
                 <DivLayout heading={cardConfig.formAdjustConfig.heading} />
@@ -652,27 +652,27 @@ export const AddUpdateClient: React.FC = () => {
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addClientFormFields.discount}
+                  config={clientFormFields.discount}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.discountBlank}
+                  config={clientFormFields.discountBlank}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.toAdjust}
+                  config={clientFormFields.toAdjust}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.baltoAdjust}
+                  config={clientFormFields.baltoAdjust}
                 />
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addClientFormFields.adjustenquiry}
+                  config={clientFormFields.adjustenquiry}
                 />
                 {/* <h6 className="card-title m-t-20"> */}
 

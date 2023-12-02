@@ -41,40 +41,79 @@ const clientGroupName: FormFieldType = createFormConfig(
   ClientGroup,
   "Enter Client Name"
 );
+
+const showBOBDetailsOption = {
+  showBOBDetails: {
+    value: false,
+    label: "Show Bank of Baroda Detail in Invoice",
+  },
+};
+
 const showBOBDetails: FormFieldType = createFormConfig(
   "showBOBDetails",
-  "Show Bank of Baroda Detail in Invoice",
+  "",
   "checkbox",
   ClientGroup2,
-  ""
+  "",
+  showBOBDetailsOption
 );
+
+const showUnionBankDetailsOption = {
+  showUnionBankDetails: {
+    value: false,
+    label: "Show UNION Bank Detail in Invoice",
+  },
+};
+
 const showUnionBankDetails: FormFieldType = createFormConfig(
   "showUnionBankDetails",
-  "Show UNION Bank Detail in Invoice",
+  "",
   "checkbox",
   ClientGroup2,
-  ""
+  "",
+  showUnionBankDetailsOption
 );
+
+const showBOIDetailsOption = {
+  showBOIDetails: { value: false, label: "Show BOI Detail in Invoice" },
+};
+
 const showBOIDetails: FormFieldType = createFormConfig(
   "showBOIDetails",
-  "Show BOI Detail in Invoice",
+  "",
   "checkbox",
   ClientGroup2,
-  ""
+  "",
+  showBOIDetailsOption
 );
+
+const showSouthIndianBankDetailsOption = {
+  showSouthIndianBankDetails: {
+    value: false,
+    label: "Show South Indian Bank Detail in Invoice",
+  },
+};
+
 const showSouthIndianBankDetails: FormFieldType = createFormConfig(
   "showSouthIndianBankDetails",
-  "Show South Indian Bank Detail in Invoice",
+  "",
   "checkbox",
   ClientGroup2,
-  ""
+  "",
+  showSouthIndianBankDetailsOption
 );
+
+const showIOBDetailsOption = {
+  showIOBDetails: { value: false, label: "Show IOB Detail in Invoice" },
+};
+
 const showIOBDetails: FormFieldType = createFormConfig(
   "showIOBDetails",
-  "Show IOB Detail in Invoice",
+  "",
   "checkbox",
   ClientGroup2,
-  ""
+  "",
+  showIOBDetailsOption
 );
 
 const searchClient: FormFieldType = createFormConfig(

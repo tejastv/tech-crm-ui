@@ -1,4 +1,4 @@
-export interface AddUpdateClientGroupType {
+export interface ClientGroupFormType {
   id?: number;
   clintGroupIdToMove?: number;
   clientIds: Array<any>;

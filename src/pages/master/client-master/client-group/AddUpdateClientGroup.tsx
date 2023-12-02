@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   ActionButtons,
   BorderLayout,
   Card,
-  Input,
   InputWithText,
-  Select,
-  SingleCheckbox,
+  NewCheckbox,
+  NewInput,
+  NewSelect,
 } from "@shared/index";
 import {
-  AddUpdateClientGroupType,
+  ClientGroupFormType,
+  ClientGroupType,
   addClientGroupFormFields,
   useClientGroupApiCallHook,
 } from "@master/index";
@@ -30,7 +31,13 @@ export const AddUpdateClientGroup: React.FC = () => {
     },
   };
 
-  const methods = useForm<AddUpdateClientGroupType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm<ClientGroupFormType>();
   const {
     addClientGroupMutation,
     getClientGroupData,
@@ -59,11 +66,11 @@ export const AddUpdateClientGroup: React.FC = () => {
           ));
     }
     if (clientGroupListData) {
-      addClientGroupFormFields.moveToClient.config.options = selectOptionsMaker(
-        clientGroupListData,
-        "groupId",
-        "groupName"
-      );
+      // addClientGroupFormFields.moveToClient.config.options = selectOptionsMaker(
+      //   clientGroupListData,
+      //   "groupId",
+      //   "groupName"
+      // );
     }
     if (clientGroupDataSuccess) {
       addClientGroupFormFields.clientGroupName.config.setData =
@@ -81,113 +88,140 @@ export const AddUpdateClientGroup: React.FC = () => {
     }
   } else {
     useEffect(() => {
-      methods.reset();
+      reset();
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((clientGroupData): void => {
+  const mapClientGroupToClientGroupForm = (
+    clientGroupData: ClientGroupType
+  ) => {
+    let clientGroupForm: Partial<ClientGroupFormType> = {};
+    return clientGroupForm;
+  };
+
+  useEffect(() => {
+    // if (params.id) reset(mapClientGroupToClientGroupForm(userData));
+  }, [params.id]);
+
+  const onSubmit = handleSubmit((clientGroupData): void => {
     let data: any = { ...clientGroupData };
-    if (params.id && clientGroupData) {
-      let ids = [];
-      let updateClientGroupObj = {
-        ...data,
-      };
-      if (data.clientIds.length > 0) {
-        ids = data.clientIds.map((data: any) => data.value);
-        updateClientGroupObj["clientIds"] = ids;
-      }
-      updateClientGroup({
-        id: +params.id,
-        ...updateClientGroupObj,
-        clintGroupIdToMove: data.clintGroupIdToMove.value,
-      });
-    } else {
-      addClientGroup(data);
-    }
+    console.log(data);
+
+    // if (params.id && clientGroupData) {
+    //   let ids = [];
+    //   let updateClientGroupObj = {
+    //     ...data,
+    //   };
+    //   if (data.clientIds.length > 0) {
+    //     ids = data.clientIds.map((data: any) => data.value);
+    //     updateClientGroupObj["clientIds"] = ids;
+    //   }
+    //   updateClientGroup({
+    //     id: +params.id,
+    //     ...updateClientGroupObj,
+    //     clintGroupIdToMove: data.clintGroupIdToMove.value,
+    //   });
+    // } else {
+    //   addClientGroup(data);
+    // }
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addClientGroupFormFields.clientGroupName}
+              />
+            </div>
+          </div>
+          <div className="col-md-6 col-xs-12 mb-3">
+            <div className="row">
+              <div className="col-md-3"></div>
+              <div className="col-md-9">
+                <small className="text-center badge badge-default badge-primary form-text text-white">
+                  <InputWithText
+                    config={addClientGroupFormFields.namenote.config}
+                  />
+                </small>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6 col-xs-12">
+            <div className="row">
+              <div className="col-md-3"></div>
+              <div className="col-md-9">
+                <NewCheckbox
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientGroupFormFields.showBOBDetails}
+                />
+                <NewCheckbox
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientGroupFormFields.showBOIDetails}
+                />
+                <NewCheckbox
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientGroupFormFields.showIOBDetails}
+                />
+                <NewCheckbox
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientGroupFormFields.showSouthIndianBankDetails}
+                />
+                <NewCheckbox
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addClientGroupFormFields.showUnionBankDetails}
+                />
+              </div>
+            </div>
+          </div>
+          {params.id && (
+            <>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input
-                    config={addClientGroupFormFields.clientGroupName.config}
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={addClientGroupFormFields.searchClient}
                   />
                 </div>
               </div>
-              <div className="col-md-6 col-xs-12 mb-3">
-                <div className="row">
-                  <div className="col-md-3"></div>
-                  <div className="col-md-9">
-                    <small className="text-center badge badge-default badge-primary form-text text-white">
-                      <InputWithText
-                        config={addClientGroupFormFields.namenote.config}
-                      />
-                    </small>
-                  </div>
+              <div className="row">
+                <div className="col-md-6 col-xs-12">
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={addClientGroupFormFields.moveToClient}
+                  />
                 </div>
               </div>
-              <div className="col-md-6 col-xs-12">
-                <div className="row">
-                  <div className="col-md-3"></div>
-                  <div className="col-md-9">
-                    <SingleCheckbox
-                      config={addClientGroupFormFields.showBOBDetails.config}
-                    />
-                    <SingleCheckbox
-                      config={addClientGroupFormFields.showBOIDetails.config}
-                    />
-                    <SingleCheckbox
-                      config={addClientGroupFormFields.showIOBDetails.config}
-                    />
-                    <SingleCheckbox
-                      config={
-                        addClientGroupFormFields.showSouthIndianBankDetails
-                          .config
-                      }
-                    />
-                    <SingleCheckbox
-                      config={
-                        addClientGroupFormFields.showUnionBankDetails.config
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
-              {params.id && (
-                <>
-                  <div className="row">
-                    <div className="col-md-6 col-xs-12">
-                      <Select
-                        config={addClientGroupFormFields.searchClient.config}
-                      />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-6 col-xs-12">
-                      <Select
-                        config={addClientGroupFormFields.moveToClient.config}
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
-      </Card>
-    </>
+            </>
+          )}
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

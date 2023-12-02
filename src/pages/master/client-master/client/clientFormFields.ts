@@ -615,7 +615,7 @@ const adjustenquiryproforma: FormFieldType = createFormConfig(
   "Adjust /Enquiry Proforma"
 );
 
-export const addClientFormFields = {
+export const clientFormFields = {
   clientName,
   clientGst,
   gstn,
