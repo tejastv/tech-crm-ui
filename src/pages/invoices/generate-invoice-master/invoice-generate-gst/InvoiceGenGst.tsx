@@ -10,6 +10,7 @@ import {
   TableType,
   NewInput,
   NewSelect,
+  NewCheckbox,
 } from "@shared/index";
 import { InvoiceGenGstType, invoiceGenGstFormFields } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
@@ -204,8 +205,11 @@ export const InvoiceGenerateGst: React.FC = () => {
                   />
                 </div>
                 <div className="col-md-4">
-                  <SingleCheckbox
-                    config={invoiceGenGstFormFields.gstField.config}
+                  <NewCheckbox
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceGenGstFormFields.gstField}
                   />
                 </div>
                 {/* // currency , Staste ad GST */}
@@ -235,8 +239,11 @@ export const InvoiceGenerateGst: React.FC = () => {
                   />
                 </div>
                 <div className="col-md-3 ">
-                  <SingleCheckbox
-                    config={invoiceGenGstFormFields.gstActualBuyreField.config}
+                  <NewCheckbox
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceGenGstFormFields.actualBuyreField}
                   />
                 </div>
                 {/* // Actual Buyer , Staste ad GST */}
@@ -292,8 +299,11 @@ export const InvoiceGenerateGst: React.FC = () => {
                     config={invoiceGenGstFormFields.invoicenoField}
                   />
                   <div className="col-md-14 col-xs-12 text-right">
-                    <SingleCheckbox
-                      config={invoiceGenGstFormFields.manualField.config}
+                    <NewCheckbox
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceGenGstFormFields.manualField}
                     />
                   </div>
                   {/* </div> */}
@@ -354,15 +364,12 @@ export const InvoiceGenerateGst: React.FC = () => {
                     register={register}
                     config={invoiceGenGstFormFields.dateField}
                   />
-                  {/* </div> */}
-
-                  {/* <div className="col-sm-5 "> */}
-                  <SingleCheckbox
-                    config={invoiceGenGstFormFields.donotField.config}
+                  <NewCheckbox
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceGenGstFormFields.donotField}
                   />
-                  {/* </div> */}
-
-                  {/* <div className="col-sm-12"> */}
                   <NewInput
                     errors={errors}
                     register={register}

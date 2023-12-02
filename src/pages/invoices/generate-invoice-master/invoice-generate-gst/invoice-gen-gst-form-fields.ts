@@ -1,4 +1,4 @@
-import { FormFieldType, ValidationType } from "@shared/index";
+import { FormFieldType, MapType, Options, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
 
 const currencyValidation = {
@@ -309,6 +309,15 @@ const totalValidation = {
   },
 } as ValidationType;
 
+const actionOption: MapType<Options> = {
+  new: { value: "manual", label: "Manual" },
+  // renew: { value: "renew", label: "Specific Client Datewise" },
+};
+
+const actionOptiontwo: MapType<Options> = {
+  new: { value: "y", label: "Do Not Compare Report with Invoice Date" },
+};
+
 const clientField: FormFieldType = {
   config: {
     name: "client",
@@ -481,10 +490,11 @@ const invoicenoField: FormFieldType = createFormConfig(
 );
 const manualField: FormFieldType = createFormConfig(
   "manual",
-  "Manual",
+  "",
   "checkbox",
   manualValidation,
-  ""
+  "",
+  actionOption
 );
 const amountField: FormFieldType = createFormConfig(
   "amount",
@@ -543,10 +553,11 @@ const dateField: FormFieldType = createFormConfig(
 
 const donotField: FormFieldType = createFormConfig(
   "Do Not Comparereportwithinvoicedate",
-  "Do Not Compare Report with Invoice Date",
+  "",
   "checkbox",
   manualValidation,
-  ""
+  "",
+  actionOptiontwo
 );
 
 const subtotalField: FormFieldType = createFormConfig(
