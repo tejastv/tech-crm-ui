@@ -21,6 +21,6 @@ const stdPriceClientCurrency: FormFieldType = createFormConfig(
   {}
 );
 
-export const addStdPriceClientsFormFields = {
+export const stdPriceClientsFormFields = {
   stdPriceClientCurrency,
 };

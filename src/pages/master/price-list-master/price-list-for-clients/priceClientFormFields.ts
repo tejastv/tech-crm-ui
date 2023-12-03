@@ -151,7 +151,7 @@ const priceCurrencyClient: FormFieldType = createFormConfig(
   {}
 );
 
-export const addPriceClientFormFields = {
+export const priceClientFormFields = {
   pricecity,
   priceClient,
   priceClient2,

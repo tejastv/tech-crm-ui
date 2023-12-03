@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   BorderLayout,
   Card,
-  Select,
   Button,
-  Input,
   Table,
   TableType,
   Loader,
+  NewSelect,
+  NewInput,
 } from "@shared/index";
 import {
   CityType,
   ClientType,
   ClientWisePriceType,
-  addPriceClientFormFields,
+  priceClientFormFields,
   useCityApiCallHook,
 } from "@master/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
@@ -24,7 +24,13 @@ import { useAxios } from "@hooks/useAxios";
 import { apiUrls } from "@constants/api-urls";
 
 export const PriceListForClients: React.FC = () => {
-  const getPriceFromOtherGroupForm = useForm();
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm();
   const { instance } = useAxios();
   const { getCity } = useCityApiCallHook();
 
@@ -72,7 +78,7 @@ export const PriceListForClients: React.FC = () => {
       label: "All",
       value: -1,
     });
-    addPriceClientFormFields.pricecity.config.options = options;
+    priceClientFormFields.pricecity.config.options = options;
   }
 
   const cityChangeHandler = (selectedOption: any) => {
@@ -101,7 +107,7 @@ export const PriceListForClients: React.FC = () => {
   };
 
   if (cityWiseClient) {
-    addPriceClientFormFields.priceClient.config.options = cityWiseClient;
+    priceClientFormFields.priceClient.config.options = cityWiseClient;
   }
 
   const getClientWisePrice = async (clientObj: ClientType) => {
@@ -158,40 +164,48 @@ export const PriceListForClients: React.FC = () => {
     }
   };
 
-  if (client) {
-    addPriceClientFormFields.priceClientCurrency.config.setData =
-      client.currencyName;
-    addPriceClientFormFields.priceGroup.config.setData = client.groupName;
-  }
+  useEffect(() => {
+    if (
+      priceClientFormFields.priceClientCurrency.config.name ==
+      "Priceclientcurrencey"
+    ) {
+      setValue(
+        priceClientFormFields.priceClientCurrency.config.name,
+        client.currencyName
+      );
+    }
+    if (priceClientFormFields.priceGroup.config.name == "priceGroup") {
+      setValue(priceClientFormFields.priceGroup.config.name, client.groupName);
+    }
+  }, [client]);
 
-  const onGetPriceFromOtherGroupFormSubmit =
-    getPriceFromOtherGroupForm.handleSubmit((data, e): void => {
-      let url = "";
-      setTableData([]);
-      setIsLoading(true);
-      if (e?.target.name == "stdPrice") {
-        let confirmation = confirm(
-          "Do you want fatch price from Standard Price?"
+  const onGetPriceFromOtherGroupFormSubmit = handleSubmit((data, e): void => {
+    let url = "";
+    setTableData([]);
+    setIsLoading(true);
+    if (e?.target.name == "stdPrice") {
+      let confirmation = confirm(
+        "Do you want fatch price from Standard Price?"
+      );
+      if (confirmation) {
+        url = apiUrls.CLIENT_WISE_PRICE.replace(
+          "{id}",
+          "" + data.Priceclient.value
         );
-        if (confirmation) {
-          url = apiUrls.CLIENT_WISE_PRICE.replace(
-            "{id}",
-            "" + data.Priceclient.value
-          );
-          getCurrencyWisePrice(client);
-        }
-      } else if (e?.target.name == "fromGroup") {
-        let confirmation = confirm("Do you want fatch price from Group?");
-        if (confirmation) {
-          url = apiUrls.GET_GROUP_WISE_PRICE.replace(
-            "{id}",
-            "" + data.Priceclient.value
-          );
-          getGroupWisePrice(client);
-        }
+        getCurrencyWisePrice(client);
       }
-      setApiUrl(url);
-    });
+    } else if (e?.target.name == "fromGroup") {
+      let confirmation = confirm("Do you want fatch price from Group?");
+      if (confirmation) {
+        url = apiUrls.GET_GROUP_WISE_PRICE.replace(
+          "{id}",
+          "" + data.Priceclient.value
+        );
+        getGroupWisePrice(client);
+      }
+    }
+    setApiUrl(url);
+  });
 
   const onSaveBtnClickHandler = async () => {
     let cellData = Object.values(tableCellData);
@@ -437,32 +451,36 @@ export const PriceListForClients: React.FC = () => {
   };
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <div className="p-t-20">
-          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-            <FormProvider {...getPriceFromOtherGroupForm}>
-              <form noValidate autoComplete="off">
-                <div className="row">
-                  <div className="col-md-3 col-xs-12">
-                    <Select
-                      config={addPriceClientFormFields.pricecity.config}
-                      onChangeHandler={cityChangeHandler}
-                    />
-                  </div>
-                  <div className="col-md-4 col-xs-12">
-                    <Select
-                      config={addPriceClientFormFields.priceClient.config}
-                      onChangeHandler={clientChangeHandler}
-                    />
-                  </div>
-                  <div className="col-md-2 col-xs-12">
-                    <Input
-                      config={
-                        addPriceClientFormFields.priceClientCurrency.config
-                      }
-                    />
-                    {/* <div className="row justify-content-end">
+    <Card config={cardConfig.formLayoutConfig}>
+      <div className="p-t-20">
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <form noValidate autoComplete="off">
+            <div className="row">
+              <div className="col-md-3 col-xs-12">
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={priceClientFormFields.pricecity}
+                  onChange={cityChangeHandler}
+                />
+              </div>
+              <div className="col-md-4 col-xs-12">
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={priceClientFormFields.priceClient}
+                  onChange={clientChangeHandler}
+                />
+              </div>
+              <div className="col-md-2 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={priceClientFormFields.priceClientCurrency}
+                />
+                {/* <div className="row justify-content-end">
                       <div className="col-md-12 col-xs-12 text-right">
                         <Button
                           type={"submit"}
@@ -472,13 +490,15 @@ export const PriceListForClients: React.FC = () => {
                         </Button>
                       </div>
                     </div> */}
-                  </div>
-                  <div className="col-md-3  col-xs-12">
-                    <Input
-                      config={addPriceClientFormFields.priceGroup.config}
-                    />
+              </div>
+              <div className="col-md-3  col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={priceClientFormFields.priceGroup}
+                />
 
-                    {/* <div className="row justify-content-end">
+                {/* <div className="row justify-content-end">
                       <div className="col-md-12 col-xs-12 text-right">
                         <Button
                           type={"submit"}
@@ -488,238 +508,60 @@ export const PriceListForClients: React.FC = () => {
                         </Button>
                       </div>
                     </div> */}
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-7" />
-                  <div className="col-md-2">
-                    <Button
-                      type="submit"
-                      className={"btn btn-danger btn-sm w-100"}
-                      name="stdPrice"
-                      onClick={onGetPriceFromOtherGroupFormSubmit}
-                    >
-                      <i className="far fa-save"></i> Get Std. Price
-                    </Button>
-                  </div>
-                  <div className="col-md-2">
-                    <Button
-                      type="submit"
-                      name="fromGroup"
-                      onClick={onGetPriceFromOtherGroupFormSubmit}
-                      className={"btn btn-danger btn-sm w-100"}
-                    >
-                      <i className="far fa-save"></i> Get Price (From Group)
-                    </Button>
-                  </div>
-                </div>
-                <div className="row justify-content-space-between mt-3">
-                  <div className="offset-7 col-md-4">
-                    <div className="text-center">
-                      <Button
-                        type="button"
-                        name="saveAll"
-                        onClick={onSaveBtnClickHandler}
-                        className={"btn btn-danger btn-sm"}
-                      >
-                        <i className="far fa-save"></i> Save All
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </FormProvider>
-          </BorderLayout>
-        </div>
-        <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-          {tableHeading && (
-            <label className="custom-label" htmlFor="tableHeading">
-              {tableHeading}
-            </label>
-          )}
-          {tableData.length > 0 ? (
-            <Table config={tableConfig.config} />
-          ) : (
-            isLoading && <Loader />
-          )}
-        </BorderLayout>
-      </Card>
-    </>
-  );
-};
-
-// const { data: groupWiseCurrencyData } = getGroupWiseCurrencyData(
-//   group,
-//   group != -2
-// );
-// if (groupWiseCurrencyData) {
-//   let currencyData = selectOptionsMaker(
-//     [groupWiseCurrencyData],
-//     "currencyId",
-//     "currecnyName"
-//   );
-//   addPriceClientFormFields.priceCurrencyClient.config.options = currencyData;
-// }
-
-// const groupChangeHandler = (selectedOption: any) => {
-//   if (selectedOption) {
-//     setGroup(selectedOption.value);
-//     // setIsStdPriceBtnClicked(false);
-//   }
-// };
-
-// const { data: clientWiseCurrencyAndGroup } = getCurrencyAndGroupByClientID(
-//   client,
-//   client != -2
-// );
-
-// if (clientWiseCurrencyAndGroup) {
-//   let currency = [
-//     {
-//       value: clientWiseCurrencyAndGroup.currencyId,
-//       label: clientWiseCurrencyAndGroup.currencyName,
-//     },
-//   ];
-//   let group = [
-//     {
-//       value: clientWiseCurrencyAndGroup.groupId,
-//       label: clientWiseCurrencyAndGroup.groupName,
-//     },
-//   ];
-//   addPriceClientFormFields.priceClientCurrency.config.options = currency;
-//   addPriceClientFormFields.priceGroup.config.options = group;
-// }
-
-// const { data: clientGroupData } = getClientGroup();
-// if (clientGroupData) {
-//   addPriceClientFormFields.priceGroup2.config.options = selectOptionsMaker(
-//     clientGroupData,
-//     "groupId",
-//     "groupName"
-//   );
-// }
-
-// const onOtherFormGroupFormSubmit = otherFormGroupForm.handleSubmit(
-//   (data): void => {
-//     console.log("value", data);
-//   }
-// );
-
-// const onGetPriceFormSubmit = getPriceForm.handleSubmit((data): void => {
-//   console.log("value", data);
-// });
-
-// const { data: clientWiseCurrency } = getCurrencyAndGroupByClientID(
-//   client2,
-//   client2 != -2
-// );
-
-// if (clientWiseCurrency) {
-//   let currency = [
-//     {
-//       value: clientWiseCurrency.currencyId,
-//       label: clientWiseCurrency.currencyName,
-//     },
-//   ];
-
-//   addPriceClientFormFields.priceCurrencyGroup.config.options = currency;
-// }
-
-// const client2ChangeHandler = (selectedOption: any) => {
-//   if (selectedOption) {
-//     setClient2(selectedOption.value);
-//     // setIsStdPriceBtnClicked(false);
-//   }
-// };
-{
-  /* <FormProvider {...otherFormGroupForm}>
-              <form
-                noValidate
-                onSubmit={onOtherFormGroupFormSubmit}
-                autoComplete="off"
-              >
-                <div className="row">
-                  <div className="col-md-3 col-xs-12">
-                    <Select
-                      config={addPriceClientFormFields.priceGroup2.config}
-                      onChangeHandler={groupChangeHandler}
-                    />
-                  </div>
-                  <div className="col-md-3 col-xs-12">
-                    <Select
-                      config={
-                        addPriceClientFormFields.priceCurrencyClient.config
-                      }
-                    />
-                  </div>
-
-                  <div className="col-md-2 col-xs-12 text-right">
-                    <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                      <i className="far fa-save"></i> Get Price(From Other
-                      Group)
-                    </Button>
-                  </div>
-                </div>
-              </form>
-            </FormProvider> */
-}
-{
-  /* <FormProvider {...getPriceForm}>
-              <form
-                noValidate
-                onSubmit={onGetPriceFormSubmit}
-                autoComplete="off"
-              >
-                <div className="row">
-                  <div className="col-md-3 col-xs-12">
-                    <Select
-                      config={addPriceClientFormFields.priceClient2.config}
-                      onChangeHandler={client2ChangeHandler}
-                    />
-                  </div>
-                  <div className="col-md-3 col-xs-12">
-                    <Select
-                      config={
-                        addPriceClientFormFields.priceCurrencyGroup.config
-                      }
-                    />
-                  </div>
-                  <div className="col-md-1 col-xs-12 text-right">
-                    <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                      <i className="far fa-save"></i> Get Price
-                    </Button>
-                  </div>
-                </div>
-                <div className="row m-6 justify-content-center">
-                  <div className="col-mt-6 col-xs-12 text-center">
-                    <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                      <i className="far fa-save"></i> Save All
-                    </Button>
-                  </div>
-                </div>
-              </form>
-            </FormProvider> */
-}
-{
-  /* <BorderLayout
-            heading={cardConfig.formButtonsConfig.heading}
-          ></BorderLayout> */
-}
-{
-  /* <div className="col-md-2">
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-7" />
+              <div className="col-md-2">
                 <Button
-                  type={"submit"}
+                  type="submit"
                   className={"btn btn-danger btn-sm w-100"}
+                  name="stdPrice"
+                  onClick={onGetPriceFromOtherGroupFormSubmit}
                 >
-                  <i className="far fa-save"></i> Get Price (Other Group)
+                  <i className="far fa-save"></i> Get Std. Price
                 </Button>
               </div>
               <div className="col-md-2">
                 <Button
-                  type={"submit"}
+                  type="submit"
+                  name="fromGroup"
+                  onClick={onGetPriceFromOtherGroupFormSubmit}
                   className={"btn btn-danger btn-sm w-100"}
                 >
-                  <i className="far fa-save"></i> Get Price
+                  <i className="far fa-save"></i> Get Price (From Group)
                 </Button>
-              </div> */
-}
+              </div>
+            </div>
+            <div className="row justify-content-space-between mt-3">
+              <div className="offset-7 col-md-4">
+                <div className="text-center">
+                  <Button
+                    type="button"
+                    name="saveAll"
+                    onClick={onSaveBtnClickHandler}
+                    className={"btn btn-danger btn-sm"}
+                  >
+                    <i className="far fa-save"></i> Save All
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </BorderLayout>
+      </div>
+      <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
+        {tableHeading && (
+          <label className="custom-label" htmlFor="tableHeading">
+            {tableHeading}
+          </label>
+        )}
+        {tableData.length > 0 ? (
+          <Table config={tableConfig.config} />
+        ) : (
+          isLoading && <Loader />
+        )}
+      </BorderLayout>
+    </Card>
+  );
+};

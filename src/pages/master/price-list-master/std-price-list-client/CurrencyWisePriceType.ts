@@ -1,4 +1,4 @@
-export interface CurrencyWisePrice {
+export interface CurrencyWisePriceType {
   srNo?: number;
   countryId: number;
   currencyId: number;

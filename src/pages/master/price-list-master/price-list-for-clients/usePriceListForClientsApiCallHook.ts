@@ -2,7 +2,7 @@ import { useAxios } from "@hooks/useAxios";
 import {
   ClientWisePriceType,
   // CurrencyAndGroupType,
-  CurrencyWisePrice,
+  CurrencyWisePriceType,
 } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import {
@@ -50,8 +50,8 @@ export const usePriceListForClientsApiCallHook = () => {
 
   const getCurrencyWisePrice = (
     id: string
-  ): UseQueryResult<CurrencyWisePrice[]> => {
-    return useQuery<CurrencyWisePrice[]>({
+  ): UseQueryResult<CurrencyWisePriceType[]> => {
+    return useQuery<CurrencyWisePriceType[]>({
       queryKey: [queryKeys.CURRENCY_WISE_PRICE, id],
       queryFn: async () => {
         const response = await instance.get(

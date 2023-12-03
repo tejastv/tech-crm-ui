@@ -1,4 +1,4 @@
-export interface UpdatePriceListForGroup {
+export interface UpdatePriceListForGroupType {
   groupId?: number;
   countryID: number;
   price: number;
