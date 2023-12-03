@@ -302,7 +302,7 @@ export const StdPriceListClient: React.FC = () => {
       <form noValidate autoComplete="off" className="p-t-20">
         <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
           <div className="row">
-            <div className="col-md-3 col-xs-12">
+            <div className="col-md-4 col-xs-12">
               <NewSelect
                 errors={errors}
                 register={register}
@@ -312,19 +312,17 @@ export const StdPriceListClient: React.FC = () => {
               />
             </div>
           </div>
-          {currency !== "0" && (
-            <div className="row m-6 justify-content-end">
-              <div className="col-mt- col-xs-12 text-end">
-                <Button
-                  type="button"
-                  onClick={onDataEditClick}
-                  className={"btn btn-danger btn-sm"}
-                >
-                  <i className="far fa-save"></i> Save
-                </Button>
-              </div>
+          <div className="row m-6 justify-content-end">
+            <div className="col-mt- col-xs-12 text-end">
+              <Button
+                type="button"
+                onClick={onDataEditClick}
+                className={"btn btn-danger btn-sm"}
+              >
+                <i className="far fa-save"></i> Save All
+              </Button>
             </div>
-          )}
+          </div>
         </BorderLayout>
       </form>
       <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
