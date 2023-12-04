@@ -1,8 +1,10 @@
+import { Options } from "@shared/index";
+
 export interface LocalSourceFormType {
   id?: string;
-  localsource: string;
+  localSource: string;
   email: string;
   emailCc: string;
-  currencyId: number;
-  countryId: number;
+  currencyId: Options;
+  countryId: Options;
 }

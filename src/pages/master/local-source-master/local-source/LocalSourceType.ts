@@ -1,4 +1,5 @@
 export interface LocalSourceType {
+  id?: number;
   localSourceId: number;
   localSource: string;
   email: string;

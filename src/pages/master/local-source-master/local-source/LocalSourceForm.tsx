@@ -16,10 +16,10 @@ import {
   useCurrencyApiCallHook,
   CountryType,
   LocalSourceType,
+  CurrencyType,
 } from "@master/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
-import { useParams } from "react-router-dom";
-import { returnObjectBasedOnID } from "@utils/returnObjectBasedOnID";
+import { useLocation, useParams } from "react-router-dom";
 
 export const LocalSourceForm: React.FC = () => {
   const {
@@ -30,6 +30,7 @@ export const LocalSourceForm: React.FC = () => {
     formState: { errors },
   } = useForm<LocalSourceFormType>();
   const params = useParams();
+  const { state: localLocalSourceData } = useLocation();
   const {
     addLocalSourceMutation,
     updateLocalSourceMutation,
@@ -53,6 +54,7 @@ export const LocalSourceForm: React.FC = () => {
   const { data: countryData } = getCountry();
 
   const [countryOptions, setCountryOptions] = useState<CountryType[]>();
+  const [currencyOption, setCurrencyOption] = useState<CurrencyType[]>();
 
   useEffect(() => {
     if (countryData) {
@@ -69,99 +71,94 @@ export const LocalSourceForm: React.FC = () => {
     localSourceFormFields.sourcecountryField.config.options = options;
   }
 
-  const { data: currencyData, isSuccess: getCurrencySuccess } = getCurrency();
-  if (currencyData) {
-    localSourceFormFields.localsourcecurrenceyField.config.options =
-      selectOptionsMaker(currencyData, "currencyId", "currencyType");
+  const { data: currencyData } = getCurrency();
+
+  useEffect(() => {
+    if (currencyData) {
+      setCurrencyOption(Object.values(currencyData));
+    }
+  }, [currencyData && Object.values(currencyData).length]);
+
+  if (currencyOption?.length) {
+    let options = selectOptionsMaker(
+      currencyOption,
+      "currencyId",
+      "currencyType"
+    );
+    localSourceFormFields.localsourcecurrenceyField.config.options = options;
   }
 
-  const onSubmit = handleSubmit((localsourceData) => {
-    let data: any = { ...localsourceData };
-    data.countryId = +data.countryId["value"];
-    data.currencyId = +data.currencyId["value"];
-    if (params.id && localsourceData) {
-      updateLocalSource({ id: params.id, ...data });
-    } else {
-      addLocalSource(data);
-    }
-  });
+  const { data: localsourceData } = getLocalSourceData(
+    "" + params.id,
+    !localLocalSourceData && params.id !== undefined
+  );
 
-  const { data: localsourceData, isSuccess: localsourceDataSuccess } =
-    getLocalSourceData("" + params.id, params.id != undefined);
-
-  if (params.id) {
-    if (localsourceDataSuccess) {
-      if (countryOptions && getCurrencySuccess) {
-        let id = localsourceData?.countryId;
-        let currencyId = localsourceData?.currencyId;
-        let countrynamedata: any = returnObjectBasedOnID(
-          countryOptions,
-          "countryId",
-          id,
-          "countryId",
-          "countryName"
-        );
-        let currencydata: any = returnObjectBasedOnID(
-          currencyData,
-          "currencyId",
-          currencyId,
-          "currencyId",
-          "currencyType"
-        );
-        localSourceFormFields.sourcecountryField.config.setData =
-          countrynamedata
-            ? {
-                label: countrynamedata.label,
-                value: countrynamedata.value,
-              }
-            : [];
-        localSourceFormFields.localsourcecurrenceyField.config.setData =
-          currencydata
-            ? {
-                label: currencydata.label,
-                value: currencydata.value,
-              }
-            : [];
-      }
-      localSourceFormFields.localSourceField.config.setData =
-        localsourceData.localSource;
-      localSourceFormFields.emailField.config.setData = localsourceData.email;
-      localSourceFormFields.emailCCField.config.setData =
-        localsourceData.emailCc;
-    }
-  }
-
-  const mapLocalSourceFromToLocalSource = (formUserData: LocalSourceFormType) => {
+  const reqBodyMap = (localSourceFormData: LocalSourceFormType) => {
     let localSourceData: Partial<LocalSourceType> = {
-      localSourceId: ;
-      localSource: ;
-      email: formUserData.email;
-      emailCc: formUserData.emailCc;
-      countryName: formUserData.;
-      currency: ;
-      currencyId: ;
-      countryId: ;
+      localSource: localSourceFormData.localSource,
+      email: localSourceFormData.email,
+      emailCc: localSourceFormData.emailCc,
     };
+    if (currencyData && localSourceFormData?.currencyId) {
+      localSourceData.currencyId = localSourceFormData.currencyId.value;
+    }
+    if (countryData && localSourceFormData?.countryId) {
+      localSourceData.countryId = localSourceFormData.countryId.value;
+    }
     return localSourceData;
   };
 
-  const mapUsertoFormUser = (userData: UserType) => {
-    let formUserData: Partial<FormUserType> = {
-      loginId: userData.user,
-      password: userData.password,
-      userName: userData.username,
-      userType: addUserFormFields.userTypeData[userData.usertype],
+  const mapLocalSourceToLocalSourceFrom = (
+    localSourceData: LocalSourceType
+  ) => {
+    let localSourceFormData: Partial<LocalSourceFormType> = {
+      localSource: localSourceData.localSource,
+      email: localSourceData.email,
+      emailCc: localSourceData?.emailCc,
     };
-    return formUserData;
+    if (currencyData && localSourceData?.currencyId) {
+      let data = currencyData[localSourceData.currencyId];
+      data &&
+        (localSourceFormData.currencyId = {
+          label: data.currencySymbol,
+          value: data.currencyId,
+        });
+    }
+    if (countryData && localSourceData?.countryId != null) {
+      let data = countryData[localSourceData.countryId];
+      data &&
+        (localSourceFormData.countryId = {
+          label: data.countryName,
+          value: data.countryId,
+        });
+    }
+    return localSourceFormData;
   };
 
   useEffect(() => {
-    if (params.id) reset(mapUsertoFormUser(userData));
-  }, [params.id]);
+    if (params.id) {
+      if (localLocalSourceData !== null) {
+        reset(mapLocalSourceToLocalSourceFrom(localLocalSourceData));
+      }
+    }
+  }, [params.id, localLocalSourceData, countryOptions, currencyOption]);
 
   useEffect(() => {
-    reset();
-  }, []);
+    if (params.id) {
+      if (localsourceData && Object.values(localsourceData).length > 0) {
+        reset(mapLocalSourceToLocalSourceFrom(localsourceData));
+      }
+    }
+  }, [params.id, localsourceData, countryOptions, currencyOption]);
+
+  const onSubmit = handleSubmit((localsourceData) => {
+    let localSourceData: Partial<LocalSourceType> = reqBodyMap(localsourceData);
+    if (params.id && localsourceData) {
+      updateLocalSource({ id: +params.id, ...localSourceData });
+    } else {
+      addLocalSource(localSourceData);
+    }
+  });
 
   return (
     <Card config={cardConfig.formLayoutConfig}>

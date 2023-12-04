@@ -48,7 +48,7 @@ export const useLocalSourceApiCallHook = () => {
   };
 
   const addLocalSource = async (
-    localsourceData: LocalSourceFormType
+    localsourceData: Partial<LocalSourceType>
   ): Promise<ApiResponseType<LocalSourceType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_LOCALSOURCE,
@@ -59,7 +59,7 @@ export const useLocalSourceApiCallHook = () => {
 
   const addLocalSourceMutation = () => {
     const mutation = useMutation(
-      (updatedItem: LocalSourceFormType) => addLocalSource(updatedItem),
+      (updatedItem: Partial<LocalSourceType>) => addLocalSource(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -73,7 +73,7 @@ export const useLocalSourceApiCallHook = () => {
   };
 
   const updateLocalSourceData = async (
-    updateLocalSourceData: LocalSourceFormType
+    updateLocalSourceData: Partial<LocalSourceType>
   ): Promise<ApiResponseType<LocalSourceType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_LOCALSOURCE.replace(
@@ -87,7 +87,8 @@ export const useLocalSourceApiCallHook = () => {
 
   const updateLocalSourceMutation = () => {
     const mutation = useMutation(
-      (updatedItem: LocalSourceFormType) => updateLocalSourceData(updatedItem),
+      (updatedItem: Partial<LocalSourceType>) =>
+        updateLocalSourceData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
