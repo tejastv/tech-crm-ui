@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   BorderLayout,
   Card,
-  Select,
   Button,
   Table,
   TableType,
@@ -155,110 +154,99 @@ export const InvoiceDetailGroupWise: React.FC = () => {
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-3">
-                  <div className="card-body">
-                    <NewSelect
-                      errors={errors}
-                      register={register}
-                      control={control}
-                      config={invoiceDetailGroupWiseFormFields.fyearField}
-                    />
-                  </div>
-                </div>
-
-                <div className="col-md-3 col-xs-12">
-                  <div className="card-body">
-                    <NewInput
-                      errors={errors}
-                      register={register}
-                      config={invoiceDetailGroupWiseFormFields.fromdateField}
-                    />
-                  </div>
-                </div>
-                <div className="col-md-3 col-xs-12">
-                  <div className="card-body">
-                    <NewInput
-                      errors={errors}
-                      register={register}
-                      config={invoiceDetailGroupWiseFormFields.todateeField}
-                    />
-                    <div className="mb-2">
-                      <div className="col-md-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm"}
-                        >
-                          Get
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-md-3">
-                  <div className="card-body">
-                    <NewSelect
-                      errors={errors}
-                      register={register}
-                      control={control}
-                      config={invoiceDetailGroupWiseFormFields.groupField}
-                    />
-                    <div className="mb-2 mt-3">
-                      <div className="col-md-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm"}
-                        >
-                          Referesh/View
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Table */}
-              <div className="col-md-12 col-xs-12">
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-3">
                 <div className="card-body">
-                  <Table config={tableConfig.config}>null</Table>
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceDetailGroupWiseFormFields.fYearField}
+                  />
                 </div>
               </div>
-              {/* </div> */}
-            </BorderLayout>
-            <div className="card-body">
-              <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-                <div className="mb-2 mt-3">
-                  <div className="col-md-14 col-xs-12 text-right">
-                    <Button
-                      type="button"
-                      className={"btn btn-danger btn-sm mr-1"}
-                    >
-                      <i className="far fa-save"></i>
-                      Export Invoice List
-                    </Button>
 
-                    <Button
-                      type="button"
-                      className={"btn btn-secondary btn-sm"}
-                    >
-                      <i className="fa fa-close"></i>
-                      Cancel
-                    </Button>
+              <div className="col-md-3 col-xs-12">
+                <div className="card-body">
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceDetailGroupWiseFormFields.fromDateField}
+                  />
+                </div>
+              </div>
+              <div className="col-md-3 col-xs-12">
+                <div className="card-body">
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceDetailGroupWiseFormFields.toDateField}
+                  />
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        Get
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </BorderLayout>
+              </div>
+
+              <div className="col-md-3">
+                <div className="card-body">
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceDetailGroupWiseFormFields.groupField}
+                  />
+                  <div className="mb-2 mt-3">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        Referesh/View
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </form>
-        </FormProvider>
+
+            {/* Table */}
+            <div className="col-md-12 col-xs-12">
+              <div className="card-body">
+                <Table config={tableConfig.config}>null</Table>
+              </div>
+            </div>
+            {/* </div> */}
+          </BorderLayout>
+          <div className="card-body">
+            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+              <div className="mb-2 mt-3">
+                <div className="col-md-14 col-xs-12 text-right">
+                  <Button
+                    type="button"
+                    className={"btn btn-danger btn-sm mr-1"}
+                  >
+                    <i className="far fa-save"></i>
+                    Export Invoice List
+                  </Button>
+
+                  <Button type="button" className={"btn btn-secondary btn-sm"}>
+                    <i className="fa fa-close"></i>
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </BorderLayout>
+          </div>
+        </form>
       </Card>
     </>
   );
