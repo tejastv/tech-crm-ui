@@ -6,6 +6,6 @@ export interface ClientGroupType {
   showBOIDetails: boolean;
   showSouthIndianBankDetails: boolean;
   showIOBDetails: boolean;
-  showIDBIDetails: null;
-  showSBIDetails: null;
+  showIDBIDetails: boolean;
+  showSBIDetails: boolean;
 }

@@ -8,7 +8,7 @@ export { AddUpdateClient } from "./client-master/client/AddUpdateClient";
 
 // Client Segment master child pages
 export { GroupMaster } from "./client-master/client-group/ClientGroup";
-export { AddUpdateClientGroup } from "./client-master/client-group/AddUpdateClientGroup";
+export { ClientGroupForm } from "./client-master/client-group/ClientGroupForm";
 export { Segment } from "./client-master/segment/Segment";
 export { AddUpdateSegment } from "./client-master/segment/AddUpdateSegment";
 
@@ -97,10 +97,10 @@ export { addSegmentFormFields } from "./client-master/segment/add-segment-form-f
 
 export { addCompanyFormFields } from "./company/add-update-company-form-fields";
 
-export { addPriceClientFormFields } from "./price-list-master/price-list-for-clients/price-list-for-clients-form-fields";
-export { addStdPriceClientsFormFields } from "./price-list-master/std-price-list-client/add-std-price-client-form-fields";
+export { priceClientFormFields } from "./price-list-master/price-list-for-clients/priceClientFormFields";
+export { stdPriceClientsFormFields } from "./price-list-master/std-price-list-client/add-std-price-client-form-fields";
 export { addActualBuyersFormFields } from "./price-list-master/actual-buyer/add-actual-buyer-form-fields";
-export { addPriceGroupFormFields } from "./price-list-master/price-list-group-wise/add-price-group-form-fields";
+export { priceGroupFormFields } from "./price-list-master/price-list-group-wise/priceGroupFormFields";
 
 export { localSourceFormFields } from "./local-source-master/local-source/localSourceFormFields";
 export { addPriceFormFields } from "./local-source-master/price-list/add-price-form-fields";
@@ -149,13 +149,13 @@ export * from "./price-list-master/actual-buyer/add-actual-buyer-type";
 
 // export * from "./price-list-master/price-list-for-clients/price-client-type";
 
-export * from "./price-list-master/price-list-group-wise/price-group-type";
+export * from "./price-list-master/price-list-group-wise/PriceGroupType";
 
 export * from "./price-list-master/std-price-list-client/add-std-price-client-type";
-export * from "./price-list-master/std-price-list-client/std-price-client-type";
+export * from "./price-list-master/std-price-list-client/CurrencyWisePriceType";
 
 export * from "./price-list-master/std-price-list-client/add-std-price-client-type";
-export * from "./price-list-master/std-price-list-client/std-price-client-type";
+export * from "./price-list-master/std-price-list-client/CurrencyWisePriceType";
 
 // Local Source
 
@@ -221,14 +221,14 @@ export * from "./location-master/city/add-update-city-type";
 export * from "./location-master/state/StateFormType";
 export * from "./location-master/continent/add-update-continent-type";
 export * from "./location-master/country/add-update-country-type";
-export * from "./price-list-master/price-list-group-wise/city-wise-group-type";
-export * from "./price-list-master/price-list-group-wise/group-wise-currency-type";
-export * from "./price-list-master/price-list-for-clients/currency-and-group-type";
+export * from "./price-list-master/price-list-group-wise/CityWiseGroupType";
+export * from "./price-list-master/price-list-group-wise/GroupWiseCurrencyType";
+export * from "./price-list-master/price-list-for-clients/CurrencyAndGroupType";
 export * from "./client-master/client-group/client-group-basedon-clientID-type";
-export * from "./price-list-master/price-list-group-wise/update-price-group-type";
+export * from "./price-list-master/price-list-group-wise/UpdatePriceListForGroupType";
 export * from "./price-list-master/std-price-list-client/update-standard-price-type";
 export * from "./local-source-master/std-price-list/update-ls-standard-price-type";
-export * from "./price-list-master/price-list-for-clients/client-wise-price-type";
+export * from "./price-list-master/price-list-for-clients/ClientWisePriceType";
 
 // Transaction master
 export * from "../transaction-search/enquiries/enquiry-list/EnquiriesType";

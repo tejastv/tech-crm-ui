@@ -102,7 +102,7 @@ const priceGroupCurrency2: FormFieldType = createFormConfig(
   {}
 );
 
-export const addPriceGroupFormFields = {
+export const priceGroupFormFields = {
   pricegroupcity,
   priceGroupSelect,
   priceGroupSelect2,

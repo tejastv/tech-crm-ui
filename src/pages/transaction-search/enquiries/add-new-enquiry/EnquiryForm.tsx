@@ -16,7 +16,7 @@ import {
   EnqueryFormType,
   EnqStatusType,
   ServiceType,
-  enqFormFields,
+  enquiryFormFields,
   useAddEnquiryApiCallHook,
   useEnquiriesApiCallHook,
   EnquiriesType,
@@ -120,14 +120,15 @@ export const EnquiryForm: React.FC = () => {
   };
 
   useEffect(() => {
-    // enqFormFields.enqtype.config.setData = "false";
-    if (enqFormFields.enqtype.config.options) {
-      const defaultenqTypeOption = enqFormFields.enqtype.config.options.find(
-        (option) => option.label === "NEW"
-      );
+    // enquiryFormFields.enqtype.config.setData = "false";
+    if (enquiryFormFields.enqtype.config.options) {
+      const defaultenqTypeOption =
+        enquiryFormFields.enqtype.config.options.find(
+          (option) => option.label === "NEW"
+        );
 
       if (defaultenqTypeOption) {
-        enqFormFields.enqtype.config.setData = defaultenqTypeOption;
+        enquiryFormFields.enqtype.config.setData = defaultenqTypeOption;
       }
     }
   }, []);
@@ -142,7 +143,7 @@ export const EnquiryForm: React.FC = () => {
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "cityId", "cityName", true);
-    enqFormFields.enqCity.config.options = options;
+    enquiryFormFields.enqCity.config.options = options;
   }
 
   const { data: stateData } = getState();
@@ -154,7 +155,7 @@ export const EnquiryForm: React.FC = () => {
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
-    enqFormFields.enqState.config.options = options;
+    enquiryFormFields.enqState.config.options = options;
   }
 
   const { data: countryData } = getCountry();
@@ -171,7 +172,7 @@ export const EnquiryForm: React.FC = () => {
       "countryId",
       "countryName"
     );
-    enqFormFields.enqCountry.config.options = options;
+    enquiryFormFields.enqCountry.config.options = options;
   }
 
   //  Client api call
@@ -185,7 +186,7 @@ export const EnquiryForm: React.FC = () => {
 
   if (clientOptions?.length) {
     let options = selectOptionsMaker(clientOptions, "clientID", "clientName");
-    enqFormFields.enqClient.config.options = options;
+    enquiryFormFields.enqClient.config.options = options;
   }
 
   //  Fyear  api call
@@ -199,7 +200,7 @@ export const EnquiryForm: React.FC = () => {
 
   if (finYearOptions?.length) {
     let options = selectOptionsMaker(finYearOptions, "finYear", "finYear");
-    enqFormFields.enqFinYear.config.options = options;
+    enquiryFormFields.enqFinYear.config.options = options;
   }
 
   //  Actual buyer api call
@@ -216,7 +217,7 @@ export const EnquiryForm: React.FC = () => {
       "partyId",
       "partyName"
     );
-    enqFormFields.enqActualBuyer.config.options = options;
+    enquiryFormFields.enqActualBuyer.config.options = options;
   }
 
   // Source api call
@@ -230,7 +231,7 @@ export const EnquiryForm: React.FC = () => {
 
   if (sourceOptions?.length) {
     let options = selectOptionsMaker(sourceOptions, "sourceID", "source");
-    enqFormFields.enqSource.config.options = options;
+    enquiryFormFields.enqSource.config.options = options;
   }
 
   // Local Source api call
@@ -248,7 +249,7 @@ export const EnquiryForm: React.FC = () => {
       "localSourceId",
       "localSource"
     );
-    enqFormFields.enqLocalSource.config.options = options;
+    enquiryFormFields.enqLocalSource.config.options = options;
   }
 
   // Company api call
@@ -267,7 +268,7 @@ export const EnquiryForm: React.FC = () => {
       "companyName",
       true
     );
-    enqFormFields.enqCompanyName.config.options = options;
+    enquiryFormFields.enqCompanyName.config.options = options;
   }
 
   // Service Type api call
@@ -285,7 +286,7 @@ export const EnquiryForm: React.FC = () => {
       "serviceTypeID",
       "serviceType"
     );
-    enqFormFields.enqServiceType.config.options = options;
+    enquiryFormFields.enqServiceType.config.options = options;
   }
 
   // enq Status api call
@@ -303,51 +304,54 @@ export const EnquiryForm: React.FC = () => {
       "enquiryStatusID",
       "enquiryStatus"
     );
-    enqFormFields.enqStatus.config.options = options;
+    enquiryFormFields.enqStatus.config.options = options;
   }
 
   const companyOnChangeHandler = (companyData: any) => {
     if (companyData.data) {
-      if (enqFormFields.enqGivenAddress.config.name == "givenAddress") {
+      if (enquiryFormFields.enqGivenAddress.config.name == "givenAddress") {
         setValue(
-          enqFormFields.enqGivenAddress.config.name,
+          enquiryFormFields.enqGivenAddress.config.name,
           companyData.data.address
         );
       }
-      if (enqFormFields.enqZip.config.name == "zip") {
-        setValue(enqFormFields.enqZip.config.name, companyData.data.zip);
+      if (enquiryFormFields.enqZip.config.name == "zip") {
+        setValue(enquiryFormFields.enqZip.config.name, companyData.data.zip);
       }
-      if (enqFormFields.enqTelePhone.config.name == "phone") {
+      if (enquiryFormFields.enqTelePhone.config.name == "phone") {
         setValue(
-          enqFormFields.enqTelePhone.config.name,
+          enquiryFormFields.enqTelePhone.config.name,
           companyData.data.phone
         );
       }
-      if (enqFormFields.enqFax.config.name == "fax") {
-        setValue(enqFormFields.enqFax.config.name, companyData.data.fax);
+      if (enquiryFormFields.enqFax.config.name == "fax") {
+        setValue(enquiryFormFields.enqFax.config.name, companyData.data.fax);
       }
-      if (enqFormFields.enqEmail.config.name == "email") {
-        setValue(enqFormFields.enqEmail.config.name, companyData.data.email);
-      }
-      if (enqFormFields.enqWebsite.config.name == "website") {
+      if (enquiryFormFields.enqEmail.config.name == "email") {
         setValue(
-          enqFormFields.enqWebsite.config.name,
+          enquiryFormFields.enqEmail.config.name,
+          companyData.data.email
+        );
+      }
+      if (enquiryFormFields.enqWebsite.config.name == "website") {
+        setValue(
+          enquiryFormFields.enqWebsite.config.name,
           companyData.data.website
         );
       }
-      if (enqFormFields.enqContact.config.name == "contactPerson") {
+      if (enquiryFormFields.enqContact.config.name == "contactPerson") {
         setValue(
-          enqFormFields.enqContact.config.name,
+          enquiryFormFields.enqContact.config.name,
           companyData.data.contactPerson
         );
       }
-      if (enqFormFields.enqDesignation.config.name == "designation") {
+      if (enquiryFormFields.enqDesignation.config.name == "designation") {
         setValue(
-          enqFormFields.enqDesignation.config.name,
+          enquiryFormFields.enqDesignation.config.name,
           companyData.data.designation
         );
       }
-      if (enqFormFields.enqCity.config.name == "cityId") {
+      if (enquiryFormFields.enqCity.config.name == "cityId") {
         let data = returnFormatedObjectElseEmptyArray(
           companyData.data.cityId,
           companyData.data,
@@ -355,11 +359,11 @@ export const EnquiryForm: React.FC = () => {
           "cityName"
         );
         data.length > 0 &&
-          setValue(enqFormFields.enqCity.config.name, data[0], {
+          setValue(enquiryFormFields.enqCity.config.name, data[0], {
             shouldValidate: true,
           });
       }
-      if (enqFormFields.enqState.config.name == "stateId") {
+      if (enquiryFormFields.enqState.config.name == "stateId") {
         let data = returnFormatedObjectElseEmptyArray(
           companyData.data.stateId,
           companyData.data,
@@ -367,11 +371,11 @@ export const EnquiryForm: React.FC = () => {
           "state"
         );
         data.length > 0 &&
-          setValue(enqFormFields.enqState.config.name, data[0], {
+          setValue(enquiryFormFields.enqState.config.name, data[0], {
             shouldValidate: true,
           });
       }
-      if (enqFormFields.enqCountry.config.name == "countryId") {
+      if (enquiryFormFields.enqCountry.config.name == "countryId") {
         let data = returnFormatedObjectElseEmptyArray(
           companyData.data.countryId,
           companyData.data,
@@ -379,7 +383,7 @@ export const EnquiryForm: React.FC = () => {
           "countryName"
         );
         data.length > 0 &&
-          setValue(enqFormFields.enqCountry.config.name, data[0], {
+          setValue(enquiryFormFields.enqCountry.config.name, data[0], {
             shouldValidate: true,
           });
       }
@@ -407,23 +411,23 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (refNo) {
-      if (enqFormFields.enqRefNo.config.name == "refNo") {
-        setValue(enqFormFields.enqRefNo.config.name, refNo);
+      if (enquiryFormFields.enqRefNo.config.name == "refNo") {
+        setValue(enquiryFormFields.enqRefNo.config.name, refNo);
       }
     }
   }, [refNo]);
 
   const getPriceHandler = () => {
     let obj: any = {};
-    if (enqFormFields.enqCountry.config.name === "countryId") {
-      obj["countryId"] = getValues(enqFormFields.enqCountry.config.name);
+    if (enquiryFormFields.enqCountry.config.name === "countryId") {
+      obj["countryId"] = getValues(enquiryFormFields.enqCountry.config.name);
     }
-    if (enqFormFields.enqClient.config.name === "clientID") {
-      obj["clientID"] = getValues(enqFormFields.enqClient.config.name);
+    if (enquiryFormFields.enqClient.config.name === "clientID") {
+      obj["clientID"] = getValues(enquiryFormFields.enqClient.config.name);
     }
-    if (enqFormFields.enqServiceType.config.name === "serviceTypeID") {
+    if (enquiryFormFields.enqServiceType.config.name === "serviceTypeID") {
       obj["serviceTypeID"] = getValues(
-        enqFormFields.enqServiceType.config.name
+        enquiryFormFields.enqServiceType.config.name
       );
     }
     if (obj.countryId && obj.clientID && obj.serviceTypeID) {
@@ -445,8 +449,8 @@ export const EnquiryForm: React.FC = () => {
   );
 
   if (priceData !== undefined) {
-    if (enqFormFields.enqPrice.config.name === "reportPrice") {
-      setValue(enqFormFields.enqPrice.config.name, priceData);
+    if (enquiryFormFields.enqPrice.config.name === "reportPrice") {
+      setValue(enquiryFormFields.enqPrice.config.name, priceData);
     }
   }
 
@@ -762,7 +766,7 @@ export const EnquiryForm: React.FC = () => {
         });
     }
     if (enqData?.pmtstatus) {
-      let data = enqFormFields.enqPrintStatusData[enqData.pmtstatus];
+      let data = enquiryFormFields.enqPrintStatusData[enqData.pmtstatus];
       data &&
         (enqFormData.pmtstatus = {
           label: data.label,
@@ -770,7 +774,7 @@ export const EnquiryForm: React.FC = () => {
         });
     }
     if (enqData?.typeofEnquiry) {
-      let data = enqFormFields.enqTypeData[enqData.typeofEnquiry];
+      let data = enquiryFormFields.enqTypeData[enqData.typeofEnquiry];
       data &&
         (enqFormData.typeofEnquiry = {
           label: data.label,
@@ -813,127 +817,127 @@ export const EnquiryForm: React.FC = () => {
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqCompanyName}
+                config={enquiryFormFields.enqCompanyName}
                 onChange={companyOnChangeHandler}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqFinYear}
+                config={enquiryFormFields.enqFinYear}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqRefNo}
+                config={enquiryFormFields.enqRefNo}
               />
               <small className="enquirynote text-right">
-                <InputWithText config={enqFormFields.enqRefNote.config} />
+                <InputWithText config={enquiryFormFields.enqRefNote.config} />
               </small>
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqSource}
+                config={enquiryFormFields.enqSource}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqGivenAddress}
+                config={enquiryFormFields.enqGivenAddress}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqCity}
+                config={enquiryFormFields.enqCity}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqState}
+                config={enquiryFormFields.enqState}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqCountry}
+                config={enquiryFormFields.enqCountry}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqZip}
+                config={enquiryFormFields.enqZip}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqTelePhone}
+                config={enquiryFormFields.enqTelePhone}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqFax}
+                config={enquiryFormFields.enqFax}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqEmail}
+                config={enquiryFormFields.enqEmail}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqWebsite}
+                config={enquiryFormFields.enqWebsite}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqContact}
+                config={enquiryFormFields.enqContact}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqDesignation}
+                config={enquiryFormFields.enqDesignation}
               />
             </div>
             <div className="col-md-6 col-xs-12">
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqClientRef}
+                config={enquiryFormFields.enqClientRef}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqClient}
+                config={enquiryFormFields.enqClient}
                 onChange={(e) => getClientValue(e.value)}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqRequestNo}
+                config={enquiryFormFields.enqRequestNo}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqClientId}
+                config={enquiryFormFields.enqClientId}
               />
               <Link to={""} className="card-title">
                 <InputWithText
-                  config={enqFormFields.enqActualBuyerAddNote.config}
+                  config={enquiryFormFields.enqActualBuyerAddNote.config}
                 />
               </Link>
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqActualBuyer}
+                config={enquiryFormFields.enqActualBuyer}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqServiceType}
+                config={enquiryFormFields.enqServiceType}
               />
               <div className="row mb-2 justify-content-end">
                 <div className="col-md-4 col-xs-12 text-right">
@@ -949,67 +953,67 @@ export const EnquiryForm: React.FC = () => {
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqPrice}
+                config={enquiryFormFields.enqPrice}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqGivenName}
+                config={enquiryFormFields.enqGivenName}
               />
               <NewDatePicker
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqRecdon}
+                config={enquiryFormFields.enqRecdon}
               />
               <NewDatePicker
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqDueOn}
+                config={enquiryFormFields.enqDueOn}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqtype}
+                config={enquiryFormFields.enqtype}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqLocalSource}
+                config={enquiryFormFields.enqLocalSource}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqPrintStatus}
+                config={enquiryFormFields.enqPrintStatus}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqStatus}
+                config={enquiryFormFields.enqStatus}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={enqFormFields.enqSvisit}
+                config={enquiryFormFields.enqSvisit}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqNotesForEnquiry}
+                config={enquiryFormFields.enqNotesForEnquiry}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqNotesForAdj}
+                config={enquiryFormFields.enqNotesForAdj}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqInstruction}
+                config={enquiryFormFields.enqInstruction}
               />
             </div>
             <div className="col-md-3 col-xs-12">
@@ -1018,7 +1022,7 @@ export const EnquiryForm: React.FC = () => {
                       <Link to={""} className="card-title">
                         <InputWithText
                           config={
-                            enqFormFields.enqActualBuyerAddNote
+                            enquiryFormFields.enqActualBuyerAddNote
                           }
                         />
                       </Link>
@@ -1028,35 +1032,35 @@ export const EnquiryForm: React.FC = () => {
                     </div> */}
               </div>
               {/* <NewInput errors={errors}
-                  register={register} config={enqFormFields.enqPrice} /> */}
+                  register={register} config={enquiryFormFields.enqPrice} /> */}
             </div>
             <div className="col-md-6 col-xs-12">
               {!isFetching && <Table config={tableConfig.config}></Table>}
             </div>
             <div className="card-title">
               <InputWithText
-                config={enqFormFields.enqDiscountCommissionNote.config}
+                config={enquiryFormFields.enqDiscountCommissionNote.config}
               />
             </div>
             <div className="col-3">
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqDis}
+                config={enquiryFormFields.enqDis}
               />
             </div>
             <div className="col-3">
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqDiscount}
+                config={enquiryFormFields.enqDiscount}
               />
             </div>
             <div className="col-3">
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqAdjust}
+                config={enquiryFormFields.enqAdjust}
               />
               <div className="row">
                 <div className="col-md-12 col-xs-12 text-right">
@@ -1070,12 +1074,12 @@ export const EnquiryForm: React.FC = () => {
               <NewInput
                 errors={errors}
                 register={register}
-                config={enqFormFields.enqReportComm}
+                config={enquiryFormFields.enqReportComm}
               />
             </div>
             <div className="card-title col-12">
               <InputWithText
-                config={enqFormFields.enqDiscountTypeNote.config}
+                config={enquiryFormFields.enqDiscountTypeNote.config}
               />
             </div>
           </div>
