@@ -741,7 +741,7 @@ const enqDiscountTypeNote: Note = createNoteConfig(
   "Discount Type - | % of Discount - | Discounted Value -"
 );
 
-export const enqFormFields = {
+export const enquiryFormFields = {
   enqCompanyName,
   enqFinYear,
   enqRefNo,

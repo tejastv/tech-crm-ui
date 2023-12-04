@@ -1,6 +1,6 @@
 // Company master child pages
 export { EnquiryForm } from "./enquiries/add-new-enquiry/EnquiryForm";
-export { enqFormFields } from "./enquiries/add-new-enquiry/enqFormFields";
+export { enquiryFormFields } from "./enquiries/add-new-enquiry/enquiryFormFields";
 
 export { Enquiries } from "./enquiries/enquiry-list/Enquiries";
 export { enqSearchFormFields } from "./enquiries/enquiry-list/EnquiriesSearchFormFields";
