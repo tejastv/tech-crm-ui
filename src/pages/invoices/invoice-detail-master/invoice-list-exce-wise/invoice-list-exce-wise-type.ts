@@ -1,11 +1,11 @@
 import { Options } from "@shared/index";
 
 export interface InvoiceListExceWiseType {
-  fyearField: Options;
-  fromdateField: string;
-  todateeField: string;
+  fYearField: Options;
+  fromDateField: string;
+  toDateField: string;
   cityField: Options;
-  ClientField: Options;
+  clientField: Options;
   allClientDatewiseField: string;
   specificClientDatewiseField: string;
 
