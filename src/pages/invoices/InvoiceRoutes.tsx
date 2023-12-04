@@ -6,6 +6,9 @@ const GenerateInvoiceMasterIndex = React.lazy(
   () => import("./generate-invoice-master/GenerateInvoiceMasterIndex")
 );
 
+const InvoiceDetailMasterIndex = React.lazy(
+  () => import("./invoice-detail-master/InvoiceDetailMasterIndex")
+);
 const InvoicesRoutes = () => {
   return (
     <Routes>
@@ -17,6 +20,17 @@ const InvoicesRoutes = () => {
         element={
           <React.Suspense>
             <GenerateInvoiceMasterIndex />
+          </React.Suspense>
+        }
+      ></Route>
+      <Route
+        path={
+          INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES
+            .INVOICE_DETAIL_MASTER_PERENT_ROUTE
+        }
+        element={
+          <React.Suspense>
+            <InvoiceDetailMasterIndex />
           </React.Suspense>
         }
       ></Route>

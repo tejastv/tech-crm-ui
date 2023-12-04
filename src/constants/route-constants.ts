@@ -218,4 +218,37 @@ export const INVOICE_ROUTES = {
     INVOICE_GENERATE_AUTO_GST: "invoice-generate-auto-gst",
     INVOICE_GENERATE_ACTUAL_BUYRE_GST: "invoice-generate-actual-buyre-gst",
   },
+
+  INVOICE_DETAIL_MASTER_ROUTES: {
+    INVOICE_DETAIL_MASTER_PERENT_ROUTE: "/invoice-detail-master/*",
+    INVOICE_DETAIL_MASTER_ROUTE: "invoice-detail-master/",
+
+    INVOICE_LIST_PARENT_ROUTE: "/invoice-list/*",
+    INVOICE_LIST: "invoice-list",
+
+    INVOICE_DETAIL_REPORT_PARENT_ROUTE: "/invoice-detail-report/*",
+    INVOICE_DETAIL_REPORT: "invoice-detail-report",
+
+    INVOICE_DETAIL_REPORT_PRO_PARENT_ROUTE: "/invoice-detail-report-pro/*",
+    INVOICE_DETAIL_REPORT_PRO: "invoice-detail-report-pro",
+
+    INVOICE_DETAIL_REPORT_GROUP_WISE_PARENT_ROUTE:
+      "/invoice-detail-report-group-wise/*",
+    INVOICE_DETAIL_REPORT_GROUP_WISE: "invoice-detail-report-group-wise",
+
+    INVOICE_LIST_TDS_PARENT_ROUTE: "/invoice-list-tds/*",
+    INVOICE_LIST_TDS: "invoice-list-tds",
+
+    INVOICE_LIST_SERVICE_TAX_PARENT_ROUTE: "/invoice-list-service-tax/*",
+    INVOICE_LIST_SERVICE_TAX: "invoice-list-service-tax",
+
+    INVOICE_LIST_PERFOMA_PARENT_ROUTE: "/invoice-list-perfoma/*",
+    INVOICE_LIST_PERFOMA: "invoice-list-perfoma",
+
+    INVOICE_LIST_EXCE_WISE_PARENT_ROUTE: "/invoice-list-exce-wise/*",
+    INVOICE_LIST_EXCE_WISE: "invoice-list-exce-wise",
+
+    INVOICE_SETTLED_PARENT_ROUTE: "/invoice-settled/*",
+    INVOICE_SETTLED_: "invoice-settled",
+  },
 };
