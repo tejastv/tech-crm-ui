@@ -1,14 +1,14 @@
 import { Options } from "@shared/index";
 
 export interface InvoiceListTdsType {
-  fyearField: Options;
-  fromdateField: string;
-  todateeField: string;
+  fYearField: Options;
+  fromDateField: string;
+  toDateField: string;
   cityField: Options;
-  ClientField: Options;
+  clientField: Options;
   allClientDatewiseField: string;
 
-  CurrencyField: string;
+  currencyField: string;
   invoicesField: string;
   tdsField: string;
   certiAmtField: string;
