@@ -8,16 +8,16 @@ const actionValidation = {
   },
 } as ValidationType;
 
-const clientValidation = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-  maxLength: {
-    value: 30,
-    message: "30 characters max",
-  },
-} as ValidationType;
+// const clientValidation = {
+//   required: {
+//     value: true,
+//     message: "{label} field is rquired",
+//   },
+//   maxLength: {
+//     value: 30,
+//     message: "30 characters max",
+//   },
+// } as ValidationType;
 
 const fromDateValidation = {
   required: {

@@ -102,7 +102,7 @@ export const Currency: React.FC = () => {
     config: {
       tableName: "Currency",
       columns: columns,
-      tableData: currencyData || [],
+      tableData: (currencyData && Object.values(currencyData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -123,7 +123,7 @@ export const Currency: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

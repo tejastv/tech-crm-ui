@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -16,6 +16,7 @@ import {
   useStdPriceApiCallHook,
   StdPriceType,
   useCurrencyApiCallHook,
+  CurrencyType,
 } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
@@ -45,12 +46,21 @@ export const StdPrice: React.FC = () => {
     useStdPriceApiCallHook();
   const { mutateAsync: updateStandardPrice } = updateStandardPriceMutation();
 
-  if (currencyData) {
-    addStdPriceFormFields.stdcurrencey.config.options = selectOptionsMaker(
-      currencyData,
+  const [currencyOption, setCurrencyOption] = useState<CurrencyType[]>();
+
+  useEffect(() => {
+    if (currencyData) {
+      setCurrencyOption(Object.values(currencyData));
+    }
+  }, [currencyData && Object.values(currencyData).length]);
+
+  if (currencyOption?.length) {
+    let options = selectOptionsMaker(
+      currencyOption,
       "currencyId",
-      "currencyInWord"
+      "currencyType"
     );
+    addStdPriceFormFields.stdcurrencey.config.options = options;
   }
 
   // const columns: ColumnDef<StdPriceType>[] = [

@@ -111,7 +111,7 @@ export const AddSupplier: React.FC = () => {
 
   if (CurrencyData) {
     addSupplierFormFields.CurrenceySupplier.config.options = selectOptionsMaker(
-      CurrencyData,
+      Object.values(CurrencyData),
       "currencyId",
       "currencyType"
     );
@@ -198,7 +198,7 @@ export const AddSupplier: React.FC = () => {
       if (CurrencyData) {
         let id = supplierMasterData?.currencyID;
         let data: any = returnObjectBasedOnID(
-          CurrencyData,
+          Object.values(CurrencyData),
           "currencyId",
           id,
           "currencyId",

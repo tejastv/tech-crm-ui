@@ -184,7 +184,7 @@ export const AddUpdateClient: React.FC = () => {
 
   useEffect(() => {
     if (currencyData) {
-      setCurrencyOptions(currencyData);
+      setCurrencyOptions(Object.values(currencyData));
     }
   }, [currencyData?.length]);
 

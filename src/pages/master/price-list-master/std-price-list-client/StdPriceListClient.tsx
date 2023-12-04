@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import {
@@ -12,6 +12,7 @@ import {
 } from "@shared/index";
 import {
   AddStdPriceClientsType,
+  CurrencyType,
   CurrencyWisePriceType,
   stdPriceClientsFormFields,
   useCurrencyApiCallHook,
@@ -52,9 +53,21 @@ export const StdPriceListClient: React.FC = () => {
     useStdPriceClientsApiCallHook();
   const { mutateAsync: updateStandardPrice } = updateStandardPriceMutation();
 
-  if (currencyData) {
-    stdPriceClientsFormFields.stdPriceClientCurrency.config.options =
-      selectOptionsMaker(currencyData, "currencyId", "currencyInWord");
+  const [currencyOption, setCurrencyOption] = useState<CurrencyType[]>();
+
+  useEffect(() => {
+    if (currencyData) {
+      setCurrencyOption(Object.values(currencyData));
+    }
+  }, [currencyData && Object.values(currencyData).length]);
+
+  if (currencyOption?.length) {
+    let options = selectOptionsMaker(
+      currencyOption,
+      "currencyId",
+      "currencyInWord"
+    );
+    stdPriceClientsFormFields.stdPriceClientCurrency.config.options = options;
   }
 
   let [tableData, setTableData] = useState({} as any);
