@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   ActionButtons,
   BorderLayout,
   Card,
-  Input,
-  Select,
+  NewInput,
+  NewSelect,
 } from "@shared/index";
 import {
-  AddUpdateLocalSourceType,
-  addLocalSrouceFormFields,
+  LocalSourceFormType,
+  localSourceFormFields,
   useLocalSourceApiCallHook,
   useCountryApiCallHook,
   useCurrencyApiCallHook,
@@ -20,8 +20,14 @@ import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
 import { returnObjectBasedOnID } from "@utils/returnObjectBasedOnID";
 
-export const AddUpdateLocalSource: React.FC = () => {
-  const methods = useForm<AddUpdateLocalSourceType>();
+export const LocalSourceForm: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm<LocalSourceFormType>();
   const params = useParams();
   const {
     addLocalSourceMutation,
@@ -59,16 +65,16 @@ export const AddUpdateLocalSource: React.FC = () => {
       "countryId",
       "countryName"
     );
-    addLocalSrouceFormFields.sourcecountryField.config.options = options;
+    localSourceFormFields.sourcecountryField.config.options = options;
   }
 
   const { data: currencyData, isSuccess: getCurrencySuccess } = getCurrency();
   if (currencyData) {
-    addLocalSrouceFormFields.localsourcecurrenceyField.config.options =
+    localSourceFormFields.localsourcecurrenceyField.config.options =
       selectOptionsMaker(currencyData, "currencyId", "currencyType");
   }
 
-  const onSubmit = methods.handleSubmit((localsourceData) => {
+  const onSubmit = handleSubmit((localsourceData) => {
     let data: any = { ...localsourceData };
     data.countryId = +data.countryId["value"];
     data.currencyId = +data.currencyId["value"];
@@ -100,14 +106,14 @@ export const AddUpdateLocalSource: React.FC = () => {
           "currencyId",
           "currencyType"
         );
-        addLocalSrouceFormFields.sourcecountryField.config.setData =
+        localSourceFormFields.sourcecountryField.config.setData =
           countrynamedata
             ? {
                 label: countrynamedata.label,
                 value: countrynamedata.value,
               }
             : [];
-        addLocalSrouceFormFields.localsourcecurrenceyField.config.setData =
+        localSourceFormFields.localsourcecurrenceyField.config.setData =
           currencydata
             ? {
                 label: currencydata.label,
@@ -115,69 +121,71 @@ export const AddUpdateLocalSource: React.FC = () => {
               }
             : [];
       }
-      addLocalSrouceFormFields.localSourceField.config.setData =
+      localSourceFormFields.localSourceField.config.setData =
         localsourceData.localSource;
-      addLocalSrouceFormFields.emailField.config.setData =
-        localsourceData.email;
-      addLocalSrouceFormFields.emailCCField.config.setData =
+      localSourceFormFields.emailField.config.setData = localsourceData.email;
+      localSourceFormFields.emailCCField.config.setData =
         localsourceData.emailCc;
     }
   } else {
     useEffect(() => {
-      methods.reset();
+      reset();
     }, []);
   }
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <Input
-                      config={addLocalSrouceFormFields.localSourceField.config}
-                    />
-                    <Input
-                      config={addLocalSrouceFormFields.emailField.config}
-                    />
-                    <Input
-                      config={addLocalSrouceFormFields.emailCCField.config}
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <Select
-                      config={
-                        addLocalSrouceFormFields.localsourcecurrenceyField
-                          .config
-                      }
-                    />
-                    <Select
-                      config={
-                        addLocalSrouceFormFields.sourcecountryField.config
-                      }
-                    />
-                  </div>
-                </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <div className="card-body">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={localSourceFormFields.localSourceField}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={localSourceFormFields.emailField}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={localSourceFormFields.emailCCField}
+                />
               </div>
-            </BorderLayout>
-            <div className="card-body">
-              <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-                <ActionButtons />
-              </BorderLayout>
             </div>
-          </form>
-        </FormProvider>
-      </Card>
-    </>
+            <div className="col-md-6 col-xs-12">
+              <div className="card-body">
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={localSourceFormFields.localsourcecurrenceyField}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={localSourceFormFields.sourcecountryField}
+                />
+              </div>
+            </div>
+          </div>
+        </BorderLayout>
+        <div className="card-body">
+          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <ActionButtons />
+          </BorderLayout>
+        </div>
+      </form>
+    </Card>
   );
 };

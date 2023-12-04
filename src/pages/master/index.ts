@@ -32,7 +32,7 @@ export { ActualBuyer } from "./price-list-master/actual-buyer/ActualBuyer";
 
 //Local Source
 // LocalSource Child Page
-export { AddUpdateLocalSource } from "./local-source-master/local-source/AddUpdateLocalSource";
+export { LocalSourceForm } from "./local-source-master/local-source/LocalSourceForm";
 export { LocalSource } from "./local-source-master/local-source/LocalSource";
 // Price List Child Page
 export { AddPrice } from "./local-source-master/price-list/AddPrice";
@@ -102,7 +102,7 @@ export { addStdPriceClientsFormFields } from "./price-list-master/std-price-list
 export { addActualBuyersFormFields } from "./price-list-master/actual-buyer/add-actual-buyer-form-fields";
 export { addPriceGroupFormFields } from "./price-list-master/price-list-group-wise/add-price-group-form-fields";
 
-export { addLocalSrouceFormFields } from "./local-source-master/local-source/add-localSource-form-fields";
+export { localSourceFormFields } from "./local-source-master/local-source/localSourceFormFields";
 export { addPriceFormFields } from "./local-source-master/price-list/add-price-form-fields";
 export { addStdPriceFormFields } from "./local-source-master/std-price-list/add-std-price-form-fields";
 // export * from "./local-source-master/features/form-fields/add-price";
@@ -159,8 +159,8 @@ export * from "./price-list-master/std-price-list-client/std-price-client-type";
 
 // Local Source
 
-export * from "./local-source-master/local-source/add-update-localSource-type";
-export * from "./local-source-master/local-source/localSource-type";
+export * from "./local-source-master/local-source/LocalSourceFormType";
+export * from "./local-source-master/local-source/LocalSourceType";
 
 export * from "./local-source-master/price-list/add-price-type";
 export * from "./local-source-master/price-list/price-type";

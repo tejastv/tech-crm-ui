@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { LocalSourceType, AddUpdateLocalSourceType } from "@master/index";
+import { LocalSourceType, LocalSourceFormType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType, MapType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -48,7 +48,7 @@ export const useLocalSourceApiCallHook = () => {
   };
 
   const addLocalSource = async (
-    localsourceData: AddUpdateLocalSourceType
+    localsourceData: LocalSourceFormType
   ): Promise<ApiResponseType<LocalSourceType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_LOCALSOURCE,
@@ -59,7 +59,7 @@ export const useLocalSourceApiCallHook = () => {
 
   const addLocalSourceMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateLocalSourceType) => addLocalSource(updatedItem),
+      (updatedItem: LocalSourceFormType) => addLocalSource(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -73,7 +73,7 @@ export const useLocalSourceApiCallHook = () => {
   };
 
   const updateLocalSourceData = async (
-    updateLocalSourceData: AddUpdateLocalSourceType
+    updateLocalSourceData: LocalSourceFormType
   ): Promise<ApiResponseType<LocalSourceType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_LOCALSOURCE.replace(
@@ -87,8 +87,7 @@ export const useLocalSourceApiCallHook = () => {
 
   const updateLocalSourceMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateLocalSourceType) =>
-        updateLocalSourceData(updatedItem),
+      (updatedItem: LocalSourceFormType) => updateLocalSourceData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

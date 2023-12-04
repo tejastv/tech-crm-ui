@@ -20,7 +20,7 @@ const EmailValidation = {
   pattern: {
     value:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      message: "Please Include an '@' and .com/in in the email address.",
+    message: "Please Include an '@' and .com/in in the email address.",
   },
 } as ValidationType;
 const EmailValidationCC = {
@@ -31,7 +31,7 @@ const EmailValidationCC = {
   pattern: {
     value:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      message: "Please Include an '@' and .com/in in the emailCC address.",
+    message: "Please Include an '@' and .com/in in the emailCC address.",
   },
 } as ValidationType;
 
@@ -126,7 +126,7 @@ const sourcecountryField: FormFieldType = {
     },
   },
 };
-export const addLocalSrouceFormFields = {
+export const localSourceFormFields = {
   localSourceField,
   emailField,
   emailCCField,
