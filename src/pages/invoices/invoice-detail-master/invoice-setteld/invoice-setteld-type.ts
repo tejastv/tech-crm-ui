@@ -1,17 +1,17 @@
 import { Options } from "@shared/index";
 
 export interface InvoiceListSetteldType {
-  fyearField: Options;
-  fromdateField: string;
-  todateeField: string;
+  fYearField: Options;
+  fromDateField: string;
+  toDateField: string;
   cityField: Options;
-  ClientField: Options;
+  clientField: Options;
   allClientDatewiseField: string;
 
-  CurrencyField: Options;
+  currencyField: Options;
 
   tdsField: string;
   totalAmountField: string;
   recivedField: string;
-  outstandingField: string;
+  outStandingField: string;
 }
