@@ -15,6 +15,7 @@ import {
   useCountryApiCallHook,
   useCurrencyApiCallHook,
   CountryType,
+  LocalSourceType,
 } from "@master/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
@@ -85,9 +86,10 @@ export const LocalSourceForm: React.FC = () => {
     }
   });
 
+  const { data: localsourceData, isSuccess: localsourceDataSuccess } =
+    getLocalSourceData("" + params.id, params.id != undefined);
+
   if (params.id) {
-    const { data: localsourceData, isSuccess: localsourceDataSuccess } =
-      getLocalSourceData("" + params.id);
     if (localsourceDataSuccess) {
       if (countryOptions && getCurrencySuccess) {
         let id = localsourceData?.countryId;
@@ -127,11 +129,39 @@ export const LocalSourceForm: React.FC = () => {
       localSourceFormFields.emailCCField.config.setData =
         localsourceData.emailCc;
     }
-  } else {
-    useEffect(() => {
-      reset();
-    }, []);
   }
+
+  const mapLocalSourceFromToLocalSource = (formUserData: LocalSourceFormType) => {
+    let localSourceData: Partial<LocalSourceType> = {
+      localSourceId: ;
+      localSource: ;
+      email: formUserData.email;
+      emailCc: formUserData.emailCc;
+      countryName: formUserData.;
+      currency: ;
+      currencyId: ;
+      countryId: ;
+    };
+    return localSourceData;
+  };
+
+  const mapUsertoFormUser = (userData: UserType) => {
+    let formUserData: Partial<FormUserType> = {
+      loginId: userData.user,
+      password: userData.password,
+      userName: userData.username,
+      userType: addUserFormFields.userTypeData[userData.usertype],
+    };
+    return formUserData;
+  };
+
+  useEffect(() => {
+    if (params.id) reset(mapUsertoFormUser(userData));
+  }, [params.id]);
+
+  useEffect(() => {
+    reset();
+  }, []);
 
   return (
     <Card config={cardConfig.formLayoutConfig}>

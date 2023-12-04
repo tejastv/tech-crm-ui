@@ -33,7 +33,7 @@ export const useLocalSourceApiCallHook = () => {
     });
   };
 
-  const getLocalSourceData = (id: string) => {
+  const getLocalSourceData = (id: string, condition: any) => {
     return useQuery<LocalSourceType>({
       queryKey: [queryKeys.LOCALSOURCE_DATA, id],
       queryFn: async () => {
@@ -42,7 +42,7 @@ export const useLocalSourceApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
