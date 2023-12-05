@@ -437,7 +437,31 @@ export const InvoiceGenerateGst: React.FC = () => {
           </BorderLayout>
           <div className="card-body">
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
+              <div className="row">
+                {/* <ActionButtons /> */}{" "}
+                <div className="col-md-3 col-xs-12"></div>
+                <div className="col-md-2 col-xs-12">
+                  <div className="col-md-14 col-xs-12 text-right">
+                    <Button type="button" className={"btn btn-danger btn-sm"}>
+                      Save Invoice
+                    </Button>
+                  </div>
+                </div>
+                <div className="col-md-2 col-xs-12">
+                  {/* <div className="col-md-14 col-xs-12"> */}
+                  <Button type="button" className={"btn btn-danger btn-sm"}>
+                    Save & Generate Invoice
+                  </Button>
+                  {/* </div> */}
+                </div>
+                <div className="col-md-2 col-xs-12">
+                  <div className="col-md-14 col-xs-12">
+                    <Button type="button" className={"btn btn-danger btn-sm"}>
+                      Cancel
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </BorderLayout>
           </div>
         </form>
