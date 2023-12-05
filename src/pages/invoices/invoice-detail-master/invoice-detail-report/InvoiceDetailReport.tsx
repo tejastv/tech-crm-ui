@@ -190,23 +190,24 @@ export const InvoiceDetailReport: React.FC = () => {
                       config={invoiceDetailReportFormFields.toDateField}
                     />
                   </div>
-                  <div className="col-md-12 col-xs-12">
+
+                  <div className="col-md-6 col-xs-12">
                     <NewSelect
                       errors={errors}
                       register={register}
                       control={control}
                       config={invoiceDetailReportFormFields.cityField}
                     />
-                    <div className="mb-2">
-                      <div className="col-md-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm "}
-                        >
-                          Get
-                        </Button>
-                      </div>
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button
+                        type="button"
+                        className={"btn btn-danger btn-sm "}
+                      >
+                        Get
+                      </Button>
                     </div>
+                  </div>
+                  <div className="col-md-6 col-xs-12">
                     <NewSelect
                       errors={errors}
                       register={register}
