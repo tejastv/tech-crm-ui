@@ -166,7 +166,7 @@ export const InvoiceGenerateGst: React.FC = () => {
         >
           <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
             <div className="row">
-              <div className="col-md-6 col-xs-12">
+              <div className="col-md-3 col-xs-12">
                 <NewSelect
                   errors={errors}
                   register={register}
@@ -174,113 +174,114 @@ export const InvoiceGenerateGst: React.FC = () => {
                   config={invoiceGenGstFormFields.clientField}
                 />
               </div>
-              <div className="col-md-6 col-xs-12">
+              <div className="col-md-3 col-xs-12">
                 <NewInput
                   errors={errors}
                   register={register}
                   config={invoiceGenGstFormFields.countryField}
                 />
               </div>
-              <div className="row">
-                <div className="col-md-4 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.currencyField}
-                  />
-                </div>
-                <div className="col-md-4 col-xs-12">
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={invoiceGenGstFormFields.stateField}
-                  />
-                </div>
-                <div className="col-md-4 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.gstnField}
-                  />
-                </div>
-                <div className="col-md-4">
-                  <NewCheckbox
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={invoiceGenGstFormFields.gstField}
-                  />
-                </div>
-                {/* // currency , Staste ad GST */}
+            </div>
+            <div className="row">
+              <div className="col-md-3 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={invoiceGenGstFormFields.currencyField}
+                />
               </div>
-              <hr />
-              <div className="row">
-                <div className="col-md-3 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.actualBuyreField}
-                  />
-                </div>
-                <div className="col-md-3 col-xs-12">
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={invoiceGenGstFormFields.stateActualBuyreField}
-                  />
-                </div>
-                <div className="col-md-3 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.gstnActualBuyreField}
-                  />
-                </div>
-                <div className="col-md-3 ">
-                  <NewCheckbox
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={invoiceGenGstFormFields.actualBuyreField}
-                  />
-                </div>
-                {/* // Actual Buyer , Staste ad GST */}
+              <div className="col-md-3 col-xs-12">
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={invoiceGenGstFormFields.stateField}
+                />
               </div>
-              {/* <div className="card-body"> */}
-              <hr />
-              <div className="row">
-                <div className="col-md-4 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.fromDateField}
-                  />
-                </div>
-                <div className="col-md-4 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.toDateField}
-                  />
-                </div>
-                {/* // From Date,ToDate View button */}
-                <div className="col-md-4 col-xs-12">
-                  <Button type="button" className={"btn btn-danger btn-sm"}>
-                    Get Enqires
-                  </Button>
-                </div>
-                {/* </div>   */}
+              <div className="col-md-3 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={invoiceGenGstFormFields.gstnField}
+                />
               </div>
+              <div className="col-md-3">
+                <NewCheckbox
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={invoiceGenGstFormFields.gstField}
+                />
+              </div>
+              {/* // currency , Staste ad GST */}
+            </div>
+            <hr />
+            <div className="row">
+              <div className="col-md-3 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={invoiceGenGstFormFields.actualBuyreField}
+                />
+              </div>
+              <div className="col-md-3 col-xs-12">
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={invoiceGenGstFormFields.stateActualBuyreField}
+                />
+              </div>
+              <div className="col-md-3 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={invoiceGenGstFormFields.gstnActualBuyreField}
+                />
+              </div>
+              <div className="col-md-3 ">
+                <NewCheckbox
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={invoiceGenGstFormFields.gstActualBuyreField}
+                />
+              </div>
+              {/* // Actual Buyer , Staste ad GST */}
+            </div>
+            {/* <div className="card-body"> */}
+            <hr />
+            <div className="row">
+              <div className="col-md-3 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={invoiceGenGstFormFields.fromDateField}
+                />
+              </div>
+              <div className="col-md-3 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={invoiceGenGstFormFields.toDateField}
+                />
+              </div>
+              {/* // From Date,ToDate View button */}
+              <div className="col-md-6 col-xs-12">
+                <Button type="button" className={"btn btn-danger btn-sm"}>
+                  Get Enqires
+                </Button>
+              </div>
+              {/* </div>   */}
+            </div>
 
-              {/* Table */}
-              <div className="col-md-12 col-xs-12">
-                <div className="card-body">
-                  <Table config={tableConfig.config}>null</Table>
-                </div>
+            {/* Table */}
+            <div className="col-md-12 col-xs-12">
+              <div className="card-body">
+                <Table config={tableConfig.config}>null</Table>
               </div>
-
+            </div>
+            <div className="row">
               <div className="col-md-5 col-xs-12">
                 <div className="card-body">
                   {/* <div className="col-sm-6 "> */}

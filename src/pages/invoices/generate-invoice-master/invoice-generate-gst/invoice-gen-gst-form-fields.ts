@@ -318,6 +318,14 @@ const actionOptiontwo: MapType<Options> = {
   new: { value: "y", label: "Do Not Compare Report with Invoice Date" },
 };
 
+const gstActionOption: MapType<Options> = {
+  new: { value: "y", label: "Gst Yes/No" },
+};
+
+const gstActualBuyreActionOption: MapType<Options> = {
+  new: { value: "y", label: "Gst Yes/No" },
+};
+
 const clientField: FormFieldType = {
   config: {
     name: "client",
@@ -428,17 +436,19 @@ const codeField: FormFieldType = createFormConfig(
 );
 const gstField: FormFieldType = createFormConfig(
   "gst",
-  "Gst Yes/No",
+  "",
   "text",
   gstValidation,
-  ""
+  "",
+  gstActionOption
 );
 const gstActualBuyreField: FormFieldType = createFormConfig(
   "gstActualBuyre",
-  "Gst Yes/No",
+  "",
   "text",
   gstValidation,
-  ""
+  "",
+  gstActualBuyreActionOption
 );
 
 const toDateField: FormFieldType = createFormConfig(
