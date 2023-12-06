@@ -35,10 +35,10 @@ const addressValidation = {
     value: false,
     message: "Please Enter Address",
   },
-  pattern: {
-    value: /^[\w\s\d#.,\-\/]+$/,
-    message: "Please use alphanumeric characters",
-  },
+  // pattern: {
+  //   value: /^[\w\s\d#.,\-\/]+$/,
+  //   message: "Please use alphanumeric characters",
+  // },
 } as ValidationType;
 
 const telNoValidation = {
@@ -46,10 +46,10 @@ const telNoValidation = {
     value: false,
     message: "Please Enter Telephone Number",
   },
-  pattern: {
-    value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
-    message: "Invalid telephone number. Please use Number.",
-  },
+  // pattern: {
+  //   value: /^\+?1?\s*\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
+  //   message: "Invalid telephone number. Please use Number.",
+  // },
 } as ValidationType;
 
 const FaxNoValidation = {
@@ -57,11 +57,11 @@ const FaxNoValidation = {
     value: false,
     message: "Please Enter Fax number",
   },
-  pattern: {
-    value: /^\+?[0-9\s\-()+.]*$/,
-    message:
-      "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
-  },
+  // pattern: {
+  //   value: /^\+?[0-9\s\-()+.]*$/,
+  //   message:
+  //     "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
+  // },
 } as ValidationType;
 
 const EmailValidation = {
@@ -69,11 +69,11 @@ const EmailValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value:
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    message: "Please Include an '@' and .com/in in the email address.",
-  },
+  // pattern: {
+  //   value:
+  //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  //   message: "Please Include an '@' and .com/in in the email address.",
+  // },
 } as ValidationType;
 
 const WebsiteValidation = {
@@ -81,10 +81,10 @@ const WebsiteValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
-    message: "website URL e.g., http://www.example.com",
-  },
+  // pattern: {
+  //   value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
+  //   message: "website URL e.g., http://www.example.com",
+  // },
 } as ValidationType;
 
 const ContactValidation = {
@@ -92,10 +92,10 @@ const ContactValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "{label} should be up to 30 characters max",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "{label} should be up to 30 characters max",
+  // },
 } as ValidationType;
 
 const DesignationValidation = {
@@ -103,10 +103,10 @@ const DesignationValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 50,
-    message: "Designation should be up to 50 characters long",
-  },
+  // maxLength: {
+  //   value: 50,
+  //   message: "Designation should be up to 50 characters long",
+  // },
 } as ValidationType;
 
 const ZipValidation = {
@@ -114,10 +114,10 @@ const ZipValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d{6}$/,
-    message: "Invalid ZIP code,Please enter a 6-digit number.",
-  },
+  // pattern: {
+  //   value: /^\d{6}$/,
+  //   message: "Invalid ZIP code,Please enter a 6-digit number.",
+  // },
 } as ValidationType;
 
 const CityValidation = {
@@ -125,10 +125,10 @@ const CityValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message: "Please select a {label}",
-  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 
 const StateValidation = {
@@ -136,10 +136,10 @@ const StateValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message: "Please select a {label}",
-  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 
 const CountryValidation = {
@@ -147,10 +147,10 @@ const CountryValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message: "Please select a {label}",
-  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 const CrDayValidation = {
   required: {
@@ -169,21 +169,21 @@ const ClientCurrencyValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message:
-      "Invalid currency format. Please use a valid currency code (e.g., USD).",
-  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message:
+  //     "Invalid currency format. Please use a valid currency code (e.g., USD).",
+  // },
 } as ValidationType;
 const ExecutiveValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Invalid Executive selection",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "Invalid Executive selection",
+  // },
 } as ValidationType;
 const InstructionValidation = {
   required: {
@@ -196,30 +196,30 @@ const GroupValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 50,
-    message: "Please select a {label}",
-  },
+  // maxLength: {
+  //   value: 50,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 const SegmentValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 50,
-    message: "Please select a {label}",
-  },
+  // maxLength: {
+  //   value: 50,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 const RemarksValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 50,
-    message: "Invalid Remarks",
-  },
+  // maxLength: {
+  //   value: 50,
+  //   message: "Invalid Remarks",
+  // },
 } as ValidationType;
 const InvoiceValidation = {
   required: {
@@ -256,60 +256,60 @@ const AdjustValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "{label} should be up to 30 characters max",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "{label} should be up to 30 characters max",
+  // },
 } as ValidationType;
 const BalAdjustValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Adjust is invalid",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "Adjust is invalid",
+  // },
 } as ValidationType;
 const AdjustEnqValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Adjust is invalid",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "Adjust is invalid",
+  // },
 } as ValidationType;
 const AdjustPropfomaValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Adjust is invalid",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "Adjust is invalid",
+  // },
 } as ValidationType;
 const BalAdjustPropfomaValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Adjust is invalid",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "Adjust is invalid",
+  // },
 } as ValidationType;
 const AdjustEnqPropfomaValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Adjust is invalid",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "Adjust is invalid",
+  // },
 } as ValidationType;
 
 // Option Section
