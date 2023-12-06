@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   BorderLayout,
@@ -48,6 +48,14 @@ import {
   returnFormatedObjectElseEmptyArray,
   selectOptionsMaker,
 } from "@utils/index";
+
+const priceMapper = {
+  1: "price", // Normal
+  2: "priceHighDel", // High
+  3: "priceOnline", // Online
+  4: "priceSuperFlash", // Superflash
+  6: "priceSME", // SME
+};
 
 export const EnquiryForm: React.FC = () => {
   const {
@@ -102,6 +110,10 @@ export const EnquiryForm: React.FC = () => {
     serviceTypeId: null,
     countryId: null,
   });
+
+  const countryRef = useRef(null);
+  const clientRef = useRef(null);
+  const serviceTypeRef = useRef(null);
 
   const cardConfig = {
     formLayoutConfig: {
@@ -414,14 +426,23 @@ export const EnquiryForm: React.FC = () => {
     let obj: any = {};
     if (enquiryFormFields.enqCountry.config.name === "countryId") {
       obj["countryId"] = getValues(enquiryFormFields.enqCountry.config.name);
+      if (!obj.countryId) {
+        return alert("Please select Country.");
+      }
     }
     if (enquiryFormFields.enqClient.config.name === "clientID") {
       obj["clientID"] = getValues(enquiryFormFields.enqClient.config.name);
+      if (!obj.clientID) {
+        return alert("Please select Client.");
+      }
     }
     if (enquiryFormFields.enqServiceType.config.name === "serviceTypeID") {
       obj["serviceTypeID"] = getValues(
         enquiryFormFields.enqServiceType.config.name
       );
+      if (!obj.serviceTypeID) {
+        return alert("Please select Service Type.");
+      }
     }
     if (obj.countryId && obj.clientID && obj.serviceTypeID) {
       setGetPriceFlag({ flag: true, ...obj });
@@ -435,7 +456,6 @@ export const EnquiryForm: React.FC = () => {
   const { data: priceData } = getPrice(
     {
       clientId: getPriceFlag.clientID?.value,
-      serviceTypeId: getPriceFlag.serviceTypeID?.value,
       countryId: getPriceFlag.countryId?.value,
     },
     getPriceFlag.flag
@@ -443,7 +463,11 @@ export const EnquiryForm: React.FC = () => {
 
   if (priceData !== undefined) {
     if (enquiryFormFields.enqPrice.config.name === "reportPrice") {
-      setValue(enquiryFormFields.enqPrice.config.name, priceData);
+      setValue(
+        enquiryFormFields.enqPrice.config.name,
+        // @ts-ignore
+        priceData[0][priceMapper[getPriceFlag.serviceTypeID?.value]]
+      );
     }
   }
 
@@ -855,6 +879,7 @@ export const EnquiryForm: React.FC = () => {
                 register={register}
                 control={control}
                 config={enquiryFormFields.enqCountry}
+                onChange={() => setValue("reportPrice", undefined)}
               />
               <NewInput
                 errors={errors}
@@ -903,7 +928,10 @@ export const EnquiryForm: React.FC = () => {
                 register={register}
                 control={control}
                 config={enquiryFormFields.enqClient}
-                onChange={(e) => getClientValue(e.value)}
+                onChange={(e) => {
+                  setValue("reportPrice", undefined);
+                  getClientValue(e.value);
+                }}
               />
               <NewInput
                 errors={errors}
