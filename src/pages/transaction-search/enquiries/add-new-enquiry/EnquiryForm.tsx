@@ -175,7 +175,6 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqCountry.config.options = options;
   }
 
-  //  Client api call
   const { data: clientData } = getClient();
 
   useEffect(() => {
@@ -189,7 +188,6 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqClient.config.options = options;
   }
 
-  //  Fyear  api call
   const { data: fYearData } = getFinYear();
 
   useEffect(() => {
@@ -203,7 +201,6 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqFinYear.config.options = options;
   }
 
-  //  Actual buyer api call
   const { data: actualBuyerData } = getActualBuyer();
   useEffect(() => {
     if (actualBuyerData) {
@@ -220,7 +217,6 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqActualBuyer.config.options = options;
   }
 
-  // Source api call
   const { data: sourceData } = getSource();
 
   useEffect(() => {
@@ -252,7 +248,6 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqLocalSource.config.options = options;
   }
 
-  // Company api call
   const { data: companyData } = getCompany();
 
   useEffect(() => {
@@ -271,7 +266,6 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqCompanyName.config.options = options;
   }
 
-  // Service Type api call
   const { data: serviceData } = getServiceType();
 
   useEffect(() => {
@@ -289,7 +283,6 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqServiceType.config.options = options;
   }
 
-  // enq Status api call
   const { data: enqStatusData } = getEnqStatus();
 
   useEffect(() => {

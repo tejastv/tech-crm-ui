@@ -12,10 +12,10 @@ const CompanyEnquiry = {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 characters max",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "30 characters max",
+  // },
 } as ValidationType;
 
 const YearEnquiry = {
@@ -23,20 +23,20 @@ const YearEnquiry = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[0-9]{4}$/,
-    message: "Invalid year format. Please enter a valid year (yyyy).",
-  },
+  // pattern: {
+  //   value: /^[0-9]{4}$/,
+  //   message: "Invalid year format. Please enter a valid year (yyyy).",
+  // },
 } as ValidationType;
 const refnoEnquiry = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 characters max",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "30 characters max",
+  // },
 } as ValidationType;
 
 const SourceEnquiry = {
@@ -44,10 +44,10 @@ const SourceEnquiry = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
-    message: "Select {label}",
-  },
+  // pattern: {
+  //   value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+  //   message: "Select {label}",
+  // },
 } as ValidationType;
 
 const GivenaddressValidation = {
@@ -55,10 +55,10 @@ const GivenaddressValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[\w\s\d#.,\-\/]+$/,
-    message: "Please use alphanumeric characters",
-  },
+  // pattern: {
+  //   value: /^[\w\s\d#.,\-\/]+$/,
+  //   message: "Please use alphanumeric characters",
+  // },
 } as ValidationType;
 
 const telNoEnquiryValidation = {
@@ -77,11 +77,11 @@ const FaxNoEnquiryValidation = {
     value: false,
     message: "Please Enter Fax number",
   },
-  pattern: {
-    value: /^\+?[0-9\s\-()+.]*$/,
-    message:
-      "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
-  },
+  // pattern: {
+  //   value: /^\+?[0-9\s\-()+.]*$/,
+  //   message:
+  //     "Invalid fax number. Please use a valid format like +123 456 7890 or (123) 456-7890.",
+  // },
 } as ValidationType;
 
 const EmailEnquiryValidation = {
@@ -89,11 +89,11 @@ const EmailEnquiryValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value:
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    message: "Please Include an '@' and .com/in in the email address.",
-  },
+  // pattern: {
+  //   value:
+  //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    //message: "Please Include an '@' and .com/in in the email address.",
+  // },
 } as ValidationType;
 
 const WebsiteEnquiryValidation = {
@@ -101,10 +101,10 @@ const WebsiteEnquiryValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
-    message: "website URL e.g., http://www.example.com",
-  },
+  // pattern: {
+  //   value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
+  //   message: "website URL e.g., http://www.example.com",
+  // },
 } as ValidationType;
 
 const ContactEnquiryValidation = {
@@ -112,10 +112,10 @@ const ContactEnquiryValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "{label} should be up to 30 characters max",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "{label} should be up to 30 characters max",
+  // },
 } as ValidationType;
 
 const DesignationEnquiryValidation = {
@@ -123,10 +123,10 @@ const DesignationEnquiryValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 50,
-    message: "Designation should be up to 50 characters long",
-  },
+  // maxLength: {
+  //   value: 50,
+  //   message: "Designation should be up to 50 characters long",
+  // },
 } as ValidationType;
 
 const ZipEnquiryValidation = {
@@ -145,10 +145,10 @@ const CityEnquiryValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message: "Please select a {label}",
-  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 
 const StateEnquiryValidation = {
@@ -156,10 +156,10 @@ const StateEnquiryValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message: "Please select a {label}",
-  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 
 const CountryEnquiryValidation = {
@@ -167,10 +167,10 @@ const CountryEnquiryValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message: "Please select a {label}",
-  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 
 // Right Field validation
@@ -185,170 +185,170 @@ const GivenNameEnquiryValidation = {
     value: true,
     message: "Given Name field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Given Name should not exceed 30 characters",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "Given Name should not exceed 30 characters",
+  // },
 } as ValidationType;
 const recdOnValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/,
-    message: "Invalid date format. Please enter a valid date (yyyy-mm-dd).",
-  },
+  // pattern: {
+  //   value: /^(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/,
+  //   message: "Invalid date format. Please enter a valid date (yyyy-mm-dd).",
+  // },
 } as ValidationType;
 const EnqValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message: "Please select a {label}",
-  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 const localsourceenquiryValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 50,
-    message: "Please select a {label}",
-  },
+  // maxLength: {
+  //   value: 50,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 const ServiceTypeValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 50,
-    message: "Please select a {label}",
-  },
+  // maxLength: {
+  //   value: 50,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 const DueOnValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/,
-    message: "Invalid date format. Please enter a valid date (yyyy-mm-dd).",
-  },
+  // pattern: {
+  //   value: /^(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/,
+  //   message: "Invalid date format. Please enter a valid date (yyyy-mm-dd).",
+  // },
 } as ValidationType;
 const PrintStatusValidationValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 50,
-    message: "Please select a {label}",
-  },
+  // maxLength: {
+  //   value: 50,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 const NotesforEnqValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 50,
-    message: "50 characters max",
-  },
+  // maxLength: {
+  //   value: 50,
+  //   message: "50 characters max",
+  // },
 } as ValidationType;
 const EnqStatusValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 50,
-    message: "Please select a {label}",
-  },
+  // maxLength: {
+  //   value: 50,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 const svisitValidation = {
   required: {
     value: false,
     message: "Please select a {label}",
   },
-  maxLength: {
-    value: 50,
-    message: "Please select a {label}",
-  },
+  // maxLength: {
+  //   value: 50,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 const NotesForAdjValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "{label} should be up to 30 characters max",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "{label} should be up to 30 characters max",
+  // },
 } as ValidationType;
 const instructionEnquiryValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Adjust is invalid",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "Adjust is invalid",
+  // },
 } as ValidationType;
 const AdjustEnqValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Adjust is invalid",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "Adjust is invalid",
+  // },
 } as ValidationType;
 const ClientRefEnquiryValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 charaters Max",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "30 charaters Max",
+  // },
 } as ValidationType;
 const ClientEnquiryValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Select {label}",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "Select {label}",
+  // },
 } as ValidationType;
 const RequestNoValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 max Chearcter",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "30 max Chearcter",
+  // },
 } as ValidationType;
 const ClientIdEnquiryValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 max Chearcter",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "30 max Chearcter",
+  // },
 } as ValidationType;
 
 const ActualBuyerEnquiryValidation = {
@@ -356,10 +356,10 @@ const ActualBuyerEnquiryValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "Select {label}",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "Select {label}",
+  // },
 } as ValidationType;
 
 const PriceeEnquiryEnquiryValidation = {
@@ -367,40 +367,40 @@ const PriceeEnquiryEnquiryValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 max Chearcter",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "30 max Chearcter",
+  // },
 } as ValidationType;
 const DisEnquiryValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 max Chearcter",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "30 max Chearcter",
+  // },
 } as ValidationType;
 const DiscountEnquiryValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 max Chearcter",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "30 max Chearcter",
+  // },
 } as ValidationType;
 const CommEnquiryValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 max Chearcter",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "30 max Chearcter",
+  // },
 } as ValidationType;
 
 const enqCompanyName: FormFieldType = createFormConfig(
