@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   BorderLayout,
   Button,
   Card,
   Loader,
-  Select,
+  NewSelect,
+  // Select,
   Table,
   TableType,
 } from "@shared/index";
@@ -38,7 +39,11 @@ export const StdPrice: React.FC = () => {
     },
   };
 
-  const methods = useForm<AddUpdateStdPriceType>();
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = useForm<AddUpdateStdPriceType>();
   const [currency, setCurrency] = useState("0");
   const { getCurrency } = useCurrencyApiCallHook();
   const { data: currencyData } = getCurrency();
@@ -347,33 +352,34 @@ export const StdPrice: React.FC = () => {
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form noValidate autoComplete="off" className="p-t-20">
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <div className="row">
-                <div className="col-4 pull-right">
-                  <Select
-                    config={addStdPriceFormFields.stdcurrencey.config}
-                    onChangeHandler={handleSelectChange}
-                  />
+        <form noValidate autoComplete="off" className="p-t-20">
+          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <div className="row">
+              <div className="col-4 pull-right">
+                <NewSelect
+                  config={addStdPriceFormFields.stdcurrencey}
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  onChange={handleSelectChange}
+                />
+              </div>
+            </div>
+            {currency !== "0" && (
+              <div className="row m-6 justify-content-end">
+                <div className="col-mt- col-xs-12 text-end">
+                  <Button
+                    type="button"
+                    onClick={onDataEditClick}
+                    className={"btn btn-danger btn-sm"}
+                  >
+                    <i className="far fa-save"></i> Save
+                  </Button>
                 </div>
               </div>
-              {currency !== "0" && (
-                <div className="row m-6 justify-content-end">
-                  <div className="col-mt- col-xs-12 text-end">
-                    <Button
-                      type="button"
-                      onClick={onDataEditClick}
-                      className={"btn btn-danger btn-sm"}
-                    >
-                      <i className="far fa-save"></i> Save
-                    </Button>
-                  </div>
-                </div>
-              )}
-            </BorderLayout>
-          </form>
-        </FormProvider>
+            )}
+          </BorderLayout>
+        </form>
         <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
           {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
         </BorderLayout>
