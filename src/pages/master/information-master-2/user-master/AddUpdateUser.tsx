@@ -5,16 +5,20 @@ import {
   ActionButtons,
   BorderLayout,
   Card,
+  Table,
   NewInput,
   NewSelect,
+  TableType,
 } from "@shared/index";
 import {
   FormUserType,
   UserType,
+  UserRightsType,
   addUserFormFields,
   useUserApiCallHook,
 } from "@master/index";
 import { useLocation, useParams } from "react-router-dom";
+import { ColumnDef } from "@tanstack/react-table";
 
 export const AddUpdateUser: React.FC = () => {
   const params = useParams();
@@ -30,6 +34,53 @@ export const AddUpdateUser: React.FC = () => {
     },
     formTableConfig: {
       heading: "Set User Rights",
+    },
+  };
+
+  const columns: ColumnDef<UserRightsType>[] = [
+    {
+      id: "srNo",
+      cell: (info) => info.getValue(),
+      header: () => <>Sr. No</>,
+    },
+    {
+      accessorFn: (row) => row.mainMenu,
+      id: "mainMenu",
+      cell: (info) => info.getValue(),
+      header: () => <>Main Menu</>,
+    },
+    {
+      accessorFn: (row) => row.subMenu,
+      id: "subMenu",
+      cell: (info) => info.getValue(),
+      header: () => <>Sub Menu</>,
+    },
+    {
+      accessorFn: (row) => row.rights,
+      id: "rights",
+      cell: (info) => info.getValue(),
+      header: () => <>Rights</>,
+    },
+  ];
+
+  const tableConfig: TableType<UserRightsType> = {
+    config: {
+      tableName: "User Rights Master",
+      columns: columns,
+      tableData: userData || [],
+      copyBtn: false,
+      csvBtn: false,
+      excelBtn: false,
+      pdfBtn: false,
+      printBtn: false,
+      globalSearchBox: false,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: true,
+        tableMetaDataShow: true,
+      },
+      // onDeleteClick: deleteUserClick,
+      // onEditClick: editUserClick,
     },
   };
 
@@ -114,7 +165,7 @@ export const AddUpdateUser: React.FC = () => {
             </div>
           </div>
           <BorderLayout heading={cardConfig.formTableConfig.heading}>
-            {/* <Table/> */}
+            <Table config={tableConfig.config} />
           </BorderLayout>
         </BorderLayout>
         <BorderLayout heading={cardConfig.formActionsConfig.heading}>
