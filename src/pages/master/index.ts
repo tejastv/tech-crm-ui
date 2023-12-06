@@ -104,7 +104,7 @@ export { priceGroupFormFields } from "./price-list-master/price-list-group-wise/
 
 export { localSourceFormFields } from "./local-source-master/local-source/localSourceFormFields";
 export { addPriceFormFields } from "./local-source-master/price-list/add-price-form-fields";
-export { addStdPriceFormFields } from "./local-source-master/std-price-list/add-std-price-form-fields";
+export { stdPriceFormFields } from "./local-source-master/std-price-list/stdPriceFormFields";
 // export * from "./local-source-master/features/form-fields/add-price";
 // export * from "./local-source-master/features/form-fields/add-std-price";
 
@@ -166,7 +166,7 @@ export * from "./local-source-master/price-list/add-price-type";
 export * from "./local-source-master/price-list/price-type";
 
 export * from "./local-source-master/std-price-list/add-update-std-price-type";
-export * from "./local-source-master/std-price-list/std-price-type";
+export * from "./local-source-master/std-price-list/StdPriceType";
 
 export * from "./information-master/bank-master-deposit/add-update-bankdeposit-type";
 export * from "./information-master/bank-master-deposit/bankdeposit-type";
@@ -227,7 +227,7 @@ export * from "./price-list-master/price-list-for-clients/CurrencyAndGroupType";
 export * from "./client-master/client-group/client-group-basedon-clientID-type";
 export * from "./price-list-master/price-list-group-wise/UpdatePriceListForGroupType";
 export * from "./price-list-master/std-price-list-client/update-standard-price-type";
-export * from "./local-source-master/std-price-list/update-ls-standard-price-type";
+export * from "./local-source-master/std-price-list/UpdateLsStandardPriceType";
 export * from "./price-list-master/price-list-for-clients/ClientWisePriceType";
 
 // Transaction master

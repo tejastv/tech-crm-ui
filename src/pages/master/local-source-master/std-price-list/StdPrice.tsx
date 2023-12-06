@@ -7,13 +7,12 @@ import {
   Card,
   Loader,
   NewSelect,
-  // Select,
   Table,
   TableType,
 } from "@shared/index";
 import {
   AddUpdateStdPriceType,
-  addStdPriceFormFields,
+  stdPriceFormFields,
   useStdPriceApiCallHook,
   StdPriceType,
   useCurrencyApiCallHook,
@@ -65,52 +64,8 @@ export const StdPrice: React.FC = () => {
       "currencyId",
       "currencyType"
     );
-    addStdPriceFormFields.stdcurrencey.config.options = options;
+    stdPriceFormFields.stdcurrencey.config.options = options;
   }
-
-  // const columns: ColumnDef<StdPriceType>[] = [
-  //   {
-  //     id: "srNo",
-  //     cell: (info) => info.getValue(),
-  //     header: () => <>Sr no</>,
-  //   },
-  //   {
-  //     accessorFn: (row) => row.countryID,
-  //     id: "countryId",
-  //     cell: (info) => info.getValue(),
-  //     header: () => <>Country Id</>,
-  //   },
-  //   {
-  //     accessorFn: (row) => row.countryName,
-  //     id: "country",
-  //     cell: (info) => info.getValue(),
-  //     header: () => <>Country Name</>,
-  //   },
-  //   {
-  //     accessorFn: (row) => row.price,
-  //     id: "price",
-  //     cell: (info) => info.getValue(),
-  //     header: () => <>Normal Price</>,
-  //   },
-  //   {
-  //     accessorFn: (row) => row.priceHighDel,
-  //     id: "priceHighDel",
-  //     cell: (info) => info.getValue(),
-  //     header: () => <>High Del Price</>,
-  //   },
-  //   {
-  //     accessorFn: (row) => row.priceOnline,
-  //     id: "on-line",
-  //     cell: (info) => info.getValue(),
-  //     header: () => <>On-Line</>,
-  //   },
-  //   {
-  //     accessorFn: (row) => row.priceSuperflash,
-  //     id: "superflash",
-  //     cell: (info) => info.getValue(),
-  //     header: () => <>Superflash</>,
-  //   },
-  // ];
 
   const [tableData, setTableData] = useState({} as any);
 
@@ -308,7 +263,7 @@ export const StdPrice: React.FC = () => {
     // table.options.meta?.updateData(index, id, value);
   };
 
-  const onDataEditClick = () => {
+  const onSaveAllHandler = () => {
     let cellData: any = Object.values(tableData);
     if (cellData.length > 0) {
       cellData[0]["currency_id"] = +currency;
@@ -350,40 +305,36 @@ export const StdPrice: React.FC = () => {
   };
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <form noValidate autoComplete="off" className="p-t-20">
-          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-            <div className="row">
-              <div className="col-4 pull-right">
-                <NewSelect
-                  config={addStdPriceFormFields.stdcurrencey}
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  onChange={handleSelectChange}
-                />
-              </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form noValidate autoComplete="off" className="p-t-20">
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <div className="row">
+            <div className="col-4 pull-right">
+              <NewSelect
+                config={stdPriceFormFields.stdcurrencey}
+                errors={errors}
+                register={register}
+                control={control}
+                onChange={handleSelectChange}
+              />
             </div>
-            {currency !== "0" && (
-              <div className="row m-6 justify-content-end">
-                <div className="col-mt- col-xs-12 text-end">
-                  <Button
-                    type="button"
-                    onClick={onDataEditClick}
-                    className={"btn btn-danger btn-sm"}
-                  >
-                    <i className="far fa-save"></i> Save
-                  </Button>
-                </div>
-              </div>
-            )}
-          </BorderLayout>
-        </form>
-        <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-          {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+          </div>
+          <div className="row m-6 justify-content-end">
+            <div className="col-mt- col-xs-12 text-end">
+              <Button
+                type="button"
+                onClick={onSaveAllHandler}
+                className={"btn btn-danger btn-sm"}
+              >
+                <i className="far fa-save"></i> Save All
+              </Button>
+            </div>
+          </div>
         </BorderLayout>
-      </Card>
-    </>
+      </form>
+      <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+      </BorderLayout>
+    </Card>
   );
 };

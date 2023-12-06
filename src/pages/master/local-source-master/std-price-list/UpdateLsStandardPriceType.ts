@@ -1,4 +1,4 @@
-export interface UpdateLsStandardPrice {
+export interface UpdateLsStandardPriceType {
   currency_id?: number;
   countryId: number;
   price: number;

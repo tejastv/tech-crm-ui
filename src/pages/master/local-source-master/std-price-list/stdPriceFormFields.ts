@@ -21,6 +21,6 @@ const stdcurrencey: FormFieldType = createFormConfig(
   {}
 );
 
-export const addStdPriceFormFields = {
+export const stdPriceFormFields = {
   stdcurrencey,
 };
