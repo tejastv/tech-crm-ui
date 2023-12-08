@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import {
-  AddUpdateClientType,
+  ClientFormType,
   CityType,
   ClientGroupType,
   CountryType,
@@ -41,7 +41,7 @@ import {
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
 
-export const AddUpdateClient: React.FC = () => {
+export const ClientForm: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -49,7 +49,7 @@ export const AddUpdateClient: React.FC = () => {
     control,
     setValue,
     formState: { errors },
-  } = useForm<AddUpdateClientType>();
+  } = useForm<ClientFormType>();
   const params = useParams();
 
   const { addClientMutation, updateClientMutation, getClientData } =

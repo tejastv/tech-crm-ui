@@ -3,14 +3,14 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
-  AddBankdrawnonType,
-  addBankdrawnonFormFields,
+  BankDrawnOnFormType,
+  bankDrawnOnFormFields,
   useBankMasterDrawnApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-export const AddBankMasterDrawn: React.FC = () => {
-  const methods = useForm<AddBankdrawnonType>();
+export const BankMasterDrawnForm: React.FC = () => {
+  const methods = useForm<BankDrawnOnFormType>();
 
   const {
     addBankMasterDrawnOnMutation,
@@ -18,7 +18,8 @@ export const AddBankMasterDrawn: React.FC = () => {
     updateBankMasterDrawnOnMutation,
   } = useBankMasterDrawnApiCallHook();
   const { mutateAsync: addBankMasterDrawnOn } = addBankMasterDrawnOnMutation();
-  const { mutateAsync: updateBankMasterDrawnOn } = updateBankMasterDrawnOnMutation();
+  const { mutateAsync: updateBankMasterDrawnOn } =
+    updateBankMasterDrawnOnMutation();
   const params = useParams();
 
   const cardConfig = {
@@ -48,7 +49,7 @@ export const AddBankMasterDrawn: React.FC = () => {
     console.log(params.id);
 
     if (BankMasterDrawnDataSuccess) {
-      addBankdrawnonFormFields.bankdrawn.config.setData =
+      bankDrawnOnFormFields.bankdrawn.config.setData =
         BankMasterDrawnData?.bankName;
     }
   } else {
@@ -78,7 +79,7 @@ export const AddBankMasterDrawn: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={addBankdrawnonFormFields.bankdrawn.config} />
+                  <Input config={bankDrawnOnFormFields.bankdrawn.config} />
                 </div>
               </div>
             </BorderLayout>

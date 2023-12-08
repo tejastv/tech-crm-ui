@@ -1,4 +1,4 @@
-export interface AddUpdateCompanyType {
+export interface CompanyFormType {
   id?: string;
   address: string;
   bankers: string;

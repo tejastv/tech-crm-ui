@@ -136,7 +136,7 @@ const sDateField: FormFieldType = createFormConfig(
   formattedDate
 );
 
-export const addCurrencyFormFields = {
+export const currencyFormFields = {
   currencyField,
   symbolField,
   currencyWordField,

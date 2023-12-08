@@ -1,4 +1,4 @@
-export interface AddUpdateClientType {
+export interface ClientFormType {
   id?: number;
   clientID: number;
   ourRefNo: string;

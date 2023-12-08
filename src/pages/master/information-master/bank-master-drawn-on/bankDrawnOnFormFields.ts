@@ -19,6 +19,6 @@ const bankdrawn: FormFieldType = createFormConfig(
   "Bank Drawn"
 );
 
-export const addBankdrawnonFormFields = {
+export const bankDrawnOnFormFields = {
   bankdrawn,
 };

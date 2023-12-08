@@ -36,7 +36,7 @@ const bankDepositAc: FormFieldType = createFormConfig(
   "Bank Deposit A/C No."
 );
 
-export const addBankDepositeFormFields = {
+export const bankDepositeFormFields = {
   bankdeposit,
   bankDepositAc,
 };

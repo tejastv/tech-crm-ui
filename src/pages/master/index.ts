@@ -1,10 +1,10 @@
 // Company master child pages
-export { AddUpdateCompany } from "./company/AddUpdateCompany";
+export { CompanyForm } from "./company/CompanyForm";
 export { CompanyMaster } from "./company/Company";
 
 // Client master child pages
 export { Client } from "./client-master/client/Client";
-export { AddUpdateClient } from "./client-master/client/AddUpdateClient";
+export { ClientForm } from "./client-master/client/ClientForm";
 
 // Client Segment master child pages
 export { GroupMaster } from "./client-master/client-group/ClientGroup";
@@ -47,19 +47,19 @@ export { AddUpdateContinent } from "./location-master/continent/AddUpdateContine
 export { Continent } from "./location-master/continent/Continent";
 
 //BankMasterDeposit master child pages
-export { AddBankMasterDeposit } from "./information-master/bank-master-deposit/AddUpdateBankDeposit";
+export { BankMasterDepositForm } from "./information-master/bank-master-deposit/BankMasterDepositForm";
 export { BankMasterDeposit } from "./information-master/bank-master-deposit/BankDeposit";
 
 export { AddPaymentMode } from "./information-master/payment-mode/AddPaymentMode";
 export { PaymentMode } from "./information-master/payment-mode/PaymentMode";
 
-export { AddUpdateCurrency } from "./information-master/currency/AddUpdateCurrency";
+export { CurrencyForm } from "./information-master/currency/CurrencyForm";
 export { Currency } from "./information-master/currency/Currency";
 export { AddUpdateSource } from "./information-master/source/AddUpdateSource";
 export { Source } from "./information-master/source/Source";
 export { AddSupplier } from "./information-master/supplier-master/AddUpdateSupplier";
 export { Supplier } from "./information-master/supplier-master/Supplier";
-export { AddBankMasterDrawn } from "./information-master/bank-master-drawn-on/AddUpdateBankDrawn";
+export { BankMasterDrawnForm } from "./information-master/bank-master-drawn-on/BankMasterDrawnForm";
 export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankDrawn";
 
 // Information Master 2
@@ -95,7 +95,7 @@ export { addCityFormFields } from "./location-master/city/add-city-form-fields";
 export { addClientGroupFormFields } from "./client-master/client-group/addClientGroupFormFields";
 export { addSegmentFormFields } from "./client-master/segment/add-segment-form-fields";
 
-export { addCompanyFormFields } from "./company/add-update-company-form-fields";
+export { companyFormFields } from "./company/companyFormFields";
 
 export { priceClientFormFields } from "./price-list-master/price-list-for-clients/priceClientFormFields";
 export { stdPriceClientsFormFields } from "./price-list-master/std-price-list-client/add-std-price-client-form-fields";
@@ -111,12 +111,12 @@ export { stdPriceFormFields } from "./local-source-master/std-price-list/stdPric
 export { addCoutryFormFields } from "./location-master/country/add-country-form-fields";
 export { addContinentFormFields } from "./location-master/continent/add-continent-form-fields";
 
-export { addBankDepositeFormFields } from "./information-master/bank-master-deposit/add-bankdeposit-form-fields";
+export { bankDepositeFormFields } from "./information-master/bank-master-deposit/bankDepositeFormFields";
 export { addPaymentModeFormFields } from "./information-master/payment-mode/add-paymentmode-form-fileds";
 export { addSourceFormFields } from "./information-master/source/add-source-form-fields";
-export { addBankdrawnonFormFields } from "./information-master/bank-master-drawn-on/add-bankdrawnon-form-fields";
+export { bankDrawnOnFormFields } from "./information-master/bank-master-drawn-on/bankDrawnOnFormFields";
 export { addSupplierFormFields } from "./information-master/supplier-master/add-supplier-form-fields";
-export { addCurrencyFormFields } from "./information-master/currency/add-currency-form-fields";
+export { currencyFormFields } from "./information-master/currency/currencyFormFields";
 
 export { addIndustryFormFields } from "./information-master-2/industry/add-industry-form-fields";
 export { addCallTypeFormFields } from "./information-master-2/call-type/add-calltype-form-fields";
@@ -130,12 +130,12 @@ export { addUserFormFields } from "./information-master-2/user-master/UserFormFi
 // Models
 
 // company master
-export * from "./company/add-update-company-type";
-export * from "./company/company-type";
+export * from "./company/CompanyFormType";
+export * from "./company/CompanyType";
 
 // client master
-export * from "./client-master/client/client-type";
-export * from "./client-master/client/add-client-type";
+export * from "./client-master/client/ClientType";
+export * from "./client-master/client/ClientFormType";
 
 export * from "./client-master/client-group/ClientGroupFormType";
 export * from "./client-master/client-group/ClientGroupType";
@@ -168,14 +168,14 @@ export * from "./local-source-master/price-list/price-type";
 export * from "./local-source-master/std-price-list/add-update-std-price-type";
 export * from "./local-source-master/std-price-list/StdPriceType";
 
-export * from "./information-master/bank-master-deposit/add-update-bankdeposit-type";
-export * from "./information-master/bank-master-deposit/bankdeposit-type";
+export * from "./information-master/bank-master-deposit/BankDepositFormType";
+export * from "./information-master/bank-master-deposit/BankDepositType";
 
-export * from "./information-master/bank-master-drawn-on/add-update-bankdrawnon-type";
-export * from "./information-master/bank-master-drawn-on/bankdrawnon-type";
+export * from "./information-master/bank-master-drawn-on/BankDrawnOnFormType";
+export * from "./information-master/bank-master-drawn-on/BankdrawnonType";
 
-export * from "./information-master/currency/add-update-currency-type";
-export * from "./information-master/currency/currency-type";
+export * from "./information-master/currency/CurrencyFormType";
+export * from "./information-master/currency/CurrencyType";
 
 export * from "./information-master/payment-mode/add-paymentmode-type";
 export * from "./information-master/payment-mode/paymentmode-type";

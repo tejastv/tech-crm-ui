@@ -8,14 +8,14 @@ import {
   ActionButtons,
 } from "@shared/index";
 import {
-  addCurrencyFormFields,
-  AddUpdateCurrencyType,
+  currencyFormFields,
+  CurrencyFormType,
   useCurrencyApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-export const AddUpdateCurrency: React.FC = () => {
-  const methods = useForm<AddUpdateCurrencyType>();
+export const CurrencyForm: React.FC = () => {
+  const methods = useForm<CurrencyFormType>();
   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } =
     useCurrencyApiCallHook();
   const { mutateAsync: addCurrency } = addCurrencyMutation();
@@ -51,18 +51,18 @@ export const AddUpdateCurrency: React.FC = () => {
     const { data: currencyData, isSuccess: currencyDataSuccess } =
       getCurrencyData("" + params.id);
     if (currencyDataSuccess) {
-      addCurrencyFormFields.currencyField.config.setData =
+      currencyFormFields.currencyField.config.setData =
         currencyData?.currencyType;
-      addCurrencyFormFields.symbolField.config.setData =
+      currencyFormFields.symbolField.config.setData =
         currencyData?.currencySymbol;
-      addCurrencyFormFields.currencyWordField.config.setData =
+      currencyFormFields.currencyWordField.config.setData =
         currencyData?.currencyInWord;
-      addCurrencyFormFields.purchesExchanegField.config.setData =
+      currencyFormFields.purchesExchanegField.config.setData =
         currencyData?.exchangeRateRs;
-      addCurrencyFormFields.pDateField.config.setData = currencyData?.entryDate;
-      addCurrencyFormFields.sellExchanegField.config.setData =
+      currencyFormFields.pDateField.config.setData = currencyData?.entryDate;
+      currencyFormFields.sellExchanegField.config.setData =
         currencyData?.exchangeRateRsSell;
-      addCurrencyFormFields.sDateField.config.setData =
+      currencyFormFields.sDateField.config.setData =
         currencyData?.entryDateSell;
     }
   } else {
@@ -94,19 +94,15 @@ export const AddUpdateCurrency: React.FC = () => {
                 <div className="row">
                   <div className="col-md-6">
                     <div className="col-md-12 col-xs-12">
-                      <Input
-                        config={addCurrencyFormFields.currencyField.config}
-                      />
+                      <Input config={currencyFormFields.currencyField.config} />
                     </div>
                     <div className="col-md-12 col-xs-12">
-                      <Input
-                        config={addCurrencyFormFields.symbolField.config}
-                      />
+                      <Input config={currencyFormFields.symbolField.config} />
                     </div>
                   </div>
                   <div className="col-md-6 col-xs-12">
                     <Input
-                      config={addCurrencyFormFields.currencyWordField.config}
+                      config={currencyFormFields.currencyWordField.config}
                     />
                   </div>
                 </div>
@@ -122,12 +118,10 @@ export const AddUpdateCurrency: React.FC = () => {
                       <div className="col-md-12 col-xs-12">
                         <Input
                           config={
-                            addCurrencyFormFields.purchesExchanegField.config
+                            currencyFormFields.purchesExchanegField.config
                           }
                         />
-                        <Input
-                          config={addCurrencyFormFields.pDateField.config}
-                        />
+                        <Input config={currencyFormFields.pDateField.config} />
                       </div>
                     </div>
                   </div>
@@ -141,13 +135,9 @@ export const AddUpdateCurrency: React.FC = () => {
                       </div>
                       <div className="col-md-12 col-xs-12">
                         <Input
-                          config={
-                            addCurrencyFormFields.sellExchanegField.config
-                          }
+                          config={currencyFormFields.sellExchanegField.config}
                         />
-                        <Input
-                          config={addCurrencyFormFields.sDateField.config}
-                        />
+                        <Input config={currencyFormFields.sDateField.config} />
                       </div>
                     </div>
                   </div>

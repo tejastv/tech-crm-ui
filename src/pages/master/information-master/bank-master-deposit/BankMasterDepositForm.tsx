@@ -3,14 +3,14 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
-  AddBankDepositType,
-  addBankDepositeFormFields,
+  BankDepositFormType,
+  bankDepositeFormFields,
   useBankMasterDepositApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-export const AddBankMasterDeposit: React.FC = () => {
-  const methods = useForm<AddBankDepositType>();
+export const BankMasterDepositForm: React.FC = () => {
+  const methods = useForm<BankDepositFormType>();
 
   const {
     addBankMasterDepositMutation,
@@ -51,9 +51,9 @@ export const AddBankMasterDeposit: React.FC = () => {
     console.log(params.id);
 
     if (BankMasterDepositDataSuccess) {
-      addBankDepositeFormFields.bankdeposit.config.setData =
+      bankDepositeFormFields.bankdeposit.config.setData =
         BankMasterDepositData?.bankName;
-      addBankDepositeFormFields.bankDepositAc.config.setData =
+      bankDepositeFormFields.bankDepositAc.config.setData =
         BankMasterDepositData?.accountNo;
     }
   } else {
@@ -90,14 +90,10 @@ export const AddBankMasterDeposit: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input
-                    config={addBankDepositeFormFields.bankdeposit.config}
-                  />
+                  <Input config={bankDepositeFormFields.bankdeposit.config} />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input
-                    config={addBankDepositeFormFields.bankDepositAc.config}
-                  />
+                  <Input config={bankDepositeFormFields.bankDepositAc.config} />
                 </div>
               </div>
             </BorderLayout>
