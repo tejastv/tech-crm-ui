@@ -20,17 +20,17 @@ export const usePaymentModeApiCallHook = () => {
       queryKey: [queryKeys.PAYMENTMODE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_PAYMENTMODE);
-        const data = response.data.data.sort(
-          (a: { paymentMode: string }, b: { paymentMode: any }) =>
-            a.paymentMode.localeCompare(b.paymentMode)
-        );
+        const data = response.data.data;
         return data;
       },
       staleTime: Infinity,
     });
   };
 
-  const getPaymentModeData = (id: string): UseQueryResult<PaymentModeType> => {
+  const getPaymentModeData = (
+    id: string,
+    condition?: any
+  ): UseQueryResult<PaymentModeType> => {
     return useQuery<PaymentModeType>({
       queryKey: [queryKeys.PAYMENTMODE_DATA, id],
       queryFn: async () => {
@@ -39,7 +39,7 @@ export const usePaymentModeApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };

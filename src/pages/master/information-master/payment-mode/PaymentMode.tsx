@@ -51,7 +51,7 @@ export const PaymentMode: React.FC = () => {
     },
   ];
 
-  const { data: paymentModeData, isLoading } = getPaymentMode();
+  const { data: paymentModeData, isFetching } = getPaymentMode();
   const { mutateAsync: deletePaymentMode } = deletePaymentModeMutation();
 
   const deletePaymentModeClick = async (paymentData: any) => {
@@ -62,7 +62,9 @@ export const PaymentMode: React.FC = () => {
   };
 
   const editPaymentModeClick = (paymentData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", paymentData.paymentModeId));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", paymentData.paymentModeId), {
+      state: paymentData,
+    });
   };
 
   const tableConfig: TableType<PaymentModeType> = {
@@ -90,7 +92,7 @@ export const PaymentMode: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );
