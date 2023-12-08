@@ -1,4 +1,4 @@
-export interface AddUpdateSourceType {
+export interface SourceFormType {
   id?: number;
   sourceID: number;
   source: string;

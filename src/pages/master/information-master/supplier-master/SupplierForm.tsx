@@ -10,8 +10,8 @@ import {
 } from "@shared/index";
 
 import {
-  AddUpdateSupplierMasterType,
-  addSupplierFormFields,
+  SupplierMasterFormType,
+  supplierFormFields,
   useSupplierMasterApiCallHook,
   useCityApiCallHook,
   useStateApiCallHook,
@@ -26,8 +26,8 @@ import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
 import { returnObjectBasedOnID, cleanupObject } from "@utils/index";
 
-export const AddSupplier: React.FC = () => {
-  const methods = useForm<AddUpdateSupplierMasterType>();
+export const SupplierForm: React.FC = () => {
+  const methods = useForm<SupplierMasterFormType>();
   const params = useParams();
   const {
     addSupplierMasterMutation,
@@ -63,7 +63,7 @@ export const AddSupplier: React.FC = () => {
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "id", "cityName");
-    addSupplierFormFields.citySupplier.config.options = options;
+    supplierFormFields.citySupplier.config.options = options;
   }
 
   // state api call
@@ -84,7 +84,7 @@ export const AddSupplier: React.FC = () => {
       "stateName",
       true
     );
-    addSupplierFormFields.stateSupplier.config.options = options;
+    supplierFormFields.stateSupplier.config.options = options;
   }
 
   // country api call
@@ -104,13 +104,13 @@ export const AddSupplier: React.FC = () => {
       "countryId",
       "countryName"
     );
-    addSupplierFormFields.countrySupplier.config.options = options;
+    supplierFormFields.countrySupplier.config.options = options;
   }
 
   const { data: CurrencyData } = getCurrency();
 
   if (CurrencyData) {
-    addSupplierFormFields.CurrenceySupplier.config.options = selectOptionsMaker(
+    supplierFormFields.CurrenceySupplier.config.options = selectOptionsMaker(
       Object.values(CurrencyData),
       "currencyId",
       "currencyType"
@@ -155,7 +155,7 @@ export const AddSupplier: React.FC = () => {
           "id",
           "cityName"
         );
-        addSupplierFormFields.citySupplier.config.setData = data
+        supplierFormFields.citySupplier.config.setData = data
           ? {
               label: data.label,
               value: data.value,
@@ -171,7 +171,7 @@ export const AddSupplier: React.FC = () => {
           "stateId",
           "state"
         );
-        addSupplierFormFields.stateSupplier.config.setData = data
+        supplierFormFields.stateSupplier.config.setData = data
           ? {
               label: data.label,
               value: data.value,
@@ -187,7 +187,7 @@ export const AddSupplier: React.FC = () => {
           "countryId",
           "countryName"
         );
-        addSupplierFormFields.countrySupplier.config.setData = data
+        supplierFormFields.countrySupplier.config.setData = data
           ? {
               label: data.label,
               value: data.value,
@@ -204,32 +204,30 @@ export const AddSupplier: React.FC = () => {
           "currencyId",
           "currencyType"
         );
-        addSupplierFormFields.CurrenceySupplier.config.setData = data
+        supplierFormFields.CurrenceySupplier.config.setData = data
           ? {
               label: data.label,
               value: data.value,
             }
           : [];
       }
-      addSupplierFormFields.nameSupplier.config.setData =
+      supplierFormFields.nameSupplier.config.setData =
         supplierMasterData.supplierName;
-      addSupplierFormFields.nickname.config.setData =
-        supplierMasterData.nickName;
-      addSupplierFormFields.addressSupplier.config.setData =
+      supplierFormFields.nickname.config.setData = supplierMasterData.nickName;
+      supplierFormFields.addressSupplier.config.setData =
         supplierMasterData.address;
-      addSupplierFormFields.telnoSupplier.config.setData =
+      supplierFormFields.telnoSupplier.config.setData =
         supplierMasterData.phone;
-      addSupplierFormFields.faxnoSupplier.config.setData =
-        supplierMasterData.fax;
-      addSupplierFormFields.emailSupplier.config.setData =
+      supplierFormFields.faxnoSupplier.config.setData = supplierMasterData.fax;
+      supplierFormFields.emailSupplier.config.setData =
         supplierMasterData.email;
-      addSupplierFormFields.websiteSupplier.config.setData =
+      supplierFormFields.websiteSupplier.config.setData =
         supplierMasterData.website;
-      addSupplierFormFields.contactSupplier.config.setData =
+      supplierFormFields.contactSupplier.config.setData =
         supplierMasterData.contactPerson;
-      addSupplierFormFields.designationSupplier.config.setData =
+      supplierFormFields.designationSupplier.config.setData =
         supplierMasterData.designation;
-      addSupplierFormFields.zipSupplier.config.setData = supplierMasterData.zip;
+      supplierFormFields.zipSupplier.config.setData = supplierMasterData.zip;
     }
   } else {
     useEffect(() => {
@@ -249,26 +247,22 @@ export const AddSupplier: React.FC = () => {
           <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
             <div className="row">
               <div className="col-md-6 col-xs-12">
-                <Input config={addSupplierFormFields.nameSupplier.config} />
-                <Input config={addSupplierFormFields.nickname.config} />
-                <Input config={addSupplierFormFields.addressSupplier.config} />
-                <Input config={addSupplierFormFields.telnoSupplier.config} />
-                <Input config={addSupplierFormFields.faxnoSupplier.config} />
-                <Input config={addSupplierFormFields.emailSupplier.config} />
-                <Input config={addSupplierFormFields.websiteSupplier.config} />
-                <Input config={addSupplierFormFields.contactSupplier.config} />
-                <Input
-                  config={addSupplierFormFields.designationSupplier.config}
-                />
+                <Input config={supplierFormFields.nameSupplier.config} />
+                <Input config={supplierFormFields.nickname.config} />
+                <Input config={supplierFormFields.addressSupplier.config} />
+                <Input config={supplierFormFields.telnoSupplier.config} />
+                <Input config={supplierFormFields.faxnoSupplier.config} />
+                <Input config={supplierFormFields.emailSupplier.config} />
+                <Input config={supplierFormFields.websiteSupplier.config} />
+                <Input config={supplierFormFields.contactSupplier.config} />
+                <Input config={supplierFormFields.designationSupplier.config} />
               </div>
               <div className="col-md-6 col-xs-12">
-                <Select config={addSupplierFormFields.citySupplier.config} />
-                <Input config={addSupplierFormFields.zipSupplier.config} />
-                <Select config={addSupplierFormFields.stateSupplier.config} />
-                <Select config={addSupplierFormFields.countrySupplier.config} />
-                <Select
-                  config={addSupplierFormFields.CurrenceySupplier.config}
-                />
+                <Select config={supplierFormFields.citySupplier.config} />
+                <Input config={supplierFormFields.zipSupplier.config} />
+                <Select config={supplierFormFields.stateSupplier.config} />
+                <Select config={supplierFormFields.countrySupplier.config} />
+                <Select config={supplierFormFields.CurrenceySupplier.config} />
               </div>
             </div>
           </BorderLayout>

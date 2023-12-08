@@ -50,14 +50,14 @@ export { Continent } from "./location-master/continent/Continent";
 export { BankMasterDepositForm } from "./information-master/bank-master-deposit/BankMasterDepositForm";
 export { BankMasterDeposit } from "./information-master/bank-master-deposit/BankDeposit";
 
-export { AddPaymentMode } from "./information-master/payment-mode/AddPaymentMode";
+export { PaymentModeForm } from "./information-master/payment-mode/PaymentModeForm";
 export { PaymentMode } from "./information-master/payment-mode/PaymentMode";
 
 export { CurrencyForm } from "./information-master/currency/CurrencyForm";
 export { Currency } from "./information-master/currency/Currency";
-export { AddUpdateSource } from "./information-master/source/AddUpdateSource";
+export { SourceForm } from "./information-master/source/SourceForm";
 export { Source } from "./information-master/source/Source";
-export { AddSupplier } from "./information-master/supplier-master/AddUpdateSupplier";
+export { SupplierForm } from "./information-master/supplier-master/SupplierForm";
 export { Supplier } from "./information-master/supplier-master/Supplier";
 export { BankMasterDrawnForm } from "./information-master/bank-master-drawn-on/BankMasterDrawnForm";
 export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankDrawn";
@@ -112,10 +112,10 @@ export { addCoutryFormFields } from "./location-master/country/add-country-form-
 export { addContinentFormFields } from "./location-master/continent/add-continent-form-fields";
 
 export { bankDepositeFormFields } from "./information-master/bank-master-deposit/bankDepositeFormFields";
-export { addPaymentModeFormFields } from "./information-master/payment-mode/add-paymentmode-form-fileds";
-export { addSourceFormFields } from "./information-master/source/add-source-form-fields";
+export { paymentModeFormFields } from "./information-master/payment-mode/paymentModeFormFields";
+export { sourceFormFields } from "./information-master/source/sourceFormFields";
 export { bankDrawnOnFormFields } from "./information-master/bank-master-drawn-on/bankDrawnOnFormFields";
-export { addSupplierFormFields } from "./information-master/supplier-master/add-supplier-form-fields";
+export { supplierFormFields } from "./information-master/supplier-master/supplierFormFields";
 export { currencyFormFields } from "./information-master/currency/currencyFormFields";
 
 export { addIndustryFormFields } from "./information-master-2/industry/add-industry-form-fields";
@@ -177,14 +177,14 @@ export * from "./information-master/bank-master-drawn-on/BankdrawnonType";
 export * from "./information-master/currency/CurrencyFormType";
 export * from "./information-master/currency/CurrencyType";
 
-export * from "./information-master/payment-mode/add-paymentmode-type";
-export * from "./information-master/payment-mode/paymentmode-type";
+export * from "./information-master/payment-mode/PaymentModeFormType";
+export * from "./information-master/payment-mode/PaymentModeType";
 
-export * from "./information-master/source/add-update-source-type";
-export * from "./information-master/source/source-type";
+export * from "./information-master/source/SourceFormType";
+export * from "./information-master/source/SourceType";
 
-export * from "./information-master/supplier-master/add-update-supplier-type";
-export * from "./information-master/supplier-master/supplier-type";
+export * from "./information-master/supplier-master/SupplierMasterFormType";
+export * from "./information-master/supplier-master/SupplierMasterType";
 
 // information master
 export * from "./information-master-2/call-type/add-update-calltype-type";

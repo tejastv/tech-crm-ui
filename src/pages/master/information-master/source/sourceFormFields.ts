@@ -32,7 +32,7 @@ const letterfile: FormFieldType = createFormConfig(
   "Source"
 );
 
-export const addSourceFormFields = {
+export const sourceFormFields = {
   source,
   letterfile,
 };

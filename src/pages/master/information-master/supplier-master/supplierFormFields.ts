@@ -265,7 +265,7 @@ const CurrenceySupplier: FormFieldType = createFormConfig(
   {}
 );
 
-export const addSupplierFormFields = {
+export const supplierFormFields = {
   nameSupplier,
   nickname,
   addressSupplier,

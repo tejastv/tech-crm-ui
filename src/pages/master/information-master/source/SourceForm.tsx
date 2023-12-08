@@ -3,14 +3,14 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
-  AddUpdateSourceType,
-  addSourceFormFields,
+  SourceFormType,
+  sourceFormFields,
   useSourceApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 import { fileToBase64 } from "@utils/fileToBase64";
 
-export const AddUpdateSource: React.FC = () => {
+export const SourceForm: React.FC = () => {
   const params = useParams();
   const cardConfig = {
     formLayoutConfig: {
@@ -22,7 +22,7 @@ export const AddUpdateSource: React.FC = () => {
     },
   };
 
-  const methods = useForm<AddUpdateSourceType>();
+  const methods = useForm<SourceFormType>();
   const { addSourceMutation, getSourceData, updateSourceMutation } =
     useSourceApiCallHook();
   const { mutateAsync: addSource } = addSourceMutation();
@@ -33,7 +33,7 @@ export const AddUpdateSource: React.FC = () => {
       "" + params.id
     );
     if (sourceDataSuccess) {
-      addSourceFormFields.source.config.setData = sourceData.source;
+      sourceFormFields.source.config.setData = sourceData.source;
     }
   } else {
     useEffect(() => {
@@ -66,10 +66,10 @@ export const AddUpdateSource: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={addSourceFormFields.source.config} />
+                  <Input config={sourceFormFields.source.config} />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <Input config={addSourceFormFields.letterfile.config} />
+                  <Input config={sourceFormFields.letterfile.config} />
                 </div>
               </div>
             </BorderLayout>

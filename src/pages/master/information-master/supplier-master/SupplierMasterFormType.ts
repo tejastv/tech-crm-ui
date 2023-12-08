@@ -1,4 +1,4 @@
-export interface AddUpdateSupplierMasterType {
+export interface SupplierMasterFormType {
   id?: number;
   address: string;
   zip: string;

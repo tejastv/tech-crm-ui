@@ -3,19 +3,19 @@ import { useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, NewInput } from "@shared/index";
 import {
-  AddPaymentModeType,
-  addPaymentModeFormFields,
+  PaymentModeFormType,
+  paymentModeFormFields,
   usePaymentModeApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-export const AddPaymentMode: React.FC = () => {
+export const PaymentModeForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<AddPaymentModeType>();
+  } = useForm<PaymentModeFormType>();
   const {
     addPaymentModeMutation,
     getPaymentModeData,
@@ -50,7 +50,7 @@ export const AddPaymentMode: React.FC = () => {
     console.log(params.id);
 
     if (paymentModeDataSuccess) {
-      addPaymentModeFormFields.paymentmode.config.setData =
+      paymentModeFormFields.paymentmode.config.setData =
         paymentModeData?.paymentMode;
     }
   } else {
@@ -82,7 +82,7 @@ export const AddPaymentMode: React.FC = () => {
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addPaymentModeFormFields.paymentmode}
+                  config={paymentModeFormFields.paymentmode}
                 />
               </div>
             </div>
