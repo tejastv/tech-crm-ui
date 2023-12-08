@@ -158,7 +158,7 @@ const startrefno: FormFieldType = createFormConfig(
   "Start Ref. No."
 );
 
-export const addFinYearFormFields = {
+export const finYearFormFields = {
   finyear,
   totaltax,
   stax,

@@ -20,6 +20,6 @@ const calltype: FormFieldType = createFormConfig(
   "Call Type"
 );
 
-export const addCallTypeFormFields = {
+export const callTypeFormFields = {
   calltype,
 };

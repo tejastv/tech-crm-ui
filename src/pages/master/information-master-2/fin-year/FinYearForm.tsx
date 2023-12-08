@@ -3,14 +3,14 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
-  AddUpdateFinYearType,
-  addFinYearFormFields,
+  FinYearFormType,
+  finYearFormFields,
   useFinYearApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-export const AddUpdateFinYear: React.FC = () => {
-  const methods = useForm<AddUpdateFinYearType>();
+export const FinYearForm: React.FC = () => {
+  const methods = useForm<FinYearFormType>();
   const {
     addFinYearMutation,
     getFinYearData,
@@ -31,7 +31,7 @@ export const AddUpdateFinYear: React.FC = () => {
     },
   };
 
-  addFinYearFormFields.finyear.config.setData = lastFinYear;
+  finYearFormFields.finyear.config.setData = lastFinYear;
 
   if (params.id) {
     const { data: finYearData, isSuccess: finYearDataSuccess } = getFinYearData(
@@ -39,13 +39,13 @@ export const AddUpdateFinYear: React.FC = () => {
     );
     if (finYearDataSuccess) {
       console.log(finYearData);
-      addFinYearFormFields.finyear.config.setData = finYearData.finYear;
-      addFinYearFormFields.totaltax.config.setData = finYearData.serviceTax;
-      addFinYearFormFields.stax.config.setData = finYearData.stax;
-      addFinYearFormFields.edcess.config.setData = finYearData.eduCess;
-      addFinYearFormFields.cgst.config.setData = finYearData.cgstper;
-      addFinYearFormFields.sgst.config.setData = finYearData.sgstper;
-      addFinYearFormFields.igst.config.setData = finYearData.igstper;
+      finYearFormFields.finyear.config.setData = finYearData.finYear;
+      finYearFormFields.totaltax.config.setData = finYearData.serviceTax;
+      finYearFormFields.stax.config.setData = finYearData.stax;
+      finYearFormFields.edcess.config.setData = finYearData.eduCess;
+      finYearFormFields.cgst.config.setData = finYearData.cgstper;
+      finYearFormFields.sgst.config.setData = finYearData.sgstper;
+      finYearFormFields.igst.config.setData = finYearData.igstper;
     }
   } else {
     useEffect(() => {
@@ -82,20 +82,20 @@ export const AddUpdateFinYear: React.FC = () => {
               <div className="row">
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
-                    <Input config={addFinYearFormFields.finyear.config} />
-                    <Input config={addFinYearFormFields.stax.config} />
-                    <Input config={addFinYearFormFields.edcess.config} />
-                    <Input config={addFinYearFormFields.totaltax.config} />
+                    <Input config={finYearFormFields.finyear.config} />
+                    <Input config={finYearFormFields.stax.config} />
+                    <Input config={finYearFormFields.edcess.config} />
+                    <Input config={finYearFormFields.totaltax.config} />
                   </div>
                 </div>
 
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
-                    <Input config={addFinYearFormFields.cgst.config} />
-                    <Input config={addFinYearFormFields.sgst.config} />
-                    <Input config={addFinYearFormFields.igst.config} />
-                    {/* <Input config={addFinYearFormFields.startinvno.config} /> */}
-                    {/* <Input config={addFinYearFormFields.startrefno.config} /> */}
+                    <Input config={finYearFormFields.cgst.config} />
+                    <Input config={finYearFormFields.sgst.config} />
+                    <Input config={finYearFormFields.igst.config} />
+                    {/* <Input config={finYearFormFields.startinvno.config} /> */}
+                    {/* <Input config={finYearFormFields.startrefno.config} /> */}
                   </div>
                 </div>
               </div>

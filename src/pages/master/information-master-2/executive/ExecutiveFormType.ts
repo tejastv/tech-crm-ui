@@ -1,4 +1,4 @@
-export interface AddUpdateExecutiveType {
+export interface ExecutiveFormType {
   id?: string;
   executive: string;
   email: string;

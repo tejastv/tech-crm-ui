@@ -3,23 +3,17 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
-  AddUpdateCallTypeType,
-  addCallTypeFormFields,
-  useCallTypeApiCallHook,
+  CreditDaysFormType,
+  creditDaysFormFields,
+  useCreditDaysApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-export const AddUpdateCalltype: React.FC = () => {
-  const methods = useForm<AddUpdateCallTypeType>();
-  const { addCallTypeMutation, getCallTypeData, updateCallTypeMutation } =
-    useCallTypeApiCallHook();
-  const { mutateAsync: addCallType } = addCallTypeMutation();
-  const { mutateAsync: updateCallType } = updateCallTypeMutation();
+export const CreditDaysForm: React.FC = () => {
   const params = useParams();
-
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: params.id ? "Update Call Type" : "Add Call Type",
+      mainHeading: params.id ? "Update Credit Period" : "Add Credit Period",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -27,11 +21,17 @@ export const AddUpdateCalltype: React.FC = () => {
     },
   };
 
+  const methods = useForm<CreditDaysFormType>();
+  const { addCreditDaysMutation, getCreditDaysData, updateCreditDaysMutation } =
+    useCreditDaysApiCallHook();
+  const { mutateAsync: addCreditDays } = addCreditDaysMutation();
+  const { mutateAsync: updateCreditDays } = updateCreditDaysMutation();
+
   if (params.id) {
-    const { data: callTypeData, isSuccess: callTypeDataSuccess } =
-      getCallTypeData("" + params.id);
-    if (callTypeDataSuccess) {
-      addCallTypeFormFields.calltype.config.setData = callTypeData.typeName;
+    const { data: creditDays, isSuccess: creditDaysSuccess } =
+      getCreditDaysData("" + params.id);
+    if (creditDaysSuccess) {
+      creditDaysFormFields.creditdays.config.setData = creditDays.creditPeriod;
     }
   } else {
     useEffect(() => {
@@ -39,12 +39,12 @@ export const AddUpdateCalltype: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((callTypeData): void => {
-    let data: any = { ...callTypeData };
-    if (params.id && callTypeData) {
-      updateCallType({ typeID: +params.id, ...data });
+  const onSubmit = methods.handleSubmit((creditDays): void => {
+    let data: any = { ...creditDays };
+    if (params.id && creditDays) {
+      updateCreditDays({ id: +params.id, ...data });
     } else {
-      addCallType(data);
+      addCreditDays(data);
     }
   });
 
@@ -61,7 +61,7 @@ export const AddUpdateCalltype: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={addCallTypeFormFields.calltype.config} />
+                  <Input config={creditDaysFormFields.creditdays.config} />
                 </div>
               </div>
             </BorderLayout>

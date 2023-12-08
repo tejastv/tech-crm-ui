@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateCallTypeType, CallTypeType } from "@master/index";
+import { CallTypeFormType, CallTypeType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -45,7 +45,7 @@ export const useCallTypeApiCallHook = () => {
   };
 
   const addCallType = async (
-    callTypeData: AddUpdateCallTypeType
+    callTypeData: CallTypeFormType
   ): Promise<ApiResponseType<CallTypeType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_CALL_TYPE,
@@ -56,7 +56,7 @@ export const useCallTypeApiCallHook = () => {
 
   const addCallTypeMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateCallTypeType) => addCallType(updatedItem),
+      (updatedItem: CallTypeFormType) => addCallType(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -70,7 +70,7 @@ export const useCallTypeApiCallHook = () => {
   };
 
   const updateCallTypeData = async (
-    updateCallTypeData: AddUpdateCallTypeType
+    updateCallTypeData: CallTypeFormType
   ): Promise<ApiResponseType<CallTypeType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_CALL_TYPE.replace(
@@ -84,7 +84,7 @@ export const useCallTypeApiCallHook = () => {
 
   const updateCallTypeMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateCallTypeType) => updateCallTypeData(updatedItem),
+      (updatedItem: CallTypeFormType) => updateCallTypeData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

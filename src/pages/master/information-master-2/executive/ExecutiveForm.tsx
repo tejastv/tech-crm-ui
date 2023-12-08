@@ -10,10 +10,10 @@ import {
   Select,
 } from "@shared/index";
 import {
-  AddUpdateExecutiveType,
+  ExecutiveFormType,
   CityType,
   StateType,
-  addExecutiveFormFields,
+  executiveFormFields,
   useCityApiCallHook,
   useExecutiveApiCallHook,
   useStateApiCallHook,
@@ -22,8 +22,8 @@ import { useParams } from "react-router-dom";
 import { returnObjectBasedOnID } from "@utils/returnObjectBasedOnID";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
-export const AddUpdateExecutive: React.FC = () => {
-  const methods = useForm<AddUpdateExecutiveType>();
+export const ExecutiveForm: React.FC = () => {
+  const methods = useForm<ExecutiveFormType>();
   const { addExecutiveMutation, getExecutiveData, updateExecutiveMutation } =
     useExecutiveApiCallHook();
   const { getCity } = useCityApiCallHook();
@@ -53,7 +53,7 @@ export const AddUpdateExecutive: React.FC = () => {
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "id", "cityName");
-    addExecutiveFormFields.cityInformation2.config.options = options;
+    executiveFormFields.cityInformation2.config.options = options;
   }
 
   // state api call
@@ -68,7 +68,7 @@ export const AddUpdateExecutive: React.FC = () => {
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
-    addExecutiveFormFields.stateInformation2.config.options = options;
+    executiveFormFields.stateInformation2.config.options = options;
   }
 
   if (params.id) {
@@ -76,9 +76,9 @@ export const AddUpdateExecutive: React.FC = () => {
       getExecutiveData("" + params.id);
 
     if (executiveDataSuccess) {
-      addExecutiveFormFields.executiveInfomation2.config.setData =
+      executiveFormFields.executiveInfomation2.config.setData =
         executiveData?.executive;
-      addExecutiveFormFields.emailInformation2.config.setData =
+      executiveFormFields.emailInformation2.config.setData =
         executiveData?.email;
       if (cityOptions) {
         let id = executiveData?.cityId;
@@ -89,7 +89,7 @@ export const AddUpdateExecutive: React.FC = () => {
           "id",
           "cityName"
         );
-        addExecutiveFormFields.cityInformation2.config.setData = data
+        executiveFormFields.cityInformation2.config.setData = data
           ? {
               label: data?.label,
               value: data?.value,
@@ -105,14 +105,14 @@ export const AddUpdateExecutive: React.FC = () => {
           "stateId",
           "state"
         );
-        addExecutiveFormFields.stateInformation2.config.setData = data
+        executiveFormFields.stateInformation2.config.setData = data
           ? {
               label: data?.label,
               value: data?.value,
             }
           : [];
       }
-      addExecutiveFormFields.checkboxInformation2.config.setData =
+      executiveFormFields.checkboxInformation2.config.setData =
         executiveData?.invoiceRequired;
     }
   } else {
@@ -148,30 +148,26 @@ export const AddUpdateExecutive: React.FC = () => {
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
                     <Input
-                      config={
-                        addExecutiveFormFields.executiveInfomation2.config
-                      }
+                      config={executiveFormFields.executiveInfomation2.config}
                     />
                     <Input
-                      config={addExecutiveFormFields.emailInformation2.config}
+                      config={executiveFormFields.emailInformation2.config}
                     />
                     <Select
-                      config={addExecutiveFormFields.cityInformation2.config}
+                      config={executiveFormFields.cityInformation2.config}
                     />
                     {/* <Input
-                      config={addExecutiveFormFields.cityInformation2.config}
+                      config={executiveFormFields.cityInformation2.config}
                     /> */}
                   </div>
                 </div>
                 <div className="col-md-6 col-xs-12">
                   <div className="card-body">
                     <Checkbox
-                      config={
-                        addExecutiveFormFields.checkboxInformation2.config
-                      }
+                      config={executiveFormFields.checkboxInformation2.config}
                     />
                     <Select
-                      config={addExecutiveFormFields.stateInformation2.config}
+                      config={executiveFormFields.stateInformation2.config}
                     />
                     {/*<Input config={stateSupplier.config} />
                   <Input config={countrySupplier.config} />

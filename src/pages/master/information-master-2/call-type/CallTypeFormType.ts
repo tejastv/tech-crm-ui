@@ -1,4 +1,4 @@
-export interface AddUpdateCallTypeType {
+export interface CallTypeFormType {
   typeID: number;
   typeName: string;
   synId?: null;

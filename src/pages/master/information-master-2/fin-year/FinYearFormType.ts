@@ -1,4 +1,4 @@
-export interface AddUpdateFinYearType {
+export interface FinYearFormType {
   id?: number;
   finYear: number;
   eduCess: number;

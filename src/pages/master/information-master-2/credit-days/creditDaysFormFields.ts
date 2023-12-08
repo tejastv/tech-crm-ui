@@ -19,6 +19,6 @@ const creditdays: FormFieldType = createFormConfig(
   "Credit Days"
 );
 
-export const addCreditDaysFormFields = {
+export const creditDaysFormFields = {
   creditdays,
 };

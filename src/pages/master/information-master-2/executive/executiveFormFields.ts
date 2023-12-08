@@ -50,7 +50,9 @@ const checkboxInfoValidation = {
   },
 } as ValidationType;
 
-const checkInfoOptions = {"checkOpt" : { value: false, label: "Required Invoice Copy" }};
+const checkInfoOptions = {
+  checkOpt: { value: false, label: "Required Invoice Copy" },
+};
 
 const executiveInfomation2: FormFieldType = createFormConfig(
   "executive",
@@ -91,7 +93,7 @@ const stateInformation2: FormFieldType = createFormConfig(
   {}
 );
 
-export const addExecutiveFormFields = {
+export const executiveFormFields = {
   executiveInfomation2,
   emailInformation2,
   cityInformation2,

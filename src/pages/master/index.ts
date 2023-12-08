@@ -66,22 +66,22 @@ export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankD
 export { AddUpdateIndustry } from "./information-master-2/industry/AddUpdateIndustry";
 export { Industry } from "./information-master-2/industry/Industry";
 
-export { AddUpdateCalltype } from "./information-master-2/call-type/AddUpdateCalltype";
+export { CalltypeForm } from "./information-master-2/call-type/CalltypeForm";
 export { CallType } from "./information-master-2/call-type/CallType";
 
 export { AddUpdatePurposeMaster } from "./information-master-2/purpose-master/AddUpdatePurposeMaster";
 export { PurposeMaster } from "./information-master-2/purpose-master/PurposeMaster";
 
-export { AddUpdateCreditDays } from "./information-master-2/credit-days/AddUpdateCreditDays";
+export { CreditDaysForm } from "./information-master-2/credit-days/CreditDaysForm";
 export { CreditDays } from "./information-master-2/credit-days/CreditDays";
 
 export { AddUpdateSiteStatus } from "./information-master-2/site-status/AddUpdateSiteStatus";
 export { SiteStatus } from "./information-master-2/site-status/SiteStatus";
 
-export { AddUpdateExecutive } from "./information-master-2/executive/AddUpdateExecutive";
+export { ExecutiveForm } from "./information-master-2/executive/ExecutiveForm";
 export { Executive } from "./information-master-2/executive/Executive";
 
-export { AddUpdateFinYear } from "./information-master-2/fin-year/AddUpdateFinyear";
+export { FinYearForm } from "./information-master-2/fin-year/FinYearForm";
 export { FinYear } from "./information-master-2/fin-year/FinYear";
 
 export { AddUpdateUser } from "./information-master-2/user-master/AddUpdateUser";
@@ -119,12 +119,12 @@ export { supplierFormFields } from "./information-master/supplier-master/supplie
 export { currencyFormFields } from "./information-master/currency/currencyFormFields";
 
 export { addIndustryFormFields } from "./information-master-2/industry/add-industry-form-fields";
-export { addCallTypeFormFields } from "./information-master-2/call-type/add-calltype-form-fields";
+export { callTypeFormFields } from "./information-master-2/call-type/callTypeFormFields";
 export { addPurposeFormFields } from "./information-master-2/purpose-master/add-purpose-form-fields";
-export { addCreditDaysFormFields } from "./information-master-2/credit-days/add-creditdays-form-fields";
+export { creditDaysFormFields } from "./information-master-2/credit-days/creditDaysFormFields";
 export { addSiteStatusFormFields } from "./information-master-2/site-status/add-sitestatus-form-fields";
-export { addExecutiveFormFields } from "./information-master-2/executive/add-executive-form-field";
-export { addFinYearFormFields } from "./information-master-2/fin-year/add-finyear-form-fields";
+export { executiveFormFields } from "./information-master-2/executive/executiveFormFields";
+export { finYearFormFields } from "./information-master-2/fin-year/finYearFormFields";
 export { addUserFormFields } from "./information-master-2/user-master/UserFormFields";
 
 // Models
@@ -187,18 +187,18 @@ export * from "./information-master/supplier-master/SupplierMasterFormType";
 export * from "./information-master/supplier-master/SupplierMasterType";
 
 // information master
-export * from "./information-master-2/call-type/add-update-calltype-type";
-export * from "./information-master-2/call-type/calltype-type";
+export * from "./information-master-2/call-type/CallTypeFormType";
+export * from "./information-master-2/call-type/CallTypeType";
 
-export * from "./information-master-2/credit-days/add-update-creditdays-type";
-export * from "./information-master-2/credit-days/creditdays-type";
+export * from "./information-master-2/credit-days/CreditDaysFormType";
+export * from "./information-master-2/credit-days/CreditDaysType";
 
-export * from "./information-master-2/executive/add-update-executive-type";
-export * from "./information-master-2/executive/executive-type";
+export * from "./information-master-2/executive/ExecutiveFormType";
+export * from "./information-master-2/executive/ExecutiveType";
 
-export * from "./information-master-2/fin-year/add-update-finyear-type";
-export * from "./information-master-2/fin-year/finyear-type";
-export * from "./information-master-2/fin-year/last-fin-year-type";
+export * from "./information-master-2/fin-year/FinYearFormType";
+export * from "./information-master-2/fin-year/FinYearType";
+export * from "./information-master-2/fin-year/LastFinYearType";
 
 export * from "./information-master-2/industry/add-update-industry-type";
 export * from "./information-master-2/industry/industry-type";
