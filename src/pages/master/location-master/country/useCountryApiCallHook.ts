@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { CountryType, AddUpdateCountryType } from "@master/index";
+import { CountryType, CountryFormType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType, MapType } from "@shared/index";
 import {
@@ -50,7 +50,7 @@ export const useCountryApiCallHook = () => {
   };
 
   const addCountry = async (
-    countryData: AddUpdateCountryType
+    countryData: CountryFormType
   ): Promise<ApiResponseType<CountryType>> => {
     const response = await instance.post(apiUrls.GET_ADD_COUNTRY, countryData);
     return response.data.data;
@@ -58,7 +58,7 @@ export const useCountryApiCallHook = () => {
 
   const addCountryMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateCountryType) => addCountry(updatedItem),
+      (updatedItem: CountryFormType) => addCountry(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -72,7 +72,7 @@ export const useCountryApiCallHook = () => {
   };
 
   const updateCountryData = async (
-    updateCountryData: AddUpdateCountryType
+    updateCountryData: CountryFormType
   ): Promise<ApiResponseType<CountryType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_COUNTRY.replace(
@@ -86,7 +86,7 @@ export const useCountryApiCallHook = () => {
 
   const updateCountryMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateCountryType) => updateCountryData(updatedItem),
+      (updatedItem: CountryFormType) => updateCountryData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

@@ -1,6 +1,6 @@
 import { useAxios } from "@hooks/useAxios";
 import {
-  AddUpdateFinYearType,
+  FinYearFormType,
   FinYearType,
   LastFinYearType,
   // LastFinYearType,
@@ -69,7 +69,7 @@ export const useFinYearApiCallHook = () => {
   };
 
   const addFinYear = async (
-    finYearData: AddUpdateFinYearType
+    finYearData: FinYearFormType
   ): Promise<ApiResponseType<FinYearType>> => {
     const response = await instance.post(apiUrls.GET_ADD_FIN_YEAR, finYearData);
     return response.data.data;
@@ -77,7 +77,7 @@ export const useFinYearApiCallHook = () => {
 
   const addFinYearMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateFinYearType) => addFinYear(updatedItem),
+      (updatedItem: FinYearFormType) => addFinYear(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -91,7 +91,7 @@ export const useFinYearApiCallHook = () => {
   };
 
   const updateFinYearData = async (
-    updateFinYearData: AddUpdateFinYearType
+    updateFinYearData: FinYearFormType
   ): Promise<ApiResponseType<FinYearType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_FIN_YEAR.replace(
@@ -105,7 +105,7 @@ export const useFinYearApiCallHook = () => {
 
   const updateFinYearMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateFinYearType) => updateFinYearData(updatedItem),
+      (updatedItem: FinYearFormType) => updateFinYearData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

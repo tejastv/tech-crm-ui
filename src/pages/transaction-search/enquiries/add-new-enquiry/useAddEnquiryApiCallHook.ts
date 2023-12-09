@@ -64,7 +64,7 @@ export const useAddEnquiryApiCallHook = () => {
         );
         let mapedData = selectOptionsMapMaker(
           data,
-          "serviceTypeID",
+          "serviceTypeId",
           "serviceType"
         );
         return mapedData;

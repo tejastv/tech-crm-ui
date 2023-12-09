@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddPaymentModeType, PaymentModeType } from "@master/index";
+import { PaymentModeFormType, PaymentModeType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -45,7 +45,7 @@ export const usePaymentModeApiCallHook = () => {
   };
 
   const addPaymentMode = async (
-    paymentModeData: AddPaymentModeType
+    paymentModeData: PaymentModeFormType
   ): Promise<ApiResponseType<PaymentModeType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_PAYMENTMODE,
@@ -56,7 +56,7 @@ export const usePaymentModeApiCallHook = () => {
 
   const addPaymentModeMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddPaymentModeType) => addPaymentMode(updatedItem),
+      (updatedItem: PaymentModeFormType) => addPaymentMode(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -70,7 +70,7 @@ export const usePaymentModeApiCallHook = () => {
   };
 
   const updatePaymentModeData = async (
-    updatePaymentModeData: AddPaymentModeType
+    updatePaymentModeData: PaymentModeFormType
   ): Promise<ApiResponseType<PaymentModeType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_PAYMENTMODE.replace(
@@ -84,7 +84,7 @@ export const usePaymentModeApiCallHook = () => {
 
   const updatePaymentModeMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddPaymentModeType) => updatePaymentModeData(updatedItem),
+      (updatedItem: PaymentModeFormType) => updatePaymentModeData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

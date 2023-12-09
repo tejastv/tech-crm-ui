@@ -436,7 +436,7 @@ export const Enquiries: React.FC = () => {
   }, [clientData]);
 
   if (clientOptions?.length) {
-    let options = selectOptionsMaker(clientOptions, "clientID", "clientName");
+    let options = selectOptionsMaker(clientOptions, "clientId", "clientName");
     enqSearchFormFields.clientnameField.config.options = options;
   }
 

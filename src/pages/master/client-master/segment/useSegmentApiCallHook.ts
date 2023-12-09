@@ -7,7 +7,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-import { AddUpdateSegmentType, SegmentType } from "@master/index";
+import { SegmentFormType, SegmentType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 
@@ -46,7 +46,7 @@ export const useSegmentApiCallHook = () => {
   };
 
   const addSegment = async (
-    segmentData: AddUpdateSegmentType
+    segmentData: SegmentFormType
   ): Promise<ApiResponseType<SegmentType>> => {
     const response = await instance.post(apiUrls.GET_ADD_SEGMENT, segmentData);
     return response.data.data;
@@ -54,7 +54,7 @@ export const useSegmentApiCallHook = () => {
 
   const addSegmentMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateSegmentType) => addSegment(updatedItem),
+      (updatedItem: SegmentFormType) => addSegment(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -68,7 +68,7 @@ export const useSegmentApiCallHook = () => {
   };
 
   const updateSegmentData = async (
-    updateSegmentData: AddUpdateSegmentType
+    updateSegmentData: SegmentFormType
   ): Promise<ApiResponseType<SegmentType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_SEGMENT.replace(
@@ -82,7 +82,7 @@ export const useSegmentApiCallHook = () => {
 
   const updateSegmentMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateSegmentType) => updateSegmentData(updatedItem),
+      (updatedItem: SegmentFormType) => updateSegmentData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

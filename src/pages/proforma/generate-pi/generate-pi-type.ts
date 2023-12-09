@@ -15,13 +15,13 @@ export interface GeneratePiType {
   enqID: number;
   fyear: number;
   bookNo: string;
-  companyID: number;
+  companyId: number;
   recdDate: string;
   dueDate: string;
-  serviceTypeID: 1;
+  serviceTypeId: 1;
   clientID: number;
   clientRefNo: string;
-  sourceID: number;
+  sourceId: number;
   enqStatusID: 1;
   notes: string;
   pmtstatus: string;

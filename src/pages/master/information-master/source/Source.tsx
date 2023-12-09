@@ -62,12 +62,12 @@ export const Source: React.FC = () => {
   const deleteSourceClick = async (sourceData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deleteSource(sourceData.sourceID);
+      await deleteSource(sourceData.sourceId);
     }
   };
 
   const editSourceClick = (sourceData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", sourceData.sourceID));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", sourceData.sourceId));
   };
 
   const tableConfig: TableType<SourceType> = {
