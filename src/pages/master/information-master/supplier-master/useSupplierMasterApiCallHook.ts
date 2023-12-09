@@ -31,7 +31,8 @@ export const useSupplierMasterApiCallHook = () => {
   };
 
   const getSupplierMasterData = (
-    id: string
+    id: string,
+    condition: boolean
   ): UseQueryResult<SupplierMasterType> => {
     return useQuery<SupplierMasterType>({
       queryKey: [queryKeys.SUPPLIER_MASTER_DATA, id],
@@ -41,7 +42,7 @@ export const useSupplierMasterApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };

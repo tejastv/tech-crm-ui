@@ -9,7 +9,6 @@ import {
 } from "@shared/index";
 import { COMMON_ROUTES } from "@constants/index";
 import {
-  SupplierMasterFormType,
   SupplierMasterType,
   useSupplierMasterApiCallHook,
 } from "@master/index";
@@ -35,7 +34,7 @@ export const Supplier: React.FC = () => {
   const { getSupplierMaster, deleteSupplierMasterMutation } =
     useSupplierMasterApiCallHook();
   const navigate = useNavigate();
-  const columns: ColumnDef<SupplierMasterFormType>[] = [
+  const columns: ColumnDef<SupplierMasterType>[] = [
     {
       id: "action",
       cell: (info) => info.getValue(),
@@ -83,25 +82,25 @@ export const Supplier: React.FC = () => {
       header: () => <>Designation</>,
     },
     {
-      accessorFn: (row) => row.countryID,
-      id: "countryID",
+      accessorFn: (row) => row.countryName,
+      id: "countryId",
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
     },
     {
-      accessorFn: (row) => row.cityID,
-      id: "cityID",
+      accessorFn: (row) => row.cityName,
+      id: "cityId",
       cell: (info) => info.getValue(),
       header: () => <>City</>,
     },
     {
-      accessorFn: (row) => row.stateID,
-      id: "stateID",
+      accessorFn: (row) => row.stateName,
+      id: "stateId",
       cell: (info) => info.getValue(),
       header: () => <>State</>,
     },
     {
-      accessorFn: (row) => row.countryID,
+      accessorFn: (row) => row.countryName,
       id: "countryID",
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
@@ -119,7 +118,9 @@ export const Supplier: React.FC = () => {
   };
 
   const editSupplierMasterClick = (supplierMasterData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", supplierMasterData.supplierId));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", supplierMasterData.supplierId), {
+      state: null
+    });
   };
 
   const tableConfig: TableType<SupplierMasterType> = {

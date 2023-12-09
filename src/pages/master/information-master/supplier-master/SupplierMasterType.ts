@@ -4,9 +4,12 @@ export interface SupplierMasterType {
   fax: string;
   supplierId: number;
   supplierName: string;
-  cityID: number;
-  stateID: number;
-  countryID: number;
+  cityId: number;
+  cityName: string;
+  stateId: number;
+  stateName: string;
+  countryId: number;
+  countryName: string;
   email: string;
   currencyId: number;
   nickName: string;

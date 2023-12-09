@@ -292,7 +292,7 @@ export const InvoiceGenerateGst: React.FC = () => {
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={invoiceGenGstFormFields.invoicenoField}
+                    config={invoiceGenGstFormFields.invoiceNoField}
                   />
                   <div className="col-md-14 col-xs-12 text-right">
                     <NewCheckbox
@@ -336,12 +336,12 @@ export const InvoiceGenerateGst: React.FC = () => {
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={invoiceGenGstFormFields.cgstperField}
+                    config={invoiceGenGstFormFields.cgstPerField}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={invoiceGenGstFormFields.stamountField}
+                    config={invoiceGenGstFormFields.stAmountField}
                   />
 
                   <NewInput
@@ -364,7 +364,7 @@ export const InvoiceGenerateGst: React.FC = () => {
                     errors={errors}
                     register={register}
                     control={control}
-                    config={invoiceGenGstFormFields.donotField}
+                    config={invoiceGenGstFormFields.doNotField}
                   />
                   <NewInput
                     errors={errors}
@@ -375,13 +375,13 @@ export const InvoiceGenerateGst: React.FC = () => {
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={invoiceGenGstFormFields.sgstperField}
+                    config={invoiceGenGstFormFields.sGstPerField}
                   />
 
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={invoiceGenGstFormFields.igstperField}
+                    config={invoiceGenGstFormFields.iGstPerField}
                   />
 
                   <NewInput

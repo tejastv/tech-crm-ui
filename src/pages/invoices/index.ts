@@ -24,6 +24,8 @@ export { InvoiceListPerfoma } from "./invoice-detail-master/invoice-list-perfoma
 export { InvoiceListExceWise } from "./invoice-detail-master/invoice-list-exce-wise/InvoiceListExceWise";
 export { InvoiceSetteld } from "./invoice-detail-master/invoice-setteld/InvoiceSetteld";
 
+export { InvoiceListService } from "./invoice-detail-master/invoice-list-service-tax/InvoiceListService";
+
 export * from "./generate-invoice-master/invoice-generate-gst/invoice-gen-gst-type";
 export * from "./generate-invoice-master/generate-invoice-auto/add-generate-invoice-auto-type";
 export * from "./generate-invoice-master/generate-invoice-actual-buyre/generate-invoice-actual-buyre-type";

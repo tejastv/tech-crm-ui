@@ -71,7 +71,7 @@ export const Enquiries: React.FC = () => {
       header: () => <>Action</>,
     },
     {
-      accessorFn: (row) => row.enqID,
+      accessorFn: (row) => row.enqId,
       id: "enqID",
       cell: (info) => info.getValue(),
       header: () => <>SN</>,

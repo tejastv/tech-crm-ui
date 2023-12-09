@@ -51,7 +51,7 @@ const invoiceAmountValidation = {
     message: "use alphanumeric characters or hyphens only.",
   },
 } as ValidationType;
-const suppliernameValidation = {
+const supplierNameValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -71,7 +71,7 @@ const noteValidation = {
     message: "use alphanumeric characters or hyphens only.",
   },
 } as ValidationType;
-const invoicenoValidation = {
+const invoiceNoValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -98,9 +98,9 @@ const calculateValidation = {
 
 const fYearField: FormFieldType = {
   config: {
-    name: "fyear",
+    name: "fYear",
     label: "F. Year",
-    id: "fyear",
+    id: "fYear",
     options: [],
     placeholder: "Select  ",
     validation: {
@@ -121,16 +121,16 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
-const invoicedateField: FormFieldType = createFormConfig(
-  "invoicedate",
+const invoiceDateField: FormFieldType = createFormConfig(
+  "invoiceDate",
   "Invoice Date",
   "date",
   invoiceDateValidation,
   formattedDate
 );
 
-const grsamountField: FormFieldType = createFormConfig(
-  "grsamount",
+const grsAmountField: FormFieldType = createFormConfig(
+  "grsAmount",
   "Grs. Amount",
   "text",
   GrsAmountValidation,
@@ -145,8 +145,8 @@ const stField: FormFieldType = createFormConfig(
   STValidation,
   ""
 );
-const edcessField: FormFieldType = createFormConfig(
-  "edcess",
+const edCessField: FormFieldType = createFormConfig(
+  "edCess",
   "Ed. Cess",
   "text",
   edCessValidation,
@@ -154,24 +154,27 @@ const edcessField: FormFieldType = createFormConfig(
 );
 
 const calculateField: FormFieldType = createFormConfig(
-  "calculatetax",
-  "Calculate Tax",
+  "calculateTax",
+  "",
   "text",
   calculateValidation,
-  ""
+  "",
+  {
+    tax: { value: true, label: "Calculate Tax" },
+  }
 );
-const invoiceamountField: FormFieldType = createFormConfig(
-  "invoiceamount",
+const invoiceAmountField: FormFieldType = createFormConfig(
+  "invoiceAmount",
   "Invoice Amount",
   "text",
   invoiceAmountValidation,
   ""
 );
-const suplliernameField: FormFieldType = createFormConfig(
-  "suplliername",
-  "Supllier Name",
+const supplierNameField: FormFieldType = createFormConfig(
+  "supplierName",
+  "Supplier Name",
   "text",
-  suppliernameValidation,
+  supplierNameValidation,
   ""
 );
 const notesField: FormFieldType = createFormConfig(
@@ -181,33 +184,31 @@ const notesField: FormFieldType = createFormConfig(
   noteValidation,
   ""
 );
-const invoicenoField: FormFieldType = createFormConfig(
-  "invoiceno",
+const invoiceNoField: FormFieldType = createFormConfig(
+  "invoiceNo",
   "Invoice No",
   "text",
-  invoicenoValidation,
+  invoiceNoValidation,
   ""
 );
 const blankField: FormFieldType = createFormConfig(
   "blank",
   "",
   "text",
-  invoicenoValidation,
+  invoiceNoValidation,
   ""
 );
 
 export const addPurchaseBillsFormFields = {
   fYearField,
-  invoicedateField,
-  grsamountField,
+  invoiceDateField,
+  grsAmountField,
   calculateField,
   stField,
-  edcessField,
-  invoiceamountField,
-
-  suplliernameField,
+  edCessField,
+  invoiceAmountField,
+  supplierNameField,
   notesField,
-
-  invoicenoField,
+  invoiceNoField,
   blankField,
 };
