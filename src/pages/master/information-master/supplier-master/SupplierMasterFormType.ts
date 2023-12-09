@@ -1,3 +1,5 @@
+import { Options } from "@shared/index";
+
 export interface SupplierMasterFormType {
   id?: number;
   address: string;
@@ -5,11 +7,11 @@ export interface SupplierMasterFormType {
   fax: string;
   supplierId: number;
   supplierName: string;
-  cityId: number;
-  stateId: number;
-  countryId: number;
+  cityId: Options;
+  stateId: Options;
+  countryId: Options;
   email: string;
-  currencyId: number;
+  currencyId: Options;
   nickName: string;
   website: string;
   phone: string;

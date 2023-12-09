@@ -74,7 +74,7 @@ export const Executive: React.FC = () => {
     },
   ];
 
-  const { data: executiveData, isLoading } = getExecutive();
+  const { data: executiveData, isFetching } = getExecutive();
   const { mutateAsync: deleteExecutive } = deleteExecutiveMutation();
 
   const deleteExecutiveClick = async (executiveData: any) => {
@@ -85,7 +85,9 @@ export const Executive: React.FC = () => {
   };
 
   const editExecutiveClick = (executiveData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", executiveData.executiveId));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", executiveData.executiveId), {
+      state: null,
+    });
   };
 
   const tableConfig: TableType<ExecutiveType> = {
@@ -113,7 +115,7 @@ export const Executive: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

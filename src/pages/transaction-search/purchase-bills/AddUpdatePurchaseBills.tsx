@@ -1,17 +1,22 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   BorderLayout,
   Card,
-  Input,
   ActionButtons,
-  Select,
-  SingleCheckbox,
+  NewSelect,
+  NewInput,
+  NewCheckbox,
 } from "@shared/index";
 import { useParams } from "react-router-dom";
 import { addPurchaseBillsFormFields } from "@transaction-search/index";
 
 export const AddUpdatePurchase: React.FC = () => {
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = useForm<any>();
   //   const methods = useForm<AddUpdatePurchaseType>();
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();
@@ -36,89 +41,99 @@ export const AddUpdatePurchase: React.FC = () => {
     };
   }, []);
 
-  //   if (params.id) {
-  //     const { data: currencyData, isSuccess: currencyDataSuccess } = getCurrencyData(
-  //       "" + params.id
-  //     );
-  //     if (currencyDataSuccess) {
-  //       addCurrencyFormFields.currencyField.config.setData = currencyData?.currencyType;
-  //       addCurrencyFormFields.symbolField.config.setData = currencyData?.currencySymbol;
-  //       addCurrencyFormFields.currencyWordField.config.setData = currencyData?.currencyInWord;
-  //       addCurrencyFormFields.purchesExchanegField.config.setData = currencyData?.exchangeRateRs;
-  //       addCurrencyFormFields.pDateField.config.setData = currencyData?.entryDate;
-  //       addCurrencyFormFields.sellExchanegField.config.setData = currencyData?.exchangeRateRsSell;
-  //       addCurrencyFormFields.sDateField.config.setData = currencyData?.entryDateSell;
-  //     }
-  //   } else {
-  //     useEffect(() => {
-  //       methods.reset();
-  //     }, []);
-  //   }
-
   const methods = useForm();
   const onSubmit = methods.handleSubmit((data): void => {
     console.log("value", data);
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-4 col-xs-12">
-                  <div className="card-body">
-                      
-                        <Select config={addPurchaseBillsFormFields.fYearField.config}/>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-4 col-xs-12">
+              <div className="card-body">
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addPurchaseBillsFormFields.fYearField}
+                />
 
-                        <Input config={addPurchaseBillsFormFields.invoicedateField.config}/>
-                        <Input config={ addPurchaseBillsFormFields.grsamountField.config}/>
-
-                        <div className="col-md-7 col-xs-12 text-right">
-                          <SingleCheckbox config={ addPurchaseBillsFormFields.calculateField.config }/>
-                        </div>
-
-                        <Input config={addPurchaseBillsFormFields.stField.config}/>
-                                                
-                        <Input config={ addPurchaseBillsFormFields.edcessField.config }/>
-                        
-                        <Input config={ addPurchaseBillsFormFields.invoiceamountField.config}/>
-
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addPurchaseBillsFormFields.invoiceDateField}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addPurchaseBillsFormFields.invoiceDateField}
+                />
+                <div className="col-md-7 col-xs-12">
+                  <NewCheckbox
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={addPurchaseBillsFormFields.calculateField}
+                  />
                 </div>
-                </div>
-
-                <div className="col-4 col-xs-12">
-                  <div className="card-body">
-
-                      <Select config={addPurchaseBillsFormFields.suplliernameField.config}/>
-
-                      <Input config={addPurchaseBillsFormFields.notesField.config}/>
-                  </div>
-                </div>
-
-                <div className="col-4 col-xs-12">
-                  <div className="card-body">
-                    
-                    <Input config={addPurchaseBillsFormFields.invoicenoField.config}/>
-
-                  </div>
-                </div>
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addPurchaseBillsFormFields.stField}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addPurchaseBillsFormFields.edCessField}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addPurchaseBillsFormFields.invoiceAmountField}
+                />
               </div>
-            </BorderLayout>
-            <div className="card-body">
-              <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-                <ActionButtons />
-              </BorderLayout>
             </div>
-          </form>
-        </FormProvider>
-      </Card>
-    </>
+
+            <div className="col-4 col-xs-12">
+              <div className="card-body">
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addPurchaseBillsFormFields.supplierNameField}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addPurchaseBillsFormFields.notesField}
+                />
+              </div>
+            </div>
+
+            <div className="col-4 col-xs-12">
+              <div className="card-body">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addPurchaseBillsFormFields.invoiceNoField}
+                />
+              </div>
+            </div>
+          </div>
+        </BorderLayout>
+        <div className="card-body">
+          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <ActionButtons />
+          </BorderLayout>
+        </div>
+      </form>
+    </Card>
   );
 };

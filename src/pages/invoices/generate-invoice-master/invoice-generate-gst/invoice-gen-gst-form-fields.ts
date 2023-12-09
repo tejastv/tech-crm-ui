@@ -457,7 +457,7 @@ const symbolField: FormFieldType = createFormConfig(
   ""
 );
 
-const currencyinwordField: FormFieldType = createFormConfig(
+const currencyInwardField: FormFieldType = createFormConfig(
   "currencyinword",
   "Currency in Word",
   "text",
@@ -481,7 +481,7 @@ const fYearField: FormFieldType = {
   },
 };
 
-const invoicenoField: FormFieldType = createFormConfig(
+const invoiceNoField: FormFieldType = createFormConfig(
   "invoiceno",
   "Invoice No.",
   "text",
@@ -519,7 +519,7 @@ const stField: FormFieldType = createFormConfig(
   ""
 );
 
-const cgstperField: FormFieldType = createFormConfig(
+const cgstPerField: FormFieldType = createFormConfig(
   "cgstper",
   "CGST%",
   "text",
@@ -527,7 +527,7 @@ const cgstperField: FormFieldType = createFormConfig(
   ""
 );
 
-const stamountField: FormFieldType = createFormConfig(
+const stAmountField: FormFieldType = createFormConfig(
   "stamount",
   "ST Amount",
   "text",
@@ -551,7 +551,7 @@ const dateField: FormFieldType = createFormConfig(
   formattedDate
 );
 
-const donotField: FormFieldType = createFormConfig(
+const doNotField: FormFieldType = createFormConfig(
   "Do Not Comparereportwithinvoicedate",
   "",
   "checkbox",
@@ -568,7 +568,7 @@ const subtotalField: FormFieldType = createFormConfig(
   ""
 );
 
-const sgstperField: FormFieldType = createFormConfig(
+const sGstPerField: FormFieldType = createFormConfig(
   "sgstper",
   "SGST%",
   "text",
@@ -576,7 +576,7 @@ const sgstperField: FormFieldType = createFormConfig(
   ""
 );
 
-const igstperField: FormFieldType = createFormConfig(
+const iGstPerField: FormFieldType = createFormConfig(
   "igstper",
   "IGST%",
   "text",
@@ -638,27 +638,26 @@ export const invoiceGenGstFormFields = {
   countryField,
   stateField,
   stateActualBuyreField,
-
   codeField,
   gstField,
   gstActualBuyreField,
   toDateField,
   symbolField,
-  currencyinwordField,
+  currencyInwardField,
   fYearField,
-  invoicenoField,
+  invoiceNoField,
   manualField,
   amountField,
   disAmountField,
   stField,
-  cgstperField,
-  stamountField,
+  cgstPerField,
+  stAmountField,
   cgstField,
   dateField,
-  donotField,
+  doNotField,
   subtotalField,
-  sgstperField,
-  igstperField,
+  sGstPerField,
+  iGstPerField,
   sgstField,
   igstField,
   sTaxField,

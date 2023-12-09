@@ -389,7 +389,7 @@ const symbolField: FormFieldType = createFormConfig(
   ""
 );
 
-const currencyinwordField: FormFieldType = createFormConfig(
+const currencyInwardField: FormFieldType = createFormConfig(
   "currencyinword",
   "Currency in Word",
   "text",
@@ -450,7 +450,7 @@ const stField: FormFieldType = createFormConfig(
   ""
 );
 
-const cgstperField: FormFieldType = createFormConfig(
+const cgstPerField: FormFieldType = createFormConfig(
   "cgstper",
   "CGST%",
   "text",
@@ -458,7 +458,7 @@ const cgstperField: FormFieldType = createFormConfig(
   ""
 );
 
-const stamountField: FormFieldType = createFormConfig(
+const stAmountField: FormFieldType = createFormConfig(
   "stamount",
   "ST Amount",
   "text",
@@ -482,7 +482,7 @@ const dateField: FormFieldType = createFormConfig(
   formattedDate
 );
 
-const donotField: FormFieldType = createFormConfig(
+const doNotField: FormFieldType = createFormConfig(
   "Do Not Comparereportwithinvoicedate",
   "Do Not Compare Report with Invoice Date",
   "checkbox",
@@ -498,7 +498,7 @@ const subtotalField: FormFieldType = createFormConfig(
   ""
 );
 
-const sgstperField: FormFieldType = createFormConfig(
+const sGstPerField: FormFieldType = createFormConfig(
   "sgstper",
   "SGST%",
   "text",
@@ -506,7 +506,7 @@ const sgstperField: FormFieldType = createFormConfig(
   ""
 );
 
-const igstperField: FormFieldType = createFormConfig(
+const iGstPerField: FormFieldType = createFormConfig(
   "igstper",
   "IGST%",
   "text",
@@ -569,21 +569,21 @@ export const addGeneratePiFormFields = {
   gstField,
   todateeField,
   symbolField,
-  currencyinwordField,
+  currencyInwardField,
   fyearField,
   invoicenoField,
   manualField,
   amountField,
   disamountField,
   stField,
-  cgstperField,
-  stamountField,
+  cgstPerField,
+  stAmountField,
   cgstField,
   dateField,
-  donotField,
+  doNotField,
   subtotalField,
-  sgstperField,
-  igstperField,
+  sGstPerField,
+  iGstPerField,
   sgstField,
   igstField,
   staxField,

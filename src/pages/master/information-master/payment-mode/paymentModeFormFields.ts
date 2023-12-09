@@ -11,7 +11,7 @@ const PaymentModeValidation = {
   },
 } as ValidationType;
 
-const paymentmode: FormFieldType = createFormConfig(
+const paymentMode: FormFieldType = createFormConfig(
   "paymentMode",
   "Payment Mode",
   "text",
@@ -20,5 +20,5 @@ const paymentmode: FormFieldType = createFormConfig(
 );
 
 export const paymentModeFormFields = {
-  paymentmode,
+  paymentMode,
 };

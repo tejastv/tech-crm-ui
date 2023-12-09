@@ -3,11 +3,12 @@ import { useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, NewInput } from "@shared/index";
 import {
+  PaymentModeType,
   PaymentModeFormType,
   paymentModeFormFields,
   usePaymentModeApiCallHook,
 } from "@master/index";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export const PaymentModeForm: React.FC = () => {
   const {
@@ -24,6 +25,7 @@ export const PaymentModeForm: React.FC = () => {
   const { mutateAsync: addPaymentMode } = addPaymentModeMutation();
   const { mutateAsync: updatePaymentMode } = updatePaymentModeMutation();
   const params = useParams();
+  const { state: localPayModeData } = useLocation();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -44,20 +46,35 @@ export const PaymentModeForm: React.FC = () => {
     };
   }, []);
 
-  if (params.id) {
-    const { data: paymentModeData, isSuccess: paymentModeDataSuccess } =
-      getPaymentModeData("" + params.id);
-    console.log(params.id);
+  const { data: paymentModeData } = getPaymentModeData(
+    "" + params.id,
+    !localPayModeData && params.id !== undefined
+  );
 
-    if (paymentModeDataSuccess) {
-      paymentModeFormFields.paymentmode.config.setData =
-        paymentModeData?.paymentMode;
+  const mapPayModeDataToPayModeForm = (enqData: PaymentModeType) => {
+    let enqFormData: Partial<PaymentModeFormType> = {
+      paymentMode: enqData.paymentMode,
+    };
+
+    return enqFormData;
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      if (paymentModeData && Object.values(paymentModeData).length > 0) {
+        reset(mapPayModeDataToPayModeForm(paymentModeData));
+      }
     }
-  } else {
-    useEffect(() => {
-      reset();
-    }, []);
-  }
+  }, [params.id, paymentModeData]);
+
+  useEffect(() => {
+    if (params.id) {
+      if (localPayModeData !== null) {
+        console.log(localPayModeData);
+        reset(mapPayModeDataToPayModeForm(localPayModeData));
+      }
+    }
+  }, [params.id, localPayModeData]);
 
   const onSubmit = handleSubmit((paymentModeData): void => {
     if (params.id && paymentModeData) {
@@ -82,7 +99,7 @@ export const PaymentModeForm: React.FC = () => {
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={paymentModeFormFields.paymentmode}
+                  config={paymentModeFormFields.paymentMode}
                 />
               </div>
             </div>
