@@ -21,20 +21,28 @@ export const NewCheckbox: React.FC<{
 }> = (props) => {
   const inputErrors = findInputError(props.errors, props.config.config.name);
   const isInvalid = isFormInvalid(inputErrors);
+  const options =
+    props.config.config.options && Object.values(props.config.config.options);
   return (
     <div className="row">
       <div className="col-12">
         <div className="form-group row">
-          <Form.Label
-            className="col-sm-3 control-label col-form-label"
-            htmlFor={props.config.config.id}
+          {props.config.config.label && (
+            <Form.Label
+              className="col-sm-3 control-label col-form-label"
+              htmlFor={props.config.config.id}
+            >
+              {props.config.config.label}{" "}
+              {props.config.config.validation?.required.value && <span>*</span>}
+            </Form.Label>
+          )}
+          <div
+            className={`${
+              props.config.config.label ? "col-md-9" : "col-md-12"
+            }`}
           >
-            {props.config.config.label}{" "}
-            {props.config.config.validation?.required.value && <span>*</span>}
-          </Form.Label>
-          <div className="col-sm-9">
-            {props.config.config.options &&
-              props.config.config.options.map((option, index) => {
+            {options &&
+              options.map((option, index) => {
                 return (
                   <Controller
                     name={props.config.config.name}

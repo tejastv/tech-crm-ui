@@ -34,7 +34,7 @@ export interface EnqueryFormType {
   requestNo: string;
   instruction: string;
   reportFilename: string;
-  reportPrice: number;
+  reportPrice?: number;
   reportComission: number;
   typeofEnquiry: Options;
   lineOfBusiness: string;

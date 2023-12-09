@@ -51,7 +51,7 @@ export const AddUpdateCity: React.FC = () => {
     if (stateData) {
       setStateOptions(Object.values(stateData));
     }
-  }, [stateData?.length && Object.values(stateData).length]);
+  }, [stateData && Object.values(stateData).length]);
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
@@ -101,48 +101,43 @@ export const AddUpdateCity: React.FC = () => {
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <form
-          onSubmit={onSubmit}
-          noValidate
-          autoComplete="off"
-          className="p-t-20"
-        >
-          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-            <div className="row">
-              <div className="col-md-6 col-xs-12">
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addCityFormFields.cityField}
-                />
-                {/* <Input config={addCityFormFields.cityField.config} /> */}
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={addCityFormFields.osPrintField}
-                />
-                {/* <Input config={addCityFormFields.osPrintField.config} /> */}
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <NewSelect
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={addCityFormFields.state}
-                />
-                {/* <Select config={addCityFormFields.state.config} /> */}
-              </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addCityFormFields.cityField}
+              />
             </div>
-          </BorderLayout>
-          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-            <ActionButtons />
-          </BorderLayout>
-        </form>
-      </Card>
-    </>
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={addCityFormFields.osPrintField}
+              />
+            </div>
+            <div className="col-md-6 col-xs-12">
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={addCityFormFields.state}
+              />
+            </div>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

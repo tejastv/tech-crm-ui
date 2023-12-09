@@ -497,36 +497,6 @@ const fYearValidation = {
 } as ValidationType;
 // Option Section
 // Right Field start
-const enqTypeOption = [
-  { value: "NEW", label: "NEW" },
-  { value: "RENUAL", label: "RENUAL" },
-];
-const localSourceEnquiryOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const ServiceOptions = [
-  { value: "India", label: "India" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const printStatusOption = [
-  { value: "Not Received ", label: " Not Received" },
-  {
-    value: "Received",
-    label: "Received",
-  },
-];
-const EnqStatusOptions = [
-  { value: "1-Pending", label: "1-Pending" },
-  { value: "2-Pending", label: "2-Pending" },
-];
-const sVisitOptions = [
-  { value: "in %", label: "in %" },
-  { value: "Per Report", label: "Per Report" },
-  { value: "NO Discount", label: "NO Discount" },
-];
 const companyField: FormFieldType = createFormConfig(
   "company",
   "Company",
@@ -554,7 +524,7 @@ const sourceField: FormFieldType = createFormConfig(
   "select",
   sourceValidation,
   "",
-  []
+  {}
 );
 
 const givenAddressField: FormFieldType = createFormConfig(
@@ -563,7 +533,7 @@ const givenAddressField: FormFieldType = createFormConfig(
   "textarea",
   givenAddressValidation,
   "Enter Address",
-  [],
+  {},
   false,
   true
 );
@@ -615,7 +585,7 @@ const cityField: FormFieldType = createFormConfig(
   "select",
   cityEnquiryValidation,
   "Select City",
-  []
+  {}
 );
 const zipField: FormFieldType = createFormConfig(
   "zip",
@@ -630,7 +600,7 @@ const stateField: FormFieldType = createFormConfig(
   "select",
   stateEnquiryValidation,
   "Select State",
-  []
+  {}
 );
 const stateCodeField: FormFieldType = createFormConfig(
   "state",
@@ -645,7 +615,7 @@ const countryField: FormFieldType = createFormConfig(
   "select",
   countryEnquiryValidation,
   "Select Country",
-  []
+  {}
 );
 
 // Right Side Fields
@@ -655,7 +625,7 @@ const blankField: FormFieldType = createFormConfig(
   "text",
   blankValidation,
   "",
-  [],
+  {},
   true
 );
 const givenNameField: FormFieldType = createFormConfig(
@@ -686,7 +656,7 @@ const enqTypeField: FormFieldType = createFormConfig(
   "select",
   enqValidation,
   "",
-  enqTypeOption
+  {}
 );
 const localSourceField: FormFieldType = createFormConfig(
   "localSource",
@@ -694,7 +664,7 @@ const localSourceField: FormFieldType = createFormConfig(
   "select",
   localSourceEnquiryValidation,
   "Select Local Source",
-  localSourceEnquiryOptions
+  {}
 );
 const serviceTypeField: FormFieldType = createFormConfig(
   "serviceType",
@@ -702,7 +672,7 @@ const serviceTypeField: FormFieldType = createFormConfig(
   "select",
   serviceTypeValidation,
   "Select Service",
-  ServiceOptions
+  {}
 );
 const dueOnField: FormFieldType = createFormConfig(
   "dueOn",
@@ -717,7 +687,7 @@ const printStatusField: FormFieldType = createFormConfig(
   "select",
   printStatusValidationValidation,
   "",
-  printStatusOption
+  {}
 );
 const enqStatusField: FormFieldType = createFormConfig(
   "enqStatus",
@@ -725,7 +695,7 @@ const enqStatusField: FormFieldType = createFormConfig(
   "select",
   enqStatusValidation,
   "",
-  EnqStatusOptions
+  {}
 );
 
 const sVisitField: FormFieldType = createFormConfig(
@@ -734,7 +704,7 @@ const sVisitField: FormFieldType = createFormConfig(
   "select",
   sVisitValidation,
   "",
-  sVisitOptions
+  {}
 );
 const notesForField: FormFieldType = createFormConfig(
   "notesForEnquiry",
@@ -803,7 +773,7 @@ const companyIdField: FormFieldType = createFormConfig(
   "text",
   companyIdValidation,
   "",
-  [],
+  {},
   true
 );
 const bankField: FormFieldType = createFormConfig(

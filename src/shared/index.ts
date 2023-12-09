@@ -21,6 +21,7 @@ export { Image } from "./components/ui/Image";
 export { DivLayout } from "./components/ui/Div-layout";
 export { Loader } from "./components/ui/Loader";
 export { DebouncedInput } from "./components/ui/DebouncedInput";
+export { NewSingleCheckbox } from "./components/ui/NewSingleCheckbox";
 export { TableCell } from "./components/ui/TableCell";
 export { EditCell } from "./components/ui/EditCell";
 export { NewInput } from "./components/ui/NewInput";
@@ -54,9 +55,3 @@ export * from "./types/toaster-type";
 export * from "./types/api-response-type";
 export * from "./types/pegination-config-type";
 export * from "./types/pagination-type";
-
-///////////////////////////////////////////////////////////////
-//DEV
-export { Components } from "./components/ui/dev/Components";
-export * from "./components/ui/dev/form-fields";
-///////////////////////////////////////////////////////////////

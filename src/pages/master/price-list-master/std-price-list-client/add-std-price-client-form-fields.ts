@@ -12,21 +12,15 @@ const StdPriceClientCurrencyValidation = {
   },
 } as ValidationType;
 
-const StdpriceClientCurrencyOptions = [
-  { value: "Mumbai", label: "200" },
-  { value: "strawberry", label: "300" },
-  { value: "vanilla", label: "400" },
-];
-
 const stdPriceClientCurrency: FormFieldType = createFormConfig(
   "stdpriceclientcurrencey",
   "Currency",
   "select",
   StdPriceClientCurrencyValidation,
   "Select Currency",
-  StdpriceClientCurrencyOptions
+  {}
 );
 
-export const addStdPriceClientsFormFields = {
+export const stdPriceClientsFormFields = {
   stdPriceClientCurrency,
 };

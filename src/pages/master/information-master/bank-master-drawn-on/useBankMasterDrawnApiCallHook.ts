@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddBankdrawnonType, BankdrawnonType } from "@master/index";
+import { BankDrawnOnFormType, BankdrawnonType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -47,7 +47,7 @@ export const useBankMasterDrawnApiCallHook = () => {
   };
 
   const addBankMasterDrawnOn = async (
-    BankdrawnOnData: AddBankdrawnonType
+    BankdrawnOnData: BankDrawnOnFormType
   ): Promise<ApiResponseType<BankdrawnonType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_BANKMASTER_DRAWN,
@@ -58,7 +58,7 @@ export const useBankMasterDrawnApiCallHook = () => {
 
   const addBankMasterDrawnOnMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddBankdrawnonType) => addBankMasterDrawnOn(updatedItem),
+      (updatedItem: BankDrawnOnFormType) => addBankMasterDrawnOn(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -72,7 +72,7 @@ export const useBankMasterDrawnApiCallHook = () => {
   };
 
   const updateBankMasterDrawnOnData = async (
-    BankMasterDrawnOnData: AddBankdrawnonType
+    BankMasterDrawnOnData: BankDrawnOnFormType
   ): Promise<ApiResponseType<BankdrawnonType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_BANKMASTER_DRAWN.replace(
@@ -86,7 +86,7 @@ export const useBankMasterDrawnApiCallHook = () => {
 
   const updateBankMasterDrawnOnMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddBankdrawnonType) =>
+      (updatedItem: BankDrawnOnFormType) =>
         updateBankMasterDrawnOnData(updatedItem),
       {
         onSuccess: async () => {

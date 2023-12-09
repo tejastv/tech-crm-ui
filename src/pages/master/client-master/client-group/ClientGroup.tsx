@@ -129,7 +129,7 @@ export const GroupMaster: React.FC = () => {
     config: {
       tableName: "Group Master",
       columns: columns,
-      tableData: clientGroupData || [],
+      tableData: (clientGroupData && Object.values(clientGroupData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -150,7 +150,7 @@ export const GroupMaster: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

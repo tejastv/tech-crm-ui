@@ -1,14 +1,14 @@
 // Company master child pages
-export { AddUpdateCompany } from "./company/AddUpdateCompany";
+export { CompanyForm } from "./company/CompanyForm";
 export { CompanyMaster } from "./company/Company";
 
 // Client master child pages
 export { Client } from "./client-master/client/Client";
-export { AddUpdateClient } from "./client-master/client/AddUpdateClient";
+export { ClientForm } from "./client-master/client/ClientForm";
 
 // Client Segment master child pages
 export { GroupMaster } from "./client-master/client-group/ClientGroup";
-export { AddUpdateClientGroup } from "./client-master/client-group/AddUpdateClientGroup";
+export { ClientGroupForm } from "./client-master/client-group/ClientGroupForm";
 export { Segment } from "./client-master/segment/Segment";
 export { AddUpdateSegment } from "./client-master/segment/AddUpdateSegment";
 
@@ -32,7 +32,7 @@ export { ActualBuyer } from "./price-list-master/actual-buyer/ActualBuyer";
 
 //Local Source
 // LocalSource Child Page
-export { AddUpdateLocalSource } from "./local-source-master/local-source/AddUpdateLocalSource";
+export { LocalSourceForm } from "./local-source-master/local-source/LocalSourceForm";
 export { LocalSource } from "./local-source-master/local-source/LocalSource";
 // Price List Child Page
 export { AddPrice } from "./local-source-master/price-list/AddPrice";
@@ -47,98 +47,98 @@ export { AddUpdateContinent } from "./location-master/continent/AddUpdateContine
 export { Continent } from "./location-master/continent/Continent";
 
 //BankMasterDeposit master child pages
-export { AddBankMasterDeposit } from "./information-master/bank-master-deposit/AddUpdateBankDeposit";
+export { BankMasterDepositForm } from "./information-master/bank-master-deposit/BankMasterDepositForm";
 export { BankMasterDeposit } from "./information-master/bank-master-deposit/BankDeposit";
 
-export { AddPaymentMode } from "./information-master/payment-mode/AddPaymentMode";
+export { PaymentModeForm } from "./information-master/payment-mode/PaymentModeForm";
 export { PaymentMode } from "./information-master/payment-mode/PaymentMode";
 
-export { AddUpdateCurrency } from "./information-master/currency/AddUpdateCurrency";
+export { CurrencyForm } from "./information-master/currency/CurrencyForm";
 export { Currency } from "./information-master/currency/Currency";
-export { AddUpdateSource } from "./information-master/source/AddUpdateSource";
+export { SourceForm } from "./information-master/source/SourceForm";
 export { Source } from "./information-master/source/Source";
-export { AddSupplier } from "./information-master/supplier-master/AddUpdateSupplier";
+export { SupplierForm } from "./information-master/supplier-master/SupplierForm";
 export { Supplier } from "./information-master/supplier-master/Supplier";
-export { AddBankMasterDrawn } from "./information-master/bank-master-drawn-on/AddUpdateBankDrawn";
+export { BankMasterDrawnForm } from "./information-master/bank-master-drawn-on/BankMasterDrawnForm";
 export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankDrawn";
 
 // Information Master 2
 export { AddUpdateIndustry } from "./information-master-2/industry/AddUpdateIndustry";
 export { Industry } from "./information-master-2/industry/Industry";
 
-export { AddUpdateCalltype } from "./information-master-2/call-type/AddUpdateCalltype";
+export { CalltypeForm } from "./information-master-2/call-type/CalltypeForm";
 export { CallType } from "./information-master-2/call-type/CallType";
 
 export { AddUpdatePurposeMaster } from "./information-master-2/purpose-master/AddUpdatePurposeMaster";
 export { PurposeMaster } from "./information-master-2/purpose-master/PurposeMaster";
 
-export { AddUpdateCreditDays } from "./information-master-2/credit-days/AddUpdateCreditDays";
+export { CreditDaysForm } from "./information-master-2/credit-days/CreditDaysForm";
 export { CreditDays } from "./information-master-2/credit-days/CreditDays";
 
 export { AddUpdateSiteStatus } from "./information-master-2/site-status/AddUpdateSiteStatus";
 export { SiteStatus } from "./information-master-2/site-status/SiteStatus";
 
-export { AddUpdateExecutive } from "./information-master-2/executive/AddUpdateExecutive";
+export { ExecutiveForm } from "./information-master-2/executive/ExecutiveForm";
 export { Executive } from "./information-master-2/executive/Executive";
 
-export { AddUpdateFinYear } from "./information-master-2/fin-year/AddUpdateFinyear";
+export { FinYearForm } from "./information-master-2/fin-year/FinYearForm";
 export { FinYear } from "./information-master-2/fin-year/FinYear";
 
 export { AddUpdateUser } from "./information-master-2/user-master/AddUpdateUser";
 export { User } from "./information-master-2/user-master/User";
 
 //Form Fields
-export { addClientFormFields } from "./client-master/client/add-client-form-fields";
+export { clientFormFields } from "./client-master/client/clientFormFields";
 export { addStateFormFields } from "./location-master/state/add-state-form-fields";
 export { addCityFormFields } from "./location-master/city/add-city-form-fields";
 
-export { addClientGroupFormFields } from "./client-master/client-group/add-client-group-form-fields";
+export { addClientGroupFormFields } from "./client-master/client-group/addClientGroupFormFields";
 export { addSegmentFormFields } from "./client-master/segment/add-segment-form-fields";
 
-export { addCompanyFormFields } from "./company/add-update-company-form-fields";
+export { companyFormFields } from "./company/companyFormFields";
 
-export { addPriceClientFormFields } from "./price-list-master/price-list-for-clients/price-list-for-clients-form-fields";
-export { addStdPriceClientsFormFields } from "./price-list-master/std-price-list-client/add-std-price-client-form-fields";
+export { priceClientFormFields } from "./price-list-master/price-list-for-clients/priceClientFormFields";
+export { stdPriceClientsFormFields } from "./price-list-master/std-price-list-client/add-std-price-client-form-fields";
 export { addActualBuyersFormFields } from "./price-list-master/actual-buyer/add-actual-buyer-form-fields";
-export { addPriceGroupFormFields } from "./price-list-master/price-list-group-wise/add-price-group-form-fields";
+export { priceGroupFormFields } from "./price-list-master/price-list-group-wise/priceGroupFormFields";
 
-export { addLocalSrouceFormFields } from "./local-source-master/local-source/add-localSource-form-fields";
+export { localSourceFormFields } from "./local-source-master/local-source/localSourceFormFields";
 export { addPriceFormFields } from "./local-source-master/price-list/add-price-form-fields";
-export { addStdPriceFormFields } from "./local-source-master/std-price-list/add-std-price-form-fields";
+export { stdPriceFormFields } from "./local-source-master/std-price-list/stdPriceFormFields";
 // export * from "./local-source-master/features/form-fields/add-price";
 // export * from "./local-source-master/features/form-fields/add-std-price";
 
 export { addCoutryFormFields } from "./location-master/country/add-country-form-fields";
 export { addContinentFormFields } from "./location-master/continent/add-continent-form-fields";
 
-export { addBankDepositeFormFields } from "./information-master/bank-master-deposit/add-bankdeposit-form-fields";
-export { addPaymentModeFormFields } from "./information-master/payment-mode/add-paymentmode-form-fileds";
-export { addSourceFormFields } from "./information-master/source/add-source-form-fields";
-export { addBankdrawnonFormFields } from "./information-master/bank-master-drawn-on/add-bankdrawnon-form-fields";
-export { addSupplierFormFields } from "./information-master/supplier-master/add-supplier-form-fields";
-export { addCurrencyFormFields } from "./information-master/currency/add-currency-form-fields";
+export { bankDepositeFormFields } from "./information-master/bank-master-deposit/bankDepositeFormFields";
+export { paymentModeFormFields } from "./information-master/payment-mode/paymentModeFormFields";
+export { sourceFormFields } from "./information-master/source/sourceFormFields";
+export { bankDrawnOnFormFields } from "./information-master/bank-master-drawn-on/bankDrawnOnFormFields";
+export { supplierFormFields } from "./information-master/supplier-master/supplierFormFields";
+export { currencyFormFields } from "./information-master/currency/currencyFormFields";
 
 export { addIndustryFormFields } from "./information-master-2/industry/add-industry-form-fields";
-export { addCallTypeFormFields } from "./information-master-2/call-type/add-calltype-form-fields";
+export { callTypeFormFields } from "./information-master-2/call-type/callTypeFormFields";
 export { addPurposeFormFields } from "./information-master-2/purpose-master/add-purpose-form-fields";
-export { addCreditDaysFormFields } from "./information-master-2/credit-days/add-creditdays-form-fields";
+export { creditDaysFormFields } from "./information-master-2/credit-days/creditDaysFormFields";
 export { addSiteStatusFormFields } from "./information-master-2/site-status/add-sitestatus-form-fields";
-export { addExecutiveFormFields } from "./information-master-2/executive/add-executive-form-field";
-export { addFinYearFormFields } from "./information-master-2/fin-year/add-finyear-form-fields";
+export { executiveFormFields } from "./information-master-2/executive/executiveFormFields";
+export { finYearFormFields } from "./information-master-2/fin-year/finYearFormFields";
 export { addUserFormFields } from "./information-master-2/user-master/UserFormFields";
 
 // Models
 
 // company master
-export * from "./company/add-update-company-type";
-export * from "./company/company-type";
+export * from "./company/CompanyFormType";
+export * from "./company/CompanyType";
 
 // client master
-export * from "./client-master/client/client-type";
-export * from "./client-master/client/add-client-type";
+export * from "./client-master/client/ClientType";
+export * from "./client-master/client/ClientFormType";
 
-export * from "./client-master/client-group/add-update-client-group-type";
-export * from "./client-master/client-group/client-group-type";
+export * from "./client-master/client-group/ClientGroupFormType";
+export * from "./client-master/client-group/ClientGroupType";
 
 export * from "./client-master/segment/add-update-segment.type";
 export * from "./client-master/segment/segment-type";
@@ -149,56 +149,56 @@ export * from "./price-list-master/actual-buyer/add-actual-buyer-type";
 
 // export * from "./price-list-master/price-list-for-clients/price-client-type";
 
-export * from "./price-list-master/price-list-group-wise/price-group-type";
+export * from "./price-list-master/price-list-group-wise/PriceGroupType";
 
 export * from "./price-list-master/std-price-list-client/add-std-price-client-type";
-export * from "./price-list-master/std-price-list-client/std-price-client-type";
+export * from "./price-list-master/std-price-list-client/CurrencyWisePriceType";
 
 export * from "./price-list-master/std-price-list-client/add-std-price-client-type";
-export * from "./price-list-master/std-price-list-client/std-price-client-type";
+export * from "./price-list-master/std-price-list-client/CurrencyWisePriceType";
 
 // Local Source
 
-export * from "./local-source-master/local-source/add-update-localSource-type";
-export * from "./local-source-master/local-source/localSource-type";
+export * from "./local-source-master/local-source/LocalSourceFormType";
+export * from "./local-source-master/local-source/LocalSourceType";
 
 export * from "./local-source-master/price-list/add-price-type";
 export * from "./local-source-master/price-list/price-type";
 
 export * from "./local-source-master/std-price-list/add-update-std-price-type";
-export * from "./local-source-master/std-price-list/std-price-type";
+export * from "./local-source-master/std-price-list/StdPriceType";
 
-export * from "./information-master/bank-master-deposit/add-update-bankdeposit-type";
-export * from "./information-master/bank-master-deposit/bankdeposit-type";
+export * from "./information-master/bank-master-deposit/BankDepositFormType";
+export * from "./information-master/bank-master-deposit/BankDepositType";
 
-export * from "./information-master/bank-master-drawn-on/add-update-bankdrawnon-type";
-export * from "./information-master/bank-master-drawn-on/bankdrawnon-type";
+export * from "./information-master/bank-master-drawn-on/BankDrawnOnFormType";
+export * from "./information-master/bank-master-drawn-on/BankdrawnonType";
 
-export * from "./information-master/currency/add-update-currency-type";
-export * from "./information-master/currency/currency-type";
+export * from "./information-master/currency/CurrencyFormType";
+export * from "./information-master/currency/CurrencyType";
 
-export * from "./information-master/payment-mode/add-paymentmode-type";
-export * from "./information-master/payment-mode/paymentmode-type";
+export * from "./information-master/payment-mode/PaymentModeFormType";
+export * from "./information-master/payment-mode/PaymentModeType";
 
-export * from "./information-master/source/add-update-source-type";
-export * from "./information-master/source/source-type";
+export * from "./information-master/source/SourceFormType";
+export * from "./information-master/source/SourceType";
 
-export * from "./information-master/supplier-master/add-update-supplier-type";
-export * from "./information-master/supplier-master/supplier-type";
+export * from "./information-master/supplier-master/SupplierMasterFormType";
+export * from "./information-master/supplier-master/SupplierMasterType";
 
 // information master
-export * from "./information-master-2/call-type/add-update-calltype-type";
-export * from "./information-master-2/call-type/calltype-type";
+export * from "./information-master-2/call-type/CallTypeFormType";
+export * from "./information-master-2/call-type/CallTypeType";
 
-export * from "./information-master-2/credit-days/add-update-creditdays-type";
-export * from "./information-master-2/credit-days/creditdays-type";
+export * from "./information-master-2/credit-days/CreditDaysFormType";
+export * from "./information-master-2/credit-days/CreditDaysType";
 
-export * from "./information-master-2/executive/add-update-executive-type";
-export * from "./information-master-2/executive/executive-type";
+export * from "./information-master-2/executive/ExecutiveFormType";
+export * from "./information-master-2/executive/ExecutiveType";
 
-export * from "./information-master-2/fin-year/add-update-finyear-type";
-export * from "./information-master-2/fin-year/finyear-type";
-export * from "./information-master-2/fin-year/last-fin-year-type";
+export * from "./information-master-2/fin-year/FinYearFormType";
+export * from "./information-master-2/fin-year/FinYearType";
+export * from "./information-master-2/fin-year/LastFinYearType";
 
 export * from "./information-master-2/industry/add-update-industry-type";
 export * from "./information-master-2/industry/industry-type";
@@ -221,14 +221,14 @@ export * from "./location-master/city/add-update-city-type";
 export * from "./location-master/state/StateFormType";
 export * from "./location-master/continent/add-update-continent-type";
 export * from "./location-master/country/add-update-country-type";
-export * from "./price-list-master/price-list-group-wise/city-wise-group-type";
-export * from "./price-list-master/price-list-group-wise/group-wise-currency-type";
-export * from "./price-list-master/price-list-for-clients/currency-and-group-type";
+export * from "./price-list-master/price-list-group-wise/CityWiseGroupType";
+export * from "./price-list-master/price-list-group-wise/GroupWiseCurrencyType";
+export * from "./price-list-master/price-list-for-clients/CurrencyAndGroupType";
 export * from "./client-master/client-group/client-group-basedon-clientID-type";
-export * from "./price-list-master/price-list-group-wise/update-price-group-type";
+export * from "./price-list-master/price-list-group-wise/UpdatePriceListForGroupType";
 export * from "./price-list-master/std-price-list-client/update-standard-price-type";
-export * from "./local-source-master/std-price-list/update-ls-standard-price-type";
-export * from "./price-list-master/price-list-for-clients/client-wise-price-type";
+export * from "./local-source-master/std-price-list/UpdateLsStandardPriceType";
+export * from "./price-list-master/price-list-for-clients/ClientWisePriceType";
 
 // Transaction master
 export * from "../transaction-search/enquiries/enquiry-list/EnquiriesType";

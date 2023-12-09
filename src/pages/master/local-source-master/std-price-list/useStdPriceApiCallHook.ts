@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { StdPriceType, UpdateLsStandardPrice } from "@master/index";
+import { StdPriceType, UpdateLsStandardPriceType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { UseQueryResult, useMutation, useQuery } from "@tanstack/react-query";
 import { ApiResponseType } from "@shared/index";
@@ -22,7 +22,7 @@ export const useStdPriceApiCallHook = () => {
   };
 
   const updateStandardPrice = async (
-    updateStandardPrice: Array<UpdateLsStandardPrice>
+    updateStandardPrice: Array<UpdateLsStandardPriceType>
   ): Promise<ApiResponseType<any>> => {
     const response = await instance.post(
       apiUrls.UPDATE_LOCALSOURCE_STANDARD_PRICE.replace(

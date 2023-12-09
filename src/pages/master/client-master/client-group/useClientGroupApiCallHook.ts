@@ -1,11 +1,11 @@
 import { useAxios } from "@hooks/useAxios";
 import {
-  AddUpdateClientGroupType,
+  ClientGroupFormType,
   ClientBasedOnClientId,
   ClientGroupType,
 } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
@@ -19,8 +19,8 @@ export const useClientGroupApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getClientGroup = (): UseQueryResult<ClientGroupType[]> => {
-    return useQuery<ClientGroupType[]>({
+  const getClientGroup = (): UseQueryResult<MapType<ClientGroupType>> => {
+    return useQuery<MapType<ClientGroupType>>({
       queryKey: [queryKeys.CLIENT_GROUP_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CLIENT_GROUP);
@@ -56,7 +56,7 @@ export const useClientGroupApiCallHook = () => {
   };
 
   const addClientGroup = async (
-    clientGroupData: AddUpdateClientGroupType
+    clientGroupData: ClientGroupFormType
   ): Promise<ApiResponseType<ClientGroupType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_CLIENT_GROUP,
@@ -67,7 +67,7 @@ export const useClientGroupApiCallHook = () => {
 
   const addClientGroupMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateClientGroupType) => addClientGroup(updatedItem),
+      (updatedItem: ClientGroupFormType) => addClientGroup(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -81,7 +81,7 @@ export const useClientGroupApiCallHook = () => {
   };
 
   const updateClientGroupData = async (
-    updateClientGroupData: AddUpdateClientGroupType
+    updateClientGroupData: ClientGroupFormType
   ): Promise<ApiResponseType<ClientGroupType>> => {
     const response = await instance.put(
       apiUrls.UPDATE_CLIENT_GROUP.replace(
@@ -98,8 +98,7 @@ export const useClientGroupApiCallHook = () => {
 
   const updateClientGroupMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateClientGroupType) =>
-        updateClientGroupData(updatedItem),
+      (updatedItem: ClientGroupFormType) => updateClientGroupData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

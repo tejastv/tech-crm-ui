@@ -12,14 +12,13 @@ import {
 } from "@shared/index";
 import { addEnqPiFormFields } from "@proforma/index";
 import {
-  ClientType,
   useCityApiCallHook,
   useStateApiCallHook,
   useCountryApiCallHook,
-  useSourceApiCallHook,
-  useLocalSourceApiCallHook,
-  useClientApiCallHook,
-  useCompanyApiCallHook,
+  // useSourceApiCallHook,
+  // useLocalSourceApiCallHook,
+  // useClientApiCallHook,
+  // useCompanyApiCallHook,
   useFinYearApiCallHook,
   CompanyType,
   CityType,
@@ -55,10 +54,9 @@ export const AddEnqPi: React.FC = () => {
   const { getCity } = useCityApiCallHook();
   const { getState } = useStateApiCallHook();
   const { getCountry } = useCountryApiCallHook();
-  const { getSource } = useSourceApiCallHook();
-  const { getLocalSource } = useLocalSourceApiCallHook();
-  const { getClient, getClientData } = useClientApiCallHook();
-  const { getCompany } = useCompanyApiCallHook();
+  // const { getSource } = useSourceApiCallHook();
+  // const { getLocalSource } = useLocalSourceApiCallHook();
+  // const { getClient } = useClientApiCallHook();
   const { getFinYear } = useFinYearApiCallHook();
   const [cityOptions, setCityOptions] = useState<CityType[]>();
   const [stateOptions, setStateOptions] = useState<StateType[]>();

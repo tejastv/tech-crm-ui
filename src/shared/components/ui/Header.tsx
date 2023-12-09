@@ -5,6 +5,7 @@ import logoImage from "@assets/images/logo.png";
 import { useAuth } from "@hooks/index";
 import {
   DASHBOARD,
+  INVOICE_ROUTES,
   LOGIN,
   MASTER_ROUTES,
   PROFORMA_ROUTES,
@@ -594,15 +595,16 @@ export const Header: React.FC = () => {
                           <span className="hide-menu ">User Wise Activity</span>
                         </a>
                       </li>
-                      <li className="sidebar-item">
-                        <a
-                          className="sidebar-link"
-                          href="mirainform_report.php"
-                        >
-                          <i className="mdi mdi-creation"></i>
-                          <span className="hide-menu ">Mirainform Report</span>
-                        </a>
-                      </li>
+
+                      {/* <li className="sidebar-item">
+                          <a
+                            className="sidebar-link"
+                            href="mirainform_report.php"
+                          >
+                            <i className="mdi mdi-creation"></i>
+                            <span className="hide-menu ">Mirainform Report</span>
+                          </a>
+                        </li> */}
                     </ul>
                   </li>
                   <li className="sidebar-item">
@@ -619,7 +621,7 @@ export const Header: React.FC = () => {
                       <li className="sidebar-item">
                         <Link
                           className="sidebar-link"
-                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.NEWENQUIRY_TRANSACTION_ROUTES.NEWENQUIRY}`}
+                          to={`${TRANSACTION_ROUTES.TRANSACTION}${TRANSACTION_ROUTES.ENQUIRYDETAILS_TRANSACTION_ROUTES.ENQUIRYDETAILS}/add`}
                         >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Add New Enquiry</span>
@@ -644,13 +646,6 @@ export const Header: React.FC = () => {
                         </Link>
                       </li>
 
-                      <li className="sidebar-item">
-                        {" "}
-                        <a className="sidebar-link" href="enquiry_search.php">
-                          <i className="mdi mdi-creation"></i>
-                          <span className="hide-menu ">Enquiry Search</span>
-                        </a>
-                      </li>
                       <li className="sidebar-item">
                         {" "}
                         <a
@@ -1014,40 +1009,37 @@ export const Header: React.FC = () => {
                           className="collapse second-level"
                         >
                           <li className="sidebar-item">
-                            {" "}
-                            <a
-                              className="sidebar-link "
-                              href="generate_invoice_for_client_gst.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.GENERATE_INVOICE_MASTER_ROUTE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.INVOICE_GENERATE_GST}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Generate Invoice(GST)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
-                            {" "}
-                            <a
-                              className="sidebar-link "
-                              href="generate_invoice_auto_gst.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.GENERATE_INVOICE_MASTER_ROUTE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.INVOICE_GENERATE_AUTO_GST}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
-                                Generate Invoice(Auto) - GST
+                                Generate Invoice(Auto)GST
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
-                            {" "}
-                            <a
-                              className="sidebar-link "
-                              href="generate_invoice_actbuyer_auto_gst.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.GENERATE_INVOICE_MASTER_ROUTE}${INVOICE_ROUTES.GENERATE_INVOICE_ROUTES.INVOICE_GENERATE_ACTUAL_BUYRE_GST}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Generate Invoice - Actual Buyer (Auto) - GST
                               </span>
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </li>
@@ -1069,106 +1061,109 @@ export const Header: React.FC = () => {
                         >
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_list.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">Invoice List</span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_detail_report.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_REPORT}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice Detail Report
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_detail_report_pro.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_REPORT_PRO}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice Detail Report PRO
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_detail_report_grpwise.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_REPORT_GROUP_WISE}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice Detail Report(Group wise)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_list_with_tds.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST_TDS}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice List (With TDS)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a className="sidebar-link " href="#">
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST_SERVICE_TAX}`}
+                            >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice List(With Service Tax)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_list_proforma.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST_PERFOMA}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice List(Proforma)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_list_executive_wise.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_LIST_EXCE_WISE}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice List(Exec. wise)
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li className="sidebar-item">
                             {" "}
-                            <a
-                              className="sidebar-link "
-                              href="invoice_settled.php"
+                            <Link
+                              className="sidebar-link"
+                              to={`${INVOICE_ROUTES.INVOICE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_DETAIL_MASTER_ROUTE}${INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES.INVOICE_SETTLED_}`}
                             >
                               <i className="mdi mdi-creation"></i>
                               <span className="hide-menu ">
                                 Invoice Settled
                               </span>
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </li>

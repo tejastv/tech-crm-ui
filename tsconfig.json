@@ -33,7 +33,8 @@
       "@master/*": ["pages/master/*"],
       "@transaction-search/*": ["pages/transaction-search/*"],
       "@proforma/*": ["pages/proforma/*"],
-      "@reports/*": ["pages/reports/*"]
+      "@reports/*": ["pages/reports/*"],
+      "@invoices/*": ["pages/invoices"]
     }
   },
   "include": [
