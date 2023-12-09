@@ -1,14 +1,16 @@
-import { FormFieldType, Note, ValidationType } from "@shared/index";
+import {
+  FormFieldType,
+  MapType,
+  Note,
+  Options,
+  ValidationType,
+} from "@shared/index";
 import { createFormConfig, createNoteConfig } from "@utils/index";
 
 const CompanyValidation = {
   required: {
     value: true,
     message: "{label} field is required",
-  },
-  maxLength: {
-    value: 30,
-    message: "30 characters max",
   },
 } as ValidationType;
 
@@ -498,54 +500,54 @@ const fYearValidation = {
 // Option Section
 // Right Field start
 const companyField: FormFieldType = createFormConfig(
-  "company",
+  "companyId",
   "Company",
-  "text",
+  "select",
   CompanyValidation,
-  "Enter Company"
+  "Select Company",
+  {}
 );
 const yearField: FormFieldType = createFormConfig(
-  "year",
+  "fYear",
   "Year",
   "year",
   yearValidation,
-  ""
+  "Select Year"
 );
 const refNoField: FormFieldType = createFormConfig(
   "refNo",
   "Ref No",
   "text",
   refNoValidation,
-  "1"
+  "",
+  {},
+  true
 );
 const sourceField: FormFieldType = createFormConfig(
-  "source",
+  "sourceID",
   "Source",
   "select",
   sourceValidation,
-  "",
+  "Select Source",
   {}
 );
 
 const givenAddressField: FormFieldType = createFormConfig(
-  "address",
-  "Given Address",
+  "givenAddress",
+  "Address",
   "textarea",
   givenAddressValidation,
-  "Enter Address",
-  {},
-  false,
-  true
+  "Enter Address"
 );
 const telNoField: FormFieldType = createFormConfig(
-  "telNo",
+  "phone",
   "Tel No.",
   "text",
   telNoEnquiryValidation,
   "Enter Tel No."
 );
 const faxNoField: FormFieldType = createFormConfig(
-  "faxNo",
+  "fax",
   "Fax No.",
   "text",
   faxNoEnquiryValidation,
@@ -566,7 +568,7 @@ const websiteField: FormFieldType = createFormConfig(
   "Enter WebSite"
 );
 const contactField: FormFieldType = createFormConfig(
-  "contact",
+  "contactPerson",
   "Contact",
   "text",
   contactEnquiryValidation,
@@ -580,7 +582,7 @@ const designationField: FormFieldType = createFormConfig(
   "Enter Designation"
 );
 const cityField: FormFieldType = createFormConfig(
-  "city",
+  "cityId",
   "City",
   "select",
   cityEnquiryValidation,
@@ -595,7 +597,7 @@ const zipField: FormFieldType = createFormConfig(
   "Enter Zip"
 );
 const stateField: FormFieldType = createFormConfig(
-  "state",
+  "stateId",
   "State",
   "select",
   stateEnquiryValidation,
@@ -610,7 +612,7 @@ const stateCodeField: FormFieldType = createFormConfig(
   ""
 );
 const countryField: FormFieldType = createFormConfig(
-  "country",
+  "countryId",
   "Country",
   "select",
   countryEnquiryValidation,
@@ -624,9 +626,7 @@ const blankField: FormFieldType = createFormConfig(
   "",
   "text",
   blankValidation,
-  "",
-  {},
-  true
+  ""
 );
 const givenNameField: FormFieldType = createFormConfig(
   "givenName",
@@ -643,23 +643,29 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
 const recdOnField: FormFieldType = createFormConfig(
-  "clientCurrency",
-  "Recd . On",
+  "recdDate",
+  "Enq. Date/Recd. On",
   "date",
   recdOnValidation,
   formattedDate
 );
 
+const enqTypeData: MapType<Options> = {
+  new: { value: "new", label: "NEW" },
+  renew: { value: "renew", label: "RENEWAL" },
+};
+
 const enqTypeField: FormFieldType = createFormConfig(
-  "enqType",
+  "typeofEnquiry",
   "Enq. Type",
   "select",
-  enqValidation,
-  "",
-  {}
+  enqValidation, // Replace with your validation function
+  "Select Enq. Type",
+  enqTypeData,
+  true // Default value set to "NEW"
 );
 const localSourceField: FormFieldType = createFormConfig(
-  "localSource",
+  "localSourceId",
   "Local Source",
   "select",
   localSourceEnquiryValidation,
@@ -667,7 +673,7 @@ const localSourceField: FormFieldType = createFormConfig(
   {}
 );
 const serviceTypeField: FormFieldType = createFormConfig(
-  "serviceType",
+  "serviceTypeID",
   "Service Type",
   "select",
   serviceTypeValidation,
@@ -675,39 +681,49 @@ const serviceTypeField: FormFieldType = createFormConfig(
   {}
 );
 const dueOnField: FormFieldType = createFormConfig(
-  "dueOn",
+  "dueDate",
   "Due On",
   "date",
   dueOnValidation,
   "date"
 );
+
+const enqPrintStatusData: MapType<Options> = {
+  "Not Received": { value: "Not Received", label: "Not Received" },
+  Received: { label: "Received", value: "Received" },
+};
+
 const printStatusField: FormFieldType = createFormConfig(
-  "printStatus",
+  "pmtstatus",
   "Print Status",
   "select",
   printStatusValidationValidation,
-  "",
-  {}
+  "Select Print Status",
+  enqPrintStatusData
 );
 const enqStatusField: FormFieldType = createFormConfig(
-  "enqStatus",
+  "enqStatusID",
   "Enq. Status",
   "select",
   enqStatusValidation,
-  "",
+  "Select Enq. Status",
   {}
 );
 
 const sVisitField: FormFieldType = createFormConfig(
-  "sVisit",
-  "S.Visit ",
+  "svisit",
+  "S.Visit",
   "select",
   sVisitValidation,
-  "",
-  {}
+  "Select S.Visit",
+  {
+    0: { value: "0", label: "NA" },
+    1: { value: "1", label: "Pending to Visit" },
+    2: { value: "2", label: "Visited" },
+  }
 );
 const notesForField: FormFieldType = createFormConfig(
-  "notesForEnquiry",
+  "notes",
   "Notes for Enquiry ",
   "textarea",
   notesForEnqValidation,
@@ -716,47 +732,51 @@ const notesForField: FormFieldType = createFormConfig(
 
 const clientDetailsNote: Note = createNoteConfig("Client Details");
 const instructionField: FormFieldType = createFormConfig(
-  "instructionEnquiry",
+  "instruction",
   "Instruction ",
-  "textarea",
+  "text",
   instructionEnquiryValidation,
   "Instruction"
 );
 const adjustField: FormFieldType = createFormConfig(
-  "adjust",
+  "adjustment",
   "Adjust",
   "text",
   adjustEnqValidation,
-  "Adjust"
+  "Adjust",
+  {},
+  true
 );
 
 const clientRefField: FormFieldType = createFormConfig(
-  "clientRefEnquiry",
+  "clientRefNo",
   "Client Ref",
   "text",
   clientRefEnquiryValidation,
   "Client Ref"
 );
 const clientField: FormFieldType = createFormConfig(
-  "clientEnquiry",
+  "clientID",
   "Client",
   "select",
   clientEnquiryValidation,
   "Select Client"
 );
 const requestNoField: FormFieldType = createFormConfig(
-  "requestNoEnquiry",
+  "requestNo",
   "Request No.",
   "text",
   requestNoValidation,
   "Request No."
 );
 const clientIdField: FormFieldType = createFormConfig(
-  "clientIdEnquiry",
+  "clientidenquiry",
   "Client Id",
   "text",
   clientIdEnquiryValidation,
-  "Client Id"
+  "Client Id",
+  {},
+  true
 );
 
 const priceField: FormFieldType = createFormConfig(

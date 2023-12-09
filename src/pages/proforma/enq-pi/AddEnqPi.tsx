@@ -3,22 +3,18 @@ import { useForm } from "react-hook-form";
 import {
   BorderLayout,
   Card,
-  Input,
-  Select,
   Button,
   InputWithText,
   ActionButtons,
   SingleCheckbox,
+  NewSelect,
+  NewInput,
 } from "@shared/index";
 import { addEnqPiFormFields } from "@proforma/index";
 import {
   useCityApiCallHook,
   useStateApiCallHook,
   useCountryApiCallHook,
-  // useSourceApiCallHook,
-  // useLocalSourceApiCallHook,
-  // useClientApiCallHook,
-  // useCompanyApiCallHook,
   useFinYearApiCallHook,
   CompanyType,
   CityType,
@@ -27,6 +23,11 @@ import {
   FinYearType,
   LocalSourceType,
   SourceType,
+  ClientType,
+  useClientApiCallHook,
+  useLocalSourceApiCallHook,
+  useSourceApiCallHook,
+  useCompanyApiCallHook,
 } from "@master/index";
 import {
   returnFormatedObjectElseEmptyArray,
@@ -44,20 +45,19 @@ export const AddEnqPi: React.FC = () => {
     handleSubmit,
     control,
     setValue,
-    reset,
-    getValues,
     formState: { errors },
   } = useForm<any>();
-  const { getRefNo, getServiceType } =
-    useAddEnquiryApiCallHook();
+  const { getRefNo, getServiceType } = useAddEnquiryApiCallHook();
   const params = useParams();
   const { getCity } = useCityApiCallHook();
   const { getState } = useStateApiCallHook();
   const { getCountry } = useCountryApiCallHook();
-  // const { getSource } = useSourceApiCallHook();
-  // const { getLocalSource } = useLocalSourceApiCallHook();
-  // const { getClient } = useClientApiCallHook();
+  const { getSource } = useSourceApiCallHook();
+  const { getLocalSource } = useLocalSourceApiCallHook();
+  const { getClient } = useClientApiCallHook();
   const { getFinYear } = useFinYearApiCallHook();
+  const { getCompany } = useCompanyApiCallHook();
+
   const [cityOptions, setCityOptions] = useState<CityType[]>();
   const [stateOptions, setStateOptions] = useState<StateType[]>();
   const [countryOptions, setCountryOptions] = useState<CountryType[]>();
@@ -84,7 +84,6 @@ export const AddEnqPi: React.FC = () => {
       heading: "Action Button",
     },
   };
-
 
   // city api call
   const { data: cityData } = getCity();
@@ -155,7 +154,7 @@ export const AddEnqPi: React.FC = () => {
 
   if (finYearOptions?.length) {
     let options = selectOptionsMaker(finYearOptions, "finYear", "finYear");
-    addEnqPiFormFields.fYearField.config.options = options;
+    addEnqPiFormFields.yearField.config.options = options;
   }
 
   // Source api call
@@ -228,6 +227,7 @@ export const AddEnqPi: React.FC = () => {
   }
 
   const companyOnChangeHandler = (companyData: any) => {
+    console.log(companyData)
     if (companyData.data) {
       if (addEnqPiFormFields.givenAddressField.config.name == "givenAddress") {
         setValue(
@@ -328,13 +328,13 @@ export const AddEnqPi: React.FC = () => {
   }
 
   const onSubmit = handleSubmit((enquiryPiData): void => {
+    console.log(enquiryPiData);
     // let reqObj: Partial<EnquiriesType> = mapEnqRequest(enquiryData);
-    // console.log(reqObj);
     // if (params.id && reqObj) {
     // } else {
     // }
   });
-  
+
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
@@ -347,21 +347,33 @@ export const AddEnqPi: React.FC = () => {
           <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
             <div className="row">
               <div className="col-md-4 col-xs-12">
-                <Select
-                  config={addEnqPiFormFields.companyField.config}
-                  onChangeHandler={companyOnChangeHandler}
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addEnqPiFormFields.companyField}
+                  onChange={companyOnChangeHandler}
                 />
               </div>
               {/* <div className="col-md-4 col-xs-12">
                   <Input config={addEnqPiFormFields.companyIdField.config} />
                 </div> */}
               <div className="col-md-4 col-xs-12">
-                <Select config={addEnqPiFormFields.yearField.config} />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addEnqPiFormFields.yearField}
+                />
               </div>
               <div className="col-md-4 col-xs-12">
                 <div className="row">
                   <div className="col-md-8 col-xs-12">
-                    <Input config={addEnqPiFormFields.refNoField.config} />
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={addEnqPiFormFields.refNoField}
+                    />
                   </div>
                   <div className="col-md-4 col-xs-12">
                     <small className="enquirynote">
@@ -375,102 +387,212 @@ export const AddEnqPi: React.FC = () => {
             </div>
             <div className="row">
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.givenAddressField.config} />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.givenAddressField}
+                />
               </div>
               <div className="col-md-4 col-xs-12">
-                <Select config={addEnqPiFormFields.countryField.config} />
-                <Select config={addEnqPiFormFields.stateField.config} />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addEnqPiFormFields.stateField}
+                />
               </div>
               <div className="col-md-4 col-xs-12">
-                <Select config={addEnqPiFormFields.cityField.config} />
-                <Input config={addEnqPiFormFields.zipField.config} />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addEnqPiFormFields.cityField}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.zipField}
+                />
               </div>
             </div>
             <div className="row">
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.telNoField.config} />
-                <Input config={addEnqPiFormFields.faxNoField.config} />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.telNoField}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.faxNoField}
+                />
               </div>
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.emailField.config} />
-                <Input config={addEnqPiFormFields.websiteField.config} />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.emailField}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.websiteField}
+                />
               </div>
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.contactField.config} />
-                <Input config={addEnqPiFormFields.designationField.config} />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.contactField}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.designationField}
+                />
               </div>
             </div>
             <hr className="mt-0" />
             <div className="row">
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.recdOnField.config} />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.recdOnField}
+                />
               </div>
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.dueOnField.config} />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.dueOnField}
+                />
               </div>
               <div className="col-md-4 col-xs-12">
-                <Select config={addEnqPiFormFields.serviceTypeField.config} />
-              </div>
-
-              <div className="col-md-4 col-xs-12">
-                <Select config={addEnqPiFormFields.printStatusField.config} />
-              </div>
-              <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.crAmountField.config} />
-              </div>
-              <div className="col-md-4 col-xs-12">
-                <Select config={addEnqPiFormFields.enqStatusField.config} />
-              </div>
-
-              <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.notesForField.config} />
-              </div>
-              <div className="col-md-4 col-xs-12">
-                <Select config={addEnqPiFormFields.instructionField.config} />
-              </div>
-              <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.cmieField.config} />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addEnqPiFormFields.serviceTypeField}
+                />
               </div>
 
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.rocStatusField.config} />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addEnqPiFormFields.printStatusField}
+                />
               </div>
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.recordsField.config} />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.crAmountField}
+                />
+              </div>
+              <div className="col-md-4 col-xs-12"></div>
+
+              <div className="col-md-4 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.enqStatusField}
+                />
               </div>
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.recFinField.config} />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addEnqPiFormFields.instructionField}
+                />
+              </div>
+              <div className="col-md-4 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.cmieField}
+                />
               </div>
 
               <div className="col-md-4 col-xs-12">
-                <Select config={addEnqPiFormFields.sourceField.config} />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.rocStatusField}
+                />
               </div>
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.priceField.config} />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.recordsField}
+                />
               </div>
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.adjustField.config} />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.recFinField}
+                />
+              </div>
+
+              <div className="col-md-4 col-xs-12">
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addEnqPiFormFields.telNoField}
+                />
+              </div>
+              <div className="col-md-4 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.priceField}
+                />
+              </div>
+              <div className="col-md-4 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.adjustField}
+                />
               </div>
 
               <div className="col-md-4 col-xs-12">
                 <div className="row">
-                  <div className="col-md-10 col-xs-12">
-                    <Select
-                      config={addEnqPiFormFields.localSourceField.config}
+                  <div className="col-md-12 col-xs-12">
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={addEnqPiFormFields.localSourceField}
                     />
                   </div>
                   <div className="col-md-2 pt-2 col-xs-12">
-                    <SingleCheckbox
+                    {/* <SingleCheckbox
                       config={addEnqPiFormFields.allField.config}
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.fYearField.config} />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.fYearField}
+                />
               </div>
               <div className="col-md-4 col-xs-12">
-                <Input config={addEnqPiFormFields.bankField.config} />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addEnqPiFormFields.bankField}
+                />
               </div>
             </div>
             <hr className="m-0" />
@@ -478,12 +600,21 @@ export const AddEnqPi: React.FC = () => {
               <div className="col-md-4 col-xs-12">
                 <div className="card-body">
                   {/* <Input config={addEnqPiFormFields.clientRefField.config} /> */}
-                  <Select config={addEnqPiFormFields.clientField.config} />
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={addEnqPiFormFields.clientField}
+                  />
                 </div>
               </div>
               <div className="col-md-4 col-xs-12">
                 <div className="card-body">
-                  <Input config={addEnqPiFormFields.requestNoField.config} />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={addEnqPiFormFields.requestNoField}
+                  />
                 </div>
               </div>
               <div className="col-md-4 col-xs-12">
