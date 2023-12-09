@@ -1,16 +1,22 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
+import { ActionButtons, BorderLayout, Card, NewInput } from "@shared/index";
 import {
   BankDrawnOnFormType,
+  BankdrawnonType,
   bankDrawnOnFormFields,
   useBankMasterDrawnApiCallHook,
 } from "@master/index";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 export const BankMasterDrawnForm: React.FC = () => {
-  const methods = useForm<BankDrawnOnFormType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<BankDrawnOnFormType>();
 
   const {
     addBankMasterDrawnOnMutation,
@@ -21,6 +27,7 @@ export const BankMasterDrawnForm: React.FC = () => {
   const { mutateAsync: updateBankMasterDrawnOn } =
     updateBankMasterDrawnOnMutation();
   const params = useParams();
+  const { state: localBankDrawnData } = useLocation();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -37,28 +44,46 @@ export const BankMasterDrawnForm: React.FC = () => {
   useEffect(() => {
     // This code will run when the component is about to unmount
     return () => {
-      methods.reset();
+      reset();
       // Place your cleanup code here
       console.log("Component is unmounting. Cleanup can be performed here.");
     };
   }, []);
 
-  if (params.id) {
-    const { data: BankMasterDrawnData, isSuccess: BankMasterDrawnDataSuccess } =
-      getBankMasterDrawnOnData("" + params.id);
-    console.log(params.id);
+  const mapBankDrawnDataToBankDrawnForm = (bankDrawnData: BankdrawnonType) => {
+    let bankDrawnFormData: Partial<BankDrawnOnFormType> = {
+      bankName: bankDrawnData.bankName,
+    };
 
-    if (BankMasterDrawnDataSuccess) {
-      bankDrawnOnFormFields.bankdrawn.config.setData =
-        BankMasterDrawnData?.bankName;
+    return bankDrawnFormData;
+  };
+
+  const { data: BankMasterDrawnData } = getBankMasterDrawnOnData(
+    "" + params.id,
+    !localBankDrawnData && params.id !== undefined
+  );
+
+  useEffect(() => {
+    if (params.id) {
+      if (
+        BankMasterDrawnData &&
+        Object.values(BankMasterDrawnData).length > 0
+      ) {
+        reset(mapBankDrawnDataToBankDrawnForm(BankMasterDrawnData));
+      }
     }
-  } else {
-    useEffect(() => {
-      methods.reset();
-    }, []);
-  }
+  }, [params.id, BankMasterDrawnData]);
 
-  const onSubmit = methods.handleSubmit((BankMasterDrawnData): void => {
+  useEffect(() => {
+    if (params.id) {
+      if (localBankDrawnData !== null) {
+        console.log(localBankDrawnData);
+        reset(mapBankDrawnDataToBankDrawnForm(localBankDrawnData));
+      }
+    }
+  }, [params.id, localBankDrawnData]);
+
+  const onSubmit = handleSubmit((BankMasterDrawnData): void => {
     if (params.id && BankMasterDrawnData) {
       updateBankMasterDrawnOn({ id: params.id, ...BankMasterDrawnData });
     } else {
@@ -69,25 +94,27 @@ export const BankMasterDrawnForm: React.FC = () => {
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <Input config={bankDrawnOnFormFields.bankdrawn.config} />
-                </div>
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={bankDrawnOnFormFields.bankdrawn}
+                />
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
+            </div>
+          </BorderLayout>
+          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <ActionButtons />
+          </BorderLayout>
+        </form>
       </Card>
     </>
   );
