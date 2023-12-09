@@ -9,25 +9,26 @@ import {
 
 import { SegmentFormType, SegmentType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useSegmentApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getSegment = (): UseQueryResult<SegmentType[]> => {
-    return useQuery<SegmentType[]>({
+  const getSegment = (): UseQueryResult<MapType<SegmentType>> => {
+    return useQuery<MapType<SegmentType>>({
       queryKey: [queryKeys.SEGMENT_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_SEGMENT);
-        const data = response.data.data.sort(
-          (a: { segmentName: string }, b: { segmentName: any }) =>
-            a.segmentName.localeCompare(b.segmentName)
-        );
-        return data;
+        const data = response.data.data;
+        let mapedData = selectOptionsMapMaker(data, "segmentId", "segmentName");
+        console.log(mapedData);
+        return mapedData;
       },
       staleTime: Infinity,
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 
