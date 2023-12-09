@@ -1,4 +1,4 @@
-export interface AddUpdateActualBuyerType {
+export interface ActualBuyerFormType {
   id?: string;
   partyId: number;
   partyName: string;

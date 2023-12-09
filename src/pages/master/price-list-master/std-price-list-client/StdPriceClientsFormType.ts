@@ -1,4 +1,4 @@
-export interface AddStdPriceClientsType {
+export interface StdPriceClientsFormType {
   countryName: string;
   currencyId: number;
   price: number;

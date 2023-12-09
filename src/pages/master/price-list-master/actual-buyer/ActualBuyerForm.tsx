@@ -11,12 +11,12 @@ import {
   Select,
 } from "@shared/index";
 import {
-  AddUpdateActualBuyerType,
+  ActualBuyerFormType,
   CityType,
   ClientType,
   CountryType,
   StateType,
-  addActualBuyersFormFields,
+  actualBuyersFormFields,
   useActualBuyerApiCallHook,
   useCityApiCallHook,
   useClientApiCallHook,
@@ -27,8 +27,8 @@ import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { cleanupObject } from "@utils/cleanUpObject";
 import { useParams } from "react-router-dom";
 
-export const AddUpdateActualBuyer: React.FC = () => {
-  const methods = useForm<AddUpdateActualBuyerType>();
+export const ActualBuyerForm: React.FC = () => {
+  const methods = useForm<ActualBuyerFormType>();
   const params = useParams();
   const cardConfig = {
     formLayoutConfig: {
@@ -64,7 +64,7 @@ export const AddUpdateActualBuyer: React.FC = () => {
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "id", "cityName");
-    addActualBuyersFormFields.cityactualbuyer.config.options = options;
+    actualBuyersFormFields.cityactualbuyer.config.options = options;
   }
 
   // state api call
@@ -78,7 +78,7 @@ export const AddUpdateActualBuyer: React.FC = () => {
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
-    addActualBuyersFormFields.stateactualbuyer.config.options = options;
+    actualBuyersFormFields.stateactualbuyer.config.options = options;
   }
 
   // country api call
@@ -96,7 +96,7 @@ export const AddUpdateActualBuyer: React.FC = () => {
       "countryId",
       "countryName"
     );
-    addActualBuyersFormFields.countryactualbuyer.config.options = options;
+    actualBuyersFormFields.countryactualbuyer.config.options = options;
   }
 
   useEffect(() => {
@@ -107,7 +107,7 @@ export const AddUpdateActualBuyer: React.FC = () => {
 
   if (clientOptions?.length) {
     let options = selectOptionsMaker(clientOptions, "clientId", "clientName");
-    addActualBuyersFormFields.clientactualbuyer.config.options = options;
+    actualBuyersFormFields.clientactualbuyer.config.options = options;
   }
 
   const onSubmit = methods.handleSubmit((actualBuyerData): void => {
@@ -146,26 +146,26 @@ export const AddUpdateActualBuyer: React.FC = () => {
               <div className="col-md-6 col-xs-12">
                 <div className="card-body">
                   <Select
-                    config={addActualBuyersFormFields.clientactualbuyer.config}
+                    config={actualBuyersFormFields.clientactualbuyer.config}
                   />
                   <Input
-                    config={addActualBuyersFormFields.nameactualbuyer.config}
+                    config={actualBuyersFormFields.nameactualbuyer.config}
                   />
                   <Input
-                    config={addActualBuyersFormFields.addressactualbuyer.config}
+                    config={actualBuyersFormFields.addressactualbuyer.config}
                   />
                   <Input
-                    config={addActualBuyersFormFields.telnoactualbuyer.config}
+                    config={actualBuyersFormFields.telnoactualbuyer.config}
                   />
                   <Input
-                    config={addActualBuyersFormFields.emailactualbuyer.config}
+                    config={actualBuyersFormFields.emailactualbuyer.config}
                   />
                   <Input
-                    config={addActualBuyersFormFields.contactactualbuyer.config}
+                    config={actualBuyersFormFields.contactactualbuyer.config}
                   />
                   <Input
                     config={
-                      addActualBuyersFormFields.designationactualbuyer.config
+                      actualBuyersFormFields.designationactualbuyer.config
                     }
                   />
                 </div>
@@ -173,26 +173,26 @@ export const AddUpdateActualBuyer: React.FC = () => {
               <div className="col-md-6 col-xs-12">
                 <div className="card-body">
                   <Select
-                    config={addActualBuyersFormFields.cityactualbuyer.config}
+                    config={actualBuyersFormFields.cityactualbuyer.config}
                   />
                   <Select
-                    config={addActualBuyersFormFields.stateactualbuyer.config}
+                    config={actualBuyersFormFields.stateactualbuyer.config}
                   />
-                  <Input config={addActualBuyersFormFields.PIN.config} />
+                  <Input config={actualBuyersFormFields.PIN.config} />
                   <Select
-                    config={addActualBuyersFormFields.countryactualbuyer.config}
+                    config={actualBuyersFormFields.countryactualbuyer.config}
                   />
                   <Input
-                    config={addActualBuyersFormFields.faxnoactualbuyer.config}
+                    config={actualBuyersFormFields.faxnoactualbuyer.config}
                   />
                   <Input
-                    config={addActualBuyersFormFields.websiteactualbuyer.config}
+                    config={actualBuyersFormFields.websiteactualbuyer.config}
                   />
                   <Input
-                    config={addActualBuyersFormFields.cstactualbuyer.config}
+                    config={actualBuyersFormFields.cstactualbuyer.config}
                   />
                   <Input
-                    config={addActualBuyersFormFields.gstnactualbuyer.config}
+                    config={actualBuyersFormFields.gstnactualbuyer.config}
                   />
                   {/* <div className="col-md-12"> */}
 
@@ -201,7 +201,7 @@ export const AddUpdateActualBuyer: React.FC = () => {
                       className="form-text text-red text-red-custom"
                     > */}
                   <InputWithText
-                    config={addActualBuyersFormFields.actualbuyergstnote.config}
+                    config={actualBuyersFormFields.actualbuyergstnote.config}
                   />
                   {/* </p> */}
                   {/* </div> */}

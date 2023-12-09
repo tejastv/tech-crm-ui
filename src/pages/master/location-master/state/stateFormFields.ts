@@ -75,7 +75,7 @@ const country: FormFieldType = createFormConfig(
   {}
 );
 
-export const addStateFormFields = {
+export const stateFormFields = {
   stateField,
   stateCodeField,
   numbericCodeField,

@@ -11,14 +11,14 @@ import {
   CountryType,
   StateFormType,
   StateType,
-  addStateFormFields,
+  stateFormFields,
   useCountryApiCallHook,
   useStateApiCallHook,
 } from "@master/index";
 import { useLocation, useParams } from "react-router-dom";
 import { selectOptionsMaker } from "@utils/index";
 
-export const AddUpdateState: React.FC = () => {
+export const StateForm: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -64,7 +64,7 @@ export const AddUpdateState: React.FC = () => {
       "countryId",
       "countryName"
     );
-    addStateFormFields.country.config.options = options;
+    stateFormFields.country.config.options = options;
   }
 
   useEffect(() => {
@@ -134,25 +134,25 @@ export const AddUpdateState: React.FC = () => {
               <NewInput
                 errors={errors}
                 register={register}
-                config={addStateFormFields.stateField}
+                config={stateFormFields.stateField}
               />
               <NewInput
                 errors={errors}
                 register={register}
-                config={addStateFormFields.numbericCodeField}
+                config={stateFormFields.numbericCodeField}
               />
             </div>
             <div className="col-md-6 col-xs-12">
               <NewInput
                 errors={errors}
                 register={register}
-                config={addStateFormFields.stateCodeField}
+                config={stateFormFields.stateCodeField}
               />
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={addStateFormFields.country}
+                config={stateFormFields.country}
               />
             </div>
           </div>

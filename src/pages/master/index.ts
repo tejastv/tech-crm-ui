@@ -17,7 +17,7 @@ export { AddUpdateSegment } from "./client-master/segment/AddUpdateSegment";
 export { CityForm } from "./location-master/city/CityForm";
 export { City } from "./location-master/city/City";
 // State master child pages
-export { AddUpdateState } from "./location-master/state/AddUpdateState";
+export { StateForm } from "./location-master/state/StateForm";
 export { State } from "./location-master/state/State";
 
 //Price List Master
@@ -27,7 +27,7 @@ export { StdPriceListClient } from "./price-list-master/std-price-list-client/St
 
 export { PriceListGroup } from "./price-list-master/price-list-group-wise/PriceListGroup";
 // Actual Buyer
-export { AddUpdateActualBuyer } from "./price-list-master/actual-buyer/AddUpdateActualBuyer";
+export { ActualBuyerForm } from "./price-list-master/actual-buyer/ActualBuyerForm";
 export { ActualBuyer } from "./price-list-master/actual-buyer/ActualBuyer";
 
 //Local Source
@@ -40,10 +40,10 @@ export { LocalSourcePriceList } from "./local-source-master/price-list/LocalSour
 export { StdPrice } from "./local-source-master/std-price-list/StdPrice";
 
 // Country master child pages
-export { AddUpdateCountry } from "./location-master/country/AddUpdateCountry";
+export { CountryForm } from "./location-master/country/CountryForm";
 export { Country } from "./location-master/country/Country";
 // Continent master child pages
-export { AddUpdateContinent } from "./location-master/continent/AddUpdateContinent";
+export { ContinentForm } from "./location-master/continent/ContinentForm";
 export { Continent } from "./location-master/continent/Continent";
 
 //BankMasterDeposit master child pages
@@ -89,7 +89,7 @@ export { User } from "./information-master-2/user-master/User";
 
 //Form Fields
 export { clientFormFields } from "./client-master/client/clientFormFields";
-export { addStateFormFields } from "./location-master/state/add-state-form-fields";
+export { stateFormFields } from "./location-master/state/stateFormFields";
 export { cityFormFields } from "./location-master/city/cityFormFields";
 
 export { addClientGroupFormFields } from "./client-master/client-group/addClientGroupFormFields";
@@ -98,8 +98,8 @@ export { addSegmentFormFields } from "./client-master/segment/add-segment-form-f
 export { companyFormFields } from "./company/companyFormFields";
 
 export { priceClientFormFields } from "./price-list-master/price-list-for-clients/priceClientFormFields";
-export { stdPriceClientsFormFields } from "./price-list-master/std-price-list-client/add-std-price-client-form-fields";
-export { addActualBuyersFormFields } from "./price-list-master/actual-buyer/add-actual-buyer-form-fields";
+export { stdPriceClientsFormFields } from "./price-list-master/std-price-list-client/stdPriceClientsFormFields";
+export { actualBuyersFormFields } from "./price-list-master/actual-buyer/actualBuyersFormFields";
 export { priceGroupFormFields } from "./price-list-master/price-list-group-wise/priceGroupFormFields";
 
 export { localSourceFormFields } from "./local-source-master/local-source/localSourceFormFields";
@@ -108,8 +108,8 @@ export { stdPriceFormFields } from "./local-source-master/std-price-list/stdPric
 // export * from "./local-source-master/features/form-fields/add-price";
 // export * from "./local-source-master/features/form-fields/add-std-price";
 
-export { addCoutryFormFields } from "./location-master/country/add-country-form-fields";
-export { addContinentFormFields } from "./location-master/continent/add-continent-form-fields";
+export { coutryFormFields } from "./location-master/country/coutryFormFields";
+export { continentFormFields } from "./location-master/continent/continentFormFields";
 
 export { bankDepositeFormFields } from "./information-master/bank-master-deposit/bankDepositeFormFields";
 export { paymentModeFormFields } from "./information-master/payment-mode/paymentModeFormFields";
@@ -144,17 +144,17 @@ export * from "./client-master/segment/add-update-segment.type";
 export * from "./client-master/segment/segment-type";
 
 // price master
-export * from "./price-list-master/actual-buyer/actual-buyer-type";
-export * from "./price-list-master/actual-buyer/add-actual-buyer-type";
+export * from "./price-list-master/actual-buyer/ActualBuyerType";
+export * from "./price-list-master/actual-buyer/ActualBuyerFormType";
 
 // export * from "./price-list-master/price-list-for-clients/price-client-type";
 
 export * from "./price-list-master/price-list-group-wise/PriceGroupType";
 
-export * from "./price-list-master/std-price-list-client/add-std-price-client-type";
+export * from "./price-list-master/std-price-list-client/StdPriceClientsFormType";
 export * from "./price-list-master/std-price-list-client/CurrencyWisePriceType";
 
-export * from "./price-list-master/std-price-list-client/add-std-price-client-type";
+export * from "./price-list-master/std-price-list-client/StdPriceClientsFormType";
 export * from "./price-list-master/std-price-list-client/CurrencyWisePriceType";
 
 // Local Source
@@ -215,18 +215,18 @@ export * from "./information-master-2/user-master/UserType";
 // location master
 export * from "./location-master/city/CityType";
 export * from "./location-master/state/StateType";
-export * from "./location-master/continent/continent-type";
-export * from "./location-master/country/country-type";
+export * from "./location-master/continent/ContinentType";
+export * from "./location-master/country/CountryType";
 export * from "./location-master/city/CityFormType";
 export * from "./location-master/state/StateFormType";
-export * from "./location-master/continent/add-update-continent-type";
-export * from "./location-master/country/add-update-country-type";
+export * from "./location-master/continent/ContinentFormType";
+export * from "./location-master/country/CountryFormType";
 export * from "./price-list-master/price-list-group-wise/CityWiseGroupType";
 export * from "./price-list-master/price-list-group-wise/GroupWiseCurrencyType";
 export * from "./price-list-master/price-list-for-clients/CurrencyAndGroupType";
 export * from "./client-master/client-group/client-group-basedon-clientID-type";
 export * from "./price-list-master/price-list-group-wise/UpdatePriceListForGroupType";
-export * from "./price-list-master/std-price-list-client/update-standard-price-type";
+export * from "./price-list-master/std-price-list-client/UpdateStandardPrice";
 export * from "./local-source-master/std-price-list/UpdateLsStandardPriceType";
 export * from "./price-list-master/price-list-for-clients/ClientWisePriceType";
 

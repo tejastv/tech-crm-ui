@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateActualBuyerType, ActualBuyerType } from "@master/index";
+import { ActualBuyerFormType, ActualBuyerType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType, MapType } from "@shared/index";
 import {
@@ -47,7 +47,7 @@ export const useActualBuyerApiCallHook = () => {
   };
 
   const addActualBuyer = async (
-    actualBuyerData: AddUpdateActualBuyerType
+    actualBuyerData: ActualBuyerFormType
   ): Promise<ApiResponseType<ActualBuyerType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_ACTUAL_BUYER,
@@ -58,7 +58,7 @@ export const useActualBuyerApiCallHook = () => {
 
   const addActualBuyerMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateActualBuyerType) => addActualBuyer(updatedItem),
+      (updatedItem: ActualBuyerFormType) => addActualBuyer(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -72,7 +72,7 @@ export const useActualBuyerApiCallHook = () => {
   };
 
   const updateActualBuyerData = async (
-    updateActualBuyerData: AddUpdateActualBuyerType
+    updateActualBuyerData: ActualBuyerFormType
   ): Promise<ApiResponseType<ActualBuyerType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_ACTUAL_BUYER.replace(
@@ -86,8 +86,7 @@ export const useActualBuyerApiCallHook = () => {
 
   const updateActualBuyerMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateActualBuyerType) =>
-        updateActualBuyerData(updatedItem),
+      (updatedItem: ActualBuyerFormType) => updateActualBuyerData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

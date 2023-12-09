@@ -281,7 +281,7 @@ const actualbuyergstnote: Note = createNoteConfig(
   "don't know GST, write NOGST. Do not input any other number."
 );
 
-export const addActualBuyersFormFields = {
+export const actualBuyersFormFields = {
   clientactualbuyer,
   nameactualbuyer,
   addressactualbuyer,

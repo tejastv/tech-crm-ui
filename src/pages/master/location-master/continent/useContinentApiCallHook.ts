@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { ContinentType, AddUpdateContinentType } from "@master/index";
+import { ContinentType, ContinentFormType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -50,7 +50,7 @@ export const useContinentApiCallHook = () => {
   };
 
   const addContinent = async (
-    continentData: AddUpdateContinentType
+    continentData: ContinentFormType
   ): Promise<ApiResponseType<ContinentType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_CONTINENT,
@@ -61,7 +61,7 @@ export const useContinentApiCallHook = () => {
 
   const addContinentMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateContinentType) => addContinent(updatedItem),
+      (updatedItem: ContinentFormType) => addContinent(updatedItem),
       {
         onSuccess: async () => {
           await await queryClient.invalidateQueries({
@@ -75,7 +75,7 @@ export const useContinentApiCallHook = () => {
   };
 
   const updateContinentData = async (
-    updateContinentData: AddUpdateContinentType
+    updateContinentData: ContinentFormType
   ): Promise<ApiResponseType<ContinentType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_CONTINENT.replace(
@@ -89,7 +89,7 @@ export const useContinentApiCallHook = () => {
 
   const updateContinentMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateContinentType) => updateContinentData(updatedItem),
+      (updatedItem: ContinentFormType) => updateContinentData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

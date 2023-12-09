@@ -1,4 +1,4 @@
-export interface AddUpdateCountryType {
+export interface CountryFormType {
   id?: string;
   countryName: string;
   countryCode: string;

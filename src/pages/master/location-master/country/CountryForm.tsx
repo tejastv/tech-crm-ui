@@ -9,8 +9,8 @@ import {
   NewSelect,
 } from "@shared/index";
 import {
-  AddUpdateCountryType,
-  addCoutryFormFields,
+  CountryFormType,
+  coutryFormFields,
   useContinentApiCallHook,
   useCountryApiCallHook,
 } from "@master/index";
@@ -18,14 +18,14 @@ import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
 import { returnObjectBasedOnID } from "@utils/returnObjectBasedOnID";
 
-export const AddUpdateCountry: React.FC = () => {
+export const CountryForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     reset,
     control,
     formState: { errors },
-  } = useForm<AddUpdateCountryType>();
+  } = useForm<CountryFormType>();
   const params = useParams();
   const { addCountryMutation, updateCountryMutation, getCountryData } =
     useCountryApiCallHook();
@@ -83,7 +83,7 @@ export const AddUpdateCountry: React.FC = () => {
 
   useEffect(() => {
     if (continentData) {
-      addCoutryFormFields.continentCountryField.config.options =
+      coutryFormFields.continentCountryField.config.options =
         selectOptionsMaker(continentData, "id", "continent");
     }
   }, [continentData?.length]);
@@ -107,20 +107,20 @@ export const AddUpdateCountry: React.FC = () => {
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addCoutryFormFields.countryField}
+                  config={coutryFormFields.countryField}
                 />
                 <NewSelect
                   errors={errors}
                   register={register}
                   control={control}
-                  config={addCoutryFormFields.continentCountryField}
+                  config={coutryFormFields.continentCountryField}
                 />
               </div>
               <div className="col-md-6 col-xs-12">
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addCoutryFormFields.countryCodeField}
+                  config={coutryFormFields.countryCodeField}
                 />
               </div>
             </div>

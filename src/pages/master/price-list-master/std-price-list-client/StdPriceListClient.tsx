@@ -11,7 +11,7 @@ import {
   TableType,
 } from "@shared/index";
 import {
-  AddStdPriceClientsType,
+  StdPriceClientsFormType,
   CurrencyType,
   CurrencyWisePriceType,
   stdPriceClientsFormFields,
@@ -45,7 +45,7 @@ export const StdPriceListClient: React.FC = () => {
     register,
     control,
     formState: { errors },
-  } = useForm<AddStdPriceClientsType>();
+  } = useForm<StdPriceClientsFormType>();
   const [currency, setCurrency] = useState("0");
   const { getCurrency } = useCurrencyApiCallHook();
   const { data: currencyData } = getCurrency();

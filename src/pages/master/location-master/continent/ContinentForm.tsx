@@ -3,19 +3,19 @@ import { useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, NewInput } from "@shared/index";
 import {
-  AddUpdateContinentType,
-  addContinentFormFields,
+  ContinentFormType,
+  continentFormFields,
   useContinentApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-export const AddUpdateContinent: React.FC = () => {
+export const ContinentForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<AddUpdateContinentType>();
+  } = useForm<ContinentFormType>();
   const { addContinentMutation, getContinentData, updateContinentMutation } =
     useContinentApiCallHook();
   const { mutateAsync: addContinent } = addContinentMutation();
@@ -68,7 +68,7 @@ export const AddUpdateContinent: React.FC = () => {
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={addContinentFormFields.continentField}
+                  config={continentFormFields.continentField}
                 />
               </div>
             </div>

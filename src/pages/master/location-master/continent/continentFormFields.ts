@@ -20,6 +20,6 @@ const continentField: FormFieldType = createFormConfig(
   ""
 );
 
-export const addContinentFormFields = {
+export const continentFormFields = {
   continentField,
 };

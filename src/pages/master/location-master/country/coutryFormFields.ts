@@ -89,7 +89,7 @@ const countrylocalSourceField: FormFieldType = createFormConfig(
   ""
 );
 
-export const addCoutryFormFields = {
+export const coutryFormFields = {
   countryField,
   countryCodeField,
   continentCountryField,
