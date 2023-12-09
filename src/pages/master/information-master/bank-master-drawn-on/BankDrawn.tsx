@@ -51,7 +51,7 @@ export const BankMasterDrawn: React.FC = () => {
     },
   ];
 
-  const { data: BankMasterDrawnData, isLoading } = getBankMasterDrawnOn();
+  const { data: BankMasterDrawnData, isFetching } = getBankMasterDrawnOn();
   const { mutateAsync: deleteBankMasterDrawn } =
     deleteBankMasterDrawnOnMutation();
 
@@ -63,7 +63,9 @@ export const BankMasterDrawn: React.FC = () => {
   };
 
   const editBankMasterDrawnClick = (BankMasterDrawnData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", BankMasterDrawnData.bankId));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", BankMasterDrawnData.bankId), {
+      state: BankMasterDrawnData,
+    });
   };
 
   const tableConfig: TableType<BankdrawnonType> = {
@@ -91,7 +93,7 @@ export const BankMasterDrawn: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );
