@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddBankDepositType, BankDepositType } from "@master/index";
+import { BankDepositFormType, BankDepositType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -47,7 +47,7 @@ export const useBankMasterDepositApiCallHook = () => {
   };
 
   const addBankMasterDeposit = async (
-    BankDepositData: AddBankDepositType
+    BankDepositData: BankDepositFormType
   ): Promise<ApiResponseType<BankDepositType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_BANKMASTER_DEPOSIT,
@@ -58,7 +58,7 @@ export const useBankMasterDepositApiCallHook = () => {
 
   const addBankMasterDepositMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddBankDepositType) => addBankMasterDeposit(updatedItem),
+      (updatedItem: BankDepositFormType) => addBankMasterDeposit(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -72,7 +72,7 @@ export const useBankMasterDepositApiCallHook = () => {
   };
 
   const updateBankMasterDepositData = async (
-    BankMasterDepositData: AddBankDepositType
+    BankMasterDepositData: BankDepositFormType
   ): Promise<ApiResponseType<BankDepositType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_BANKMASTER_DEPOSIT.replace(
@@ -86,7 +86,7 @@ export const useBankMasterDepositApiCallHook = () => {
 
   const updateBankMasterDepositOnMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddBankDepositType) =>
+      (updatedItem: BankDepositFormType) =>
         updateBankMasterDepositData(updatedItem),
       {
         onSuccess: async () => {

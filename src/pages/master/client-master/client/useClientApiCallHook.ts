@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateClientType, ClientType } from "@master/index";
+import { ClientFormType, ClientType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType, MapType, PaginationType } from "@shared/index";
 import {
@@ -50,7 +50,7 @@ export const useClientApiCallHook = () => {
   };
 
   const addClient = async (
-    clientData: AddUpdateClientType
+    clientData: ClientFormType
   ): Promise<ApiResponseType<ClientType>> => {
     const response = await instance.post(apiUrls.GET_ADD_CLIENT, clientData);
     return response.data.data;
@@ -58,7 +58,7 @@ export const useClientApiCallHook = () => {
 
   const addClientMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateClientType) => addClient(updatedItem),
+      (updatedItem: ClientFormType) => addClient(updatedItem),
       {
         onSuccess: async () => {
           await await queryClient.invalidateQueries({
@@ -72,7 +72,7 @@ export const useClientApiCallHook = () => {
   };
 
   const updateClientData = async (
-    updateClientData: AddUpdateClientType
+    updateClientData: ClientFormType
   ): Promise<ApiResponseType<ClientType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_CLIENT.replace(
@@ -86,7 +86,7 @@ export const useClientApiCallHook = () => {
 
   const updateClientMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateClientType) => updateClientData(updatedItem),
+      (updatedItem: ClientFormType) => updateClientData(updatedItem),
       {
         onSuccess: async () => {
           await await queryClient.invalidateQueries({

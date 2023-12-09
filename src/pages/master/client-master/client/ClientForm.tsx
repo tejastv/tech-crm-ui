@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import {
-  AddUpdateClientType,
+  ClientFormType,
   CityType,
   ClientGroupType,
   CountryType,
@@ -49,7 +49,7 @@ export const ClientForm: React.FC = () => {
     control,
     setValue,
     formState: { errors },
-  } = useForm<AddUpdateClientType>();
+  } = useForm<ClientFormType>();
   const params = useParams();
 
   const { addClientMutation, updateClientMutation, getClientData } =

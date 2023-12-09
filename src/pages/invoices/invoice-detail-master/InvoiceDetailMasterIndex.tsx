@@ -21,12 +21,20 @@ const InvoiceListTdxIndex = React.lazy(
   () => import("./invoice-list-tds/InvoiceListTdsIndex")
 );
 
+const InvoiceListServiceIndex = React.lazy(
+  () => import("./invoice-list-service-tax/InvoiceListServiceIndex")
+);
+
 const InvoiceListPerfomaIndex = React.lazy(
   () => import("./invoice-list-perfoma/InvoiceListPerfomaIndex")
 );
 
 const InvoiceListExceWiseIndex = React.lazy(
   () => import("./invoice-list-exce-wise/InvoiceListExceWiseIndex")
+);
+
+const InvoiceListSetteldIndex = React.lazy(
+  () => import("./invoice-setteld/InvoiceSetteldIndex")
 );
 
 const InvoiceDetailMasterRoutes = () => {
@@ -65,7 +73,15 @@ const InvoiceDetailMasterRoutes = () => {
             .INVOICE_LIST_TDS_PARENT_ROUTE
         }
         element={<InvoiceListTdxIndex />}
-      />{" "}
+      />
+      <Route
+        path={
+          INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES
+            .INVOICE_LIST_SERVICE_TAX_PARENT_ROUTE
+        }
+        element={<InvoiceListServiceIndex />}
+      />
+
       <Route
         path={
           INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES
@@ -79,6 +95,13 @@ const InvoiceDetailMasterRoutes = () => {
             .INVOICE_LIST_EXCE_WISE_PARENT_ROUTE
         }
         element={<InvoiceListExceWiseIndex />}
+      />
+      <Route
+        path={
+          INVOICE_ROUTES.INVOICE_DETAIL_MASTER_ROUTES
+            .INVOICE_SETTLED_PARENT_ROUTE
+        }
+        element={<InvoiceListSetteldIndex />}
       />
     </Routes>
   );

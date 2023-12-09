@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateCreditDaysType, CreditDaysType } from "@master/index";
+import { CreditDaysFormType, CreditDaysType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -45,7 +45,7 @@ export const useCreditDaysApiCallHook = () => {
   };
 
   const addCreditDays = async (
-    creditDaysData: AddUpdateCreditDaysType
+    creditDaysData: CreditDaysFormType
   ): Promise<ApiResponseType<CreditDaysType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_CREDIT_DAYS,
@@ -56,7 +56,7 @@ export const useCreditDaysApiCallHook = () => {
 
   const addCreditDaysMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateCreditDaysType) => addCreditDays(updatedItem),
+      (updatedItem: CreditDaysFormType) => addCreditDays(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -70,7 +70,7 @@ export const useCreditDaysApiCallHook = () => {
   };
 
   const updateCreditDaysData = async (
-    updateCreditDaysData: AddUpdateCreditDaysType
+    updateCreditDaysData: CreditDaysFormType
   ): Promise<ApiResponseType<CreditDaysType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_CREDIT_DAYS.replace(
@@ -84,8 +84,7 @@ export const useCreditDaysApiCallHook = () => {
 
   const updateCreditDaysMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateCreditDaysType) =>
-        updateCreditDaysData(updatedItem),
+      (updatedItem: CreditDaysFormType) => updateCreditDaysData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
