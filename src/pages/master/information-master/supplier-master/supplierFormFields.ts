@@ -226,7 +226,7 @@ const designationSupplier: FormFieldType = createFormConfig(
 
 // Right Side Fields
 const citySupplier: FormFieldType = createFormConfig(
-  "cityID",
+  "cityId",
   "City",
   "select",
   CityValidation,
@@ -241,7 +241,7 @@ const zipSupplier: FormFieldType = createFormConfig(
   "Enter Zip"
 );
 const stateSupplier: FormFieldType = createFormConfig(
-  "stateID",
+  "stateId",
   "State",
   "select",
   StateValidation,
@@ -249,7 +249,7 @@ const stateSupplier: FormFieldType = createFormConfig(
   {}
 );
 const countrySupplier: FormFieldType = createFormConfig(
-  "countryID",
+  "countryId",
   "Country",
   "select",
   CountryValidation,

@@ -15,7 +15,7 @@ const Client = {
 } as ValidationType;
 
 const city: FormFieldType = createFormConfig(
-  "cityID",
+  "cityId",
   "City",
   "select",
   City,

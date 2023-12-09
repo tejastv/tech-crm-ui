@@ -80,12 +80,12 @@ export const Executive: React.FC = () => {
   const deleteExecutiveClick = async (executiveData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deleteExecutive(executiveData.executiveID);
+      await deleteExecutive(executiveData.executiveId);
     }
   };
 
   const editExecutiveClick = (executiveData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", executiveData.executiveID));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", executiveData.executiveId));
   };
 
   const tableConfig: TableType<ExecutiveType> = {
@@ -113,7 +113,7 @@ export const Executive: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

@@ -209,7 +209,7 @@ export const ClientForm: React.FC = () => {
   if (executiveOptions?.length) {
     let options = selectOptionsMaker(
       executiveOptions,
-      "executiveID",
+      "executiveId",
       "executive"
     );
     clientFormFields.executive.config.options = options;
@@ -310,9 +310,9 @@ export const ClientForm: React.FC = () => {
         let id = clientMasterData?.executiveId;
         let data: any = returnObjectBasedOnID(
           executiveOptions,
-          "executiveID",
+          "executiveId",
           id,
-          "executiveID",
+          "executiveId",
           "executive"
         );
         if (data.length > 0) {

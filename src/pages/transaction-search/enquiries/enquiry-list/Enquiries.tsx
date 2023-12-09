@@ -71,8 +71,8 @@ export const Enquiries: React.FC = () => {
       header: () => <>Action</>,
     },
     {
-      accessorFn: (row) => row.enqID,
-      id: "enqID",
+      accessorFn: (row) => row.enqId,
+      id: "enqId",
       cell: (info) => info.getValue(),
       header: () => <>SN</>,
     },
@@ -443,12 +443,12 @@ export const Enquiries: React.FC = () => {
   const deleteEnquiryClick = (enquiriesData: any) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
-      deleteEnquiry(enquiriesData.enqID);
+      deleteEnquiry(enquiriesData.enqId);
     }
   };
 
   const editEnquiryClick = (enquiriesData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", enquiriesData.enqID), {
+    navigate(COMMON_ROUTES.EDIT.replace(":id", enquiriesData.enqId), {
       state: null,
     });
   };

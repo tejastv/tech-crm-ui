@@ -75,7 +75,7 @@ export const useCallTypeApiCallHook = () => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_CALL_TYPE.replace(
         "{id}",
-        "" + updateCallTypeData.typeID
+        "" + updateCallTypeData.typeId
       ),
       updateCallTypeData
     );

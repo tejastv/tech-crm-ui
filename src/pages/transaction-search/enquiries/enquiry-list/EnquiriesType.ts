@@ -14,8 +14,8 @@ export interface EnquiriesType {
   sourceId: number;
   enqStatusId: number;
   notes: string;
-  pmtstatus: string;
-  creditamount: string;
+  pmtStatus: string;
+  creditAmount: string;
   reportDate: string;
   givenAddress: string;
   cityId: number;

@@ -1,6 +1,6 @@
 export interface PriceGroupType {
   price: number;
-  countryID: number;
+  countryId: number;
   currencyId: number;
   countryName: string;
   otherCharges: number;

@@ -120,14 +120,14 @@ export const SupplierForm: React.FC = () => {
   const onSubmit = methods.handleSubmit((currencyData) => {
     let data: any = { ...cleanupObject(currencyData) };
     data["ourRefNo"] = "String";
-    if (data.cityID) {
-      data.cityID = +data.cityID["value"];
+    if (data.cityId) {
+      data.cityId = +data.cityId["value"];
     }
-    if (data.stateID) {
-      data.stateID = +data.stateID["value"];
+    if (data.stateId) {
+      data.stateId = +data.stateId["value"];
     }
-    if (data.countryID) {
-      data.countryID = +data.countryID["value"];
+    if (data.countryId) {
+      data.countryId = +data.countryId["value"];
     }
     if (data.currencyId) {
       data.currencyId = +data.currencyId["value"];
@@ -147,7 +147,7 @@ export const SupplierForm: React.FC = () => {
     const { data: supplierMasterData } = getSupplierMasterData("" + params.id);
     if (supplierMasterData) {
       if (cityOptions) {
-        let id = supplierMasterData?.cityID;
+        let id = supplierMasterData?.cityId;
         let data: any = returnObjectBasedOnID(
           cityOptions,
           "id",
@@ -163,7 +163,7 @@ export const SupplierForm: React.FC = () => {
           : [];
       }
       if (stateOptions) {
-        let id = supplierMasterData?.stateID;
+        let id = supplierMasterData?.stateId;
         let data: any = returnObjectBasedOnID(
           stateOptions,
           "stateId",
@@ -179,7 +179,7 @@ export const SupplierForm: React.FC = () => {
           : [];
       }
       if (countryOptions) {
-        let id = supplierMasterData?.countryID;
+        let id = supplierMasterData?.countryId;
         let data: any = returnObjectBasedOnID(
           countryOptions,
           "countryId",

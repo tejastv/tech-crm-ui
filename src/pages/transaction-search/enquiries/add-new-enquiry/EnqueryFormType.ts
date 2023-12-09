@@ -13,8 +13,8 @@ export interface EnqueryFormType {
   sourceId: Options;
   enqStatusId: Options;
   notes: string;
-  pmtstatus: Options;
-  creditamount: string;
+  pmtStatus: Options;
+  creditAmount: string;
   reportDate: string;
   givenAddress: string;
   cityId: Options;

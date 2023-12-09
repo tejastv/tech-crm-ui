@@ -5,9 +5,9 @@ export interface SupplierMasterFormType {
   fax: string;
   supplierId: number;
   supplierName: string;
-  cityID: number;
-  stateID: number;
-  countryID: number;
+  cityId: number;
+  stateId: number;
+  countryId: number;
   email: string;
   currencyId: number;
   nickName: string;

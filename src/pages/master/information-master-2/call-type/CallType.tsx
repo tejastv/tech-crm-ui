@@ -56,12 +56,12 @@ export const CallType: React.FC = () => {
   const deleteCallTypeClick = async (callTypeData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deleteCallType(callTypeData.typeID);
+      await deleteCallType(callTypeData.typeId);
     }
   };
 
   const editCallTypeClick = (callTypeData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", callTypeData.typeID));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", callTypeData.typeId));
   };
 
   const tableConfig: TableType<CallTypeType> = {
@@ -89,7 +89,7 @@ export const CallType: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );
