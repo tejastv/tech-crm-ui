@@ -4,14 +4,14 @@ import { FormProvider, useForm } from "react-hook-form";
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 
 import {
-  AddUpdateSegmentType,
-  addSegmentFormFields,
+  SegmentFormType,
+  segmentFormFields,
   useSegmentApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-export const AddUpdateSegment: React.FC = () => {
-  const methods = useForm<AddUpdateSegmentType>();
+export const SegmentForm: React.FC = () => {
+  const methods = useForm<SegmentFormType>();
   const { addSegmentMutation, updateSegmentMutation, getSegmentData } =
     useSegmentApiCallHook();
   const { mutateAsync: addSegment } = addSegmentMutation();
@@ -33,8 +33,7 @@ export const AddUpdateSegment: React.FC = () => {
       "" + params.id
     );
     if (segmentDataSuccess) {
-      addSegmentFormFields.clientSegment.config.setData =
-        segmentData?.segmentName;
+      segmentFormFields.clientSegment.config.setData = segmentData?.segmentName;
     }
   } else {
     useEffect(() => {
@@ -63,7 +62,7 @@ export const AddUpdateSegment: React.FC = () => {
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
               <div className="row">
                 <div className="col-6 pull-right">
-                  <Input config={addSegmentFormFields.clientSegment.config} />
+                  <Input config={segmentFormFields.clientSegment.config} />
                 </div>
               </div>
             </BorderLayout>

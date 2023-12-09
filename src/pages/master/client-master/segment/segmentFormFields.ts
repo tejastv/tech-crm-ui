@@ -20,6 +20,6 @@ const clientSegment: FormFieldType = createFormConfig(
   "Enter Segment"
 );
 
-export const addSegmentFormFields = {
+export const segmentFormFields = {
   clientSegment,
 };

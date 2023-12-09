@@ -10,7 +10,7 @@ export { ClientForm } from "./client-master/client/ClientForm";
 export { GroupMaster } from "./client-master/client-group/ClientGroup";
 export { ClientGroupForm } from "./client-master/client-group/ClientGroupForm";
 export { Segment } from "./client-master/segment/Segment";
-export { AddUpdateSegment } from "./client-master/segment/AddUpdateSegment";
+export { SegmentForm } from "./client-master/segment/SegmentForm";
 
 // Location
 // City master child pages
@@ -93,7 +93,7 @@ export { stateFormFields } from "./location-master/state/stateFormFields";
 export { cityFormFields } from "./location-master/city/cityFormFields";
 
 export { addClientGroupFormFields } from "./client-master/client-group/addClientGroupFormFields";
-export { addSegmentFormFields } from "./client-master/segment/add-segment-form-fields";
+export { segmentFormFields } from "./client-master/segment/segmentFormFields";
 
 export { companyFormFields } from "./company/companyFormFields";
 
@@ -140,8 +140,8 @@ export * from "./client-master/client/ClientFormType";
 export * from "./client-master/client-group/ClientGroupFormType";
 export * from "./client-master/client-group/ClientGroupType";
 
-export * from "./client-master/segment/add-update-segment.type";
-export * from "./client-master/segment/segment-type";
+export * from "./client-master/segment/SegmentFormType";
+export * from "./client-master/segment/SegmentType";
 
 // price master
 export * from "./price-list-master/actual-buyer/ActualBuyerType";
@@ -224,7 +224,7 @@ export * from "./location-master/country/CountryFormType";
 export * from "./price-list-master/price-list-group-wise/CityWiseGroupType";
 export * from "./price-list-master/price-list-group-wise/GroupWiseCurrencyType";
 export * from "./price-list-master/price-list-for-clients/CurrencyAndGroupType";
-export * from "./client-master/client-group/client-group-basedon-clientID-type";
+export * from "./client-master/client-group/ClientBasedOnClientId";
 export * from "./price-list-master/price-list-group-wise/UpdatePriceListForGroupType";
 export * from "./price-list-master/std-price-list-client/UpdateStandardPrice";
 export * from "./local-source-master/std-price-list/UpdateLsStandardPriceType";

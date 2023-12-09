@@ -1,4 +1,4 @@
-export interface AddUpdateSegmentType {
+export interface SegmentFormType {
   id?: string;
   segmentName: string;
 }
