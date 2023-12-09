@@ -30,7 +30,7 @@ export const useExecutiveApiCallHook = () => {
     });
   };
 
-  const getExecutiveData = (id: string): UseQueryResult<ExecutiveType> => {
+  const getExecutiveData = (id: string, condition: boolean): UseQueryResult<ExecutiveType> => {
     return useQuery<ExecutiveType>({
       queryKey: [queryKeys.EXECUTIVE_DATA, id],
       queryFn: async () => {
@@ -39,13 +39,13 @@ export const useExecutiveApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 
   const addExecutive = async (
-    executiveData: ExecutiveFormType
+    executiveData: Partial<ExecutiveType>
   ): Promise<ApiResponseType<ExecutiveType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_EXECUTIVE,
@@ -56,7 +56,7 @@ export const useExecutiveApiCallHook = () => {
 
   const addExecutiveMutation = () => {
     const mutation = useMutation(
-      (updatedItem: ExecutiveFormType) => addExecutive(updatedItem),
+      (updatedItem: Partial<ExecutiveType>) => addExecutive(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -70,12 +70,12 @@ export const useExecutiveApiCallHook = () => {
   };
 
   const updateExecutiveData = async (
-    updateExecutiveData: ExecutiveFormType
+    updateExecutiveData: Partial<ExecutiveType>
   ): Promise<ApiResponseType<ExecutiveType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_EXECUTIVE.replace(
         "{id}",
-        "" + updateExecutiveData.id
+        "" + updateExecutiveData.executiveId
       ),
       updateExecutiveData
     );
@@ -84,7 +84,7 @@ export const useExecutiveApiCallHook = () => {
 
   const updateExecutiveMutation = () => {
     const mutation = useMutation(
-      (updatedItem: ExecutiveFormType) => updateExecutiveData(updatedItem),
+      (updatedItem: Partial<ExecutiveType>) => updateExecutiveData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

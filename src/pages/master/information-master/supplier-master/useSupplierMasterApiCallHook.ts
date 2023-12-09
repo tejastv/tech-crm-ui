@@ -48,7 +48,7 @@ export const useSupplierMasterApiCallHook = () => {
   };
 
   const addSupplierMaster = async (
-    supplierMasterData: SupplierMasterFormType
+    supplierMasterData: Partial<SupplierMasterType>
   ): Promise<ApiResponseType<SupplierMasterType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_SUPPLIER_MASTER,
@@ -59,7 +59,7 @@ export const useSupplierMasterApiCallHook = () => {
 
   const addSupplierMasterMutation = () => {
     const mutation = useMutation(
-      (updatedItem: SupplierMasterFormType) => addSupplierMaster(updatedItem),
+      (updatedItem: Partial<SupplierMasterType>) => addSupplierMaster(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -73,12 +73,12 @@ export const useSupplierMasterApiCallHook = () => {
   };
 
   const updateSupplierMasterData = async (
-    updateSupplierMasterData: SupplierMasterFormType
+    updateSupplierMasterData: Partial<SupplierMasterType>
   ): Promise<ApiResponseType<SupplierMasterType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_SUPPLIER_MASTER.replace(
         "{id}",
-        "" + updateSupplierMasterData.id
+        "" + updateSupplierMasterData.supplierId
       ),
       updateSupplierMasterData
     );
@@ -87,7 +87,7 @@ export const useSupplierMasterApiCallHook = () => {
 
   const updateSupplierMasterMutation = () => {
     const mutation = useMutation(
-      (updatedItem: SupplierMasterFormType) =>
+      (updatedItem: Partial<SupplierMasterType>) =>
         updateSupplierMasterData(updatedItem),
       {
         onSuccess: async () => {

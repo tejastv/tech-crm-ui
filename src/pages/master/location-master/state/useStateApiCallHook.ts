@@ -29,6 +29,7 @@ export const useStateApiCallHook = () => {
         let mapedData = selectOptionsMapMaker(data, "stateId", "stateName");
         return mapedData;
       },
+      refetchOnWindowFocus: false,
       staleTime: Infinity,
     });
   };

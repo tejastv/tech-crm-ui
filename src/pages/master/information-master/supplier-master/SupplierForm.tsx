@@ -21,11 +21,12 @@ import {
   CountryType,
   StateType,
   SupplierMasterType,
+  CurrencyType,
 } from "@master/index";
 
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useLocation, useParams } from "react-router-dom";
-import { returnObjectBasedOnID, cleanupObject } from "@utils/index";
+import { cleanupObject } from "@utils/index";
 
 export const SupplierForm: React.FC = () => {
   const { state: localSupplierData } = useLocation();
@@ -115,46 +116,69 @@ export const SupplierForm: React.FC = () => {
     supplierFormFields.countrySupplier.config.options = options;
   }
 
-  const { data: CurrencyData } = getCurrency();
+  const { data: currencyData } = getCurrency();
+  const [currencyOptions, setCurrencyOptions] = useState<CurrencyType[]>();
 
-  if (CurrencyData) {
-    supplierFormFields.currencySupplier.config.options = selectOptionsMaker(
-      Object.values(CurrencyData),
+  useEffect(() => {
+    if (currencyData) {
+      setCurrencyOptions(Object.values(currencyData));
+    }
+  }, [currencyData]);
+
+  if (currencyOptions?.length) {
+    let options = selectOptionsMaker(
+      currencyOptions,
       "currencyId",
       "currencyType"
     );
+    supplierFormFields.currencySupplier.config.options = options;
   }
 
-  const onSubmit = handleSubmit((currencyData) => {
-    let data: any = { ...cleanupObject(currencyData) };
-    data["ourRefNo"] = "String";
-    if (data.cityId) {
-      data.cityId = +data.cityId["value"];
-    }
-    if (data.stateId) {
-      data.stateId = +data.stateId["value"];
-    }
-    if (data.countryId) {
-      data.countryId = +data.countryId["value"];
-    }
-    if (data.currencyId) {
-      data.currencyId = +data.currencyId["value"];
-    }
-    if (data.supplierId) {
-      data.supplierId = +data.supplierId;
-    }
-    if (params.id && data) {
-      updateSupplierMaster({ id: params.id, ...data });
+  const onSubmit = handleSubmit((supplierFormData: SupplierMasterFormType) => {
+    let reqObj: Partial<SupplierMasterType> =
+      mapSupplierRequest(supplierFormData);
+    if (params.id && reqObj) {
+      updateSupplierMaster({ supplierId: +params.id, ...reqObj });
     } else {
-      addSupplierMaster(data);
+      addSupplierMaster(reqObj);
     }
   });
-
 
   const { data: supplierMasterData } = getSupplierMasterData(
     "" + params.id,
     !localSupplierData && params.id !== undefined
   );
+
+  const mapSupplierRequest = (supplierFormData: SupplierMasterFormType) => {
+    let supplierData: Partial<SupplierMasterType> = {
+      address: supplierFormData.address,
+      zip: supplierFormData.zip,
+      fax: supplierFormData.fax,
+      supplierId: supplierFormData.supplierId,
+      supplierName: supplierFormData.supplierName,
+      email: supplierFormData.email,
+      nickName: supplierFormData.nickName,
+      website: supplierFormData.website,
+      phone: supplierFormData.phone,
+      contactPerson: supplierFormData.contactPerson,
+      designation: supplierFormData.designation,
+      ourRefNo: supplierFormData.ourRefNo,
+    };
+    if (cityData && supplierFormData?.cityId) {
+      supplierData.cityId = supplierFormData.cityId.value;
+    }
+    if (stateData && supplierFormData?.stateId) {
+      supplierData.stateId = supplierFormData.stateId.value;
+    }
+    if (countryData && supplierFormData?.countryId) {
+      supplierData.countryId = supplierFormData.countryId.value;
+    }
+    if (currencyData && supplierFormData?.currencyId) {
+      supplierData.currencyId = supplierFormData.currencyId.value;
+    }
+    // industryId: formEnqData.industryId.value,
+    return cleanupObject(supplierData);
+  };
 
   const mapSupplierDataToSupplierForm = (supplierData: SupplierMasterType) => {
     let supplierFormData: Partial<SupplierMasterFormType> = {
@@ -164,7 +188,6 @@ export const SupplierForm: React.FC = () => {
       supplierId: supplierData.supplierId,
       supplierName: supplierData.supplierName,
       email: supplierData.email,
-      currencyId: supplierData.currencyId,
       nickName: supplierData.nickName,
       website: supplierData.website,
       phone: supplierData.phone,
@@ -196,6 +219,14 @@ export const SupplierForm: React.FC = () => {
           value: data.countryId,
         });
     }
+    if (currencyData && supplierData?.currencyId) {
+      let data = currencyData[supplierData.currencyId];
+      data &&
+        (supplierFormData.currencyId = {
+          label: data.currencyType,
+          value: data.currencyId,
+        });
+    }
     return supplierFormData;
   };
 
@@ -205,7 +236,14 @@ export const SupplierForm: React.FC = () => {
         reset(mapSupplierDataToSupplierForm(supplierMasterData));
       }
     }
-  }, [params.id, cityOptions, stateOptions, countryOptions]);
+  }, [
+    params.id,
+    cityOptions,
+    stateOptions,
+    countryOptions,
+    currencyOptions,
+    supplierMasterData,
+  ]);
 
   return (
     <Card config={cardConfig.formLayoutConfig}>

@@ -3,7 +3,7 @@ export interface ExecutiveType {
   stateId: number;
   email: string;
   cityName: string;
-  executiveID: number;
+  executiveId: number;
   executive: string;
   invoiceRequired: boolean;
   stateName: string;

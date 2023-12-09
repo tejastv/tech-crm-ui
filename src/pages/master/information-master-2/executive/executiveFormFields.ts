@@ -54,21 +54,21 @@ const checkInfoOptions = {
   checkOpt: { value: false, label: "Required Invoice Copy" },
 };
 
-const executiveInfomation2: FormFieldType = createFormConfig(
+const executiveInformation: FormFieldType = createFormConfig(
   "executive",
   "Executive",
   "text",
   ExecutiveValidation,
   " Executive"
 );
-const emailInformation2: FormFieldType = createFormConfig(
+const emailInformation: FormFieldType = createFormConfig(
   "email",
   "E-Mail",
   "Email",
   EmailValidation,
   "Enter E-mail"
 );
-const cityInformation2: FormFieldType = createFormConfig(
+const cityInformation: FormFieldType = createFormConfig(
   "cityId",
   "City",
   "select",
@@ -76,7 +76,7 @@ const cityInformation2: FormFieldType = createFormConfig(
   "Select City",
   {}
 );
-const checkboxInformation2: FormFieldType = createFormConfig(
+const checkboxInformation: FormFieldType = createFormConfig(
   "invoiceRequired",
   "",
   "checkbox",
@@ -84,7 +84,7 @@ const checkboxInformation2: FormFieldType = createFormConfig(
   "",
   checkInfoOptions
 );
-const stateInformation2: FormFieldType = createFormConfig(
+const stateInformation: FormFieldType = createFormConfig(
   "stateId",
   "State",
   "select",
@@ -94,9 +94,9 @@ const stateInformation2: FormFieldType = createFormConfig(
 );
 
 export const executiveFormFields = {
-  executiveInfomation2,
-  emailInformation2,
-  cityInformation2,
-  checkboxInformation2,
-  stateInformation2,
+  executiveInformation,
+  emailInformation,
+  cityInformation,
+  checkboxInformation,
+  stateInformation,
 };

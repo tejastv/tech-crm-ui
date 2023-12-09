@@ -11,7 +11,7 @@ export interface SupplierMasterFormType {
   stateId: Options;
   countryId: Options;
   email: string;
-  currencyId: number;
+  currencyId: Options;
   nickName: string;
   website: string;
   phone: string;

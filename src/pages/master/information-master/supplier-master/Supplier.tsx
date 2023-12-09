@@ -98,13 +98,7 @@ export const Supplier: React.FC = () => {
       id: "stateId",
       cell: (info) => info.getValue(),
       header: () => <>State</>,
-    },
-    {
-      accessorFn: (row) => row.countryName,
-      id: "countryID",
-      cell: (info) => info.getValue(),
-      header: () => <>Country</>,
-    },
+    }
   ];
 
   const { data: supplierMasterData, isLoading } = getSupplierMaster();
