@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateCityType, CityType } from "@master/index";
+import { CityFormType, CityType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -50,7 +50,7 @@ export const useCityApiCallHook = () => {
   };
 
   const addCity = async (
-    cityData: AddUpdateCityType
+    cityData: CityFormType
   ): Promise<ApiResponseType<CityType>> => {
     const response = await instance.post(apiUrls.GET_ADD_CITY, cityData);
     return response.data.data;
@@ -58,7 +58,7 @@ export const useCityApiCallHook = () => {
 
   const addCityMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateCityType) => addCity(updatedItem),
+      (updatedItem: CityFormType) => addCity(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -72,7 +72,7 @@ export const useCityApiCallHook = () => {
   };
 
   const updateCityData = async (
-    updateCityData: AddUpdateCityType
+    updateCityData: CityFormType
   ): Promise<ApiResponseType<CityType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_CITY.replace("{id}", "" + updateCityData.id),
@@ -83,7 +83,7 @@ export const useCityApiCallHook = () => {
 
   const updateCityMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateCityType) => updateCityData(updatedItem),
+      (updatedItem: CityFormType) => updateCityData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

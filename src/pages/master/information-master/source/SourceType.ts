@@ -1,5 +1,5 @@
 export interface SourceType {
-  sourceID: number;
+  sourceId: number;
   source: string;
   firstLetterFile: string;
 }

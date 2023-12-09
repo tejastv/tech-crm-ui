@@ -196,7 +196,7 @@ export const EnquiryForm: React.FC = () => {
   }, [clientData]);
 
   if (clientOptions?.length) {
-    let options = selectOptionsMaker(clientOptions, "clientID", "clientName");
+    let options = selectOptionsMaker(clientOptions, "clientId", "clientName");
     enquiryFormFields.enqClient.config.options = options;
   }
 
@@ -238,7 +238,7 @@ export const EnquiryForm: React.FC = () => {
   }, [sourceData]);
 
   if (sourceOptions?.length) {
-    let options = selectOptionsMaker(sourceOptions, "sourceID", "source");
+    let options = selectOptionsMaker(sourceOptions, "sourceId", "source");
     enquiryFormFields.enqSource.config.options = options;
   }
 
@@ -289,7 +289,7 @@ export const EnquiryForm: React.FC = () => {
   if (serviceOptions?.length) {
     let options = selectOptionsMaker(
       serviceOptions,
-      "serviceTypeID",
+      "serviceTypeId",
       "serviceType"
     );
     enquiryFormFields.enqServiceType.config.options = options;
@@ -430,21 +430,21 @@ export const EnquiryForm: React.FC = () => {
         return alert("Please select Country.");
       }
     }
-    if (enquiryFormFields.enqClient.config.name === "clientID") {
-      obj["clientID"] = getValues(enquiryFormFields.enqClient.config.name);
-      if (!obj.clientID) {
+    if (enquiryFormFields.enqClient.config.name === "clientId") {
+      obj["clientId"] = getValues(enquiryFormFields.enqClient.config.name);
+      if (!obj.clientId) {
         return alert("Please select Client.");
       }
     }
-    if (enquiryFormFields.enqServiceType.config.name === "serviceTypeID") {
-      obj["serviceTypeID"] = getValues(
+    if (enquiryFormFields.enqServiceType.config.name === "serviceTypeId") {
+      obj["serviceTypeId"] = getValues(
         enquiryFormFields.enqServiceType.config.name
       );
-      if (!obj.serviceTypeID) {
+      if (!obj.serviceTypeId) {
         return alert("Please select Service Type.");
       }
     }
-    if (obj.countryId && obj.clientID && obj.serviceTypeID) {
+    if (obj.countryId && obj.clientId && obj.serviceTypeId) {
       setGetPriceFlag({ flag: true, ...obj });
       // console.log("true", { flag: true, ...obj });
     } else {
@@ -455,7 +455,7 @@ export const EnquiryForm: React.FC = () => {
 
   const { data: priceData } = getPrice(
     {
-      clientId: getPriceFlag.clientID?.value,
+      clientId: getPriceFlag.clientId?.value,
       countryId: getPriceFlag.countryId?.value,
     },
     getPriceFlag.flag
@@ -466,7 +466,7 @@ export const EnquiryForm: React.FC = () => {
       setValue(
         enquiryFormFields.enqPrice.config.name,
         // @ts-ignore
-        priceData[0][priceMapper[getPriceFlag.serviceTypeID?.value]]
+        priceData[0][priceMapper[getPriceFlag.serviceTypeId?.value]]
       );
     }
   }
@@ -608,20 +608,20 @@ export const EnquiryForm: React.FC = () => {
       cmie: enqFormData.cmie,
       email: enqFormData.email,
     };
-    if (countryData && enqFormData?.companyID) {
-      enqData.companyID = enqFormData.companyID.value;
+    if (countryData && enqFormData?.companyId) {
+      enqData.companyId = enqFormData.companyId.value;
     }
-    if (countryData && enqFormData?.serviceTypeID) {
-      enqData.serviceTypeID = enqFormData.serviceTypeID.value;
+    if (countryData && enqFormData?.serviceTypeId) {
+      enqData.serviceTypeId = enqFormData.serviceTypeId.value;
     }
-    if (countryData && enqFormData?.clientID) {
-      enqData.clientID = enqFormData.clientID.value;
+    if (countryData && enqFormData?.clientId) {
+      enqData.clientId = enqFormData.clientId.value;
     }
-    if (countryData && enqFormData?.sourceID) {
-      enqData.sourceID = enqFormData.sourceID.value;
+    if (countryData && enqFormData?.sourceId) {
+      enqData.sourceId = enqFormData.sourceId.value;
     }
-    if (countryData && enqFormData?.enqStatusID) {
-      enqData.enqStatusID = enqFormData.enqStatusID.value;
+    if (countryData && enqFormData?.enqStatusId) {
+      enqData.enqStatusId = enqFormData.enqStatusId.value;
     }
     if (countryData && enqFormData?.cityId) {
       enqData.cityId = enqFormData.cityId.value;
@@ -693,51 +693,51 @@ export const EnquiryForm: React.FC = () => {
       cmie: enqData.cmie,
       email: enqData.email,
     };
-    if (companyData && enqData?.companyID) {
-      let data = companyData[enqData.companyID];
+    if (companyData && enqData?.companyId) {
+      let data = companyData[enqData.companyId];
       data &&
-        (enqFormData.companyID = {
+        (enqFormData.companyId = {
           label: data.companyName,
           value: data.companyId,
         });
     }
-    if (clientData && enqData?.clientID) {
-      let data = clientData[enqData.clientID];
+    if (clientData && enqData?.clientId) {
+      let data = clientData[enqData.clientId];
       data &&
-        ((enqFormData.clientID = {
+        ((enqFormData.clientId = {
           label: data.clientName,
-          value: data.clientID,
+          value: data.clientId,
         }),
-        getClientValue(data.clientID));
+        getClientValue(data.clientId));
     }
-    if (serviceData && enqData?.serviceTypeID) {
-      let data = serviceData[enqData.serviceTypeID];
+    if (serviceData && enqData?.serviceTypeId) {
+      let data = serviceData[enqData.serviceTypeId];
       data &&
-        (enqFormData.serviceTypeID = {
+        (enqFormData.serviceTypeId = {
           label: data.serviceType,
-          value: data.serviceTypeID,
+          value: data.serviceTypeId,
         });
     }
-    if (countryData && clientData?.clientID) {
-      let data = clientData[enqData.clientID];
+    if (countryData && clientData?.clientId) {
+      let data = clientData[enqData.clientId];
       data &&
-        (enqFormData.clientID = {
+        (enqFormData.clientId = {
           label: data.clientName,
-          value: data.clientID,
+          value: data.clientId,
         });
     }
-    if (sourceData && enqData?.sourceID) {
-      let data = sourceData[enqData.sourceID];
+    if (sourceData && enqData?.sourceId) {
+      let data = sourceData[enqData.sourceId];
       data &&
-        (enqFormData.sourceID = {
+        (enqFormData.sourceId = {
           label: data.source,
-          value: data.sourceID,
+          value: data.sourceId,
         });
     }
-    if (enqStatusData && enqData?.enqStatusID) {
-      let data = enqStatusData[enqData.enqStatusID];
+    if (enqStatusData && enqData?.enqStatusId) {
+      let data = enqStatusData[enqData.enqStatusId];
       data &&
-        (enqFormData.enqStatusID = {
+        (enqFormData.enqStatusId = {
           label: data.enquiryStatus,
           value: data.enquiryStatusID,
         });

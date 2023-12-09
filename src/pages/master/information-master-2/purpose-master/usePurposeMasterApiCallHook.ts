@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdatePurposeMasterType, PurposeMasterType } from "@master/index";
+import { PurposeMasterFormType, PurposeMasterType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -47,7 +47,7 @@ export const usePurposeMasterApiCallHook = () => {
   };
 
   const addPurposeMaster = async (
-    purposeMasterData: AddUpdatePurposeMasterType
+    purposeMasterData: PurposeMasterFormType
   ): Promise<ApiResponseType<PurposeMasterType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_PURPOSE_MASTER,
@@ -58,8 +58,7 @@ export const usePurposeMasterApiCallHook = () => {
 
   const addPurposeMasterMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdatePurposeMasterType) =>
-        addPurposeMaster(updatedItem),
+      (updatedItem: PurposeMasterFormType) => addPurposeMaster(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -73,7 +72,7 @@ export const usePurposeMasterApiCallHook = () => {
   };
 
   const updatePurposeMasterData = async (
-    updatePurposeMasterData: AddUpdatePurposeMasterType
+    updatePurposeMasterData: PurposeMasterFormType
   ): Promise<ApiResponseType<PurposeMasterType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_PURPOSE_MASTER.replace(
@@ -87,7 +86,7 @@ export const usePurposeMasterApiCallHook = () => {
 
   const updatePurposeMasterMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdatePurposeMasterType) =>
+      (updatedItem: PurposeMasterFormType) =>
         updatePurposeMasterData(updatedItem),
       {
         onSuccess: async () => {

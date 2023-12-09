@@ -257,7 +257,7 @@ const countrySupplier: FormFieldType = createFormConfig(
   {}
 );
 const CurrenceySupplier: FormFieldType = createFormConfig(
-  "currencyID",
+  "currencyId",
   "Currency",
   "select",
   CurrencyValidation,

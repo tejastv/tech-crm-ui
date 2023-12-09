@@ -98,7 +98,7 @@ export const PriceListForClients: React.FC = () => {
     if (data) {
       let groupArray = selectOptionsMaker(
         data.records,
-        "clientID",
+        "clientId",
         "clientName",
         true
       );
@@ -126,7 +126,7 @@ export const PriceListForClients: React.FC = () => {
     const response = await instance.get(
       apiUrls.GET_UPDATE_DELETE_STDPRICE_CLIENTS.replace(
         "{id}",
-        "" + clientObj.currencyID
+        "" + clientObj.currencyId
       )
     );
     const data = response.data.data;

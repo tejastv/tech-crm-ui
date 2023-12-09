@@ -151,7 +151,7 @@ export const PriceListGroup: React.FC = () => {
         "Do you want fatch price from Standard Price?"
       );
       if (confirmation) {
-        getCurrencyWisePrice(data.priceGroup.data.currencyID);
+        getCurrencyWisePrice(data.priceGroup.data.currencyId);
       }
     }
   });

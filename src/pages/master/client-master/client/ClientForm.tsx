@@ -260,51 +260,54 @@ export const ClientForm: React.FC = () => {
     if (clientMasterData) {
       let clonedClientMasterData = { ...clientMasterData };
       if (cityOptions?.length) {
+        console.log(clientMasterData.cityId, cityOptions);
+
         let data = returnFormatedObjectElseEmptyArray(
-          clientMasterData.cityID,
+          clientMasterData.cityId,
           clientMasterData,
-          "cityID",
+          "cityId",
           "cityName"
         );
+        console.log(data);
         if (data.length > 0) {
-          clonedClientMasterData.cityID = data[0];
+          clonedClientMasterData.cityId = data[0];
         }
       }
       if (stateOptions?.length) {
         let data = returnFormatedObjectElseEmptyArray(
-          clientMasterData.stateID,
+          clientMasterData.stateId,
           clientMasterData,
-          "stateID",
+          "stateId",
           "stateName"
         );
         if (data.length > 0) {
-          clonedClientMasterData.stateID = data[0];
+          clonedClientMasterData.stateId = data[0];
         }
       }
       if (countryOptions?.length) {
         let data = returnFormatedObjectElseEmptyArray(
-          clientMasterData.countryID,
+          clientMasterData.countryId,
           clientMasterData,
-          "countryID",
+          "countryId",
           "countryName"
         );
         if (data.length > 0) {
-          clonedClientMasterData.countryID = data[0];
+          clonedClientMasterData.countryId = data[0];
         }
       }
       if (currencyOptions?.length) {
         let data = returnFormatedObjectElseEmptyArray(
-          clientMasterData.currencyID,
+          clientMasterData.currencyId,
           clientMasterData,
-          "currencyID",
+          "currencyId",
           "currencyName"
         );
         if (data.length > 0) {
-          clonedClientMasterData.currencyID = data[0];
+          clonedClientMasterData.currencyId = data[0];
         }
       }
       if (executiveOptions?.length) {
-        let id = clientMasterData?.executive_id;
+        let id = clientMasterData?.executiveId;
         let data: any = returnObjectBasedOnID(
           executiveOptions,
           "executiveID",
@@ -313,7 +316,7 @@ export const ClientForm: React.FC = () => {
           "executive"
         );
         if (data.length > 0) {
-          clonedClientMasterData.executive_id = {
+          clonedClientMasterData.executiveId = {
             label: data[0].label,
             value: data[0].value,
           };
@@ -392,7 +395,7 @@ export const ClientForm: React.FC = () => {
 
   const handleSelectCity = (selectedOption: any) => {
     if (selectedOption) {
-      if (clientFormFields.stateClient.config.name === "stateID") {
+      if (clientFormFields.stateClient.config.name === "stateId") {
         setValue(
           clientFormFields.stateClient.config.name,
           returnFormatedObjectElseEmptyArray(
@@ -403,7 +406,7 @@ export const ClientForm: React.FC = () => {
           )
         );
       }
-      if (clientFormFields.countryClient.config.name === "countryID") {
+      if (clientFormFields.countryClient.config.name === "countryId") {
         setValue(
           clientFormFields.countryClient.config.name,
           returnFormatedObjectElseEmptyArray(
@@ -421,7 +424,7 @@ export const ClientForm: React.FC = () => {
     let data: any = { ...cleanupObject(clientData) };
     delete data.state;
     data["ourRefNo"] = "String";
-    data["adjustfromDate"] = new Date().toISOString();
+    data["adjustFromDate"] = new Date().toISOString();
     data["autoSendOutstanding"] = "Y";
     data["enteredBy"] = 0;
     data["individualReport"] = "1";
@@ -429,14 +432,13 @@ export const ClientForm: React.FC = () => {
     data["nickName"] = "String";
     data["staxApplicable"] = "Y";
     data.adjustPerEnq = data.adjustPerEnq && parseFloat(data.adjustPerEnq);
-    data.adjustPerEnq_PI =
-      data.adjustPerEnq_PI && parseFloat(data.adjustPerEnq_PI);
+    data.adjustPerEnqPI =
+      data.adjustPerEnqPI && parseFloat(data.adjustPerEnqPI);
     data.balToAdjust = data.balToAdjust && parseFloat(data.balToAdjust);
-    data.balToAdjust_PI =
-      data.balToAdjust_PI && parseFloat(data.balToAdjust_PI);
+    data.balToAdjustPI = data.balToAdjustPI && parseFloat(data.balToAdjustPI);
     data.discount = data.discount && parseFloat(data.discount);
     data.toAdjust = data.toAdjust && parseFloat(data.toAdjust);
-    data.toAdjust_PI = data.toAdjust_PI && parseFloat(data.toAdjust_PI);
+    data.toAdjustPI = data.toAdjustPI && parseFloat(data.toAdjustPI);
     data.disType = data.disType && data.disType.toString();
     data.gstYN = data.gstYN && data.gstYN.toString();
     data.monthlyInvoice = data.monthlyInvoice && data.monthlyInvoice.toString();
@@ -447,23 +449,23 @@ export const ClientForm: React.FC = () => {
     } else {
       data.billONActualBuyer = "N";
     }
-    if (data.cityID) {
-      data.cityID = +data.cityID["value"];
+    if (data.cityId) {
+      data.cityId = +data.cityId["value"];
     }
-    if (data.stateID) {
-      data.stateID = +data.stateID["value"];
+    if (data.stateId) {
+      data.stateId = +data.stateId["value"];
     }
-    if (data.countryID) {
-      data.countryID = +data.countryID["value"];
+    if (data.countryId) {
+      data.countryId = +data.countryId["value"];
     }
     if (data.crDays) {
       data.crDays = +data.crDays["value"];
     }
-    if (data.currencyID) {
-      data.currencyID = +data.currencyID["value"];
+    if (data.currencyId) {
+      data.currencyId = +data.currencyId["value"];
     }
-    if (data.executive_id) {
-      data.executive_id = +data.executive_id["value"];
+    if (data.executiveId) {
+      data.executiveId = +data.executiveId["value"];
     }
     if (data.groupId) {
       data.groupId = +data.groupId["value"];

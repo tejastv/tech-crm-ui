@@ -53,6 +53,12 @@ export const CompanyForm: React.FC = () => {
   const [stateOptions, setStateOptions] = useState<StateType[]>();
   const [countryOptions, setCountryOptions] = useState<CountryType[]>();
 
+  // const [options, setOptions] = useState<{
+  //   cityOptions: CityType;
+  //   stateOptions: StateType;
+  //   countryOptions: CountryType;
+  // }>();
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Add Company Master",
@@ -68,6 +74,7 @@ export const CompanyForm: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
+      // setOptions()
       setCityOptions(Object.values(cityData));
     }
   }, [cityData && Object.values(cityData).length]);

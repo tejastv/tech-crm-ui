@@ -9,7 +9,7 @@ export interface SupplierMasterFormType {
   stateID: number;
   countryID: number;
   email: string;
-  currencyID: number;
+  currencyId: number;
   nickName: string;
   website: string;
   phone: string;

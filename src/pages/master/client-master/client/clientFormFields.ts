@@ -416,7 +416,7 @@ const designationClient: FormFieldType = createFormConfig(
   "Enter Designation"
 );
 const cityClient: FormFieldType = createFormConfig(
-  "cityID",
+  "cityId",
   "City",
   "select",
   CityValidation,
@@ -431,7 +431,7 @@ const zipClient: FormFieldType = createFormConfig(
   "Enter Zip"
 );
 const stateClient: FormFieldType = createFormConfig(
-  "stateID",
+  "stateId",
   "State",
   "select",
   StateValidation,
@@ -448,7 +448,7 @@ const statecodeClient: FormFieldType = createFormConfig(
   true
 );
 const countryClient: FormFieldType = createFormConfig(
-  "countryID",
+  "countryId",
   "Country",
   "select",
   CountryValidation,
@@ -493,7 +493,7 @@ const clientIdSelect: FormFieldType = createFormConfig(
   {}
 );
 const clientCurrencey: FormFieldType = createFormConfig(
-  "currencyID",
+  "currencyId",
   "Currency",
   "select",
   ClientCurrencyValidation,
@@ -501,7 +501,7 @@ const clientCurrencey: FormFieldType = createFormConfig(
   {}
 );
 const executive: FormFieldType = createFormConfig(
-  "executive_id",
+  "executiveId",
   "Executive",
   "select",
   ExecutiveValidation,
@@ -566,7 +566,7 @@ const discount: FormFieldType = createFormConfig(
 );
 const discountBlank: FormFieldType = createFormConfig(
   "discount",
-  " ",
+  "",
   "text",
   DiscountValidation,
   "discount"
@@ -594,21 +594,21 @@ const adjustenquiry: FormFieldType = createFormConfig(
 );
 // Adjust From Proforma
 const toAdjustproforma: FormFieldType = createFormConfig(
-  "toAdjust_PI",
+  "toAdjustPI",
   "To Adjusts",
   "text",
   AdjustPropfomaValidation,
   "Adjusts Proforma"
 );
 const baltoAdjustproformaproforma: FormFieldType = createFormConfig(
-  "balToAdjust_PI",
+  "balToAdjustPI",
   "Bal.to Adjust",
   "text",
   BalAdjustPropfomaValidation,
   "Bal to Adjust Proforma"
 );
 const adjustenquiryproforma: FormFieldType = createFormConfig(
-  "adjustPerEnq_PI",
+  "adjustPerEnqPI",
   "Adjust/Enquiry",
   "text",
   AdjustEnqPropfomaValidation,
