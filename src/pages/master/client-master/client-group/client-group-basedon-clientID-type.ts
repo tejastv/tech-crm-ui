@@ -12,7 +12,7 @@ export interface ClientBasedOnClientId {
   website: string;
   contactPerson: string;
   designation: string;
-  currencyID: number;
+  currencyId: number;
   nickName: string;
   executive_id: number;
   osListPrInteger: string;

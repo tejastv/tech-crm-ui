@@ -538,7 +538,7 @@ const recfin: FormFieldType = {
   },
 };
 
-export const addCompanyFormFields = {
+export const companyFormFields = {
   nameField,
   addressField,
   officeAddressField,

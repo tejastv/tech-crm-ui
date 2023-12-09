@@ -1,6 +1,6 @@
 export interface AddUpdateStdPriceType {
   countryName: string;
-  currencyID: number;
+  currencyId: number;
   price: number;
   priceHighDel: number;
   otherCharges: number;

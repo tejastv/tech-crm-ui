@@ -92,7 +92,7 @@ const EmailEnquiryValidation = {
   // pattern: {
   //   value:
   //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    //message: "Please Include an '@' and .com/in in the email address.",
+  //message: "Please Include an '@' and .com/in in the email address.",
   // },
 } as ValidationType;
 
@@ -404,7 +404,7 @@ const CommEnquiryValidation = {
 } as ValidationType;
 
 const enqCompanyName: FormFieldType = createFormConfig(
-  "companyID",
+  "companyId",
   "Company",
   "select",
   CompanyEnquiry,
@@ -428,7 +428,7 @@ const enqRefNo: FormFieldType = createFormConfig(
   true
 );
 const enqSource: FormFieldType = createFormConfig(
-  "sourceID",
+  "sourceId",
   "Source",
   "select",
   SourceEnquiry,
@@ -580,7 +580,7 @@ const enqLocalSource: FormFieldType = createFormConfig(
   {}
 );
 const enqServiceType: FormFieldType = createFormConfig(
-  "serviceTypeID",
+  "serviceTypeId",
   "Service Type",
   "select",
   ServiceTypeValidation,
@@ -668,7 +668,7 @@ const enqClientRef: FormFieldType = createFormConfig(
   "Client Ref"
 );
 const enqClient: FormFieldType = createFormConfig(
-  "clientID",
+  "clientId",
   "Client",
   "select",
   ClientEnquiryValidation,

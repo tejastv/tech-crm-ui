@@ -1,10 +1,10 @@
 // Company master child pages
-export { AddUpdateCompany } from "./company/AddUpdateCompany";
+export { CompanyForm } from "./company/CompanyForm";
 export { CompanyMaster } from "./company/Company";
 
 // Client master child pages
 export { Client } from "./client-master/client/Client";
-export { AddUpdateClient } from "./client-master/client/AddUpdateClient";
+export { ClientForm } from "./client-master/client/ClientForm";
 
 // Client Segment master child pages
 export { GroupMaster } from "./client-master/client-group/ClientGroup";
@@ -95,7 +95,7 @@ export { addCityFormFields } from "./location-master/city/add-city-form-fields";
 export { addClientGroupFormFields } from "./client-master/client-group/addClientGroupFormFields";
 export { addSegmentFormFields } from "./client-master/segment/add-segment-form-fields";
 
-export { addCompanyFormFields } from "./company/add-update-company-form-fields";
+export { companyFormFields } from "./company/companyFormFields";
 
 export { priceClientFormFields } from "./price-list-master/price-list-for-clients/priceClientFormFields";
 export { stdPriceClientsFormFields } from "./price-list-master/std-price-list-client/add-std-price-client-form-fields";
@@ -130,11 +130,11 @@ export { addUserFormFields } from "./information-master-2/user-master/UserFormFi
 // Models
 
 // company master
-export * from "./company/add-update-company-type";
-export * from "./company/company-type";
+export * from "./company/CompanyFormType";
+export * from "./company/CompanyType";
 
 // client master
-export * from "./client-master/client/client-type";
+export * from "./client-master/client/ClientType";
 export * from "./client-master/client/add-client-type";
 
 export * from "./client-master/client-group/ClientGroupFormType";

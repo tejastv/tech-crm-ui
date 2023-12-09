@@ -54,7 +54,7 @@ export const ClientGroupForm: React.FC = () => {
         (addClientGroupFormFields.searchClient.config.setData =
           selectOptionsMaker(
             clientGroupBasedOnIdData,
-            "clientID",
+            "clientId",
             "clientName"
           ));
     }

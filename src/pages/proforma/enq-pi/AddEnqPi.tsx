@@ -117,7 +117,7 @@ export const AddEnqPi: React.FC = () => {
   // if (ClientData) {
   //   addEnqPiFormFields.clientField.config.options = selectOptionsMaker(
   //     ClientData,
-  //     "clientID",
+  //     "clientId",
   //     "clientName"
   //   );
   // }
@@ -135,7 +135,7 @@ export const AddEnqPi: React.FC = () => {
   // if (SourceData) {
   //   addEnqPiFormFields.sourceField.config.options = selectOptionsMaker(
   //     SourceData,
-  //     "sourceID",
+  //     "sourceId",
   //     "source"
   //   );
   // }
@@ -163,7 +163,7 @@ export const AddEnqPi: React.FC = () => {
   if (ServiceData) {
     addEnqPiFormFields.serviceTypeField.config.options = selectOptionsMaker(
       ServiceData,
-      "serviceTypeID",
+      "serviceTypeId",
       "serviceType"
     );
   }

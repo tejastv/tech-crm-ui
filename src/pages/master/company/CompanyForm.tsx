@@ -13,8 +13,8 @@ import {
 } from "@shared/index";
 
 import {
-  AddUpdateCompanyType,
-  addCompanyFormFields,
+  CompanyFormType,
+  companyFormFields,
   useCompanyApiCallHook,
   useCityApiCallHook,
   useStateApiCallHook,
@@ -32,7 +32,7 @@ import {
   returnFormatedObjectElseEmptyArray,
 } from "@utils/index";
 
-export const AddUpdateCompany: React.FC = () => {
+export const CompanyForm: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -40,7 +40,7 @@ export const AddUpdateCompany: React.FC = () => {
     control,
     setValue,
     formState: { errors },
-  } = useForm<AddUpdateCompanyType>();
+  } = useForm<CompanyFormType>();
   const params = useParams();
   const { addCompanyMutation, updateCompanyMutation, getCompanyData } =
     useCompanyApiCallHook();
@@ -52,6 +52,12 @@ export const AddUpdateCompany: React.FC = () => {
   const [cityOptions, setCityOptions] = useState<CityType[]>();
   const [stateOptions, setStateOptions] = useState<StateType[]>();
   const [countryOptions, setCountryOptions] = useState<CountryType[]>();
+
+  // const [options, setOptions] = useState<{
+  //   cityOptions: CityType;
+  //   stateOptions: StateType;
+  //   countryOptions: CountryType;
+  // }>();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -68,13 +74,14 @@ export const AddUpdateCompany: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
+      // setOptions()
       setCityOptions(Object.values(cityData));
     }
   }, [cityData && Object.values(cityData).length]);
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "cityId", "cityName", true);
-    addCompanyFormFields.city.config.options = options;
+    companyFormFields.city.config.options = options;
   }
 
   // state api call
@@ -93,7 +100,7 @@ export const AddUpdateCompany: React.FC = () => {
       "stateName",
       true
     );
-    addCompanyFormFields.state.config.options = options;
+    companyFormFields.state.config.options = options;
   }
 
   // country api call
@@ -111,7 +118,7 @@ export const AddUpdateCompany: React.FC = () => {
       "countryId",
       "countryName"
     );
-    addCompanyFormFields.country.config.options = options;
+    companyFormFields.country.config.options = options;
   }
 
   const { data: companyMasterData } = getCompanyData(
@@ -181,7 +188,7 @@ export const AddUpdateCompany: React.FC = () => {
   const handleSelectChange = (selectedOption: any) => {
     if (selectedOption) {
       console.log(selectedOption);
-      if (addCompanyFormFields.state.config.name === "stateId") {
+      if (companyFormFields.state.config.name === "stateId") {
         let data = returnFormatedObjectElseEmptyArray(
           selectedOption.data.stateId,
           selectedOption.data,
@@ -189,9 +196,9 @@ export const AddUpdateCompany: React.FC = () => {
           "stateName"
         );
         data.length > 0 &&
-          setValue(addCompanyFormFields.state.config.name, data[0]);
+          setValue(companyFormFields.state.config.name, data[0]);
       }
-      if (addCompanyFormFields.country.config.name === "countryId") {
+      if (companyFormFields.country.config.name === "countryId") {
         let data = returnFormatedObjectElseEmptyArray(
           selectedOption.data.countryId,
           selectedOption.data,
@@ -199,7 +206,7 @@ export const AddUpdateCompany: React.FC = () => {
           "countryName"
         );
         data.length > 0 &&
-          setValue(addCompanyFormFields.country.config.name, data[0]);
+          setValue(companyFormFields.country.config.name, data[0]);
       }
     }
   };
@@ -242,71 +249,71 @@ export const AddUpdateCompany: React.FC = () => {
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.nameField}
+                    config={companyFormFields.nameField}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.addressField}
+                    config={companyFormFields.addressField}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.zip}
+                    config={companyFormFields.zip}
                   />
                   <NewSelect
                     errors={errors}
                     register={register}
                     control={control}
                     onChange={handleSelectChange}
-                    config={addCompanyFormFields.city}
+                    config={companyFormFields.city}
                   />
                   <NewSelect
                     errors={errors}
                     register={register}
                     control={control}
-                    config={addCompanyFormFields.state}
+                    config={companyFormFields.state}
                   />
                   <NewSelect
                     errors={errors}
                     register={register}
                     control={control}
-                    config={addCompanyFormFields.country}
+                    config={companyFormFields.country}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.officeAddressField}
+                    config={companyFormFields.officeAddressField}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.telNo}
+                    config={companyFormFields.telNo}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.faxNo}
+                    config={companyFormFields.faxNo}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.emailField}
+                    config={companyFormFields.emailField}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.website}
+                    config={companyFormFields.website}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.contactPerson}
+                    config={companyFormFields.contactPerson}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.designation}
+                    config={companyFormFields.designation}
                   />
                 </div>
               </div>
@@ -315,68 +322,68 @@ export const AddUpdateCompany: React.FC = () => {
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.hscode}
+                    config={companyFormFields.hscode}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.givenName}
+                    config={companyFormFields.givenName}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.referenceno}
+                    config={companyFormFields.referenceno}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.financialyear}
+                    config={companyFormFields.financialyear}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.regno}
+                    config={companyFormFields.regno}
                   />
                   <NewRadio
                     errors={errors}
                     register={register}
                     control={control}
-                    config={addCompanyFormFields.companyType}
+                    config={companyFormFields.companyType}
                   />
                   <NewDatePicker
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.incorporationDate}
+                    config={companyFormFields.incorporationDate}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.bankers}
+                    config={companyFormFields.bankers}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.notes}
+                    config={companyFormFields.notes}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.cmie}
+                    config={companyFormFields.cmie}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.rocStatus}
+                    config={companyFormFields.rocStatus}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.recodes}
+                    config={companyFormFields.recodes}
                   />
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={addCompanyFormFields.recfin}
+                    config={companyFormFields.recfin}
                   />
                 </div>
               </div>

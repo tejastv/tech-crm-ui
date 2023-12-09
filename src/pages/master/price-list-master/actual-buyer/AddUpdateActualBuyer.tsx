@@ -106,7 +106,7 @@ export const AddUpdateActualBuyer: React.FC = () => {
   }, [clientData]);
 
   if (clientOptions?.length) {
-    let options = selectOptionsMaker(clientOptions, "clientID", "clientName");
+    let options = selectOptionsMaker(clientOptions, "clientId", "clientName");
     addActualBuyersFormFields.clientactualbuyer.config.options = options;
   }
 

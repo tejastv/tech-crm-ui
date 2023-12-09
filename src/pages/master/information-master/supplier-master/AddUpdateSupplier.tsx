@@ -129,8 +129,8 @@ export const AddSupplier: React.FC = () => {
     if (data.countryID) {
       data.countryID = +data.countryID["value"];
     }
-    if (data.currencyID) {
-      data.currencyID = +data.currencyID["value"];
+    if (data.currencyId) {
+      data.currencyId = +data.currencyId["value"];
     }
     if (data.supplierId) {
       data.supplierId = +data.supplierId;
@@ -196,7 +196,7 @@ export const AddSupplier: React.FC = () => {
       }
 
       if (CurrencyData) {
-        let id = supplierMasterData?.currencyID;
+        let id = supplierMasterData?.currencyId;
         let data: any = returnObjectBasedOnID(
           Object.values(CurrencyData),
           "currencyId",

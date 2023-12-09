@@ -7,7 +7,7 @@ export interface CountryType {
   // countrylocalSource: string;
   continentId: any;
   price?: number;
-  currencyID?: number;
+  currencyId?: number;
   countryId: number;
   countryID?: number;
   otherCharges?: number;

@@ -1,6 +1,6 @@
 export interface AddUpdateSourceType {
   id?: number;
-  sourceID: number;
+  sourceId: number;
   source: string;
   firstLetterFile: string;
 }

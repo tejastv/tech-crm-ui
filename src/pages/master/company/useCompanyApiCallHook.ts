@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { CompanyType, AddUpdateCompanyType } from "@master/index";
+import { CompanyType, CompanyFormType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -43,7 +43,7 @@ export const useCompanyApiCallHook = () => {
   };
 
   const addCompany = async (
-    companyData: AddUpdateCompanyType
+    companyData: CompanyFormType
   ): Promise<ApiResponseType<CompanyType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_COMPANY_MASTER,
@@ -54,7 +54,7 @@ export const useCompanyApiCallHook = () => {
 
   const addCompanyMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateCompanyType) => addCompany(updatedItem),
+      (updatedItem: CompanyFormType) => addCompany(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -68,7 +68,7 @@ export const useCompanyApiCallHook = () => {
   };
 
   const updateCompanyData = async (
-    updateCompanyData: AddUpdateCompanyType
+    updateCompanyData: CompanyFormType
   ): Promise<ApiResponseType<CompanyType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_COMPANY_MASTER.replace(
@@ -82,7 +82,7 @@ export const useCompanyApiCallHook = () => {
 
   const updateCompanyMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateCompanyType) => updateCompanyData(updatedItem),
+      (updatedItem: CompanyFormType) => updateCompanyData(updatedItem),
       {
         onSuccess: async () => {
           await await queryClient.invalidateQueries({

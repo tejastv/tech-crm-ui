@@ -23,11 +23,10 @@ export const useClientApiCallHook = () => {
         const response = await instance.get(apiUrls.GET_ADD_CLIENT);
         let mapedData = selectOptionsMapMaker(
           response.data.data.records,
-          "clientID",
+          "clientId",
           "clientName"
         );
         return mapedData;
-        // return response.data.data.records;
       },
       staleTime: Infinity,
     });
