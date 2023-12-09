@@ -37,7 +37,6 @@ import {
 import {
   cleanupObject,
   returnFormatedObjectElseEmptyArray,
-  returnObjectBasedOnID,
 } from "@utils/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
@@ -118,6 +117,7 @@ export const ClientForm: React.FC = () => {
   }
 
   const { data: stateData } = getState();
+
   useEffect(() => {
     if (stateData) {
       setStateOptions(Object.values(stateData));
