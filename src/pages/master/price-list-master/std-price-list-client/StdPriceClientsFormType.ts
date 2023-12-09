@@ -6,5 +6,5 @@ export interface StdPriceClientsFormType {
   otherCharges: number;
   priceOnline: number;
   priceSuperflash: number;
-  countryID: number;
+  countryId: number;
 }

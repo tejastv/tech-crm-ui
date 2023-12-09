@@ -295,13 +295,13 @@ export const EnqPi: React.FC = () => {
   const deleteProformaClick = (proformaData: GeneratePiType) => {
     var conformation = confirm("Are you sure to delete it?");
     if (conformation) {
-      deleteProforma(proformaData.enqID.toString());
+      deleteProforma(proformaData.enqId.toString());
     }
   };
 
   const editProformaClick = (proformaData: GeneratePiType) => {
     console.log(proformaData);
-    navigate(COMMON_ROUTES.EDIT.replace(":id", proformaData.enqID.toString()));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", proformaData.enqId.toString()));
   };
 
   const tableConfig: TableType<GeneratePiType> = {
@@ -329,7 +329,7 @@ export const EnqPi: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

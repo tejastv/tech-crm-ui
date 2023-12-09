@@ -1,6 +1,6 @@
 export interface UpdatePriceListForGroupType {
   groupId?: number;
-  countryID: number;
+  countryId: number;
   price: number;
   priceHighDel: number;
   priceOnline: number;

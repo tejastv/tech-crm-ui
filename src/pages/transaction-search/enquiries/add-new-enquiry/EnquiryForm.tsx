@@ -575,7 +575,7 @@ export const EnquiryForm: React.FC = () => {
       dueDate: enqFormData.dueDate,
       clientRefNo: enqFormData.clientRefNo,
       notes: enqFormData.notes,
-      creditamount: enqFormData.creditamount,
+      creditAmount: enqFormData.creditAmount,
       reportDate: enqFormData.reportDate,
       givenAddress: enqFormData.givenAddress,
       zip: enqFormData.zip,
@@ -641,8 +641,8 @@ export const EnquiryForm: React.FC = () => {
     if (countryData && enqFormData?.fYear) {
       enqData.fyear = enqFormData.fYear.value;
     }
-    if (countryData && enqFormData?.pmtstatus) {
-      enqData.pmtstatus = enqFormData.pmtstatus.value;
+    if (countryData && enqFormData?.pmtStatus) {
+      enqData.pmtStatus = enqFormData.pmtStatus.value;
     }
     if (countryData && enqFormData?.typeofEnquiry) {
       enqData.typeofEnquiry = enqFormData.typeofEnquiry.value;
@@ -662,7 +662,7 @@ export const EnquiryForm: React.FC = () => {
       dueDate: enqData.dueDate && enqData.dueDate.split("T")[0],
       clientRefNo: enqData.clientRefNo,
       notes: enqData.notes,
-      creditamount: enqData.creditamount,
+      creditAmount: enqData.creditAmount,
       reportDate: enqData.reportDate,
       givenAddress: enqData.givenAddress,
       zip: enqData.zip,
@@ -782,10 +782,10 @@ export const EnquiryForm: React.FC = () => {
           value: data.finYear,
         });
     }
-    if (enqData?.pmtstatus) {
-      let data = enquiryFormFields.enqPrintStatusData[enqData.pmtstatus];
+    if (enqData?.pmtStatus) {
+      let data = enquiryFormFields.enqPrintStatusData[enqData.pmtStatus];
       data &&
-        (enqFormData.pmtstatus = {
+        (enqFormData.pmtStatus = {
           label: data.label,
           value: data.value,
         });

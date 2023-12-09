@@ -80,7 +80,7 @@ export const Executive: React.FC = () => {
   const deleteExecutiveClick = async (executiveData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deleteExecutive(executiveData.executiveID);
+      await deleteExecutive(executiveData.executiveId);
     }
   };
 

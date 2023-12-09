@@ -601,7 +601,7 @@ const enqPrintStatusData: MapType<Options> = {
 };
 
 const enqPrintStatus: FormFieldType = createFormConfig(
-  "pmtstatus",
+  "pmtStatus",
   "Print Status",
   "select",
   PrintStatusValidationValidation,
@@ -609,7 +609,7 @@ const enqPrintStatus: FormFieldType = createFormConfig(
   enqPrintStatusData
 );
 const enqStatus: FormFieldType = createFormConfig(
-  "enqStatusID",
+  "enqStatusId",
   "Enq. Status",
   "select",
   EnqStatusValidation,

@@ -9,7 +9,7 @@ export interface CountryType {
   price?: number;
   currencyId?: number;
   countryId: number;
-  countryID?: number;
+  countryId?: number;
   otherCharges?: number;
   priceOnline?: number;
   priceSuperflash?: number;

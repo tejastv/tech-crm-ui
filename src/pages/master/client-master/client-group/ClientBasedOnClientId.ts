@@ -1,12 +1,12 @@
 export interface ClientBasedOnClientId {
-  clientID: number;
+  clientId: number;
   ourRefNo: string;
   clientName: string;
   address: string;
-  cityID: number;
+  cityId: number;
   zip: string;
-  stateID: number;
-  countryID: number;
+  stateId: number;
+  countryId: number;
   phone: string;
   fax: string;
   website: string;

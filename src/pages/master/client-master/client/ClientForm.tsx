@@ -103,27 +103,25 @@ export const ClientForm: React.FC = () => {
     }
   }, []);
 
-  // city api call
   const { data: cityData } = getCity();
 
   useEffect(() => {
     if (cityData) {
       setCityOptions(Object.values(cityData));
     }
-  }, [cityData && Object.values(cityData).length]);
+  }, [cityData]);
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "cityId", "cityName", true);
     clientFormFields.cityClient.config.options = options;
   }
 
-  // state api call
   const { data: stateData } = getState();
   useEffect(() => {
     if (stateData) {
       setStateOptions(Object.values(stateData));
     }
-  }, [stateData && Object.values(stateData).length]);
+  }, [stateData]);
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(
@@ -135,14 +133,13 @@ export const ClientForm: React.FC = () => {
     clientFormFields.stateClient.config.options = options;
   }
 
-  // country api call
   const { data: countryData } = getCountry();
 
   useEffect(() => {
     if (countryData) {
       setCountryOptions(Object.values(countryData));
     }
-  }, [countryData && Object.values(countryData).length]);
+  }, [countryData]);
 
   if (countryOptions?.length) {
     let options = selectOptionsMaker(
@@ -153,7 +150,6 @@ export const ClientForm: React.FC = () => {
     clientFormFields.countryClient.config.options = options;
   }
 
-  // CreditDays api call
   const { data: creditDaysData } = getCreditDays();
   // if (creditDaysData) {
   //   const defaultCrDayOption = clientFormFields.crDay.config.options.find(
@@ -166,9 +162,9 @@ export const ClientForm: React.FC = () => {
   // }
   useEffect(() => {
     if (creditDaysData) {
-      setCreditOptions(creditDaysData);
+      setCreditOptions(Object.values(creditDaysData));
     }
-  }, [creditDaysData?.length]);
+  }, [creditDaysData]);
 
   if (creditOptions?.length) {
     let options = selectOptionsMaker(
@@ -179,14 +175,13 @@ export const ClientForm: React.FC = () => {
     clientFormFields.crDay.config.options = options;
   }
 
-  // currency api call
   const { data: currencyData } = getCurrency();
 
   useEffect(() => {
     if (currencyData) {
       setCurrencyOptions(Object.values(currencyData));
     }
-  }, [currencyData?.length]);
+  }, [currencyData]);
 
   if (currencyOptions?.length) {
     let options = selectOptionsMaker(
@@ -197,32 +192,30 @@ export const ClientForm: React.FC = () => {
     clientFormFields.clientCurrencey.config.options = options;
   }
 
-  // Executive api call
   const { data: executiveData } = getExecutive();
 
   useEffect(() => {
     if (executiveData) {
-      setExecutiveOptions(executiveData);
+      setExecutiveOptions(Object.values(executiveData));
     }
-  }, [executiveData?.length]);
+  }, [executiveData]);
 
   if (executiveOptions?.length) {
     let options = selectOptionsMaker(
       executiveOptions,
-      "executiveID",
+      "executiveId",
       "executive"
     );
     clientFormFields.executive.config.options = options;
   }
 
-  // ClientGroup api call
   const { data: clientGroupData } = getClientGroup();
 
   useEffect(() => {
     if (clientGroupData) {
       setClientGroupOptions(Object.values(clientGroupData));
     }
-  }, [clientGroupData?.length]);
+  }, [clientGroupData]);
 
   if (clientGroupOptions?.length) {
     let options = selectOptionsMaker(
@@ -233,14 +226,13 @@ export const ClientForm: React.FC = () => {
     clientFormFields.groupClient.config.options = options;
   }
 
-  // Segment api call
   const { data: segmentData } = getSegment();
 
   useEffect(() => {
     if (segmentData) {
-      setSegmentOptions(segmentData);
+      setSegmentOptions(Object.values(segmentData));
     }
-  }, [segmentData?.length]);
+  }, [segmentData]);
 
   if (segmentOptions?.length) {
     let options = selectOptionsMaker(
@@ -260,15 +252,12 @@ export const ClientForm: React.FC = () => {
     if (clientMasterData) {
       let clonedClientMasterData = { ...clientMasterData };
       if (cityOptions?.length) {
-        console.log(clientMasterData.cityId, cityOptions);
-
         let data = returnFormatedObjectElseEmptyArray(
           clientMasterData.cityId,
           clientMasterData,
           "cityId",
           "cityName"
         );
-        console.log(data);
         if (data.length > 0) {
           clonedClientMasterData.cityId = data[0];
         }
@@ -310,9 +299,9 @@ export const ClientForm: React.FC = () => {
         let id = clientMasterData?.executiveId;
         let data: any = returnObjectBasedOnID(
           executiveOptions,
-          "executiveID",
+          "executiveId",
           id,
-          "executiveID",
+          "executiveId",
           "executive"
         );
         if (data.length > 0) {
@@ -476,7 +465,6 @@ export const ClientForm: React.FC = () => {
     console.log(data);
     if (params.id && data) {
       updateClient({ id: params.id, ...data });
-      console.log(data);
     } else {
       addClient(data);
     }

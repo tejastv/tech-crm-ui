@@ -112,7 +112,7 @@ export const PriceListForClients: React.FC = () => {
 
   const getClientWisePrice = async (clientObj: ClientType) => {
     const response = await instance.get(
-      apiUrls.CLIENT_WISE_PRICE.replace("{id}", "" + clientObj.clientID)
+      apiUrls.CLIENT_WISE_PRICE.replace("{id}", "" + clientObj.clientId)
     );
     const data = response.data.data;
     if (data) {
@@ -158,7 +158,7 @@ export const PriceListForClients: React.FC = () => {
       setApiUrl(
         apiUrls.CLIENT_WISE_PRICE.replace(
           "{id}",
-          "" + selectedOption.data.clientID
+          "" + selectedOption.data.clientId
         )
       );
     }

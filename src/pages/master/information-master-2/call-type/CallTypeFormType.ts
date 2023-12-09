@@ -1,9 +1,9 @@
 export interface CallTypeFormType {
-  typeID: number;
+  typeId: number;
   typeName: string;
   synId?: null;
   synFlag?: null;
-  synMasterID?: null;
-  locationID?: null;
+  synMasterId?: null;
+  locationId?: null;
   cid?: null;
 }
