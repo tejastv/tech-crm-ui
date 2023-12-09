@@ -21,7 +21,10 @@ export const InvoiceListTDS: React.FC = () => {
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
   const {
     register,
+    handleSubmit,
     control,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm<InvoiceListTdsType>();
   const cardConfig = {
@@ -202,7 +205,7 @@ export const InvoiceListTDS: React.FC = () => {
                       config={invoiceListTDSFormFields.toDateField}
                     />
                   </div>
-                  <div className="col-md-6 col-xs-12">
+                  <div className="col-md-6 col-xs-12 text-right">
                     <NewCheckbox
                       errors={errors}
                       register={register}

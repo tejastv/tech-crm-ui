@@ -14,7 +14,7 @@ import {
 import { InvoiceListType, invoiceListFormFields } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const InvoiceList: React.FC = () => {
+export const InvoiceGenerateGst: React.FC = () => {
   //   const methods = useForm<AddUpdatePurchaseType>();
   //   const { addCurrencyMutation, getCurrencyData, updateCurrencyMutation } = useCurrencyApiCallHook();
   //   const { mutateAsync: addCurrency } = addCurrencyMutation();

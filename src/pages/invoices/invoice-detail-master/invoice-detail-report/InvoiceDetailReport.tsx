@@ -5,6 +5,7 @@ import {
   Card,
   Button,
   Table,
+  Radio,
   TableType,
   NewSelect,
   NewInput,
@@ -24,7 +25,10 @@ export const InvoiceDetailReport: React.FC = () => {
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
   const {
     register,
+    handleSubmit,
     control,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm<InvoiceDetailReportType>();
   const cardConfig = {
@@ -264,12 +268,6 @@ export const InvoiceDetailReport: React.FC = () => {
                         Print Invoice
                       </Button>
                     </div>
-                    <NewSelect
-                      errors={errors}
-                      register={register}
-                      control={control}
-                      config={invoiceDetailReportFormFields.clientField}
-                    />
                   </div>
                 </div>
                 <div className="col-md-2">

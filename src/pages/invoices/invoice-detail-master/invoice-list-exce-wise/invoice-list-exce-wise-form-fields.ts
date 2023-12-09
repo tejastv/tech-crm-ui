@@ -53,6 +53,10 @@ const actionOption: MapType<Options> = {
   renew: { value: "renew", label: "Specific Client Datewise" },
 };
 
+const markOption: MapType<Options> = {
+  new: { value: "new", label: "Mark All" },
+};
+
 const allClientDatewiseField: FormFieldType = createFormConfig(
   "allClientDatewise",
   "",
@@ -119,10 +123,11 @@ const excecutiveField: FormFieldType = {
 };
 const markAllField: FormFieldType = createFormConfig(
   "markAll",
-  "Mark All",
+  "",
   "text",
   markAllValidation,
-  ""
+  "",
+  markOption
 );
 const emailField: FormFieldType = createFormConfig(
   "email",
