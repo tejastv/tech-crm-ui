@@ -31,7 +31,8 @@ export const useBankMasterDepositApiCallHook = () => {
   };
 
   const getBankMasterDepositData = (
-    id: string
+    id: string,
+    condition?: any
   ): UseQueryResult<BankDepositType> => {
     return useQuery<BankDepositType>({
       queryKey: [queryKeys.BANKMASTER_DEPOSIT_DATA, id],
@@ -41,7 +42,7 @@ export const useBankMasterDepositApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
