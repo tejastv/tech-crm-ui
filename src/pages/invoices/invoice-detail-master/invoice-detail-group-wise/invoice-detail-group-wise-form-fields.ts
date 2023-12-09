@@ -1,7 +1,7 @@
 import { FormFieldType, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
 
-const FromDateValidation = {
+const fromDateValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -13,7 +13,7 @@ const FromDateValidation = {
   },
 } as ValidationType;
 
-const ToDateValidation = {
+const toDateValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -45,23 +45,23 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
-const fromdateField: FormFieldType = createFormConfig(
+const fromDateField: FormFieldType = createFormConfig(
   "fromDate",
   "From",
   "date",
-  FromDateValidation,
+  fromDateValidation,
   formattedDate
 );
 
-const todateeField: FormFieldType = createFormConfig(
+const toDateField: FormFieldType = createFormConfig(
   "toDate",
   "To Date",
   "date",
-  ToDateValidation,
+  toDateValidation,
   formattedDate
 );
 
-const fyearField: FormFieldType = {
+const fYearField: FormFieldType = {
   config: {
     name: "fyear",
     label: "F.Year ",
@@ -80,9 +80,9 @@ const fyearField: FormFieldType = {
 export const invoiceDetailGroupWiseFormFields = {
   groupField,
 
-  fromdateField,
+  fromDateField,
 
-  todateeField,
+  toDateField,
 
-  fyearField,
+  fYearField,
 };
