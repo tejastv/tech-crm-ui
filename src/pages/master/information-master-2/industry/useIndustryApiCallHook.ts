@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateIndustryType, IndustryType } from "@master/index";
+import { IndustryFormType, IndustryType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -45,7 +45,7 @@ export const useIndustryApiCallHook = () => {
   };
 
   const addIndustry = async (
-    industryData: AddUpdateIndustryType
+    industryData: IndustryFormType
   ): Promise<ApiResponseType<IndustryType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_INDUSTRY,
@@ -56,7 +56,7 @@ export const useIndustryApiCallHook = () => {
 
   const addIndustryMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateIndustryType) => addIndustry(updatedItem),
+      (updatedItem: IndustryFormType) => addIndustry(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -70,7 +70,7 @@ export const useIndustryApiCallHook = () => {
   };
 
   const updateIndustryData = async (
-    updateIndustryData: AddUpdateIndustryType
+    updateIndustryData: IndustryFormType
   ): Promise<ApiResponseType<IndustryType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_INDUSTRY.replace(
@@ -84,7 +84,7 @@ export const useIndustryApiCallHook = () => {
 
   const updateIndustryMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateIndustryType) => updateIndustryData(updatedItem),
+      (updatedItem: IndustryFormType) => updateIndustryData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

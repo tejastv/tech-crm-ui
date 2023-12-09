@@ -121,7 +121,7 @@ const osPrintField: FormFieldType = {
 //   ""
 // )
 
-export const addCityFormFields = {
+export const cityFormFields = {
   cityField,
   state,
   osPrintField,

@@ -1,4 +1,4 @@
-export interface AddUpdateIndustryType {
+export interface IndustryFormType {
   id?: number;
   industryName: string;
 }

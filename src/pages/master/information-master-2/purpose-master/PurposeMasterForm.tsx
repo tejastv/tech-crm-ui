@@ -3,18 +3,18 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
-  AddUpdateSiteStatusType,
-  addSiteStatusFormFields,
-  useSiteStatusApiCallHook,
+  PurposeMasterFormType,
+  purposeFormFields,
+  usePurposeMasterApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-export const AddUpdateSiteStatus: React.FC = () => {
+export const PurposeMasterForm: React.FC = () => {
   const params = useParams();
 
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: params.id ? "Update Site Status" : "Add Site Status",
+      mainHeading: params.id ? "Update Purpose Master" : "Add Purpose Master",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -22,17 +22,20 @@ export const AddUpdateSiteStatus: React.FC = () => {
     },
   };
 
-  const methods = useForm<AddUpdateSiteStatusType>();
-  const { addSiteStatusMutation, getSiteStatusData, updateSiteStatusMutation } =
-    useSiteStatusApiCallHook();
-  const { mutateAsync: addSiteStatus } = addSiteStatusMutation();
-  const { mutateAsync: updateSiteStatus } = updateSiteStatusMutation();
+  const methods = useForm<PurposeMasterFormType>();
+  const {
+    addPurposeMasterMutation,
+    getPurposeMasterData,
+    updatePurposeMasterMutation,
+  } = usePurposeMasterApiCallHook();
+  const { mutateAsync: addPurposeMaster } = addPurposeMasterMutation();
+  const { mutateAsync: updatePurposeMaster } = updatePurposeMasterMutation();
 
   if (params.id) {
-    const { data: siteStatus, isSuccess: siteStatusSuccess } =
-      getSiteStatusData("" + params.id);
-    if (siteStatusSuccess) {
-      addSiteStatusFormFields.sitestatus.config.setData = siteStatus.siteStatus;
+    const { data: purposeMasterData, isSuccess: purposeMasterDataSuccess } =
+      getPurposeMasterData("" + params.id);
+    if (purposeMasterDataSuccess) {
+      purposeFormFields.purpose.config.setData = purposeMasterData.purpose;
     }
   } else {
     useEffect(() => {
@@ -40,12 +43,12 @@ export const AddUpdateSiteStatus: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((siteStatus): void => {
-    let data: any = { ...siteStatus };
-    if (params.id && siteStatus) {
-      updateSiteStatus({ id: +params.id, ...data });
+  const onSubmit = methods.handleSubmit((purposeMasterData): void => {
+    let data: any = { ...purposeMasterData };
+    if (params.id && purposeMasterData) {
+      updatePurposeMaster({ id: +params.id, ...data });
     } else {
-      addSiteStatus(data);
+      addPurposeMaster(data);
     }
   });
 
@@ -62,7 +65,7 @@ export const AddUpdateSiteStatus: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={addSiteStatusFormFields.sitestatus.config} />
+                  <Input config={purposeFormFields.purpose.config} />
                 </div>
               </div>
             </BorderLayout>

@@ -19,6 +19,6 @@ const sitestatus: FormFieldType = createFormConfig(
   "Site Status"
 );
 
-export const addSiteStatusFormFields = {
+export const siteStatusFormFields = {
   sitestatus,
 };

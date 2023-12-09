@@ -11,23 +11,23 @@ import {
   // Select,
 } from "@shared/index";
 import {
-  AddUpdateCityType,
+  CityFormType,
   StateType,
-  addCityFormFields,
+  cityFormFields,
   useCityApiCallHook,
   useStateApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 import { returnObjectBasedOnID, selectOptionsMaker } from "@utils/index";
 
-export const AddUpdateCity: React.FC = () => {
+export const CityForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     reset,
     control,
     formState: { errors },
-  } = useForm<AddUpdateCityType>();
+  } = useForm<CityFormType>();
   const { addCityMutation, getCityData, updateCityMutation } =
     useCityApiCallHook();
   const { mutateAsync: addCity } = addCityMutation();
@@ -55,7 +55,7 @@ export const AddUpdateCity: React.FC = () => {
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
-    addCityFormFields.state.config.options = options;
+    cityFormFields.state.config.options = options;
   }
 
   const { data: cityData } = getCityData(
@@ -114,14 +114,14 @@ export const AddUpdateCity: React.FC = () => {
               <NewInput
                 errors={errors}
                 register={register}
-                config={addCityFormFields.cityField}
+                config={cityFormFields.cityField}
               />
             </div>
             <div className="col-md-6 col-xs-12">
               <NewInput
                 errors={errors}
                 register={register}
-                config={addCityFormFields.osPrintField}
+                config={cityFormFields.osPrintField}
               />
             </div>
             <div className="col-md-6 col-xs-12">
@@ -129,7 +129,7 @@ export const AddUpdateCity: React.FC = () => {
                 errors={errors}
                 register={register}
                 control={control}
-                config={addCityFormFields.state}
+                config={cityFormFields.state}
               />
             </div>
           </div>

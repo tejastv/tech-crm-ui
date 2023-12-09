@@ -11,7 +11,7 @@ import {
   TableType,
 } from "@shared/index";
 import {
-  AddUpdateStdPriceType,
+  StdPriceFormType,
   stdPriceFormFields,
   useStdPriceApiCallHook,
   StdPriceType,
@@ -42,7 +42,7 @@ export const StdPrice: React.FC = () => {
     register,
     control,
     formState: { errors },
-  } = useForm<AddUpdateStdPriceType>();
+  } = useForm<StdPriceFormType>();
   const [currency, setCurrency] = useState("0");
   const { getCurrency } = useCurrencyApiCallHook();
   const { data: currencyData } = getCurrency();

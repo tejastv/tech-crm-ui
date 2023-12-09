@@ -3,18 +3,17 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
-  AddUpdatePurposeMasterType,
-  addPurposeFormFields,
-  usePurposeMasterApiCallHook,
+  IndustryFormType,
+  industryFormFields,
+  useIndustryApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-export const AddUpdatePurposeMaster: React.FC = () => {
+export const IndustryForm: React.FC = () => {
   const params = useParams();
-
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: params.id ? "Update Purpose Master" : "Add Purpose Master",
+      mainHeading: params.id ? "Update Industry" : "Add Industry",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -22,20 +21,17 @@ export const AddUpdatePurposeMaster: React.FC = () => {
     },
   };
 
-  const methods = useForm<AddUpdatePurposeMasterType>();
-  const {
-    addPurposeMasterMutation,
-    getPurposeMasterData,
-    updatePurposeMasterMutation,
-  } = usePurposeMasterApiCallHook();
-  const { mutateAsync: addPurposeMaster } = addPurposeMasterMutation();
-  const { mutateAsync: updatePurposeMaster } = updatePurposeMasterMutation();
+  const methods = useForm<IndustryFormType>();
+  const { addIndustryMutation, getIndustryData, updateIndustryMutation } =
+    useIndustryApiCallHook();
+  const { mutateAsync: addIndustry } = addIndustryMutation();
+  const { mutateAsync: updateIndustry } = updateIndustryMutation();
 
   if (params.id) {
-    const { data: purposeMasterData, isSuccess: purposeMasterDataSuccess } =
-      getPurposeMasterData("" + params.id);
-    if (purposeMasterDataSuccess) {
-      addPurposeFormFields.purpose.config.setData = purposeMasterData.purpose;
+    const { data: industryData, isSuccess: industryDataSuccess } =
+      getIndustryData("" + params.id);
+    if (industryDataSuccess) {
+      industryFormFields.industry.config.setData = industryData.industryName;
     }
   } else {
     useEffect(() => {
@@ -43,12 +39,12 @@ export const AddUpdatePurposeMaster: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((purposeMasterData): void => {
-    let data: any = { ...purposeMasterData };
-    if (params.id && purposeMasterData) {
-      updatePurposeMaster({ id: +params.id, ...data });
+  const onSubmit = methods.handleSubmit((industryData): void => {
+    let data: any = { ...industryData };
+    if (params.id && industryData) {
+      updateIndustry({ id: +params.id, ...data });
     } else {
-      addPurposeMaster(data);
+      addIndustry(data);
     }
   });
 
@@ -65,7 +61,7 @@ export const AddUpdatePurposeMaster: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={addPurposeFormFields.purpose.config} />
+                  <Input config={industryFormFields.industry.config} />
                 </div>
               </div>
             </BorderLayout>

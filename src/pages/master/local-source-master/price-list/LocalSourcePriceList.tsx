@@ -10,9 +10,9 @@ import {
   Button,
   DatePicker,
 } from "@shared/index";
-import { addPriceFormFields } from "@master/index";
+import { priceFormFields } from "@master/index";
 
-export const AddPrice: React.FC = () => {
+export const LocalSourcePriceList: React.FC = () => {
   const methods = useForm();
   const cardConfig = {
     formLayoutConfig: {
@@ -48,10 +48,10 @@ export const AddPrice: React.FC = () => {
               <div className="row">
                 <div className="col-md-2 col-xs-12"></div>
                 <div className="col-md-5 col-xs-12">
-                  <Select config={addPriceFormFields.priceLocalSource.config} />
+                  <Select config={priceFormFields.priceLocalSource.config} />
                 </div>
                 <div className="col-md-5 col-xs-12">
-                  <Select config={addPriceFormFields.priceCurrency.config} />
+                  <Select config={priceFormFields.priceCurrency.config} />
                 </div>
               </div>
               <div className="row justify-content-end">
@@ -66,21 +66,19 @@ export const AddPrice: React.FC = () => {
                   <DivLayout heading={cardConfig.formPurchesConfig.heading} />
                 </div>
                 <div className="col-md-5 col-xs-12">
-                  <Input
-                    config={addPriceFormFields.purchesExchanegRate.config}
-                  />
+                  <Input config={priceFormFields.purchesExchanegRate.config} />
                 </div>
                 <div className="col-md-5 col-xs-12">
-                  <DatePicker config={addPriceFormFields.purchesDate.config} />
+                  <DatePicker config={priceFormFields.purchesDate.config} />
                 </div>
                 <div className="col-md-2 col-xs-12">
                   <DivLayout heading={cardConfig.formSellConfig.heading} />
                 </div>
                 <div className="col-md-5 col-xs-12">
-                  <Input config={addPriceFormFields.sellExchanegRate.config} />
+                  <Input config={priceFormFields.sellExchanegRate.config} />
                 </div>
                 <div className="col-md-5 col-xs-12">
-                  <DatePicker config={addPriceFormFields.sellDate.config} />
+                  <DatePicker config={priceFormFields.sellDate.config} />
                 </div>
               </div>
               <div className="row justify-content-end">

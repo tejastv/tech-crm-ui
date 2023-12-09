@@ -3,17 +3,18 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
 import {
-  AddUpdateIndustryType,
-  addIndustryFormFields,
-  useIndustryApiCallHook,
+  SiteStatusFormType,
+  siteStatusFormFields,
+  useSiteStatusApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
 
-export const AddUpdateIndustry: React.FC = () => {
+export const SiteStatusForm: React.FC = () => {
   const params = useParams();
+
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: params.id ? "Update Industry" : "Add Industry",
+      mainHeading: params.id ? "Update Site Status" : "Add Site Status",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -21,17 +22,17 @@ export const AddUpdateIndustry: React.FC = () => {
     },
   };
 
-  const methods = useForm<AddUpdateIndustryType>();
-  const { addIndustryMutation, getIndustryData, updateIndustryMutation } =
-    useIndustryApiCallHook();
-  const { mutateAsync: addIndustry } = addIndustryMutation();
-  const { mutateAsync: updateIndustry } = updateIndustryMutation();
+  const methods = useForm<SiteStatusFormType>();
+  const { addSiteStatusMutation, getSiteStatusData, updateSiteStatusMutation } =
+    useSiteStatusApiCallHook();
+  const { mutateAsync: addSiteStatus } = addSiteStatusMutation();
+  const { mutateAsync: updateSiteStatus } = updateSiteStatusMutation();
 
   if (params.id) {
-    const { data: industryData, isSuccess: industryDataSuccess } =
-      getIndustryData("" + params.id);
-    if (industryDataSuccess) {
-      addIndustryFormFields.industry.config.setData = industryData.industryName;
+    const { data: siteStatus, isSuccess: siteStatusSuccess } =
+      getSiteStatusData("" + params.id);
+    if (siteStatusSuccess) {
+      siteStatusFormFields.sitestatus.config.setData = siteStatus.siteStatus;
     }
   } else {
     useEffect(() => {
@@ -39,12 +40,12 @@ export const AddUpdateIndustry: React.FC = () => {
     }, []);
   }
 
-  const onSubmit = methods.handleSubmit((industryData): void => {
-    let data: any = { ...industryData };
-    if (params.id && industryData) {
-      updateIndustry({ id: +params.id, ...data });
+  const onSubmit = methods.handleSubmit((siteStatus): void => {
+    let data: any = { ...siteStatus };
+    if (params.id && siteStatus) {
+      updateSiteStatus({ id: +params.id, ...data });
     } else {
-      addIndustry(data);
+      addSiteStatus(data);
     }
   });
 
@@ -61,7 +62,7 @@ export const AddUpdateIndustry: React.FC = () => {
             <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <Input config={addIndustryFormFields.industry.config} />
+                  <Input config={siteStatusFormFields.sitestatus.config} />
                 </div>
               </div>
             </BorderLayout>

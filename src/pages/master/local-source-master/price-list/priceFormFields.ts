@@ -110,7 +110,7 @@ const sellDate: FormFieldType = createFormConfig(
   ""
 );
 
-export const addPriceFormFields = {
+export const priceFormFields = {
   priceLocalSource,
   priceCurrency,
   purchesExchanegRate,

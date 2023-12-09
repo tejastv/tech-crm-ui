@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateSiteStatusType, SiteStatusType } from "@master/index";
+import { SiteStatusFormType, SiteStatusType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -45,7 +45,7 @@ export const useSiteStatusApiCallHook = () => {
   };
 
   const addSiteStatus = async (
-    siteStatusData: AddUpdateSiteStatusType
+    siteStatusData: SiteStatusFormType
   ): Promise<ApiResponseType<SiteStatusType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_SITE_STATUS,
@@ -56,7 +56,7 @@ export const useSiteStatusApiCallHook = () => {
 
   const addSiteStatusMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateSiteStatusType) => addSiteStatus(updatedItem),
+      (updatedItem: SiteStatusFormType) => addSiteStatus(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -70,7 +70,7 @@ export const useSiteStatusApiCallHook = () => {
   };
 
   const updateSiteStatusData = async (
-    updateSiteStatusData: AddUpdateSiteStatusType
+    updateSiteStatusData: SiteStatusFormType
   ): Promise<ApiResponseType<SiteStatusType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_SITE_STATUS.replace(
@@ -84,8 +84,7 @@ export const useSiteStatusApiCallHook = () => {
 
   const updateSiteStatusMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateSiteStatusType) =>
-        updateSiteStatusData(updatedItem),
+      (updatedItem: SiteStatusFormType) => updateSiteStatusData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

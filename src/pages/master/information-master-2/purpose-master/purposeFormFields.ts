@@ -1,6 +1,6 @@
 import { FormFieldType, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
-const IndustryValidation = {
+const PurposeValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -11,14 +11,14 @@ const IndustryValidation = {
   },
 } as ValidationType;
 
-const industry: FormFieldType = createFormConfig(
-  "industryName",
-  "Industry",
+const purpose: FormFieldType = createFormConfig(
+  "purpose",
+  "Purpose",
   "text",
-  IndustryValidation,
-  "Industry"
+  PurposeValidation,
+  "Purpose"
 );
 
-export const addIndustryFormFields = {
-  industry,
+export const purposeFormFields = {
+  purpose,
 };

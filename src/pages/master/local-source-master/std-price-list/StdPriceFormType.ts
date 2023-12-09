@@ -1,4 +1,4 @@
-export interface AddUpdateStdPriceType {
+export interface StdPriceFormType {
   countryName: string;
   currencyId: number;
   price: number;
