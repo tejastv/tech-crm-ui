@@ -9,7 +9,7 @@ import {
 } from "@shared/index";
 import { COMMON_ROUTES } from "@constants/index";
 import {
-  AddUpdateSupplierMasterType,
+  SupplierMasterFormType,
   SupplierMasterType,
   useSupplierMasterApiCallHook,
 } from "@master/index";
@@ -35,7 +35,7 @@ export const Supplier: React.FC = () => {
   const { getSupplierMaster, deleteSupplierMasterMutation } =
     useSupplierMasterApiCallHook();
   const navigate = useNavigate();
-  const columns: ColumnDef<AddUpdateSupplierMasterType>[] = [
+  const columns: ColumnDef<SupplierMasterFormType>[] = [
     {
       id: "action",
       cell: (info) => info.getValue(),
@@ -83,26 +83,26 @@ export const Supplier: React.FC = () => {
       header: () => <>Designation</>,
     },
     {
-      accessorFn: (row) => row.countryID,
-      id: "countryID",
+      accessorFn: (row) => row.countryId,
+      id: "countryId",
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
     },
     {
-      accessorFn: (row) => row.cityID,
-      id: "cityID",
+      accessorFn: (row) => row.cityId,
+      id: "cityId",
       cell: (info) => info.getValue(),
       header: () => <>City</>,
     },
     {
-      accessorFn: (row) => row.stateID,
-      id: "stateID",
+      accessorFn: (row) => row.stateId,
+      id: "stateId",
       cell: (info) => info.getValue(),
       header: () => <>State</>,
     },
     {
-      accessorFn: (row) => row.countryID,
-      id: "countryID",
+      accessorFn: (row) => row.countryId,
+      id: "countryId",
       cell: (info) => info.getValue(),
       header: () => <>Country</>,
     },
@@ -147,7 +147,7 @@ export const Supplier: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

@@ -64,7 +64,7 @@ export const useAddEnquiryApiCallHook = () => {
         );
         let mapedData = selectOptionsMapMaker(
           data,
-          "serviceTypeID",
+          "serviceTypeId",
           "serviceType"
         );
         return mapedData;
@@ -99,16 +99,16 @@ export const useAddEnquiryApiCallHook = () => {
   };
 
   const getPrice = (ids: any, condition: any) => {
-    return useQuery<number>({
-      queryKey: [
-        queryKeys.PRICE_DATA,
-        ids.countryId + ids.clientId + ids.serviceTypeId,
-      ],
+    return useQuery<Array<any>>({
+      queryKey: [queryKeys.PRICE_DATA, ids.countryId + ids.clientId],
       queryFn: async () => {
         const response = await instance.get(
-          apiUrls.GET_PRICE.replace("{client_id}", ids.clientId)
-            .replace("{country_id}", ids.countryId)
-            .replace("{serviceTypeId}", ids.serviceTypeId)
+          apiUrls.CLIENT_WISE_PRICE.replace("{id}", ids.clientId),
+          {
+            params: {
+              country_id: ids.countryId,
+            },
+          }
         );
         return response.data.data;
       },

@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateExecutiveType, ExecutiveType } from "@master/index";
+import { ExecutiveFormType, ExecutiveType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -45,7 +45,7 @@ export const useExecutiveApiCallHook = () => {
   };
 
   const addExecutive = async (
-    executiveData: AddUpdateExecutiveType
+    executiveData: ExecutiveFormType
   ): Promise<ApiResponseType<ExecutiveType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_EXECUTIVE,
@@ -56,7 +56,7 @@ export const useExecutiveApiCallHook = () => {
 
   const addExecutiveMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateExecutiveType) => addExecutive(updatedItem),
+      (updatedItem: ExecutiveFormType) => addExecutive(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -70,7 +70,7 @@ export const useExecutiveApiCallHook = () => {
   };
 
   const updateExecutiveData = async (
-    updateExecutiveData: AddUpdateExecutiveType
+    updateExecutiveData: ExecutiveFormType
   ): Promise<ApiResponseType<ExecutiveType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_EXECUTIVE.replace(
@@ -84,7 +84,7 @@ export const useExecutiveApiCallHook = () => {
 
   const updateExecutiveMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateExecutiveType) => updateExecutiveData(updatedItem),
+      (updatedItem: ExecutiveFormType) => updateExecutiveData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 export const LocalSource: React.FC = () => {
   const { getLocalSource, deleteLocalSourceMutation } =
     useLocalSourceApiCallHook();
-  const { data: localsourceData, isLoading } = getLocalSource();
+  const { data: localsourceData, isFetching } = getLocalSource();
 
   const { mutateAsync: deleteLocalSource } = deleteLocalSourceMutation();
   const navigate = useNavigate();
@@ -85,7 +85,9 @@ export const LocalSource: React.FC = () => {
 
   const editLocalSourceClick = (localsourceData: any) => {
     console.log(localsourceData);
-    navigate(COMMON_ROUTES.EDIT.replace(":id", localsourceData.localSourceId));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", localsourceData.localSourceId), {
+      state: null,
+    });
   };
 
   const tableConfig: TableType<LocalSourceType> = {
@@ -113,7 +115,7 @@ export const LocalSource: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

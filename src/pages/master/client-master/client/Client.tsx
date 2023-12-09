@@ -110,7 +110,7 @@ export const Client: React.FC = () => {
     },
     {
       accessorFn: (row) => row.currencyName,
-      id: "currencyID",
+      id: "currencyId",
       cell: (info) => info.getValue(),
       header: () => <>Currency Type</>,
     },
@@ -163,8 +163,8 @@ export const Client: React.FC = () => {
       header: () => <>group Name</>,
     },
     {
-      accessorFn: (row) => row.executive_id,
-      id: "executive_id",
+      accessorFn: (row) => row.executiveId,
+      id: "executiveId",
       cell: (info) => info.getValue(),
       header: () => <>Executive</>,
     },
@@ -205,8 +205,8 @@ export const Client: React.FC = () => {
       header: () => <>Remarks</>,
     },
     {
-      accessorFn: (row) => row.adjustfromDate,
-      id: "adjustfromDate",
+      accessorFn: (row) => row.adjustFromDate,
+      id: "adjustFromDate",
       cell: (info) => info.getValue(),
       header: () => <>Adjust From Date</>,
     },
@@ -229,8 +229,8 @@ export const Client: React.FC = () => {
       header: () => <>GSTN</>,
     },
     {
-      accessorFn: (row) => row.stateID,
-      id: "stateID",
+      accessorFn: (row) => row.stateId,
+      id: "stateId",
       cell: (info) => info.getValue(),
       header: () => <>State Code N</>,
     },
@@ -242,18 +242,18 @@ export const Client: React.FC = () => {
     },
   ];
 
-  const { data: clientData, isLoading } = getClient();
+  const { data: clientData, isFetching } = getClient();
   const { mutateAsync: deleteClient } = deleteClientMutation();
 
   const deleteClientClick = async (clientData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deleteClient(clientData.clientID);
+      await deleteClient(clientData.clientId);
     }
   };
 
   const editClientClick = (clientData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", clientData.clientID));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", clientData.clientId));
   };
 
   const tableConfig: TableType<ClientType> = {
@@ -281,7 +281,7 @@ export const Client: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

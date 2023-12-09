@@ -1,9 +1,10 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateCurrencyType, CurrencyType } from "@master/index";
+import { CurrencyFormType, CurrencyType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useCurrencyApiCallHook = () => {
   const { instance } = useAxios();
@@ -11,7 +12,7 @@ export const useCurrencyApiCallHook = () => {
   const navigate = useNavigate();
 
   const getCurrency = () => {
-    return useQuery<CurrencyType[]>({
+    return useQuery<MapType<CurrencyType>>({
       queryKey: [queryKeys.CURRENCY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CURRENCY);
@@ -19,7 +20,14 @@ export const useCurrencyApiCallHook = () => {
           (a: { currencyType: string }, b: { currencyType: any }) =>
             a.currencyType.localeCompare(b.currencyType)
         );
-        return data;
+        // return data;
+
+        let mapedData = selectOptionsMapMaker(
+          data,
+          "currencyId",
+          "currencySymbol"
+        );
+        return mapedData;
       },
       staleTime: Infinity,
     });
@@ -42,7 +50,7 @@ export const useCurrencyApiCallHook = () => {
   };
 
   const addCurrency = async (
-    currencyData: AddUpdateCurrencyType
+    currencyData: CurrencyFormType
   ): Promise<ApiResponseType<CurrencyType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_CURRENCY,
@@ -53,7 +61,7 @@ export const useCurrencyApiCallHook = () => {
 
   const addCurrencyMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateCurrencyType) => addCurrency(updatedItem),
+      (updatedItem: CurrencyFormType) => addCurrency(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -67,7 +75,7 @@ export const useCurrencyApiCallHook = () => {
   };
 
   const updateCurrencyData = async (
-    updateCurrencyData: AddUpdateCurrencyType
+    updateCurrencyData: CurrencyFormType
   ): Promise<ApiResponseType<CurrencyType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_CURRENCY.replace(
@@ -81,7 +89,7 @@ export const useCurrencyApiCallHook = () => {
 
   const updateCurrencyMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateCurrencyType) => updateCurrencyData(updatedItem),
+      (updatedItem: CurrencyFormType) => updateCurrencyData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

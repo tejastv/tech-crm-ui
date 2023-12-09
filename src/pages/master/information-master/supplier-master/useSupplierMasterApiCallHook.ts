@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateSupplierMasterType, SupplierMasterType } from "@master/index";
+import { SupplierMasterFormType, SupplierMasterType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -47,7 +47,7 @@ export const useSupplierMasterApiCallHook = () => {
   };
 
   const addSupplierMaster = async (
-    supplierMasterData: AddUpdateSupplierMasterType
+    supplierMasterData: SupplierMasterFormType
   ): Promise<ApiResponseType<SupplierMasterType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_SUPPLIER_MASTER,
@@ -58,8 +58,7 @@ export const useSupplierMasterApiCallHook = () => {
 
   const addSupplierMasterMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateSupplierMasterType) =>
-        addSupplierMaster(updatedItem),
+      (updatedItem: SupplierMasterFormType) => addSupplierMaster(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -73,7 +72,7 @@ export const useSupplierMasterApiCallHook = () => {
   };
 
   const updateSupplierMasterData = async (
-    updateSupplierMasterData: AddUpdateSupplierMasterType
+    updateSupplierMasterData: SupplierMasterFormType
   ): Promise<ApiResponseType<SupplierMasterType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_SUPPLIER_MASTER.replace(
@@ -87,7 +86,7 @@ export const useSupplierMasterApiCallHook = () => {
 
   const updateSupplierMasterMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateSupplierMasterType) =>
+      (updatedItem: SupplierMasterFormType) =>
         updateSupplierMasterData(updatedItem),
       {
         onSuccess: async () => {

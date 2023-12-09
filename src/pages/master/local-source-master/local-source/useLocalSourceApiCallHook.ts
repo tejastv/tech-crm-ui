@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { LocalSourceType, AddUpdateLocalSourceType } from "@master/index";
+import { LocalSourceType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType, MapType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -33,7 +33,7 @@ export const useLocalSourceApiCallHook = () => {
     });
   };
 
-  const getLocalSourceData = (id: string) => {
+  const getLocalSourceData = (id: string, condition: any) => {
     return useQuery<LocalSourceType>({
       queryKey: [queryKeys.LOCALSOURCE_DATA, id],
       queryFn: async () => {
@@ -42,13 +42,13 @@ export const useLocalSourceApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 
   const addLocalSource = async (
-    localsourceData: AddUpdateLocalSourceType
+    localsourceData: Partial<LocalSourceType>
   ): Promise<ApiResponseType<LocalSourceType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_LOCALSOURCE,
@@ -59,7 +59,7 @@ export const useLocalSourceApiCallHook = () => {
 
   const addLocalSourceMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateLocalSourceType) => addLocalSource(updatedItem),
+      (updatedItem: Partial<LocalSourceType>) => addLocalSource(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -73,7 +73,7 @@ export const useLocalSourceApiCallHook = () => {
   };
 
   const updateLocalSourceData = async (
-    updateLocalSourceData: AddUpdateLocalSourceType
+    updateLocalSourceData: Partial<LocalSourceType>
   ): Promise<ApiResponseType<LocalSourceType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_LOCALSOURCE.replace(
@@ -87,7 +87,7 @@ export const useLocalSourceApiCallHook = () => {
 
   const updateLocalSourceMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateLocalSourceType) =>
+      (updatedItem: Partial<LocalSourceType>) =>
         updateLocalSourceData(updatedItem),
       {
         onSuccess: async () => {

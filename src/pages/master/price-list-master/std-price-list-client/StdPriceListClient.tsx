@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 import {
   BorderLayout,
   Button,
   Card,
   Loader,
-  Select,
+  NewSelect,
   Table,
-  // TableCell,
   TableType,
 } from "@shared/index";
 import {
-  AddStdPriceClientsType,
-  CurrencyWisePrice,
-  addStdPriceClientsFormFields,
+  StdPriceClientsFormType,
+  CurrencyType,
+  CurrencyWisePriceType,
+  stdPriceClientsFormFields,
   useCurrencyApiCallHook,
   useStdPriceClientsApiCallHook,
 } from "@master/index";
@@ -41,7 +41,11 @@ export const StdPriceListClient: React.FC = () => {
     },
   };
 
-  const methods = useForm<AddStdPriceClientsType>();
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = useForm<StdPriceClientsFormType>();
   const [currency, setCurrency] = useState("0");
   const { getCurrency } = useCurrencyApiCallHook();
   const { data: currencyData } = getCurrency();
@@ -49,14 +53,26 @@ export const StdPriceListClient: React.FC = () => {
     useStdPriceClientsApiCallHook();
   const { mutateAsync: updateStandardPrice } = updateStandardPriceMutation();
 
-  if (currencyData) {
-    addStdPriceClientsFormFields.stdPriceClientCurrency.config.options =
-      selectOptionsMaker(currencyData, "currencyId", "currencyInWord");
+  const [currencyOption, setCurrencyOption] = useState<CurrencyType[]>();
+
+  useEffect(() => {
+    if (currencyData) {
+      setCurrencyOption(Object.values(currencyData));
+    }
+  }, [currencyData && Object.values(currencyData).length]);
+
+  if (currencyOption?.length) {
+    let options = selectOptionsMaker(
+      currencyOption,
+      "currencyId",
+      "currencyInWord"
+    );
+    stdPriceClientsFormFields.stdPriceClientCurrency.config.options = options;
   }
 
   let [tableData, setTableData] = useState({} as any);
 
-  const columns: ColumnDef<CurrencyWisePrice>[] = [
+  const columns: ColumnDef<CurrencyWisePriceType>[] = [
     {
       id: "srNo",
       cell: (info) => info.getValue(),
@@ -268,7 +284,7 @@ export const StdPriceListClient: React.FC = () => {
 
   const { data: stdPriceData, isFetching } = getStdPriceClientsData(currency);
 
-  const tableConfig: TableType<CurrencyWisePrice> = {
+  const tableConfig: TableType<CurrencyWisePriceType> = {
     config: {
       tableName: "Standard Price",
       columns: columns,
@@ -295,41 +311,36 @@ export const StdPriceListClient: React.FC = () => {
   };
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form noValidate autoComplete="off" className="p-t-20">
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-3 col-xs-12">
-                  <Select
-                    config={
-                      addStdPriceClientsFormFields.stdPriceClientCurrency.config
-                    }
-                    onChangeHandler={handleSelectChange}
-                  />
-                </div>
-              </div>
-              {currency !== "0" && (
-                <div className="row m-6 justify-content-end">
-                  <div className="col-mt- col-xs-12 text-end">
-                    <Button
-                      type="button"
-                      onClick={onDataEditClick}
-                      className={"btn btn-danger btn-sm"}
-                    >
-                      <i className="far fa-save"></i> Save
-                    </Button>
-                  </div>
-                </div>
-              )}
-            </BorderLayout>
-          </form>
-        </FormProvider>
-        <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-          {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+    <Card config={cardConfig.formLayoutConfig}>
+      <form noValidate autoComplete="off" className="p-t-20">
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-4 col-xs-12">
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={stdPriceClientsFormFields.stdPriceClientCurrency}
+                onChange={handleSelectChange}
+              />
+            </div>
+          </div>
+          <div className="row m-6 justify-content-end">
+            <div className="col-mt- col-xs-12 text-end">
+              <Button
+                type="button"
+                onClick={onDataEditClick}
+                className={"btn btn-danger btn-sm"}
+              >
+                <i className="far fa-save"></i> Save All
+              </Button>
+            </div>
+          </div>
         </BorderLayout>
-      </Card>
-    </>
+      </form>
+      <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+      </BorderLayout>
+    </Card>
   );
 };

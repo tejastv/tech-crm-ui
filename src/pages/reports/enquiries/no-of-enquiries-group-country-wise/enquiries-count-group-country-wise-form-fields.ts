@@ -30,7 +30,7 @@ const group: FormFieldType = createFormConfig(
   // [{ value: "all", label: "All" }]
 );
 const city: FormFieldType = createFormConfig(
-  "cityID",
+  "cityId",
   "City",
   "select",
   City,
@@ -39,7 +39,7 @@ const city: FormFieldType = createFormConfig(
   // [{ value: "all", label: "All" }]
 );
 const client: FormFieldType = createFormConfig(
-  "clientID",
+  "clientId",
   "Client",
   "select",
   Client,

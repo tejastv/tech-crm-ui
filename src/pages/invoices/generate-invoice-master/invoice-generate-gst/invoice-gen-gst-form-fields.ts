@@ -1,4 +1,4 @@
-import { FormFieldType, ValidationType } from "@shared/index";
+import { FormFieldType, MapType, Options, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
 
 const currencyValidation = {
@@ -34,7 +34,7 @@ const gstnActualBuyreValidation = {
   },
 } as ValidationType;
 
-const actualbuyreValidation = {
+const actualBuyreValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -44,7 +44,7 @@ const actualbuyreValidation = {
     message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
   },
 } as ValidationType;
-const FromDateValidation = {
+const fromDateValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -56,7 +56,7 @@ const FromDateValidation = {
   },
 } as ValidationType;
 
-const CountryValidation = {
+const countryValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -67,7 +67,7 @@ const CountryValidation = {
   },
 } as ValidationType;
 
-const CodeValidation = {
+const codeValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -81,7 +81,7 @@ const gstValidation = {
   },
 } as ValidationType;
 
-const ToDateValidation = {
+const toDateValidation = {
   required: {
     value: false,
     message: "{label} field is rquired",
@@ -100,7 +100,7 @@ const symbolValidation = {
   },
 } as ValidationType;
 
-const currencyinwordValidation = {
+const currencyInWordValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -111,7 +111,7 @@ const currencyinwordValidation = {
       "Invalid Currency in Word format. Please enter a valid currency name (e.g., USD).",
   },
 } as ValidationType;
-const invoicenoValidation = {
+const invoiceNoValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -133,7 +133,7 @@ const amountValidation = {
       "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
   },
 } as ValidationType;
-const disamountValidation = {
+const disAmountValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -169,7 +169,7 @@ const stValidation = {
   },
 } as ValidationType;
 
-const stamountValidation = {
+const stAmountValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -181,7 +181,7 @@ const stamountValidation = {
   },
 } as ValidationType;
 
-const cgstperValidation = {
+const cgstPerValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -205,7 +205,7 @@ const cgstValidation = {
   },
 } as ValidationType;
 
-const sgstperValidation = {
+const sgstPerValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -217,7 +217,7 @@ const sgstperValidation = {
   },
 } as ValidationType;
 
-const igstperValidation = {
+const igstPerValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -253,7 +253,7 @@ const igstValidation = {
   },
 } as ValidationType;
 
-const subtotalValidation = {
+const subTotalValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -264,7 +264,7 @@ const subtotalValidation = {
       "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
   },
 } as ValidationType;
-const staxValidation = {
+const sTaxValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -275,7 +275,7 @@ const staxValidation = {
       "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
   },
 } as ValidationType;
-const ecessValidation = {
+const eCessValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -286,7 +286,7 @@ const ecessValidation = {
       "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
   },
 } as ValidationType;
-const krishicessValidation = {
+const krishiCessValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -308,6 +308,15 @@ const totalValidation = {
       "Invalid total format. Please use a valid number format (e.g., 5 or 5.5).",
   },
 } as ValidationType;
+
+const actionOption: MapType<Options> = {
+  new: { value: "manual", label: "Manual" },
+  // renew: { value: "renew", label: "Specific Client Datewise" },
+};
+
+const actionOptiontwo: MapType<Options> = {
+  new: { value: "y", label: "Do Not Compare Report with Invoice Date" },
+};
 
 const clientField: FormFieldType = {
   config: {
@@ -350,7 +359,7 @@ const actualBuyreField: FormFieldType = createFormConfig(
   "actualbuyre",
   "Actual Buyre",
   "text",
-  actualbuyreValidation,
+  actualBuyreValidation,
   ""
 );
 
@@ -363,18 +372,18 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
-const fromdateField: FormFieldType = createFormConfig(
+const fromDateField: FormFieldType = createFormConfig(
   "fromDate",
   "From",
   "date",
-  FromDateValidation,
+  fromDateValidation,
   formattedDate
 );
 const countryField: FormFieldType = createFormConfig(
   "country",
   "Country",
   "text",
-  CountryValidation,
+  countryValidation,
   ""
 );
 
@@ -414,7 +423,7 @@ const codeField: FormFieldType = createFormConfig(
   "code",
   "Code",
   "text",
-  CodeValidation,
+  codeValidation,
   ""
 );
 const gstField: FormFieldType = createFormConfig(
@@ -432,11 +441,11 @@ const gstActualBuyreField: FormFieldType = createFormConfig(
   ""
 );
 
-const todateeField: FormFieldType = createFormConfig(
+const toDateField: FormFieldType = createFormConfig(
   "toDate",
   "To Date",
   "date",
-  ToDateValidation,
+  toDateValidation,
   formattedDate
 );
 
@@ -452,11 +461,11 @@ const currencyinwordField: FormFieldType = createFormConfig(
   "currencyinword",
   "Currency in Word",
   "text",
-  currencyinwordValidation,
+  currencyInWordValidation,
   ""
 );
 
-const fyearField: FormFieldType = {
+const fYearField: FormFieldType = {
   config: {
     name: "fyear",
     label: "F.Year ",
@@ -476,15 +485,16 @@ const invoicenoField: FormFieldType = createFormConfig(
   "invoiceno",
   "Invoice No.",
   "text",
-  invoicenoValidation,
+  invoiceNoValidation,
   ""
 );
 const manualField: FormFieldType = createFormConfig(
   "manual",
-  "Manual",
+  "",
   "checkbox",
   manualValidation,
-  ""
+  "",
+  actionOption
 );
 const amountField: FormFieldType = createFormConfig(
   "amount",
@@ -493,11 +503,11 @@ const amountField: FormFieldType = createFormConfig(
   amountValidation,
   ""
 );
-const disamountField: FormFieldType = createFormConfig(
+const disAmountField: FormFieldType = createFormConfig(
   "disamt",
   "Dis.Amt",
   "text",
-  disamountValidation,
+  disAmountValidation,
   ""
 );
 
@@ -513,7 +523,7 @@ const cgstperField: FormFieldType = createFormConfig(
   "cgstper",
   "CGST%",
   "text",
-  cgstperValidation,
+  cgstPerValidation,
   ""
 );
 
@@ -521,7 +531,7 @@ const stamountField: FormFieldType = createFormConfig(
   "stamount",
   "ST Amount",
   "text",
-  stamountValidation,
+  stAmountValidation,
   ""
 );
 
@@ -543,17 +553,18 @@ const dateField: FormFieldType = createFormConfig(
 
 const donotField: FormFieldType = createFormConfig(
   "Do Not Comparereportwithinvoicedate",
-  "Do Not Compare Report with Invoice Date",
+  "",
   "checkbox",
   manualValidation,
-  ""
+  "",
+  actionOptiontwo
 );
 
 const subtotalField: FormFieldType = createFormConfig(
   "subtotal",
   "Sub Total",
   "text",
-  subtotalValidation,
+  subTotalValidation,
   ""
 );
 
@@ -561,7 +572,7 @@ const sgstperField: FormFieldType = createFormConfig(
   "sgstper",
   "SGST%",
   "text",
-  sgstperValidation,
+  sgstPerValidation,
   ""
 );
 
@@ -569,7 +580,7 @@ const igstperField: FormFieldType = createFormConfig(
   "igstper",
   "IGST%",
   "text",
-  igstperValidation,
+  igstPerValidation,
   ""
 );
 
@@ -588,25 +599,25 @@ const igstField: FormFieldType = createFormConfig(
   igstValidation,
   ""
 );
-const staxField: FormFieldType = createFormConfig(
+const sTaxField: FormFieldType = createFormConfig(
   "stax",
   "S Tax.%",
   "text",
-  staxValidation,
+  sTaxValidation,
   ""
 );
-const ecessField: FormFieldType = createFormConfig(
+const eCessField: FormFieldType = createFormConfig(
   "ecess",
   "E Cess.%",
   "text",
-  ecessValidation,
+  eCessValidation,
   ""
 );
-const krishicessField: FormFieldType = createFormConfig(
+const krishiCessField: FormFieldType = createFormConfig(
   "krishicess",
   "Krishi Cess. %",
   "text",
-  krishicessValidation,
+  krishiCessValidation,
   ""
 );
 const totalField: FormFieldType = createFormConfig(
@@ -623,7 +634,7 @@ export const invoiceGenGstFormFields = {
   gstnField,
   gstnActualBuyreField,
   actualBuyreField,
-  fromdateField,
+  fromDateField,
   countryField,
   stateField,
   stateActualBuyreField,
@@ -631,14 +642,14 @@ export const invoiceGenGstFormFields = {
   codeField,
   gstField,
   gstActualBuyreField,
-  todateeField,
+  toDateField,
   symbolField,
   currencyinwordField,
-  fyearField,
+  fYearField,
   invoicenoField,
   manualField,
   amountField,
-  disamountField,
+  disAmountField,
   stField,
   cgstperField,
   stamountField,
@@ -650,8 +661,8 @@ export const invoiceGenGstFormFields = {
   igstperField,
   sgstField,
   igstField,
-  staxField,
-  ecessField,
-  krishicessField,
+  sTaxField,
+  eCessField,
+  krishiCessField,
   totalField,
 };

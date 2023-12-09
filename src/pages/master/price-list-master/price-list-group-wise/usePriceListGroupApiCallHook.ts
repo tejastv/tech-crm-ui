@@ -3,7 +3,7 @@ import {
   CityWiseGroupType,
   CountryType,
   GroupWiseCurrencyType,
-  UpdatePriceListForGroup,
+  UpdatePriceListForGroupType,
 } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import {
@@ -89,7 +89,7 @@ export const usePriceListGroupApiCallHook = () => {
   };
 
   const updatePriceListForGroup = async (
-    updatePriceListForGroup: Array<UpdatePriceListForGroup>
+    updatePriceListForGroup: Array<UpdatePriceListForGroupType>
   ): Promise<ApiResponseType<any>> => {
     console.log(updatePriceListForGroup);
     const response = await instance.post(
@@ -104,7 +104,7 @@ export const usePriceListGroupApiCallHook = () => {
 
   const updatePriceListForGroupMutation = () => {
     const mutation = useMutation(
-      (updatedItem: Array<UpdatePriceListForGroup>) =>
+      (updatedItem: Array<UpdatePriceListForGroupType>) =>
         updatePriceListForGroup(updatedItem),
       {
         onSuccess: async () => {

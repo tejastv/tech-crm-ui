@@ -14,7 +14,7 @@ import {
 } from "@shared/index";
 import { COMMON_ROUTES } from "@constants/index";
 import {
-  AddUpdateClientType,
+  ClientFormType,
   CompanyType,
   useCompanyApiCallHook,
 } from "@master/index";
@@ -28,7 +28,7 @@ export const AddBulkEnquiries: React.FC = () => {
   const { data: companyData, isLoading } = getCompany();
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
-  const methods = useForm<AddUpdateClientType>();
+  const methods = useForm<ClientFormType>();
 
   const config = {
     breadcrumbConfig: {

@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { AddUpdateSourceType, SourceType } from "@master/index";
+import { SourceFormType, SourceType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType, MapType } from "@shared/index";
 import {
@@ -23,7 +23,7 @@ export const useSourceApiCallHook = () => {
         const response = await instance.get(apiUrls.GET_ADD_SOURCE);
         let mapedData = selectOptionsMapMaker(
           response.data.data,
-          "sourceID",
+          "sourceId",
           "source"
         );
         return mapedData;
@@ -48,7 +48,7 @@ export const useSourceApiCallHook = () => {
   };
 
   const addSource = async (
-    sourceData: AddUpdateSourceType
+    sourceData: SourceFormType
   ): Promise<ApiResponseType<SourceType>> => {
     const response = await instance.post(apiUrls.GET_ADD_SOURCE, sourceData);
     return response.data.data;
@@ -56,7 +56,7 @@ export const useSourceApiCallHook = () => {
 
   const addSourceMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateSourceType) => addSource(updatedItem),
+      (updatedItem: SourceFormType) => addSource(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -70,7 +70,7 @@ export const useSourceApiCallHook = () => {
   };
 
   const updateSourceData = async (
-    updateSourceData: AddUpdateSourceType
+    updateSourceData: SourceFormType
   ): Promise<ApiResponseType<SourceType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_SOURCE.replace(
@@ -84,7 +84,7 @@ export const useSourceApiCallHook = () => {
 
   const updateSourceMutation = () => {
     const mutation = useMutation(
-      (updatedItem: AddUpdateSourceType) => updateSourceData(updatedItem),
+      (updatedItem: SourceFormType) => updateSourceData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
