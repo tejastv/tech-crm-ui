@@ -99,7 +99,7 @@ export const PaymentModeForm: React.FC = () => {
                 <NewInput
                   errors={errors}
                   register={register}
-                  config={paymentModeFormFields.paymentmode}
+                  config={paymentModeFormFields.paymentMode}
                 />
               </div>
             </div>
