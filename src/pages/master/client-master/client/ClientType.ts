@@ -52,4 +52,5 @@ export interface ClientType {
   autoSendOutstanding: string;
   locked: string;
   email: string;
+  stateCode?: number;
 }
