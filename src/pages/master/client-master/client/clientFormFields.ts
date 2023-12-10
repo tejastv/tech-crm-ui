@@ -6,10 +6,10 @@ const nameClientMaster = {
     value: true,
     message: "{label} field is rquired",
   },
-  maxLength: {
-    value: 30,
-    message: "30 characters max",
-  },
+  // maxLength: {
+  //   value: 30,
+  //   message: "30 characters max",
+  // },
 } as ValidationType;
 
 const GSTClient = {
@@ -371,7 +371,10 @@ const addressClient: FormFieldType = createFormConfig(
   "Address",
   "textarea",
   addressValidation,
-  "Enter Address"
+  "Enter Address",
+  {},
+  false,
+  true
 );
 const telnoClient: FormFieldType = createFormConfig(
   "phone",

@@ -441,7 +441,10 @@ const enqGivenAddress: FormFieldType = createFormConfig(
   "Address",
   "textarea",
   GivenaddressValidation,
-  "Enter Address"
+  "Enter Address",
+  {},
+  false,
+  true
 );
 const enqTelePhone: FormFieldType = createFormConfig(
   "phone",

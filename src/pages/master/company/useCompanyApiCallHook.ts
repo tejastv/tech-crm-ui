@@ -43,7 +43,7 @@ export const useCompanyApiCallHook = () => {
   };
 
   const addCompany = async (
-    companyData: CompanyFormType
+    companyData: Partial<CompanyType>
   ): Promise<ApiResponseType<CompanyType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_COMPANY_MASTER,
@@ -54,7 +54,7 @@ export const useCompanyApiCallHook = () => {
 
   const addCompanyMutation = () => {
     const mutation = useMutation(
-      (updatedItem: CompanyFormType) => addCompany(updatedItem),
+      (updatedItem: Partial<CompanyType>) => addCompany(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -68,12 +68,12 @@ export const useCompanyApiCallHook = () => {
   };
 
   const updateCompanyData = async (
-    updateCompanyData: CompanyFormType
+    updateCompanyData: Partial<CompanyType>
   ): Promise<ApiResponseType<CompanyType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_COMPANY_MASTER.replace(
         "{id}",
-        "" + updateCompanyData.id
+        "" + updateCompanyData.companyId
       ),
       updateCompanyData
     );
@@ -82,7 +82,7 @@ export const useCompanyApiCallHook = () => {
 
   const updateCompanyMutation = () => {
     const mutation = useMutation(
-      (updatedItem: CompanyFormType) => updateCompanyData(updatedItem),
+      (updatedItem: Partial<CompanyType>) => updateCompanyData(updatedItem),
       {
         onSuccess: async () => {
           await await queryClient.invalidateQueries({
