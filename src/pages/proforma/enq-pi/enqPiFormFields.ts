@@ -842,7 +842,7 @@ const fYearField: FormFieldType = createFormConfig(
 
 const refNote: Note = createNoteConfig("Note: Ref. No is Auto");
 
-export const addEnqPiFormFields = {
+export const enqPiFormFields = {
   companyField,
   yearField,
   refNoField,
