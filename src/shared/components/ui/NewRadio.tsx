@@ -52,6 +52,7 @@ export const NewRadio: React.FC<{
                           {...field}
                           className="mr-3"
                           value={option.value}
+                          // name={''+(field.value === option.value)}
                           onChange={(e) => {
                             let value: any = e.target.value;
                             let result;
@@ -68,7 +69,7 @@ export const NewRadio: React.FC<{
                               props.onChange(result);
                             }
                           }}
-                          defaultChecked={field.value === option.value}
+                          checked={field.value === option.value}
                         />
                       )}
                     ></Controller>

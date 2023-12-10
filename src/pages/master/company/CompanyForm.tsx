@@ -22,8 +22,6 @@ import {
   CityType,
   StateType,
   CountryType,
-  ClientFormType,
-  ClientType,
 } from "@master/index";
 
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";

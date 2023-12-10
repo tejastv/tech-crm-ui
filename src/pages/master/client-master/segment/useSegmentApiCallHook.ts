@@ -24,7 +24,6 @@ export const useSegmentApiCallHook = () => {
         const response = await instance.get(apiUrls.GET_ADD_SEGMENT);
         const data = response.data.data;
         let mapedData = selectOptionsMapMaker(data, "segmentId", "segmentName");
-        console.log(mapedData);
         return mapedData;
       },
       staleTime: Infinity,
