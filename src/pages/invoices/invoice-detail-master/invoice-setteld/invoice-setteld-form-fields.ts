@@ -25,12 +25,12 @@ const allClientDatewiseValidation = {
     message: "{label} field is rquired",
   },
 } as ValidationType;
-const invoicesValidation = {
-  required: {
-    value: false,
-    message: "{label} field is rquired",
-  },
-} as ValidationType;
+// const invoicesValidation = {
+//   required: {
+//     value: false,
+//     message: "{label} field is rquired",
+//   },
+// } as ValidationType;
 const totalamountValidation = {
   required: {
     value: false,

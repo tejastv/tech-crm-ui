@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { CompanyType, CompanyFormType } from "@master/index";
+import { CompanyType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";

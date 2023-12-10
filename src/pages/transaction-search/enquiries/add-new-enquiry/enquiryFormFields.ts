@@ -685,7 +685,7 @@ const enqRequestNo: FormFieldType = createFormConfig(
   "Request No."
 );
 const enqClientId: FormFieldType = createFormConfig(
-  "clientidenquiry",
+  "clientIdDisable",
   "Client Id",
   "text",
   ClientIdEnquiryValidation,

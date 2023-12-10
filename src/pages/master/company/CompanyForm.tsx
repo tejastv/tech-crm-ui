@@ -22,15 +22,12 @@ import {
   CityType,
   StateType,
   CountryType,
-  ClientFormType,
-  ClientType,
   CompanyType,
 } from "@master/index";
 
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
 import {
-  returnObjectBasedOnID,
   cleanupObject,
   returnFormatedObjectElseEmptyArray,
 } from "@utils/index";

@@ -339,10 +339,11 @@ const osEmailOptions = {
 };
 
 const discountOptions = {
-  in: { value: "in", label: "in %" },
+  inPer: { value: "inPer", label: "in %" },
   perRep: { value: "perRep", label: "Per Report" },
-  NA: { value: "NA", label: "NO Discount" },
+  nodDis: { value: "nodDis", label: "NO Discount" },
 };
+
 const clientName: FormFieldType = createFormConfig(
   "clientName",
   "Name",
@@ -350,6 +351,7 @@ const clientName: FormFieldType = createFormConfig(
   nameClientMaster,
   "Enter Client Name"
 );
+
 const clientGst: FormFieldType = createFormConfig(
   "gstYN",
   "GST",

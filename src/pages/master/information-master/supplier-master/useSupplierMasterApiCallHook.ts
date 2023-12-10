@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { SupplierMasterFormType, SupplierMasterType } from "@master/index";
+import { SupplierMasterType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -59,7 +59,8 @@ export const useSupplierMasterApiCallHook = () => {
 
   const addSupplierMasterMutation = () => {
     const mutation = useMutation(
-      (updatedItem: Partial<SupplierMasterType>) => addSupplierMaster(updatedItem),
+      (updatedItem: Partial<SupplierMasterType>) =>
+        addSupplierMaster(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
