@@ -1,0 +1,42 @@
+import { Options } from "@shared/index";
+
+export interface EnquiryPIFormType {
+  refNo: string;
+  bookNo: string;
+  companyId: Options;
+  recdDate: string;
+  dueDate: string;
+  serviceTypeId: Options;
+  clientId: Options;
+  clientRefNo: string;
+  sourceId: Options;
+  enqStatusId: Options;
+  notes: string;
+  localSourceId: Options;
+  pmtStatus: string;
+  creditAmount: string;
+  reportDate: string;
+  givenAddress: string;
+  cityId: Options;
+  zip: string;
+  stateId: Options;
+  countryId: Options;
+  rockStatus: string;
+  records: string;
+  recFin: string;
+  phone: string;
+  fax: string;
+  email: string;
+  website: string;
+  contactPerson: string;
+  designation: string;
+  financialYear: string;
+  bankers: string;
+  requestNo: string;
+  instruction: string;
+  reportPrice: number;
+  adjustment: number;
+  cmie: string;
+  actualEnqId: number;
+  fyear: number;
+}
