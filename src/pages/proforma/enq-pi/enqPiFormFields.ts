@@ -860,13 +860,12 @@ export const enqPiFormFields = {
   cityField,
   zipField,
   refNote,
-  //   2nd Side
-  givenNameField, //n
+  givenNameField,
   blankField,
   allField,
   recdOnField,
   serviceTypeField,
-  enqTypeField, //n
+  enqTypeField,
   priceField,
   localSourceField,
   dueOnField,
@@ -874,10 +873,9 @@ export const enqPiFormFields = {
   enqStatusField,
   sVisitField,
   notesForField,
-  fYearField, //n
+  fYearField,
   instructionField,
   adjustField,
-  //   Client Details
   clientRefField,
   clientField,
   requestNoField,
