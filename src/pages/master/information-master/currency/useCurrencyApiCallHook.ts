@@ -33,7 +33,7 @@ export const useCurrencyApiCallHook = () => {
     });
   };
 
-  const getCurrencyData = (id: string) => {
+  const getCurrencyData = (id: string, condition?: any) => {
     console.log(id);
     // if (!id) queryClient.removeQueries({ queryKey: [queryKeys.CITY_DATA, id] });
     return useQuery<CurrencyType>({
@@ -44,7 +44,7 @@ export const useCurrencyApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
