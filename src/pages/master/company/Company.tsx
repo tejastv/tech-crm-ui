@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   BorderLayout,
@@ -13,8 +13,14 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
 
 export const CompanyMaster: React.FC = () => {
+  const [limit, setLimit] = useState(100);
+  const [offset, setOffset] = useState(0);
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
-  const { data: companyData, isFetching } = getCompany();
+  const { data: receivedObj, isFetching } = getCompany({
+    limit,
+    offset,
+  });
+  const companyData = receivedObj?.data;
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
 
@@ -136,6 +142,14 @@ export const CompanyMaster: React.FC = () => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", companyData.companyId));
   };
 
+  const nextButtonClick = () => {
+    setOffset(offset + limit);
+  };
+
+  const prevButtonClick = () => {
+    setOffset(offset - limit);
+  };
+
   const tableConfig: TableType<CompanyType> = {
     config: {
       tableName: "Company Master",
@@ -148,12 +162,17 @@ export const CompanyMaster: React.FC = () => {
       printBtn: true,
       globalSearchBox: true,
       pagination: {
-        pageSize: 10,
+        pageSize: limit,
+        offset,
         nextPreviousBtnShow: true,
         tableMetaDataShow: true,
+        isNextButtonEnabled: receivedObj?.count! > offset,
+        isPrevButtonEnabled: offset > 0,
       },
       onDeleteClick: deleteCompanyClick,
       onEditClick: editCompanyClick,
+      onNextButtonClick: nextButtonClick,
+      onPrevButtonClick: prevButtonClick,
     },
   };
 

@@ -17,5 +17,7 @@ export interface TableType<T> {
     showItemCountDropdown?: boolean;
     onDeleteClick?: (data: any) => void;
     onEditClick?: (data: any, other?: any) => void;
+    onNextButtonClick?: () => void;
+    onPrevButtonClick?: () => void;
   };
 }
