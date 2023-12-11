@@ -19,3 +19,5 @@ export const STATUS_CODES = {
   CODE_404: 404,
   CODE_500: 500,
 };
+
+export const PAGINATION_LIMIT = 100;
