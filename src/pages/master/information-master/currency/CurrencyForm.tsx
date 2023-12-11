@@ -34,7 +34,7 @@ export const CurrencyForm: React.FC = () => {
       mainHeading: params.id ? "Update Currency" : "Add Currency",
       heading: "Entry",
     },
-    formPurchesConfig: {
+    formPurchaseConfig: {
       heading: "Purchase",
     },
     formSellConfig: {
@@ -54,30 +54,6 @@ export const CurrencyForm: React.FC = () => {
     };
   }, []);
 
-  // if (params.id) {
-  //   const { data: currencyData, isSuccess: currencyDataSuccess } =
-  //     getCurrencyData("" + params.id);
-  //   if (currencyDataSuccess) {
-  //     currencyFormFields.currencyField.config.setData =
-  //       currencyData?.currencyType;
-  //     currencyFormFields.symbolField.config.setData =
-  //       currencyData?.currencySymbol;
-  //     currencyFormFields.currencyWordField.config.setData =
-  //       currencyData?.currencyInWord;
-  //     currencyFormFields.purchesExchanegField.config.setData =
-  //       currencyData?.exchangeRateRs;
-  //     currencyFormFields.pDateField.config.setData = currencyData?.entryDate;
-  //     currencyFormFields.sellExchanegField.config.setData =
-  //       currencyData?.exchangeRateRsSell;
-  //     currencyFormFields.sDateField.config.setData =
-  //       currencyData?.entryDateSell;
-  //   }
-  // } else {
-  //   useEffect(() => {
-  //     reset();
-  //   }, []);
-  // }
-
   const { data: currencyData } = getCurrencyData(
     "" + params.id,
     !localCurrencyData && params.id !== undefined
@@ -93,7 +69,6 @@ export const CurrencyForm: React.FC = () => {
       entryDateSell: currencyData.entryDateSell,
       exchangeRateRsSell: currencyData.exchangeRateRsSell,
     };
-
     return currencyFormData;
   };
 
@@ -108,7 +83,6 @@ export const CurrencyForm: React.FC = () => {
   useEffect(() => {
     if (params.id) {
       if (localCurrencyData !== null) {
-        console.log(localCurrencyData);
         reset(mapCurrencyDataToCurrencyForm(localCurrencyData));
       }
     }
@@ -123,92 +97,88 @@ export const CurrencyForm: React.FC = () => {
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <form
-          onSubmit={onSubmit}
-          noValidate
-          autoComplete="off"
-          className="p-t-20"
-        >
-          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-            <div className="card-body">
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="col-md-12 col-xs-12">
-                    <NewInput
-                      errors={errors}
-                      register={register}
-                      config={currencyFormFields.currencyField}
-                    />
-                  </div>
-                  <div className="col-md-12 col-xs-12">
-                    <NewInput
-                      errors={errors}
-                      register={register}
-                      config={currencyFormFields.symbolField}
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6 col-xs-12">
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="card-body">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="col-md-12 col-xs-12">
                   <NewInput
                     errors={errors}
                     register={register}
-                    config={currencyFormFields.currencyWordField}
+                    config={currencyFormFields.currencyField}
+                  />
+                </div>
+                <div className="col-md-12 col-xs-12">
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={currencyFormFields.symbolField}
                   />
                 </div>
               </div>
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="row">
-                    <div className="card-title col-md-12 m-t-40 text-center">
-                      <DivLayout
-                        heading={cardConfig.formPurchesConfig.heading}
-                      />
-                      <hr />
-                    </div>
-                    <div className="col-md-12 col-xs-12">
-                      <NewInput
-                        errors={errors}
-                        register={register}
-                        config={currencyFormFields.purchesExchanegField}
-                      />
-                      <NewInput
-                        errors={errors}
-                        register={register}
-                        config={currencyFormFields.pDateField}
-                      />
-                    </div>
+              <div className="col-md-6 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={currencyFormFields.currencyWordField}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="row">
+                  <div className="card-title col-md-12 m-t-40 text-center">
+                    <DivLayout heading={cardConfig.formPurchaseConfig.heading} />
+                    <hr />
+                  </div>
+                  <div className="col-md-12 col-xs-12">
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={currencyFormFields.purchaseExchangeField}
+                    />
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={currencyFormFields.pDateField}
+                    />
                   </div>
                 </div>
-                <div className="col-md-6">
-                  <div className="row">
-                    <div className="card-title col-md-12 m-t-40 text-center">
-                      <DivLayout heading={cardConfig.formSellConfig.heading} />
-                      <hr />
-                    </div>
-                    <div className="col-md-12 col-xs-12">
-                      <NewInput
-                        errors={errors}
-                        register={register}
-                        config={currencyFormFields.sellExchanegField}
-                      />
-                      <NewInput
-                        errors={errors}
-                        register={register}
-                        config={currencyFormFields.sDateField}
-                      />
-                    </div>
+              </div>
+              <div className="col-md-6">
+                <div className="row">
+                  <div className="card-title col-md-12 m-t-40 text-center">
+                    <DivLayout heading={cardConfig.formSellConfig.heading} />
+                    <hr />
+                  </div>
+                  <div className="col-md-12 col-xs-12">
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={currencyFormFields.sellExchangeField}
+                    />
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={currencyFormFields.sDateField}
+                    />
                   </div>
                 </div>
               </div>
             </div>
-          </BorderLayout>
-          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-            <ActionButtons />
-          </BorderLayout>
-        </form>
-      </Card>
-    </>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

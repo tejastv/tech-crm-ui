@@ -124,7 +124,7 @@ export const ActualBuyer: React.FC = () => {
     },
   ];
 
-  const { data: actualBuyerData, isLoading } = getActualBuyer();
+  const { data: actualBuyerData, isFetching } = getActualBuyer();
   const { mutateAsync: deleteActualBuyer } = deleteActualBuyerMutation();
 
   const deleteActualBuyerClick = async (actualBuyerData: any) => {
@@ -135,7 +135,9 @@ export const ActualBuyer: React.FC = () => {
   };
 
   const editActualBuyerClick = (actualBuyerData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", actualBuyerData.actualBuyerId));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", actualBuyerData.partyId), {
+      state: null
+    });
   };
 
   const tableConfig: TableType<ActualBuyerType> = {
@@ -163,7 +165,7 @@ export const ActualBuyer: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

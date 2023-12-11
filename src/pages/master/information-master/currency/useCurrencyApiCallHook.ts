@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { CurrencyFormType, CurrencyType } from "@master/index";
+import { CurrencyType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType, MapType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -33,9 +33,7 @@ export const useCurrencyApiCallHook = () => {
     });
   };
 
-  const getCurrencyData = (id: string, condition?: any) => {
-    console.log(id);
-    // if (!id) queryClient.removeQueries({ queryKey: [queryKeys.CITY_DATA, id] });
+  const getCurrencyData = (id: string, condition: boolean) => {
     return useQuery<CurrencyType>({
       queryKey: [queryKeys.CURRENCY_DATA, id],
       queryFn: async () => {
@@ -50,7 +48,7 @@ export const useCurrencyApiCallHook = () => {
   };
 
   const addCurrency = async (
-    currencyData: CurrencyFormType
+    currencyData: Partial<CurrencyType>
   ): Promise<ApiResponseType<CurrencyType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_CURRENCY,
@@ -61,7 +59,7 @@ export const useCurrencyApiCallHook = () => {
 
   const addCurrencyMutation = () => {
     const mutation = useMutation(
-      (updatedItem: CurrencyFormType) => addCurrency(updatedItem),
+      (updatedItem: Partial<CurrencyType>) => addCurrency(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -75,12 +73,12 @@ export const useCurrencyApiCallHook = () => {
   };
 
   const updateCurrencyData = async (
-    updateCurrencyData: CurrencyFormType
+    updateCurrencyData: Partial<CurrencyType>
   ): Promise<ApiResponseType<CurrencyType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_CURRENCY.replace(
         "{id}",
-        "" + updateCurrencyData.id
+        "" + updateCurrencyData.currencyId
       ),
       updateCurrencyData
     );
@@ -89,7 +87,7 @@ export const useCurrencyApiCallHook = () => {
 
   const updateCurrencyMutation = () => {
     const mutation = useMutation(
-      (updatedItem: CurrencyFormType) => updateCurrencyData(updatedItem),
+      (updatedItem: Partial<CurrencyType>) => updateCurrencyData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
