@@ -16,19 +16,25 @@ export const useClientApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getClient = (): UseQueryResult<MapType<ClientType>> => {
-    return useQuery<MapType<ClientType>>({
-      queryKey: [queryKeys.CLIENT_DATA],
+  const getClient = (
+    queryObject: any
+  ): UseQueryResult<{ data: MapType<ClientType>; count: number }> => {
+    return useQuery<{ data: MapType<ClientType>; count: number }>({
+      queryKey: [queryKeys.CLIENT_DATA, queryObject],
       queryFn: async () => {
-        const response = await instance.get(apiUrls.GET_ADD_CLIENT);
+        const response = await instance.get(apiUrls.GET_ADD_CLIENT, {
+          params: {
+            limit: queryObject.limit,
+            offset: queryObject.offset,
+          },
+        });
         let mapedData = selectOptionsMapMaker(
           response.data.data.records,
           "clientId",
           "clientName"
         );
-        return mapedData;
+        return { data: mapedData, count: response.data.data.count };
       },
-      staleTime: Infinity,
     });
   };
 
