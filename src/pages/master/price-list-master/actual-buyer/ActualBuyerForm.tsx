@@ -78,7 +78,6 @@ export const ActualBuyerForm: React.FC = () => {
     actualBuyersFormFields.cityActualBuyer.config.options = options;
   }
 
-  // state api call
   const [stateOptions, setStateOptions] = useState<StateType[]>();
 
   useEffect(() => {
@@ -92,7 +91,6 @@ export const ActualBuyerForm: React.FC = () => {
     actualBuyersFormFields.stateActualBuyer.config.options = options;
   }
 
-  // country api call
   const [countryOptions, setCountryOptions] = useState<CountryType[]>();
 
   useEffect(() => {

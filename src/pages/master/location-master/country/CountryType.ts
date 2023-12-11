@@ -8,7 +8,6 @@ export interface CountryType {
   continentId: any;
   price?: number;
   currencyId?: number;
-  countryId: number;
   countryId?: number;
   otherCharges?: number;
   priceOnline?: number;

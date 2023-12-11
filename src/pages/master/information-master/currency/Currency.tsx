@@ -84,7 +84,7 @@ export const Currency: React.FC = () => {
     },
   ];
 
-  const { data: currencyData, isLoading } = getCurrency();
+  const { data: currencyData, isFetching } = getCurrency();
   const { mutateAsync: deleteCurrency } = deleteCurrencyMutation();
 
   const deleteCurrencyClick = async (currencyData: any) => {
@@ -125,7 +125,7 @@ export const Currency: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );
