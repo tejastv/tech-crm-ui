@@ -60,35 +60,33 @@ export const ActualBuyerForm: React.FC = () => {
     if (cityData) {
       setCityOptions(Object.values(cityData));
     }
-  }, [cityData && Object.values(cityData).length]);
+  }, [cityData]);
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "id", "cityName");
     actualBuyersFormFields.cityactualbuyer.config.options = options;
   }
 
-  // state api call
   const [stateOptions, setStateOptions] = useState<StateType[]>();
 
   useEffect(() => {
     if (stateData) {
       setStateOptions(Object.values(stateData));
     }
-  }, [stateData && Object.values(stateData).length]);
+  }, [stateData]);
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
     actualBuyersFormFields.stateactualbuyer.config.options = options;
   }
 
-  // country api call
   const [countryOptions, setCountryOptions] = useState<CountryType[]>();
 
   useEffect(() => {
     if (countryData) {
       setCountryOptions(Object.values(countryData));
     }
-  }, [countryData && Object.values(countryData).length]);
+  }, [countryData]);
 
   if (countryOptions?.length) {
     let options = selectOptionsMaker(

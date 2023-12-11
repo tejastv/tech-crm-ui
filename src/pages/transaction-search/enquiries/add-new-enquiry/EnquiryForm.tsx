@@ -401,9 +401,11 @@ export const EnquiryForm: React.FC = () => {
   );
 
   const getClientValue = (clientId: number) => {
-    // console.log(clientId);
     if (clientId) {
       setClientId(clientId);
+      if (enquiryFormFields.enqClientId.config.name === "clientIdDisable") {
+        setValue(enquiryFormFields.enqClientId.config.name, clientId);
+      }
     }
   };
 

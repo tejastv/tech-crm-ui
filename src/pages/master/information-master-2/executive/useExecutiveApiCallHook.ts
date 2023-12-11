@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { ExecutiveFormType, ExecutiveType } from "@master/index";
+import { ExecutiveType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -30,7 +30,10 @@ export const useExecutiveApiCallHook = () => {
     });
   };
 
-  const getExecutiveData = (id: string, condition: boolean): UseQueryResult<ExecutiveType> => {
+  const getExecutiveData = (
+    id: string,
+    condition: boolean
+  ): UseQueryResult<ExecutiveType> => {
     return useQuery<ExecutiveType>({
       queryKey: [queryKeys.EXECUTIVE_DATA, id],
       queryFn: async () => {
