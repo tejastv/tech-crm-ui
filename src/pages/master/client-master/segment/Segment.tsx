@@ -60,7 +60,9 @@ export const Segment: React.FC = () => {
   };
 
   const editSegmentClick = (segmentData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", segmentData.segmentId));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", segmentData.segmentId), {
+      state: null
+    });
   };
 
   const tableConfig: TableType<SegmentType> = {

@@ -1,14 +1,7 @@
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { ColumnDef } from "@tanstack/react-table";
 
-import {
-  Card,
-  BorderLayout,
-  Select,
-  Button,
-  Table,
-  TableType,
-} from "@shared/index";
+import { Card, BorderLayout, Button, Table, TableType, NewSelect } from "@shared/index";
 import {
   enquiriesCountGraphViewFormFields,
   EnquiriesCountGraphViewType,
@@ -317,112 +310,118 @@ const thirdTableConfig: TableType<EnquiryCountGraphViewType> = {
 };
 
 export const EnquiriesCountGraphView: React.FC = () => {
-  const methods = useForm<EnquiriesCountGraphViewType>();
-
-  const onSubmit = methods.handleSubmit((enquiryData): void => {
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<any>();
+  const onSubmit = handleSubmit((enquiryData): void => {
     console.log("Enquiries Count Graph View submitted.", enquiryData);
   });
 
   return (
     <Card config={cardConfig.formLayoutConfig}>
-      <FormProvider {...methods}>
-        <form
-          onSubmit={onSubmit}
-          noValidate
-          autoComplete="off"
-          className="p-t-20"
-        >
-          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-            <div className="row">
-              <div className="col-md-4 col-xs-12">
-                <Select
-                  config={enquiriesCountGraphViewFormFields.city.config}
-                  // onChangeHandler={companyOnChangeHandler}
-                />
-              </div>
-              <div className="col-md-4 col-xs-12">
-                <div className="row">
-                  <div className="col">
-                    <Select
-                      config={enquiriesCountGraphViewFormFields.client.config}
-                      // onChangeHandler={companyOnChangeHandler}
-                    />
-                  </div>
-                  <div className="col-auto">
-                    <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                      Refresh/View
-                    </Button>
-                  </div>
-                </div>
-              </div>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-4 col-xs-12">
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={enquiriesCountGraphViewFormFields.city}
+              />
             </div>
-          </BorderLayout>
-          <BorderLayout heading={cardConfig.formListConfig.heading}>
-            <div className="row">
-              <div className="col-2 ex1">
-                <p>Select will come</p>
-              </div>
-              <div className="col-4 ex1">
-                <Table config={firstTableConfig.config}>
-                  {/* {isLoading && <Loader />} */}
-                </Table>
-              </div>
-              <div className="col-6 ex1">
-                <Table config={secondTableConfig.config}>
-                  {/* {isLoading && <Loader />} */}
-                </Table>
-                <div className="float-right">
-                  <Button
-                    type="button"
-                    className="btn btn-danger  waves-effect waves-light mr-2"
-                    // onClick={routeHandler}
-                  >
-                    <i className="far fa-save pr-1"></i> Export
+            <div className="col-md-4 col-xs-12">
+              <div className="row">
+                <div className="col">
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={enquiriesCountGraphViewFormFields.client}
+                  />
+                </div>
+                <div className="col-auto">
+                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+                    Refresh/View
                   </Button>
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-2 ex1">
-                <p>Select will come</p>
-              </div>
-              <div className="col-4 ex1" />
-              <div className="col-6 ex1">
-                <Table config={thirdTableConfig.config}>
-                  {/* {isLoading && <Loader />} */}
-                </Table>
-                <div className="float-right">
-                  <Button
-                    type="button"
-                    className="btn btn-danger  waves-effect waves-light mr-2"
-                    // onClick={routeHandler}
-                  >
-                    <i className="far fa-save pr-1"></i> Export
-                  </Button>
-                </div>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formListConfig.heading}>
+          <div className="row">
+            <div className="col-2 ex1">
+              <p>Select will come</p>
+            </div>
+            <div className="col-4 ex1">
+              <Table config={firstTableConfig.config}>
+                {/* {isLoading && <Loader />} */}
+              </Table>
+            </div>
+            <div className="col-6 ex1">
+              <Table config={secondTableConfig.config}>
+                {/* {isLoading && <Loader />} */}
+              </Table>
+              <div className="float-right">
+                <Button
+                  type="button"
+                  className="btn btn-danger  waves-effect waves-light mr-2"
+                  // onClick={routeHandler}
+                >
+                  <i className="far fa-save pr-1"></i> Export
+                </Button>
               </div>
             </div>
-          </BorderLayout>
-          <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-            <div className="text-center">
-              <Button
-                type="button"
-                className="btn btn-danger  waves-effect waves-light mr-2"
-                // onClick={routeHandler}
-              >
-                <i className="fas fa-file-export pr-1"></i> Export
-              </Button>
-              <Button
-                type="button"
-                className="btn btn-danger  waves-effect waves-light"
-                // onClick={routeHandler}
-              >
-                <i className="fas fa-times-circle pr-1"></i> Cancel
-              </Button>
+          </div>
+          <div className="row">
+            <div className="col-2 ex1">
+              <p>Select will come</p>
             </div>
-          </BorderLayout>
-        </form>
-      </FormProvider>
+            <div className="col-4 ex1" />
+            <div className="col-6 ex1">
+              <Table config={thirdTableConfig.config}>
+                {/* {isLoading && <Loader />} */}
+              </Table>
+              <div className="float-right">
+                <Button
+                  type="button"
+                  className="btn btn-danger  waves-effect waves-light mr-2"
+                  // onClick={routeHandler}
+                >
+                  <i className="far fa-save pr-1"></i> Export
+                </Button>
+              </div>
+            </div>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
+          <div className="text-center">
+            <Button
+              type="button"
+              className="btn btn-danger  waves-effect waves-light mr-2"
+              // onClick={routeHandler}
+            >
+              <i className="fas fa-file-export pr-1"></i> Export
+            </Button>
+            <Button
+              type="button"
+              className="btn btn-danger  waves-effect waves-light"
+              // onClick={routeHandler}
+            >
+              <i className="fas fa-times-circle pr-1"></i> Cancel
+            </Button>
+          </div>
+        </BorderLayout>
+      </form>
     </Card>
   );
 };

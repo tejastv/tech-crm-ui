@@ -11,7 +11,7 @@ const PriceLocalsourceValidation = {
     message: "30 characters max",
   },
 } as ValidationType;
-const PurchesExchanegRateValidation = {
+const purchaseExchangeRateValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -21,7 +21,7 @@ const PurchesExchanegRateValidation = {
     message: "30 characters max",
   },
 } as ValidationType;
-const SellExchanegRateValidation = {
+const sellExchangeRateValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -42,7 +42,7 @@ const PriceCurrencyValidation = {
     message: "Please select a {label}",
   },
 } as ValidationType;
-const PurchesDateValidation = {
+const purchaseDateValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -81,25 +81,25 @@ const priceCurrency: FormFieldType = createFormConfig(
   "Select Currency",
   {}
 );
-const purchesExchanegRate: FormFieldType = createFormConfig(
+const purchaseExchangeRate: FormFieldType = createFormConfig(
   "emailCC",
   "Exchg. Rate(Rs.)",
   "text",
-  PurchesExchanegRateValidation,
+  purchaseExchangeRateValidation,
   "Enter Exchg. Rate(Rs.)"
 );
-const sellExchanegRate: FormFieldType = createFormConfig(
+const sellExchangeRate: FormFieldType = createFormConfig(
   "currencey",
   "Exchg. Rate(Rs.)",
   "text",
-  SellExchanegRateValidation,
+  sellExchangeRateValidation,
   "Enter Exchg. Rate(Rs.) "
 );
-const purchesDate: FormFieldType = createFormConfig(
-  "purchesDate",
+const purchaseDate: FormFieldType = createFormConfig(
+  "purchaseDate",
   "Date",
   "date",
-  PurchesDateValidation,
+  purchaseDateValidation,
   ""
 );
 const sellDate: FormFieldType = createFormConfig(
@@ -113,8 +113,8 @@ const sellDate: FormFieldType = createFormConfig(
 export const priceFormFields = {
   priceLocalSource,
   priceCurrency,
-  purchesExchanegRate,
-  sellExchanegRate,
-  purchesDate,
+  purchaseExchangeRate,
+  sellExchangeRate,
+  purchaseDate,
   sellDate,
 };

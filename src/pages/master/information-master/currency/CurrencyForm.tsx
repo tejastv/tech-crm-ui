@@ -27,7 +27,7 @@ export const CurrencyForm: React.FC = () => {
       mainHeading: params.id ? "Update Currency" : "Add Currency",
       heading: "Entry",
     },
-    formPurchesConfig: {
+    formPurchaseConfig: {
       heading: "Purchase",
     },
     formSellConfig: {
@@ -80,76 +80,66 @@ export const CurrencyForm: React.FC = () => {
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="col-md-12 col-xs-12">
-                      <Input config={currencyFormFields.currencyField.config} />
-                    </div>
-                    <div className="col-md-12 col-xs-12">
-                      <Input config={currencyFormFields.symbolField.config} />
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-xs-12">
-                    <Input
-                      config={currencyFormFields.currencyWordField.config}
-                    />
-                  </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="card-body">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="col-md-12 col-xs-12">
+                  <Input config={currencyFormFields.currencyField.config} />
                 </div>
+                <div className="col-md-12 col-xs-12">
+                  <Input config={currencyFormFields.symbolField.config} />
+                </div>
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Input config={currencyFormFields.currencyWordField.config} />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6">
                 <div className="row">
-                  <div className="col-md-6">
-                    <div className="row">
-                      <div className="card-title col-md-12 m-t-40 text-center">
-                        <DivLayout
-                          heading={cardConfig.formPurchesConfig.heading}
-                        />
-                        <hr />
-                      </div>
-                      <div className="col-md-12 col-xs-12">
-                        <Input
-                          config={
-                            currencyFormFields.purchesExchanegField.config
-                          }
-                        />
-                        <Input config={currencyFormFields.pDateField.config} />
-                      </div>
-                    </div>
+                  <div className="card-title col-md-12 m-t-40 text-center">
+                    <DivLayout
+                      heading={cardConfig.formPurchaseConfig.heading}
+                    />
+                    <hr />
                   </div>
-                  <div className="col-md-6">
-                    <div className="row">
-                      <div className="card-title col-md-12 m-t-40 text-center">
-                        <DivLayout
-                          heading={cardConfig.formSellConfig.heading}
-                        />
-                        <hr />
-                      </div>
-                      <div className="col-md-12 col-xs-12">
-                        <Input
-                          config={currencyFormFields.sellExchanegField.config}
-                        />
-                        <Input config={currencyFormFields.sDateField.config} />
-                      </div>
-                    </div>
+                  <div className="col-md-12 col-xs-12">
+                    <Input
+                      config={currencyFormFields.purchesExchanegField.config}
+                    />
+                    <Input config={currencyFormFields.pDateField.config} />
                   </div>
                 </div>
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
-      </Card>
-    </>
+              <div className="col-md-6">
+                <div className="row">
+                  <div className="card-title col-md-12 m-t-40 text-center">
+                    <DivLayout heading={cardConfig.formSellConfig.heading} />
+                    <hr />
+                  </div>
+                  <div className="col-md-12 col-xs-12">
+                    <Input
+                      config={currencyFormFields.sellExchanegField.config}
+                    />
+                    <Input config={currencyFormFields.sDateField.config} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };
