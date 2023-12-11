@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   BorderLayout,
@@ -30,6 +30,10 @@ export const Client: React.FC = () => {
 
   const { getClient, deleteClientMutation } = useClientApiCallHook();
   const navigate = useNavigate();
+
+  const [limit, setLimit] = useState(100);
+  const [offset, setOffset] = useState(0);
+
   const columns: ColumnDef<ClientType>[] = [
     {
       id: "action",
@@ -242,7 +246,12 @@ export const Client: React.FC = () => {
     },
   ];
 
-  const { data: clientData, isFetching } = getClient();
+  const { data: receivedObj, isFetching } = getClient({
+    limit,
+    offset,
+  });
+  const clientData = receivedObj?.data;
+
   const { mutateAsync: deleteClient } = deleteClientMutation();
 
   const deleteClientClick = async (clientData: any) => {
@@ -254,6 +263,14 @@ export const Client: React.FC = () => {
 
   const editClientClick = (clientData: any) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", clientData.clientId));
+  };
+
+  const nextButtonClick = () => {
+    setOffset(offset + limit);
+  };
+
+  const prevButtonClick = () => {
+    setOffset(offset - limit);
   };
 
   const tableConfig: TableType<ClientType> = {
@@ -268,12 +285,16 @@ export const Client: React.FC = () => {
       printBtn: true,
       globalSearchBox: true,
       pagination: {
-        pageSize: 10,
+        pageSize: limit,
         nextPreviousBtnShow: true,
         tableMetaDataShow: true,
+        isNextButtonEnabled: receivedObj?.count! > offset,
+        isPrevButtonEnabled: offset > 0,
       },
       onDeleteClick: deleteClientClick,
       onEditClick: editClientClick,
+      onNextButtonClick: nextButtonClick,
+      onPrevButtonClick: prevButtonClick,
     },
   };
 
