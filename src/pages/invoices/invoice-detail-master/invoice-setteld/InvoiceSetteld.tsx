@@ -220,13 +220,6 @@ export const InvoiceSetteld: React.FC = () => {
 
               <div className="col-md-3">
                 <div className="row">
-                  <div className="mb-2">
-                    <div className="col-md-14 col-xs-12 ">
-                      <Button type="button" className={"btn btn-danger btn-sm"}>
-                        Refresh/View
-                      </Button>
-                    </div>
-                  </div>
                   <div className="col-md-12 col-xs-12">
                     <NewSelect
                       errors={errors}
@@ -234,6 +227,13 @@ export const InvoiceSetteld: React.FC = () => {
                       control={control}
                       config={invoiceListSetteldFormFields.currencyField}
                     />
+                  </div>
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        Refresh/View
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>

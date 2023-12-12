@@ -32,7 +32,7 @@ const markAllValidation = {
   },
 } as ValidationType;
 
-const fyearField: FormFieldType = {
+const fYearField: FormFieldType = {
   config: {
     name: "fyear",
     label: "F.Year ",
@@ -51,6 +51,10 @@ const fyearField: FormFieldType = {
 const actionOption: MapType<Options> = {
   new: { value: "new", label: "All Client Datewise" },
   renew: { value: "renew", label: "Specific Client Datewise" },
+};
+
+const markOption: MapType<Options> = {
+  new: { value: "new", label: "Mark All" },
 };
 
 const allClientDatewiseField: FormFieldType = createFormConfig(
@@ -119,10 +123,11 @@ const excecutiveField: FormFieldType = {
 };
 const markAllField: FormFieldType = createFormConfig(
   "markAll",
-  "Mark All",
+  "",
   "text",
   markAllValidation,
-  ""
+  "",
+  markOption
 );
 const emailField: FormFieldType = createFormConfig(
   "email",
@@ -132,7 +137,7 @@ const emailField: FormFieldType = createFormConfig(
   ""
 );
 export const invoiceListExceWiseFormFields = {
-  fyearField,
+  fYearField,
   fromDateField,
   toDateField,
   cityField,
