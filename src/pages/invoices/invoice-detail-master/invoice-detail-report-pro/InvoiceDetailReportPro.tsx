@@ -24,7 +24,10 @@ export const InvoiceDetailReportPro: React.FC = () => {
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
   const {
     register,
+    handleSubmit,
     control,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm<InvoiceDetailReportProType>();
   const cardConfig = {
@@ -224,7 +227,7 @@ export const InvoiceDetailReportPro: React.FC = () => {
                       config={invoiceDetailReportProFormFields.toDateField}
                     />
                   </div>
-                  <div className="col-md-12 col-xs-12">
+                  <div className="col-md-6 col-xs-12">
                     <NewSelect
                       errors={errors}
                       register={register}
@@ -241,6 +244,8 @@ export const InvoiceDetailReportPro: React.FC = () => {
                         </Button>
                       </div>
                     </div>
+                  </div>
+                  <div className="col-md-6 col-xs-12">
                     <NewSelect
                       errors={errors}
                       register={register}
@@ -248,6 +253,7 @@ export const InvoiceDetailReportPro: React.FC = () => {
                       config={invoiceDetailReportProFormFields.clientField}
                     />
                   </div>
+                  <div className="col-md-12 col-xs-12"></div>
                 </div>
               </div>
 

@@ -23,6 +23,7 @@ import { useForm } from "react-hook-form";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { cleanupObject } from "@utils/cleanUpObject";
 import { formatDateString } from "@utils/dateFormatter";
+import { usePagination } from "@hooks/usePagination";
 
 export const Enquiries: React.FC = () => {
   const { getEnquiries, getEnquiryBasedOnSearchParam, deleteEnquiryMutation } =
@@ -426,14 +427,23 @@ export const Enquiries: React.FC = () => {
     },
   ];
 
+  const {
+    limit,
+    offset,
+  } = usePagination();
+  
+
   // client api call
-  const { data: clientData } = getClient();
+  const { data: clientData } = getClient({
+    limit,
+    offset,
+  });
 
   useEffect(() => {
-    if (clientData) {
-      setClientOptions(Object.values(clientData));
+    if (clientData?.data) {
+      setClientOptions(Object.values(clientData.data));
     }
-  }, [clientData]);
+  }, [clientData?.data]);
 
   if (clientOptions?.length) {
     let options = selectOptionsMaker(clientOptions, "clientId", "clientName");

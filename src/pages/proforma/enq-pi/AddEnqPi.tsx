@@ -10,7 +10,7 @@ import {
   ActionButtons,
   SingleCheckbox,
 } from "@shared/index";
-import { addEnqPiFormFields } from "@proforma/index";
+import { enqPiFormFields } from "@proforma/index";
 import {
   useCityApiCallHook,
   useStateApiCallHook,
@@ -75,7 +75,7 @@ export const AddEnqPi: React.FC = () => {
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "cityId", "cityName");
-    addEnqPiFormFields.cityField.config.options = options;
+    enqPiFormFields.cityField.config.options = options;
   }
 
   const { data: stateData } = getState();
@@ -91,7 +91,7 @@ export const AddEnqPi: React.FC = () => {
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
-    addEnqPiFormFields.stateField.config.options = options;
+    enqPiFormFields.stateField.config.options = options;
   }
 
   // country api call
@@ -110,12 +110,12 @@ export const AddEnqPi: React.FC = () => {
       "countryId",
       "countryName"
     );
-    addEnqPiFormFields.countryField.config.options = options;
+    enqPiFormFields.countryField.config.options = options;
   }
 
   // const { data: ClientData } = getClient();
   // if (ClientData) {
-  //   addEnqPiFormFields.clientField.config.options = selectOptionsMaker(
+  //   enqPiFormFields.clientField.config.options = selectOptionsMaker(
   //     ClientData,
   //     "clientId",
   //     "clientName"
@@ -124,7 +124,7 @@ export const AddEnqPi: React.FC = () => {
 
   const { data: fYearData } = getFinYear();
   if (fYearData) {
-    addEnqPiFormFields.fYearField.config.options = selectOptionsMaker(
+    enqPiFormFields.fYearField.config.options = selectOptionsMaker(
       fYearData,
       "finYear",
       "finYear"
@@ -133,7 +133,7 @@ export const AddEnqPi: React.FC = () => {
 
   // const { data: SourceData } = getSource();
   // if (SourceData) {
-  //   addEnqPiFormFields.sourceField.config.options = selectOptionsMaker(
+  //   enqPiFormFields.sourceField.config.options = selectOptionsMaker(
   //     SourceData,
   //     "sourceId",
   //     "source"
@@ -142,7 +142,7 @@ export const AddEnqPi: React.FC = () => {
 
   // const { data: LocalSourceData } = getLocalSource();
   // if (LocalSourceData) {
-  //   addEnqPiFormFields.localSourceField.config.options = selectOptionsMaker(
+  //   enqPiFormFields.localSourceField.config.options = selectOptionsMaker(
   //     LocalSourceData,
   //     "localSourceId",
   //     "localSource"
@@ -151,7 +151,7 @@ export const AddEnqPi: React.FC = () => {
 
   // const { data: companyData } = getCompany();
   // if (companyData) {
-  //   addEnqPiFormFields.companyField.config.options = selectOptionsMaker(
+  //   enqPiFormFields.companyField.config.options = selectOptionsMaker(
   //     companyData,
   //     "companyId",
   //     "companyName",
@@ -161,7 +161,7 @@ export const AddEnqPi: React.FC = () => {
 
   const { data: ServiceData } = getServiceType();
   if (ServiceData) {
-    addEnqPiFormFields.serviceTypeField.config.options = selectOptionsMaker(
+    enqPiFormFields.serviceTypeField.config.options = selectOptionsMaker(
       ServiceData,
       "serviceTypeId",
       "serviceType"
@@ -179,10 +179,10 @@ export const AddEnqPi: React.FC = () => {
 
   if (isCompanyChange) {
     let dataObj = cleanupObject(selectedCompanyData);
-    addEnqPiFormFields.givenAddressField.config.setData = dataObj?.address;
-    addEnqPiFormFields.zipField.config.setData = dataObj?.zip;
-    addEnqPiFormFields.telNoField.config.setData = dataObj?.phone;
-    addEnqPiFormFields.faxNoField.config.setData = dataObj?.fax;
+    enqPiFormFields.givenAddressField.config.setData = dataObj?.address;
+    enqPiFormFields.zipField.config.setData = dataObj?.zip;
+    enqPiFormFields.telNoField.config.setData = dataObj?.phone;
+    enqPiFormFields.faxNoField.config.setData = dataObj?.fax;
     // if (cityData) {
     //   let data: any = returnObjectBasedOnID(
     //     cityData,
@@ -191,7 +191,7 @@ export const AddEnqPi: React.FC = () => {
     //     "cityId",
     //     "cityName"
     //   );
-    //   addEnqPiFormFields.cityField.config.setData =
+    //   enqPiFormFields.cityField.config.setData =
     //     data.length > 0
     //       ? [
     //           {
@@ -209,7 +209,7 @@ export const AddEnqPi: React.FC = () => {
     //     "stateId",
     //     "stateName"
     //   );
-    //   addEnqPiFormFields.stateField.config.setData =
+    //   enqPiFormFields.stateField.config.setData =
     //     data.length > 0
     //       ? [
     //           {
@@ -227,7 +227,7 @@ export const AddEnqPi: React.FC = () => {
     //     "countryId",
     //     "countryName"
     //   );
-    //   addEnqPiFormFields.countryField.config.setData =
+    //   enqPiFormFields.countryField.config.setData =
     //     data.length > 0
     //       ? [
     //           {
@@ -238,13 +238,13 @@ export const AddEnqPi: React.FC = () => {
     //       : [];
     // }
 
-    addEnqPiFormFields.emailField.config.setData = dataObj?.email;
-    addEnqPiFormFields.websiteField.config.setData = dataObj?.website;
-    addEnqPiFormFields.contactField.config.setData = dataObj?.contactPerson;
-    addEnqPiFormFields.designationField.config.setData = dataObj?.designation;
+    enqPiFormFields.emailField.config.setData = dataObj?.email;
+    enqPiFormFields.websiteField.config.setData = dataObj?.website;
+    enqPiFormFields.contactField.config.setData = dataObj?.contactPerson;
+    enqPiFormFields.designationField.config.setData = dataObj?.designation;
   }
 
-  // addEnqPiFormFields.refNoField.config.setData = refNo;
+  // enqPiFormFields.refNoField.config.setData = refNo;
   if (params.id) {
   } else {
     useEffect(() => {
@@ -271,25 +271,25 @@ export const AddEnqPi: React.FC = () => {
               <div className="row">
                 <div className="col-md-4 col-xs-12">
                   <Select
-                    config={addEnqPiFormFields.companyField.config}
+                    config={enqPiFormFields.companyField.config}
                     onChangeHandler={companyOnChangeHandler}
                   />
                 </div>
                 {/* <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.companyIdField.config} />
+                  <Input config={enqPiFormFields.companyIdField.config} />
                 </div> */}
                 <div className="col-md-4 col-xs-12">
-                  <Select config={addEnqPiFormFields.yearField.config} />
+                  <Select config={enqPiFormFields.yearField.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
                   <div className="row">
                     <div className="col-md-8 col-xs-12">
-                      <Input config={addEnqPiFormFields.refNoField.config} />
+                      <Input config={enqPiFormFields.refNoField.config} />
                     </div>
                     <div className="col-md-4 col-xs-12">
                       <small className="enquirynote">
                         <InputWithText
-                          config={addEnqPiFormFields.refNote.config}
+                          config={enqPiFormFields.refNote.config}
                         />
                       </small>
                     </div>
@@ -298,120 +298,120 @@ export const AddEnqPi: React.FC = () => {
               </div>
               <div className="row">
                 <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.givenAddressField.config} />
+                  <Input config={enqPiFormFields.givenAddressField.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Select config={addEnqPiFormFields.countryField.config} />
-                  <Select config={addEnqPiFormFields.stateField.config} />
+                  <Select config={enqPiFormFields.countryField.config} />
+                  <Select config={enqPiFormFields.stateField.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Select config={addEnqPiFormFields.cityField.config} />
-                  <Input config={addEnqPiFormFields.zipField.config} />
+                  <Select config={enqPiFormFields.cityField.config} />
+                  <Input config={enqPiFormFields.zipField.config} />
                 </div>
               </div>
               <div className="row">
                 <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.telNoField.config} />
-                  <Input config={addEnqPiFormFields.faxNoField.config} />
+                  <Input config={enqPiFormFields.telNoField.config} />
+                  <Input config={enqPiFormFields.faxNoField.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.emailField.config} />
-                  <Input config={addEnqPiFormFields.websiteField.config} />
+                  <Input config={enqPiFormFields.emailField.config} />
+                  <Input config={enqPiFormFields.websiteField.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.contactField.config} />
-                  <Input config={addEnqPiFormFields.designationField.config} />
+                  <Input config={enqPiFormFields.contactField.config} />
+                  <Input config={enqPiFormFields.designationField.config} />
                 </div>
               </div>
               <hr className="mt-0" />
               <div className="row">
                 <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.recdOnField.config} />
+                  <Input config={enqPiFormFields.recdOnField.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.dueOnField.config} />
+                  <Input config={enqPiFormFields.dueOnField.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Select config={addEnqPiFormFields.serviceTypeField.config} />
-                </div>
-
-                <div className="col-md-4 col-xs-12">
-                  <Select config={addEnqPiFormFields.printStatusField.config} />
-                </div>
-                <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.crAmountField.config} />
-                </div>
-                <div className="col-md-4 col-xs-12">
-                  <Select config={addEnqPiFormFields.enqStatusField.config} />
+                  <Select config={enqPiFormFields.serviceTypeField.config} />
                 </div>
 
                 <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.notesForField.config} />
+                  <Select config={enqPiFormFields.printStatusField.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Select config={addEnqPiFormFields.instructionField.config} />
+                  <Input config={enqPiFormFields.crAmountField.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.cmieField.config} />
-                </div>
-
-                <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.rocStatusField.config} />
-                </div>
-                <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.recordsField.config} />
-                </div>
-                <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.recFinField.config} />
+                  <Select config={enqPiFormFields.enqStatusField.config} />
                 </div>
 
                 <div className="col-md-4 col-xs-12">
-                  <Select config={addEnqPiFormFields.sourceField.config} />
+                  <Input config={enqPiFormFields.notesForField.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.priceField.config} />
+                  <Select config={enqPiFormFields.instructionField.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.adjustField.config} />
+                  <Input config={enqPiFormFields.cmieField.config} />
+                </div>
+
+                <div className="col-md-4 col-xs-12">
+                  <Input config={enqPiFormFields.rocStatusField.config} />
+                </div>
+                <div className="col-md-4 col-xs-12">
+                  <Input config={enqPiFormFields.recordsField.config} />
+                </div>
+                <div className="col-md-4 col-xs-12">
+                  <Input config={enqPiFormFields.recFinField.config} />
+                </div>
+
+                <div className="col-md-4 col-xs-12">
+                  <Select config={enqPiFormFields.sourceField.config} />
+                </div>
+                <div className="col-md-4 col-xs-12">
+                  <Input config={enqPiFormFields.priceField.config} />
+                </div>
+                <div className="col-md-4 col-xs-12">
+                  <Input config={enqPiFormFields.adjustField.config} />
                 </div>
 
                 <div className="col-md-4 col-xs-12">
                   <div className="row">
                     <div className="col-md-10 col-xs-12">
                       <Select
-                        config={addEnqPiFormFields.localSourceField.config}
+                        config={enqPiFormFields.localSourceField.config}
                       />
                     </div>
                     <div className="col-md-2 pt-2 col-xs-12">
                       <SingleCheckbox
-                        config={addEnqPiFormFields.allField.config}
+                        config={enqPiFormFields.allField.config}
                       />
                     </div>
                   </div>
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.fYearField.config} />
+                  <Input config={enqPiFormFields.fYearField.config} />
                 </div>
                 <div className="col-md-4 col-xs-12">
-                  <Input config={addEnqPiFormFields.bankField.config} />
+                  <Input config={enqPiFormFields.bankField.config} />
                 </div>
               </div>
               <hr className="m-0" />
               <div className="row">
                 <div className="col-md-4 col-xs-12">
                   <div className="card-body">
-                    {/* <Input config={addEnqPiFormFields.clientRefField.config} /> */}
-                    <Select config={addEnqPiFormFields.clientField.config} />
+                    {/* <Input config={enqPiFormFields.clientRefField.config} /> */}
+                    <Select config={enqPiFormFields.clientField.config} />
                   </div>
                 </div>
                 <div className="col-md-4 col-xs-12">
                   <div className="card-body">
-                    <Input config={addEnqPiFormFields.requestNoField.config} />
+                    <Input config={enqPiFormFields.requestNoField.config} />
                   </div>
                 </div>
                 <div className="col-md-4 col-xs-12">
                   <div className="card-body">
-                    {/* <Input config={addEnqPiFormFields.clientIdField.config} /> */}
+                    {/* <Input config={enqPiFormFields.clientIdField.config} /> */}
                     <div className="col-md-14 col-xs-12 text-right">
                       <Button
                         type={"submit"}

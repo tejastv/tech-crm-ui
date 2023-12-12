@@ -1,16 +1,18 @@
+import { Options } from "@shared/index";
+
 export interface CompanyFormType {
   id?: string;
   address: string;
   bankers: string;
   bulkEnquiryId: number;
-  cityId: number;
+  cityId: Options;
   cityName: string;
   cmie: string;
   companyName: string;
   companyRegNo: string;
   companyType: number;
   contactPerson: string;
-  countryId: any;
+  countryId: Options;
   countryName: string;
   designation: string;
   email: string;
@@ -31,7 +33,7 @@ export interface CompanyFormType {
   reportFilePath: string;
   rocStatus: string;
   state: string;
-  stateId: any;
+  stateId: Options;
   status: number;
   website: string;
   zip: string;

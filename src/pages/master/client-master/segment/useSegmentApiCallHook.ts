@@ -7,7 +7,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-import { SegmentFormType, SegmentType } from "@master/index";
+import { SegmentType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType, MapType } from "@shared/index";
 import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
@@ -31,7 +31,7 @@ export const useSegmentApiCallHook = () => {
     });
   };
 
-  const getSegmentData = (id: string): UseQueryResult<SegmentType> => {
+  const getSegmentData = (id: string, condition: boolean): UseQueryResult<SegmentType> => {
     return useQuery<SegmentType>({
       queryKey: [queryKeys.SEGMENT_DATA, id],
       queryFn: async () => {
@@ -40,13 +40,13 @@ export const useSegmentApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 
   const addSegment = async (
-    segmentData: SegmentFormType
+    segmentData: Partial<SegmentType>
   ): Promise<ApiResponseType<SegmentType>> => {
     const response = await instance.post(apiUrls.GET_ADD_SEGMENT, segmentData);
     return response.data.data;
@@ -54,7 +54,7 @@ export const useSegmentApiCallHook = () => {
 
   const addSegmentMutation = () => {
     const mutation = useMutation(
-      (updatedItem: SegmentFormType) => addSegment(updatedItem),
+      (updatedItem: Partial<SegmentType>) => addSegment(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -68,12 +68,12 @@ export const useSegmentApiCallHook = () => {
   };
 
   const updateSegmentData = async (
-    updateSegmentData: SegmentFormType
+    updateSegmentData: Partial<SegmentType>
   ): Promise<ApiResponseType<SegmentType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_SEGMENT.replace(
         "{id}",
-        "" + updateSegmentData.id
+        "" + updateSegmentData.segmentId
       ),
       updateSegmentData
     );
@@ -82,7 +82,7 @@ export const useSegmentApiCallHook = () => {
 
   const updateSegmentMutation = () => {
     const mutation = useMutation(
-      (updatedItem: SegmentFormType) => updateSegmentData(updatedItem),
+      (updatedItem: Partial<SegmentType>) => updateSegmentData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

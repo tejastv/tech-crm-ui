@@ -3,7 +3,7 @@ import { createFormConfig } from "@utils/index";
 const CurrencyValidation = {
   required: {
     value: true,
-    message: "{label} field is rquired",
+    message: "{label} field is required",
   },
   maxLength: {
     value: 30,
@@ -13,7 +13,7 @@ const CurrencyValidation = {
 const CurrencyWordValidation = {
   required: {
     value: true,
-    message: "{label} field is rquired",
+    message: "{label} field is required",
   },
   maxLength: {
     value: 30,
@@ -23,7 +23,7 @@ const CurrencyWordValidation = {
 const SymbolValidation = {
   required: {
     value: true,
-    message: "{label} field is rquired",
+    message: "{label} field is required",
   },
   pattern: {
     value: /^[a-zA-Z0-9\-]+$/,
@@ -32,10 +32,10 @@ const SymbolValidation = {
   },
 } as ValidationType;
 
-const PurchesExchanegValidation = {
+const purchaseExchangeValidation = {
   required: {
     value: true,
-    message: "{label} field is rquired",
+    message: "{label} field is required",
   },
   pattern: {
     value: /^\d+(\.\d{1,2})?$/,
@@ -43,10 +43,10 @@ const PurchesExchanegValidation = {
       "Invalid exchange rate format. Please use a valid number format (e.g., 123.45).",
   },
 } as ValidationType;
-const SellExchanegValidation = {
+const sellExchangeValidation = {
   required: {
     value: true,
-    message: "{label} field is rquired",
+    message: "{label} field is required",
   },
   pattern: {
     value: /^\d+(\.\d{1,2})?$/,
@@ -54,10 +54,10 @@ const SellExchanegValidation = {
       "Invalid exchange rate format. Please use a valid number format (e.g., 123.45).",
   },
 } as ValidationType;
-const PurchesDateValidation = {
+const purchaseDateValidation = {
   required: {
     value: true,
-    message: "{label} field is rquired",
+    message: "{label} field is required",
   },
   // pattern: {
   //   value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
@@ -67,7 +67,7 @@ const PurchesDateValidation = {
 const SellDateValidation = {
   required: {
     value: true,
-    message: "{label} field is rquired",
+    message: "{label} field is required",
   },
   // pattern: {
   //   value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
@@ -98,18 +98,18 @@ const currencyWordField: FormFieldType = createFormConfig(
 );
 
 // Purchase
-const purchesExchanegField: FormFieldType = createFormConfig(
+const purchaseExchangeField: FormFieldType = createFormConfig(
   "exchangeRateRs",
   "Exchg. Rate(Rs.)",
   "text",
-  PurchesExchanegValidation,
+  purchaseExchangeValidation,
   "Enter Exchg. Rate(Rs.)"
 );
-const sellExchanegField: FormFieldType = createFormConfig(
+const sellExchangeField: FormFieldType = createFormConfig(
   "exchangeRateRsSell",
   "Exchg. Rate(Rs.)",
   "text",
-  SellExchanegValidation,
+  sellExchangeValidation,
   "Enter Exchg. Rate(Rs.) "
 );
 const myDate = new Date(); // Replace this with your actual date
@@ -125,7 +125,7 @@ const pDateField: FormFieldType = createFormConfig(
   "entryDate",
   "Date",
   "date",
-  PurchesDateValidation,
+  purchaseDateValidation,
   formattedDate
 );
 const sDateField: FormFieldType = createFormConfig(
@@ -140,8 +140,8 @@ export const currencyFormFields = {
   currencyField,
   symbolField,
   currencyWordField,
-  purchesExchanegField,
-  sellExchanegField,
+  purchaseExchangeField,
+  sellExchangeField,
   pDateField,
   sDateField,
 };

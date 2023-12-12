@@ -6,6 +6,7 @@ import {
   Button,
   Table,
   TableType,
+  SingleCheckbox,
   NewSelect,
   NewInput,
   NewRadio,
@@ -24,7 +25,10 @@ export const InvoiceListExceWise: React.FC = () => {
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
   const {
     register,
+    handleSubmit,
     control,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm<InvoiceListExceWiseType>();
   const cardConfig = {
@@ -323,7 +327,7 @@ export const InvoiceListExceWise: React.FC = () => {
                   errors={errors}
                   register={register}
                   control={control}
-                  config={invoiceListExceWiseFormFields.fyearField}
+                  config={invoiceListExceWiseFormFields.fYearField}
                 />
 
                 <NewRadio
@@ -349,23 +353,24 @@ export const InvoiceListExceWise: React.FC = () => {
                       config={invoiceListExceWiseFormFields.toDateField}
                     />
                   </div>
-                  <div className="col-md-12 col-xs-12">
+                  <div className="col-md-6 col-xs-12">
                     <NewSelect
                       errors={errors}
                       register={register}
                       control={control}
                       config={invoiceListExceWiseFormFields.cityField}
                     />
-                    <div className="mb-2">
-                      <div className="col-md-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm "}
-                        >
-                          Get
-                        </Button>
-                      </div>
+
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button
+                        type="button"
+                        className={"btn btn-danger btn-sm "}
+                      >
+                        Get
+                      </Button>
                     </div>
+                  </div>
+                  <div className="col-md-6 col-xs-12">
                     <NewSelect
                       errors={errors}
                       register={register}
@@ -378,32 +383,27 @@ export const InvoiceListExceWise: React.FC = () => {
 
               <div className="col-md-3">
                 <div className="row">
-                  <div className="card-body">
-                    <div className="mb-2">
-                      <div className="col-md-14 col-xs-12 ">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm"}
-                        >
-                          Refresh/View
-                        </Button>
-                      </div>
-                    </div>
-                    <div className="col-md-6   col-xs-12">
-                      <NewCheckbox
-                        errors={errors}
-                        register={register}
-                        control={control}
-                        config={invoiceListExceWiseFormFields.markAllField}
-                      />
-                    </div>
-                    <div className="col-md-12 col-xs-12">
-                      <NewSelect
-                        errors={errors}
-                        register={register}
-                        control={control}
-                        config={invoiceListExceWiseFormFields.emailField}
-                      />
+                  <div className="col-md-12 col-xs-12">
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceListExceWiseFormFields.emailField}
+                    />
+                  </div>
+                  <div className="col-md-12  text-right col-xs-12">
+                    <NewCheckbox
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceListExceWiseFormFields.markAllField}
+                    />
+                  </div>
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right ">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        Refresh/View
+                      </Button>
                     </div>
                   </div>
                 </div>

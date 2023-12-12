@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   BorderLayout,
@@ -11,6 +11,7 @@ import { COMMON_ROUTES } from "@constants/index";
 import { ClientType, useClientApiCallHook } from "@master/index";
 import { useNavigate } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
+import { usePagination } from "@hooks/usePagination";
 
 export const Client: React.FC = () => {
   const config = {
@@ -30,6 +31,17 @@ export const Client: React.FC = () => {
 
   const { getClient, deleteClientMutation } = useClientApiCallHook();
   const navigate = useNavigate();
+  const {
+    limit,
+    offset,
+    total,
+    nextButtonClick,
+    prevButtonClick,
+    isNextEnabled,
+    isPrevEnabled,
+    setTotalValue,
+  } = usePagination();
+
   const columns: ColumnDef<ClientType>[] = [
     {
       id: "action",
@@ -242,7 +254,17 @@ export const Client: React.FC = () => {
     },
   ];
 
-  const { data: clientData, isFetching } = getClient();
+  const { data: receivedObj, isFetching } = getClient({
+    limit,
+    offset,
+  });
+
+  useEffect(() => {
+    setTotalValue(receivedObj?.count!);
+  }, [receivedObj?.count]);
+
+  const clientData = receivedObj?.data;
+
   const { mutateAsync: deleteClient } = deleteClientMutation();
 
   const deleteClientClick = async (clientData: any) => {
@@ -268,12 +290,18 @@ export const Client: React.FC = () => {
       printBtn: true,
       globalSearchBox: true,
       pagination: {
-        pageSize: 10,
+        pageSize: limit,
+        offset,
+        total,
         nextPreviousBtnShow: true,
         tableMetaDataShow: true,
+        isNextButtonEnabled: isNextEnabled,
+        isPrevButtonEnabled: isPrevEnabled,
       },
       onDeleteClick: deleteClientClick,
       onEditClick: editClientClick,
+      onNextButtonClick: nextButtonClick,
+      onPrevButtonClick: prevButtonClick,
     },
   };
 

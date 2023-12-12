@@ -65,8 +65,8 @@ const actionOption: MapType<Options> = {
   renew: { value: "renew", label: "Specific Client Datewise" },
 };
 const invoicesOption: MapType<Options> = {
-  new: { value: "new", label: "All Client Datewise" },
-  renew: { value: "renew", label: "Specific Client Datewise" },
+  new: { value: "new", label: "Invoices with TDS Certificate" },
+  renew: { value: "renew", label: "Invoices without TDS Certificate" },
 };
 
 const allClientDatewiseField: FormFieldType = createFormConfig(

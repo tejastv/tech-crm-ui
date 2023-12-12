@@ -1,7 +1,7 @@
 import { FormFieldType, Note, ValidationType } from "@shared/index";
 import { createFormConfig, createNoteConfig } from "@utils/index";
 
-const ClientActualBuyer = {
+const clientActualBuyerValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -11,7 +11,7 @@ const ClientActualBuyer = {
     message: "Select {label}",
   },
 } as ValidationType;
-const nameActualBuyer = {
+const nameActualBuyerValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -123,7 +123,7 @@ const DesignationValidation = {
   },
 } as ValidationType;
 
-const PinValidation = {
+const pinValidation = {
   required: {
     value: false,
     message: "{label} field is rquired ",
@@ -167,50 +167,50 @@ const CountryValidation = {
   },
 } as ValidationType;
 
-const clientactualbuyer: FormFieldType = createFormConfig(
+const clientActualBuyer: FormFieldType = createFormConfig(
   "clientId",
   "Client",
   "select",
-  ClientActualBuyer,
+  clientActualBuyerValidation,
   "Select Client",
   {}
 );
-const nameactualbuyer: FormFieldType = createFormConfig(
+const nameActualBuyer: FormFieldType = createFormConfig(
   "partyName",
   "Name",
   "text",
-  nameActualBuyer,
+  nameActualBuyerValidation,
   "Name"
 );
-const addressactualbuyer: FormFieldType = createFormConfig(
+const addressActualBuyer: FormFieldType = createFormConfig(
   "partyAddress",
   "Address",
   "textarea",
   addressValidation,
   "Address"
 );
-const telnoactualbuyer: FormFieldType = createFormConfig(
+const telNoActualBuyer: FormFieldType = createFormConfig(
   "telNo",
   "Tel No.",
   "text",
   telNoValidation,
   "Enter Tel No."
 );
-const emailactualbuyer: FormFieldType = createFormConfig(
+const emailActualBuyer: FormFieldType = createFormConfig(
   "email",
   "E-Mail",
   "Email",
   EmailValidation,
   "Enter E-mail"
 );
-const contactactualbuyer: FormFieldType = createFormConfig(
+const contactActualBuyer: FormFieldType = createFormConfig(
   "personResponsible",
   "Contact",
   "text",
   ContactValidation,
   "Enter Contact"
 );
-const designationactualbuyer: FormFieldType = createFormConfig(
+const designationActualBuyer: FormFieldType = createFormConfig(
   "personDesg",
   "Designation",
   "text",
@@ -218,7 +218,7 @@ const designationactualbuyer: FormFieldType = createFormConfig(
   "Enter Designation"
 );
 //
-const cityactualbuyer: FormFieldType = createFormConfig(
+const cityActualBuyer: FormFieldType = createFormConfig(
   "cityId",
   "City",
   "select",
@@ -226,7 +226,7 @@ const cityactualbuyer: FormFieldType = createFormConfig(
   "Select City",
   {}
 );
-const stateactualbuyer: FormFieldType = createFormConfig(
+const stateActualBuyer: FormFieldType = createFormConfig(
   "stateId",
   "State",
   "select",
@@ -234,14 +234,14 @@ const stateactualbuyer: FormFieldType = createFormConfig(
   "Select State",
   {}
 );
-const PIN: FormFieldType = createFormConfig(
+const pin: FormFieldType = createFormConfig(
   "pin",
   "PIN",
   "text",
-  PinValidation,
+  pinValidation,
   "PIN"
 );
-const countryactualbuyer: FormFieldType = createFormConfig(
+const countryActualBuyer: FormFieldType = createFormConfig(
   "countryId",
   "Country",
   "select",
@@ -249,53 +249,53 @@ const countryactualbuyer: FormFieldType = createFormConfig(
   "Select Country",
   {}
 );
-const faxnoactualbuyer: FormFieldType = createFormConfig(
+const faxNoActualBuyer: FormFieldType = createFormConfig(
   "faxNo",
   "Fax No.",
   "text",
   FaxNoValidation,
   "Enter Fax No."
 );
-const websiteactualbuyer: FormFieldType = createFormConfig(
+const websiteActualBuyer: FormFieldType = createFormConfig(
   "website",
   "Website",
   "text",
   WebsiteValidation,
   "https://"
 );
-const cstactualbuyer: FormFieldType = createFormConfig(
+const cstActualBuyer: FormFieldType = createFormConfig(
   "refNo",
   "CST/TIN No.",
   "text",
   cst,
   "CST/TIN No."
 );
-const gstnactualbuyer: FormFieldType = createFormConfig(
+const gstnActualBuyer: FormFieldType = createFormConfig(
   "gstn",
   "GSTN",
   "text",
   GSTN,
   "GSTN"
 );
-const actualbuyergstnote: Note = createNoteConfig(
+const actualBuyerGstNote: Note = createNoteConfig(
   "don't know GST, write NOGST. Do not input any other number."
 );
 
 export const actualBuyersFormFields = {
-  clientactualbuyer,
-  nameactualbuyer,
-  addressactualbuyer,
-  telnoactualbuyer,
-  emailactualbuyer,
-  contactactualbuyer,
-  designationactualbuyer,
-  cityactualbuyer,
-  stateactualbuyer,
-  PIN,
-  countryactualbuyer,
-  faxnoactualbuyer,
-  websiteactualbuyer,
-  cstactualbuyer,
-  gstnactualbuyer,
-  actualbuyergstnote,
+  clientActualBuyer,
+  nameActualBuyer,
+  addressActualBuyer,
+  telNoActualBuyer,
+  emailActualBuyer,
+  contactActualBuyer,
+  designationActualBuyer,
+  cityActualBuyer,
+  stateActualBuyer,
+  pin,
+  countryActualBuyer,
+  faxNoActualBuyer,
+  websiteActualBuyer,
+  cstActualBuyer,
+  gstnActualBuyer,
+  actualBuyerGstNote,
 };

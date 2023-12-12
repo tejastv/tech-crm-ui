@@ -3,15 +3,15 @@ import { useForm } from "react-hook-form";
 import {
   BorderLayout,
   Card,
-  ActionButtons,
   Button,
   Table,
   TableType,
-  NewInput,
   NewSelect,
+  NewInput,
+  NewRadio,
   NewCheckbox,
 } from "@shared/index";
-import { InvoiceGenGstType, invoiceGenGstFormFields } from "@invoices/index";
+import { InvoiceListType, invoiceListFormFields } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const InvoiceGenerateGst: React.FC = () => {
@@ -21,12 +21,15 @@ export const InvoiceGenerateGst: React.FC = () => {
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
   const {
     register,
+    handleSubmit,
     control,
+    setValue,
+    reset,
     formState: { errors },
-  } = useForm<InvoiceGenGstType>();
+  } = useForm<InvoiceListType>();
   const cardConfig = {
     formLayoutConfig: {
-      mainHeading: "Genereate Invoice",
+      mainHeading: "Invoice List",
       heading: "Entry",
     },
     formActionsConfig: {
@@ -60,17 +63,30 @@ export const InvoiceGenerateGst: React.FC = () => {
   //       methods.reset();
   //     }, []);
   //   }
-  const columns: ColumnDef<InvoiceGenGstType>[] = [
+  const columns: ColumnDef<InvoiceListType>[] = [
     {
       id: "srNo",
       // cell: (info) => info.getValue(),
       header: () => <>SRNO</>,
     },
+
     {
       // accessorFn: (row) => row.state,
       id: "Client Name",
       // cell: (info) => info.getValue(),
-      header: () => <>Ref No</>,
+      header: () => <>Invoice No</>,
+    },
+    {
+      // accessorFn: (row) => row.state,
+      id: "Client Name",
+      // cell: (info) => info.getValue(),
+      header: () => <>Invoice Date</>,
+    },
+    {
+      // accessorFn: (row) => row.state,
+      id: "Client Name",
+      // cell: (info) => info.getValue(),
+      header: () => <>Client Name</>,
     },
     {
       // accessorFn: (row) => row.state,
@@ -82,54 +98,31 @@ export const InvoiceGenerateGst: React.FC = () => {
       // accessorFn: (row) => row.state,
       id: "Client Name",
       // cell: (info) => info.getValue(),
-      header: () => <>Order Date</>,
+      header: () => <>Report Country</>,
     },
     {
       // accessorFn: (row) => row.state,
       id: "Client Name",
       // cell: (info) => info.getValue(),
-      header: () => <>Company</>,
+      header: () => <>Company Name</>,
     },
     {
       // accessorFn: (row) => row.state,
       id: "Client Name",
       // cell: (info) => info.getValue(),
-      header: () => <>Country</>,
+      header: () => <>Bill Amt</>,
     },
     {
       // accessorFn: (row) => row.state,
       id: "Client Name",
       // cell: (info) => info.getValue(),
-      header: () => <>Price</>,
-    },
-    {
-      // accessorFn: (row) => row.stateCodeN,
-      id: "Address",
-      // cell: (info) => info.getValue(),
-      header: () => <>Report Date</>,
-    },
-    {
-      // accessorFn: (row) => row.stateCodeA,
-      id: "Country Name",
-      // cell: (info) => info.getValue(),
-      header: () => <>Service</>,
-    },
-    {
-      // accessorFn: (row) => row.stateCodeA,
-      id: "Country Name",
-      // cell: (info) => info.getValue(),
-      header: () => <>Select all </>,
-    },
-    {
-      id: "Instruction",
-      // cell: (info) => info.getValue(),
-      header: () => <>Adjustment</>,
+      header: () => <>Total Amt</>,
     },
   ];
 
-  const tableConfig: TableType<InvoiceGenGstType> = {
+  const tableConfig: TableType<InvoiceListType> = {
     config: {
-      tableName: "generate Pi",
+      tableName: "Invocie List",
       columns: columns,
       tableData: [],
       copyBtn: false,
@@ -162,114 +155,83 @@ export const InvoiceGenerateGst: React.FC = () => {
         >
           <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
             <div className="row">
-              <div className="col-md-6 col-xs-12">
+              <div className="col-md-3">
                 <NewSelect
                   errors={errors}
                   register={register}
                   control={control}
-                  config={invoiceGenGstFormFields.clientField}
+                  config={invoiceListFormFields.fYearField}
                 />
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <NewInput
+                <NewRadio
                   errors={errors}
                   register={register}
-                  config={invoiceGenGstFormFields.countryField}
+                  control={control}
+                  config={invoiceListFormFields.allClientDatewiseField}
                 />
               </div>
-              <div className="row">
-                <div className="col-md-4 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.currencyField}
-                  />
+              <div className="col-md-6">
+                <div className="row">
+                  <div className="col-md-6 col-xs-12">
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceListFormFields.fromDateField}
+                    />
+                  </div>
+                  <div className="col-md-6 col-xs-12">
+                    <NewInput
+                      errors={errors}
+                      register={register}
+                      config={invoiceListFormFields.toDateField}
+                    />
+                  </div>
+                  <div className="col-md-6 col-xs-12">
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceListFormFields.cityField}
+                    />
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button
+                        type="button"
+                        className={"btn btn-danger btn-sm "}
+                      >
+                        Get
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="col-md-6 col-xs-12">
+                    <NewSelect
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceListFormFields.clientField}
+                    />
+                  </div>
                 </div>
-                <div className="col-md-4 col-xs-12">
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={invoiceGenGstFormFields.stateField}
-                  />
-                </div>
-                <div className="col-md-4 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.gstnField}
-                  />
-                </div>
-                <div className="col-md-4">
-                  <NewCheckbox
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={invoiceGenGstFormFields.gstField}
-                  />
-                </div>
-                {/* // currency , Staste ad GST */}
-              </div>
-              <hr />
-              <div className="row">
-                <div className="col-md-3 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.actualBuyreField}
-                  />
-                </div>
-                <div className="col-md-3 col-xs-12">
-                  <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={invoiceGenGstFormFields.stateActualBuyreField}
-                  />
-                </div>
-                <div className="col-md-3 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.gstnActualBuyreField}
-                  />
-                </div>
-                <div className="col-md-3 ">
-                  <NewCheckbox
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={invoiceGenGstFormFields.actualBuyreField}
-                  />
-                </div>
-                {/* // Actual Buyer , Staste ad GST */}
-              </div>
-              {/* <div className="card-body"> */}
-              <hr />
-              <div className="row">
-                <div className="col-md-4 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.fromDateField}
-                  />
-                </div>
-                <div className="col-md-4 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.toDateField}
-                  />
-                </div>
-                {/* // From Date,ToDate View button */}
-                <div className="col-md-4 col-xs-12">
-                  <Button type="button" className={"btn btn-danger btn-sm"}>
-                    Get Enqires
-                  </Button>
-                </div>
-                {/* </div>   */}
               </div>
 
+              <div className="col-md-3">
+                <div className="row">
+                  <div className="col-md-4">
+                    <NewCheckbox
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceListFormFields.bobField}
+                    />
+                  </div>
+
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 ">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        Refresh/View
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
               {/* Table */}
               <div className="col-md-12 col-xs-12">
                 <div className="card-body">
@@ -432,7 +394,80 @@ export const InvoiceGenerateGst: React.FC = () => {
           </BorderLayout>
           <div className="card-body">
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
+              {/* <ActionButtons /> */}
+              <div className="row">
+                <div className="col-md-1 ">
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        <i className="far fa-save"></i>
+                        Currency Total
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3 ">
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        <i className="far fa-save"></i>
+                        Export Invoice With Detail to word
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-2 ">
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        <i className="far fa-save"></i>
+                        Export Invoice With Detail to Excel
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-2 ">
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        <i className="far fa-save"></i>
+                        Invoicein Excel
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-1 ">
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        <i className="far fa-save"></i>
+                        Export Invoice List
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-2">
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        Print Preview
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-1 text-right">
+                  <div className="mb-2">
+                    <div className="col-sm-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        <i className="far fa-window-close"></i>
+                        Cancel
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </BorderLayout>
           </div>
         </form>

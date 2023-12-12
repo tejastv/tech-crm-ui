@@ -17,6 +17,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { addBulkEnquiriesFormFields } from "@transaction-search/index";
+import { usePagination } from "@hooks/usePagination";
 
 export const AddBulkEnquiries: React.FC = () => {
   const {
@@ -25,7 +26,16 @@ export const AddBulkEnquiries: React.FC = () => {
     formState: { errors },
   } = useForm<any>();
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
-  const { data: companyData, isLoading } = getCompany();
+  
+  const {
+    limit,
+    offset,
+  } = usePagination();
+  
+  const { data: companyData, isLoading } = getCompany({
+    limit,
+    offset,
+  });
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
 
@@ -91,7 +101,7 @@ export const AddBulkEnquiries: React.FC = () => {
     config: {
       tableName: "Company Master",
       columns: columns,
-      tableData: (companyData && Object.values(companyData)) || [],
+      tableData: (companyData?.data && Object.values(companyData.data)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

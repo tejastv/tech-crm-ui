@@ -53,4 +53,5 @@ export interface EnqueryFormType {
   fYear: Options;
   cmie: string;
   email: string;
+  clientIdDisable?: number;
 }
