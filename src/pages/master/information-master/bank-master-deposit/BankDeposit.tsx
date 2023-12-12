@@ -60,7 +60,7 @@ export const BankMasterDeposit: React.FC = () => {
     },
   ];
 
-  const { data: BankMasterDepositData, isLoading } = getBankMasterDeposit();
+  const { data: BankMasterDepositData, isFetching } = getBankMasterDeposit();
   const { mutateAsync: deleteBankMasterDeposit } =
     deleteBankMasterDepositMutation();
 
@@ -72,7 +72,9 @@ export const BankMasterDeposit: React.FC = () => {
   };
 
   const editBankMasterDepositClick = (BankMasterDepositData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", BankMasterDepositData.id));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", BankMasterDepositData.id), {
+      state: BankMasterDepositData,
+    });
   };
 
   const tableConfig: TableType<BankDepositType> = {
@@ -100,7 +102,7 @@ export const BankMasterDeposit: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

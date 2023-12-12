@@ -15,5 +15,5 @@ export interface InvoiceGenGstType {
   gstField: string;
   todateeField: string;
   symbolField: string;
-  currencyinwordField: string;
+  currencyInwardField: string;
 }

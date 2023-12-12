@@ -181,14 +181,14 @@ const addressSupplier: FormFieldType = createFormConfig(
   addressValidation,
   "Enter Address"
 );
-const telnoSupplier: FormFieldType = createFormConfig(
+const telNoSupplier: FormFieldType = createFormConfig(
   "phone",
   "Tel No.",
   "number",
   telNoValidation,
   "Enter Tel No."
 );
-const faxnoSupplier: FormFieldType = createFormConfig(
+const faxNoSupplier: FormFieldType = createFormConfig(
   "fax",
   "Fax No.",
   "text",
@@ -256,7 +256,7 @@ const countrySupplier: FormFieldType = createFormConfig(
   "Select Country",
   {}
 );
-const CurrenceySupplier: FormFieldType = createFormConfig(
+const currencySupplier: FormFieldType = createFormConfig(
   "currencyId",
   "Currency",
   "select",
@@ -269,8 +269,8 @@ export const supplierFormFields = {
   nameSupplier,
   nickname,
   addressSupplier,
-  telnoSupplier,
-  faxnoSupplier,
+  telNoSupplier,
+  faxNoSupplier,
   emailSupplier,
   websiteSupplier,
   contactSupplier,
@@ -279,5 +279,5 @@ export const supplierFormFields = {
   zipSupplier,
   stateSupplier,
   countrySupplier,
-  CurrenceySupplier,
+  currencySupplier,
 };

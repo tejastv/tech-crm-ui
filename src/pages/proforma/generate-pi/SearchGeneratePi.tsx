@@ -266,13 +266,13 @@ export const SearchGeneratePi: React.FC = () => {
                     {/* </div> */}
                     {/* <div className="col-sm-6 "> */}
                     <Input
-                      config={addGeneratePiFormFields.cgstperField.config}
+                      config={addGeneratePiFormFields.cgstPerField.config}
                     />
                     {/* </div> */}
 
                     {/* <div className="col-sm-6 "> */}
                     <Input
-                      config={addGeneratePiFormFields.stamountField.config}
+                      config={addGeneratePiFormFields.stAmountField.config}
                     />
 
                     {/* </div> */}
@@ -290,7 +290,7 @@ export const SearchGeneratePi: React.FC = () => {
 
                     {/* <div className="col-sm-5 "> */}
                     <SingleCheckbox
-                      config={addGeneratePiFormFields.donotField.config}
+                      config={addGeneratePiFormFields.doNotField.config}
                     />
                     {/* </div> */}
 
@@ -302,13 +302,13 @@ export const SearchGeneratePi: React.FC = () => {
 
                     {/* <div className="col-sm-6 "> */}
                     <Input
-                      config={addGeneratePiFormFields.sgstperField.config}
+                      config={addGeneratePiFormFields.sGstPerField.config}
                     />
                     {/* </div> */}
 
                     {/* <div className="col-sm-6 "> */}
                     <Input
-                      config={addGeneratePiFormFields.igstperField.config}
+                      config={addGeneratePiFormFields.iGstPerField.config}
                     />
                     {/* </div> */}
                     {/* <div className="col-sm-6 "> */}

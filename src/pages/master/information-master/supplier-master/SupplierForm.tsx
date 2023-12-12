@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   ActionButtons,
   BorderLayout,
   Card,
-  Input,
-  Select,
+  NewInput,
+  NewSelect,
 } from "@shared/index";
 
 import {
@@ -20,14 +20,23 @@ import {
   CityType,
   CountryType,
   StateType,
+  SupplierMasterType,
+  CurrencyType,
 } from "@master/index";
 
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
-import { useParams } from "react-router-dom";
-import { returnObjectBasedOnID, cleanupObject } from "@utils/index";
+import { useLocation, useParams } from "react-router-dom";
+import { cleanupObject } from "@utils/index";
 
 export const SupplierForm: React.FC = () => {
-  const methods = useForm<SupplierMasterFormType>();
+  const { state: localSupplierData } = useLocation();
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<SupplierMasterFormType>();
   const params = useParams();
   const {
     addSupplierMasterMutation,
@@ -59,10 +68,10 @@ export const SupplierForm: React.FC = () => {
     if (cityData) {
       setCityOptions(Object.values(cityData));
     }
-  }, [cityData && Object.values(cityData).length]);
+  }, [cityData]);
 
   if (cityOptions?.length) {
-    let options = selectOptionsMaker(cityOptions, "id", "cityName");
+    let options = selectOptionsMaker(cityOptions, "cityId", "cityName");
     supplierFormFields.citySupplier.config.options = options;
   }
 
@@ -75,7 +84,7 @@ export const SupplierForm: React.FC = () => {
     if (stateData) {
       setStateOptions(Object.values(stateData));
     }
-  }, [stateData && Object.values(stateData).length]);
+  }, [stateData]);
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(
@@ -96,7 +105,7 @@ export const SupplierForm: React.FC = () => {
     if (countryData) {
       setCountryOptions(Object.values(countryData));
     }
-  }, [countryData && Object.values(countryData).length]);
+  }, [countryData]);
 
   if (countryOptions?.length) {
     let options = selectOptionsMaker(
@@ -107,170 +116,230 @@ export const SupplierForm: React.FC = () => {
     supplierFormFields.countrySupplier.config.options = options;
   }
 
-  const { data: CurrencyData } = getCurrency();
+  const { data: currencyData } = getCurrency();
+  const [currencyOptions, setCurrencyOptions] = useState<CurrencyType[]>();
 
-  if (CurrencyData) {
-    supplierFormFields.CurrenceySupplier.config.options = selectOptionsMaker(
-      Object.values(CurrencyData),
+  useEffect(() => {
+    if (currencyData) {
+      setCurrencyOptions(Object.values(currencyData));
+    }
+  }, [currencyData]);
+
+  if (currencyOptions?.length) {
+    let options = selectOptionsMaker(
+      currencyOptions,
       "currencyId",
       "currencyType"
     );
+    supplierFormFields.currencySupplier.config.options = options;
   }
 
-  const onSubmit = methods.handleSubmit((currencyData) => {
-    let data: any = { ...cleanupObject(currencyData) };
-    data["ourRefNo"] = "String";
-    if (data.cityId) {
-      data.cityId = +data.cityId["value"];
-    }
-    if (data.stateId) {
-      data.stateId = +data.stateId["value"];
-    }
-    if (data.countryId) {
-      data.countryId = +data.countryId["value"];
-    }
-    if (data.currencyId) {
-      data.currencyId = +data.currencyId["value"];
-    }
-    if (data.supplierId) {
-      data.supplierId = +data.supplierId;
-    }
-    console.log(data);
-    if (params.id && data) {
-      updateSupplierMaster({ id: params.id, ...data });
+  const onSubmit = handleSubmit((supplierFormData: SupplierMasterFormType) => {
+    let reqObj: Partial<SupplierMasterType> =
+      mapSupplierRequest(supplierFormData);
+    if (params.id && reqObj) {
+      updateSupplierMaster({ supplierId: +params.id, ...reqObj });
     } else {
-      addSupplierMaster(data);
+      addSupplierMaster(reqObj);
     }
   });
 
-  if (params.id) {
-    const { data: supplierMasterData } = getSupplierMasterData("" + params.id);
-    if (supplierMasterData) {
-      if (cityOptions) {
-        let id = supplierMasterData?.cityId;
-        let data: any = returnObjectBasedOnID(
-          cityOptions,
-          "id",
-          id,
-          "id",
-          "cityName"
-        );
-        supplierFormFields.citySupplier.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-      if (stateOptions) {
-        let id = supplierMasterData?.stateId;
-        let data: any = returnObjectBasedOnID(
-          stateOptions,
-          "stateId",
-          id,
-          "stateId",
-          "state"
-        );
-        supplierFormFields.stateSupplier.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-      if (countryOptions) {
-        let id = supplierMasterData?.countryId;
-        let data: any = returnObjectBasedOnID(
-          countryOptions,
-          "countryId",
-          id,
-          "countryId",
-          "countryName"
-        );
-        supplierFormFields.countrySupplier.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
+  const { data: supplierMasterData } = getSupplierMasterData(
+    "" + params.id,
+    !localSupplierData && params.id !== undefined
+  );
 
-      if (CurrencyData) {
-        let id = supplierMasterData?.currencyId;
-        let data: any = returnObjectBasedOnID(
-          Object.values(CurrencyData),
-          "currencyId",
-          id,
-          "currencyId",
-          "currencyType"
-        );
-        supplierFormFields.CurrenceySupplier.config.setData = data
-          ? {
-              label: data.label,
-              value: data.value,
-            }
-          : [];
-      }
-      supplierFormFields.nameSupplier.config.setData =
-        supplierMasterData.supplierName;
-      supplierFormFields.nickname.config.setData = supplierMasterData.nickName;
-      supplierFormFields.addressSupplier.config.setData =
-        supplierMasterData.address;
-      supplierFormFields.telnoSupplier.config.setData =
-        supplierMasterData.phone;
-      supplierFormFields.faxnoSupplier.config.setData = supplierMasterData.fax;
-      supplierFormFields.emailSupplier.config.setData =
-        supplierMasterData.email;
-      supplierFormFields.websiteSupplier.config.setData =
-        supplierMasterData.website;
-      supplierFormFields.contactSupplier.config.setData =
-        supplierMasterData.contactPerson;
-      supplierFormFields.designationSupplier.config.setData =
-        supplierMasterData.designation;
-      supplierFormFields.zipSupplier.config.setData = supplierMasterData.zip;
+  const mapSupplierRequest = (supplierFormData: SupplierMasterFormType) => {
+    let supplierData: Partial<SupplierMasterType> = {
+      address: supplierFormData.address,
+      zip: supplierFormData.zip,
+      fax: supplierFormData.fax,
+      supplierId: supplierFormData.supplierId,
+      supplierName: supplierFormData.supplierName,
+      email: supplierFormData.email,
+      nickName: supplierFormData.nickName,
+      website: supplierFormData.website,
+      phone: supplierFormData.phone,
+      contactPerson: supplierFormData.contactPerson,
+      designation: supplierFormData.designation,
+      ourRefNo: supplierFormData.ourRefNo,
+    };
+    if (cityData && supplierFormData?.cityId) {
+      supplierData.cityId = supplierFormData.cityId.value;
     }
-  } else {
-    useEffect(() => {
-      methods.reset();
-    }, []);
-  }
+    if (stateData && supplierFormData?.stateId) {
+      supplierData.stateId = supplierFormData.stateId.value;
+    }
+    if (countryData && supplierFormData?.countryId) {
+      supplierData.countryId = supplierFormData.countryId.value;
+    }
+    if (currencyData && supplierFormData?.currencyId) {
+      supplierData.currencyId = supplierFormData.currencyId.value;
+    }
+    // industryId: formEnqData.industryId.value,
+    return cleanupObject(supplierData);
+  };
+
+  const mapSupplierDataToSupplierForm = (supplierData: SupplierMasterType) => {
+    let supplierFormData: Partial<SupplierMasterFormType> = {
+      address: supplierData.address,
+      zip: supplierData.zip,
+      fax: supplierData.fax,
+      supplierId: supplierData.supplierId,
+      supplierName: supplierData.supplierName,
+      email: supplierData.email,
+      nickName: supplierData.nickName,
+      website: supplierData.website,
+      phone: supplierData.phone,
+      contactPerson: supplierData.contactPerson,
+      designation: supplierData.designation,
+      ourRefNo: supplierData.ourRefNo,
+    };
+    if (cityData && supplierData?.cityId) {
+      let data = cityData[supplierData.cityId];
+      data &&
+        (supplierFormData.cityId = {
+          label: data.cityName,
+          value: data.cityId,
+        });
+    }
+    if (stateData && supplierData?.stateId) {
+      let data = stateData[supplierData.stateId];
+      data &&
+        (supplierFormData.stateId = {
+          label: data.stateName,
+          value: data.stateId,
+        });
+    }
+    if (countryData && supplierData?.countryId) {
+      let data = countryData[supplierData.countryId];
+      data &&
+        (supplierFormData.countryId = {
+          label: data.countryName,
+          value: data.countryId,
+        });
+    }
+    if (currencyData && supplierData?.currencyId) {
+      let data = currencyData[supplierData.currencyId];
+      data &&
+        (supplierFormData.currencyId = {
+          label: data.currencyType,
+          value: data.currencyId,
+        });
+    }
+    return supplierFormData;
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      if (supplierMasterData && Object.values(supplierMasterData).length > 0) {
+        reset(mapSupplierDataToSupplierForm(supplierMasterData));
+      }
+    }
+  }, [
+    params.id,
+    cityOptions,
+    stateOptions,
+    countryOptions,
+    currencyOptions,
+    supplierMasterData,
+  ]);
 
   return (
     <Card config={cardConfig.formLayoutConfig}>
-      <FormProvider {...methods}>
-        <form
-          onSubmit={onSubmit}
-          noValidate
-          autoComplete="off"
-          className="p-t-20"
-        >
-          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-            <div className="row">
-              <div className="col-md-6 col-xs-12">
-                <Input config={supplierFormFields.nameSupplier.config} />
-                <Input config={supplierFormFields.nickname.config} />
-                <Input config={supplierFormFields.addressSupplier.config} />
-                <Input config={supplierFormFields.telnoSupplier.config} />
-                <Input config={supplierFormFields.faxnoSupplier.config} />
-                <Input config={supplierFormFields.emailSupplier.config} />
-                <Input config={supplierFormFields.websiteSupplier.config} />
-                <Input config={supplierFormFields.contactSupplier.config} />
-                <Input config={supplierFormFields.designationSupplier.config} />
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <Select config={supplierFormFields.citySupplier.config} />
-                <Input config={supplierFormFields.zipSupplier.config} />
-                <Select config={supplierFormFields.stateSupplier.config} />
-                <Select config={supplierFormFields.countrySupplier.config} />
-                <Select config={supplierFormFields.CurrenceySupplier.config} />
-              </div>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={supplierFormFields.nameSupplier}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={supplierFormFields.nickname}
+              />
+
+              <NewInput
+                errors={errors}
+                register={register}
+                config={supplierFormFields.addressSupplier}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={supplierFormFields.telNoSupplier}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={supplierFormFields.faxNoSupplier}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={supplierFormFields.emailSupplier}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={supplierFormFields.websiteSupplier}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={supplierFormFields.contactSupplier}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={supplierFormFields.designationSupplier}
+              />
             </div>
-          </BorderLayout>
-          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-            <ActionButtons />
-          </BorderLayout>
-        </form>
-      </FormProvider>
+            <div className="col-md-6 col-xs-12">
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={supplierFormFields.citySupplier}
+              />
+              <NewInput
+                errors={errors}
+                register={register}
+                config={supplierFormFields.zipSupplier}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={supplierFormFields.stateSupplier}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={supplierFormFields.countrySupplier}
+              />
+              <NewSelect
+                errors={errors}
+                register={register}
+                control={control}
+                config={supplierFormFields.currencySupplier}
+              />
+            </div>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
     </Card>
   );
 };

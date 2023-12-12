@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   BorderLayout,
@@ -111,9 +111,9 @@ export const EnquiryForm: React.FC = () => {
     countryId: null,
   });
 
-  const countryRef = useRef(null);
-  const clientRef = useRef(null);
-  const serviceTypeRef = useRef(null);
+  // const countryRef = useRef(null);
+  // const clientRef = useRef(null);
+  // const serviceTypeRef = useRef(null);
 
   const cardConfig = {
     formLayoutConfig: {
@@ -401,9 +401,11 @@ export const EnquiryForm: React.FC = () => {
   );
 
   const getClientValue = (clientId: number) => {
-    // console.log(clientId);
     if (clientId) {
       setClientId(clientId);
+      if (enquiryFormFields.enqClientId.config.name === "clientIdDisable") {
+        setValue(enquiryFormFields.enqClientId.config.name, clientId);
+      }
     }
   };
 
@@ -608,46 +610,46 @@ export const EnquiryForm: React.FC = () => {
       cmie: enqFormData.cmie,
       email: enqFormData.email,
     };
-    if (countryData && enqFormData?.companyId) {
+    if (companyData && enqFormData?.companyId) {
       enqData.companyId = enqFormData.companyId.value;
     }
-    if (countryData && enqFormData?.serviceTypeId) {
+    if (serviceData && enqFormData?.serviceTypeId) {
       enqData.serviceTypeId = enqFormData.serviceTypeId.value;
     }
-    if (countryData && enqFormData?.clientId) {
+    if (clientData && enqFormData?.clientId) {
       enqData.clientId = enqFormData.clientId.value;
     }
-    if (countryData && enqFormData?.sourceId) {
+    if (sourceData && enqFormData?.sourceId) {
       enqData.sourceId = enqFormData.sourceId.value;
     }
-    if (countryData && enqFormData?.enqStatusId) {
+    if (enqStatusData && enqFormData?.enqStatusId) {
       enqData.enqStatusId = enqFormData.enqStatusId.value;
     }
-    if (countryData && enqFormData?.cityId) {
+    if (cityData && enqFormData?.cityId) {
       enqData.cityId = enqFormData.cityId.value;
     }
-    if (countryData && enqFormData?.stateId) {
+    if (stateData && enqFormData?.stateId) {
       enqData.stateId = enqFormData.stateId.value;
     }
     if (countryData && enqFormData?.countryId) {
       enqData.countryId = enqFormData.countryId.value;
     }
-    if (countryData && enqFormData?.actualBuyerId) {
+    if (actualBuyerData && enqFormData?.actualBuyerId) {
       enqData.actualBuyerId = enqFormData.actualBuyerId.value;
     }
-    if (countryData && enqFormData?.siteStatusId) {
+    if (enqFormData?.siteStatusId) {
       enqData.siteStatusId = enqFormData.siteStatusId.value;
     }
-    if (countryData && enqFormData?.fYear) {
+    if (fYearData && enqFormData?.fYear) {
       enqData.fyear = enqFormData.fYear.value;
     }
-    if (countryData && enqFormData?.pmtStatus) {
+    if (enqFormData?.pmtStatus) {
       enqData.pmtStatus = enqFormData.pmtStatus.value;
     }
-    if (countryData && enqFormData?.typeofEnquiry) {
+    if (enqFormData?.typeofEnquiry) {
       enqData.typeofEnquiry = enqFormData.typeofEnquiry.value;
     }
-    if (countryData && enqFormData?.localSourceId) {
+    if (localSourceData && enqFormData?.localSourceId) {
       enqData.localSourceId = enqFormData.localSourceId.value;
     }
     // industryId: formEnqData.industryId.value,

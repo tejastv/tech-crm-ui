@@ -54,15 +54,21 @@ export const NewRadio: React.FC<{
                           value={option.value}
                           onChange={(e) => {
                             let value: any = e.target.value;
-                            if (typeof eval(value) === "boolean") {
-                              value = e.target.checked;
+                            let result;
+
+                            if (value === "true" || value === "false") {
+                              result = e.target.checked;
+                            } else if (!isNaN(Number(value))) {
+                              result = Number(value);
+                            } else {
+                              result = value;
                             }
-                            field.onChange(value);
+                            field.onChange(result);
                             if (props.onChange) {
-                              props.onChange(value);
+                              props.onChange(result);
                             }
                           }}
-                          defaultChecked={field.value === option.value}
+                          checked={field.value === option.value}
                         />
                       )}
                     ></Controller>

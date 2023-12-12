@@ -4,31 +4,30 @@ import React from "react";
 import {
   BorderLayout,
   Button,
-  Input,
-  InputWithText,
   Loader,
+  NewInput,
+  NewSelect,
   PageBreadcrumb,
-  Select,
   Table,
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "@constants/index";
-import {
-  ClientFormType,
-  CompanyType,
-  useCompanyApiCallHook,
-} from "@master/index";
+import { CompanyType, useCompanyApiCallHook } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { addBulkEnquiriesFormFields } from "@transaction-search/index";
 
 export const AddBulkEnquiries: React.FC = () => {
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = useForm<any>();
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
   const { data: companyData, isLoading } = getCompany();
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
-  const methods = useForm<ClientFormType>();
 
   const config = {
     breadcrumbConfig: {
@@ -114,37 +113,37 @@ export const AddBulkEnquiries: React.FC = () => {
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <div className="col-12">
         <BorderLayout heading={config.borderLayoutConfig.heading}>
-          <FormProvider {...methods}>
-            <form noValidate autoComplete="off" className="p-t-20">
-              <div className="row">
-                <div className="col-md-5 col-xs-12">
-                  <Select
-                    config={addBulkEnquiriesFormFields.clientnameField.config}
-                  />
-                </div>
-                <div className="col-md-5 col-xs-12">
-                  <Input
-                    config={addBulkEnquiriesFormFields.uploadfileField.config}
-                  />
-                  <div className="col-md-9">
-                    <small className="text-center">
-                      <InputWithText
-                        config={
-                          addBulkEnquiriesFormFields.uploadFilenote.config
-                        }
-                      />
-                    </small>
-                  </div>
-                </div>
-                <div className="col-md-2 col-xs-12 text-left">
-                  <Button type={"submit"} className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>Submit
-                  </Button>
+          <form noValidate autoComplete="off" className="p-t-20">
+            <div className="row">
+              <div className="col-md-5 col-xs-12">
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={addBulkEnquiriesFormFields.clientnameField}
+                />
+              </div>
+              <div className="col-md-5 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={addBulkEnquiriesFormFields.uploadfileField}
+                />
+                <div className="col-md-9">
+                  <small className="text-center">
+                    {/* <InputWithText
+                      config={addBulkEnquiriesFormFields.uploadFilenote.config}
+                    /> */}
+                  </small>
                 </div>
               </div>
-            </form>
-          </FormProvider>
-
+              <div className="col-md-2 col-xs-12 text-left">
+                <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+                  <i className="far fa-save"></i>Submit
+                </Button>
+              </div>
+            </div>
+          </form>
           {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
         </BorderLayout>
       </div>

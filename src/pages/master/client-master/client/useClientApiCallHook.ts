@@ -16,19 +16,25 @@ export const useClientApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getClient = (): UseQueryResult<MapType<ClientType>> => {
-    return useQuery<MapType<ClientType>>({
-      queryKey: [queryKeys.CLIENT_DATA],
+  const getClient = (
+    queryObject: any
+  ): UseQueryResult<{ data: MapType<ClientType>; count: number }> => {
+    return useQuery<{ data: MapType<ClientType>; count: number }>({
+      queryKey: [queryKeys.CLIENT_DATA, queryObject],
       queryFn: async () => {
-        const response = await instance.get(apiUrls.GET_ADD_CLIENT);
+        const response = await instance.get(apiUrls.GET_ADD_CLIENT, {
+          params: {
+            limit: queryObject.limit,
+            offset: queryObject.offset,
+          },
+        });
         let mapedData = selectOptionsMapMaker(
           response.data.data.records,
           "clientId",
           "clientName"
         );
-        return mapedData;
+        return { data: mapedData, count: response.data.data.count };
       },
-      staleTime: Infinity,
     });
   };
 
@@ -50,7 +56,7 @@ export const useClientApiCallHook = () => {
   };
 
   const addClient = async (
-    clientData: ClientFormType
+    clientData: Partial<ClientFormType>
   ): Promise<ApiResponseType<ClientType>> => {
     const response = await instance.post(apiUrls.GET_ADD_CLIENT, clientData);
     return response.data.data;
@@ -58,7 +64,7 @@ export const useClientApiCallHook = () => {
 
   const addClientMutation = () => {
     const mutation = useMutation(
-      (updatedItem: ClientFormType) => addClient(updatedItem),
+      (updatedItem: Partial<ClientFormType>) => addClient(updatedItem),
       {
         onSuccess: async () => {
           await await queryClient.invalidateQueries({
@@ -72,7 +78,7 @@ export const useClientApiCallHook = () => {
   };
 
   const updateClientData = async (
-    updateClientData: ClientFormType
+    updateClientData: Partial<ClientFormType>
   ): Promise<ApiResponseType<ClientType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_CLIENT.replace(
@@ -86,7 +92,7 @@ export const useClientApiCallHook = () => {
 
   const updateClientMutation = () => {
     const mutation = useMutation(
-      (updatedItem: ClientFormType) => updateClientData(updatedItem),
+      (updatedItem: Partial<ClientFormType>) => updateClientData(updatedItem),
       {
         onSuccess: async () => {
           await await queryClient.invalidateQueries({

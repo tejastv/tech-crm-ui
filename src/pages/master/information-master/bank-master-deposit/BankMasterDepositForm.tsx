@@ -1,16 +1,22 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
+import { ActionButtons, BorderLayout, Card, NewInput } from "@shared/index";
 import {
   BankDepositFormType,
+  BankDepositType,
   bankDepositeFormFields,
   useBankMasterDepositApiCallHook,
 } from "@master/index";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 export const BankMasterDepositForm: React.FC = () => {
-  const methods = useForm<BankDepositFormType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<BankDepositFormType>();
 
   const {
     addBankMasterDepositMutation,
@@ -21,6 +27,7 @@ export const BankMasterDepositForm: React.FC = () => {
   const { mutateAsync: updateBankMasterDeposit } =
     updateBankMasterDepositOnMutation();
   const params = useParams();
+  const { state: localBankDepositData } = useLocation();
 
   const cardConfig = {
     formLayoutConfig: {
@@ -37,32 +44,49 @@ export const BankMasterDepositForm: React.FC = () => {
   useEffect(() => {
     // This code will run when the component is about to unmount
     return () => {
-      methods.reset();
+      reset();
       // Place your cleanup code here
       console.log("Component is unmounting. Cleanup can be performed here.");
     };
   }, []);
 
-  if (params.id) {
-    const {
-      data: BankMasterDepositData,
-      isSuccess: BankMasterDepositDataSuccess,
-    } = getBankMasterDepositData("" + params.id);
-    console.log(params.id);
+  const mapBankDepositDataToBankDepositForm = (
+    bankDrawnData: BankDepositType
+  ) => {
+    let bankDrawnFormData: Partial<BankDepositFormType> = {
+      bankName: bankDrawnData.bankName,
+      accountNo: bankDrawnData.accountNo,
+    };
 
-    if (BankMasterDepositDataSuccess) {
-      bankDepositeFormFields.bankdeposit.config.setData =
-        BankMasterDepositData?.bankName;
-      bankDepositeFormFields.bankDepositAc.config.setData =
-        BankMasterDepositData?.accountNo;
+    return bankDrawnFormData;
+  };
+
+  const { data: BankMasterDepositData } = getBankMasterDepositData(
+    "" + params.id,
+    !localBankDepositData && params.id !== undefined
+  );
+
+  useEffect(() => {
+    if (params.id) {
+      if (
+        BankMasterDepositData &&
+        Object.values(BankMasterDepositData).length > 0
+      ) {
+        reset(mapBankDepositDataToBankDepositForm(BankMasterDepositData));
+      }
     }
-  } else {
-    useEffect(() => {
-      methods.reset();
-    }, []);
-  }
+  }, [params.id, BankMasterDepositData]);
 
-  const onSubmit = methods.handleSubmit((BankMasterDepositData): void => {
+  useEffect(() => {
+    if (params.id) {
+      if (localBankDepositData !== null) {
+        console.log(localBankDepositData);
+        reset(mapBankDepositDataToBankDepositForm(localBankDepositData));
+      }
+    }
+  }, [params.id, localBankDepositData]);
+
+  const onSubmit = handleSubmit((BankMasterDepositData): void => {
     let data: any = { ...BankMasterDepositData };
     data["ifscCode"] = "String";
     data["branch"] = "String";
@@ -80,28 +104,34 @@ export const BankMasterDepositForm: React.FC = () => {
   return (
     <>
       <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <Input config={bankDepositeFormFields.bankdeposit.config} />
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  <Input config={bankDepositeFormFields.bankDepositAc.config} />
-                </div>
+        <form
+          onSubmit={onSubmit}
+          noValidate
+          autoComplete="off"
+          className="p-t-20"
+        >
+          <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={bankDepositeFormFields.bankdeposit}
+                />
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
+              <div className="col-md-6 col-xs-12">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={bankDepositeFormFields.bankDepositAc}
+                />
+              </div>
+            </div>
+          </BorderLayout>
+          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+            <ActionButtons />
+          </BorderLayout>
+        </form>
       </Card>
     </>
   );

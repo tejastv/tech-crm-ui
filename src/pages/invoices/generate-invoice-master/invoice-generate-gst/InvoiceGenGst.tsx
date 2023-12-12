@@ -238,6 +238,158 @@ export const InvoiceGenerateGst: React.FC = () => {
                   <Table config={tableConfig.config}>null</Table>
                 </div>
               </div>
+
+              <div className="col-md-5 col-xs-12">
+                <div className="card-body">
+                  {/* <div className="col-sm-6 "> */}
+                  <NewSelect
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceGenGstFormFields.fYearField}
+                  />
+
+                  {/* </div> */}
+                  {/* <div className="col-sm-6 "> */}
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.invoiceNoField}
+                  />
+                  <div className="col-md-14 col-xs-12 text-right">
+                    <NewCheckbox
+                      errors={errors}
+                      register={register}
+                      control={control}
+                      config={invoiceGenGstFormFields.manualField}
+                    />
+                  </div>
+                  {/* </div> */}
+                  {/* <div className="col-sm-6 "> */}
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.amountField}
+                  />
+
+                  {/* </div> */}
+                  {/* <div className="col-sm-5 "> */}
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.disAmountField}
+                  />
+
+                  {/* </div> */}
+
+                  <div className="mb-2">
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button type="button" className={"btn btn-danger btn-sm"}>
+                        Get Dis
+                      </Button>
+                    </div>
+                  </div>
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.stField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.cgstPerField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.stAmountField}
+                  />
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.cgstField}
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-4 col-xs-12">
+                <div className="card-body">
+                  {/* <div className="col-sm-7 "> */}
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.dateField}
+                  />
+                  <NewCheckbox
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={invoiceGenGstFormFields.doNotField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.subtotalField}
+                  />
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.sGstPerField}
+                  />
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.iGstPerField}
+                  />
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.sgstField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.igstField}
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-3 col-xs-12">
+                <div className="card-body">
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.sTaxField}
+                  />
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.eCessField}
+                  />
+
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.krishiCessField}
+                  />
+                  <NewInput
+                    errors={errors}
+                    register={register}
+                    config={invoiceGenGstFormFields.totalField}
+                  />
+                  <div className="col-md-14 col-xs-12 text-right">
+                    <Button type="button" className={"btn btn-danger btn-sm"}>
+                      calculate
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
           </BorderLayout>
           <div className="card-body">

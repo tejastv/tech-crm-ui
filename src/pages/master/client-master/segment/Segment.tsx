@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Segment: React.FC = () => {
   const { getSegment, deleteSegmentMutation } = useSegmentApiCallHook();
-  const { data: segmentData, isLoading } = getSegment();
+  const { data: segmentData, isFetching } = getSegment();
   const { mutateAsync: deleteSegment } = deleteSegmentMutation();
   const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ export const Segment: React.FC = () => {
     },
     {
       accessorFn: (row) => row.segmentName,
-      id: "cityName",
+      id: "Segment Name",
       cell: (info) => info.getValue(),
       header: () => <>Segment Name</>,
     },
@@ -60,14 +60,16 @@ export const Segment: React.FC = () => {
   };
 
   const editSegmentClick = (segmentData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", segmentData.segmentId));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", segmentData.segmentId), {
+      state: null
+    });
   };
 
   const tableConfig: TableType<SegmentType> = {
     config: {
       tableName: "Segment",
       columns: columns,
-      tableData: segmentData || [],
+      tableData: (segmentData && Object.values(segmentData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -88,7 +90,7 @@ export const Segment: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

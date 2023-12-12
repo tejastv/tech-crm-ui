@@ -1,12 +1,14 @@
+import { Options } from "@shared/index";
+
 export interface ActualBuyerFormType {
   id?: string;
   partyId: number;
   partyName: string;
   partyAddress: string;
-  cityId: number;
+  cityId: Options;
   pin: string;
-  stateId: number;
-  countryId: number;
+  stateId: Options;
+  countryId: Options;
   telNo: string;
   faxNo: string;
   email: string;
@@ -17,6 +19,6 @@ export interface ActualBuyerFormType {
   active: true;
   revisionCntr: number;
   gstn: string;
-  clientId: number;
+  clientId: Options;
   locked: string;
 }

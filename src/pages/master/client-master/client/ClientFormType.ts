@@ -1,21 +1,23 @@
+import { Options } from "@shared/index";
+
 export interface ClientFormType {
   id?: number;
   clientId: number;
   ourRefNo: string;
   clientName: string;
   address: string;
-  cityId: number;
+  cityId: Options;
   zip: string;
-  stateId: any;
-  countryId: any;
+  stateId: Options;
+  countryId: Options;
   phone: string;
   fax: string;
   website: string;
   contactPerson: string;
   designation: string;
-  currencyId: number;
+  currencyId: Options;
   nickName: string;
-  executiveId: number;
+  executiveId: Options;
   osListPrInteger: string;
   monthlyInvoice: string;
   enteredBy: number;
@@ -24,7 +26,7 @@ export interface ClientFormType {
   modifiedDate: string;
   priorityId: number;
   instruction: string;
-  groupId: number;
+  groupId: Options;
   disType: string;
   discount: number;
   toAdjust: number;
@@ -34,11 +36,11 @@ export interface ClientFormType {
   staxApplicable: string;
   remarks: string;
   adjustFromDate: string;
-  segmentId: number;
+  segmentId: Options;
   toAdjustPI: number;
   balToAdjustPI: number;
   adjustPerEnqPI: number;
-  crDays: number;
+  crDays: Options;
   gstn: string;
   gstYN: string;
   billONActualBuyer: string | boolean;

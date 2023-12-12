@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   ActionButtons,
   BorderLayout,
   Card,
-  Checkbox,
-  Input,
-  Select,
+  NewCheckbox,
+  NewInput,
+  NewSelect,
 } from "@shared/index";
 import {
   ExecutiveFormType,
@@ -17,13 +17,21 @@ import {
   useCityApiCallHook,
   useExecutiveApiCallHook,
   useStateApiCallHook,
+  ExecutiveType,
 } from "@master/index";
-import { useParams } from "react-router-dom";
-import { returnObjectBasedOnID } from "@utils/returnObjectBasedOnID";
+import { useLocation, useParams } from "react-router-dom";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
+import { cleanupObject } from "@utils/index";
 
 export const ExecutiveForm: React.FC = () => {
-  const methods = useForm<ExecutiveFormType>();
+  const { state: localExecutiveData } = useLocation();
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ExecutiveFormType>();
   const { addExecutiveMutation, getExecutiveData, updateExecutiveMutation } =
     useExecutiveApiCallHook();
   const { getCity } = useCityApiCallHook();
@@ -49,11 +57,11 @@ export const ExecutiveForm: React.FC = () => {
     if (cityData) {
       setCityOptions(Object.values(cityData));
     }
-  }, [cityData && Object.values(cityData).length]);
+  }, [cityData]);
 
   if (cityOptions?.length) {
-    let options = selectOptionsMaker(cityOptions, "id", "cityName");
-    executiveFormFields.cityInformation2.config.options = options;
+    let options = selectOptionsMaker(cityOptions, "cityId", "cityName");
+    executiveFormFields.cityInformation.config.options = options;
   }
 
   // state api call
@@ -64,124 +72,127 @@ export const ExecutiveForm: React.FC = () => {
     if (stateData) {
       setStateOptions(Object.values(stateData));
     }
-  }, [stateData && Object.values(stateData).length]);
+  }, [stateData]);
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(stateOptions, "stateId", "stateName");
-    executiveFormFields.stateInformation2.config.options = options;
+    executiveFormFields.stateInformation.config.options = options;
   }
 
-  if (params.id) {
-    const { data: executiveData, isSuccess: executiveDataSuccess } =
-      getExecutiveData("" + params.id);
+  const { data: executiveData } = getExecutiveData(
+    "" + params.id,
+    !localExecutiveData && params.id !== undefined
+  );
 
-    if (executiveDataSuccess) {
-      executiveFormFields.executiveInfomation2.config.setData =
-        executiveData?.executive;
-      executiveFormFields.emailInformation2.config.setData =
-        executiveData?.email;
-      if (cityOptions) {
-        let id = executiveData?.cityId;
-        let data: any = returnObjectBasedOnID(
-          cityOptions,
-          "id",
-          id,
-          "id",
-          "cityName"
-        );
-        executiveFormFields.cityInformation2.config.setData = data
-          ? {
-              label: data?.label,
-              value: data?.value,
-            }
-          : [];
-      }
-      if (stateOptions) {
-        let id = executiveData?.stateId;
-        let data: any = returnObjectBasedOnID(
-          stateOptions,
-          "stateId",
-          id,
-          "stateId",
-          "state"
-        );
-        executiveFormFields.stateInformation2.config.setData = data
-          ? {
-              label: data?.label,
-              value: data?.value,
-            }
-          : [];
-      }
-      executiveFormFields.checkboxInformation2.config.setData =
-        executiveData?.invoiceRequired;
+  const mapExecutiveDataToSupplierForm = (executiveData: ExecutiveType) => {
+    let executiveFormData: Partial<ExecutiveFormType> = {
+      email: executiveData.email,
+      executiveId: executiveData.executiveId,
+      executive: executiveData.executive,
+      invoiceRequired: executiveData.invoiceRequired,
+    };
+    if (cityData && executiveData?.cityId) {
+      let data = cityData[executiveData.cityId];
+      data &&
+        (executiveFormData.cityId = {
+          label: data.cityName,
+          value: data.cityId,
+        });
     }
-  } else {
-    useEffect(() => {
-      methods.reset();
-    }, []);
-  }
+    if (stateData && executiveData?.stateId) {
+      let data = stateData[executiveData.stateId];
+      data &&
+        (executiveFormData.stateId = {
+          label: data.stateName,
+          value: data.stateId,
+        });
+    }
+    return executiveFormData;
+  };
 
-  const onSubmit = methods.handleSubmit((executiveData): void => {
-    let data: any = { ...executiveData };
-    data.cityId = +data.cityId["value"];
-    data.stateId = +data.stateId["value"];
-    data.invoiceRequired = eval(data.invoiceRequired);
+  const mapExecutiveRequest = (executiveFormData: ExecutiveFormType) => {
+    let enqData: Partial<ExecutiveType> = {
+      email: executiveFormData.email,
+      invoiceRequired: executiveFormData.invoiceRequired,
+    };
+    if (cityData && executiveFormData?.cityId) {
+      enqData.cityId = executiveFormData.cityId.value;
+    }
+    if (stateData && executiveFormData?.stateId) {
+      enqData.stateId = executiveFormData.stateId.value;
+    }
+    return cleanupObject(enqData);
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      if (executiveData && Object.values(executiveData).length > 0) {
+        reset(mapExecutiveDataToSupplierForm(executiveData));
+      }
+    }
+  }, [params.id, cityOptions, stateOptions, executiveData]);
+
+  const onSubmit = handleSubmit((executiveData: ExecutiveFormType): void => {
+    let reqObj: Partial<ExecutiveType> = mapExecutiveRequest(executiveData);
     if (params.id && executiveData) {
-      updateExecutive({ id: params.id, ...data });
+      updateExecutive({ executiveId: +params.id, ...reqObj });
     } else {
-      addExecutive(data);
+      addExecutive(reqObj);
     }
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <Input
-                      config={executiveFormFields.executiveInfomation2.config}
-                    />
-                    <Input
-                      config={executiveFormFields.emailInformation2.config}
-                    />
-                    <Select
-                      config={executiveFormFields.cityInformation2.config}
-                    />
-                    {/* <Input
-                      config={executiveFormFields.cityInformation2.config}
-                    /> */}
-                  </div>
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <Checkbox
-                      config={executiveFormFields.checkboxInformation2.config}
-                    />
-                    <Select
-                      config={executiveFormFields.stateInformation2.config}
-                    />
-                    {/*<Input config={stateSupplier.config} />
-                  <Input config={countrySupplier.config} />
-                  <Input config={CurrenceySupplier.config} /> */}
-                  </div>
-                </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <div className="card-body">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={executiveFormFields.executiveInformation}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={executiveFormFields.emailInformation}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={executiveFormFields.cityInformation}
+                />
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
-      </Card>
-    </>
+            </div>
+            <div className="col-md-6 col-xs-12">
+              <div className="card-body">
+                <NewCheckbox
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={executiveFormFields.checkboxInformation}
+                />
+                <NewSelect
+                  errors={errors}
+                  register={register}
+                  control={control}
+                  config={executiveFormFields.stateInformation}
+                />
+              </div>
+            </div>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

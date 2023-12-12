@@ -1,8 +1,11 @@
+import { Options } from "@shared/index";
+
 export interface ExecutiveFormType {
   id?: string;
-  executive: string;
+  executiveId: number;
   email: string;
-  cityId: number;
-  stateId: number;
+  cityId: Options;
+  stateId: Options;
   invoiceRequired: boolean;
+  executive: string,
 }

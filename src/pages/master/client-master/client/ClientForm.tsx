@@ -31,12 +31,12 @@ import {
   useExecutiveApiCallHook,
   useSegmentApiCallHook,
   useStateApiCallHook,
+  ClientType,
 } from "@master/index";
 
 import {
   cleanupObject,
   returnFormatedObjectElseEmptyArray,
-  returnObjectBasedOnID,
 } from "@utils/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
@@ -103,27 +103,26 @@ export const ClientForm: React.FC = () => {
     }
   }, []);
 
-  // city api call
   const { data: cityData } = getCity();
 
   useEffect(() => {
     if (cityData) {
       setCityOptions(Object.values(cityData));
     }
-  }, [cityData && Object.values(cityData).length]);
+  }, [cityData]);
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "cityId", "cityName", true);
     clientFormFields.cityClient.config.options = options;
   }
 
-  // state api call
   const { data: stateData } = getState();
+
   useEffect(() => {
     if (stateData) {
       setStateOptions(Object.values(stateData));
     }
-  }, [stateData && Object.values(stateData).length]);
+  }, [stateData]);
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(
@@ -135,14 +134,13 @@ export const ClientForm: React.FC = () => {
     clientFormFields.stateClient.config.options = options;
   }
 
-  // country api call
   const { data: countryData } = getCountry();
 
   useEffect(() => {
     if (countryData) {
       setCountryOptions(Object.values(countryData));
     }
-  }, [countryData && Object.values(countryData).length]);
+  }, [countryData]);
 
   if (countryOptions?.length) {
     let options = selectOptionsMaker(
@@ -153,7 +151,6 @@ export const ClientForm: React.FC = () => {
     clientFormFields.countryClient.config.options = options;
   }
 
-  // CreditDays api call
   const { data: creditDaysData } = getCreditDays();
   // if (creditDaysData) {
   //   const defaultCrDayOption = clientFormFields.crDay.config.options.find(
@@ -166,9 +163,9 @@ export const ClientForm: React.FC = () => {
   // }
   useEffect(() => {
     if (creditDaysData) {
-      setCreditOptions(creditDaysData);
+      setCreditOptions(Object.values(creditDaysData));
     }
-  }, [creditDaysData?.length]);
+  }, [creditDaysData]);
 
   if (creditOptions?.length) {
     let options = selectOptionsMaker(
@@ -179,14 +176,13 @@ export const ClientForm: React.FC = () => {
     clientFormFields.crDay.config.options = options;
   }
 
-  // currency api call
   const { data: currencyData } = getCurrency();
 
   useEffect(() => {
     if (currencyData) {
       setCurrencyOptions(Object.values(currencyData));
     }
-  }, [currencyData?.length]);
+  }, [currencyData]);
 
   if (currencyOptions?.length) {
     let options = selectOptionsMaker(
@@ -197,14 +193,13 @@ export const ClientForm: React.FC = () => {
     clientFormFields.clientCurrencey.config.options = options;
   }
 
-  // Executive api call
   const { data: executiveData } = getExecutive();
 
   useEffect(() => {
     if (executiveData) {
-      setExecutiveOptions(executiveData);
+      setExecutiveOptions(Object.values(executiveData));
     }
-  }, [executiveData?.length]);
+  }, [executiveData]);
 
   if (executiveOptions?.length) {
     let options = selectOptionsMaker(
@@ -215,14 +210,13 @@ export const ClientForm: React.FC = () => {
     clientFormFields.executive.config.options = options;
   }
 
-  // ClientGroup api call
   const { data: clientGroupData } = getClientGroup();
 
   useEffect(() => {
     if (clientGroupData) {
       setClientGroupOptions(Object.values(clientGroupData));
     }
-  }, [clientGroupData?.length]);
+  }, [clientGroupData]);
 
   if (clientGroupOptions?.length) {
     let options = selectOptionsMaker(
@@ -233,14 +227,13 @@ export const ClientForm: React.FC = () => {
     clientFormFields.groupClient.config.options = options;
   }
 
-  // Segment api call
   const { data: segmentData } = getSegment();
 
   useEffect(() => {
     if (segmentData) {
-      setSegmentOptions(segmentData);
+      setSegmentOptions(Object.values(segmentData));
     }
-  }, [segmentData?.length]);
+  }, [segmentData]);
 
   if (segmentOptions?.length) {
     let options = selectOptionsMaker(
@@ -257,113 +250,10 @@ export const ClientForm: React.FC = () => {
   );
 
   useEffect(() => {
-    if (clientMasterData) {
-      let clonedClientMasterData = { ...clientMasterData };
-      if (cityOptions?.length) {
-        console.log(clientMasterData.cityId, cityOptions);
-
-        let data = returnFormatedObjectElseEmptyArray(
-          clientMasterData.cityId,
-          clientMasterData,
-          "cityId",
-          "cityName"
-        );
-        console.log(data);
-        if (data.length > 0) {
-          clonedClientMasterData.cityId = data[0];
-        }
+    if (params.id) {
+      if (clientMasterData && Object.values(clientMasterData).length > 0) {
+        reset(mapClientToClientForm(clientMasterData));
       }
-      if (stateOptions?.length) {
-        let data = returnFormatedObjectElseEmptyArray(
-          clientMasterData.stateId,
-          clientMasterData,
-          "stateId",
-          "stateName"
-        );
-        if (data.length > 0) {
-          clonedClientMasterData.stateId = data[0];
-        }
-      }
-      if (countryOptions?.length) {
-        let data = returnFormatedObjectElseEmptyArray(
-          clientMasterData.countryId,
-          clientMasterData,
-          "countryId",
-          "countryName"
-        );
-        if (data.length > 0) {
-          clonedClientMasterData.countryId = data[0];
-        }
-      }
-      if (currencyOptions?.length) {
-        let data = returnFormatedObjectElseEmptyArray(
-          clientMasterData.currencyId,
-          clientMasterData,
-          "currencyId",
-          "currencyName"
-        );
-        if (data.length > 0) {
-          clonedClientMasterData.currencyId = data[0];
-        }
-      }
-      if (executiveOptions?.length) {
-        let id = clientMasterData?.executiveId;
-        let data: any = returnObjectBasedOnID(
-          executiveOptions,
-          "executiveId",
-          id,
-          "executiveId",
-          "executive"
-        );
-        if (data.length > 0) {
-          clonedClientMasterData.executiveId = {
-            label: data[0].label,
-            value: data[0].value,
-          };
-        }
-      }
-      if (clientGroupOptions?.length) {
-        let data = returnFormatedObjectElseEmptyArray(
-          clientMasterData.groupId,
-          clientMasterData,
-          "groupId",
-          "groupName"
-        );
-        if (data.length > 0) {
-          clonedClientMasterData.groupId = data[0];
-        }
-      }
-      if (executiveOptions?.length) {
-        let data = returnFormatedObjectElseEmptyArray(
-          clientMasterData.segmentId,
-          clientMasterData,
-          "segmentId",
-          "segmentName"
-        );
-        if (data.length > 0) {
-          clonedClientMasterData.segmentId = data[0];
-        }
-      }
-      clonedClientMasterData.billONActualBuyer =
-        clientMasterData.billONActualBuyer === "Y" ? true : false;
-      if (creditOptions?.length) {
-        let id = clientMasterData?.crDays;
-        let data: any = returnObjectBasedOnID(
-          creditOptions,
-          "creditPeriodId",
-          id,
-          "creditPeriodId",
-          "creditPeriod"
-        );
-        if (data.length > 0) {
-          clonedClientMasterData.crDays = {
-            label: data[0].label,
-            value: data[0].value,
-          };
-        }
-      }
-      // console.log(clonedClientMasterData);
-      reset(clonedClientMasterData);
     }
   }, [
     params.id,
@@ -378,9 +268,179 @@ export const ClientForm: React.FC = () => {
     segmentOptions,
   ]);
 
-  useEffect(() => {
-    reset();
-  }, [!params.id]);
+  const mapClientToClientForm = (clientData: ClientType) => {
+    let clientFormData: Partial<ClientFormType> = {
+      ourRefNo: clientData.ourRefNo,
+      clientName: clientData.clientName,
+      address: clientData.address,
+      zip: clientData.zip,
+      phone: clientData.phone,
+      fax: clientData.fax,
+      website: clientData.website,
+      contactPerson: clientData.contactPerson,
+      designation: clientData.designation,
+      nickName: clientData.nickName,
+      osListPrInteger: clientData.osListPrInteger,
+      monthlyInvoice: clientData.monthlyInvoice,
+      enteredBy: clientData.enteredBy,
+      enteredDate: clientData.enteredDate,
+      modifiedBy: clientData.modifiedBy,
+      modifiedDate: clientData.modifiedDate,
+      priorityId: clientData.priorityId,
+      instruction: clientData.instruction,
+      disType: clientData.disType,
+      discount: clientData.discount,
+      toAdjust: clientData.toAdjust,
+      balToAdjust: clientData.balToAdjust,
+      adjustPerEnq: clientData.adjustPerEnq,
+      individualReport: clientData.individualReport,
+      staxApplicable: clientData.staxApplicable,
+      remarks: clientData.remarks,
+      adjustFromDate: clientData.adjustFromDate,
+      toAdjustPI: clientData.toAdjustPI,
+      balToAdjustPI: clientData.balToAdjustPI,
+      adjustPerEnqPI: clientData.adjustPerEnqPI,
+      gstn: clientData.gstn,
+      gstYN: clientData.gstYN,
+      billONActualBuyer: clientData.billONActualBuyer,
+      autoSendOutstanding: clientData.autoSendOutstanding,
+      locked: clientData.locked,
+      email: clientData.email,
+      stateCode: clientData.stateCode,
+    };
+    if (cityData && clientData?.cityId) {
+      let data = cityData[clientData.cityId];
+      data &&
+        (clientFormData.cityId = {
+          label: data.cityName,
+          value: data.cityId,
+        });
+    }
+    if (stateData && clientData?.stateId) {
+      let data = stateData[clientData.stateId];
+      data &&
+        (clientFormData.stateId = {
+          label: data.stateName,
+          value: data.stateId,
+        });
+    }
+    if (countryData && clientData?.countryId) {
+      let data = countryData[clientData.countryId];
+      data &&
+        (clientFormData.countryId = {
+          label: data.countryName,
+          value: data.countryId,
+        });
+    }
+    if (currencyData && clientData?.currencyId) {
+      let data = currencyData[clientData.currencyId];
+      data &&
+        (clientFormData.currencyId = {
+          label: data.currencyType,
+          value: data.currencyId,
+        });
+    }
+    if (executiveData && clientData?.executiveId) {
+      let data = executiveData[clientData.executiveId];
+      data &&
+        (clientFormData.executiveId = {
+          label: data.executive,
+          value: data.executiveId,
+        });
+    }
+    if (clientGroupData && clientData?.groupId) {
+      let data = clientGroupData[clientData.groupId];
+      data &&
+        (clientFormData.groupId = {
+          label: data.groupName,
+          value: data.groupId,
+        });
+    }
+    if (segmentData && clientData?.segmentId) {
+      let data = segmentData[clientData.segmentId];
+      data &&
+        (clientFormData.segmentId = {
+          label: data.segmentName,
+          value: data.segmentId,
+        });
+    }
+    if (creditDaysData && clientData?.crDays) {
+      let data = creditDaysData[clientData.crDays];
+      data &&
+        (clientFormData.crDays = {
+          label: data.creditPeriod,
+          value: data.creditPeriodId,
+        });
+    }
+    return clientFormData;
+  };
+
+  const mapClientFormToClientReq = (clientFormData: ClientFormType) => {
+    let clientReqData: Partial<ClientType> = {
+      ourRefNo: "String",
+      clientName: clientFormData.clientName,
+      address: clientFormData.address,
+      zip: clientFormData.zip,
+      phone: clientFormData.phone,
+      fax: clientFormData.fax,
+      website: clientFormData.website,
+      contactPerson: clientFormData.contactPerson,
+      designation: clientFormData.designation,
+      nickName: "String",
+      osListPrInteger: clientFormData.osListPrInteger,
+      monthlyInvoice: clientFormData.monthlyInvoice,
+      enteredBy: 0,
+      enteredDate: clientFormData.enteredDate,
+      modifiedBy: clientFormData.modifiedBy,
+      modifiedDate: clientFormData.modifiedDate,
+      priorityId: clientFormData.priorityId,
+      instruction: clientFormData.instruction,
+      disType: clientFormData.disType,
+      discount: clientFormData.discount,
+      toAdjust: clientFormData.toAdjust,
+      balToAdjust: clientFormData.balToAdjust,
+      adjustPerEnq: clientFormData.adjustPerEnq,
+      individualReport: "1",
+      staxApplicable: "Y",
+      remarks: clientFormData.remarks,
+      adjustFromDate: new Date().toISOString(),
+      toAdjustPI: clientFormData.toAdjustPI,
+      balToAdjustPI: clientFormData.balToAdjustPI,
+      adjustPerEnqPI: clientFormData.adjustPerEnqPI,
+      gstn: clientFormData.gstn,
+      gstYN: clientFormData.gstYN,
+      billONActualBuyer: clientFormData.billONActualBuyer,
+      autoSendOutstanding: "Y",
+      locked: "Y",
+      email: clientFormData.email,
+      //stateCode: clientFormData.stateCode,
+    };
+    if (cityData && clientFormData?.cityId) {
+      clientReqData.cityId = clientFormData.cityId.value;
+    }
+    if (stateData && clientFormData?.stateId) {
+      clientReqData.stateId = clientFormData.stateId.value;
+    }
+    if (countryData && clientFormData?.countryId) {
+      clientReqData.countryId = clientFormData.countryId.value;
+    }
+    if (currencyData && clientFormData?.currencyId) {
+      clientReqData.currencyId = clientFormData.currencyId.value;
+    }
+    if (clientGroupData && clientFormData?.groupId) {
+      clientReqData.groupId = clientFormData.groupId.value;
+    }
+    if (creditDaysData && clientFormData?.crDays) {
+      clientReqData.crDays = clientFormData.crDays.value;
+    }
+    if (creditDaysData && clientFormData?.segmentId) {
+      clientReqData.segmentId = clientFormData.segmentId.value;
+    }
+    if (creditDaysData && clientFormData?.executiveId) {
+      clientReqData.executiveId = clientFormData.executiveId.value;
+    }
+    return cleanupObject(clientReqData);
+  };
 
   const handleSelectChange = (selectedOption: any) => {
     if (selectedOption) {
@@ -403,7 +463,7 @@ export const ClientForm: React.FC = () => {
             selectedOption.data,
             "stateId",
             "stateName"
-          )
+          )[0]
         );
       }
       if (clientFormFields.countryClient.config.name === "countryId") {
@@ -414,71 +474,19 @@ export const ClientForm: React.FC = () => {
             selectedOption.data,
             "countryId",
             "countryName"
-          )
+          )[0]
         );
       }
     }
   };
 
   const onSubmit = handleSubmit((clientData) => {
-    let data: any = { ...cleanupObject(clientData) };
-    delete data.state;
-    data["ourRefNo"] = "String";
-    data["adjustFromDate"] = new Date().toISOString();
-    data["autoSendOutstanding"] = "Y";
-    data["enteredBy"] = 0;
-    data["individualReport"] = "1";
-    data["locked"] = "Y";
-    data["nickName"] = "String";
-    data["staxApplicable"] = "Y";
-    data.adjustPerEnq = data.adjustPerEnq && parseFloat(data.adjustPerEnq);
-    data.adjustPerEnqPI =
-      data.adjustPerEnqPI && parseFloat(data.adjustPerEnqPI);
-    data.balToAdjust = data.balToAdjust && parseFloat(data.balToAdjust);
-    data.balToAdjustPI = data.balToAdjustPI && parseFloat(data.balToAdjustPI);
-    data.discount = data.discount && parseFloat(data.discount);
-    data.toAdjust = data.toAdjust && parseFloat(data.toAdjust);
-    data.toAdjustPI = data.toAdjustPI && parseFloat(data.toAdjustPI);
-    data.disType = data.disType && data.disType.toString();
-    data.gstYN = data.gstYN && data.gstYN.toString();
-    data.monthlyInvoice = data.monthlyInvoice && data.monthlyInvoice.toString();
-    data.osListPrInteger =
-      data.osListPrInteger && data.osListPrInteger.toString();
-    if (eval(data.billONActualBuyer)) {
-      data.billONActualBuyer = "Y";
+    let reqObj: Partial<ClientType> = mapClientFormToClientReq(clientData);
+    console.log(reqObj);
+    if (params.id && reqObj) {
+      updateClient({ id: +params.id, ...reqObj });
     } else {
-      data.billONActualBuyer = "N";
-    }
-    if (data.cityId) {
-      data.cityId = +data.cityId["value"];
-    }
-    if (data.stateId) {
-      data.stateId = +data.stateId["value"];
-    }
-    if (data.countryId) {
-      data.countryId = +data.countryId["value"];
-    }
-    if (data.crDays) {
-      data.crDays = +data.crDays["value"];
-    }
-    if (data.currencyId) {
-      data.currencyId = +data.currencyId["value"];
-    }
-    if (data.executiveId) {
-      data.executiveId = +data.executiveId["value"];
-    }
-    if (data.groupId) {
-      data.groupId = +data.groupId["value"];
-    }
-    if (data.segmentId) {
-      data.segmentId = +data.segmentId["value"];
-    }
-    console.log(data);
-    if (params.id && data) {
-      updateClient({ id: params.id, ...data });
-      console.log(data);
-    } else {
-      addClient(data);
+      addClient(reqObj);
     }
   });
 

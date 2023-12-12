@@ -24,10 +24,7 @@ export const InvoiceSetteld: React.FC = () => {
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
   const {
     register,
-    handleSubmit,
     control,
-    setValue,
-    reset,
     formState: { errors },
   } = useForm<InvoiceListSetteldType>();
   const cardConfig = {

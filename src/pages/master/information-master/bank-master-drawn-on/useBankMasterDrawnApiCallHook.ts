@@ -31,7 +31,8 @@ export const useBankMasterDrawnApiCallHook = () => {
   };
 
   const getBankMasterDrawnOnData = (
-    id: string
+    id: string,
+    condition?: any
   ): UseQueryResult<BankdrawnonType> => {
     return useQuery<BankdrawnonType>({
       queryKey: [queryKeys.BANKMASTER_DRAWN_DATA, id],
@@ -41,7 +42,7 @@ export const useBankMasterDrawnApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
