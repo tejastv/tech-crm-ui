@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { ActualBuyerFormType, ActualBuyerType } from "@master/index";
+import { ActualBuyerType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType, MapType } from "@shared/index";
 import {

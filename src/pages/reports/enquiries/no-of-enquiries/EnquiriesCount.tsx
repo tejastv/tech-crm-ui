@@ -8,7 +8,7 @@ import {
   TableType,
   NewSelect,
 } from "@shared/index";
-import { enquiriesCountFormFields, EnquiriesCountType } from "@reports/index";
+import { enquiriesCountFormFields } from "@reports/index";
 import { EnquiryCountType } from "@reports/index";
 import { ColumnDef } from "@tanstack/react-table";
 

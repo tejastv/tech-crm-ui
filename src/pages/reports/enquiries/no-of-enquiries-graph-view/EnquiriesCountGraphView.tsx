@@ -4,7 +4,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Card, BorderLayout, Button, Table, TableType, NewSelect } from "@shared/index";
 import {
   enquiriesCountGraphViewFormFields,
-  EnquiriesCountGraphViewType,
   EnquiryCountGraphViewType,
 } from "@reports/index";
 

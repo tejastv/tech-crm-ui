@@ -9,7 +9,8 @@ export const usePagination = (
   const [limit, setLimit] = useState(defaultLimit);
   const [offset, setOffset] = useState(defaultOffset);
   const [total, setTotal] = useState(defaultTotal);
-
+  console.log(setLimit);
+  
   const nextButtonClick = () => {
     setOffset(offset + limit);
   };

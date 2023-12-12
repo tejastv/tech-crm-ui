@@ -7,7 +7,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-import { SegmentFormType, SegmentType } from "@master/index";
+import { SegmentType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType, MapType } from "@shared/index";
 import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";

@@ -6,7 +6,6 @@ import {
   ActionButtons,
   BorderLayout,
   Card,
-  InputWithText,
   NewInput,
   NewSelect,
 } from "@shared/index";
@@ -27,6 +26,7 @@ import {
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { cleanupObject } from "@utils/cleanUpObject";
 import { useLocation, useParams } from "react-router-dom";
+import { usePagination } from "@hooks/usePagination";
 
 export const ActualBuyerForm: React.FC = () => {
   const params = useParams();
@@ -49,7 +49,17 @@ export const ActualBuyerForm: React.FC = () => {
   };
 
   const { getClient } = useClientApiCallHook();
-  const { data: clientData } = getClient();
+
+  const {
+    limit,
+    offset,
+  } = usePagination();
+
+  const { data: clientData } = getClient({
+    limit,
+    offset,
+  });
+  
   const {
     addActualBuyerMutation,
     updateActualBuyerMutation,
@@ -109,8 +119,8 @@ export const ActualBuyerForm: React.FC = () => {
   }
 
   useEffect(() => {
-    if (clientData) {
-      setClientOptions(Object.values(clientData));
+    if (clientData?.data) {
+      setClientOptions(Object.values(clientData.data));
     }
   }, [clientData]);
 
@@ -169,7 +179,7 @@ export const ActualBuyerForm: React.FC = () => {
         });
     }
     if (clientData && actualBuyerData?.clientId) {
-      let data = clientData[actualBuyerData.clientId];
+      let data = clientData.data[actualBuyerData.clientId];
       data &&
         (actualBuyerFormData.clientId = {
           label: data.clientName,

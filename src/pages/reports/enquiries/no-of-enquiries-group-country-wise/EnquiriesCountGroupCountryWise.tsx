@@ -11,7 +11,6 @@ import {
 } from "@shared/index";
 import {
   enquiriesCountGroupCountryWiseFormFields,
-  EnquiriesCountGroupCountryWiseType,
   EnquiryCountGroupCountryWiseType,
 } from "@reports/index";
 

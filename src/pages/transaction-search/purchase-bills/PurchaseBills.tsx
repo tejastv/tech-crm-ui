@@ -12,10 +12,19 @@ import { COMMON_ROUTES } from "@constants/index";
 import { CompanyType, useCompanyApiCallHook } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
+import { usePagination } from "@hooks/usePagination";
 
 export const PurchaseBills: React.FC = () => {
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
-  const { data: companyData, isLoading } = getCompany();
+  const {
+    limit,
+    offset,
+  } = usePagination();
+  
+  const { data: companyData, isLoading } = getCompany({
+    limit,
+    offset,
+  });
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
 
@@ -121,7 +130,7 @@ export const PurchaseBills: React.FC = () => {
     config: {
       tableName: "Company Master",
       columns: columns,
-      tableData: (companyData && Object.values(companyData)) || [],
+      tableData: (companyData?.data && Object.values(companyData.data)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
