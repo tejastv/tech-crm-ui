@@ -7,7 +7,7 @@ export { AddEnqPi } from "./enq-pi/AddEnqPi";
 export { SearchEnqPi } from "./enq-pi/SearchEnqPi";
 
 export { addGeneratePiFormFields } from "./generate-pi/add-generate-pi-form-field";
-export { addEnqPiFormFields } from "./enq-pi/add-enq-pi-form-field";
+export { enqPiFormFields } from "./enq-pi/enqPiFormFields";
 
 export { useProformaApiCallHook } from "./useProformaApiCallHook";
 export * from "./generate-pi/generate-pi-type";

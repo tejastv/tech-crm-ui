@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { ActualBuyerFormType, ActualBuyerType } from "@master/index";
+import { ActualBuyerType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType, MapType } from "@shared/index";
 import {
@@ -32,7 +32,10 @@ export const useActualBuyerApiCallHook = () => {
     });
   };
 
-  const getActualBuyerData = (id: string): UseQueryResult<ActualBuyerType> => {
+  const getActualBuyerData = (
+    id: string,
+    condition: boolean
+  ): UseQueryResult<ActualBuyerType> => {
     return useQuery<ActualBuyerType>({
       queryKey: [queryKeys.ACTUAL_BUYER_DATA, id],
       queryFn: async () => {
@@ -41,13 +44,13 @@ export const useActualBuyerApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 
   const addActualBuyer = async (
-    actualBuyerData: ActualBuyerFormType
+    actualBuyerData: Partial<ActualBuyerType>
   ): Promise<ApiResponseType<ActualBuyerType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_ACTUAL_BUYER,
@@ -58,7 +61,7 @@ export const useActualBuyerApiCallHook = () => {
 
   const addActualBuyerMutation = () => {
     const mutation = useMutation(
-      (updatedItem: ActualBuyerFormType) => addActualBuyer(updatedItem),
+      (updatedItem: Partial<ActualBuyerType>) => addActualBuyer(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -72,12 +75,12 @@ export const useActualBuyerApiCallHook = () => {
   };
 
   const updateActualBuyerData = async (
-    updateActualBuyerData: ActualBuyerFormType
+    updateActualBuyerData: Partial<ActualBuyerType>
   ): Promise<ApiResponseType<ActualBuyerType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_ACTUAL_BUYER.replace(
         "{id}",
-        "" + updateActualBuyerData.id
+        "" + updateActualBuyerData.partyId
       ),
       updateActualBuyerData
     );
@@ -86,7 +89,8 @@ export const useActualBuyerApiCallHook = () => {
 
   const updateActualBuyerMutation = () => {
     const mutation = useMutation(
-      (updatedItem: ActualBuyerFormType) => updateActualBuyerData(updatedItem),
+      (updatedItem: Partial<ActualBuyerType>) =>
+        updateActualBuyerData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

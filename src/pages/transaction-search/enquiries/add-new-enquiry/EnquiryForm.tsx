@@ -48,6 +48,7 @@ import {
   returnFormatedObjectElseEmptyArray,
   selectOptionsMaker,
 } from "@utils/index";
+import { usePagination } from "@hooks/usePagination";
 
 const priceMapper = {
   1: "price", // Normal
@@ -186,14 +187,21 @@ export const EnquiryForm: React.FC = () => {
     );
     enquiryFormFields.enqCountry.config.options = options;
   }
+  const {
+    limit,
+    offset,
+  } = usePagination();
 
-  const { data: clientData } = getClient();
+  const { data: clientData } = getClient({
+    limit,
+    offset,
+  });
 
   useEffect(() => {
-    if (clientData) {
-      setClientOptions(Object.values(clientData));
+    if (clientData?.data) {
+      setClientOptions(Object.values(clientData.data));
     }
-  }, [clientData]);
+  }, [clientData?.data]);
 
   if (clientOptions?.length) {
     let options = selectOptionsMaker(clientOptions, "clientId", "clientName");
@@ -260,13 +268,16 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqLocalSource.config.options = options;
   }
 
-  const { data: companyData } = getCompany();
+  const { data: companyData } = getCompany({
+    limit,
+    offset,
+  });
 
   useEffect(() => {
-    if (companyData) {
-      setCompanyOptions(Object.values(companyData));
+    if (companyData?.data) {
+      setCompanyOptions(Object.values(companyData.data));
     }
-  }, [companyData]);
+  }, [companyData?.data]);
 
   if (companyOptions?.length) {
     let options = selectOptionsMaker(
@@ -696,7 +707,7 @@ export const EnquiryForm: React.FC = () => {
       email: enqData.email,
     };
     if (companyData && enqData?.companyId) {
-      let data = companyData[enqData.companyId];
+      let data = companyData.data[enqData.companyId];
       data &&
         (enqFormData.companyId = {
           label: data.companyName,
@@ -704,7 +715,7 @@ export const EnquiryForm: React.FC = () => {
         });
     }
     if (clientData && enqData?.clientId) {
-      let data = clientData[enqData.clientId];
+      let data = clientData.data[enqData.clientId];
       data &&
         ((enqFormData.clientId = {
           label: data.clientName,
@@ -720,8 +731,8 @@ export const EnquiryForm: React.FC = () => {
           value: data.serviceTypeId,
         });
     }
-    if (countryData && clientData?.clientId) {
-      let data = clientData[enqData.clientId];
+    if (countryData && clientData?.data?.clientId) {
+      let data = clientData.data[enqData.clientId];
       data &&
         (enqFormData.clientId = {
           label: data.clientName,

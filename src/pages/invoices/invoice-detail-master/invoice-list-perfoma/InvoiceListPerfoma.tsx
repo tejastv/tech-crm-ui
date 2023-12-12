@@ -5,6 +5,7 @@ import {
   Card,
   Button,
   Table,
+  Radio,
   TableType,
   NewSelect,
   NewInput,
@@ -23,7 +24,10 @@ export const InvoiceListPerfoma: React.FC = () => {
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
   const {
     register,
+    handleSubmit,
     control,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm<InvoiceListPerfomaType>();
   const cardConfig = {
@@ -294,23 +298,24 @@ export const InvoiceListPerfoma: React.FC = () => {
                       config={invoiceListPerfomaFormFields.toDateField}
                     />
                   </div>
-                  <div className="col-md-12 col-xs-12">
+                  <div className="col-md-6 col-xs-12">
                     <NewSelect
                       errors={errors}
                       register={register}
                       control={control}
                       config={invoiceListPerfomaFormFields.cityField}
                     />
-                    <div className="mb-2">
-                      <div className="col-md-14 col-xs-12 text-right">
-                        <Button
-                          type="button"
-                          className={"btn btn-danger btn-sm "}
-                        >
-                          Get
-                        </Button>
-                      </div>
+
+                    <div className="col-md-14 col-xs-12 text-right">
+                      <Button
+                        type="button"
+                        className={"btn btn-danger btn-sm "}
+                      >
+                        Get
+                      </Button>
                     </div>
+                  </div>
+                  <div className="col-md-6 col-xs-12">
                     <NewSelect
                       errors={errors}
                       register={register}
@@ -345,7 +350,7 @@ export const InvoiceListPerfoma: React.FC = () => {
             <BorderLayout heading={cardConfig.formActionsConfig.heading}>
               {/* <ActionButtons /> */}
               <div className="row">
-                <div className="col-md-4"></div>
+                <div className="col-md-1"></div>
                 <div className="col-md-2 ">
                   <div className="mb-2">
                     <div className="col-md-14 col-xs-12 text-right">
@@ -356,7 +361,7 @@ export const InvoiceListPerfoma: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-2">
+                <div className="col-md-3">
                   <div className="mb-2">
                     <div className="col-md-14 col-xs-12 text-right">
                       <Button type="button" className={"btn btn-danger btn-sm"}>
@@ -379,7 +384,7 @@ export const InvoiceListPerfoma: React.FC = () => {
                   </div>
                 </div>
                 <div className="col-md-2">
-                  <div className="mb-2">
+                  <div className="mb-1">
                     <div className="col-sm-14 col-xs-12 float-right">
                       <Button type="button" className={"btn btn-danger btn-sm"}>
                         <i className="far fa-window-close"></i>

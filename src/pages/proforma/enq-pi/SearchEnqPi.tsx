@@ -12,10 +12,20 @@ import { COMMON_ROUTES } from "@constants/index";
 import { CompanyType, useCompanyApiCallHook } from "@master/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
+import { usePagination } from "@hooks/usePagination";
 
 export const SearchEnqPi: React.FC = () => {
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
-  const { data, isLoading } = getCompany();
+ 
+  const {
+    limit,
+    offset,
+  } = usePagination();
+
+  const { data, isLoading } = getCompany({
+    limit,
+    offset,
+  });
   const { mutateAsync: deleteCompany } = deleteCompanyMutation();
   const navigate = useNavigate();
   console.log(data);

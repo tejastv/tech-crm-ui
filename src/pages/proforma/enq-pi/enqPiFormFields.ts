@@ -842,7 +842,7 @@ const fYearField: FormFieldType = createFormConfig(
 
 const refNote: Note = createNoteConfig("Note: Ref. No is Auto");
 
-export const addEnqPiFormFields = {
+export const enqPiFormFields = {
   companyField,
   yearField,
   refNoField,
@@ -860,13 +860,12 @@ export const addEnqPiFormFields = {
   cityField,
   zipField,
   refNote,
-  //   2nd Side
-  givenNameField, //n
+  givenNameField,
   blankField,
   allField,
   recdOnField,
   serviceTypeField,
-  enqTypeField, //n
+  enqTypeField,
   priceField,
   localSourceField,
   dueOnField,
@@ -874,10 +873,9 @@ export const addEnqPiFormFields = {
   enqStatusField,
   sVisitField,
   notesForField,
-  fYearField, //n
+  fYearField,
   instructionField,
   adjustField,
-  //   Client Details
   clientRefField,
   clientField,
   requestNoField,

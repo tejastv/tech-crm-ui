@@ -96,7 +96,7 @@ export const Currency: React.FC = () => {
 
   const editCurrencyClick = (currencyData: any) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", currencyData.currencyId), {
-      state: currencyData,
+      state: null
     });
   };
 

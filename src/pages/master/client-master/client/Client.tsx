@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 import {
   BorderLayout,
@@ -11,6 +11,7 @@ import { COMMON_ROUTES } from "@constants/index";
 import { ClientType, useClientApiCallHook } from "@master/index";
 import { useNavigate } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
+import { usePagination } from "@hooks/usePagination";
 
 export const Client: React.FC = () => {
   const config = {
@@ -30,9 +31,16 @@ export const Client: React.FC = () => {
 
   const { getClient, deleteClientMutation } = useClientApiCallHook();
   const navigate = useNavigate();
-
-  const [limit, setLimit] = useState(100);
-  const [offset, setOffset] = useState(0);
+  const {
+    limit,
+    offset,
+    total,
+    nextButtonClick,
+    prevButtonClick,
+    isNextEnabled,
+    isPrevEnabled,
+    setTotalValue,
+  } = usePagination();
 
   const columns: ColumnDef<ClientType>[] = [
     {
@@ -250,6 +258,11 @@ export const Client: React.FC = () => {
     limit,
     offset,
   });
+
+  useEffect(() => {
+    setTotalValue(receivedObj?.count!);
+  }, [receivedObj?.count]);
+
   const clientData = receivedObj?.data;
 
   const { mutateAsync: deleteClient } = deleteClientMutation();
@@ -265,14 +278,6 @@ export const Client: React.FC = () => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", clientData.clientId));
   };
 
-  const nextButtonClick = () => {
-    setOffset(offset + limit);
-  };
-
-  const prevButtonClick = () => {
-    setOffset(offset - limit);
-  };
-
   const tableConfig: TableType<ClientType> = {
     config: {
       tableName: "Client",
@@ -286,10 +291,12 @@ export const Client: React.FC = () => {
       globalSearchBox: true,
       pagination: {
         pageSize: limit,
+        offset,
+        total,
         nextPreviousBtnShow: true,
         tableMetaDataShow: true,
-        isNextButtonEnabled: receivedObj?.count! > offset,
-        isPrevButtonEnabled: offset > 0,
+        isNextButtonEnabled: isNextEnabled,
+        isPrevButtonEnabled: isPrevEnabled,
       },
       onDeleteClick: deleteClientClick,
       onEditClick: editClientClick,
