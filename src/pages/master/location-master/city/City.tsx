@@ -90,6 +90,7 @@ export const City: React.FC = () => {
         pageSize: 10,
         nextPreviousBtnShow: true,
         tableMetaDataShow: true,
+        isClientSidePagination: true,
       },
       onDeleteClick: deleteCityClick,
       onEditClick: editCityClick,

@@ -173,6 +173,7 @@ export const CompanyMaster: React.FC = () => {
         tableMetaDataShow: true,
         isNextButtonEnabled: isNextEnabled,
         isPrevButtonEnabled: isPrevEnabled,
+        isClientSidePagination: false,
       },
       onDeleteClick: deleteCompanyClick,
       onEditClick: editCompanyClick,
