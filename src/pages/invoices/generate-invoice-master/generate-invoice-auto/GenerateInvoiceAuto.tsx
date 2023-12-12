@@ -9,6 +9,7 @@ import {
   TableType,
   NewInput,
   NewSelect,
+  NewRadio,
 } from "@shared/index";
 import {
   GenerateInvoiceAutoType,
@@ -246,8 +247,12 @@ export const InvoiceGenerateAuto: React.FC = () => {
             <div className="row">
               <div className="col-md-6 col-xs-12">
                 <div className="card-body">
-                  <Radio config={generateInvoiceAutoFormFields.action.config} />
-
+                  <NewRadio
+                    errors={errors}
+                    register={register}
+                    control={control}
+                    config={generateInvoiceAutoFormFields.action}
+                  />
                   <NewSelect
                     errors={errors}
                     register={register}

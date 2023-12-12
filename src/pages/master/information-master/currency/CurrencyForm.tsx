@@ -14,6 +14,7 @@ import {
   useCurrencyApiCallHook,
 } from "@master/index";
 import { useParams, useLocation } from "react-router-dom";
+import { cleanupObject } from "@utils/index";
 
 export const CurrencyForm: React.FC = () => {
   const {
@@ -88,11 +89,25 @@ export const CurrencyForm: React.FC = () => {
     }
   }, [params.id, localCurrencyData]);
 
-  const onSubmit = handleSubmit((currencyData) => {
-    if (params.id && currencyData) {
-      updateCurrency({ id: params.id, ...currencyData });
+  const mapSupplierRequest = (supplierFormData: CurrencyFormType) => {
+    let supplierData: Partial<CurrencyType> = {
+      currencySymbol: supplierFormData.currencySymbol,
+      currencyInWord: supplierFormData.currencyInWord,
+      currencyType: supplierFormData.currencyType,
+      entryDate: supplierFormData.entryDate,
+      exchangeRateRs: supplierFormData.exchangeRateRs,
+      entryDateSell: supplierFormData.entryDateSell,
+      exchangeRateRsSell: supplierFormData.exchangeRateRsSell,
+    };
+    return cleanupObject(supplierData);
+  };
+
+  const onSubmit = handleSubmit((currencyData: CurrencyFormType) => {
+    let reqObj: Partial<CurrencyType> = mapSupplierRequest(currencyData);
+    if (params.id && reqObj) {
+      updateCurrency({ currencyId: +params.id, ...reqObj });
     } else {
-      addCurrency(currencyData);
+      addCurrency(reqObj);
     }
   });
 
@@ -135,7 +150,9 @@ export const CurrencyForm: React.FC = () => {
               <div className="col-md-6">
                 <div className="row">
                   <div className="card-title col-md-12 m-t-40 text-center">
-                    <DivLayout heading={cardConfig.formPurchaseConfig.heading} />
+                    <DivLayout
+                      heading={cardConfig.formPurchaseConfig.heading}
+                    />
                     <hr />
                   </div>
                   <div className="col-md-12 col-xs-12">
