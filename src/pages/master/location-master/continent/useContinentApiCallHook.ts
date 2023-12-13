@@ -29,6 +29,7 @@ export const useContinentApiCallHook = () => {
         return mapedData;
       },
       staleTime: Infinity,
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 

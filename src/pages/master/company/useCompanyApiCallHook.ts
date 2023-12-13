@@ -32,6 +32,7 @@ export const useCompanyApiCallHook = () => {
         // return data;
         return { data: mapedData, count: response.data.data.count };
       },
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 

@@ -48,6 +48,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const columns = props.config.columns;
   const pageSizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   const { errorMessageToaster, successMessageToaster } = useToaster();
+  let clientSidePagination = !props.config.pagination?.isClientSidePagination ? false : true;
 
   const table = useReactTable({
     data,
@@ -95,7 +96,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   };
 
   const onNextClick = () => {
-    if (props.config.pagination?.isClientSidePagination) {
+    if (clientSidePagination) {
       table.nextPage();
     } else {
       props.config.onNextButtonClick && props.config.onNextButtonClick();
@@ -103,7 +104,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   };
 
   const onPrevClick = () => {
-    if (props.config.pagination?.isClientSidePagination) {
+    if (clientSidePagination) {
       table.previousPage();
     } else {
       props.config.onPrevButtonClick && props.config.onPrevButtonClick();
@@ -566,7 +567,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
           <div className="mt-3">
             <div className="row">
               <div className="col-sm-12 col-md-5">
-                {props.config.pagination?.isClientSidePagination ? (
+                {clientSidePagination ? (
                   <div
                     className="dataTables_info"
                     id="zero_config_info"
@@ -612,14 +613,14 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                           onClick={onPrevClick}
                           type="button"
                           disabled={
-                            props.config.pagination?.isClientSidePagination
+                            clientSidePagination
                               ? !table.getCanPreviousPage()
                               : !props.config.pagination.isPrevButtonEnabled
                           }
                           aria-controls="zero_config"
                           data-dt-idx="0"
                           className={`page-link ${
-                            (props.config.pagination?.isClientSidePagination
+                            (clientSidePagination
                               ? !table.getCanPreviousPage()
                               : !props.config.pagination.isPrevButtonEnabled) &&
                             "disabled"
@@ -638,14 +639,14 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                           data-dt-idx="1"
                           type="button"
                           className={`page-link ${
-                            (props.config.pagination?.isClientSidePagination
+                            (clientSidePagination
                               ? !table.getCanNextPage()
                               : !props.config.pagination.isNextButtonEnabled) &&
                             "disabled"
                           }`}
                           onClick={onNextClick}
                           disabled={
-                            props.config.pagination?.isClientSidePagination
+                            clientSidePagination
                               ? !table.getCanNextPage()
                               : !props.config.pagination.isNextButtonEnabled
                           }
