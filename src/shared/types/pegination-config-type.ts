@@ -7,4 +7,5 @@ export interface PeginationConfigType {
   tableMetaDataShow?: boolean;
   isNextButtonEnabled?: boolean;
   isPrevButtonEnabled?: boolean;
+  isClientSidePagination?: boolean;
 }
