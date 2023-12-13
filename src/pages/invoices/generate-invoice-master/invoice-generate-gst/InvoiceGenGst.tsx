@@ -8,10 +8,9 @@ import {
   TableType,
   NewSelect,
   NewInput,
-  NewRadio,
   NewCheckbox,
 } from "@shared/index";
-import { InvoiceListType, invoiceListFormFields } from "@invoices/index";
+import { InvoiceListType, invoiceGenGstFormFields } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const InvoiceGenerateGst: React.FC = () => {
@@ -21,10 +20,7 @@ export const InvoiceGenerateGst: React.FC = () => {
   //   const { mutateAsync: updateCurrency } = updateCurrencyMutation();
   const {
     register,
-    handleSubmit,
     control,
-    setValue,
-    reset,
     formState: { errors },
   } = useForm<InvoiceListType>();
   const cardConfig = {
@@ -160,14 +156,14 @@ export const InvoiceGenerateGst: React.FC = () => {
                   errors={errors}
                   register={register}
                   control={control}
-                  config={invoiceListFormFields.fYearField}
+                  config={invoiceGenGstFormFields.fYearField}
                 />
-                <NewRadio
+                {/* <NewRadio
                   errors={errors}
                   register={register}
                   control={control}
-                  config={invoiceListFormFields.allClientDatewiseField}
-                />
+                  config={invoiceGenGstFormFields.allClientDatewiseField}
+                /> */}
               </div>
               <div className="col-md-6">
                 <div className="row">
@@ -175,23 +171,23 @@ export const InvoiceGenerateGst: React.FC = () => {
                     <NewInput
                       errors={errors}
                       register={register}
-                      config={invoiceListFormFields.fromDateField}
+                      config={invoiceGenGstFormFields.fromDateField}
                     />
                   </div>
                   <div className="col-md-6 col-xs-12">
                     <NewInput
                       errors={errors}
                       register={register}
-                      config={invoiceListFormFields.toDateField}
+                      config={invoiceGenGstFormFields.toDateField}
                     />
                   </div>
                   <div className="col-md-6 col-xs-12">
-                    <NewSelect
+                    {/* <NewSelect
                       errors={errors}
                       register={register}
                       control={control}
-                      config={invoiceListFormFields.cityField}
-                    />
+                      config={invoiceGenGstFormFields.cityField}
+                    /> */}
                     <div className="col-md-14 col-xs-12 text-right">
                       <Button
                         type="button"
@@ -206,7 +202,7 @@ export const InvoiceGenerateGst: React.FC = () => {
                       errors={errors}
                       register={register}
                       control={control}
-                      config={invoiceListFormFields.clientField}
+                      config={invoiceGenGstFormFields.clientField}
                     />
                   </div>
                 </div>
@@ -215,12 +211,12 @@ export const InvoiceGenerateGst: React.FC = () => {
               <div className="col-md-3">
                 <div className="row">
                   <div className="col-md-4">
-                    <NewCheckbox
+                    {/* <NewCheckbox
                       errors={errors}
                       register={register}
                       control={control}
-                      config={invoiceListFormFields.bobField}
-                    />
+                      config={invoiceGenGstFormFields.bobField}
+                    /> */}
                   </div>
 
                   <div className="mb-2">

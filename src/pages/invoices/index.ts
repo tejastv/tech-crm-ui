@@ -1,4 +1,4 @@
-export { invoiceGenGstFormFields } from "./generate-invoice-master/invoice-generate-gst/invoice-gen-gst-form-fields";
+export { invoiceGenGstFormFields } from "./generate-invoice-master/invoice-generate-gst/invoiceGenGstFormFields";
 export { generateInvoiceAutoFormFields } from "./generate-invoice-master/generate-invoice-auto/add-generate-invoice-auto-form-fields";
 export { generateInvoiceActualBuyreFormFields } from "./generate-invoice-master/generate-invoice-actual-buyre/generate-invoice-actual-buyre-form-fields";
 
