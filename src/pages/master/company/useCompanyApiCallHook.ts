@@ -11,7 +11,7 @@ export const useCompanyApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getCompany = (queryObject: any) => {
+  const getCompany = (queryObject: any, condition?: boolean) => {
     return useQuery<{
       data: { [key: string | number]: CompanyType };
       count: number;
@@ -22,6 +22,7 @@ export const useCompanyApiCallHook = () => {
           params: {
             limit: queryObject.limit,
             offset: queryObject.offset,
+            searchString: queryObject.searchString,
           },
         });
         const data = response.data.data.records.sort(
@@ -32,6 +33,7 @@ export const useCompanyApiCallHook = () => {
         // return data;
         return { data: mapedData, count: response.data.data.count };
       },
+      enabled: condition,
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };

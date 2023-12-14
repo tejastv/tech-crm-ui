@@ -111,6 +111,8 @@ export const EnquiryForm: React.FC = () => {
     serviceTypeId: null,
     countryId: null,
   });
+  const [searchStringCompany, setSearchStringCompany] = useState<string>("");
+  const [searchStringClient, setSearchStringClient] = useState<string>("");
 
   // const countryRef = useRef(null);
   // const clientRef = useRef(null);
@@ -187,15 +189,16 @@ export const EnquiryForm: React.FC = () => {
     );
     enquiryFormFields.enqCountry.config.options = options;
   }
-  const {
-    limit,
-    offset,
-  } = usePagination();
+  const { limit, offset } = usePagination();
 
-  const { data: clientData } = getClient({
-    limit,
-    offset,
-  });
+  const { data: clientData } = getClient(
+    {
+      limit,
+      offset,
+      searchString: searchStringClient,
+    },
+    searchStringClient.length === 3
+  );
 
   useEffect(() => {
     if (clientData?.data) {
@@ -268,10 +271,14 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqLocalSource.config.options = options;
   }
 
-  const { data: companyData } = getCompany({
-    limit,
-    offset,
-  });
+  const { data: companyData } = getCompany(
+    {
+      limit,
+      offset,
+      searchString: searchStringCompany,
+    },
+    searchStringCompany.length === 3
+  );
 
   useEffect(() => {
     if (companyData?.data) {
@@ -322,6 +329,26 @@ export const EnquiryForm: React.FC = () => {
     );
     enquiryFormFields.enqStatus.config.options = options;
   }
+
+  const companyOnInputChangeHandler = (companyInputValue: any) => {
+    if (companyInputValue.length === 3) {
+      setSearchStringCompany(companyInputValue);
+    }
+    if (companyInputValue.length === 0) {
+      setCompanyOptions([]);
+      enquiryFormFields.enqCompanyName.config.options = [];
+    }
+  };
+
+  const clientOnInputChangeHandler = (clientInputValue: any) => {
+    if (clientInputValue.length === 3) {
+      setSearchStringClient(clientInputValue);
+    }
+    if (clientInputValue.length === 0) {
+      setClientOptions([]);
+      enquiryFormFields.enqClient.config.options = [];
+    }
+  };
 
   const companyOnChangeHandler = (companyData: any) => {
     if (companyData.data) {
@@ -849,6 +876,7 @@ export const EnquiryForm: React.FC = () => {
                 control={control}
                 config={enquiryFormFields.enqCompanyName}
                 onChange={companyOnChangeHandler}
+                onInputChange={companyOnInputChangeHandler}
               />
               <NewSelect
                 errors={errors}
@@ -945,6 +973,7 @@ export const EnquiryForm: React.FC = () => {
                   setValue("reportPrice", undefined);
                   getClientValue(e.value);
                 }}
+                onInputChange={clientOnInputChangeHandler}
               />
               <NewInput
                 errors={errors}
