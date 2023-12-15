@@ -1,4 +1,4 @@
-export interface PeginationConfigType {
+export interface PaginationConfigType {
   showItemCountDropdown?: boolean;
   pageSize?: number;
   offset?: number;

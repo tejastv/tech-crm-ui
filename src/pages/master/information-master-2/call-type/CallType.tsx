@@ -8,7 +8,7 @@ import {
   TableType,
 } from "@shared/index";
 import { COMMON_ROUTES } from "@constants/index";
-import { CallTypeType, useCallTypeApiCallHook } from "@master/index";
+import { CallMasterType, useCallTypeApiCallHook } from "@master/index";
 import { useNavigate } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -31,7 +31,7 @@ export const CallType: React.FC = () => {
     },
   };
 
-  const columns: ColumnDef<CallTypeType>[] = [
+  const columns: ColumnDef<CallMasterType>[] = [
     {
       id: "action",
       cell: (info) => info.getValue(),
@@ -50,7 +50,7 @@ export const CallType: React.FC = () => {
     },
   ];
 
-  const { data: callTypeData, isLoading } = getCallType();
+  const { data: callTypeData, isFetching } = getCallType();
   const { mutateAsync: deleteCallType } = deleteCallTypeMutation();
 
   const deleteCallTypeClick = async (callTypeData: any) => {
@@ -64,7 +64,7 @@ export const CallType: React.FC = () => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", callTypeData.typeId));
   };
 
-  const tableConfig: TableType<CallTypeType> = {
+  const tableConfig: TableType<CallMasterType> = {
     config: {
       tableName: "Call Type",
       columns: columns,
@@ -89,7 +89,7 @@ export const CallType: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

@@ -1,6 +1,6 @@
 import { FormFieldType, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
-const finyearValidation = {
+const finYearValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -20,7 +20,7 @@ const totaltaxValidation = {
     message: "30 characters max",
   },
 } as ValidationType;
-const staxValidation = {
+const staXValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -30,7 +30,7 @@ const staxValidation = {
     message: "30 characters max",
   },
 } as ValidationType;
-const edcessValidation = {
+const eDcessValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -40,7 +40,7 @@ const edcessValidation = {
     message: "30 characters max",
   },
 } as ValidationType;
-const cgstValidation = {
+const cGstValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -51,7 +51,7 @@ const cgstValidation = {
       "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
   },
 } as ValidationType;
-const sgstValidation = {
+const sGstValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -61,7 +61,7 @@ const sgstValidation = {
     message: "Invalid SGST %",
   },
 } as ValidationType;
-const igstValidation = {
+const iGstValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -71,7 +71,7 @@ const igstValidation = {
     message: "Invalid IGST %",
   },
 } as ValidationType;
-const startinvnoValidation = {
+const startInvNoValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -81,7 +81,7 @@ const startinvnoValidation = {
     message: "Invalid  start ref no",
   },
 } as ValidationType;
-const startrefnoValidation = {
+const startRefNoValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -92,17 +92,17 @@ const startrefnoValidation = {
   },
 } as ValidationType;
 
-const finyear: FormFieldType = createFormConfig(
+const finYear: FormFieldType = createFormConfig(
   "finYear",
   "Fin. Year",
   "number",
-  finyearValidation,
+  finYearValidation,
   "FIn Year",
   {},
   true
 );
-const totaltax: FormFieldType = createFormConfig(
-  "totaltax",
+const totalTax: FormFieldType = createFormConfig(
+  "totalTax",
   "Total Tax",
   "number",
   totaltaxValidation,
@@ -112,60 +112,60 @@ const stax: FormFieldType = createFormConfig(
   "stax",
   "S. Tax",
   "number",
-  staxValidation,
+  staXValidation,
   "S. Tax"
 );
 const edcess: FormFieldType = createFormConfig(
   "eduCess",
   "Ed.Cess",
   "number",
-  edcessValidation,
+  eDcessValidation,
   "Ed. Cess"
 );
 const cgst: FormFieldType = createFormConfig(
   "cgstper",
   "CGST %",
   "number",
-  cgstValidation,
+  cGstValidation,
   "CGST %"
 );
 const sgst: FormFieldType = createFormConfig(
   "sgstper",
   "SGST %",
   "number",
-  sgstValidation,
+  sGstValidation,
   "SGST %"
 );
 const igst: FormFieldType = createFormConfig(
   "igstper",
   "IGST %",
   "number",
-  igstValidation,
+  iGstValidation,
   "IGST %"
 );
-const startinvno: FormFieldType = createFormConfig(
+const startInvNo: FormFieldType = createFormConfig(
   "startinno",
   "Start Inv. No.",
   "text",
-  startinvnoValidation,
+  startInvNoValidation,
   "Start Inv.No."
 );
-const startrefno: FormFieldType = createFormConfig(
-  "startrefno",
+const startRefNo: FormFieldType = createFormConfig(
+  "startRefNo",
   "Start Ref. No.",
   "text",
-  startrefnoValidation,
+  startRefNoValidation,
   "Start Ref. No."
 );
 
 export const finYearFormFields = {
-  finyear,
-  totaltax,
+  finYear,
+  totalTax,
   stax,
   edcess,
   cgst,
   sgst,
   igst,
-  startinvno,
-  startrefno,
+  startInvNo,
+  startRefNo,
 };

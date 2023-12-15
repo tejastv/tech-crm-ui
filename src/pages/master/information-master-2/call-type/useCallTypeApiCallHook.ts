@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { CallTypeFormType, CallTypeType } from "@master/index";
+import { CallMasterType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -15,8 +15,8 @@ export const useCallTypeApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getCallType = (): UseQueryResult<CallTypeType[]> => {
-    return useQuery<CallTypeType[]>({
+  const getCallType = (): UseQueryResult<Array<CallMasterType>> => {
+    return useQuery<Array<CallMasterType>>({
       queryKey: [queryKeys.CALL_TYPE_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CALL_TYPE);
@@ -30,8 +30,11 @@ export const useCallTypeApiCallHook = () => {
     });
   };
 
-  const getCallTypeData = (id: string): UseQueryResult<CallTypeType> => {
-    return useQuery<CallTypeType>({
+  const getCallTypeData = (
+    id: string,
+    condition: boolean
+  ): UseQueryResult<CallMasterType> => {
+    return useQuery<CallMasterType>({
       queryKey: [queryKeys.CALL_TYPE_DATA, id],
       queryFn: async () => {
         const response = await instance.get(
@@ -39,14 +42,14 @@ export const useCallTypeApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 
   const addCallType = async (
-    callTypeData: CallTypeFormType
-  ): Promise<ApiResponseType<CallTypeType>> => {
+    callTypeData: Partial<CallMasterType>
+  ): Promise<ApiResponseType<CallMasterType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_CALL_TYPE,
       callTypeData
@@ -56,7 +59,7 @@ export const useCallTypeApiCallHook = () => {
 
   const addCallTypeMutation = () => {
     const mutation = useMutation(
-      (updatedItem: CallTypeFormType) => addCallType(updatedItem),
+      (updatedItem: Partial<CallMasterType>) => addCallType(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -70,8 +73,8 @@ export const useCallTypeApiCallHook = () => {
   };
 
   const updateCallTypeData = async (
-    updateCallTypeData: CallTypeFormType
-  ): Promise<ApiResponseType<CallTypeType>> => {
+    updateCallTypeData: Partial<CallMasterType>
+  ): Promise<ApiResponseType<CallMasterType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_CALL_TYPE.replace(
         "{id}",
@@ -84,7 +87,7 @@ export const useCallTypeApiCallHook = () => {
 
   const updateCallTypeMutation = () => {
     const mutation = useMutation(
-      (updatedItem: CallTypeFormType) => updateCallTypeData(updatedItem),
+      (updatedItem: Partial<CallMasterType>) => updateCallTypeData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -99,7 +102,7 @@ export const useCallTypeApiCallHook = () => {
 
   const deleteCallType = async (
     id: string
-  ): Promise<ApiResponseType<CallTypeType>> => {
+  ): Promise<ApiResponseType<CallMasterType>> => {
     const response = await instance.delete(
       apiUrls.GET_UPDATE_DELETE_CALL_TYPE.replace("{id}", id)
     );

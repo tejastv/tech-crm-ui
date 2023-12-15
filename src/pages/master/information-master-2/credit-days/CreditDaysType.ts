@@ -1,4 +1,4 @@
 export interface CreditDaysType {
   creditPeriodId: number;
-  creditPeriod: number;
+  creditPeriod: string | number;
 }

@@ -1,10 +1,11 @@
 export interface FinYearFormType {
   id?: number;
-  finYear: number;
+  finYear: string;
   eduCess: number;
   cgstper: number;
   igstper: number;
   sgstper: number;
   stax: number;
   serviceTax: number;
+  totalTax: number;
 }

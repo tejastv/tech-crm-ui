@@ -1,7 +1,7 @@
 import { FormFieldType, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
 
-const CallTypeValidation = {
+const callTypeValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -12,14 +12,14 @@ const CallTypeValidation = {
   },
 } as ValidationType;
 
-const calltype: FormFieldType = createFormConfig(
+const callType: FormFieldType = createFormConfig(
   "typeName",
   "Call Type",
   "text",
-  CallTypeValidation,
+  callTypeValidation,
   "Call Type"
 );
 
 export const callTypeFormFields = {
-  calltype,
+  callType,
 };
