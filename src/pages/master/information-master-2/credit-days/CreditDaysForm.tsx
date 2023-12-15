@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
+import { ActionButtons, BorderLayout, Card, NewInput } from "@shared/index";
 import {
   CreditDaysFormType,
+  CreditDaysType,
   creditDaysFormFields,
   useCreditDaysApiCallHook,
 } from "@master/index";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { cleanupObject } from "@utils/index";
 
 export const CreditDaysForm: React.FC = () => {
   const params = useParams();
@@ -20,57 +22,77 @@ export const CreditDaysForm: React.FC = () => {
       heading: "Action Buttons",
     },
   };
-
-  const methods = useForm<CreditDaysFormType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<CreditDaysFormType>();
+  const { state: localCreditDaysData } = useLocation();
   const { addCreditDaysMutation, getCreditDaysData, updateCreditDaysMutation } =
     useCreditDaysApiCallHook();
   const { mutateAsync: addCreditDays } = addCreditDaysMutation();
   const { mutateAsync: updateCreditDays } = updateCreditDaysMutation();
 
-  if (params.id) {
-    const { data: creditDays, isSuccess: creditDaysSuccess } =
-      getCreditDaysData("" + params.id);
-    if (creditDaysSuccess) {
-      creditDaysFormFields.creditdays.config.setData = creditDays.creditPeriod;
-    }
-  } else {
-    useEffect(() => {
-      methods.reset();
-    }, []);
-  }
+  const { data: creditDays } = getCreditDaysData(
+    "" + params.id,
+    !localCreditDaysData && params.id !== undefined
+  );
 
-  const onSubmit = methods.handleSubmit((creditDays): void => {
-    let data: any = { ...creditDays };
-    if (params.id && creditDays) {
-      updateCreditDays({ id: +params.id, ...data });
+  const mapCreditDaysDataToCreditDaysForm = (creditDaysData: CreditDaysType) => {
+    let creditDayFormData: Partial<CreditDaysFormType> = {
+      creditPeriod: creditDaysData.creditPeriod,
+    };
+    return creditDayFormData;
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      if (creditDays && Object.values(creditDays).length > 0) {
+        reset(mapCreditDaysDataToCreditDaysForm(creditDays));
+      }
+    }
+  }, [params.id, creditDays]);
+
+  const mapCreditDaysRequest = (creditDaysFormData: CreditDaysFormType) => {
+    let creditDaysData: Partial<CreditDaysType> = {
+      creditPeriod: creditDaysFormData.creditPeriod,
+    };
+    return cleanupObject(creditDaysData);
+  };
+
+  const onSubmit = handleSubmit((creditDays: CreditDaysFormType): void => {
+    let reqObj: Partial<CreditDaysType> = mapCreditDaysRequest(creditDays);
+    if (params.id && reqObj) {
+      updateCreditDays({ creditPeriodId: +params.id, ...reqObj });
     } else {
-      addCreditDays(data);
+      addCreditDays(reqObj);
     }
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <Input config={creditDaysFormFields.creditdays.config} />
-                </div>
-              </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
-      </Card>
-    </>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={creditDaysFormFields.creditDays}
+              />
+            </div>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

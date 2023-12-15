@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { SiteStatusFormType, SiteStatusType } from "@master/index";
+import { SiteStatusType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -15,8 +15,8 @@ export const useSiteStatusApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getSiteStatus = (): UseQueryResult<SiteStatusType[]> => {
-    return useQuery<SiteStatusType[]>({
+  const getSiteStatus = (): UseQueryResult<Array<SiteStatusType>> => {
+    return useQuery<Array<SiteStatusType>>({
       queryKey: [queryKeys.SITE_STATUS_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_SITE_STATUS);
@@ -30,7 +30,10 @@ export const useSiteStatusApiCallHook = () => {
     });
   };
 
-  const getSiteStatusData = (id: string): UseQueryResult<SiteStatusType> => {
+  const getSiteStatusData = (
+    id: string,
+    condition: boolean
+  ): UseQueryResult<SiteStatusType> => {
     return useQuery<SiteStatusType>({
       queryKey: [queryKeys.SITE_STATUS_DATA, id],
       queryFn: async () => {
@@ -39,13 +42,13 @@ export const useSiteStatusApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 
   const addSiteStatus = async (
-    siteStatusData: SiteStatusFormType
+    siteStatusData: Partial<SiteStatusType>
   ): Promise<ApiResponseType<SiteStatusType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_SITE_STATUS,
@@ -56,7 +59,7 @@ export const useSiteStatusApiCallHook = () => {
 
   const addSiteStatusMutation = () => {
     const mutation = useMutation(
-      (updatedItem: SiteStatusFormType) => addSiteStatus(updatedItem),
+      (updatedItem: Partial<SiteStatusType>) => addSiteStatus(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -70,7 +73,7 @@ export const useSiteStatusApiCallHook = () => {
   };
 
   const updateSiteStatusData = async (
-    updateSiteStatusData: SiteStatusFormType
+    updateSiteStatusData: Partial<SiteStatusType>
   ): Promise<ApiResponseType<SiteStatusType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_SITE_STATUS.replace(
@@ -84,7 +87,8 @@ export const useSiteStatusApiCallHook = () => {
 
   const updateSiteStatusMutation = () => {
     const mutation = useMutation(
-      (updatedItem: SiteStatusFormType) => updateSiteStatusData(updatedItem),
+      (updatedItem: Partial<SiteStatusType>) =>
+        updateSiteStatusData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
