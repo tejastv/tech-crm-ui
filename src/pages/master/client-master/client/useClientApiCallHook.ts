@@ -17,7 +17,8 @@ export const useClientApiCallHook = () => {
   const navigate = useNavigate();
 
   const getClient = (
-    queryObject: any
+    queryObject: any,
+    condition?: boolean
   ): UseQueryResult<{ data: MapType<ClientType>; count: number }> => {
     return useQuery<{ data: MapType<ClientType>; count: number }>({
       queryKey: [queryKeys.CLIENT_DATA, queryObject],
@@ -26,6 +27,7 @@ export const useClientApiCallHook = () => {
           params: {
             limit: queryObject.limit,
             offset: queryObject.offset,
+            searchString: queryObject.searchString,
           },
         });
         let mapedData = selectOptionsMapMaker(
@@ -35,6 +37,7 @@ export const useClientApiCallHook = () => {
         );
         return { data: mapedData, count: response.data.data.count };
       },
+      enabled: condition,
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
