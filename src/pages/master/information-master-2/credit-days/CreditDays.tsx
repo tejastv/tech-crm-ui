@@ -50,7 +50,7 @@ export const CreditDays: React.FC = () => {
     },
   ];
 
-  const { data: creditDaysData, isLoading } = getCreditDays();
+  const { data: creditDaysData, isFetching } = getCreditDays();
   const { mutateAsync: deleteCreditDays } = deleteCreditDaysMutation();
 
   const deleteCreditDaysClick = async (creditDaysData: any) => {
@@ -61,7 +61,9 @@ export const CreditDays: React.FC = () => {
   };
 
   const editCreditDaysClick = (creditDaysData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", creditDaysData.creditPeriodId));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", creditDaysData.creditPeriodId), {
+      state: null
+    });
   };
 
   const tableConfig: TableType<CreditDaysType> = {
@@ -89,7 +91,7 @@ export const CreditDays: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+      {!isFetching ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

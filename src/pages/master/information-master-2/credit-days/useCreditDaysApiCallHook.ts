@@ -15,8 +15,8 @@ export const useCreditDaysApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getCreditDays = (): UseQueryResult<CreditDaysType[]> => {
-    return useQuery<CreditDaysType[]>({
+  const getCreditDays = (): UseQueryResult<Array<CreditDaysType>> => {
+    return useQuery<Array<CreditDaysType>>({
       queryKey: [queryKeys.CREDIT_DAYS_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CREDIT_DAYS);
@@ -30,7 +30,7 @@ export const useCreditDaysApiCallHook = () => {
     });
   };
 
-  const getCreditDaysData = (id: string): UseQueryResult<CreditDaysType> => {
+  const getCreditDaysData = (id: string, condition: boolean): UseQueryResult<CreditDaysType> => {
     return useQuery<CreditDaysType>({
       queryKey: [queryKeys.CREDIT_DAYS_DATA, id],
       queryFn: async () => {
@@ -39,13 +39,13 @@ export const useCreditDaysApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 
   const addCreditDays = async (
-    creditDaysData: CreditDaysFormType
+    creditDaysData: Partial<CreditDaysType>
   ): Promise<ApiResponseType<CreditDaysType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_CREDIT_DAYS,
@@ -56,7 +56,7 @@ export const useCreditDaysApiCallHook = () => {
 
   const addCreditDaysMutation = () => {
     const mutation = useMutation(
-      (updatedItem: CreditDaysFormType) => addCreditDays(updatedItem),
+      (updatedItem: Partial<CreditDaysType>) => addCreditDays(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -70,12 +70,12 @@ export const useCreditDaysApiCallHook = () => {
   };
 
   const updateCreditDaysData = async (
-    updateCreditDaysData: CreditDaysFormType
+    updateCreditDaysData: Partial<CreditDaysType>
   ): Promise<ApiResponseType<CreditDaysType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_CREDIT_DAYS.replace(
         "{id}",
-        "" + updateCreditDaysData.id
+        "" + updateCreditDaysData.creditPeriodId
       ),
       updateCreditDaysData
     );
@@ -84,7 +84,7 @@ export const useCreditDaysApiCallHook = () => {
 
   const updateCreditDaysMutation = () => {
     const mutation = useMutation(
-      (updatedItem: CreditDaysFormType) => updateCreditDaysData(updatedItem),
+      (updatedItem: Partial<CreditDaysType>) => updateCreditDaysData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

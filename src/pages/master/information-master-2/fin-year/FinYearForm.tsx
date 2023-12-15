@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
+import { ActionButtons, BorderLayout, Card, NewInput } from "@shared/index";
 import {
   FinYearFormType,
+  FinYearType,
   finYearFormFields,
   useFinYearApiCallHook,
 } from "@master/index";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { cleanupObject } from "@utils/index";
 
 export const FinYearForm: React.FC = () => {
-  const methods = useForm<FinYearFormType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm<FinYearFormType>();
+  const { state: localFinYearData } = useLocation();
   const {
     addFinYearMutation,
     getFinYearData,
@@ -20,7 +29,6 @@ export const FinYearForm: React.FC = () => {
   const { mutateAsync: addFinYear } = addFinYearMutation();
   const { mutateAsync: updateFinYear } = updateFinYearMutation();
   const params = useParams();
-  const [lastFinYear, setLastFinYear] = useState<number>();
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: params.id ? "Update Fin Year" : "Add Fin Year",
@@ -31,81 +39,126 @@ export const FinYearForm: React.FC = () => {
     },
   };
 
-  finYearFormFields.finyear.config.setData = lastFinYear;
+  const { data: lastFinYear } = getLastFinYear(params.id === undefined);
 
-  if (params.id) {
-    const { data: finYearData, isSuccess: finYearDataSuccess } = getFinYearData(
-      "" + params.id
-    );
-    if (finYearDataSuccess) {
-      console.log(finYearData);
-      finYearFormFields.finyear.config.setData = finYearData.finYear;
-      finYearFormFields.totaltax.config.setData = finYearData.serviceTax;
-      finYearFormFields.stax.config.setData = finYearData.stax;
-      finYearFormFields.edcess.config.setData = finYearData.eduCess;
-      finYearFormFields.cgst.config.setData = finYearData.cgstper;
-      finYearFormFields.sgst.config.setData = finYearData.sgstper;
-      finYearFormFields.igst.config.setData = finYearData.igstper;
+  useEffect(() => {
+    if (lastFinYear) {
+      if (finYearFormFields.finYear.config.name == "finYear") {
+        setValue(finYearFormFields.finYear.config.name, lastFinYear);
+      }
     }
-  } else {
-    useEffect(() => {
-      methods.reset();
-      getLastFinYear().then((finYear) => {
-        if (finYear) {
-          setLastFinYear(finYear.data);
-        }
-      });
-    }, []);
-  }
+  }, [lastFinYear]);
 
-  const onSubmit = methods.handleSubmit((finYearData): void => {
-    let data: any = { ...finYearData };
-    console.log(data);
+  const { data: finYearData } = getFinYearData(
+    "" + params.id,
+    !localFinYearData && params.id !== undefined
+  );
+
+  const mapFinYearDataToFinYearForm = (finYearData: FinYearType) => {
+    let finYearFormData: Partial<FinYearFormType> = {
+      finYear: finYearData.finYear,
+      totalTax: finYearData.serviceTax,
+      stax: finYearData.stax,
+      eduCess: finYearData.eduCess,
+      cgstper: finYearData.cgstper,
+      sgstper: finYearData.sgstper,
+      igstper: finYearData.igstper,
+    };
+    return finYearFormData;
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      if (finYearData && Object.values(finYearData).length > 0) {
+        reset(mapFinYearDataToFinYearForm(finYearData));
+      }
+    }
+  }, [params.id, finYearData]);
+
+  const mapFinYearRequest = (finYearFormData: FinYearFormType) => {
+    let finYearData: Partial<FinYearType> = {
+      finYear: finYearFormData.finYear,
+      serviceTax: finYearFormData.totalTax,
+      cgstper: finYearFormData.cgstper,
+      igstper: finYearFormData.igstper,
+      sgstper: finYearFormData.sgstper,
+      stax: finYearFormData.stax,
+      eduCess: finYearFormData.eduCess,
+    };
+    return cleanupObject(finYearData);
+  };
+
+  const onSubmit = handleSubmit((finYearData: FinYearFormType): void => {
+    let reqObj: Partial<FinYearType> = mapFinYearRequest(finYearData);
     if (params.id && finYearData) {
-      updateFinYear({ id: params.id, ...data });
+      updateFinYear({ id: +params.id, ...reqObj });
     } else {
-      addFinYear(data);
+      addFinYear(reqObj);
     }
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <Input config={finYearFormFields.finyear.config} />
-                    <Input config={finYearFormFields.stax.config} />
-                    <Input config={finYearFormFields.edcess.config} />
-                    <Input config={finYearFormFields.totaltax.config} />
-                  </div>
-                </div>
-
-                <div className="col-md-6 col-xs-12">
-                  <div className="card-body">
-                    <Input config={finYearFormFields.cgst.config} />
-                    <Input config={finYearFormFields.sgst.config} />
-                    <Input config={finYearFormFields.igst.config} />
-                    {/* <Input config={finYearFormFields.startinvno.config} /> */}
-                    {/* <Input config={finYearFormFields.startrefno.config} /> */}
-                  </div>
-                </div>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <div className="card-body">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={finYearFormFields.finYear}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={finYearFormFields.stax}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={finYearFormFields.edcess}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={finYearFormFields.totalTax}
+                />
               </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
-      </Card>
-    </>
+            </div>
+
+            <div className="col-md-6 col-xs-12">
+              <div className="card-body">
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={finYearFormFields.cgst}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={finYearFormFields.sgst}
+                />
+                <NewInput
+                  errors={errors}
+                  register={register}
+                  config={finYearFormFields.igst}
+                />
+                {/* <Input config={finYearFormFields.startinvno.config} /> */}
+                {/* <Input config={finYearFormFields.startrefno.config} /> */}
+              </div>
+            </div>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

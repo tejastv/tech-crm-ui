@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import { ActionButtons, BorderLayout, Card, Input } from "@shared/index";
+import { ActionButtons, BorderLayout, Card, NewInput } from "@shared/index";
 import {
   SourceFormType,
+  SourceType,
   sourceFormFields,
   useSourceApiCallHook,
 } from "@master/index";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { fileToBase64 } from "@utils/fileToBase64";
 
 export const SourceForm: React.FC = () => {
@@ -21,27 +22,40 @@ export const SourceForm: React.FC = () => {
       heading: "Action Buttons",
     },
   };
-
-  const methods = useForm<SourceFormType>();
+  const { state: localSourceData } = useLocation();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<SourceFormType>();
   const { addSourceMutation, getSourceData, updateSourceMutation } =
     useSourceApiCallHook();
   const { mutateAsync: addSource } = addSourceMutation();
   const { mutateAsync: updateSource } = updateSourceMutation();
 
-  if (params.id) {
-    const { data: sourceData, isSuccess: sourceDataSuccess } = getSourceData(
-      "" + params.id
-    );
-    if (sourceDataSuccess) {
-      sourceFormFields.source.config.setData = sourceData.source;
-    }
-  } else {
-    useEffect(() => {
-      methods.reset();
-    }, []);
-  }
+  const { data: sourceData } = getSourceData(
+    "" + params.id,
+    !localSourceData && params.id !== undefined
+  );
 
-  const onSubmit = methods.handleSubmit((sourceData): void => {
+  const mapSourceDataToSourceForm = (sourceData: SourceType) => {
+    let sourceFormData: Partial<SourceFormType> = {
+      source: sourceData.source,
+      firstLetterFile: sourceData.firstLetterFile,
+    };
+    return sourceFormData;
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      if (sourceData && Object.values(sourceData).length > 0) {
+        reset(mapSourceDataToSourceForm(sourceData));
+      }
+    }
+  }, [params.id, sourceData]);
+
+  const onSubmit = handleSubmit((sourceData): void => {
     let data: any = { ...sourceData };
     fileToBase64(data.firstLetterFile, (base64String) => {
       data.firstLetterFile = base64String;
@@ -54,31 +68,35 @@ export const SourceForm: React.FC = () => {
   });
 
   return (
-    <>
-      <Card config={cardConfig.formLayoutConfig}>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-              <div className="row">
-                <div className="col-md-6 col-xs-12">
-                  <Input config={sourceFormFields.source.config} />
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  <Input config={sourceFormFields.letterfile.config} />
-                </div>
-              </div>
-            </BorderLayout>
-            <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-              <ActionButtons />
-            </BorderLayout>
-          </form>
-        </FormProvider>
-      </Card>
-    </>
+    <Card config={cardConfig.formLayoutConfig}>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        autoComplete="off"
+        className="p-t-20"
+      >
+        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={sourceFormFields.source}
+              />
+            </div>
+            <div className="col-md-6 col-xs-12">
+              <NewInput
+                errors={errors}
+                register={register}
+                config={sourceFormFields.letterFile}
+              />
+            </div>
+          </div>
+        </BorderLayout>
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          <ActionButtons />
+        </BorderLayout>
+      </form>
+    </Card>
   );
 };

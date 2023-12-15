@@ -1,9 +1,6 @@
 import { useAxios } from "@hooks/useAxios";
 import {
-  FinYearFormType,
   FinYearType,
-  LastFinYearType,
-  // LastFinYearType,
 } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
@@ -21,40 +18,37 @@ export const useFinYearApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getFinYear = (): UseQueryResult<FinYearType[]> => {
-    return useQuery<FinYearType[]>({
+  const getFinYear = (): UseQueryResult<Array<FinYearType>> => {
+    return useQuery<Array<FinYearType>>({
       queryKey: [queryKeys.FIN_YEAR_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_FIN_YEAR);
-        const data = response.data.data.sort(
-          (a: { finYear: number }, b: { finYear: number }) =>
-            b.finYear - a.finYear
-        );
-        let mapedData = selectOptionsMapMaker(data, "finYear", "finYear");
+        const data = response.data.data;
+        let mappedData = selectOptionsMapMaker(data, "finYear", "finYear");
         // return data;
-        return mapedData;
+        return mappedData;
       },
       staleTime: Infinity,
     });
   };
 
-  // const getLastFinYear = (): UseQueryResult<LastFinYearType> => {
-  //   return useQuery<LastFinYearType>({
-  //     queryKey: [queryKeys.LAST_FIN_YEAR],
-  //     queryFn: async () => {
-  //       const response = await instance.get(apiUrls.GET_LAST_FIN_YEAR);
-  //       return response.data;
-  //     },
-  //     staleTime: Infinity,
-  //   });
-  // };
-
-  const getLastFinYear = async (): Promise<LastFinYearType> => {
-    const response = await instance.get(apiUrls.GET_LAST_FIN_YEAR);
-    return response.data;
+  const getLastFinYear = (condition: any): UseQueryResult<string> => {
+    return useQuery<string>({
+      queryKey: [queryKeys.LAST_FIN_YEAR],
+      queryFn: async () => {
+        const response = await instance.get(
+          apiUrls.GET_LAST_FIN_YEAR
+        );
+        return response.data.data;
+      },
+      enabled: condition,
+      staleTime: 0,
+      cacheTime: 0,
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+    });
   };
 
-  const getFinYearData = (id: string): UseQueryResult<FinYearType> => {
+  const getFinYearData = (id: string, condition: boolean): UseQueryResult<FinYearType> => {
     return useQuery<FinYearType>({
       queryKey: [queryKeys.FIN_YEAR_DATA, id],
       queryFn: async () => {
@@ -63,13 +57,13 @@ export const useFinYearApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 
   const addFinYear = async (
-    finYearData: FinYearFormType
+    finYearData: Partial<FinYearType>
   ): Promise<ApiResponseType<FinYearType>> => {
     const response = await instance.post(apiUrls.GET_ADD_FIN_YEAR, finYearData);
     return response.data.data;
@@ -77,7 +71,7 @@ export const useFinYearApiCallHook = () => {
 
   const addFinYearMutation = () => {
     const mutation = useMutation(
-      (updatedItem: FinYearFormType) => addFinYear(updatedItem),
+      (updatedItem: Partial<FinYearType>) => addFinYear(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -91,7 +85,7 @@ export const useFinYearApiCallHook = () => {
   };
 
   const updateFinYearData = async (
-    updateFinYearData: FinYearFormType
+    updateFinYearData: Partial<FinYearType>
   ): Promise<ApiResponseType<FinYearType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_FIN_YEAR.replace(
@@ -105,7 +99,7 @@ export const useFinYearApiCallHook = () => {
 
   const updateFinYearMutation = () => {
     const mutation = useMutation(
-      (updatedItem: FinYearFormType) => updateFinYearData(updatedItem),
+      (updatedItem: Partial<FinYearType>) => updateFinYearData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

@@ -1,4 +1,4 @@
 export interface PurposeMasterType {
-  purposeID: number;
+  purposeId: number;
   purpose: string;
 }

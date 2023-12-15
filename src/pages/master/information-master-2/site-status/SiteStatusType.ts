@@ -1,5 +1,5 @@
 export interface SiteStatusType {
-  id?: number;
-  sitestatusId: number;
+  id: number;
+  siteStatusId: number;
   siteStatus: string;
 }

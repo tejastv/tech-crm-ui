@@ -50,18 +50,20 @@ export const SiteStatus: React.FC = () => {
     },
   ];
 
-  const { data: siteStatusData, isLoading } = getSiteStatus();
+  const { data: siteStatusData, isFetching } = getSiteStatus();
   const { mutateAsync: deleteSiteStatus } = deleteSiteStatusMutation();
 
-  const deleteSiteStatusClick = async (siteStatusData: any) => {
+  const deleteSiteStatusClick = async (siteStatusData: SiteStatusType) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deleteSiteStatus(siteStatusData.id);
+      await deleteSiteStatus(siteStatusData.id.toString());
     }
   };
 
-  const editSiteStatusClick = (siteStatusData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", siteStatusData.id));
+  const editSiteStatusClick = (siteStatusData: SiteStatusType) => {
+    navigate(COMMON_ROUTES.EDIT.replace(":id", siteStatusData.id.toString()), {
+      state: null
+    });
   };
 
   const tableConfig: TableType<SiteStatusType> = {
@@ -89,7 +91,7 @@ export const SiteStatus: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+      {!isFetching ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );
