@@ -92,10 +92,11 @@ const GET_CITY_WISE_CLIENT_GROUP = "client/clientGroup/city/{id}";
 
 // Transaction Master
 
-const GET_ADD_ALL_ENQUIRY = "transaction/enquiry";
-const GET_UPDATE_DELETE_ALL_ENQUIRY = "transaction/enquiry/{id}";
-const GET_ADD_ALL_ENQUIRY_SEARCH = "transaction/allEnquiryAndSearch";
-const GET_PRICE = "client/{client_id}/country/{country_id}/serviceType/{serviceTypeId}"
+const GET_ADD_ALL_ENQUIRY = "transaction/enquiries";
+const GET_UPDATE_DELETE_ALL_ENQUIRY = "transaction/enquiries/{id}";
+const GET_ADD_ALL_ENQUIRY_SEARCH = "transaction/enquiries";
+const GET_PRICE =
+  "client/{client_id}/country/{country_id}/serviceType/{serviceTypeId}";
 
 const GET_ADD_SERVICETYPE = "transaction/serviceType";
 const GET_ADD_ENQTYPE = "transaction/enquiryStatus";
