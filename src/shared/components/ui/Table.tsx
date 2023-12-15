@@ -48,6 +48,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const columns = props.config.columns;
   const pageSizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   const { errorMessageToaster, successMessageToaster } = useToaster();
+  let clientSidePagination = !props.config.pagination?.isClientSidePagination ? false : true;
 
   const table = useReactTable({
     data,
@@ -95,13 +96,19 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   };
 
   const onNextClick = () => {
-    // table.nextPage();
-    props.config.onNextButtonClick && props.config.onNextButtonClick();
+    if (clientSidePagination) {
+      table.nextPage();
+    } else {
+      props.config.onNextButtonClick && props.config.onNextButtonClick();
+    }
   };
 
   const onPrevClick = () => {
-    // table.previousPage();
-    props.config.onPrevButtonClick && props.config.onPrevButtonClick();
+    if (clientSidePagination) {
+      table.previousPage();
+    } else {
+      props.config.onPrevButtonClick && props.config.onPrevButtonClick();
+    }
   };
 
   const onTableEditBtnClick = (data: any) => {
@@ -560,27 +567,35 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
           <div className="mt-3">
             <div className="row">
               <div className="col-sm-12 col-md-5">
-                <div
-                  className="dataTables_info"
-                  id="zero_config_info"
-                  role="status"
-                  aria-live="polite"
-                >
-                  Showing {props?.config?.pagination?.offset! + 1} to
-                  {props?.config?.pagination?.offset! +
-                    props?.config?.pagination?.pageSize!}{" "}
-                  of {props?.config?.pagination?.total} entries
-                </div>
-                {/* <div
-                  className="dataTables_info"
-                  id="zero_config_info"
-                  role="status"
-                  aria-live="polite"
-                >!
-                  Showing {table.getState().pagination.pageIndex + 1} to
-                  {table.getState().pagination.pageSize} of{" "}
-                  {table.getRowModel().rows.length} entries
-                </div> */}
+                {clientSidePagination ? (
+                  <div
+                    className="dataTables_info"
+                    id="zero_config_info"
+                    role="status"
+                    aria-live="polite"
+                  >
+                    Showing{" "}
+                    {table.getState().pagination.pageIndex *
+                      table.getState().pagination.pageSize +
+                      1}{" "}
+                    to{" "}
+                    {(table.getState().pagination.pageIndex + 1) *
+                      table.getState().pagination.pageSize}{" "}
+                    of {table.getTotalSize()} entries
+                  </div>
+                ) : (
+                  <div
+                    className="dataTables_info"
+                    id="zero_config_info"
+                    role="status"
+                    aria-live="polite"
+                  >
+                    Showing {props?.config?.pagination?.offset! + 1} to
+                    {props?.config?.pagination?.offset! +
+                      props?.config?.pagination?.pageSize!}{" "}
+                    of {props?.config?.pagination?.total} entries
+                  </div>
+                )}
               </div>
               {props.config.pagination.nextPreviousBtnShow && (
                 <div className="col-sm-12 col-md-7">
@@ -598,12 +613,16 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                           onClick={onPrevClick}
                           type="button"
                           disabled={
-                            !props.config.pagination.isPrevButtonEnabled
+                            clientSidePagination
+                              ? !table.getCanPreviousPage()
+                              : !props.config.pagination.isPrevButtonEnabled
                           }
                           aria-controls="zero_config"
                           data-dt-idx="0"
                           className={`page-link ${
-                            !props.config.pagination.isPrevButtonEnabled &&
+                            (clientSidePagination
+                              ? !table.getCanPreviousPage()
+                              : !props.config.pagination.isPrevButtonEnabled) &&
                             "disabled"
                           }`}
                         >
@@ -620,12 +639,16 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                           data-dt-idx="1"
                           type="button"
                           className={`page-link ${
-                            !props.config.pagination.isNextButtonEnabled &&
+                            (clientSidePagination
+                              ? !table.getCanNextPage()
+                              : !props.config.pagination.isNextButtonEnabled) &&
                             "disabled"
                           }`}
                           onClick={onNextClick}
                           disabled={
-                            !props.config.pagination.isNextButtonEnabled
+                            clientSidePagination
+                              ? !table.getCanNextPage()
+                              : !props.config.pagination.isNextButtonEnabled
                           }
                         >
                           Next

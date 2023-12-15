@@ -486,7 +486,9 @@ const invoiceNoField: FormFieldType = createFormConfig(
   "Invoice No.",
   "text",
   invoiceNoValidation,
-  ""
+  "",
+  {},
+  true
 );
 const manualField: FormFieldType = createFormConfig(
   "manual",
@@ -501,14 +503,18 @@ const amountField: FormFieldType = createFormConfig(
   "Amount",
   "text",
   amountValidation,
-  ""
+  "",
+  {},
+  true
 );
 const disAmountField: FormFieldType = createFormConfig(
   "disamt",
   "Dis.Amt",
   "text",
   disAmountValidation,
-  ""
+  "",
+  {},
+  true
 );
 
 const stField: FormFieldType = createFormConfig(
@@ -524,7 +530,9 @@ const cgstPerField: FormFieldType = createFormConfig(
   "CGST%",
   "text",
   cgstPerValidation,
-  ""
+  "",
+  {},
+  true
 );
 
 const stAmountField: FormFieldType = createFormConfig(
@@ -540,7 +548,9 @@ const cgstField: FormFieldType = createFormConfig(
   "CGST",
   "text",
   cgstValidation,
-  ""
+  "",
+  {},
+  true
 );
 
 const dateField: FormFieldType = createFormConfig(
@@ -565,7 +575,9 @@ const subtotalField: FormFieldType = createFormConfig(
   "Sub Total",
   "text",
   subTotalValidation,
-  ""
+  "",
+  {},
+  true
 );
 
 const sGstPerField: FormFieldType = createFormConfig(
@@ -573,7 +585,9 @@ const sGstPerField: FormFieldType = createFormConfig(
   "SGST%",
   "text",
   sgstPerValidation,
-  ""
+  "",
+  {},
+  true
 );
 
 const iGstPerField: FormFieldType = createFormConfig(
@@ -581,7 +595,9 @@ const iGstPerField: FormFieldType = createFormConfig(
   "IGST%",
   "text",
   igstPerValidation,
-  ""
+  "",
+  {},
+  true
 );
 
 const sgstField: FormFieldType = createFormConfig(
@@ -589,7 +605,9 @@ const sgstField: FormFieldType = createFormConfig(
   "SGST",
   "text",
   sgstValidation,
-  ""
+  "",
+  {},
+  true
 );
 
 const igstField: FormFieldType = createFormConfig(
@@ -597,7 +615,9 @@ const igstField: FormFieldType = createFormConfig(
   "IGST",
   "text",
   igstValidation,
-  ""
+  "",
+  {},
+  true
 );
 const sTaxField: FormFieldType = createFormConfig(
   "stax",
@@ -625,7 +645,9 @@ const totalField: FormFieldType = createFormConfig(
   "Total",
   "text",
   totalValidation,
-  ""
+  "",
+  {},
+  true
 );
 
 export const invoiceGenGstFormFields = {
