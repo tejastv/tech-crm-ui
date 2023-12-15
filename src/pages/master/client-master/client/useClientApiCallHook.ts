@@ -17,24 +17,27 @@ export const useClientApiCallHook = () => {
   const navigate = useNavigate();
 
   const getClient = (
-    queryObject: any
+    queryObject: any,
+    condition?: boolean
   ): UseQueryResult<{ data: MapType<ClientType>; count: number }> => {
     return useQuery<{ data: MapType<ClientType>; count: number }>({
       queryKey: [queryKeys.CLIENT_DATA, queryObject],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CLIENT, {
           params: {
-            limit: queryObject.limit,
+            limit: queryObject.searchString ? 500 : queryObject.limit,
             offset: queryObject.offset,
+            searchString: queryObject.searchString,
           },
         });
-        let mapedData = selectOptionsMapMaker(
+        let mappedData = selectOptionsMapMaker(
           response.data.data.records,
           "clientId",
           "clientName"
         );
-        return { data: mapedData, count: response.data.data.count };
+        return { data: mappedData, count: response.data.data.count };
       },
+      enabled: condition,
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
