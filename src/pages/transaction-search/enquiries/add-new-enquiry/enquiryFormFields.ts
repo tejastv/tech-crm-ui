@@ -542,21 +542,22 @@ const enqGivenName: FormFieldType = createFormConfig(
   GivenNameEnquiryValidation,
   "Given Name"
 );
-const myDate = new Date(); // Replace this with your actual date
+// const myDate = new Date(); // Replace this with your actual date
 
 // Extract year, month, and day components
-const year = myDate.getFullYear();
-const month = String(myDate.getMonth() + 1).padStart(2, "0");
-const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
+// const year = myDate.getFullYear();
+// const month = String(myDate.getMonth() + 1).padStart(2, "0");
+// const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
-const formattedDate = `${year}/${month}/${day}`;
+// const formattedDate = `${year}/${month}/${day}`;
 const enqRecdon: FormFieldType = createFormConfig(
   "recdDate",
-  "Enq. Date/Recd. On",
+  "Enq. Date/Recd. On ",
   "date",
   recdOnValidation,
-  formattedDate
+  ""
+  // formattedDate
 );
 
 const enqTypeData: MapType<Options> = {

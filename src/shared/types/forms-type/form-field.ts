@@ -15,5 +15,6 @@ export interface FormFieldType {
     isDisabled?: boolean;
     options?: Array<Options>;
   };
+  defaultValue?: any;
   onChangeHandler?: (selectedOption: any) => void;
 }

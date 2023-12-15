@@ -101,7 +101,7 @@ const GET_PRICE =
 const GET_ADD_SERVICETYPE = "transaction/serviceType";
 const GET_ADD_ENQTYPE = "transaction/enquiryStatus";
 const GET_ADD_ENQSTATUS = "transaction/enquiryStatus";
-const GET_ADD_REFNO = "transaction/getRefNo";
+const GET_ADD_REFNO = "transaction/refNo";
 
 // Proforma
 const GET_ENQUIRY_PI = "transaction/enquiryPi";

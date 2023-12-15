@@ -48,7 +48,10 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const columns = props.config.columns;
   const pageSizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   const { errorMessageToaster, successMessageToaster } = useToaster();
-  let clientSidePagination = !props.config.pagination?.isClientSidePagination ? false : true;
+  let clientSidePagination =
+    props.config.pagination?.isClientSidePagination === undefined
+      ? true
+      : false;
 
   const table = useReactTable({
     data,

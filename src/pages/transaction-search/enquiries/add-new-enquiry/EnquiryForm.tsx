@@ -187,10 +187,7 @@ export const EnquiryForm: React.FC = () => {
     );
     enquiryFormFields.enqCountry.config.options = options;
   }
-  const {
-    limit,
-    offset,
-  } = usePagination();
+  const { limit, offset } = usePagination();
 
   const { data: clientData } = getClient({
     limit,
@@ -832,6 +829,12 @@ export const EnquiryForm: React.FC = () => {
     }
   });
 
+  const addDays = (date: any, days: any) => {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return new Date(result).toISOString().split("T")[0];
+  };
+
   return (
     <Card config={cardConfig.formLayoutConfig}>
       <form
@@ -1003,6 +1006,7 @@ export const EnquiryForm: React.FC = () => {
                 errors={errors}
                 register={register}
                 config={enquiryFormFields.enqDueOn}
+                defaultValue={addDays(new Date(), 4)}
               />
               <NewSelect
                 errors={errors}

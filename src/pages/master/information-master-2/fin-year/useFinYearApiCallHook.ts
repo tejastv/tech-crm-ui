@@ -26,10 +26,7 @@ export const useFinYearApiCallHook = () => {
       queryKey: [queryKeys.FIN_YEAR_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_FIN_YEAR);
-        const data = response.data.data.sort(
-          (a: { finYear: number }, b: { finYear: number }) =>
-            b.finYear - a.finYear
-        );
+        const data = response.data.data;
         let mapedData = selectOptionsMapMaker(data, "finYear", "finYear");
         // return data;
         return mapedData;
