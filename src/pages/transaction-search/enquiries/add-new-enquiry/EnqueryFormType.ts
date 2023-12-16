@@ -46,7 +46,7 @@ export interface EnqueryFormType {
   disType: string;
   actualBuyerId: Options;
   siteStatusId: Options;
-  bulk_enquiry_id: number;
+  bulkEnquiryId: number;
   locked: string;
   givenName: string;
   localSourceId: Options;
