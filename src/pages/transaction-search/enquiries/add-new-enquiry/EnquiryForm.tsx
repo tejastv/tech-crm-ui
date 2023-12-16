@@ -187,10 +187,7 @@ export const EnquiryForm: React.FC = () => {
     );
     enquiryFormFields.enqCountry.config.options = options;
   }
-  const {
-    limit,
-    offset,
-  } = usePagination();
+  const { limit, offset } = usePagination();
 
   const { data: clientData } = getClient({
     limit,
@@ -613,9 +610,7 @@ export const EnquiryForm: React.FC = () => {
       discount: enqFormData.discount,
       adjustment: enqFormData.adjustment,
       disType: enqFormData.disType,
-      bulk_enquiry_id: enqFormData.bulk_enquiry_id
-        ? enqFormData.bulk_enquiry_id
-        : 0,
+      bulk_enquiry_id: 0,
       locked: enqFormData.locked,
       givenName: enqFormData.givenName,
       cmie: enqFormData.cmie,
