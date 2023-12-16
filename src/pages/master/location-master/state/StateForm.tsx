@@ -101,7 +101,7 @@ export const StateForm: React.FC = () => {
 
   const mapFromStateForm = (formUserData: StateFormType) => {
     let stateData: Partial<StateType> = {
-      stateName: formUserData.stateName,
+      state: formUserData.stateName,
       stateCodeN: formUserData.stateCodeN,
       stateCodeA: formUserData.stateCodeA,
     };
