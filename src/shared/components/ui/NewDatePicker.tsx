@@ -15,6 +15,7 @@ export const NewDatePicker: React.FC<{
   config: FormFieldType;
   register: any;
   errors: any;
+  defaultValue?: any;
 }> = (props) => {
   const inputErrors = findInputError(props.errors, props.config.config.name);
   const isInvalid = isFormInvalid(inputErrors);
@@ -36,6 +37,11 @@ export const NewDatePicker: React.FC<{
               id={props.config.config.id}
               type="date"
               placeholder={props.config.config.placeholder}
+              defaultValue={
+                props.defaultValue
+                  ? props.defaultValue
+                  : new Date().toISOString().split("T")[0]
+              }
               {...props.register(
                 props.config.config.name,
                 props.config.config.validation

@@ -249,25 +249,6 @@ export const ClientForm: React.FC = () => {
     params.id != undefined
   );
 
-  useEffect(() => {
-    if (params.id) {
-      if (clientMasterData && Object.values(clientMasterData).length > 0) {
-        reset(mapClientToClientForm(clientMasterData));
-      }
-    }
-  }, [
-    params.id,
-    clientMasterData,
-    cityOptions,
-    stateOptions,
-    countryOptions,
-    creditOptions,
-    currencyOptions,
-    executiveOptions,
-    clientGroupOptions,
-    segmentOptions,
-  ]);
-
   const mapClientToClientForm = (clientData: ClientType) => {
     let clientFormData: Partial<ClientFormType> = {
       ourRefNo: clientData.ourRefNo,
@@ -302,7 +283,7 @@ export const ClientForm: React.FC = () => {
       adjustPerEnqPI: clientData.adjustPerEnqPI,
       gstn: clientData.gstn,
       gstYN: clientData.gstYN,
-      billONActualBuyer: clientData.billONActualBuyer,
+      billONActualBuyer: clientData.billONActualBuyer ? true : false,
       autoSendOutstanding: clientData.autoSendOutstanding,
       locked: clientData.locked,
       email: clientData.email,
@@ -322,7 +303,8 @@ export const ClientForm: React.FC = () => {
         (clientFormData.stateId = {
           label: data.stateName,
           value: data.stateId,
-        });
+        }),
+        stateChangeHandler(data.stateCodeN);
     }
     if (countryData && clientData?.countryId) {
       let data = countryData[clientData.countryId];
@@ -409,7 +391,7 @@ export const ClientForm: React.FC = () => {
       adjustPerEnqPI: clientFormData.adjustPerEnqPI,
       gstn: clientFormData.gstn,
       gstYN: clientFormData.gstYN,
-      billONActualBuyer: clientFormData.billONActualBuyer,
+      billONActualBuyer: clientFormData.billONActualBuyer ? "Y" : "N",
       autoSendOutstanding: "Y",
       locked: "Y",
       email: clientFormData.email,
@@ -442,13 +424,12 @@ export const ClientForm: React.FC = () => {
     return cleanupObject(clientReqData);
   };
 
-  const handleSelectChange = (selectedOption: any) => {
-    if (selectedOption) {
+  const stateChangeHandler = (stateCodeN: any) => {
+    if (stateCodeN) {
       if (clientFormFields.statecodeClient.config.name === "stateCode") {
-        setValue(
-          clientFormFields.statecodeClient.config.name,
-          selectedOption.data.stateCodeN
-        );
+        setValue(clientFormFields.statecodeClient.config.name, stateCodeN, {
+          shouldValidate: true,
+        });
       }
     }
   };
@@ -480,6 +461,25 @@ export const ClientForm: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (params.id) {
+      if (clientMasterData && Object.values(clientMasterData).length > 0) {
+        reset(mapClientToClientForm(clientMasterData));
+      }
+    }
+  }, [
+    params.id,
+    clientMasterData,
+    cityOptions,
+    stateOptions,
+    countryOptions,
+    creditOptions,
+    currencyOptions,
+    executiveOptions,
+    clientGroupOptions,
+    segmentOptions,
+  ]);
+
   const onSubmit = handleSubmit((clientData) => {
     let reqObj: Partial<ClientType> = mapClientFormToClientReq(clientData);
     console.log(reqObj);
@@ -490,8 +490,19 @@ export const ClientForm: React.FC = () => {
     }
   });
 
+  // const myInlineStyles: React.CSSProperties = {
+  //   position: "absolute",
+  //   top: "0",
+  //   left: "0",
+  //   width: " 100%",
+  //   color: "#000",
+  //   height: " 100%",
+  //   display: "block",
+  // };
+
   return (
     <Card config={cardConfig.formLayoutConfig}>
+      {/* <div style={myInlineStyles}></div> */}
       <form
         onSubmit={onSubmit}
         noValidate
@@ -540,7 +551,7 @@ export const ClientForm: React.FC = () => {
                   register={register}
                   control={control}
                   config={clientFormFields.stateClient}
-                  onChange={handleSelectChange}
+                  onChange={(data) => stateChangeHandler(data.data.stateCodeN)}
                 />
                 <NewInput
                   errors={errors}

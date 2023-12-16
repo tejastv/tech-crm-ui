@@ -1,4 +1,4 @@
-export interface CallTypeType {
+export interface CallMasterType {
   typeId: number;
   typeName: string;
   synId?: null;

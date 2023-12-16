@@ -13,6 +13,7 @@ import {
 } from "@shared/index";
 import { COMMON_ROUTES, TRANSACTION_ROUTES } from "@constants/index";
 import {
+  EnquiriesSearchType,
   EnquiriesType,
   enqSearchFormFields,
   useEnquiriesApiCallHook,
@@ -26,10 +27,19 @@ import { formatDateString } from "@utils/dateFormatter";
 import { usePagination } from "@hooks/usePagination";
 
 export const Enquiries: React.FC = () => {
-  const { getEnquiries, getEnquiryBasedOnSearchParam, deleteEnquiryMutation } =
-    useEnquiriesApiCallHook();
+  const { getEnquiries, deleteEnquiryMutation } = useEnquiriesApiCallHook();
   const { mutateAsync: deleteEnquiry } = deleteEnquiryMutation();
-  const { data: enquiriesData, isFetching } = getEnquiries();
+  const {
+    limit: enqLimit,
+    offset: enqOffset,
+    total,
+    nextButtonClick,
+    prevButtonClick,
+    isNextEnabled,
+    isPrevEnabled,
+    setTotalValue,
+  } = usePagination();
+
   const navigate = useNavigate();
   const { getClient } = useClientApiCallHook();
   const {
@@ -37,11 +47,18 @@ export const Enquiries: React.FC = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<EnquiriesType>();
+  } = useForm<EnquiriesSearchType>();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get("category");
   const [clientOptions, setClientOptions] = useState<ClientType[]>();
+  const [enqSearch, setEnqSearch] = useState<EnquiriesSearchType>();
+  const { data: enquiriesObj, isFetching } = getEnquiries({
+    limit: enqLimit,
+    offset: enqOffset,
+    ...enqSearch,
+  });
+  console.log(enqSearch);
 
   const config = {
     breadcrumbConfig: {
@@ -427,11 +444,7 @@ export const Enquiries: React.FC = () => {
     },
   ];
 
-  const {
-    limit,
-    offset,
-  } = usePagination();
-  
+  const { limit, offset } = usePagination();
 
   // client api call
   const { data: clientData } = getClient({
@@ -463,11 +476,16 @@ export const Enquiries: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    setTotalValue(enquiriesObj?.count!);
+  }, [enquiriesObj?.count]);
+
   const tableConfig: TableType<EnquiriesType> = {
     config: {
       tableName: "Enquiry",
       columns: columns,
-      tableData: enquiriesData || [],
+      tableData:
+        (enquiriesObj?.data && Object.values(enquiriesObj?.data)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -475,12 +493,18 @@ export const Enquiries: React.FC = () => {
       printBtn: true,
       globalSearchBox: true,
       pagination: {
-        pageSize: 10,
+        pageSize: limit,
+        offset,
+        total,
         nextPreviousBtnShow: true,
         tableMetaDataShow: true,
+        isNextButtonEnabled: isNextEnabled,
+        isPrevButtonEnabled: isPrevEnabled,
       },
       onDeleteClick: deleteEnquiryClick,
       onEditClick: editEnquiryClick,
+      onNextButtonClick: nextButtonClick,
+      onPrevButtonClick: prevButtonClick,
     },
   };
 
@@ -499,8 +523,10 @@ export const Enquiries: React.FC = () => {
       const formattedDate = formatDateString(inputDate, "d-m-y", "-");
       data.endDate = formattedDate;
     }
+
     if (data) {
-      getEnquiryBasedOnSearchParam(data);
+      console.log(data);
+      setEnqSearch(data);
     }
   });
 
@@ -520,7 +546,7 @@ export const Enquiries: React.FC = () => {
             className="p-t-20"
           >
             <div className="row">
-              <div className="col-md-3 col-xs-12">
+              <div className="col-md-4 col-xs-12">
                 <NewSelect
                   errors={errors}
                   register={register}
@@ -529,7 +555,7 @@ export const Enquiries: React.FC = () => {
                 />
               </div>
 
-              <div className="col-md-3 col-xs-12">
+              <div className="col-md-4 col-xs-12">
                 <NewInput
                   errors={errors}
                   register={register}
@@ -537,16 +563,20 @@ export const Enquiries: React.FC = () => {
                 />
               </div>
 
-              <div className="col-md-3 col-xs-12">
+              <div className="col-md-4 col-xs-12">
                 <NewInput
                   errors={errors}
                   register={register}
                   config={enqSearchFormFields.todateeField}
                 />
               </div>
-
-              <div className="col-md-3 col-xs-12 text-left">
-                <Button type={"submit"} className={"btn btn-danger btn-sm"}>
+            </div>
+            <div className="row justify-content-end">
+              <div className="col-md-3 col-xs-12 text-right">
+                <Button
+                  type={"submit"}
+                  className={"btn btn-danger btn-sm mb-3"}
+                >
                   <i className="far fa-save"></i> Search
                 </Button>
               </div>

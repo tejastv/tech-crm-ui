@@ -15,8 +15,8 @@ export const usePurposeMasterApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getPurposeMaster = (): UseQueryResult<PurposeMasterType[]> => {
-    return useQuery<PurposeMasterType[]>({
+  const getPurposeMaster = (): UseQueryResult<Array<PurposeMasterType>> => {
+    return useQuery<Array<PurposeMasterType>>({
       queryKey: [queryKeys.PURPOSE_MASTER_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_PURPOSE_MASTER);
@@ -31,7 +31,8 @@ export const usePurposeMasterApiCallHook = () => {
   };
 
   const getPurposeMasterData = (
-    id: string
+    id: string,
+    condition: boolean
   ): UseQueryResult<PurposeMasterType> => {
     return useQuery<PurposeMasterType>({
       queryKey: [queryKeys.PURPOSE_MASTER_DATA, id],
@@ -41,13 +42,13 @@ export const usePurposeMasterApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 
   const addPurposeMaster = async (
-    purposeMasterData: PurposeMasterFormType
+    purposeMasterData: Partial<PurposeMasterType>
   ): Promise<ApiResponseType<PurposeMasterType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_PURPOSE_MASTER,
@@ -58,7 +59,7 @@ export const usePurposeMasterApiCallHook = () => {
 
   const addPurposeMasterMutation = () => {
     const mutation = useMutation(
-      (updatedItem: PurposeMasterFormType) => addPurposeMaster(updatedItem),
+      (updatedItem: Partial<PurposeMasterType>) => addPurposeMaster(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -72,12 +73,12 @@ export const usePurposeMasterApiCallHook = () => {
   };
 
   const updatePurposeMasterData = async (
-    updatePurposeMasterData: PurposeMasterFormType
+    updatePurposeMasterData: Partial<PurposeMasterType>
   ): Promise<ApiResponseType<PurposeMasterType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_PURPOSE_MASTER.replace(
         "{id}",
-        "" + updatePurposeMasterData.id
+        "" + updatePurposeMasterData.purposeId
       ),
       updatePurposeMasterData
     );
@@ -86,7 +87,7 @@ export const usePurposeMasterApiCallHook = () => {
 
   const updatePurposeMasterMutation = () => {
     const mutation = useMutation(
-      (updatedItem: PurposeMasterFormType) =>
+      (updatedItem: Partial<PurposeMasterType>) =>
         updatePurposeMasterData(updatedItem),
       {
         onSuccess: async () => {

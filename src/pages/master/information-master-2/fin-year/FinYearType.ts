@@ -1,6 +1,6 @@
 export interface FinYearType {
   id  : number;
-  finYear: number;
+  finYear: string;
   eduCess: number;
   cgstper: number;
   igstper: number;

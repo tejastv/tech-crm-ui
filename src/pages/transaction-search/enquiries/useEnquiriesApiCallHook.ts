@@ -1,22 +1,18 @@
 import { useAxios } from "@hooks/useAxios";
 import { EnquiriesType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType } from "@shared/index";
+import { ApiResponseType, MapType } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { useState } from "react";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useEnquiriesApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = useQueryClient();
-
-  const [queryParam, setQueryParam] = useState<{
-    [key: string]: string | undefined;
-  }>({});
 
   const callFormConfig = {
     headers: {
@@ -24,30 +20,47 @@ export const useEnquiriesApiCallHook = () => {
     },
   };
 
-  const getEnquiries = (): UseQueryResult<EnquiriesType[]> => {
-    return useQuery<EnquiriesType[]>({
-      queryKey: [queryKeys.ENQUIRY_DATA, queryParam],
+  const getEnquiries = (
+    queryObject: any
+  ): UseQueryResult<{
+    data: MapType<EnquiriesType>;
+    count: number;
+  }> => {
+    return useQuery<{ data: MapType<EnquiriesType>; count: number }>({
+      queryKey: [queryKeys.ENQUIRY_DATA],
       queryFn: async () => {
         const baseUrl = apiUrls.GET_ADD_ALL_ENQUIRY_SEARCH;
         const queryParams = [];
-        for (const key in queryParam) {
-          if (queryParam[key] !== undefined) {
-            queryParams.push(`${key}=${queryParam[key]!}`);
+        console.log(queryObject);
+        let queryParam: {
+          [key: string]: string | undefined;
+        } = {};
+        for (const key in queryObject) {
+          if (!queryParam[key]) {
+            console.log(key);
+            queryParams.push(`${key}=${queryObject[key]}`);
           }
         }
+        console.log(queryParams);
+
         const fullUrl =
           queryParams.length > 0
             ? `${baseUrl}?${queryParams.join("&")}`
             : baseUrl;
         const response = await instance.get(fullUrl, callFormConfig);
-        return response.data.data;
+        console.log(response);
+
+        let mapedData = selectOptionsMapMaker(
+          response.data.data.records,
+          "enqId",
+          "partyName"
+        );
+        return { data: mapedData, count: response.data.data.count };
+        // return response.data.data;
       },
       staleTime: Infinity,
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
-  };
-
-  const getEnquiryBasedOnSearchParam = (params: any) => {
-    setQueryParam(params);
   };
 
   const getEnquiryData = (
@@ -93,6 +106,6 @@ export const useEnquiriesApiCallHook = () => {
     getEnquiryData,
     getEnquiries,
     deleteEnquiryMutation,
-    getEnquiryBasedOnSearchParam,
+    // getEnquiryBasedOnSearchParam,
   };
 };

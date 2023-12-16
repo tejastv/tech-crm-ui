@@ -86,7 +86,7 @@ export const FinYear: React.FC = () => {
     },
   ];
 
-  const { data: finYearData, isLoading } = getFinYear();
+  const { data: finYearData, isFetching } = getFinYear();
   const { mutateAsync: deleteFinYear } = deleteFinYearMutation();
 
   const deleteFinYearClick = async (finYearData: any) => {
@@ -97,7 +97,9 @@ export const FinYear: React.FC = () => {
   };
 
   const editFinYearClick = (finYearData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", finYearData.finYear));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", finYearData.finYear), {
+      state: null
+    });
   };
 
   const tableConfig: TableType<FinYearType> = {
@@ -112,7 +114,7 @@ export const FinYear: React.FC = () => {
       printBtn: true,
       globalSearchBox: true,
       pagination: {
-        pageSize: 10,
+        pageSize: 40,
         nextPreviousBtnShow: true,
         tableMetaDataShow: true,
       },
@@ -125,7 +127,7 @@ export const FinYear: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );
