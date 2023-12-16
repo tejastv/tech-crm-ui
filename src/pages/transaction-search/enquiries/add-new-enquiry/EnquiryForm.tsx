@@ -640,9 +640,7 @@ export const EnquiryForm: React.FC = () => {
       discount: enqFormData.discount,
       adjustment: enqFormData.adjustment,
       disType: enqFormData.disType,
-      bulk_enquiry_id: enqFormData.bulk_enquiry_id
-        ? enqFormData.bulk_enquiry_id
-        : 0,
+      bulkEnquiryId: 0,
       locked: enqFormData.locked,
       givenName: enqFormData.givenName,
       cmie: enqFormData.cmie,
@@ -727,7 +725,7 @@ export const EnquiryForm: React.FC = () => {
       discount: enqData.discount,
       adjustment: enqData.adjustment,
       disType: enqData.disType,
-      bulk_enquiry_id: enqData.bulk_enquiry_id ? enqData.bulk_enquiry_id : 0,
+      bulkEnquiryId: 0,
       locked: enqData.locked,
       givenName: enqData.givenName,
       cmie: enqData.cmie,
