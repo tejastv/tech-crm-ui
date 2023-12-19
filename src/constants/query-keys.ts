@@ -45,6 +45,8 @@ const ENQSTATUS_DATA = "enqstatus-data";
 const REFNO_DATA = "refno-data";
 const PRICE_LIST_STANDARD_PRICE = "price-list-standard-price";
 
+const RECEIPT_DATA = "receipt-data";
+
 export const queryKeys = {
   CITY_DATA,
   STATE_DATA,
@@ -88,4 +90,5 @@ export const queryKeys = {
   CLIENT_WISE_PRICE,
   GROUP_WISE_PRICE,
   CURRENCY_WISE_PRICE,
+  RECEIPT_DATA,
 };

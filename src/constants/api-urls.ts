@@ -107,6 +107,9 @@ const GET_ADD_REFNO = "transaction/refNo";
 const GET_ENQUIRY_PI = "transaction/enquiryPi";
 const UPDATE_DELETE_ENQUIRY_PI = "transaction/enquiryPi/{id}";
 
+// Receipt
+const GET_RECEIPT = "transaction/{startYear}/receipt";
+
 export const apiUrls = {
   GET_ADD_CONTINENT,
   GET_ADD_COUNTRY,
@@ -187,4 +190,6 @@ export const apiUrls = {
 
   GET_ENQUIRY_PI,
   UPDATE_DELETE_ENQUIRY_PI,
+
+  GET_RECEIPT,
 };
