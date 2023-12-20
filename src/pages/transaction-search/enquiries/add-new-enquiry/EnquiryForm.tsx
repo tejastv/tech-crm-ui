@@ -49,6 +49,8 @@ import {
   selectOptionsMaker,
 } from "@utils/index";
 import { usePagination } from "@hooks/usePagination";
+import { useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "@constants/query-keys";
 
 const priceMapper = {
   1: "price", // Normal
@@ -103,8 +105,9 @@ export const EnquiryForm: React.FC = () => {
   const [companyOptions, setCompanyOptions] = useState<CompanyType[]>();
   const [serviceOptions, setServiceOptions] = useState<ServiceType[]>();
   const [enqStatusOptions, setEnqStatusOptions] = useState<EnqStatusType[]>();
-  const [actualBuyerOptions, setActualBuyerOptions] =
-    useState<ActualBuyerType[]>();
+  const [actualBuyerOptions, setActualBuyerOptions] = useState<
+    ActualBuyerType[]
+  >([]);
   const [getPriceFlag, setGetPriceFlag] = useState<any>({
     flag: false,
     clientId: null,
@@ -224,21 +227,32 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqFinYear.config.options = options;
   }
 
-  const { data: actualBuyerData } = getActualBuyer();
+  const { data: actualBuyerData } = getActualBuyer(
+    { client_id: clientId },
+    clientId !== -2
+  );
+
+  // useEffect(() => {
+  //   setActualBuyerOptions([]);
+  // }, []);
+
   useEffect(() => {
     if (actualBuyerData) {
+      console.log(actualBuyerData);
       setActualBuyerOptions(Object.values(actualBuyerData));
     }
   }, [actualBuyerData]);
 
-  if (actualBuyerOptions?.length) {
-    let options = selectOptionsMaker(
-      actualBuyerOptions,
-      "partyId",
-      "partyName"
-    );
-    enquiryFormFields.enqActualBuyer.config.options = options;
-  }
+  useEffect(() => {
+    if (actualBuyerOptions) {
+      let options = selectOptionsMaker(
+        actualBuyerOptions,
+        "partyId",
+        "partyName"
+      );
+      enquiryFormFields.enqActualBuyer.config.options = options;
+    }
+  }, [actualBuyerOptions]);
 
   const { data: sourceData } = getSource();
 
@@ -640,9 +654,7 @@ export const EnquiryForm: React.FC = () => {
       discount: enqFormData.discount,
       adjustment: enqFormData.adjustment,
       disType: enqFormData.disType,
-      bulk_enquiry_id: enqFormData.bulk_enquiry_id
-        ? enqFormData.bulk_enquiry_id
-        : 0,
+      bulkEnquiryId: 0,
       locked: enqFormData.locked,
       givenName: enqFormData.givenName,
       cmie: enqFormData.cmie,
@@ -727,7 +739,7 @@ export const EnquiryForm: React.FC = () => {
       discount: enqData.discount,
       adjustment: enqData.adjustment,
       disType: enqData.disType,
-      bulk_enquiry_id: enqData.bulk_enquiry_id ? enqData.bulk_enquiry_id : 0,
+      bulkEnquiryId: 0,
       locked: enqData.locked,
       givenName: enqData.givenName,
       cmie: enqData.cmie,
@@ -765,6 +777,7 @@ export const EnquiryForm: React.FC = () => {
           label: data.clientName,
           value: data.clientId,
         });
+      setSearchStringClient(data.clientName);
     }
     if (sourceData && enqData?.sourceId) {
       let data = sourceData[enqData.sourceId];
