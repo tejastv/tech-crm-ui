@@ -21,6 +21,7 @@ export * from "./enquiries/add-new-enquiry/ServiceType";
 export * from "./enquiries/add-new-enquiry/EnqStatusType";
 export * from "./enquiries/add-new-enquiry/RefNoType";
 export * from "./enquiries/add-new-enquiry/PriceType";
+export * from "./enquiries/enquiry-list/EnquiriesSearchType";
 
 export { useEnquiriesApiCallHook } from "./enquiries/useEnquiriesApiCallHook";
 export { useAddEnquiryApiCallHook } from "./enquiries/add-new-enquiry/useAddEnquiryApiCallHook";

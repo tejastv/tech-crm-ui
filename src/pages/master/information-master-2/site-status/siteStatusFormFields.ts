@@ -1,6 +1,6 @@
 import { FormFieldType, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
-const SiteStatusValidation = {
+const siteStatusValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -11,14 +11,14 @@ const SiteStatusValidation = {
   },
 } as ValidationType;
 
-const sitestatus: FormFieldType = createFormConfig(
+const siteStatus: FormFieldType = createFormConfig(
   "siteStatus",
   "Site Status",
   "text",
-  SiteStatusValidation,
+  siteStatusValidation,
   "Site Status"
 );
 
 export const siteStatusFormFields = {
-  sitestatus,
+  siteStatus,
 };

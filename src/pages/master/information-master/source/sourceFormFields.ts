@@ -10,7 +10,7 @@ const SourceValidation = {
     message: "30 characters max",
   },
 } as ValidationType;
-const SelectFileValidation = {
+const selectFileValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
@@ -24,15 +24,15 @@ const source: FormFieldType = createFormConfig(
   SourceValidation,
   "Source"
 );
-const letterfile: FormFieldType = createFormConfig(
+const letterFile: FormFieldType = createFormConfig(
   "firstLetterFile",
   "First Letter File",
   "file:.doc,.docx",
-  SelectFileValidation,
+  selectFileValidation,
   "Source"
 );
 
 export const sourceFormFields = {
   source,
-  letterfile,
+  letterFile,
 };

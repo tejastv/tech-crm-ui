@@ -50,18 +50,18 @@ export const PurposeMaster: React.FC = () => {
     },
   ];
 
-  const { data: purposeMasterData, isLoading } = getPurposeMaster();
+  const { data: purposeMasterData, isFetching } = getPurposeMaster();
   const { mutateAsync: deletePurposeMaster } = deletePurposeMasterMutation();
 
-  const deletePurposeMasterClick = async (purposeMasterData: any) => {
+  const deletePurposeMasterClick = async (purposeMasterData: PurposeMasterType) => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
-      await deletePurposeMaster(purposeMasterData.purposeID);
+      await deletePurposeMaster(purposeMasterData.purposeId.toString());
     }
   };
 
-  const editPurposeMasterClick = (purposeMasterData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", purposeMasterData.purposeID));
+  const editPurposeMasterClick = (purposeMasterData: PurposeMasterType) => {
+    navigate(COMMON_ROUTES.EDIT.replace(":id", purposeMasterData.purposeId.toString()));
   };
 
   const tableConfig: TableType<PurposeMasterType> = {
@@ -89,7 +89,7 @@ export const PurposeMaster: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+      {!isFetching ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

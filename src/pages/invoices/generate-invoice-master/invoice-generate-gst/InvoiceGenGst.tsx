@@ -8,7 +8,6 @@ import {
   TableType,
   NewSelect,
   NewInput,
-  NewCheckbox,
 } from "@shared/index";
 import { InvoiceListType, invoiceGenGstFormFields } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";

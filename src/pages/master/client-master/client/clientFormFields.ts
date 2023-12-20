@@ -142,6 +142,17 @@ const StateValidation = {
   // },
 } as ValidationType;
 
+const StateCodeValidation = {
+  required: {
+    value: true,
+    message: "{label} field is rquired",
+  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message: "Please select a {label}",
+  // },
+} as ValidationType;
+
 const CountryValidation = {
   required: {
     value: true,
@@ -447,10 +458,9 @@ const statecodeClient: FormFieldType = createFormConfig(
   "stateCode",
   "State Code",
   "text",
-  StateValidation,
+  StateCodeValidation,
   "",
-  {},
-  true
+  {}
 );
 const countryClient: FormFieldType = createFormConfig(
   "countryId",

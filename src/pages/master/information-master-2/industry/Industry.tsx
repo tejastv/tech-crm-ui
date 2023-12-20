@@ -50,7 +50,7 @@ export const Industry: React.FC = () => {
     },
   ];
 
-  const { data: industryData, isLoading } = getIndustry();
+  const { data: industryData, isFetching } = getIndustry();
   const { mutateAsync: deleteIndustry } = deleteIndustryMutation();
 
   const deleteIndustryClick = async (industryData: any) => {
@@ -61,7 +61,9 @@ export const Industry: React.FC = () => {
   };
 
   const editIndustryClick = (industryData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", industryData.industryId));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", industryData.industryId), {
+      state: null
+    });
   };
 
   const tableConfig: TableType<IndustryType> = {
@@ -89,7 +91,7 @@ export const Industry: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+      {!isFetching ? <Table config={tableConfig.config}/> :  <Loader />}
       </BorderLayout>
     </>
   );

@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { IndustryFormType, IndustryType } from "@master/index";
+import { IndustryType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -15,8 +15,8 @@ export const useIndustryApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getIndustry = (): UseQueryResult<IndustryType[]> => {
-    return useQuery<IndustryType[]>({
+  const getIndustry = (): UseQueryResult<Array<IndustryType>> => {
+    return useQuery<Array<IndustryType>>({
       queryKey: [queryKeys.INDUSTRY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_INDUSTRY);
@@ -30,7 +30,10 @@ export const useIndustryApiCallHook = () => {
     });
   };
 
-  const getIndustryData = (id: string): UseQueryResult<IndustryType> => {
+  const getIndustryData = (
+    id: string,
+    condition: boolean
+  ): UseQueryResult<IndustryType> => {
     return useQuery<IndustryType>({
       queryKey: [queryKeys.INDUSTRY_DATA, id],
       queryFn: async () => {
@@ -39,13 +42,13 @@ export const useIndustryApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 
   const addIndustry = async (
-    industryData: IndustryFormType
+    industryData: Partial<IndustryType>
   ): Promise<ApiResponseType<IndustryType>> => {
     const response = await instance.post(
       apiUrls.GET_ADD_INDUSTRY,
@@ -56,7 +59,7 @@ export const useIndustryApiCallHook = () => {
 
   const addIndustryMutation = () => {
     const mutation = useMutation(
-      (updatedItem: IndustryFormType) => addIndustry(updatedItem),
+      (updatedItem: Partial<IndustryType>) => addIndustry(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
@@ -70,12 +73,12 @@ export const useIndustryApiCallHook = () => {
   };
 
   const updateIndustryData = async (
-    updateIndustryData: IndustryFormType
+    updateIndustryData: Partial<IndustryType>
   ): Promise<ApiResponseType<IndustryType>> => {
     const response = await instance.put(
       apiUrls.GET_UPDATE_DELETE_INDUSTRY.replace(
         "{id}",
-        "" + updateIndustryData.id
+        "" + updateIndustryData.industryId
       ),
       updateIndustryData
     );
@@ -84,7 +87,7 @@ export const useIndustryApiCallHook = () => {
 
   const updateIndustryMutation = () => {
     const mutation = useMutation(
-      (updatedItem: IndustryFormType) => updateIndustryData(updatedItem),
+      (updatedItem: Partial<IndustryType>) => updateIndustryData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

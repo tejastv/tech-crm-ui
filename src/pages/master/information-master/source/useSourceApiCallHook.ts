@@ -33,7 +33,7 @@ export const useSourceApiCallHook = () => {
     });
   };
 
-  const getSourceData = (id: string): UseQueryResult<SourceType> => {
+  const getSourceData = (id: string, condition: boolean): UseQueryResult<SourceType> => {
     return useQuery<SourceType>({
       queryKey: [queryKeys.SOURCE_DATA, id],
       queryFn: async () => {
@@ -42,7 +42,7 @@ export const useSourceApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };

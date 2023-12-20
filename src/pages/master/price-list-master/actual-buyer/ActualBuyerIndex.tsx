@@ -9,14 +9,8 @@ const CompanyMasterIndex: React.FC = () => {
   return (
     <Routes>
       <Route index element={<ActualBuyer />}></Route>
-      <Route
-        path={COMMON_ROUTES.ADD}
-        element={<ActualBuyerForm />}
-      ></Route>
-      <Route
-        path={COMMON_ROUTES.EDIT}
-        element={<ActualBuyerForm />}
-      ></Route>
+      <Route path={COMMON_ROUTES.ADD} element={<ActualBuyerForm />}></Route>
+      <Route path={COMMON_ROUTES.EDIT} element={<ActualBuyerForm />}></Route>
     </Routes>
   );
 };

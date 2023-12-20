@@ -640,9 +640,7 @@ export const EnquiryForm: React.FC = () => {
       discount: enqFormData.discount,
       adjustment: enqFormData.adjustment,
       disType: enqFormData.disType,
-      bulk_enquiry_id: enqFormData.bulk_enquiry_id
-        ? enqFormData.bulk_enquiry_id
-        : 0,
+      bulkEnquiryId: 0,
       locked: enqFormData.locked,
       givenName: enqFormData.givenName,
       cmie: enqFormData.cmie,
@@ -727,7 +725,7 @@ export const EnquiryForm: React.FC = () => {
       discount: enqData.discount,
       adjustment: enqData.adjustment,
       disType: enqData.disType,
-      bulk_enquiry_id: enqData.bulk_enquiry_id ? enqData.bulk_enquiry_id : 0,
+      bulkEnquiryId: 0,
       locked: enqData.locked,
       givenName: enqData.givenName,
       cmie: enqData.cmie,
@@ -858,6 +856,12 @@ export const EnquiryForm: React.FC = () => {
       addEnquiry(reqObj);
     }
   });
+
+  const addDays = (date: any, days: any) => {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return new Date(result).toISOString().split("T")[0];
+  };
 
   return (
     <Card config={cardConfig.formLayoutConfig}>
@@ -1032,6 +1036,7 @@ export const EnquiryForm: React.FC = () => {
                 errors={errors}
                 register={register}
                 config={enquiryFormFields.enqDueOn}
+                defaultValue={addDays(new Date(), 4)}
               />
               <NewSelect
                 errors={errors}

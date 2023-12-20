@@ -20,7 +20,7 @@ export const useCompanyApiCallHook = () => {
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_COMPANY_MASTER, {
           params: {
-            limit: queryObject.limit,
+            limit: queryObject.searchString ? 500 : queryObject.limit,
             offset: queryObject.offset,
             searchString: queryObject.searchString,
           },
@@ -29,9 +29,13 @@ export const useCompanyApiCallHook = () => {
           (a: { companyName: string }, b: { companyName: any }) =>
             a.companyName.localeCompare(b.companyName)
         );
-        let mapedData = selectOptionsMapMaker(data, "companyId", "companyName");
+        let mappedData = selectOptionsMapMaker(
+          data,
+          "companyId",
+          "companyName"
+        );
         // return data;
-        return { data: mapedData, count: response.data.data.count };
+        return { data: mappedData, count: response.data.data.count };
       },
       enabled: condition,
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus

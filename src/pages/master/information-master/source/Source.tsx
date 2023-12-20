@@ -56,7 +56,7 @@ export const Source: React.FC = () => {
     },
   ];
 
-  const { data: sourceData, isLoading } = getSource();
+  const { data: sourceData, isFetching } = getSource();
   const { mutateAsync: deleteSource } = deleteSourceMutation();
 
   const deleteSourceClick = async (sourceData: any) => {
@@ -67,7 +67,9 @@ export const Source: React.FC = () => {
   };
 
   const editSourceClick = (sourceData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", sourceData.sourceId));
+    navigate(COMMON_ROUTES.EDIT.replace(":id", sourceData.sourceId), {
+      state: null
+    });
   };
 
   const tableConfig: TableType<SourceType> = {
@@ -95,7 +97,7 @@ export const Source: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

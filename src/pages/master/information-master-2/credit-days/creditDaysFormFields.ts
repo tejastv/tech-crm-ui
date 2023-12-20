@@ -1,9 +1,9 @@
 import { FormFieldType, ValidationType } from "@shared/index";
 import { createFormConfig } from "@utils/index";
-const CreditdayValidation = {
+const creditDayValidation = {
   required: {
     value: true,
-    message: "{label} field is rquired",
+    message: "{label} field is required",
   },
   maxLength: {
     value: 30,
@@ -11,14 +11,14 @@ const CreditdayValidation = {
   },
 } as ValidationType;
 
-const creditdays: FormFieldType = createFormConfig(
+const creditDays: FormFieldType = createFormConfig(
   "creditPeriod",
   "Credit Days",
   "number",
-  CreditdayValidation,
+  creditDayValidation,
   "Credit Days"
 );
 
 export const creditDaysFormFields = {
-  creditdays,
+  creditDays,
 };

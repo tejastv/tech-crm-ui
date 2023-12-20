@@ -66,7 +66,7 @@ export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankD
 export { IndustryForm } from "./information-master-2/industry/IndustryForm";
 export { Industry } from "./information-master-2/industry/Industry";
 
-export { CalltypeForm } from "./information-master-2/call-type/CalltypeForm";
+export { CallTypeForm } from "./information-master-2/call-type/CalltypeForm";
 export { CallType } from "./information-master-2/call-type/CallType";
 
 export { PurposeMasterForm } from "./information-master-2/purpose-master/PurposeMasterForm";
@@ -188,7 +188,7 @@ export * from "./information-master/supplier-master/SupplierMasterType";
 
 // information master
 export * from "./information-master-2/call-type/CallTypeFormType";
-export * from "./information-master-2/call-type/CallTypeType";
+export * from "./information-master-2/call-type/CallMasterType";
 
 export * from "./information-master-2/credit-days/CreditDaysFormType";
 export * from "./information-master-2/credit-days/CreditDaysType";
