@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { CreditDaysFormType, CreditDaysType } from "@master/index";
+import { CreditDaysType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -30,7 +30,10 @@ export const useCreditDaysApiCallHook = () => {
     });
   };
 
-  const getCreditDaysData = (id: string, condition: boolean): UseQueryResult<CreditDaysType> => {
+  const getCreditDaysData = (
+    id: string,
+    condition: boolean
+  ): UseQueryResult<CreditDaysType> => {
     return useQuery<CreditDaysType>({
       queryKey: [queryKeys.CREDIT_DAYS_DATA, id],
       queryFn: async () => {
@@ -84,7 +87,8 @@ export const useCreditDaysApiCallHook = () => {
 
   const updateCreditDaysMutation = () => {
     const mutation = useMutation(
-      (updatedItem: Partial<CreditDaysType>) => updateCreditDaysData(updatedItem),
+      (updatedItem: Partial<CreditDaysType>) =>
+        updateCreditDaysData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({

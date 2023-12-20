@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { PurposeMasterFormType, PurposeMasterType } from "@master/index";
+import { PurposeMasterType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -59,7 +59,8 @@ export const usePurposeMasterApiCallHook = () => {
 
   const addPurposeMasterMutation = () => {
     const mutation = useMutation(
-      (updatedItem: Partial<PurposeMasterType>) => addPurposeMaster(updatedItem),
+      (updatedItem: Partial<PurposeMasterType>) =>
+        addPurposeMaster(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
