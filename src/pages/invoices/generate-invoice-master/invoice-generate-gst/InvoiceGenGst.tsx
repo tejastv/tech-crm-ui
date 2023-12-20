@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   BorderLayout,
@@ -12,6 +12,9 @@ import {
 } from "@shared/index";
 import { InvoiceListType, invoiceGenGstFormFields } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
+import { ActualBuyerType, ClientType, FinYearType, useActualBuyerApiCallHook, useClientApiCallHook, useFinYearApiCallHook } from "@pages/master";
+import { selectOptionsMaker } from "@utils/index";
+import { usePagination } from "@hooks/usePagination";
 
 export const InvoiceGenerateGst: React.FC = () => {
   const {
@@ -20,6 +23,69 @@ export const InvoiceGenerateGst: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<InvoiceListType>();
+
+  const { getFinYear } = useFinYearApiCallHook();
+  const { getClient } = useClientApiCallHook();
+  const { getActualBuyer } = useActualBuyerApiCallHook();
+
+  const [finYearOptions, setFinYearOptions] = useState<FinYearType[]>();
+  const [clientOptions, setClientOptions] = useState<ClientType[]>();
+  const [actualBuyerOptions, setActualBuyerOptions] = useState<ActualBuyerType[]>();
+  const [searchStringClient, setSearchStringClient] = useState<string>("");
+  const [clientId, setClientId] = useState<number>(-2);
+  
+  const { data: fYearData } = getFinYear();
+
+  useEffect(() => {
+    if (fYearData) {
+      setFinYearOptions(Object.values(fYearData));
+    }
+  }, [fYearData])
+
+  if (finYearOptions?.length) {
+    let options = selectOptionsMaker(finYearOptions, "finYear", "finYear");
+    invoiceGenGstFormFields.fYearField.config.options = options;
+  }
+
+  const { limit, offset } = usePagination();
+
+  const { data: clientData } = getClient(
+    {
+      limit,
+      offset,
+      searchString: searchStringClient,
+    },
+    searchStringClient.length === 3
+  );
+
+  useEffect(() => {
+    if (clientData?.data) {
+      setClientOptions(Object.values(clientData.data));
+    }
+  }, [clientData?.data]);
+
+  if (clientOptions?.length) {
+    let options = selectOptionsMaker(clientOptions, "clientId", "clientName");
+    invoiceGenGstFormFields.client.config.options = options;
+  }
+
+  const { data: actualBuyerData } = getActualBuyer();
+
+  useEffect(() => {
+    if (actualBuyerData) {
+      setActualBuyerOptions(Object.values(actualBuyerData));
+    }
+  }, [actualBuyerData]);
+
+  if (actualBuyerOptions?.length) {
+    let options = selectOptionsMaker(
+      actualBuyerOptions,
+      "partyId",
+      "partyName"
+    );
+    invoiceGenGstFormFields.actualBuyreField.config.options = options;
+  }
+
   const cardConfig = {
     formLayoutConfig: {
       mainHeading: "Invoice List",
@@ -152,6 +218,16 @@ export const InvoiceGenerateGst: React.FC = () => {
     console.log("value", data);
   });
 
+  const clientOnInputChangeHandler = (clientInputValue: any) => {
+    if (clientInputValue.length === 3) {
+      setSearchStringClient(clientInputValue);
+    }
+    if (clientInputValue.length === 0) {
+      setClientOptions([]);
+      invoiceGenGstFormFields.client.config.options = [];
+    }
+  };
+
   return (
     <Card config={cardConfig.formLayoutConfig}>
       <form
@@ -169,19 +245,14 @@ export const InvoiceGenerateGst: React.FC = () => {
                 control={control}
                 config={invoiceGenGstFormFields.fYearField}
               />
-              {/* <NewRadio
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={invoiceGenGstFormFields.allClientDatewiseField}
-                /> */}
             </div>
             <div className="col-md-4">
               <NewSelect
                 errors={errors}
                 register={register}
                 control={control}
-                config={invoiceGenGstFormFields.clientField}
+                config={invoiceGenGstFormFields.client}
+                onInputChange={clientOnInputChangeHandler}
               />
             </div>
             <div className="col-md-4">
@@ -192,68 +263,7 @@ export const InvoiceGenerateGst: React.FC = () => {
                 config={invoiceGenGstFormFields.actualBuyreField}
               />
             </div>
-            <hr className="mt-5" />
-            <div className="col-md-6">
-              <div className="row">
-                {/* <div className="col-md-6 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.fromDateField}
-                  />
-                </div> */}
-                {/* <div className="col-md-6 col-xs-12">
-                  <NewInput
-                    errors={errors}
-                    register={register}
-                    config={invoiceGenGstFormFields.toDateField}
-                  />
-                </div> */}
-                <div className="col-md-6 col-xs-12">
-                  {/* <NewSelect
-                      errors={errors}
-                      register={register}
-                      control={control}
-                      config={invoiceGenGstFormFields.cityField}
-                    /> */}
-                  {/* <div className="col-md-14 col-xs-12 text-right">
-                    <Button type="button" className={"btn btn-danger btn-sm "}>
-                      Get
-                    </Button>
-                  </div> */}
-                </div>
-                <div className="col-md-6 col-xs-12">
-                  {/* <NewSelect
-                    errors={errors}
-                    register={register}
-                    control={control}
-                    config={invoiceGenGstFormFields.clientField}
-                  /> */}
-                </div>
-              </div>
-            </div>
 
-            <div className="col-md-3">
-              <div className="row">
-                <div className="col-md-4">
-                  {/* <NewCheckbox
-                      errors={errors}
-                      register={register}
-                      control={control}
-                      config={invoiceGenGstFormFields.bobField}
-                    /> */}
-                </div>
-
-                <div className="mb-2">
-                  {/* <div className="col-md-14 col-xs-12 ">
-                    <Button type="button" className={"btn btn-danger btn-sm"}>
-                      Refresh/View
-                    </Button>
-                  </div> */}
-                </div>
-              </div>
-            </div>
-            {/* Table */}
             <div className="row">
               <div className="col-12">
                 <div className="row">
@@ -272,7 +282,7 @@ export const InvoiceGenerateGst: React.FC = () => {
                     />
                   </div>
                   <div className="col-md-4 col-xs-12">
-                    <Button type="button" className={"btn btn-danger btn-sm"}>
+                    <Button type="submit" className={"btn btn-danger btn-sm"}>
                       Get Inquires
                     </Button>
                   </div>

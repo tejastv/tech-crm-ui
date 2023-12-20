@@ -318,7 +318,7 @@ const actionOptiontwo: MapType<Options> = {
   new: { value: "y", label: "Do Not Compare Report with Invoice Date" },
 };
 
-const clientField: FormFieldType = {
+const client: FormFieldType = {
   config: {
     name: "client",
     label: "Client ",
@@ -329,6 +329,22 @@ const clientField: FormFieldType = {
       required: {
         value: true,
         message: "Select Client",
+      },
+    },
+  },
+};
+
+const actualBuyreField: FormFieldType = {
+  config: {
+    name: "actualBuyer",
+    label: "Actual Buyre",
+    id: "actualBuyer",
+    options: [],
+    placeholder: "Select Actual Buyre ",
+    validation: {
+      required: {
+        value: true,
+        message: "Select Actual Buyre",
       },
     },
   },
@@ -353,13 +369,6 @@ const gstnActualBuyreField: FormFieldType = createFormConfig(
   "GSTN",
   "text",
   gstnActualBuyreValidation,
-  ""
-);
-const actualBuyreField: FormFieldType = createFormConfig(
-  "actualbuyre",
-  "Actual Buyre",
-  "text",
-  actualBuyreValidation,
   ""
 );
 
@@ -651,7 +660,7 @@ const totalField: FormFieldType = createFormConfig(
 );
 
 export const invoiceGenGstFormFields = {
-  clientField,
+  client,
   currencyField,
   gstnField,
   gstnActualBuyreField,
