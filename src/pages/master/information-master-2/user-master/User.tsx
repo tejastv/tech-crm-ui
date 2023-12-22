@@ -32,7 +32,7 @@ export const User: React.FC = () => {
   const navigate = useNavigate();
   const columns: ColumnDef<UserType>[] = [
     {
-      id: "action",
+      id: "action:rights",
       cell: (info) => info.getValue(),
       header: () => <>Action</>,
     },
@@ -60,7 +60,7 @@ export const User: React.FC = () => {
       header: () => <>Password</>,
     },
     {
-      accessorFn: (row) => row.usertype,
+      accessorFn: (row) => row.userType,
       id: "usertype",
       cell: (info) => info.getValue(),
       header: () => <>Type Of User</>,
@@ -77,8 +77,24 @@ export const User: React.FC = () => {
     }
   };
 
-  const editUserClick = (userData: any) => {
-    navigate(COMMON_ROUTES.EDIT.replace(":id", userData.id),{state:userData});
+  const editUserClick = (userData: any, other: any) => {
+    if (other === undefined) {
+      navigate(
+        {
+          pathname: COMMON_ROUTES.EDIT.replace(":id", userData.id),
+          search: "?isEdit=true",
+        },
+        { state: userData }
+      );
+    } else {
+      navigate(
+        {
+          pathname: COMMON_ROUTES.EDIT.replace(":id", userData.id),
+          search: "?isEdit=false",
+        },
+        { state: userData }
+      );
+    }
   };
 
   const tableConfig: TableType<UserType> = {
@@ -106,7 +122,7 @@ export const User: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isLoading ? <Table config={tableConfig.config}/> :  <Loader />}
+        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

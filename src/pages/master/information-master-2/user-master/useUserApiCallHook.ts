@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { UserType } from "@master/index";
+import { GetUserWiseRights, UserType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -105,11 +105,37 @@ export const useUserApiCallHook = () => {
     return mutation;
   };
 
+  const getAllRightsMenu = (): UseQueryResult<Array<GetUserWiseRights>> => {
+    return useQuery<Array<GetUserWiseRights>>({
+      queryKey: [queryKeys.ALL_RIGHTS_DATA],
+      queryFn: async () => {
+        const response = await instance.get(apiUrls.GET_ALL_RIGHTS_MENU);
+        const data = response.data.data;
+        return data;
+      },
+      staleTime: Infinity,
+    });
+  };
+
+  const getUserWiseRightsMenu = (id: string): UseQueryResult<Array<GetUserWiseRights>> => {
+    return useQuery<Array<GetUserWiseRights>>({
+      queryKey: [queryKeys.USER_WISE_RIGHTS_DATA],
+      queryFn: async () => {
+        const response = await instance.get(apiUrls.GET_USER_WISE_RIGHTS_MENU.replace("{id}", id));
+        const data = response.data.data;
+        return data;
+      },
+      staleTime: Infinity,
+    });
+  };
+
   return {
     getUser,
     getUserData,
     addUserMutation,
     updateUserMutation,
     deleteUserMutation,
+    getAllRightsMenu,
+    getUserWiseRightsMenu
   };
 };
