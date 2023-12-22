@@ -38,7 +38,6 @@ export const AddUpdateUser: React.FC = () => {
   };
 
   const [searchParams] = useSearchParams();
-  console.log();
   const {
     register,
     handleSubmit,
@@ -79,16 +78,18 @@ export const AddUpdateUser: React.FC = () => {
   }, [params.id]);
 
   const onSubmit = handleSubmit((formUserData): void => {
-    let userData: Partial<UserType> = mapFormUserToUser(formUserData);
-    if (params.id && userData) {
-      updateUser({ id: +params.id, ...userData });
-    } else {
-      addUser(userData);
-    }
+    console.log(userMenuRights)
+    return;
+    // let userData: Partial<UserType> = mapFormUserToUser(formUserData);
+    // if (params.id && userData) {
+    //   updateUser({ id: +params.id, ...userData });
+    // } else {
+    //   addUser(userData);
+    // }
   });
 
   let [userMenuRights, setUserMenuRightsData] = useState(
-    Array<GetUserWiseRights>
+    [] as Array<GetUserWiseRights>
   );
 
   const columns: ColumnDef<GetUserWiseRights>[] = [
@@ -115,20 +116,19 @@ export const AddUpdateUser: React.FC = () => {
       cell: ({ getValue, row, column: { id } }) => {
         const initialValue = getValue() as boolean;
         // We need to keep and update the state of the cell normally
-        const [value, setValue] = React.useState<boolean>(initialValue);
+        const [value, setValue] = useState<boolean>(initialValue);
 
         // If the initialValue is changed external, sync it up with our state
         React.useEffect(() => {
-          setValue(initialValue || false);
-        }, [initialValue]);
+          setValue(row.original.rights);
+        }, [row.original.rights]);
 
         return (
           <input
             checked={value}
             type="checkbox"
             onChange={(e) => {
-              onRightChange(e.target.checked, row.original),
-                setValue(e.target.checked);
+              onRightChange(e.target.checked, row.original);
             }}
             className="editable-cell-style"
           />
@@ -138,19 +138,23 @@ export const AddUpdateUser: React.FC = () => {
     },
   ];
 
+  useEffect(() => {
+    console.log("userMenuRights >>>>>>>", userMenuRights)
+  }, [userMenuRights]);
+
   const onRightChange = (event: boolean, selectedMenu: GetUserWiseRights) => {
-    console.log(event, selectedMenu);
     if (event) {
-      selectedMenu.rights = "1";
-      // setUserMenuRightsData([{ ...selectedMenu }]);
+      selectedMenu.rights = true;
+      setUserMenuRightsData((prevValue) => [...prevValue, { ...selectedMenu }]);
     } else {
-      const index = userMenuRights.indexOf(selectedMenu);
+      const index = userMenuRights.findIndex((menu) => menu.subMenuId !== selectedMenu.subMenuId);
+      console.log(index)
+      selectedMenu.rights = false;
       if (index > -1) {
         const finalArray = userMenuRights.splice(index, 1);
-        // setUserMenuRightsData(finalArray);
+        setUserMenuRightsData(finalArray);
       }
     }
-    console.log(userMenuRights);
   };
 
   const tableConfig: TableType<GetUserWiseRights> = {
@@ -171,7 +175,6 @@ export const AddUpdateUser: React.FC = () => {
       },
     },
   };
-  console.log(searchParams.get("isEdit"));
   return (
     <Card config={cardConfig.formLayoutConfig}>
       <form
@@ -180,7 +183,8 @@ export const AddUpdateUser: React.FC = () => {
         autoComplete="off"
         className="p-t-20"
       >
-        {searchParams.get("isEdit") === "true" ? (
+        {searchParams.get("isSetting") === "false" ||
+        searchParams.get("isAdd") === "true" ? (
           <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
             <div className="row">
               <div className="col-md-6 col-xs-12">
@@ -210,11 +214,13 @@ export const AddUpdateUser: React.FC = () => {
               </div>
             </div>
           </BorderLayout>
-        ) : (
+        ) : null}
+        {searchParams.get("isAdd") === "true" ||
+        searchParams.get("isSetting") === "true" ? (
           <BorderLayout heading={cardConfig.formTableConfig.heading}>
             {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
           </BorderLayout>
-        )}
+        ) : null}
         <BorderLayout heading={cardConfig.formActionsConfig.heading}>
           <ActionButtons />
         </BorderLayout>

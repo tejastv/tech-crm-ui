@@ -19,7 +19,7 @@ export const User: React.FC = () => {
       buttons: [
         {
           btnTitle: "Add User",
-          btnRoute: COMMON_ROUTES.ADD,
+          btnRoute: COMMON_ROUTES.ADD + '?isAdd=true',
         },
       ],
     },
@@ -82,7 +82,7 @@ export const User: React.FC = () => {
       navigate(
         {
           pathname: COMMON_ROUTES.EDIT.replace(":id", userData.id),
-          search: "?isEdit=true",
+          search: "?isSetting=false",
         },
         { state: userData }
       );
@@ -90,7 +90,7 @@ export const User: React.FC = () => {
       navigate(
         {
           pathname: COMMON_ROUTES.EDIT.replace(":id", userData.id),
-          search: "?isEdit=false",
+          search: "?isSetting=true",
         },
         { state: userData }
       );

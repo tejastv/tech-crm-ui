@@ -1,7 +1,7 @@
 export interface GetUserWiseRights {
   displayString: string;
   subMenuId: number;
-  rights: string;
+  rights: boolean;
   mainMenuId: number;
   mainMenu: string;
   mainMenuCaption: string;

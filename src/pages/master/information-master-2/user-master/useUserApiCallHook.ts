@@ -110,7 +110,11 @@ export const useUserApiCallHook = () => {
       queryKey: [queryKeys.ALL_RIGHTS_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ALL_RIGHTS_MENU);
-        const data = response.data.data;
+        const data = response.data.data.map((data: GetUserWiseRights) => {
+          data.rights = false;
+          return data
+        });
+        console.log(data)
         return data;
       },
       staleTime: Infinity,
