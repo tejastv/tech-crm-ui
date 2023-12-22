@@ -261,12 +261,10 @@ export const RECEIPTS_ROUTES = {
     RECEIPT_PARENT_ROUTE: "/payment-receipt/*",
     RECEIPT: "payment-receipt",
   },
-  // NUMBER_OF_ENQUIRIES_GROUP_COUNTRY_WISE_ROUTES: {
-  //   NUMBER_OF_ENQUIRIES_GROUP_COUNTRY_WISE_PARENT_ROUTE:
-  //     "/no-of-enquiries-group-country-wise/*",
-  //   NUMBER_OF_ENQUIRIES_GROUP_COUNTRY_WISE:
-  //     "no-of-enquiries-group-country-wise",
-  // },
+  RECEIPT_ADVANCE_ROUTES: {
+    RECEIPT_ADVANCE_PARENT_ROUTE: "/advance-receipt/*",
+    RECEIPT_ADVANCE: "advance-receipt",
+  },
   // NUMBER_OF_ENQUIRIES_GRAPH_VIEW_ROUTES: {
   //   NUMBER_OF_ENQUIRIES_GRAPH_VIEW_PARENT_ROUTE:
   //     "/no-of-enquiries-graph-view/*",

@@ -353,63 +353,69 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                 </select>
               </div>
             )}
-            <div className="dt-buttons">
-              {props.config.copyBtn && (
-                <Button
-                  key="buttons-copy"
-                  className="dt-button buttons-copy buttons-html5 btn btn-danger btn-sm mr-1"
-                  aria-controls="file_export"
-                  type="button"
-                  onClick={copyTableToClipboard}
-                >
-                  <span>Copy</span>
-                </Button>
-              )}
-              {props.config.csvBtn && (
-                <Button
-                  key="buttons-csv"
-                  className="dt-button buttons-csv buttons-html5 btn btn-danger btn-sm mr-1"
-                  aria-controls="file_export"
-                  type="button"
-                  onClick={downloadCSV}
-                >
-                  <span>CSV</span>
-                </Button>
-              )}
-              {props.config.excelBtn && (
-                <Button
-                  key="buttons-excel"
-                  className="dt-button buttons-excel buttons-html5 btn btn-danger btn-sm mr-1"
-                  aria-controls="file_export"
-                  type="button"
-                  onClick={downloadExcel}
-                >
-                  <span>Excel</span>
-                </Button>
-              )}
-              {props.config.pdfBtn && (
-                <Button
-                  key="buttons-pdf"
-                  className="dt-button buttons-pdf buttons-html5 btn btn-danger btn-sm mr-1"
-                  aria-controls="file_export"
-                  type="button"
-                  onClick={downloadPDF}
-                >
-                  <span>PDF</span>
-                </Button>
-              )}
-              {props.config.printBtn && (
-                <Button
-                  key="buttons-print"
-                  className="dt-button buttons-print btn btn-danger btn-sm mr-1"
-                  aria-controls="file_export"
-                  type="button"
-                  onClick={handlePrint}
-                >
-                  <span>Print</span>
-                </Button>
-              )}
-            </div>
+            {(props.config.copyBtn ||
+              props.config.csvBtn ||
+              props.config.excelBtn ||
+              props.config.pdfBtn ||
+              props.config.printBtn) && (
+              <div className="dt-buttons">
+                {props.config.copyBtn && (
+                  <Button
+                    key="buttons-copy"
+                    className="dt-button buttons-copy buttons-html5 btn btn-danger btn-sm mr-1"
+                    aria-controls="file_export"
+                    type="button"
+                    onClick={copyTableToClipboard}
+                  >
+                    <span>Copy</span>
+                  </Button>
+                )}
+                {props.config.csvBtn && (
+                  <Button
+                    key="buttons-csv"
+                    className="dt-button buttons-csv buttons-html5 btn btn-danger btn-sm mr-1"
+                    aria-controls="file_export"
+                    type="button"
+                    onClick={downloadCSV}
+                  >
+                    <span>CSV</span>
+                  </Button>
+                )}
+                {props.config.excelBtn && (
+                  <Button
+                    key="buttons-excel"
+                    className="dt-button buttons-excel buttons-html5 btn btn-danger btn-sm mr-1"
+                    aria-controls="file_export"
+                    type="button"
+                    onClick={downloadExcel}
+                  >
+                    <span>Excel</span>
+                  </Button>
+                )}
+                {props.config.pdfBtn && (
+                  <Button
+                    key="buttons-pdf"
+                    className="dt-button buttons-pdf buttons-html5 btn btn-danger btn-sm mr-1"
+                    aria-controls="file_export"
+                    type="button"
+                    onClick={downloadPDF}
+                  >
+                    <span>PDF</span>
+                  </Button>
+                )}
+                {props.config.printBtn && (
+                  <Button
+                    key="buttons-print"
+                    className="dt-button buttons-print btn btn-danger btn-sm mr-1"
+                    aria-controls="file_export"
+                    type="button"
+                    onClick={handlePrint}
+                  >
+                    <span>Print</span>
+                  </Button>
+                )}
+              </div>
+            )}
             {props.config.globalSearchBox && (
               <div id="file_export_filter" className="dataTables_filter">
                 <label>

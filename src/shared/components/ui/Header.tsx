@@ -1405,11 +1405,13 @@ export const Header: React.FC = () => {
                         </Link>
                       </li>
                       <li className="sidebar-item">
-                        {" "}
-                        <a className="sidebar-link" href="advanced_receipt.php">
+                        <Link
+                          className="sidebar-link"
+                          to={`${RECEIPTS_ROUTES.RECEIPTS}${RECEIPTS_ROUTES.RECEIPT_ADVANCE_ROUTES.RECEIPT_ADVANCE}`}
+                        >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Receipt(ADVANCE)</span>
-                        </a>
+                        </Link>
                       </li>
                       <li className="sidebar-item">
                         {" "}
