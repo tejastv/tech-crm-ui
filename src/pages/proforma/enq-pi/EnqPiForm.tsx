@@ -29,7 +29,7 @@ import { cleanupObject, selectOptionsMaker } from "@utils/index";
 import { useAddEnquiryApiCallHook } from "@transaction-search/index";
 import { useParams } from "react-router-dom";
 
-export const AddEnqPi: React.FC = () => {
+export const EnqPiForm: React.FC = () => {
   // const { getServiceType } = useAddEnquiryApiCallHook();
   const params = useParams();
   const { getCity } = useCityApiCallHook();
