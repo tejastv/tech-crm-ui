@@ -49,8 +49,6 @@ import {
   selectOptionsMaker,
 } from "@utils/index";
 import { usePagination } from "@hooks/usePagination";
-import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "@constants/query-keys";
 
 const priceMapper = {
   1: "price", // Normal
@@ -227,32 +225,22 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqFinYear.config.options = options;
   }
 
-  const { data: actualBuyerData } = getActualBuyer(
-    { client_id: clientId },
-    clientId !== -2
-  );
-
-  // useEffect(() => {
-  //   setActualBuyerOptions([]);
-  // }, []);
+  const { data: actualBuyerData } = getActualBuyer({ client_id: clientId });
 
   useEffect(() => {
     if (actualBuyerData) {
-      console.log(actualBuyerData);
       setActualBuyerOptions(Object.values(actualBuyerData));
     }
   }, [actualBuyerData]);
 
-  useEffect(() => {
-    if (actualBuyerOptions) {
-      let options = selectOptionsMaker(
-        actualBuyerOptions,
-        "partyId",
-        "partyName"
-      );
-      enquiryFormFields.enqActualBuyer.config.options = options;
-    }
-  }, [actualBuyerOptions]);
+  if (actualBuyerOptions?.length) {
+    let options = selectOptionsMaker(
+      actualBuyerOptions,
+      "partyId",
+      "partyName"
+    );
+    enquiryFormFields.enqActualBuyer.config.options = options;
+  }
 
   const { data: sourceData } = getSource();
 
@@ -777,7 +765,6 @@ export const EnquiryForm: React.FC = () => {
           label: data.clientName,
           value: data.clientId,
         });
-      setSearchStringClient(data.clientName);
     }
     if (sourceData && enqData?.sourceId) {
       let data = sourceData[enqData.sourceId];
