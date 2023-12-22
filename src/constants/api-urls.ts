@@ -104,7 +104,7 @@ const GET_ADD_ENQSTATUS = "transaction/enquiryStatus";
 const GET_ADD_REFNO = "transaction/refNo";
 
 // Proforma
-const GET_ENQUIRY_PI = "transaction/enquiryPi";
+const GET_ENQUIRY_PI = "transaction/enquiries-pi";
 const UPDATE_DELETE_ENQUIRY_PI = "transaction/enquiryPi/{id}";
 
 export const apiUrls = {

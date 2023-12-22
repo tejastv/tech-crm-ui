@@ -30,7 +30,7 @@ import { useAddEnquiryApiCallHook } from "@transaction-search/index";
 import { useParams } from "react-router-dom";
 
 export const AddEnqPi: React.FC = () => {
-  const { getServiceType } = useAddEnquiryApiCallHook();
+  // const { getServiceType } = useAddEnquiryApiCallHook();
   const params = useParams();
   const { getCity } = useCityApiCallHook();
   const { getState } = useStateApiCallHook();
@@ -38,7 +38,7 @@ export const AddEnqPi: React.FC = () => {
   // const { getSource } = useSourceApiCallHook();
   // const { getLocalSource } = useLocalSourceApiCallHook();
   // const { getClient } = useClientApiCallHook();
-  const { getFinYear } = useFinYearApiCallHook();
+  // const { getFinYear } = useFinYearApiCallHook();
   const [isCompanyChange, setIsCompanyChange] = useState<boolean>(false);
 
   // const [refNo, setRefNo] = useState<any>();
@@ -122,14 +122,14 @@ export const AddEnqPi: React.FC = () => {
   //   );
   // }
 
-  const { data: fYearData } = getFinYear();
-  if (fYearData) {
-    enqPiFormFields.fYearField.config.options = selectOptionsMaker(
-      fYearData,
-      "finYear",
-      "finYear"
-    );
-  }
+  // const { data: fYearData } = getFinYear();
+  // if (fYearData) {
+  //   enqPiFormFields.fYearField.config.options = selectOptionsMaker(
+  //     fYearData,
+  //     "finYear",
+  //     "finYear"
+  //   );
+  // }
 
   // const { data: SourceData } = getSource();
   // if (SourceData) {
@@ -159,14 +159,14 @@ export const AddEnqPi: React.FC = () => {
   //   );
   // }
 
-  const { data: ServiceData } = getServiceType();
-  if (ServiceData) {
-    enqPiFormFields.serviceTypeField.config.options = selectOptionsMaker(
-      ServiceData,
-      "serviceTypeId",
-      "serviceType"
-    );
-  }
+  // const { data: ServiceData } = getServiceType();
+  // if (ServiceData) {
+  //   enqPiFormFields.serviceTypeField.config.options = selectOptionsMaker(
+  //     ServiceData,
+  //     "serviceTypeId",
+  //     "serviceType"
+  //   );
+  // }
 
   const [selectedCompanyData, setCompanyData] = useState<CompanyType>();
 
