@@ -10,15 +10,31 @@ import Form from "react-bootstrap/Form";
 
 import { FormFieldType } from "@shared/index";
 import { findInputError, isFormInvalid } from "@utils/index";
+import { Controller, useController } from "react-hook-form";
 
 export const NewDatePicker: React.FC<{
   config: FormFieldType;
   register: any;
   errors: any;
+  control: any;
   defaultValue?: any;
+  onChange?: (value: string) => void; // Define an onChange prop
 }> = (props) => {
   const inputErrors = findInputError(props.errors, props.config.config.name);
   const isInvalid = isFormInvalid(inputErrors);
+  const {
+    field: { onChange },
+  } = useController({
+    control: props.control,
+    name: props.config.config.name,
+  });
+  const handleSelectChange = (selectedOption: any) => {
+    // Update the form value with the selected data
+    onChange(selectedOption);
+    if (props.onChange) {
+      props.onChange(selectedOption.target.value);
+    }
+  };
   return (
     <div className="row">
       <div className="col-12">
@@ -33,18 +49,23 @@ export const NewDatePicker: React.FC<{
             </Form.Label>
           )}
           <div className="col-sm-9">
-            <Form.Control
-              id={props.config.config.id}
-              type="date"
-              placeholder={props.config.config.placeholder}
+            <Controller
+              name={props.config.config.name}
+              control={props.control}
+              rules={props.config.config.validation}
               defaultValue={
                 props.defaultValue
                   ? props.defaultValue
                   : new Date().toISOString().split("T")[0]
               }
-              {...props.register(
-                props.config.config.name,
-                props.config.config.validation
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  id={props.config.config.id}
+                  type="date"
+                  placeholder={props.config.config.placeholder}
+                  onChange={handleSelectChange} // Pass the onChange handler
+                />
               )}
             />
             {isInvalid && (

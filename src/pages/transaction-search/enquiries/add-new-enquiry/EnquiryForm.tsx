@@ -865,6 +865,10 @@ export const EnquiryForm: React.FC = () => {
     return new Date(result).toISOString().split("T")[0];
   };
 
+  const onDateChangeHnadler = (date: string) => {
+    console.log(date);
+  };
+
   return (
     <Card config={cardConfig.formLayoutConfig}>
       <form
@@ -889,6 +893,9 @@ export const EnquiryForm: React.FC = () => {
                 register={register}
                 control={control}
                 config={enquiryFormFields.enqFinYear}
+                onChange={(e) => {
+                  console.log(e);
+                }}
               />
               <NewInput
                 errors={errors}
@@ -1032,11 +1039,14 @@ export const EnquiryForm: React.FC = () => {
               <NewDatePicker
                 errors={errors}
                 register={register}
+                onChange={onDateChangeHnadler}
+                control={control}
                 config={enquiryFormFields.enqRecdon}
               />
               <NewDatePicker
                 errors={errors}
                 register={register}
+                control={control}
                 config={enquiryFormFields.enqDueOn}
                 defaultValue={addDays(new Date(), 4)}
               />
