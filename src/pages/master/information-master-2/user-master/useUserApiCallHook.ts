@@ -1,5 +1,5 @@
 import { useAxios } from "@hooks/useAxios";
-import { GetUserWiseRights, UserType } from "@master/index";
+import { GetUserWiseRights, PostUserRoles, UserType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import {
@@ -38,6 +38,31 @@ export const useUserApiCallHook = () => {
       enabled: true, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
+  };
+
+  const addUserRoles = async (
+    userData: Partial<PostUserRoles>
+  ): Promise<ApiResponseType<UserType>> => {
+    const response = await instance.post(
+      apiUrls.POST_USER_WISE_RIGHTS_MENU.replace("{id}", "" + userData.userId),
+      userData.roles
+    );
+    return response.data.data;
+  };
+
+  const addUserRolesMutation = () => {
+    const mutation = useMutation(
+      (updatedItem: Partial<PostUserRoles>) => addUserRoles(updatedItem),
+      {
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
+            queryKey: [queryKeys.USER_DATA],
+          });
+          navigate("..");
+        },
+      }
+    );
+    return mutation;
   };
 
   const addUser = async (
@@ -110,22 +135,6 @@ export const useUserApiCallHook = () => {
       queryKey: [queryKeys.ALL_RIGHTS_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ALL_RIGHTS_MENU);
-        const data = response.data.data.map((data: GetUserWiseRights) => {
-          data.rights = false;
-          return data
-        });
-        console.log(data)
-        return data;
-      },
-      staleTime: Infinity,
-    });
-  };
-
-  const getUserWiseRightsMenu = (id: string): UseQueryResult<Array<GetUserWiseRights>> => {
-    return useQuery<Array<GetUserWiseRights>>({
-      queryKey: [queryKeys.USER_WISE_RIGHTS_DATA],
-      queryFn: async () => {
-        const response = await instance.get(apiUrls.GET_USER_WISE_RIGHTS_MENU.replace("{id}", id));
         const data = response.data.data;
         return data;
       },
@@ -133,13 +142,35 @@ export const useUserApiCallHook = () => {
     });
   };
 
+  const getUserWiseRightsMenu = (
+    id: string,
+    condition: boolean
+  ): UseQueryResult<Array<GetUserWiseRights>> => {
+    return useQuery<Array<GetUserWiseRights>>({
+      queryKey: [queryKeys.USER_WISE_RIGHTS_DATA],
+      queryFn: async () => {
+        const response = await instance.get(
+          apiUrls.GET_USER_WISE_RIGHTS_MENU.replace("{id}", id)
+        );
+        const data = response.data.data.map((data: GetUserWiseRights) => {
+          data.rights = false;
+          return data;
+        });
+        return data;
+      },
+      enabled: condition, // Query is initially enabled
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+    });
+  };
+
   return {
     getUser,
     getUserData,
+    addUserRolesMutation,
     addUserMutation,
     updateUserMutation,
     deleteUserMutation,
     getAllRightsMenu,
-    getUserWiseRightsMenu
+    getUserWiseRightsMenu,
   };
 };

@@ -14,6 +14,8 @@ import {
 import {
   FormUserType,
   GetUserWiseRights,
+  PostUserRoles,
+  PostUserWiseMenu,
   UserType,
   addUserFormFields,
   useUserApiCallHook,
@@ -45,12 +47,16 @@ export const AddUpdateUser: React.FC = () => {
     control,
     formState: { errors },
   } = useForm<FormUserType>();
-  const { addUserMutation, updateUserMutation, getAllRightsMenu } =
+  const { addUserRolesMutation, addUserMutation, updateUserMutation, getUserWiseRightsMenu } =
     useUserApiCallHook();
 
-  const { data: allMenus, isFetching } = getAllRightsMenu();
+  const { data: allMenus, isFetching } = getUserWiseRightsMenu(
+    "" + params.id,
+    params.id !== undefined
+  );
 
   const { mutateAsync: addUser } = addUserMutation();
+  const { mutateAsync: addUserRoles } = addUserRolesMutation();
   const { mutateAsync: updateUser } = updateUserMutation();
 
   const mapFormUserToUser = (formUserData: FormUserType) => {
@@ -77,19 +83,30 @@ export const AddUpdateUser: React.FC = () => {
     if (params.id) reset(mapUserToFormUser(userData));
   }, [params.id]);
 
-  const onSubmit = handleSubmit((formUserData): void => {
-    console.log(userMenuRights)
-    return;
-    // let userData: Partial<UserType> = mapFormUserToUser(formUserData);
-    // if (params.id && userData) {
-    //   updateUser({ id: +params.id, ...userData });
-    // } else {
-    //   addUser(userData);
-    // }
+  const mapFormUserRole = (userRoleData: Array<PostUserWiseMenu>) => {
+    let userData: Partial<PostUserRoles> = {
+      userId: params.id,
+      roles: userRoleData,
+    };
+    return userData;
+  };
+
+  const onSubmit = handleSubmit((formUserData: FormUserType): void => {
+    if (params.id && userData && searchParams.get("isEdit") === "true") {
+      let userData: Partial<UserType> = mapFormUserToUser(formUserData);
+      updateUser({ id: +params.id, ...userData });
+    } else if (searchParams.get("isSetting") === "true") {
+      let userRoleData: Partial<PostUserRoles> = mapFormUserRole(userMenuRights);
+      console.log(userRoleData);
+      addUserRoles(userRoleData);
+    } else {
+      let userData: Partial<UserType> = mapFormUserToUser(formUserData);
+      addUser(userData);
+    }
   });
 
   let [userMenuRights, setUserMenuRightsData] = useState(
-    [] as Array<GetUserWiseRights>
+    [] as Array<PostUserWiseMenu>
   );
 
   const columns: ColumnDef<GetUserWiseRights>[] = [
@@ -139,16 +156,24 @@ export const AddUpdateUser: React.FC = () => {
   ];
 
   useEffect(() => {
-    console.log("userMenuRights >>>>>>>", userMenuRights)
+    console.log("userMenuRights >>>>>>>", userMenuRights);
   }, [userMenuRights]);
 
   const onRightChange = (event: boolean, selectedMenu: GetUserWiseRights) => {
     if (event) {
       selectedMenu.rights = true;
-      setUserMenuRightsData((prevValue) => [...prevValue, { ...selectedMenu }]);
+      let selectedRoles = {} as PostUserWiseMenu;
+      selectedRoles.menuId = selectedMenu.mainMenuId;
+      selectedRoles.subMenuId = selectedMenu.subMenuId;
+      selectedRoles.permission = true;
+      setUserMenuRightsData((prevValue) => [
+        ...prevValue,
+        { ...selectedRoles },
+      ]);
     } else {
-      const index = userMenuRights.findIndex((menu) => menu.subMenuId !== selectedMenu.subMenuId);
-      console.log(index)
+      const index = userMenuRights.findIndex(
+        (menu) => menu.subMenuId !== selectedMenu.subMenuId
+      );
       selectedMenu.rights = false;
       if (index > -1) {
         const finalArray = userMenuRights.splice(index, 1);
@@ -183,8 +208,8 @@ export const AddUpdateUser: React.FC = () => {
         autoComplete="off"
         className="p-t-20"
       >
-        {searchParams.get("isSetting") === "false" ||
-        searchParams.get("isAdd") === "true" ? (
+        {searchParams.get("isAdd") === "true" ||
+        searchParams.get("isEdit") === "true" ? (
           <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
             <div className="row">
               <div className="col-md-6 col-xs-12">
@@ -215,8 +240,7 @@ export const AddUpdateUser: React.FC = () => {
             </div>
           </BorderLayout>
         ) : null}
-        {searchParams.get("isAdd") === "true" ||
-        searchParams.get("isSetting") === "true" ? (
+        {searchParams.get("isSetting") === "true" ? (
           <BorderLayout heading={cardConfig.formTableConfig.heading}>
             {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
           </BorderLayout>

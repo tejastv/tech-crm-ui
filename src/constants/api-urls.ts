@@ -54,6 +54,7 @@ const GET_UPDATE_DELETE_SITE_STATUS = "utility/siteStatus/{id}";
 const GET_ADD_USER = "user";
 const GET_UPDATE_DELETE_USER = "user/{id}";
 const GET_USER_WISE_RIGHTS_MENU = "user/{id}/menu";
+const POST_USER_WISE_RIGHTS_MENU = "user/{id}/menu/action";
 const GET_ALL_RIGHTS_MENU = "user/menu";
 
 const GET_ADD_PAYMENTMODE = "utility/paymentMode";
@@ -145,6 +146,7 @@ export const apiUrls = {
   GET_ADD_USER,
   GET_UPDATE_DELETE_USER,
   GET_USER_WISE_RIGHTS_MENU,
+  POST_USER_WISE_RIGHTS_MENU,
   GET_ALL_RIGHTS_MENU,
   GET_ADD_BANKMASTER_DRAWN,
   GET_UPDATE_DELETE_BANKMASTER_DRAWN,

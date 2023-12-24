@@ -82,7 +82,7 @@ export const User: React.FC = () => {
       navigate(
         {
           pathname: COMMON_ROUTES.EDIT.replace(":id", userData.id),
-          search: "?isSetting=false",
+          search: "?isEdit=true",
         },
         { state: userData }
       );
