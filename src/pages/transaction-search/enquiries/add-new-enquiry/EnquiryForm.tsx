@@ -66,6 +66,8 @@ export const EnquiryForm: React.FC = () => {
     setValue,
     reset,
     getValues,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm<EnqueryFormType>();
   const { state: localEnqData } = useLocation();
@@ -1207,10 +1209,3 @@ export const EnquiryForm: React.FC = () => {
     </Card>
   );
 };
-function setError(name: string, arg1: { message: string }) {
-  throw new Error("Function not implemented.");
-}
-
-function clearErrors(name: string) {
-  throw new Error("Function not implemented.");
-}
