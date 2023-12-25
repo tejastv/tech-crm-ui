@@ -49,7 +49,7 @@ export interface EnquiriesType {
   disType: string;
   actualBuyerId: number;
   siteStatusId: number;
-  bulk_enquiry_id: number;
+  bulkEnquiryId: number;
   locked: string;
   enteredBy: number;
   enteredDate: string;

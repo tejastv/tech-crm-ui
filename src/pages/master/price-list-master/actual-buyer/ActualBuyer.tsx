@@ -1,5 +1,5 @@
 // CompanyMaster.tsx
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   BorderLayout,
@@ -124,8 +124,12 @@ export const ActualBuyer: React.FC = () => {
     },
   ];
 
-  const { data: actualBuyerData, isFetching } = getActualBuyer();
+  const { data: actualBuyerData, isFetching, refetch } = getActualBuyer();
   const { mutateAsync: deleteActualBuyer } = deleteActualBuyerMutation();
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   const deleteActualBuyerClick = async (actualBuyerData: any) => {
     var confirmation = confirm("Are you sure to delete it?");
@@ -136,7 +140,7 @@ export const ActualBuyer: React.FC = () => {
 
   const editActualBuyerClick = (actualBuyerData: any) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", actualBuyerData.partyId), {
-      state: null
+      state: null,
     });
   };
 

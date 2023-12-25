@@ -66,7 +66,7 @@ export { BankMasterDrawn } from "./information-master/bank-master-drawn-on/BankD
 export { IndustryForm } from "./information-master-2/industry/IndustryForm";
 export { Industry } from "./information-master-2/industry/Industry";
 
-export { CallTypeForm } from "./information-master-2/call-type/CallTypeForm";
+export { CallTypeForm } from "./information-master-2/call-type/CalltypeForm";
 export { CallType } from "./information-master-2/call-type/CallType";
 
 export { PurposeMasterForm } from "./information-master-2/purpose-master/PurposeMasterForm";

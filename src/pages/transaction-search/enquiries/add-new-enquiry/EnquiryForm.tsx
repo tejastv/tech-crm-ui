@@ -103,8 +103,9 @@ export const EnquiryForm: React.FC = () => {
   const [companyOptions, setCompanyOptions] = useState<CompanyType[]>();
   const [serviceOptions, setServiceOptions] = useState<ServiceType[]>();
   const [enqStatusOptions, setEnqStatusOptions] = useState<EnqStatusType[]>();
-  const [actualBuyerOptions, setActualBuyerOptions] =
-    useState<ActualBuyerType[]>();
+  const [actualBuyerOptions, setActualBuyerOptions] = useState<
+    ActualBuyerType[]
+  >([]);
   const [getPriceFlag, setGetPriceFlag] = useState<any>({
     flag: false,
     clientId: null,
@@ -224,7 +225,8 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqFinYear.config.options = options;
   }
 
-  const { data: actualBuyerData } = getActualBuyer();
+  const { data: actualBuyerData } = getActualBuyer({ client_id: clientId });
+
   useEffect(() => {
     if (actualBuyerData) {
       setActualBuyerOptions(Object.values(actualBuyerData));
@@ -640,9 +642,7 @@ export const EnquiryForm: React.FC = () => {
       discount: enqFormData.discount,
       adjustment: enqFormData.adjustment,
       disType: enqFormData.disType,
-      bulk_enquiry_id: enqFormData.bulk_enquiry_id
-        ? enqFormData.bulk_enquiry_id
-        : 0,
+      bulkEnquiryId: 0,
       locked: enqFormData.locked,
       givenName: enqFormData.givenName,
       cmie: enqFormData.cmie,
@@ -727,7 +727,7 @@ export const EnquiryForm: React.FC = () => {
       discount: enqData.discount,
       adjustment: enqData.adjustment,
       disType: enqData.disType,
-      bulk_enquiry_id: enqData.bulk_enquiry_id ? enqData.bulk_enquiry_id : 0,
+      bulkEnquiryId: 0,
       locked: enqData.locked,
       givenName: enqData.givenName,
       cmie: enqData.cmie,
@@ -865,6 +865,10 @@ export const EnquiryForm: React.FC = () => {
     return new Date(result).toISOString().split("T")[0];
   };
 
+  const onDateChangeHnadler = (date: string) => {
+    console.log(date);
+  };
+
   return (
     <Card config={cardConfig.formLayoutConfig}>
       <form
@@ -889,6 +893,9 @@ export const EnquiryForm: React.FC = () => {
                 register={register}
                 control={control}
                 config={enquiryFormFields.enqFinYear}
+                onChange={(e) => {
+                  console.log(e);
+                }}
               />
               <NewInput
                 errors={errors}
@@ -1032,11 +1039,14 @@ export const EnquiryForm: React.FC = () => {
               <NewDatePicker
                 errors={errors}
                 register={register}
+                onChange={onDateChangeHnadler}
+                control={control}
                 config={enquiryFormFields.enqRecdon}
               />
               <NewDatePicker
                 errors={errors}
                 register={register}
+                control={control}
                 config={enquiryFormFields.enqDueOn}
                 defaultValue={addDays(new Date(), 4)}
               />
