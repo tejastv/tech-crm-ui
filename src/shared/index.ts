@@ -29,7 +29,7 @@ export { NewSelect } from "./components/ui/NewSelect";
 export { NewDatePicker } from "./components/ui/NewDatePicker";
 export { NewRadio } from "./components/ui/NewRadio";
 export { NewCheckbox } from "./components/ui/NewCheckbox";
-
+export * as tableCellFormFields from "./components/ui/TableCellFormFields";
 // Types
 export * from "./types/button-type";
 export * from "./types/border-layout-type";

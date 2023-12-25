@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useRef, useState } from "react";
+import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -44,7 +44,10 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [autoResetPageIndex, skipAutoResetPageIndex] = useSkipper();
   const tableRef = useRef(null);
   // const data = props.config.tableData;
-  const [data, setData] = useState(() => [...props.config.tableData]);
+  const [data, setData] = useState<Array<any>>([]);
+  useEffect(() => {
+    setData([...props.config.tableData]);
+  }, [props.config.tableData]);
   const columns = props.config.columns;
   const pageSizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   const { errorMessageToaster, successMessageToaster } = useToaster();
@@ -116,6 +119,10 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
 
   const onTableEditBtnClick = (data: any) => {
     props.config.onEditClick && props.config.onEditClick(data);
+  };
+
+  const onRemoveRowHandler = (data: any) => {
+    props.config.onRemoveRow && props.config.onRemoveRow(data);
   };
 
   const copyTableToClipboard = async (): Promise<void> => {
@@ -524,6 +531,25 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                                     data-original-title="Delete"
                                     onClick={() =>
                                       onTableDeleteBtnClick(row.original)
+                                    }
+                                  >
+                                    <span className="badge badge-danger m-r-10">
+                                      <i className="ti-trash"></i>
+                                    </span>
+                                  </a>
+                                </td>
+                              ) : cell.column.id == "remove" ? (
+                                <td
+                                  key={`cell_action_${
+                                    cell.column.id + Math.random() * 17
+                                  }`}
+                                >
+                                  <a
+                                    className="icon"
+                                    data-toggle="tooltip"
+                                    data-original-title="Delete"
+                                    onClick={() =>
+                                      onRemoveRowHandler(row.original)
                                     }
                                   >
                                     <span className="badge badge-danger m-r-10">

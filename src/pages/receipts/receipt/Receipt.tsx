@@ -1,3 +1,4 @@
+import React, { useMemo } from "react";
 import { useForm } from "react-hook-form";
 
 import {
@@ -8,6 +9,7 @@ import {
   TableType,
   NewSelect,
   NewInput,
+  tableCellFormFields,
 } from "@shared/index";
 
 import {
@@ -37,25 +39,6 @@ const cardConfig = {
   },
 };
 
-const tableData: ReceiptType[] = [
-  {
-    advTransId: "",
-    amount: "",
-    bankID: "",
-    chqAmount: "",
-    chqDate: "",
-    chqNo: "",
-    depositBankId: "",
-    otherCharges: "",
-    expense: "",
-    netAmount: "",
-    paymentModeID: "",
-    recDate: "",
-    remarks: "",
-    tds: "",
-  },
-];
-
 export const Receipt: React.FC = () => {
   const { getBankMasterDrawnOn } = useBankMasterDrawnApiCallHook();
   const { getBankMasterDeposit } = useBankMasterDepositApiCallHook();
@@ -71,9 +54,11 @@ export const Receipt: React.FC = () => {
 
   const [startYear, setStartYear] = useState("");
   const [invoiceNo, setInvoiceNo] = useState("");
-  const [tableData, setTableData] = useState<ReceiptType[]>([]);
+  const [tableData, setTableData] = useState<ReceiptType[]>(
+    [] as ReceiptType[]
+  );
 
-  const { data: receiptData, isFetching } = getReceiptData(
+  const { data: receiptData } = getReceiptData(
     startYear,
     invoiceNo,
     startYear !== "" && invoiceNo !== ""
@@ -104,209 +89,231 @@ export const Receipt: React.FC = () => {
     }
   }, [receiptSummary]);
 
-  const cellMapDataHandler = (row: any, id: any, value: any) => {
-    const cellMap: any = tableData[row.id];
-    const localTableData = [...tableData];
-    if (!cellMap) {
-      // tableData[row.id] = {
-      //   price: row.original.price,
-      //   priceHighDel: row.original.priceHighDel,
-      //   priceOnline: row.original.priceOnline,
-      //   priceSuperFlash: row.original.priceSuperFlash,
-      //   priceSME: row.original.priceSME,
-      //   countryId: row.original.countryId,
-      // };
-      // tableData[row.id][id] = Number(value);
-    } else {
-      cellMap[id] = Number(value);
-      // @ts-ignore
-      localTableData[row.id][id] = Number(value);
-    }
-    console.log(tableData);
-    setTableData(localTableData);
-  };
-
-  const columns: ColumnDef<ReceiptType>[] = [
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <i className="fa fa-trash-alt fa-1x" />,
-    },
-    {
-      id: "srNo",
-      cell: (info) => info.getValue(),
-      header: () => <>SRNO</>,
-    },
-    {
-      accessorFn: (row) => row.recDate,
-      id: "recDate",
-      // cell: (info) => info.getValue(),
-      cell: (info) => (
-        <input
-          type="date"
-          value={info.row.original.recDate?.split("T")[0]}
-          onChange={() => null}
-        />
-      ),
-      header: () => <>Recd. Date</>,
-    },
-    {
-      accessorFn: (row) => row.paymentModeID,
-      id: "paymentModeID",
-      cell: (info) => (
-        <select defaultValue={info.row.original.paymentModeID}>
-          {paymentModeData?.map((paymentMode) => (
-            <option
-              key={paymentMode.paymentModeId}
-              value={paymentMode.paymentModeId}
-            >
-              {paymentMode.paymentMode}
-            </option>
-          ))}
-        </select>
-      ),
-      header: () => <>Payment Mode</>,
-    },
-    {
-      accessorFn: (row) => row.chqNo,
-      id: "chqNo",
-      cell: (info) => <input value={info.row.original.chqNo} />,
-      header: () => <>Cheque No</>,
-    },
-    {
-      accessorFn: (row) => row.chqDate,
-      id: "chqDate",
-      cell: (info) => (
-        <input type="date" value={info.row.original.chqDate?.split("T")[0]} />
-      ),
-      header: () => <>Cheque Date</>,
-    },
-    {
-      accessorFn: (row) => row.chqAmount,
-      id: "chqAmount",
-      cell: (info) => <input value={info.row.original.chqAmount} />,
-      header: () => <>Cheque Amt</>,
-    },
-    {
-      accessorFn: (row) => row.bankID,
-      id: "bankID",
-      cell: (info) => (
-        <select defaultValue={info.row.original.bankID}>
-          {bankMasterDrawnData?.map((bank) => (
-            <option key={bank.bankId} value={bank.bankId}>
-              {bank.bankName}
-            </option>
-          ))}
-        </select>
-      ),
-      header: () => <>Bank</>,
-    },
-    {
-      accessorFn: (row) => row.depositBankId,
-      id: "depositBankId",
-      cell: (info) => (
-        <select defaultValue={info.row.original.depositBankId}>
-          {bankMasterDepositData?.map((bank) => (
-            <option key={bank.id} value={bank.id}>
-              {bank.bankName}
-            </option>
-          ))}
-        </select>
-      ),
-      header: () => <>Deposit Bank</>,
-    },
-    {
-      accessorFn: (row) => row.amount,
-      id: "amount",
-      cell: ({ getValue, row, column: { id } }) => {
-        const initialValue = getValue();
-
-        // We need to keep and update the state of the cell normally
-        const [value, setValue] = useState(initialValue);
-
-        // When the input is blurred, we'll call our table meta's updateData function
-        const onBlur = () => {
-          cellMapDataHandler(row, id, value);
-          // table.options.meta?.updateData(index, id, value);
-        };
-
-        // If the initialValue is changed external, sync it up with our state
-        useEffect(() => {
-          setValue(initialValue);
-        }, [initialValue]);
-
-        return (
-          <input
-            value={value as number}
-            type="number"
-            onChange={(e) => setValue(+e.target.value)}
-            onBlur={onBlur}
-            // className="editable-cell-style"
-          />
-        );
-        // <input value={info.row.original.amount} />
+  const columns = useMemo<ColumnDef<ReceiptType>[]>(
+    () => [
+      {
+        id: "remove",
+        header: () => <i className="fa fa-trash-alt fa-1x" />,
       },
-      header: () => <>Amount</>,
-    },
-    {
-      accessorFn: (row) => row.tds,
-      id: "tds",
-      cell: (info) => <input value={info.row.original.tds} />,
-      header: () => <>TDS</>,
-    },
-    {
-      accessorFn: (row) => row.expense,
-      id: "expense",
-      cell: (info) => <input value={info.row.original.expense} />,
-      header: () => <>Expense</>,
-    },
-    {
-      accessorFn: (row) => row.otherCharges,
-      id: "otherCharges",
-      cell: (info) => <input value={info.row.original.otherCharges} />,
-      header: () => <>Dis./ Chg.</>,
-    },
-    {
-      accessorFn: (row) => row.netAmount,
-      id: "netAmount",
-      cell: (info) => <input value={info.row.original.netAmount} />,
-      header: () => <>Net Amount</>,
-    },
-    {
-      accessorFn: (row) => row.remarks,
-      id: "remarks",
-      cell: (info) => <input value={info.row.original.remarks} />,
-      header: () => <>Remarks</>,
-    },
-    {
-      accessorFn: (row) => row.advTransId,
-      id: "advTransId",
-      cell: (info) => <input value={info.row.original.advTransId} />,
-      header: () => <>Adv. Transaction</>,
-    },
-  ];
-
-  const tableConfig: TableType<ReceiptType> = {
-    config: {
-      tableName: "Receipt Master",
-      columns,
-      tableData: tableData || [],
-      copyBtn: false,
-      csvBtn: false,
-      excelBtn: false,
-      pdfBtn: false,
-      printBtn: false,
-      globalSearchBox: false,
-      sorting: false,
-      pagination: {
-        pageSize: 10,
-        nextPreviousBtnShow: false,
-        tableMetaDataShow: false,
+      {
+        id: "srNo",
+        cell: (info) => info.getValue(),
+        header: () => <>SRNO</>,
       },
-      // onDeleteClick: deleteClientGroupClick,
-      // onEditClick: editClientGroupClick,
-    },
-  };
+      {
+        accessorFn: (row) => row.recDate,
+        id: "recDate",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellDatePicker
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Recd. Date</>,
+      },
+      {
+        accessorFn: (row) => row.paymentModeID,
+        id: "paymentModeID",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellSelect
+              options={{
+                array: paymentModeData || [],
+                label: "paymentMode",
+                value: "paymentModeId",
+              }}
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Payment Mode</>,
+      },
+      {
+        accessorFn: (row) => row.chqNo,
+        id: "chqNo",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellInput
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Cheque No</>,
+      },
+      {
+        accessorFn: (row) => row.chqDate,
+        id: "chqDate",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellDatePicker
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Cheque Date</>,
+      },
+      {
+        accessorFn: (row) => row.chqAmount,
+        id: "chqAmount",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellInput
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Cheque Amt</>,
+      },
+      {
+        accessorFn: (row) => row.bankID,
+        id: "bankID",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellSelect
+              options={{
+                array: bankMasterDrawnData || [],
+                label: "bankName",
+                value: "bankId",
+              }}
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Bank</>,
+      },
+      {
+        accessorFn: (row) => row.depositBankId,
+        id: "depositBankId",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellSelect
+              options={{
+                array: bankMasterDepositData || [],
+                label: "bankName",
+                value: "id",
+              }}
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Deposit Bank</>,
+      },
+      {
+        accessorFn: (row) => row.amount,
+        id: "amount",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellInput
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Amount</>,
+      },
+      {
+        accessorFn: (row) => row.tds,
+        id: "tds",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellInput
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>TDS</>,
+      },
+      {
+        accessorFn: (row) => row.expense,
+        id: "expense",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellInput
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Expense</>,
+      },
+      {
+        accessorFn: (row) => row.otherCharges,
+        id: "otherCharges",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellInput
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Dis./ Chg.</>,
+      },
+      {
+        accessorFn: (row) => row.netAmount,
+        id: "netAmount",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellInput
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Net Amount</>,
+      },
+      {
+        accessorFn: (row) => row.remarks,
+        id: "remarks",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellInput
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Remarks</>,
+      },
+      {
+        accessorFn: (row) => row.advTransId,
+        id: "advTransId",
+        cell: ({ getValue, row, column: { id } }) => {
+          let value: any = getValue();
+          return (
+            <tableCellFormFields.CellInput
+              value={value}
+              onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
+            />
+          );
+        },
+        header: () => <>Adv. Transaction</>,
+      },
+    ],
+    [paymentModeData, bankMasterDepositData, bankMasterDrawnData]
+  );
 
   useEffect(() => {
     if (startYear !== "" && invoiceNo !== "") {
@@ -348,11 +355,71 @@ export const Receipt: React.FC = () => {
     }
   }, [receiptData]);
 
+  const cellMapDataHandler = (rowData: any, id: any, value: any) => {
+    if (value == "" || value == null) return;
+    setTableData((prevData: Array<any>) => {
+      const updatedData = [...prevData];
+      updatedData[rowData.index][id] = value;
+      return updatedData;
+    });
+  };
+
   const onSubmit = handleSubmit((receiptData): void => {
     setStartYear(receiptData.finYearID.value);
     setInvoiceNo(receiptData.invoiceNoId);
     setTableData([]);
   });
+
+  const handleAddRow = () => {
+    setTableData((prevData) => [
+      ...prevData,
+      {
+        advTransId: "",
+        amount: "",
+        bankID: "",
+        chqAmount: "",
+        chqDate: new Date().toISOString(),
+        chqNo: "",
+        depositBankId: "",
+        otherCharges: "",
+        expense: "",
+        netAmount: "",
+        paymentModeID: "",
+        recDate: new Date().toISOString(),
+        remarks: "",
+        tds: "",
+        transactionID: +Math.random().toFixed(2),
+      },
+    ]);
+  };
+
+  const handleRemoveRow = (tableDataObj: ReceiptType) => {
+    const updatedData = tableData.filter(
+      (data: ReceiptType) => tableDataObj.transactionID !== data.transactionID
+    );
+    setTableData(updatedData);
+  };
+
+  const tableConfig: TableType<ReceiptType> = {
+    config: {
+      tableName: "Receipt Master",
+      columns: columns,
+      tableData: tableData || [],
+      copyBtn: false,
+      csvBtn: false,
+      excelBtn: false,
+      pdfBtn: false,
+      printBtn: false,
+      globalSearchBox: false,
+      sorting: false,
+      pagination: {
+        pageSize: 10,
+        nextPreviousBtnShow: false,
+        tableMetaDataShow: false,
+      },
+      onRemoveRow: handleRemoveRow,
+    },
+  };
 
   return (
     <Card config={cardConfig.formLayoutConfig}>
@@ -445,7 +512,17 @@ export const Receipt: React.FC = () => {
           </div>
         </BorderLayout>
         <BorderLayout heading={cardConfig.formListConfig.heading}>
-          {tableData.length && <Table config={tableConfig.config} />}
+          {tableData.length > 0 && (
+            <Button
+              className="btn addMoreBtn"
+              onClick={handleAddRow}
+              type="button"
+            >
+              <i className="fa fa-plus fa-2x" aria-hidden="true"></i>
+              <span>Click here to add more row</span>
+            </Button>
+          )}
+          <Table config={tableConfig.config} />
         </BorderLayout>
         <div className="row justify-content-center my-4">
           <div className="col-10">
@@ -527,6 +604,109 @@ export const Receipt: React.FC = () => {
           </div>
         </BorderLayout>
       </form>
+      {/* <Tableex /> */}
     </Card>
   );
 };
+
+// import React from "react";
+
+// interface TableRow {
+//   id: number;
+//   amount: number;
+//   discount: number;
+// }
+
+// const Tableex: React.FC = () => {
+//   const [rows, setRows] = useState<TableRow[]>([
+//     { id: 1, amount: 0, discount: 0 },
+//   ]);
+//   const [totalAmount, setTotalAmount] = useState<number>(0);
+//   const [totalDiscount, setTotalDiscount] = useState<number>(0);
+
+//   const handleAmountChange = (id: number, amount: number) => {
+//     const updatedRows = rows.map((row) =>
+//       row.id === id ? { ...row, amount } : row
+//     );
+//     setRows(updatedRows);
+//     recalculateTotals(updatedRows);
+//   };
+
+//   const handleDiscountChange = (id: number, discount: number) => {
+//     const updatedRows = rows.map((row) =>
+//       row.id === id ? { ...row, discount } : row
+//     );
+//     setRows(updatedRows);
+//     recalculateTotals(updatedRows);
+//   };
+
+//   const recalculateTotals = (updatedRows: TableRow[]) => {
+//     const newTotalAmount = updatedRows.reduce(
+//       (acc, row) => acc + row.amount,
+//       0
+//     );
+//     const newTotalDiscount = updatedRows.reduce(
+//       (acc, row) => acc + row.discount,
+//       0
+//     );
+//     setTotalAmount(newTotalAmount);
+//     setTotalDiscount(newTotalDiscount);
+//   };
+
+//   const handleAddRow = () => {
+//     const newRow: TableRow = { id: Date.now(), amount: 0, discount: 0 };
+//     setRows([...rows, newRow]);
+//   };
+
+//   const handleRemoveRow = (id: number) => {
+//     const updatedRows = rows.filter((row) => row.id !== id);
+//     setRows(updatedRows);
+//     recalculateTotals(updatedRows);
+//   };
+
+//   return (
+//     <div>
+//       <table>
+//         <thead>
+//           <tr>
+//             <th>Amount</th>
+//             <th>Discount</th>
+//             <th>Actions</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {rows.map((row) => (
+//             <tr key={row.id}>
+//               <td>
+//                 <input
+//                   type="number"
+//                   value={row.amount}
+//                   onChange={(e) => handleAmountChange(row.id, +e.target.value)}
+//                 />
+//               </td>
+//               <td>
+//                 <input
+//                   type="number"
+//                   value={row.discount}
+//                   onChange={(e) =>
+//                     handleDiscountChange(row.id, +e.target.value)
+//                   }
+//                 />
+//               </td>
+//               <td>
+//                 <button onClick={() => handleRemoveRow(row.id)}>Remove</button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+//       <div>
+//         <p>Total Amount: {totalAmount}</p>
+//         <p>Total Discount: {totalDiscount}</p>
+//       </div>
+//       <button onClick={handleAddRow}>Add New Row</button>
+//     </div>
+//   );
+// };
+
+// export default Tableex;

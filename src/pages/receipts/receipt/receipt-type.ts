@@ -13,4 +13,5 @@ export interface ReceiptType {
   netAmount: string;
   remarks: string;
   advTransId: string;
+  transactionID?: number;
 }

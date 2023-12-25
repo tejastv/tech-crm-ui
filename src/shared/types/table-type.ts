@@ -19,5 +19,6 @@ export interface TableType<T> {
     onEditClick?: (data: any, other?: any) => void;
     onNextButtonClick?: () => void;
     onPrevButtonClick?: () => void;
+    onRemoveRow?: (data: any) => void;
   };
 }
