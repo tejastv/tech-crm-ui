@@ -54,7 +54,7 @@ const GET_UPDATE_DELETE_SITE_STATUS = "utility/siteStatus/{id}";
 const GET_ADD_USER = "user";
 const GET_UPDATE_DELETE_USER = "user/{id}";
 const GET_USER_WISE_RIGHTS_MENU = "user/{id}/menu";
-const POST_USER_WISE_RIGHTS_MENU = "user/{id}/menu/action";
+const POST_USER_WISE_RIGHTS_MENU = "user/{id}/menu/right";
 const GET_ALL_RIGHTS_MENU = "user/menu";
 
 const GET_ADD_PAYMENTMODE = "utility/paymentMode";

@@ -152,10 +152,7 @@ export const useUserApiCallHook = () => {
         const response = await instance.get(
           apiUrls.GET_USER_WISE_RIGHTS_MENU.replace("{id}", id)
         );
-        const data = response.data.data.map((data: GetUserWiseRights) => {
-          data.rights = false;
-          return data;
-        });
+        const data = response.data.data;
         return data;
       },
       enabled: condition, // Query is initially enabled

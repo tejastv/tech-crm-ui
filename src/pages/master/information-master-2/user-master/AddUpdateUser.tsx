@@ -47,13 +47,31 @@ export const AddUpdateUser: React.FC = () => {
     control,
     formState: { errors },
   } = useForm<FormUserType>();
-  const { addUserRolesMutation, addUserMutation, updateUserMutation, getUserWiseRightsMenu } =
-    useUserApiCallHook();
+  const {
+    addUserRolesMutation,
+    addUserMutation,
+    updateUserMutation,
+    getUserWiseRightsMenu,
+  } = useUserApiCallHook();
 
   const { data: allMenus, isFetching } = getUserWiseRightsMenu(
     "" + params.id,
     params.id !== undefined
   );
+
+  useEffect(() => {
+    allMenus?.filter((role: GetUserWiseRights) => {
+      if (role.rights) {
+        let selectedRoles = {} as PostUserWiseMenu;
+        selectedRoles.menuId = role.mainMenuId;
+        selectedRoles.subMenuId = role.subMenuId;
+        setUserMenuRightsData((prevValue) => [
+          ...prevValue,
+          { ...selectedRoles },
+        ]);
+      }
+    });
+  }, [allMenus]);
 
   const { mutateAsync: addUser } = addUserMutation();
   const { mutateAsync: addUserRoles } = addUserRolesMutation();
@@ -96,8 +114,8 @@ export const AddUpdateUser: React.FC = () => {
       let userData: Partial<UserType> = mapFormUserToUser(formUserData);
       updateUser({ id: +params.id, ...userData });
     } else if (searchParams.get("isSetting") === "true") {
-      let userRoleData: Partial<PostUserRoles> = mapFormUserRole(userMenuRights);
-      console.log(userRoleData);
+      let userRoleData: Partial<PostUserRoles> =
+      mapFormUserRole(userMenuRights);
       addUserRoles(userRoleData);
     } else {
       let userData: Partial<UserType> = mapFormUserToUser(formUserData);
@@ -145,7 +163,8 @@ export const AddUpdateUser: React.FC = () => {
             checked={value}
             type="checkbox"
             onChange={(e) => {
-              onRightChange(e.target.checked, row.original);
+              setValue(e.target.checked),
+                onRightChange(e.target.checked, row.original);
             }}
             className="editable-cell-style"
           />
@@ -155,17 +174,12 @@ export const AddUpdateUser: React.FC = () => {
     },
   ];
 
-  useEffect(() => {
-    console.log("userMenuRights >>>>>>>", userMenuRights);
-  }, [userMenuRights]);
-
   const onRightChange = (event: boolean, selectedMenu: GetUserWiseRights) => {
     if (event) {
       selectedMenu.rights = true;
       let selectedRoles = {} as PostUserWiseMenu;
       selectedRoles.menuId = selectedMenu.mainMenuId;
       selectedRoles.subMenuId = selectedMenu.subMenuId;
-      selectedRoles.permission = true;
       setUserMenuRightsData((prevValue) => [
         ...prevValue,
         { ...selectedRoles },
