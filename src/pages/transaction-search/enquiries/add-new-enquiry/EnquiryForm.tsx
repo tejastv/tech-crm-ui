@@ -332,6 +332,22 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqStatus.config.options = options;
   }
 
+  useEffect(() => {
+    if (enqStatusOptions && enqStatusOptions?.length > 0) {
+      const pendingOption = enqStatusOptions
+        .filter((option: EnqStatusType) => option.enquiryStatus === "Pending")
+        .map((option: EnqStatusType) => {
+          let optionObj = {} as any;
+          optionObj.label = option.enquiryStatus;
+          optionObj.value = option.enquiryStatusID;
+          return optionObj;
+        })[0];
+      if (enquiryFormFields.enqStatus.config.name === "enqStatusId") {
+        setValue(enquiryFormFields.enqStatus.config.name, pendingOption);
+      }
+    }
+  }, [enqStatusOptions]);
+
   const companyOnInputChangeHandler = (companyInputValue: any) => {
     if (companyInputValue.length === 3) {
       setSearchStringCompany(companyInputValue);
@@ -865,8 +881,27 @@ export const EnquiryForm: React.FC = () => {
     return new Date(result).toISOString().split("T")[0];
   };
 
-  const onDateChangeHnadler = (date: string) => {
-    console.log(date);
+  const onReceivedDateChangeHnadler = (date: string) => {
+    if (enquiryFormFields.enqDueOn.config.name === "dueDate") {
+      setValue(enquiryFormFields.enqDueOn.config.name, addDays(date, 4));
+    }
+  };
+
+  const enqDueDateOnChange = (date: string) => {
+    if (
+      enquiryFormFields.enqDueOn.config.name === "dueDate" &&
+      enquiryFormFields.enqRecdon.config.name === "recdDate"
+    ) {
+      const dueDate = new Date(date);
+      const recDate = getValues(enquiryFormFields.enqRecdon.config.name);
+      if (dueDate.getTime() <= new Date(recDate).getTime()) {
+        setError(enquiryFormFields.enqDueOn.config.name, {
+          message: "Due Date should be greater than Received on date",
+        });
+      } else {
+        clearErrors(enquiryFormFields.enqDueOn.config.name);
+      }
+    }
   };
 
   return (
@@ -1039,7 +1074,7 @@ export const EnquiryForm: React.FC = () => {
               <NewDatePicker
                 errors={errors}
                 register={register}
-                onChange={onDateChangeHnadler}
+                onChange={onReceivedDateChangeHnadler}
                 control={control}
                 config={enquiryFormFields.enqRecdon}
               />
@@ -1047,6 +1082,7 @@ export const EnquiryForm: React.FC = () => {
                 errors={errors}
                 register={register}
                 control={control}
+                onChange={enqDueDateOnChange}
                 config={enquiryFormFields.enqDueOn}
                 defaultValue={addDays(new Date(), 4)}
               />
@@ -1171,3 +1207,10 @@ export const EnquiryForm: React.FC = () => {
     </Card>
   );
 };
+function setError(name: string, arg1: { message: string }) {
+  throw new Error("Function not implemented.");
+}
+
+function clearErrors(name: string) {
+  throw new Error("Function not implemented.");
+}
