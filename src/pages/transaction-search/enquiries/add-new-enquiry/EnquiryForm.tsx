@@ -883,7 +883,7 @@ export const EnquiryForm: React.FC = () => {
     return new Date(result).toISOString().split("T")[0];
   };
 
-  const onReceivedDateChangeHnadler = (date: string) => {
+  const onReceivedDateChangeHandler = (date: string) => {
     if (enquiryFormFields.enqDueOn.config.name === "dueDate") {
       setValue(enquiryFormFields.enqDueOn.config.name, addDays(date, 4));
     }
@@ -1076,7 +1076,7 @@ export const EnquiryForm: React.FC = () => {
               <NewDatePicker
                 errors={errors}
                 register={register}
-                onChange={onReceivedDateChangeHnadler}
+                onChange={onReceivedDateChangeHandler}
                 control={control}
                 config={enquiryFormFields.enqRecdon}
               />
