@@ -15,7 +15,7 @@ import { GeneratePiType, useProformaApiCallHook } from "..";
 
 export const EnqPi: React.FC = () => {
   const { getEnquiryPi, deleteProformaMutation } = useProformaApiCallHook();
-  const { data: proformaData, isLoading } = getEnquiryPi();
+  const { data: proformaData, isFetching } = getEnquiryPi();
   const { mutateAsync: deleteProforma } = deleteProformaMutation();
   const navigate = useNavigate();
 
@@ -290,6 +290,11 @@ export const EnqPi: React.FC = () => {
       accessorFn: (row) => row.remarks,
       header: () => <>Remarks</>,
     },
+    {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
   ];
 
   const deleteProformaClick = (proformaData: GeneratePiType) => {
@@ -329,7 +334,7 @@ export const EnqPi: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
       </BorderLayout>
     </>
   );

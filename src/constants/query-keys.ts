@@ -46,6 +46,7 @@ const REFNO_DATA = "refno-data";
 const PRICE_LIST_STANDARD_PRICE = "price-list-standard-price";
 
 const RECEIPT_DATA = "receipt-data";
+const PROFORMA_DATA = "proforma-data";
 
 export const queryKeys = {
   CITY_DATA,
@@ -91,4 +92,5 @@ export const queryKeys = {
   GROUP_WISE_PRICE,
   CURRENCY_WISE_PRICE,
   RECEIPT_DATA,
+  PROFORMA_DATA,
 };
