@@ -82,25 +82,35 @@ export const useReceiptApiCallHook = () => {
     return mutation;
   };
 
-  const updateCityData = async (
-    updateCityData: CityFormType
-  ): Promise<ApiResponseType<CityType>> => {
-    const response = await instance.put(
-      apiUrls.GET_UPDATE_DELETE_CITY.replace("{id}", "" + updateCityData.id),
-      updateCityData
+  const addUpdateDeleteReceiptData = async (
+    updateReceiptData: any
+  ): Promise<ApiResponseType<any>> => {
+    const response = await instance.post(
+      apiUrls.ADD_UPDATE_DELETE_RECEIPT.replace(
+        "{clientId}",
+        "" + updateReceiptData.clientId
+      )
+        .replace("{fYear}", "" + updateReceiptData.fYear)
+        .replace("{invoiceNo}", "" + updateReceiptData.invoiceNo),
+      updateReceiptData.receipts,
+      {
+        headers: {
+          callFrom: "receipt",
+        },
+      }
     );
     return response.data.data;
   };
 
-  const updateCityMutation = () => {
+  const addUpdateDeleteReceiptMutation = () => {
     const mutation = useMutation(
-      (updatedItem: CityFormType) => updateCityData(updatedItem),
+      (updatedItem: any) => addUpdateDeleteReceiptData(updatedItem),
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries({
-            queryKey: [queryKeys.CITY_DATA],
+            queryKey: [queryKeys.RECEIPT_DATA],
           });
-          navigate("..");
+          // navigate("..");
         },
       }
     );
@@ -129,7 +139,7 @@ export const useReceiptApiCallHook = () => {
     getCity,
     getReceiptData,
     addCityMutation,
-    updateCityMutation,
+    addUpdateDeleteReceiptMutation,
     deleteCityMutation,
   };
 };

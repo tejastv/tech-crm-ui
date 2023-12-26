@@ -1,3 +1,4 @@
+import { formatDateString } from "@utils/dateFormatter";
 import React, { useEffect, useState } from "react";
 
 export const CellInput: React.FC<{
@@ -23,17 +24,17 @@ export const CellDatePicker: React.FC<{
   onBlur: (value: string) => void;
 }> = React.memo(({ value, onBlur }) => {
   const [state, setState] = useState<string>(
-    new Date(value).toISOString().split("T")[0]
+    formatDateString(new Date(value), "y-m-d", "-")
   );
   useEffect(() => {
-    setState(new Date(value).toISOString().split("T")[0] || "");
+    setState(formatDateString(new Date(value), "y-m-d", "-"));
   }, [value]);
   return (
     <input
       type="date"
       value={state}
       onBlur={(e) =>
-        onBlur(new Date(e.target.value).toISOString().split("T")[0])
+        onBlur(formatDateString(new Date(e.target.value), "y-m-d", "-"))
       }
       onChange={(e) => setState(e.target.value)}
     />
@@ -53,6 +54,7 @@ export const CellSelect: React.FC<{
     <select
       onBlur={(e) => onBlur(e.target.value)}
       defaultValue={state}
+      value={state}
       onChange={(e) => setState(e.target.value)}
     >
       {options?.array.map((option, index) => (

@@ -109,6 +109,8 @@ const UPDATE_DELETE_ENQUIRY_PI = "transaction/enquiries-pi/{id}";
 
 // Receipt
 const GET_RECEIPT = "transaction/{startYear}/receipt";
+const ADD_UPDATE_DELETE_RECEIPT =
+  "transaction/clients/{clientId}/{fYear}/{invoiceNo}/receipt";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -192,4 +194,5 @@ export const apiUrls = {
   UPDATE_DELETE_ENQUIRY_PI,
 
   GET_RECEIPT,
+  ADD_UPDATE_DELETE_RECEIPT,
 };

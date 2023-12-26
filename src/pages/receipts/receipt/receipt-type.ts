@@ -1,10 +1,10 @@
 export interface ReceiptType {
   recDate: string;
-  paymentModeID: string;
+  paymentModeId: string;
   chqNo: string;
   chqDate: string;
   chqAmount: string;
-  bankID: string;
+  bankId: string;
   depositBankId: string;
   amount: string;
   tds: string;
@@ -13,5 +13,5 @@ export interface ReceiptType {
   netAmount: string;
   remarks: string;
   advTransId: string;
-  transactionID?: number;
+  transactionId?: number;
 }

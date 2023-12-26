@@ -9,7 +9,7 @@ import {
   TableType,
   NewSelect,
   NewInput,
-  tableCellFormFields,
+  TableCellFormFields,
 } from "@shared/index";
 
 import {
@@ -50,7 +50,9 @@ export const Receipt: React.FC = () => {
     formState: { errors },
     setValue,
   } = useForm<any>();
-  const { getReceiptData } = useReceiptApiCallHook();
+  const { getReceiptData, addUpdateDeleteReceiptMutation } =
+    useReceiptApiCallHook();
+  const { mutateAsync: addUpdateReceipt } = addUpdateDeleteReceiptMutation();
 
   const [startYear, setStartYear] = useState("");
   const [invoiceNo, setInvoiceNo] = useState("");
@@ -106,7 +108,7 @@ export const Receipt: React.FC = () => {
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellDatePicker
+            <TableCellFormFields.CellDatePicker
               value={value}
               onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
             />
@@ -115,12 +117,12 @@ export const Receipt: React.FC = () => {
         header: () => <>Recd. Date</>,
       },
       {
-        accessorFn: (row) => row.paymentModeID,
-        id: "paymentModeID",
+        accessorFn: (row) => row.paymentModeId,
+        id: "paymentModeId",
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellSelect
+            <TableCellFormFields.CellSelect
               options={{
                 array: paymentModeData || [],
                 label: "paymentMode",
@@ -139,7 +141,7 @@ export const Receipt: React.FC = () => {
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellInput
+            <TableCellFormFields.CellInput
               value={value}
               onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
             />
@@ -153,7 +155,7 @@ export const Receipt: React.FC = () => {
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellDatePicker
+            <TableCellFormFields.CellDatePicker
               value={value}
               onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
             />
@@ -167,7 +169,7 @@ export const Receipt: React.FC = () => {
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellInput
+            <TableCellFormFields.CellInput
               value={value}
               onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
             />
@@ -176,12 +178,12 @@ export const Receipt: React.FC = () => {
         header: () => <>Cheque Amt</>,
       },
       {
-        accessorFn: (row) => row.bankID,
-        id: "bankID",
+        accessorFn: (row) => row.bankId,
+        id: "bankId",
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellSelect
+            <TableCellFormFields.CellSelect
               options={{
                 array: bankMasterDrawnData || [],
                 label: "bankName",
@@ -200,7 +202,7 @@ export const Receipt: React.FC = () => {
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellSelect
+            <TableCellFormFields.CellSelect
               options={{
                 array: bankMasterDepositData || [],
                 label: "bankName",
@@ -219,7 +221,7 @@ export const Receipt: React.FC = () => {
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellInput
+            <TableCellFormFields.CellInput
               value={value}
               onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
             />
@@ -233,7 +235,7 @@ export const Receipt: React.FC = () => {
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellInput
+            <TableCellFormFields.CellInput
               value={value}
               onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
             />
@@ -247,7 +249,7 @@ export const Receipt: React.FC = () => {
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellInput
+            <TableCellFormFields.CellInput
               value={value}
               onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
             />
@@ -261,7 +263,7 @@ export const Receipt: React.FC = () => {
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellInput
+            <TableCellFormFields.CellInput
               value={value}
               onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
             />
@@ -275,7 +277,7 @@ export const Receipt: React.FC = () => {
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellInput
+            <TableCellFormFields.CellInput
               value={value}
               onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
             />
@@ -289,7 +291,7 @@ export const Receipt: React.FC = () => {
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellInput
+            <TableCellFormFields.CellInput
               value={value}
               onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
             />
@@ -303,7 +305,7 @@ export const Receipt: React.FC = () => {
         cell: ({ getValue, row, column: { id } }) => {
           let value: any = getValue();
           return (
-            <tableCellFormFields.CellInput
+            <TableCellFormFields.CellInput
               value={value}
               onBlur={(newValue) => cellMapDataHandler(row, id, newValue)}
             />
@@ -376,7 +378,7 @@ export const Receipt: React.FC = () => {
       {
         advTransId: "",
         amount: "",
-        bankID: "",
+        bankId: "",
         chqAmount: "",
         chqDate: new Date().toISOString(),
         chqNo: "",
@@ -384,18 +386,18 @@ export const Receipt: React.FC = () => {
         otherCharges: "",
         expense: "",
         netAmount: "",
-        paymentModeID: "",
+        paymentModeId: "",
         recDate: new Date().toISOString(),
         remarks: "",
         tds: "",
-        transactionID: +Math.random().toFixed(2),
+        transactionId: +Math.random().toFixed(2),
       },
     ]);
   };
 
   const handleRemoveRow = (tableDataObj: ReceiptType) => {
     const updatedData = tableData.filter(
-      (data: ReceiptType) => tableDataObj.transactionID !== data.transactionID
+      (data: ReceiptType) => tableDataObj.transactionId !== data.transactionId
     );
     setTableData(updatedData);
   };
@@ -419,6 +421,16 @@ export const Receipt: React.FC = () => {
       },
       onRemoveRow: handleRemoveRow,
     },
+  };
+
+  const handleSaveEditClick = () => {
+    console.log(tableData);
+    addUpdateReceipt({
+      clientId: receiptData?.client?.clientId,
+      fYear: receiptData?.finYear,
+      invoiceNo: receiptData?.invoiceNo,
+      receipts: tableData,
+    });
   };
 
   return (
@@ -583,7 +595,7 @@ export const Receipt: React.FC = () => {
             <Button
               type="button"
               className="btn btn-danger  waves-effect waves-light mr-2"
-              // onClick={routeHandler}
+              onClick={handleSaveEditClick}
             >
               <i className="far fa-save pr-1"></i> Save / Edit
             </Button>
