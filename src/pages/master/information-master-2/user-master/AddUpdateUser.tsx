@@ -22,6 +22,7 @@ import {
 } from "@master/index";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
+import Form from "react-bootstrap/esm/Form";
 
 export const AddUpdateUser: React.FC = () => {
   const params = useParams();
@@ -73,6 +74,7 @@ export const AddUpdateUser: React.FC = () => {
     });
   }, [allMenus]);
 
+  console.log(userData);
   const { mutateAsync: addUser } = addUserMutation();
   const { mutateAsync: addUserRoles } = addUserRolesMutation();
   const { mutateAsync: updateUser } = updateUserMutation();
@@ -115,7 +117,7 @@ export const AddUpdateUser: React.FC = () => {
       updateUser({ id: +params.id, ...userData });
     } else if (searchParams.get("isSetting") === "true") {
       let userRoleData: Partial<PostUserRoles> =
-      mapFormUserRole(userMenuRights);
+        mapFormUserRole(userMenuRights);
       addUserRoles(userRoleData);
     } else {
       let userData: Partial<UserType> = mapFormUserToUser(formUserData);
@@ -143,7 +145,7 @@ export const AddUpdateUser: React.FC = () => {
       accessorFn: (row) => row.subMenuAction,
       id: "subMenuAction",
       cell: (info) => info.getValue(),
-      header: () => <>Main Menu</>,
+      header: () => <>Sub Menu</>,
     },
     {
       accessorFn: (row) => row.rights,
@@ -198,7 +200,7 @@ export const AddUpdateUser: React.FC = () => {
 
   const tableConfig: TableType<GetUserWiseRights> = {
     config: {
-      tableName: "Fin. Year",
+      tableName: "User Roles",
       columns: columns,
       tableData: (allMenus && Object.values(allMenus)) || [],
       copyBtn: false,
@@ -256,6 +258,20 @@ export const AddUpdateUser: React.FC = () => {
         ) : null}
         {searchParams.get("isSetting") === "true" ? (
           <BorderLayout heading={cardConfig.formTableConfig.heading}>
+            <div className="form-group row">
+              <Form.Label
+                className="col-sm-3 pt-0 pb-0 control-label col-form-label"
+                htmlFor="userName"
+              >
+                User Name: {userData.user}
+              </Form.Label>
+              <Form.Label
+                className="col-sm-3 pt-0 pb-0 control-label col-form-label"
+                htmlFor="loginId"
+              >
+                Login Id: {userData.username}
+              </Form.Label>
+            </div>
             {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
           </BorderLayout>
         ) : null}
