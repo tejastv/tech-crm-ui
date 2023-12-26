@@ -57,7 +57,7 @@ export const Enquiries: React.FC = () => {
     limit: enqLimit,
     offset: enqOffset,
     ...enqSearch,
-  });
+  }, true);
   console.log(enqSearch);
 
   const config = {

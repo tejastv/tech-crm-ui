@@ -14,25 +14,30 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ActualBuyerType, ClientType, FinYearType, useActualBuyerApiCallHook, useClientApiCallHook, useFinYearApiCallHook } from "@pages/master";
 import { selectOptionsMaker } from "@utils/index";
 import { usePagination } from "@hooks/usePagination";
+import { fetchEnquiryFormFields } from "./invoiceGenGstFormFields";
+import { useEnquiriesApiCallHook } from "@pages/transaction-search";
 
 export const InvoiceGenerateGst: React.FC = () => {
   const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<InvoiceListType>();
+    register: fetchEnqRegister,
+    control: fetchEnqControl,
+    handleSubmit: fetchEnqHandleSubmit,
+    formState: { errors: fetchEnqErrors },
+  } = useForm<any>();
 
   const { getFinYear } = useFinYearApiCallHook();
   const { getClient } = useClientApiCallHook();
   const { getActualBuyer } = useActualBuyerApiCallHook();
+  const { getEnquiries } = useEnquiriesApiCallHook();
 
   const [finYearOptions, setFinYearOptions] = useState<FinYearType[]>();
   const [clientOptions, setClientOptions] = useState<ClientType[]>();
   const [actualBuyerOptions, setActualBuyerOptions] = useState<ActualBuyerType[]>();
   const [searchStringClient, setSearchStringClient] = useState<string>("");
-  const [clientId, setClientId] = useState<number>(-2);
-  
+
+  const [enquiryList, setEnquiryList] = useState<any>();
+  const [fetchEnqFormData, setFetchEnqFormData] = useState<any>();
+
   const { data: fYearData } = getFinYear();
 
   useEffect(() => {
@@ -43,7 +48,7 @@ export const InvoiceGenerateGst: React.FC = () => {
 
   if (finYearOptions?.length) {
     let options = selectOptionsMaker(finYearOptions, "finYear", "finYear");
-    invoiceGenGstFormFields.fYearField.config.options = options;
+    fetchEnquiryFormFields.fYearField.config.options = options;
   }
 
   const { limit, offset } = usePagination();
@@ -65,7 +70,7 @@ export const InvoiceGenerateGst: React.FC = () => {
 
   if (clientOptions?.length) {
     let options = selectOptionsMaker(clientOptions, "clientId", "clientName");
-    invoiceGenGstFormFields.client.config.options = options;
+    fetchEnquiryFormFields.client.config.options = options;
   }
 
   const { data: actualBuyerData } = getActualBuyer();
@@ -82,8 +87,14 @@ export const InvoiceGenerateGst: React.FC = () => {
       "partyId",
       "partyName"
     );
-    invoiceGenGstFormFields.actualBuyreField.config.options = options;
+    fetchEnquiryFormFields.actualBuyreField.config.options = options;
   }
+
+  const { data : enquiryData } = getEnquiries(fetchEnqFormData, fetchEnqFormData != undefined);
+
+  useEffect(() => {
+    setEnquiryList(enquiryData);
+  }, [enquiryData])
 
   const cardConfig = {
     formLayoutConfig: {
@@ -213,8 +224,13 @@ export const InvoiceGenerateGst: React.FC = () => {
     },
   };
 
-  const onSubmit = handleSubmit((data): void => {
+  const onFetchEnquirySubmit = fetchEnqHandleSubmit((data): void => {
+    setFetchEnqFormData({
+      clientId: data.client.value
+    });
+
     console.log("value", data);
+
   });
 
   const clientOnInputChangeHandler = (clientInputValue: any) => {
@@ -223,70 +239,76 @@ export const InvoiceGenerateGst: React.FC = () => {
     }
     if (clientInputValue.length === 0) {
       setClientOptions([]);
-      invoiceGenGstFormFields.client.config.options = [];
+      fetchEnquiryFormFields.client.config.options = [];
     }
   };
 
   return (
     <Card config={cardConfig.formLayoutConfig}>
-      <form
-        onSubmit={onSubmit}
-        noValidate
-        autoComplete="off"
-        className="p-t-20"
-      >
-        <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-          <div className="row">
-            <div className="col-md-4">
-              <NewSelect
-                errors={errors}
-                register={register}
-                control={control}
-                config={invoiceGenGstFormFields.fYearField}
-              />
-            </div>
-            <div className="col-md-4">
-              <NewSelect
-                errors={errors}
-                register={register}
-                control={control}
-                config={invoiceGenGstFormFields.client}
-                onInputChange={clientOnInputChangeHandler}
-              />
-            </div>
-            <div className="col-md-4">
-              <NewSelect
-                errors={errors}
-                register={register}
-                control={control}
-                config={invoiceGenGstFormFields.actualBuyreField}
-              />
-            </div>
 
+      <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
+        <>
+          <form
+            onSubmit={onFetchEnquirySubmit}
+            id="fetchEnquiryForm"
+            autoComplete="off"
+            className="p-t-20"
+          >
+            <div className="row">
+              <div className="col-md-4">
+                <NewSelect
+                  errors={fetchEnqErrors}
+                  register={fetchEnqRegister}
+                  control={fetchEnqControl}
+                  config={fetchEnquiryFormFields.fYearField}
+                />
+              </div>
+              <div className="col-md-4">
+                <NewSelect
+                  errors={fetchEnqErrors}
+                  register={fetchEnqRegister}
+                  control={fetchEnqControl}
+                  config={fetchEnquiryFormFields.client}
+                  onInputChange={clientOnInputChangeHandler}
+                />
+              </div>
+              <div className="col-md-4">
+                <NewSelect
+                  errors={fetchEnqErrors}
+                  register={fetchEnqRegister}
+                  control={fetchEnqControl}
+                  config={fetchEnquiryFormFields.actualBuyreField}
+                />
+              </div>
+            </div>
             <div className="row">
               <div className="col-12">
                 <div className="row">
                   <div className="col-md-4 col-xs-12">
                     <NewInput
-                      errors={errors}
-                      register={register}
-                      config={invoiceGenGstFormFields.fromDateField}
+                      errors={fetchEnqErrors}
+                      register={fetchEnqRegister}
+                      config={fetchEnquiryFormFields.fromDateField}
                     />
                   </div>
                   <div className="col-md-4 col-xs-12">
                     <NewInput
-                      errors={errors}
-                      register={register}
-                      config={invoiceGenGstFormFields.toDateField}
+                      errors={fetchEnqErrors}
+                      register={fetchEnqRegister}
+                      config={fetchEnquiryFormFields.toDateField}
                     />
                   </div>
                   <div className="col-md-4 col-xs-12">
-                    <Button type="submit" className={"btn btn-danger btn-sm"}>
+                    <Button form={"fetchEnquiryForm"} type="submit" className={"btn btn-danger btn-sm"}>
                       Get Inquires
                     </Button>
                   </div>
                 </div>
               </div>
+            </div>
+          </form>
+
+          {/* <div className="row">
               <div className="col-md-12 col-xs-12">
                 <Table config={tableConfig.config}>null</Table>
               </div>
@@ -340,9 +362,6 @@ export const InvoiceGenerateGst: React.FC = () => {
                   config={invoiceGenGstFormFields.subtotalField}
                 />
               </div>
-
-              {/* </div> */}
-              {/* <div className="col-sm-5 "> */}
             </div>
             <div className="row">
               <div className="col-3">
@@ -397,164 +416,87 @@ export const InvoiceGenerateGst: React.FC = () => {
                   config={invoiceGenGstFormFields.totalField}
                 />
               </div>
-            </div>
-            <div className="col-md-5 col-xs-12">
-              {/* <div className="col-sm-6 "> */}
-              {/* <NewSelect
-                errors={errors}
-                register={register}
-                control={control}
-                config={invoiceGenGstFormFields.fYearField}
-              /> */}
-
-              {/* </div> */}
-              {/* <div className="col-sm-6 "> */}
-
-              <div className="col-md-14 col-xs-12 text-right">
-                {/* <NewCheckbox
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={invoiceGenGstFormFields.manualField}
-                /> */}
-              </div>
-              {/* </div> */}
-              {/* <div className="col-sm-6 "> */}
-
-              {/* </div> */}
-
-              {/* <NewInput
-                errors={errors}
-                register={register}
-                config={invoiceGenGstFormFields.stField}
-              /> */}
-
-              {/* <NewInput
-                errors={errors}
-                register={register}
-                config={invoiceGenGstFormFields.stAmountField}
-              /> */}
-            </div>
-
-            {/* <div className="col-md-4 col-xs-12">
-              <div className="card-body">
-                <NewCheckbox
-                  errors={errors}
-                  register={register}
-                  control={control}
-                  config={invoiceGenGstFormFields.doNotField}
-                />
-              </div>
             </div> */}
-
-            <div className="col-md-3 col-xs-12">
-              <div className="card-body">
-                {/* <NewInput
-                  errors={errors}
-                  register={register}
-                  config={invoiceGenGstFormFields.sTaxField}
-                />
-
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={invoiceGenGstFormFields.eCessField}
-                />
-
-                <NewInput
-                  errors={errors}
-                  register={register}
-                  config={invoiceGenGstFormFields.krishiCessField}
-                /> */}
-
-                {/* <div className="col-md-14 col-xs-12 text-right">
+        </>
+      </BorderLayout>
+      {/* <div className="card-body">
+        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+          
+          <div className="row">
+            <div className="col-md-1 ">
+              <div className="mb-2">
+                <div className="col-md-14 col-xs-12 text-right">
                   <Button type="button" className={"btn btn-danger btn-sm"}>
-                    calculate
+                    <i className="far fa-save"></i>
+                    Currency Total
                   </Button>
-                </div> */}
+                </div>
+              </div>
+            </div>
+            <div className="col-md-3 ">
+              <div className="mb-2">
+                <div className="col-md-14 col-xs-12 text-right">
+                  <Button type="button" className={"btn btn-danger btn-sm"}>
+                    <i className="far fa-save"></i>
+                    Export Invoice With Detail to word
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-2 ">
+              <div className="mb-2">
+                <div className="col-md-14 col-xs-12 text-right">
+                  <Button type="button" className={"btn btn-danger btn-sm"}>
+                    <i className="far fa-save"></i>
+                    Export Invoice With Detail to Excel
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-2 ">
+              <div className="mb-2">
+                <div className="col-md-14 col-xs-12 text-right">
+                  <Button type="button" className={"btn btn-danger btn-sm"}>
+                    <i className="far fa-save"></i>
+                    Invoicein Excel
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-1 ">
+              <div className="mb-2">
+                <div className="col-md-14 col-xs-12 text-right">
+                  <Button type="button" className={"btn btn-danger btn-sm"}>
+                    <i className="far fa-save"></i>
+                    Export Invoice List
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-md-2">
+              <div className="mb-2">
+                <div className="col-md-14 col-xs-12 text-right">
+                  <Button type="button" className={"btn btn-danger btn-sm"}>
+                    Print Preview
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-md-1 text-right">
+              <div className="mb-2">
+                <div className="col-sm-14 col-xs-12 text-right">
+                  <Button type="button" className={"btn btn-danger btn-sm"}>
+                    <i className="far fa-window-close"></i>
+                    Cancel
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </BorderLayout>
-        <div className="card-body">
-          <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-            {/* <ActionButtons /> */}
-            <div className="row">
-              <div className="col-md-1 ">
-                <div className="mb-2">
-                  <div className="col-md-14 col-xs-12 text-right">
-                    <Button type="button" className={"btn btn-danger btn-sm"}>
-                      <i className="far fa-save"></i>
-                      Currency Total
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3 ">
-                <div className="mb-2">
-                  <div className="col-md-14 col-xs-12 text-right">
-                    <Button type="button" className={"btn btn-danger btn-sm"}>
-                      <i className="far fa-save"></i>
-                      Export Invoice With Detail to word
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-2 ">
-                <div className="mb-2">
-                  <div className="col-md-14 col-xs-12 text-right">
-                    <Button type="button" className={"btn btn-danger btn-sm"}>
-                      <i className="far fa-save"></i>
-                      Export Invoice With Detail to Excel
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-2 ">
-                <div className="mb-2">
-                  <div className="col-md-14 col-xs-12 text-right">
-                    <Button type="button" className={"btn btn-danger btn-sm"}>
-                      <i className="far fa-save"></i>
-                      Invoicein Excel
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-1 ">
-                <div className="mb-2">
-                  <div className="col-md-14 col-xs-12 text-right">
-                    <Button type="button" className={"btn btn-danger btn-sm"}>
-                      <i className="far fa-save"></i>
-                      Export Invoice List
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-2">
-                <div className="mb-2">
-                  <div className="col-md-14 col-xs-12 text-right">
-                    <Button type="button" className={"btn btn-danger btn-sm"}>
-                      Print Preview
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-1 text-right">
-                <div className="mb-2">
-                  <div className="col-sm-14 col-xs-12 text-right">
-                    <Button type="button" className={"btn btn-danger btn-sm"}>
-                      <i className="far fa-window-close"></i>
-                      Cancel
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </BorderLayout>
-        </div>
-      </form>
+      </div> */}
     </Card>
   );
 };

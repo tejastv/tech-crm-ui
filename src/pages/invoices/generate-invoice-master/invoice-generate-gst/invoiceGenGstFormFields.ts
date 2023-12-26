@@ -46,14 +46,14 @@ const actualBuyreValidation = {
 } as ValidationType;
 const fromDateValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message:
-      "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
-  },
+  // pattern: {
+  //   value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+  //   message:
+  //     "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
+  // },
 } as ValidationType;
 
 const countryValidation = {
@@ -83,7 +83,7 @@ const gstValidation = {
 
 const toDateValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
 } as ValidationType;
@@ -337,14 +337,14 @@ const client: FormFieldType = {
 const actualBuyreField: FormFieldType = {
   config: {
     name: "actualBuyer",
-    label: "Actual Buyre",
+    label: "Actual Buyer",
     id: "actualBuyer",
     options: [],
-    placeholder: "Select Actual Buyre ",
+    placeholder: "Select Actual Buyer ",
     validation: {
       required: {
         value: true,
-        message: "Select Actual Buyre",
+        message: "Select Actual Buyer",
       },
     },
   },
@@ -659,23 +659,26 @@ const totalField: FormFieldType = createFormConfig(
   true
 );
 
-export const invoiceGenGstFormFields = {
+export const fetchEnquiryFormFields = {
+  fYearField,
   client,
+  actualBuyreField,
+  fromDateField,
+  toDateField,
+}
+
+export const invoiceGenGstFormFields = {
   currencyField,
   gstnField,
   gstnActualBuyreField,
-  actualBuyreField,
-  fromDateField,
   countryField,
   stateField,
   stateActualBuyreField,
   codeField,
   gstField,
   gstActualBuyreField,
-  toDateField,
   symbolField,
   currencyInwardField,
-  fYearField,
   invoiceNoField,
   manualField,
   amountField,

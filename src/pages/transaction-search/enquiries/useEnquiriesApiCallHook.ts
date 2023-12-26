@@ -21,11 +21,13 @@ export const useEnquiriesApiCallHook = () => {
   };
 
   const getEnquiries = (
-    queryObject: any
+    queryObject: any,
+    condition: boolean
   ): UseQueryResult<{
     data: MapType<EnquiriesType>;
     count: number;
   }> => {
+    console.log("condition", condition);
     return useQuery<{ data: MapType<EnquiriesType>; count: number }>({
       queryKey: [queryKeys.ENQUIRY_DATA],
       queryFn: async () => {
@@ -60,6 +62,7 @@ export const useEnquiriesApiCallHook = () => {
       },
       staleTime: Infinity,
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
+      enabled: condition
     });
   };
 

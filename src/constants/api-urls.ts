@@ -30,8 +30,8 @@ const GET_UPDATE_DELETE_FIN_YEAR = "utility/finYear/{id}";
 const GET_ADD_INDUSTRY = "utility/industry";
 const GET_UPDATE_DELETE_INDUSTRY = "utility/industry/{id}";
 
-const GET_ADD_ACTUAL_BUYER = "actualBuyer";
-const GET_UPDATE_DELETE_ACTUAL_BUYER = "actualBuyer/{id}";
+const GET_ADD_ACTUAL_BUYER = "actual-buyer";
+const GET_UPDATE_DELETE_ACTUAL_BUYER = "actual-buyer/{id}";
 
 const GET_CITY_WISE_GROUP = "priceListGroupWise/getClientGroupByCity/{id}";
 const GET_GROUP_WISE_CURRENCY = "priceListGroupWise/getCurrencyByGroup/{id}";
