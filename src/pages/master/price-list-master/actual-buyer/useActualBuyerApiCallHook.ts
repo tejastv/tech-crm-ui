@@ -16,11 +16,25 @@ export const useActualBuyerApiCallHook = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getActualBuyer = (): UseQueryResult<MapType<ActualBuyerType>> => {
+  const getActualBuyer = (
+    queryParams?: object,
+    condition?: any
+  ): UseQueryResult<MapType<ActualBuyerType>> => {
     return useQuery<MapType<ActualBuyerType>>({
       queryKey: [queryKeys.ACTUAL_BUYER_DATA],
       queryFn: async () => {
-        const response = await instance.get(apiUrls.GET_ADD_ACTUAL_BUYER);
+        let params = {};
+        if (condition) {
+          params = {
+            params: {
+              ...queryParams,
+            },
+          };
+        }
+        const response = await instance.get(
+          apiUrls.GET_ADD_ACTUAL_BUYER,
+          params
+        );
         let mapedData = selectOptionsMapMaker(
           response.data.data,
           "partyId",
@@ -28,7 +42,8 @@ export const useActualBuyerApiCallHook = () => {
         );
         return mapedData;
       },
-      staleTime: Infinity,
+      enabled: condition != undefined ? condition : true,
+      refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
 

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useRef, useState } from "react";
+import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -44,7 +44,10 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [autoResetPageIndex, skipAutoResetPageIndex] = useSkipper();
   const tableRef = useRef(null);
   // const data = props.config.tableData;
-  const [data, setData] = useState(() => [...props.config.tableData]);
+  const [data, setData] = useState<Array<any>>([]);
+  useEffect(() => {
+    setData([...props.config.tableData]);
+  }, [props.config.tableData]);
   const columns = props.config.columns;
   const pageSizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   const { errorMessageToaster, successMessageToaster } = useToaster();
@@ -114,8 +117,12 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     }
   };
 
-  const onTableEditBtnClick = (data: any) => {
-    props.config.onEditClick && props.config.onEditClick(data);
+  const onTableEditBtnClick = (data: any, other?: any) => {
+    props.config.onEditClick && props.config.onEditClick(data, other);
+  };
+
+  const onRemoveRowHandler = (data: any) => {
+    props.config.onRemoveRow && props.config.onRemoveRow(data);
   };
 
   const copyTableToClipboard = async (): Promise<void> => {
@@ -353,63 +360,69 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                 </select>
               </div>
             )}
-            <div className="dt-buttons">
-              {props.config.copyBtn && (
-                <Button
-                  key="buttons-copy"
-                  className="dt-button buttons-copy buttons-html5 btn btn-danger btn-sm mr-1"
-                  aria-controls="file_export"
-                  type="button"
-                  onClick={copyTableToClipboard}
-                >
-                  <span>Copy</span>
-                </Button>
-              )}
-              {props.config.csvBtn && (
-                <Button
-                  key="buttons-csv"
-                  className="dt-button buttons-csv buttons-html5 btn btn-danger btn-sm mr-1"
-                  aria-controls="file_export"
-                  type="button"
-                  onClick={downloadCSV}
-                >
-                  <span>CSV</span>
-                </Button>
-              )}
-              {props.config.excelBtn && (
-                <Button
-                  key="buttons-excel"
-                  className="dt-button buttons-excel buttons-html5 btn btn-danger btn-sm mr-1"
-                  aria-controls="file_export"
-                  type="button"
-                  onClick={downloadExcel}
-                >
-                  <span>Excel</span>
-                </Button>
-              )}
-              {props.config.pdfBtn && (
-                <Button
-                  key="buttons-pdf"
-                  className="dt-button buttons-pdf buttons-html5 btn btn-danger btn-sm mr-1"
-                  aria-controls="file_export"
-                  type="button"
-                  onClick={downloadPDF}
-                >
-                  <span>PDF</span>
-                </Button>
-              )}
-              {props.config.printBtn && (
-                <Button
-                  key="buttons-print"
-                  className="dt-button buttons-print btn btn-danger btn-sm mr-1"
-                  aria-controls="file_export"
-                  type="button"
-                  onClick={handlePrint}
-                >
-                  <span>Print</span>
-                </Button>
-              )}
-            </div>
+            {(props.config.copyBtn ||
+              props.config.csvBtn ||
+              props.config.excelBtn ||
+              props.config.pdfBtn ||
+              props.config.printBtn) && (
+              <div className="dt-buttons">
+                {props.config.copyBtn && (
+                  <Button
+                    key="buttons-copy"
+                    className="dt-button buttons-copy buttons-html5 btn btn-danger btn-sm mr-1"
+                    aria-controls="file_export"
+                    type="button"
+                    onClick={copyTableToClipboard}
+                  >
+                    <span>Copy</span>
+                  </Button>
+                )}
+                {props.config.csvBtn && (
+                  <Button
+                    key="buttons-csv"
+                    className="dt-button buttons-csv buttons-html5 btn btn-danger btn-sm mr-1"
+                    aria-controls="file_export"
+                    type="button"
+                    onClick={downloadCSV}
+                  >
+                    <span>CSV</span>
+                  </Button>
+                )}
+                {props.config.excelBtn && (
+                  <Button
+                    key="buttons-excel"
+                    className="dt-button buttons-excel buttons-html5 btn btn-danger btn-sm mr-1"
+                    aria-controls="file_export"
+                    type="button"
+                    onClick={downloadExcel}
+                  >
+                    <span>Excel</span>
+                  </Button>
+                )}
+                {props.config.pdfBtn && (
+                  <Button
+                    key="buttons-pdf"
+                    className="dt-button buttons-pdf buttons-html5 btn btn-danger btn-sm mr-1"
+                    aria-controls="file_export"
+                    type="button"
+                    onClick={downloadPDF}
+                  >
+                    <span>PDF</span>
+                  </Button>
+                )}
+                {props.config.printBtn && (
+                  <Button
+                    key="buttons-print"
+                    className="dt-button buttons-print btn btn-danger btn-sm mr-1"
+                    aria-controls="file_export"
+                    type="button"
+                    onClick={handlePrint}
+                  >
+                    <span>Print</span>
+                  </Button>
+                )}
+              </div>
+            )}
             {props.config.globalSearchBox && (
               <div id="file_export_filter" className="dataTables_filter">
                 <label>
@@ -494,7 +507,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                                 >
                                   {index + 1}
                                 </td>
-                              ) : cell.column.id == "action" ? (
+                              ) : cell.column.id.startsWith("action") ? (
                                 <td
                                   key={`cell_action_${
                                     cell.column.id + Math.random() * 17
@@ -518,6 +531,40 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                                     data-original-title="Delete"
                                     onClick={() =>
                                       onTableDeleteBtnClick(row.original)
+                                    }
+                                  >
+                                    <span className="badge badge-danger m-r-10">
+                                      <i className="ti-trash"></i>
+                                    </span>
+                                  </a>
+                                  {cell.column.id.split(":")[1] ===
+                                    "rights" && (
+                                    <a
+                                      className="icon"
+                                      data-toggle="tooltip"
+                                      data-original-title="Edit Rights"
+                                      onClick={() =>
+                                        onTableEditBtnClick(row.original, 'rights')
+                                      }
+                                    >
+                                      <span className="badge badge-danger m-r-10">
+                                        <i className="ti-settings"></i>
+                                      </span>
+                                    </a>
+                                  )}
+                                </td>
+                              ) : cell.column.id == "remove" ? (
+                                <td
+                                  key={`cell_action_${
+                                    cell.column.id + Math.random() * 17
+                                  }`}
+                                >
+                                  <a
+                                    className="icon"
+                                    data-toggle="tooltip"
+                                    data-original-title="Delete"
+                                    onClick={() =>
+                                      onRemoveRowHandler(row.original)
                                     }
                                   >
                                     <span className="badge badge-danger m-r-10">

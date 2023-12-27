@@ -37,12 +37,6 @@ export const NewSelect: React.FC<{
     }
   };
 
-  const handleInputChange = (inputValue: any) => {
-    if (props.onInputChange) {
-      props.onInputChange(inputValue);
-    }
-  };
-
   return (
     <div className="row">
       <div className="col-12">
@@ -86,7 +80,6 @@ export const NewSelect: React.FC<{
                     options={props.config.config.options}
                     placeholder={props.config.config.placeholder}
                     onChange={handleSelectChange} // Pass the onChange handler
-                    onInputChange={handleInputChange}
                   />
                 )}
               />

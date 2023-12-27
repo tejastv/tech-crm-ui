@@ -66,6 +66,8 @@ export const EnquiryForm: React.FC = () => {
     setValue,
     reset,
     getValues,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm<EnqueryFormType>();
   const { state: localEnqData } = useLocation();
@@ -103,8 +105,9 @@ export const EnquiryForm: React.FC = () => {
   const [companyOptions, setCompanyOptions] = useState<CompanyType[]>();
   const [serviceOptions, setServiceOptions] = useState<ServiceType[]>();
   const [enqStatusOptions, setEnqStatusOptions] = useState<EnqStatusType[]>();
-  const [actualBuyerOptions, setActualBuyerOptions] =
-    useState<ActualBuyerType[]>();
+  const [actualBuyerOptions, setActualBuyerOptions] = useState<
+    ActualBuyerType[]
+  >([]);
   const [getPriceFlag, setGetPriceFlag] = useState<any>({
     flag: false,
     clientId: null,
@@ -224,7 +227,8 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqFinYear.config.options = options;
   }
 
-  const { data: actualBuyerData } = getActualBuyer();
+  const { data: actualBuyerData } = getActualBuyer({ client_id: clientId });
+
   useEffect(() => {
     if (actualBuyerData) {
       setActualBuyerOptions(Object.values(actualBuyerData));
@@ -329,6 +333,22 @@ export const EnquiryForm: React.FC = () => {
     );
     enquiryFormFields.enqStatus.config.options = options;
   }
+
+  useEffect(() => {
+    if (enqStatusOptions && enqStatusOptions?.length > 0) {
+      const pendingOption = enqStatusOptions
+        .filter((option: EnqStatusType) => option.enquiryStatus === "Pending")
+        .map((option: EnqStatusType) => {
+          let optionObj = {} as any;
+          optionObj.label = option.enquiryStatus;
+          optionObj.value = option.enquiryStatusID;
+          return optionObj;
+        })[0];
+      if (enquiryFormFields.enqStatus.config.name === "enqStatusId") {
+        setValue(enquiryFormFields.enqStatus.config.name, pendingOption);
+      }
+    }
+  }, [enqStatusOptions]);
 
   const companyOnInputChangeHandler = (companyInputValue: any) => {
     if (companyInputValue.length === 3) {
@@ -863,6 +883,29 @@ export const EnquiryForm: React.FC = () => {
     return new Date(result).toISOString().split("T")[0];
   };
 
+  const onReceivedDateChangeHandler = (date: string) => {
+    if (enquiryFormFields.enqDueOn.config.name === "dueDate") {
+      setValue(enquiryFormFields.enqDueOn.config.name, addDays(date, 4));
+    }
+  };
+
+  const enqDueDateOnChange = (date: string) => {
+    if (
+      enquiryFormFields.enqDueOn.config.name === "dueDate" &&
+      enquiryFormFields.enqRecdon.config.name === "recdDate"
+    ) {
+      const dueDate = new Date(date);
+      const recDate = getValues(enquiryFormFields.enqRecdon.config.name);
+      if (dueDate.getTime() <= new Date(recDate).getTime()) {
+        setError(enquiryFormFields.enqDueOn.config.name, {
+          message: "Due Date should be greater than Received on date",
+        });
+      } else {
+        clearErrors(enquiryFormFields.enqDueOn.config.name);
+      }
+    }
+  };
+
   return (
     <Card config={cardConfig.formLayoutConfig}>
       <form
@@ -887,6 +930,9 @@ export const EnquiryForm: React.FC = () => {
                 register={register}
                 control={control}
                 config={enquiryFormFields.enqFinYear}
+                onChange={(e) => {
+                  console.log(e);
+                }}
               />
               <NewInput
                 errors={errors}
@@ -1030,11 +1076,15 @@ export const EnquiryForm: React.FC = () => {
               <NewDatePicker
                 errors={errors}
                 register={register}
+                onChange={onReceivedDateChangeHandler}
+                control={control}
                 config={enquiryFormFields.enqRecdon}
               />
               <NewDatePicker
                 errors={errors}
                 register={register}
+                control={control}
+                onChange={enqDueDateOnChange}
                 config={enquiryFormFields.enqDueOn}
                 defaultValue={addDays(new Date(), 4)}
               />

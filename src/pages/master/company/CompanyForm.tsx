@@ -395,6 +395,7 @@ export const CompanyForm: React.FC = () => {
                 <NewDatePicker
                   errors={errors}
                   register={register}
+                  control={control}
                   config={companyFormFields.incorporationDate}
                 />
                 <NewInput

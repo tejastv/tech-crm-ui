@@ -89,6 +89,7 @@ export const LocalSourcePriceList: React.FC = () => {
               <NewDatePicker
                 errors={errors}
                 register={register}
+                control={control}
                 config={priceFormFields.purchaseDate}
               />
             </div>
@@ -106,6 +107,7 @@ export const LocalSourcePriceList: React.FC = () => {
               <NewDatePicker
                 errors={errors}
                 register={register}
+                control={control}
                 config={priceFormFields.sellDate}
               />
             </div>

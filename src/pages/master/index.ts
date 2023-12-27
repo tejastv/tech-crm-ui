@@ -211,6 +211,9 @@ export * from "./information-master-2/site-status/SiteStatusType";
 
 export * from "./information-master-2/user-master/FormUserType";
 export * from "./information-master-2/user-master/UserType";
+export * from "./information-master-2/user-master/GetUserWiseRights";
+export * from "./information-master-2/user-master/PostUserWiseMenu";
+export * from "./information-master-2/user-master/PostUserRoles";
 
 // location master
 export * from "./location-master/city/CityType";

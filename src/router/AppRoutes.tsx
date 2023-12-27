@@ -11,6 +11,7 @@ import {
   LOGIN,
   MASTER_ROUTES,
   PROFORMA_ROUTES,
+  RECEIPTS_ROUTES,
   REPORT_ROUTES,
   ROOT,
   TRANSACTION_ROUTES,
@@ -26,6 +27,9 @@ const TransactionRoutes = React.lazy(
 const ProformaRoutes = React.lazy(() => import("@proforma/ProformaRoutes"));
 const InvoicesRoutes = React.lazy(
   () => import("../pages/invoices/InvoiceRoutes")
+);
+const ReceiptsRoutes = React.lazy(
+  () => import("../pages/receipts/ReceiptRoutes")
 );
 
 const AppRoutes = () => {
@@ -82,6 +86,14 @@ const AppRoutes = () => {
             element={
               <React.Suspense>
                 <InvoicesRoutes />
+              </React.Suspense>
+            }
+          ></Route>
+          <Route
+            path={RECEIPTS_ROUTES.RECEIPTS_PARENT_ROUTE}
+            element={
+              <React.Suspense>
+                <ReceiptsRoutes />
               </React.Suspense>
             }
           ></Route>

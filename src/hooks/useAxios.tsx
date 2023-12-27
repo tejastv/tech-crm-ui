@@ -27,7 +27,10 @@ export const useAxios = () => {
       }
       config.headers["Content-Type"] = "application/json";
 
-      if (config.headers["callFrom"] === "transaction") {
+      if (
+        config.headers["callFrom"] === "transaction" ||
+        config.headers["callFrom"] === "receipt"
+      ) {
         config.baseURL = transactionMasterBaseUrl;
       } else {
         config.baseURL = defaultBaseUrl;

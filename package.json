@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --base=mira-new",
+    "build": "tsc && vite build --base=mira-new && scp -rp dist/* root@162.241.149.48:/var/www/html/mira-new",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
