@@ -114,8 +114,8 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     }
   };
 
-  const onTableEditBtnClick = (data: any) => {
-    props.config.onEditClick && props.config.onEditClick(data);
+  const onTableEditBtnClick = (data: any, other?: any) => {
+    props.config.onEditClick && props.config.onEditClick(data, other);
   };
 
   const copyTableToClipboard = async (): Promise<void> => {
@@ -494,7 +494,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                                 >
                                   {index + 1}
                                 </td>
-                              ) : cell.column.id == "action" ? (
+                              ) : cell.column.id.startsWith("action") ? (
                                 <td
                                   key={`cell_action_${
                                     cell.column.id + Math.random() * 17
@@ -524,6 +524,21 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                                       <i className="ti-trash"></i>
                                     </span>
                                   </a>
+                                  {cell.column.id.split(":")[1] ===
+                                    "rights" && (
+                                    <a
+                                      className="icon"
+                                      data-toggle="tooltip"
+                                      data-original-title="Edit Rights"
+                                      onClick={() =>
+                                        onTableEditBtnClick(row.original, 'rights')
+                                      }
+                                    >
+                                      <span className="badge badge-danger m-r-10">
+                                        <i className="ti-settings"></i>
+                                      </span>
+                                    </a>
+                                  )}
                                 </td>
                               ) : (
                                 <td

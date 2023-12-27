@@ -19,6 +19,8 @@ const PURPOSE_MASTER_DATA = "purpose-master-data";
 const CREDIT_DAYS_DATA = "credit-days-data";
 const SITE_STATUS_DATA = "site-status-data";
 const USER_DATA = "user-data";
+const USER_WISE_RIGHTS_DATA = "user-wise-rights-data";
+const ALL_RIGHTS_DATA = "all-rights-data";
 const BANKMASTER_DRAWN_DATA = "bankmasterdrawn-data";
 const BANKMASTER_DEPOSIT_DATA = "bankmasterdeposit-data";
 const PAYMENTMODE_DATA = "paymentmode-data";
@@ -63,6 +65,8 @@ export const queryKeys = {
   CREDIT_DAYS_DATA,
   SITE_STATUS_DATA,
   USER_DATA,
+  USER_WISE_RIGHTS_DATA,
+  ALL_RIGHTS_DATA,
   BANKMASTER_DRAWN_DATA,
   BANKMASTER_DEPOSIT_DATA,
   SUPPLIER_MASTER_DATA,

@@ -1,6 +1,6 @@
 export interface UserType {
   id?: number;
-  usertype: string;
+  userType: string;
   username: string;
   password: string;
   rights: string;
