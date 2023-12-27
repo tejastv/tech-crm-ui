@@ -343,7 +343,7 @@ const actualBuyreField: FormFieldType = {
     placeholder: "Select Actual Buyer ",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Select Actual Buyer",
       },
     },
@@ -483,7 +483,7 @@ const fYearField: FormFieldType = {
     placeholder: "Select F.year ",
     validation: {
       required: {
-        value: true,
+        value: false,
         message: "Select F.Year",
       },
     },
@@ -665,7 +665,7 @@ export const fetchEnquiryFormFields = {
   actualBuyreField,
   fromDateField,
   toDateField,
-}
+};
 
 export const invoiceGenGstFormFields = {
   currencyField,

@@ -8,10 +8,18 @@ import {
   TableType,
   NewSelect,
   NewInput,
+  NewDatePicker,
 } from "@shared/index";
 import { InvoiceListType, invoiceGenGstFormFields } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
-import { ActualBuyerType, ClientType, FinYearType, useActualBuyerApiCallHook, useClientApiCallHook, useFinYearApiCallHook } from "@pages/master";
+import {
+  ActualBuyerType,
+  ClientType,
+  FinYearType,
+  useActualBuyerApiCallHook,
+  useClientApiCallHook,
+  useFinYearApiCallHook,
+} from "@pages/master";
 import { selectOptionsMaker } from "@utils/index";
 import { usePagination } from "@hooks/usePagination";
 import { fetchEnquiryFormFields } from "./invoiceGenGstFormFields";
@@ -27,12 +35,15 @@ export const InvoiceGenerateGst: React.FC = () => {
 
   const { getFinYear } = useFinYearApiCallHook();
   const { getClient } = useClientApiCallHook();
-  const { getActualBuyer } = useActualBuyerApiCallHook();
+  const { getActualBuyer, getActualBuyerBasedOnClientId } =
+    useActualBuyerApiCallHook();
   const { getEnquiries } = useEnquiriesApiCallHook();
 
   const [finYearOptions, setFinYearOptions] = useState<FinYearType[]>();
   const [clientOptions, setClientOptions] = useState<ClientType[]>();
-  const [actualBuyerOptions, setActualBuyerOptions] = useState<ActualBuyerType[]>();
+  const [clientId, setClientId] = useState<number>(-2);
+  const [actualBuyerOptions, setActualBuyerOptions] =
+    useState<ActualBuyerType[]>();
   const [searchStringClient, setSearchStringClient] = useState<string>("");
 
   const [enquiryList, setEnquiryList] = useState<any>();
@@ -44,7 +55,7 @@ export const InvoiceGenerateGst: React.FC = () => {
     if (fYearData) {
       setFinYearOptions(Object.values(fYearData));
     }
-  }, [fYearData])
+  }, [fYearData]);
 
   if (finYearOptions?.length) {
     let options = selectOptionsMaker(finYearOptions, "finYear", "finYear");
@@ -73,13 +84,15 @@ export const InvoiceGenerateGst: React.FC = () => {
     fetchEnquiryFormFields.client.config.options = options;
   }
 
-  const { data: actualBuyerData } = getActualBuyer();
-
   useEffect(() => {
-    if (actualBuyerData) {
-      setActualBuyerOptions(Object.values(actualBuyerData));
-    }
-  }, [actualBuyerData]);
+    getActualBuyerBasedOnClientId({ client_id: clientId }).then(
+      (actualBuyer) => {
+        if (actualBuyer) {
+          setActualBuyerOptions(actualBuyer);
+        }
+      }
+    );
+  }, [clientId]);
 
   if (actualBuyerOptions?.length) {
     let options = selectOptionsMaker(
@@ -90,11 +103,14 @@ export const InvoiceGenerateGst: React.FC = () => {
     fetchEnquiryFormFields.actualBuyreField.config.options = options;
   }
 
-  const { data : enquiryData } = getEnquiries(fetchEnqFormData, fetchEnqFormData != undefined);
+  const { data: enquiryData } = getEnquiries(
+    fetchEnqFormData,
+    fetchEnqFormData != undefined
+  );
 
   useEffect(() => {
     setEnquiryList(enquiryData);
-  }, [enquiryData])
+  }, [enquiryData]);
 
   const cardConfig = {
     formLayoutConfig: {
@@ -226,11 +242,10 @@ export const InvoiceGenerateGst: React.FC = () => {
 
   const onFetchEnquirySubmit = fetchEnqHandleSubmit((data): void => {
     setFetchEnqFormData({
-      clientId: data.client.value
+      clientId: data.client.value,
     });
 
     console.log("value", data);
-
   });
 
   const clientOnInputChangeHandler = (clientInputValue: any) => {
@@ -243,9 +258,14 @@ export const InvoiceGenerateGst: React.FC = () => {
     }
   };
 
+  const getClientValue = (clientId: number) => {
+    if (clientId) {
+      setClientId(clientId);
+    }
+  };
+
   return (
     <Card config={cardConfig.formLayoutConfig}>
-
       <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
         <>
           <form
@@ -269,6 +289,9 @@ export const InvoiceGenerateGst: React.FC = () => {
                   register={fetchEnqRegister}
                   control={fetchEnqControl}
                   config={fetchEnquiryFormFields.client}
+                  onChange={(e) => {
+                    getClientValue(e.value);
+                  }}
                   onInputChange={clientOnInputChangeHandler}
                 />
               </div>
@@ -285,21 +308,27 @@ export const InvoiceGenerateGst: React.FC = () => {
               <div className="col-12">
                 <div className="row">
                   <div className="col-md-4 col-xs-12">
-                    <NewInput
+                    <NewDatePicker
                       errors={fetchEnqErrors}
+                      control={fetchEnqControl}
                       register={fetchEnqRegister}
                       config={fetchEnquiryFormFields.fromDateField}
                     />
                   </div>
                   <div className="col-md-4 col-xs-12">
-                    <NewInput
+                    <NewDatePicker
                       errors={fetchEnqErrors}
                       register={fetchEnqRegister}
+                      control={fetchEnqControl}
                       config={fetchEnquiryFormFields.toDateField}
                     />
                   </div>
                   <div className="col-md-4 col-xs-12">
-                    <Button form={"fetchEnquiryForm"} type="submit" className={"btn btn-danger btn-sm"}>
+                    <Button
+                      form={"fetchEnquiryForm"}
+                      type="submit"
+                      className={"btn btn-danger btn-sm"}
+                    >
                       Get Inquires
                     </Button>
                   </div>

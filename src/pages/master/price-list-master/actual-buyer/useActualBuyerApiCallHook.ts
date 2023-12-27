@@ -9,7 +9,10 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
+import {
+  selectOptionsMaker,
+  selectOptionsMapMaker,
+} from "@utils/selectOptionsMaker";
 
 export const useActualBuyerApiCallHook = () => {
   const { instance } = useAxios();
@@ -45,6 +48,22 @@ export const useActualBuyerApiCallHook = () => {
       enabled: condition != undefined ? condition : true,
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
+  };
+
+  const getActualBuyerBasedOnClientId = async (
+    queryParams: object
+  ): Promise<ActualBuyerType[] | undefined> => {
+    if (Object.values(queryParams).length == 0) return;
+    let params = {};
+    params = {
+      params: {
+        ...queryParams,
+      },
+    };
+    const response = await instance.get(apiUrls.GET_ADD_ACTUAL_BUYER, params);
+    const data = await response.data.data;
+    let mapedData = selectOptionsMaker(data, "partyId", "partyName");
+    return mapedData;
   };
 
   const getActualBuyerData = (
@@ -144,5 +163,6 @@ export const useActualBuyerApiCallHook = () => {
     addActualBuyerMutation,
     updateActualBuyerMutation,
     deleteActualBuyerMutation,
+    getActualBuyerBasedOnClientId,
   };
 };
