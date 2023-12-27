@@ -9,6 +9,7 @@ import {
   LOGIN,
   MASTER_ROUTES,
   PROFORMA_ROUTES,
+  RECEIPTS_ROUTES,
   REPORT_ROUTES,
   TRANSACTION_ROUTES,
 } from "@constants/index";
@@ -1384,30 +1385,33 @@ export const Header: React.FC = () => {
                     </a>
                     <ul aria-expanded="false" className="collapse first-level">
                       <li className="sidebar-item">
-                        {" "}
-                        <a className="sidebar-link" href="payment_receipt.php">
+                        <Link
+                          className="sidebar-link"
+                          to={`${RECEIPTS_ROUTES.RECEIPTS}${RECEIPTS_ROUTES.RECEIPT_ROUTES.RECEIPT}`}
+                        >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Receipt</span>
-                        </a>
+                        </Link>
                       </li>
                       <li className="sidebar-item">
-                        {" "}
-                        <a
+                        <Link
                           className="sidebar-link"
-                          href="multiple_payment_receipt.php"
+                          to={`${RECEIPTS_ROUTES.RECEIPTS}${RECEIPTS_ROUTES.RECEIPT_ROUTES.RECEIPT}`}
                         >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">
-                            Receipt(Multiple Entries){" "}
+                            Receipt(Multiple Entries)
                           </span>
-                        </a>
+                        </Link>
                       </li>
                       <li className="sidebar-item">
-                        {" "}
-                        <a className="sidebar-link" href="advanced_receipt.php">
+                        <Link
+                          className="sidebar-link"
+                          to={`${RECEIPTS_ROUTES.RECEIPTS}${RECEIPTS_ROUTES.RECEIPT_ADVANCE_ROUTES.RECEIPT_ADVANCE}`}
+                        >
                           <i className="mdi mdi-creation"></i>
                           <span className="hide-menu ">Receipt(ADVANCE)</span>
-                        </a>
+                        </Link>
                       </li>
                       <li className="sidebar-item">
                         {" "}

@@ -65,3 +65,11 @@ hr {
   top: 0;
   left: 30px;
 }
+
+.addMoreBtn {
+  display: flex;
+  align-items: center;
+  span {
+    margin-left: 10px;
+  }
+}
