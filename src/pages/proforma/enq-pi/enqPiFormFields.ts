@@ -1066,12 +1066,12 @@ const CountryEnquiryValidation = {
 } as ValidationType;
 
 // Right Field validation
-const blankValidation = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-} as ValidationType;
+// const blankValidation = {
+//   required: {
+//     value: true,
+//     message: "{label} field is rquired",
+//   },
+// } as ValidationType;
 // const GivenNameEnquiryValidation = {
 //   required: {
 //     value: true,
@@ -1092,16 +1092,16 @@ const recdOnValidation = {
   //   message: "Invalid date format. Please enter a valid date (yyyy-mm-dd).",
   // },
 } as ValidationType;
-const EnqValidation = {
-  required: {
-    value: true,
-    message: "{label} field is rquired",
-  },
-  // pattern: {
-  //   value: /^[a-zA-Z0-9\-]+$/,
-  //   message: "Please select a {label}",
-  // },
-} as ValidationType;
+// const EnqValidation = {
+//   required: {
+//     value: true,
+//     message: "{label} field is rquired",
+//   },
+//   // pattern: {
+//   //   value: /^[a-zA-Z0-9\-]+$/,
+//   //   message: "Please select a {label}",
+//   // },
+// } as ValidationType;
 const localsourceenquiryValidation = {
   required: {
     value: true,
@@ -1420,13 +1420,13 @@ const enqCountry: FormFieldType = createFormConfig(
 );
 
 // Right Side Fields
-const enqBlank: FormFieldType = createFormConfig(
-  "blank",
-  "",
-  "text",
-  blankValidation,
-  ""
-);
+// const enqBlank: FormFieldType = createFormConfig(
+//   "blank",
+//   "",
+//   "text",
+//   blankValidation,
+//   ""
+// );
 // const enqGivenName: FormFieldType = createFormConfig(
 //   "givenName",
 //   "Given Name",

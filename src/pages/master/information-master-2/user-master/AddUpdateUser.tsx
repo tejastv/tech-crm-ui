@@ -150,7 +150,7 @@ export const AddUpdateUser: React.FC = () => {
     {
       accessorFn: (row) => row.rights,
       id: "rights",
-      cell: ({ getValue, row, column: { id } }) => {
+      cell: ({ getValue, row }) => {
         const initialValue = getValue() as boolean;
         // We need to keep and update the state of the cell normally
         const [value, setValue] = useState<boolean>(initialValue);

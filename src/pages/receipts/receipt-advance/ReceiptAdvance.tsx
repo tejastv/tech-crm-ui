@@ -219,6 +219,7 @@ export const ReceiptAdvance: React.FC = () => {
               <div className="row">
                 <div className="col-6">
                   <NewDatePicker
+                    control={control}
                     errors={errors}
                     register={register}
                     config={receiptAdvanceFormFields.fromDate}
@@ -226,6 +227,7 @@ export const ReceiptAdvance: React.FC = () => {
                 </div>
                 <div className="col-6">
                   <NewDatePicker
+                    control={control}
                     errors={errors}
                     register={register}
                     config={receiptAdvanceFormFields.toDate}

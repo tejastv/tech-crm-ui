@@ -9,7 +9,6 @@ import {
   InputWithText,
   ActionButtons,
   NewDatePicker,
-  SingleCheckbox,
   TableType,
   Table,
 } from "@shared/index";
@@ -52,7 +51,6 @@ import {
   EnqStatusType,
   ServiceType,
   useAddEnquiryApiCallHook,
-  useEnquiriesApiCallHook,
 } from "@transaction-search/index";
 import { useLocation, useParams } from "react-router-dom";
 import { usePagination } from "@hooks/usePagination";
@@ -78,21 +76,13 @@ export const EnqPiForm: React.FC = () => {
   } = useForm<EnquiryPiFormType>();
   const { state: localEnqData } = useLocation();
   // const { getEnquiryData } = useEnquiriesApiCallHook();
-  const {
-    getEnqStatus,
-    getRefNo,
-    getServiceType,
-    getPrice,
-    addEnquiryMutation,
-    updateEnquiryMutation,
-  } = useAddEnquiryApiCallHook();
+  const { getEnqStatus, getRefNo, getServiceType, getPrice } =
+    useAddEnquiryApiCallHook();
   const { addEnquiryPiMutation, getEnquiryPiData, updateEnquiryPiMutation } =
     useProformaApiCallHook();
   const { getActualBuyer } = useActualBuyerApiCallHook();
   const params = useParams();
-  const { mutateAsync: addEnquiry } = addEnquiryMutation();
   const { mutateAsync: addEnquiryPi } = addEnquiryPiMutation();
-  const { mutateAsync: updateEnquiry } = updateEnquiryMutation();
   const { mutateAsync: updateEnquiryPi } = updateEnquiryPiMutation();
   const { getCity } = useCityApiCallHook();
   const { getState } = useStateApiCallHook();
@@ -253,11 +243,11 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (actualBuyerOptions) {
-      let options = selectOptionsMaker(
-        actualBuyerOptions,
-        "partyId",
-        "partyName"
-      );
+      // let options = selectOptionsMaker(
+      //   actualBuyerOptions,
+      //   "partyId",
+      //   "partyName"
+      // );
       // enqPiFormFields.enqActualBuyer.config.options = options;
     }
   }, [actualBuyerOptions]);
@@ -344,11 +334,11 @@ export const EnqPiForm: React.FC = () => {
   }, [enqStatusData]);
 
   if (enqStatusOptions?.length) {
-    let options = selectOptionsMaker(
-      enqStatusOptions,
-      "enquiryStatusID",
-      "enquiryStatus"
-    );
+    // let options = selectOptionsMaker(
+    //   enqStatusOptions,
+    //   "enquiryStatusID",
+    //   "enquiryStatus"
+    // );
     // enqPiFormFields.enqStatus.config.options = options;
   }
 
@@ -1050,11 +1040,13 @@ export const EnqPiForm: React.FC = () => {
                 /> */}
                 <NewDatePicker
                   errors={errors}
+                  control={control}
                   register={register}
                   config={enqPiFormFields.enqRecdon}
                 />
                 <NewDatePicker
                   errors={errors}
+                  control={control}
                   register={register}
                   config={enqPiFormFields.enqDueOn}
                   defaultValue={addDays(new Date(), 4)}

@@ -10,7 +10,6 @@ import {
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
-import { ReceiptType } from "..";
 
 export const useReceiptApiCallHook = () => {
   const { instance } = useAxios();
