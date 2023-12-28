@@ -44,6 +44,7 @@ const actualBuyreValidation = {
     message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
   },
 } as ValidationType;
+
 const fromDateValidation = {
   required: {
     value: true,

@@ -51,9 +51,9 @@ export const useActualBuyerApiCallHook = () => {
   };
 
   const getActualBuyerBasedOnClientId = async (
-    queryParams: object
+    queryParams: any
   ): Promise<ActualBuyerType[] | undefined> => {
-    if (Object.values(queryParams).length == 0) return;
+    if (queryParams == undefined) return;
     let params = {};
     params = {
       params: {

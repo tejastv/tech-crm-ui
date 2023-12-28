@@ -7,10 +7,15 @@ import {
   Table,
   TableType,
   NewSelect,
-  NewInput,
+  // NewInput,
   NewDatePicker,
 } from "@shared/index";
-import { InvoiceListType, invoiceGenGstFormFields } from "@invoices/index";
+import {
+  InvoiceGenGstFormType,
+  InvoiceListType,
+  // invoiceGenGstFormFields,
+  useInvoiceGenGstApiCallHook,
+} from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   ActualBuyerType,
@@ -20,10 +25,10 @@ import {
   useClientApiCallHook,
   useFinYearApiCallHook,
 } from "@pages/master";
-import { selectOptionsMaker } from "@utils/index";
+import { cleanupObject, selectOptionsMaker } from "@utils/index";
 import { usePagination } from "@hooks/usePagination";
 import { fetchEnquiryFormFields } from "./invoiceGenGstFormFields";
-import { useEnquiriesApiCallHook } from "@pages/transaction-search";
+// import { useEnquiriesApiCallHook } from "@pages/transaction-search";
 
 export const InvoiceGenerateGst: React.FC = () => {
   const {
@@ -31,23 +36,26 @@ export const InvoiceGenerateGst: React.FC = () => {
     control: fetchEnqControl,
     handleSubmit: fetchEnqHandleSubmit,
     formState: { errors: fetchEnqErrors },
-  } = useForm<any>();
+  } = useForm<InvoiceGenGstFormType>();
 
   const { getFinYear } = useFinYearApiCallHook();
   const { getClient } = useClientApiCallHook();
-  const { getActualBuyer, getActualBuyerBasedOnClientId } =
-    useActualBuyerApiCallHook();
-  const { getEnquiries } = useEnquiriesApiCallHook();
+  const { getActualBuyerBasedOnClientId } = useActualBuyerApiCallHook();
+  const { getEnquires } = useInvoiceGenGstApiCallHook();
+  // const { getEnquiries } = useEnquiriesApiCallHook();
 
   const [finYearOptions, setFinYearOptions] = useState<FinYearType[]>();
   const [clientOptions, setClientOptions] = useState<ClientType[]>();
-  const [clientId, setClientId] = useState<number>(-2);
+  const [clientId, setClientId] = useState<number>();
   const [actualBuyerOptions, setActualBuyerOptions] =
     useState<ActualBuyerType[]>();
   const [searchStringClient, setSearchStringClient] = useState<string>("");
+  const [enquiresObj, setEnquiresObj] = useState<InvoiceGenGstFormType>(
+    {} as InvoiceGenGstFormType
+  );
 
-  const [enquiryList, setEnquiryList] = useState<any>();
-  const [fetchEnqFormData, setFetchEnqFormData] = useState<any>();
+  // const [enquiryList, setEnquiryList] = useState<any>();
+  // const [fetchEnqFormData, setFetchEnqFormData] = useState<any>();
 
   const { data: fYearData } = getFinYear();
 
@@ -85,7 +93,7 @@ export const InvoiceGenerateGst: React.FC = () => {
   }
 
   useEffect(() => {
-    getActualBuyerBasedOnClientId({ client_id: clientId }).then(
+    getActualBuyerBasedOnClientId(clientId && { client_id: clientId }).then(
       (actualBuyer) => {
         if (actualBuyer) {
           setActualBuyerOptions(actualBuyer);
@@ -93,6 +101,15 @@ export const InvoiceGenerateGst: React.FC = () => {
       }
     );
   }, [clientId]);
+
+  useEffect(() => {
+    getEnquires(enquiresObj).then((enquiries) => {
+      if (enquiries) {
+        console.log(enquiries);
+        // setActualBuyerOptions(enquiries);
+      }
+    });
+  }, [enquiresObj]);
 
   if (actualBuyerOptions?.length) {
     let options = selectOptionsMaker(
@@ -241,11 +258,7 @@ export const InvoiceGenerateGst: React.FC = () => {
   };
 
   const onFetchEnquirySubmit = fetchEnqHandleSubmit((data): void => {
-    // setFetchEnqFormData({
-    //   clientId: data.client.value,
-    // });
-
-    console.log("value", data);
+    setEnquiresObj(mapEnqRequest(data));
   });
 
   const clientOnInputChangeHandler = (clientInputValue: any) => {
@@ -262,6 +275,16 @@ export const InvoiceGenerateGst: React.FC = () => {
     if (clientId) {
       setClientId(clientId);
     }
+  };
+
+  const mapEnqRequest = (enquiryForm: InvoiceGenGstFormType) => {
+    let enqData: Partial<any> = {
+      startDate: enquiryForm.startDate,
+      endDate: enquiryForm.endDate,
+      clientId: enquiryForm.clientId.value,
+      fYear: enquiryForm.fYear.value,
+    };
+    return cleanupObject(enqData);
   };
 
   return (
@@ -337,18 +360,18 @@ export const InvoiceGenerateGst: React.FC = () => {
             </div>
           </form>
 
-          {/* <div className="row">
-              <div className="col-md-12 col-xs-12">
-                <Table config={tableConfig.config}>null</Table>
-              </div>
-              <div className="mt-2 text-center">
-                <Button type="button" className={"btn btn-danger btn-sm"}>
-                  Calculate
-                </Button>
-              </div>
+          <div className="row">
+            <div className="col-md-12 col-xs-12">
+              <Table config={tableConfig.config} />
             </div>
-            <hr className="mt-4 mb-4" />
-            <div className="row">
+            <div className="mt-2 text-center">
+              <Button type="button" className={"btn btn-danger btn-sm"}>
+                Calculate
+              </Button>
+            </div>
+          </div>
+          <hr className="mt-4 mb-4" />
+          {/* <div className="row">
               <div className="col-3">
                 <NewInput
                   errors={errors}
