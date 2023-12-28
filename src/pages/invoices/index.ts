@@ -26,7 +26,8 @@ export { InvoiceSetteld } from "./invoice-detail-master/invoice-setteld/InvoiceS
 
 export { InvoiceListService } from "./invoice-detail-master/invoice-list-service-tax/InvoiceListService";
 
-export * from "./generate-invoice-master/invoice-generate-gst/invoice-gen-gst-type";
+export * from "./generate-invoice-master/invoice-generate-gst/InvoiceGenGstType";
+export * from "./generate-invoice-master/invoice-generate-gst/InvoiceGenGstFormType";
 export * from "./generate-invoice-master/generate-invoice-auto/add-generate-invoice-auto-type";
 export * from "./generate-invoice-master/generate-invoice-actual-buyre/generate-invoice-actual-buyre-type";
 
@@ -38,3 +39,5 @@ export * from "./invoice-detail-master/invoice-list-tds/invoice-list-tds-type";
 export * from "./invoice-detail-master/invoice-list-perfoma/invoice-list-perfoma-type";
 export * from "./invoice-detail-master/invoice-list-exce-wise/invoice-list-exce-wise-type";
 export * from "./invoice-detail-master/invoice-setteld/invoice-setteld-type";
+
+export { useInvoiceGenGstApiCallHook } from "./generate-invoice-master/invoice-generate-gst/useInvoiceGenGstApiCallHook";

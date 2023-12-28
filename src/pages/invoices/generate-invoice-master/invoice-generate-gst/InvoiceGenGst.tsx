@@ -103,14 +103,14 @@ export const InvoiceGenerateGst: React.FC = () => {
     fetchEnquiryFormFields.actualBuyreField.config.options = options;
   }
 
-  const { data: enquiryData } = getEnquiries(
-    fetchEnqFormData,
-    fetchEnqFormData != undefined
-  );
+  // const { data: enquiryData } = getEnquiries(
+  //   fetchEnqFormData,
+  //   fetchEnqFormData != undefined
+  // );
 
-  useEffect(() => {
-    setEnquiryList(enquiryData);
-  }, [enquiryData]);
+  // useEffect(() => {
+  //   setEnquiryList(enquiryData);
+  // }, [enquiryData]);
 
   const cardConfig = {
     formLayoutConfig: {
@@ -241,9 +241,9 @@ export const InvoiceGenerateGst: React.FC = () => {
   };
 
   const onFetchEnquirySubmit = fetchEnqHandleSubmit((data): void => {
-    setFetchEnqFormData({
-      clientId: data.client.value,
-    });
+    // setFetchEnqFormData({
+    //   clientId: data.client.value,
+    // });
 
     console.log("value", data);
   });

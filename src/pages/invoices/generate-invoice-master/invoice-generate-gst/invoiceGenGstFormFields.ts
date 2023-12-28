@@ -320,7 +320,7 @@ const actionOptiontwo: MapType<Options> = {
 
 const client: FormFieldType = {
   config: {
-    name: "client",
+    name: "clientId",
     label: "Client ",
     id: "client",
     options: [],
@@ -382,8 +382,8 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
 const fromDateField: FormFieldType = createFormConfig(
-  "fromDate",
-  "From",
+  "startDate",
+  "From Date",
   "date",
   fromDateValidation,
   formattedDate
@@ -451,7 +451,7 @@ const gstActualBuyreField: FormFieldType = createFormConfig(
 );
 
 const toDateField: FormFieldType = createFormConfig(
-  "toDate",
+  "endDate",
   "To Date",
   "date",
   toDateValidation,
@@ -476,14 +476,14 @@ const currencyInwardField: FormFieldType = createFormConfig(
 
 const fYearField: FormFieldType = {
   config: {
-    name: "fyear",
+    name: "fYear",
     label: "F.Year ",
     id: "fyear",
     options: [],
     placeholder: "Select F.year ",
     validation: {
       required: {
-        value: false,
+        value: true,
         message: "Select F.Year",
       },
     },
