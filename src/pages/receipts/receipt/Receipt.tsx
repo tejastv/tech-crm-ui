@@ -524,16 +524,14 @@ export const Receipt: React.FC = () => {
           </div>
         </BorderLayout>
         <BorderLayout heading={cardConfig.formListConfig.heading}>
-          {tableData.length > 0 && (
-            <Button
-              className="btn addMoreBtn"
-              onClick={handleAddRow}
-              type="button"
-            >
-              <i className="fa fa-plus fa-2x" aria-hidden="true"></i>
-              <span>Click here to add more row</span>
-            </Button>
-          )}
+          <Button
+            className="btn addMoreBtn"
+            onClick={handleAddRow}
+            type="button"
+          >
+            <i className="fa fa-plus fa-2x" aria-hidden="true"></i>
+            <span>Click here to add more row</span>
+          </Button>
           <Table config={tableConfig.config} />
         </BorderLayout>
         <div className="row justify-content-center my-4">
