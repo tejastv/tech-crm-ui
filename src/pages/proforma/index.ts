@@ -11,3 +11,5 @@ export { enqPiFormFields } from "./enq-pi/enqPiFormFields";
 
 export { useProformaApiCallHook } from "./useProformaApiCallHook";
 export * from "./generate-pi/generate-pi-type";
+export * from "./enq-pi/EnquiryPiFormType";
+export * from "./enq-pi/EnqPiType";

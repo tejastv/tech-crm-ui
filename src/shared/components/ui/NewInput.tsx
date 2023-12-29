@@ -15,6 +15,7 @@ export const NewInput: React.FC<{
   config: FormFieldType;
   register: any;
   errors: any;
+  isVertical?: boolean;
 }> = (props) => {
   const inputErrors = findInputError(props.errors, props.config.config.name);
   const isInvalid = isFormInvalid(inputErrors);
@@ -24,7 +25,9 @@ export const NewInput: React.FC<{
         <div className="form-group row">
           {props.config.config.label && (
             <Form.Label
-              className="col-sm-3 control-label col-form-label"
+              className={`${
+                props.isVertical ? "col-sm-12" : "col-sm-3"
+              } control-label col-form-label`}
               htmlFor={props.config.config.name}
             >
               {props.config.config.label}{" "}
@@ -33,13 +36,14 @@ export const NewInput: React.FC<{
               )}
             </Form.Label>
           )}
-          <div className="col-sm-9">
+          <div className={`${props.isVertical ? "col-sm-12" : "col-sm-9"}`}>
             {props.config.config.multiline ? (
               <Form.Control
                 as="textarea"
                 rows={3}
                 placeholder={props.config.config.placeholder}
                 id={props.config.config.id}
+                disabled={props.config.config.isDisabled}
                 {...props.register(
                   props.config.config.name,
                   props.config.config.validation

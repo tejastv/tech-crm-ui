@@ -107,8 +107,13 @@ const GET_ADD_ENQSTATUS = "transaction/enquiryStatus";
 const GET_ADD_REFNO = "transaction/refNo";
 
 // Proforma
-const GET_ENQUIRY_PI = "transaction/enquiries-pi";
-const UPDATE_DELETE_ENQUIRY_PI = "transaction/enquiryPi/{id}";
+const GET_ADD_ENQUIRY_PI = "transaction/enquiries-pi";
+const UPDATE_DELETE_ENQUIRY_PI = "transaction/enquiries-pi/{id}";
+
+// Receipt
+const GET_RECEIPT = "transaction/{startYear}/receipt";
+const ADD_UPDATE_DELETE_RECEIPT =
+  "transaction/clients/{clientId}/{fYear}/{invoiceNo}/receipt";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -191,6 +196,9 @@ export const apiUrls = {
   GET_GROUP_WISE_PRICE,
   GET_CITY_WISE_CLIENT_GROUP,
 
-  GET_ENQUIRY_PI,
+  GET_ADD_ENQUIRY_PI,
   UPDATE_DELETE_ENQUIRY_PI,
+
+  GET_RECEIPT,
+  ADD_UPDATE_DELETE_RECEIPT,
 };
