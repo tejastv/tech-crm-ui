@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   BorderLayout,
@@ -14,6 +14,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { usePagination } from "@hooks/usePagination";
 
 export const Client: React.FC = () => {
+  const [searchStringClient, setSearchStringClient] = useState<string>("");
   const config = {
     breadcrumbConfig: {
       pageHeading: "Client",
@@ -254,10 +255,13 @@ export const Client: React.FC = () => {
     },
   ];
 
-  const { data: receivedObj, isFetching } = getClient({
-    limit,
-    offset,
-  });
+  const { data: receivedObj, isFetching } = getClient(
+    {
+      limit,
+      offset,
+      searchString: searchStringClient,
+    },
+  );
 
   useEffect(() => {
     setTotalValue(receivedObj?.count!);
@@ -271,6 +275,13 @@ export const Client: React.FC = () => {
     var confirmation = confirm("Are you sure to delete it?");
     if (confirmation) {
       await deleteClient(clientData.clientId);
+    }
+  };
+
+  const onSearchChange = async (searchString: any) => {
+    console.log(searchString);
+    if(searchString.length > 3) {
+      setSearchStringClient(searchString);
     }
   };
 
@@ -289,6 +300,7 @@ export const Client: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
+      isClientSideSearch: false,
       pagination: {
         pageSize: limit,
         offset,
@@ -299,6 +311,7 @@ export const Client: React.FC = () => {
         isPrevButtonEnabled: isPrevEnabled,
       },
       onDeleteClick: deleteClientClick,
+      onSearchChange: onSearchChange,
       onEditClick: editClientClick,
       onNextButtonClick: nextButtonClick,
       onPrevButtonClick: prevButtonClick,
