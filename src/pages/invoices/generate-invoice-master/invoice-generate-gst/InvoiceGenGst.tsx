@@ -25,7 +25,11 @@ import {
   useClientApiCallHook,
   useFinYearApiCallHook,
 } from "@pages/master";
-import { cleanupObject, selectOptionsMaker } from "@utils/index";
+import {
+  cleanupObject,
+  formatDateString,
+  selectOptionsMaker,
+} from "@utils/index";
 import { usePagination } from "@hooks/usePagination";
 import { fetchEnquiryFormFields } from "./invoiceGenGstFormFields";
 // import { useEnquiriesApiCallHook } from "@pages/transaction-search";
@@ -279,8 +283,12 @@ export const InvoiceGenerateGst: React.FC = () => {
 
   const mapEnqRequest = (enquiryForm: InvoiceGenGstFormType) => {
     let enqData: Partial<any> = {
-      startDate: enquiryForm.startDate,
-      endDate: enquiryForm.endDate,
+      startDate: formatDateString(
+        new Date(enquiryForm.startDate),
+        "d-m-y",
+        "-"
+      ),
+      endDate: formatDateString(new Date(enquiryForm.endDate), "d-m-y", "-"),
       clientId: enquiryForm.clientId.value,
       fYear: enquiryForm.fYear.value,
     };
