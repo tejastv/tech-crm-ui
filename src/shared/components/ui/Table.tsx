@@ -56,6 +56,9 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
       ? true
       : false;
 
+  let clientSideSearch =
+    props.config.isClientSideSearch === undefined ? true : false;
+
   const table = useReactTable({
     data,
     columns,
@@ -331,6 +334,14 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     }
   };
 
+  const handleSearchChange = (value: any) => {
+    if(clientSideSearch) {
+      setGlobalFilter(String(value));
+    } else {
+      props.config.onSearchChange && props.config.onSearchChange(value);
+    }
+  };
+  
   return (
     <>
       <div className="p-2">
@@ -430,7 +441,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                   <DebouncedInput
                     key="DebouncedInput"
                     value={globalFilter ?? ""}
-                    onChange={(value) => setGlobalFilter(String(value))}
+                    onChange={(value) => handleSearchChange(value)}
                   />
                 </label>
               </div>
@@ -544,7 +555,10 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                                       data-toggle="tooltip"
                                       data-original-title="Edit Rights"
                                       onClick={() =>
-                                        onTableEditBtnClick(row.original, 'rights')
+                                        onTableEditBtnClick(
+                                          row.original,
+                                          "rights"
+                                        )
                                       }
                                     >
                                       <span className="badge badge-danger m-r-10">

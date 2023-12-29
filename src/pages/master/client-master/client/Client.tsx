@@ -255,13 +255,11 @@ export const Client: React.FC = () => {
     },
   ];
 
-  const { data: receivedObj, isFetching } = getClient(
-    {
-      limit,
-      offset,
-      searchString: searchStringClient,
-    },
-  );
+  const { data: receivedObj, isFetching } = getClient({
+    limit,
+    offset,
+    searchString: searchStringClient,
+  });
 
   useEffect(() => {
     setTotalValue(receivedObj?.count!);
@@ -279,10 +277,7 @@ export const Client: React.FC = () => {
   };
 
   const onSearchChange = async (searchString: any) => {
-    console.log(searchString);
-    if(searchString.length > 3) {
-      setSearchStringClient(searchString);
-    }
+    setSearchStringClient(searchString);
   };
 
   const editClientClick = (clientData: any) => {
@@ -322,7 +317,7 @@ export const Client: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );
