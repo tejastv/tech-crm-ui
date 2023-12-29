@@ -21,44 +21,29 @@ export const useEnquiriesApiCallHook = () => {
   };
 
   const getEnquiries = (
-    queryObject: any
+    queryObject: any,
+    condition?: boolean
   ): UseQueryResult<{
     data: MapType<EnquiriesType>;
     count: number;
   }> => {
     return useQuery<{ data: MapType<EnquiriesType>; count: number }>({
-      queryKey: [queryKeys.ENQUIRY_DATA],
+      queryKey: [queryKeys.ENQUIRY_DATA, queryObject],
       queryFn: async () => {
         const baseUrl = apiUrls.GET_ADD_ALL_ENQUIRY_SEARCH;
-        const queryParams = [];
-        console.log(queryObject);
-        let queryParam: {
-          [key: string]: string | undefined;
-        } = {};
-        for (const key in queryObject) {
-          if (!queryParam[key]) {
-            console.log(key);
-            queryParams.push(`${key}=${queryObject[key]}`);
-          }
-        }
-        console.log(queryParams);
-
-        const fullUrl =
-          queryParams.length > 0
-            ? `${baseUrl}?${queryParams.join("&")}`
-            : baseUrl;
-        const response = await instance.get(fullUrl, callFormConfig);
-        console.log(response);
-
-        let mapedData = selectOptionsMapMaker(
+        const response = await instance.get(baseUrl, {
+          params: queryObject,
+          headers: callFormConfig.headers,
+        });
+        let mappedData = selectOptionsMapMaker(
           response.data.data.records,
           "enqId",
           "partyName"
         );
-        return { data: mapedData, count: response.data.data.count };
+        return { data: mappedData, count: response.data.data.count };
         // return response.data.data;
       },
-      staleTime: Infinity,
+      enabled: condition,
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };

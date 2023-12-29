@@ -15,6 +15,8 @@ export interface TableType<T> {
     globalSearchBox?: boolean;
     pagination?: PaginationConfigType;
     showItemCountDropdown?: boolean;
+    isClientSideSearch?: boolean;
+    onSearchChange?: (data: any) => void;
     onDeleteClick?: (data: any) => void;
     onEditClick?: (data: any, other?: any) => void;
     onNextButtonClick?: () => void;

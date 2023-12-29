@@ -1,9 +1,9 @@
 import React from "react";
 
-export const DebouncedInput = ({
+export const DebouncedInput = React.memo(({
   value: initialValue,
   onChange,
-  debounce = 500,
+  debounce = 1000,
   ...props
 }: {
   value: string | number;
@@ -31,4 +31,4 @@ export const DebouncedInput = ({
       onChange={(e) => setValue(e.target.value)}
     />
   );
-};
+});

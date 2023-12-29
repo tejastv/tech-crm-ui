@@ -18,12 +18,18 @@ export const useCompanyApiCallHook = () => {
     }>({
       queryKey: [queryKeys.COMPANY_MASTER_DATA, queryObject],
       queryFn: async () => {
+        let params = {
+          limit: queryObject.searchString ? 500 : queryObject.limit,
+          offset: queryObject.offset,
+          searchString: "",
+        } as any;
+        if (queryObject.searchString) {
+          params.searchString = queryObject.searchString;
+        } else {
+          delete params.searchString;
+        }
         const response = await instance.get(apiUrls.GET_ADD_COMPANY_MASTER, {
-          params: {
-            limit: queryObject.searchString ? 500 : queryObject.limit,
-            offset: queryObject.offset,
-            searchString: queryObject.searchString,
-          },
+          params: params,
         });
         const data = response.data.data.records.sort(
           (a: { companyName: string }, b: { companyName: any }) =>

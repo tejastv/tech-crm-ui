@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   BorderLayout,
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { usePagination } from "@hooks/usePagination";
 
 export const CompanyMaster: React.FC = () => {
+  const [searchStringClient, setSearchStringClient] = useState<string>("");
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
   const {
     limit,
@@ -28,6 +29,7 @@ export const CompanyMaster: React.FC = () => {
   const { data: receivedObj, isFetching } = getCompany({
     limit,
     offset,
+    searchString: searchStringClient,
   });
   const companyData = receivedObj?.data;
   useEffect(() => {
@@ -154,6 +156,10 @@ export const CompanyMaster: React.FC = () => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", companyData.companyId));
   };
 
+  const onSearchChange = async (searchString: any) => {
+    setSearchStringClient(searchString);
+  };
+
   const tableConfig: TableType<CompanyType> = {
     config: {
       tableName: "Company Master",
@@ -165,6 +171,7 @@ export const CompanyMaster: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
+      isClientSideSearch: false,
       pagination: {
         pageSize: limit,
         offset,
@@ -175,6 +182,7 @@ export const CompanyMaster: React.FC = () => {
         isPrevButtonEnabled: isPrevEnabled,
         isClientSidePagination: false,
       },
+      onSearchChange: onSearchChange,
       onDeleteClick: deleteCompanyClick,
       onEditClick: editCompanyClick,
       onNextButtonClick: nextButtonClick,
@@ -186,7 +194,7 @@ export const CompanyMaster: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );
