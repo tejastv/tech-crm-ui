@@ -23,12 +23,18 @@ export const useClientApiCallHook = () => {
     return useQuery<{ data: MapType<ClientType>; count: number }>({
       queryKey: [queryKeys.CLIENT_DATA, queryObject],
       queryFn: async () => {
+        let params = {
+          limit: queryObject.searchString ? 500 : queryObject.limit,
+          offset: queryObject.offset,
+          searchString: "",
+        } as any;
+        if (queryObject.searchString) {
+          params.searchString = queryObject.searchString;
+        } else {
+          delete params.searchString;
+        }
         const response = await instance.get(apiUrls.GET_ADD_CLIENT, {
-          params: {
-            limit: queryObject.searchString ? 500 : queryObject.limit,
-            offset: queryObject.offset,
-            searchString: queryObject.searchString,
-          },
+          params: params,
         });
         let mappedData = selectOptionsMapMaker(
           response.data.data.records,

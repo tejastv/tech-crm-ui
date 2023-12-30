@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   BorderLayout,
@@ -14,6 +14,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { usePagination } from "@hooks/usePagination";
 
 export const Client: React.FC = () => {
+  const [searchStringClient, setSearchStringClient] = useState<string>("");
   const config = {
     breadcrumbConfig: {
       pageHeading: "Client",
@@ -257,6 +258,7 @@ export const Client: React.FC = () => {
   const { data: receivedObj, isFetching } = getClient({
     limit,
     offset,
+    searchString: searchStringClient,
   });
 
   useEffect(() => {
@@ -274,6 +276,10 @@ export const Client: React.FC = () => {
     }
   };
 
+  const onSearchChange = async (searchString: any) => {
+    setSearchStringClient(searchString);
+  };
+
   const editClientClick = (clientData: any) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", clientData.clientId));
   };
@@ -289,6 +295,7 @@ export const Client: React.FC = () => {
       pdfBtn: true,
       printBtn: true,
       globalSearchBox: true,
+      isClientSideSearch: false,
       pagination: {
         pageSize: limit,
         offset,
@@ -299,6 +306,7 @@ export const Client: React.FC = () => {
         isPrevButtonEnabled: isPrevEnabled,
       },
       onDeleteClick: deleteClientClick,
+      onSearchChange: onSearchChange,
       onEditClick: editClientClick,
       onNextButtonClick: nextButtonClick,
       onPrevButtonClick: prevButtonClick,
@@ -309,7 +317,7 @@ export const Client: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

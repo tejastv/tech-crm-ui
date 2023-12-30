@@ -57,8 +57,7 @@ export const Enquiries: React.FC = () => {
     limit: enqLimit,
     offset: enqOffset,
     ...enqSearch,
-  }, true);
-  console.log(enqSearch);
+  });
 
   const config = {
     breadcrumbConfig: {
@@ -523,10 +522,8 @@ export const Enquiries: React.FC = () => {
       const formattedDate = formatDateString(inputDate, "d-m-y", "-");
       data.endDate = formattedDate;
     }
-
     if (data) {
-      console.log(data);
-      setEnqSearch(data);
+      setEnqSearch({ ...data });
     }
   });
 

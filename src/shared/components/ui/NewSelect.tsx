@@ -85,7 +85,7 @@ export const NewSelect: React.FC<{
                     defaultValue={[]}
                     options={props.config.config.options}
                     placeholder={props.config.config.placeholder}
-                    onChange={handleSelectChange} // Pass the onChange handler,
+                    onChange={handleSelectChange} // Pass the onChange handler
                     onInputChange={handleInputChange}
                   />
                 )}
