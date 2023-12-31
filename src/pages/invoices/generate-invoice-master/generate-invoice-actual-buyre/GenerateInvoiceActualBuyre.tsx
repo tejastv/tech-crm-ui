@@ -13,7 +13,7 @@ import {
 import {
   GenerateInvoiceActualBuyreType,
   GenerateInvoiceAutoType,
-  InvoiceGenGstType,
+  InvoiceGenGstTableType,
   generateInvoiceActualBuyreFormFields,
 } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
@@ -71,7 +71,7 @@ export const GenerateInvoiceActualBuyre: React.FC = () => {
   //       methods.reset();
   //     }, []);
   //   }
-  const columns: ColumnDef<InvoiceGenGstType>[] = [
+  const columns: ColumnDef<InvoiceGenGstTableType>[] = [
     {
       id: "srNo",
       // cell: (info) => info.getValue(),
@@ -152,7 +152,7 @@ export const GenerateInvoiceActualBuyre: React.FC = () => {
     },
   ];
 
-  const tableConfig: TableType<InvoiceGenGstType> = {
+  const tableConfig: TableType<InvoiceGenGstTableType> = {
     config: {
       tableName: "generate Invoice Auto",
       columns: columns,

@@ -12,13 +12,13 @@ import {
 } from "@shared/index";
 import {
   InvoiceGenGstFormType,
-  InvoiceListType,
+  // InvoiceGenGstTableType,
+  // InvoiceListType,
   // invoiceGenGstFormFields,
   useInvoiceGenGstApiCallHook,
 } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
 import {
-  ActualBuyerType,
   ClientType,
   FinYearType,
   useActualBuyerApiCallHook,
@@ -32,6 +32,8 @@ import {
 } from "@utils/index";
 import { usePagination } from "@hooks/usePagination";
 import { fetchEnquiryFormFields } from "./invoiceGenGstFormFields";
+import { EnquiriesType } from "@transaction-search/index";
+import _ from "lodash";
 // import { useEnquiriesApiCallHook } from "@pages/transaction-search";
 
 export const InvoiceGenerateGst: React.FC = () => {
@@ -51,21 +53,21 @@ export const InvoiceGenerateGst: React.FC = () => {
   const [finYearOptions, setFinYearOptions] = useState<FinYearType[]>();
   const [clientOptions, setClientOptions] = useState<ClientType[]>();
   const [clientId, setClientId] = useState<number>();
-  const [actualBuyerOptions, setActualBuyerOptions] =
-    useState<ActualBuyerType[]>();
   const [searchStringClient, setSearchStringClient] = useState<string>("");
   const [enquiresObj, setEnquiresObj] = useState<InvoiceGenGstFormType>(
     {} as InvoiceGenGstFormType
   );
 
-  // const [enquiryList, setEnquiryList] = useState<any>();
+  const [enquiryList, setEnquiryList] = useState<EnquiriesType[]>([]);
   // const [fetchEnqFormData, setFetchEnqFormData] = useState<any>();
 
   const { data: fYearData } = getFinYear();
 
   useEffect(() => {
     if (fYearData) {
-      setFinYearOptions(Object.values(fYearData));
+      setFinYearOptions(
+        _.orderBy(Object.values(fYearData), ["finYear"], ["desc"])
+      );
     }
   }, [fYearData]);
 
@@ -100,7 +102,8 @@ export const InvoiceGenerateGst: React.FC = () => {
     getActualBuyerBasedOnClientId(clientId && { client_id: clientId }).then(
       (actualBuyer) => {
         if (actualBuyer) {
-          setActualBuyerOptions(actualBuyer);
+          console.log(actualBuyer);
+          fetchEnquiryFormFields.actualBuyreField.config.options = actualBuyer;
         }
       }
     );
@@ -108,21 +111,12 @@ export const InvoiceGenerateGst: React.FC = () => {
 
   useEffect(() => {
     getEnquires(enquiresObj).then((enquiries) => {
-      if (enquiries) {
+      if (enquiries && enquiries?.length > 0) {
         console.log(enquiries);
-        // setActualBuyerOptions(enquiries);
+        setEnquiryList(enquiries);
       }
     });
   }, [enquiresObj]);
-
-  if (actualBuyerOptions?.length) {
-    let options = selectOptionsMaker(
-      actualBuyerOptions,
-      "partyId",
-      "partyName"
-    );
-    fetchEnquiryFormFields.actualBuyreField.config.options = options;
-  }
 
   // const { data: enquiryData } = getEnquiries(
   //   fetchEnqFormData,
@@ -143,65 +137,65 @@ export const InvoiceGenerateGst: React.FC = () => {
     },
   };
 
-  const columns: ColumnDef<InvoiceListType>[] = [
+  const columns: ColumnDef<EnquiriesType>[] = [
     {
       id: "srNo",
-      // cell: (info) => info.getValue(),
+      cell: (info) => info.getValue(),
       header: () => <>SRNO</>,
     },
 
     {
-      // accessorFn: (row) => row.state,
-      id: "Ref",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.refNo,
+      id: "refNo",
+      cell: (info) => info.getValue(),
       header: () => <>Ref</>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "Client Ref No",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.clientRef,
+      id: "clientRefNo",
+      cell: (info) => info.getValue(),
       header: () => <>Client Ref No</>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "Order Date",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.recdDate,
+      id: "recdDate",
+      cell: (info) => info.getValue(),
       header: () => <>Order Date</>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "Company",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.companyName,
+      id: "companyName",
+      cell: (info) => info.getValue(),
       header: () => <>Company</>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "Country",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.countryName,
+      id: "countryName",
+      cell: (info) => info.getValue(),
       header: () => <>Country</>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "Price",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.creditAmount,
+      id: "creditAmount",
+      cell: (info) => info.getValue(),
       header: () => <>Price</>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "Dis.",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.discount,
+      id: "discount",
+      cell: (info) => info.getValue(),
       header: () => <>Dis. </>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "Adjust",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.adjustment,
+      id: "adjustment",
+      cell: (info) => info.getValue(),
       header: () => <>Adjust</>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "Comm.	",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.reportComission,
+      id: "reportComission",
+      cell: (info) => info.getValue(),
       header: () => <>Comm. </>,
     },
     {
@@ -211,42 +205,36 @@ export const InvoiceGenerateGst: React.FC = () => {
       header: () => <>Select all </>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "Report Date",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.reportDate,
+      id: "reportDate",
+      cell: (info) => info.getValue(),
       header: () => <>Report Date</>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "Service",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.serviceTypeName,
+      id: "serviceTypeName",
+      cell: (info) => info.getValue(),
       header: () => <>Service</>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "Enq. Price",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.reportPrice,
+      id: "reportPrice",
+      cell: (info) => info.getValue(),
       header: () => <>Enq. Price</>,
     },
     {
-      // accessorFn: (row) => row.state,
-      id: "E.Type",
-      // cell: (info) => info.getValue(),
+      accessorFn: (row) => row.typeofEnquiry,
+      id: "typeofEnquiry",
+      cell: (info) => info.getValue(),
       header: () => <>E.Type</>,
-    },
-    {
-      // accessorFn: (row) => row.state,
-      id: "OldFormat",
-      // cell: (info) => info.getValue(),
-      header: () => <>OldFormat</>,
     },
   ];
 
-  const tableConfig: TableType<InvoiceListType> = {
+  const tableConfig: TableType<EnquiriesType> = {
     config: {
       tableName: "Invocie List",
       columns: columns,
-      tableData: [],
+      tableData: enquiryList,
       copyBtn: false,
       csvBtn: false,
       excelBtn: false,
@@ -291,6 +279,7 @@ export const InvoiceGenerateGst: React.FC = () => {
       endDate: formatDateString(new Date(enquiryForm.endDate), "d-m-y", "-"),
       clientId: enquiryForm.clientId.value,
       fYear: enquiryForm.fYear.value,
+      actualBuyerId: enquiryForm.actualBuyerId.value,
     };
     return cleanupObject(enqData);
   };

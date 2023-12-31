@@ -5,4 +5,5 @@ export interface InvoiceGenGstFormType {
   endDate: string;
   clientId: Options;
   fYear: Options;
+  actualBuyerId: Options;
 }

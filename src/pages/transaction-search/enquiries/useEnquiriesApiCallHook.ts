@@ -27,7 +27,7 @@ export const useEnquiriesApiCallHook = () => {
     data: MapType<EnquiriesType>;
     count: number;
   }> => {
-    console.log("condition", condition);
+    // console.log("condition", condition);
     return useQuery<{ data: MapType<EnquiriesType>; count: number }>({
       queryKey: [queryKeys.ENQUIRY_DATA, queryObject],
       queryFn: async () => {

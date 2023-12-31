@@ -337,14 +337,14 @@ const client: FormFieldType = {
 
 const actualBuyreField: FormFieldType = {
   config: {
-    name: "actualBuyer",
+    name: "actualBuyerId",
     label: "Actual Buyer",
     id: "actualBuyer",
     options: [],
     placeholder: "Select Actual Buyer ",
     validation: {
       required: {
-        value: false,
+        value: true,
         message: "Select Actual Buyer",
       },
     },

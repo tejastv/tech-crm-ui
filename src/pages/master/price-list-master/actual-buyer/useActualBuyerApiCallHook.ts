@@ -1,7 +1,7 @@
 import { useAxios } from "@hooks/useAxios";
 import { ActualBuyerType } from "@master/index";
 import { apiUrls, queryKeys } from "@constants/index";
-import { ApiResponseType, MapType } from "@shared/index";
+import { ApiResponseType, MapType, Options } from "@shared/index";
 import {
   UseQueryResult,
   useMutation,
@@ -52,7 +52,7 @@ export const useActualBuyerApiCallHook = () => {
 
   const getActualBuyerBasedOnClientId = async (
     queryParams: any
-  ): Promise<ActualBuyerType[] | undefined> => {
+  ): Promise<Options[] | undefined> => {
     if (queryParams == undefined) return;
     let params = {};
     params = {
@@ -62,6 +62,8 @@ export const useActualBuyerApiCallHook = () => {
     };
     const response = await instance.get(apiUrls.GET_ADD_ACTUAL_BUYER, params);
     const data = await response.data.data;
+    console.log(data);
+
     let mapedData = selectOptionsMaker(data, "partyId", "partyName");
     return mapedData;
   };
