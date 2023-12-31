@@ -84,7 +84,7 @@ export { Executive } from "./information-master-2/executive/Executive";
 export { FinYearForm } from "./information-master-2/fin-year/FinYearForm";
 export { FinYear } from "./information-master-2/fin-year/FinYear";
 
-export { AddUpdateUser } from "./information-master-2/user-master/AddUpdateUser";
+export { UserForm } from "./information-master-2/user-master/UserForm";
 export { User } from "./information-master-2/user-master/User";
 
 //Form Fields
