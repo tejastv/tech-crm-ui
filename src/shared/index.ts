@@ -29,6 +29,7 @@ export { NewSelect } from "./components/ui/NewSelect";
 export { NewDatePicker } from "./components/ui/NewDatePicker";
 export { NewRadio } from "./components/ui/NewRadio";
 export { NewCheckbox } from "./components/ui/NewCheckbox";
+export { IndeterminateCheckbox } from "./components/ui/IndeterminateCheckbox";
 export * as TableCellFormFields from "./components/ui/TableCellFormFields";
 // Types
 export * from "./types/button-type";

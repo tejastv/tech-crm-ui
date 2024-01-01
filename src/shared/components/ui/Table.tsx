@@ -335,13 +335,13 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   };
 
   const handleSearchChange = (value: any) => {
-    if(clientSideSearch) {
+    if (clientSideSearch) {
       setGlobalFilter(String(value));
     } else {
       props.config.onSearchChange && props.config.onSearchChange(value);
     }
   };
-  
+
   return (
     <>
       <div className="p-2">

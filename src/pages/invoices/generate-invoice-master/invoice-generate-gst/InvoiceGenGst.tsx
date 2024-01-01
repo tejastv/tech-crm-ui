@@ -9,6 +9,7 @@ import {
   NewSelect,
   // NewInput,
   NewDatePicker,
+  IndeterminateCheckbox,
 } from "@shared/index";
 import {
   InvoiceGenGstFormType,
@@ -201,8 +202,37 @@ export const InvoiceGenerateGst: React.FC = () => {
     {
       // accessorFn: (row) => row.state,
       id: "Select all ",
-      // cell: (info) => info.getValue(),
-      header: () => <>Select all </>,
+      cell: ({ row, table }) => (
+        <div className="px-1">
+          <IndeterminateCheckbox
+            {...{
+              checked: row.getIsSelected(),
+              disabled: !row.getCanSelect(),
+              indeterminate: row.getIsSomeSelected(),
+              // onChange: () => {
+              //   row.getToggleSelectedHandler();
+              // },
+              onChange: row.getToggleSelectedHandler(),
+            }}
+          />
+        </div>
+      ),
+      header: ({ table }) => (
+        <>
+          Select all
+          <IndeterminateCheckbox
+            {...{
+              checked: table.getIsAllRowsSelected(),
+              indeterminate: table.getIsSomeRowsSelected(),
+              // onChange: () => {
+              //   table.getToggleAllRowsSelectedHandler(),
+              //     onChangeOfCheckbox(table);
+              // },
+              onChange: table.getToggleAllRowsSelectedHandler(),
+            }}
+          />
+        </>
+      ),
     },
     {
       accessorFn: (row) => row.reportDate,
@@ -266,6 +296,13 @@ export const InvoiceGenerateGst: React.FC = () => {
   const getClientValue = (clientId: number) => {
     if (clientId) {
       setClientId(clientId);
+    }
+  };
+
+  const onChangeOfCheckbox = (table: any) => {
+    if (table) {
+      let selectedRows = table.getSelectedRowModel().flatRows;
+      console.log(selectedRows);
     }
   };
 
