@@ -42,11 +42,11 @@ export const useReceiptApiCallHook = () => {
       queryKey: [queryKeys.RECEIPT_DATA, startYear, invoiceNo],
       queryFn: async () => {
         const response = await instance.get(
-          apiUrls.GET_RECEIPT.replace("{startYear}", startYear),
+          apiUrls.GET_RECEIPT.replace("{fyear}", startYear).replace("{invoice_no}", invoiceNo),
           {
-            params: {
-              invoice_no: invoiceNo,
-            },
+            // params: {
+            //   invoice_no: invoiceNo,
+            // },
             headers: {
               callFrom: "receipt",
             },

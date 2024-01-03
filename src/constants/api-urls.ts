@@ -111,7 +111,7 @@ const GET_ADD_ENQUIRY_PI = "transaction/enquiries-pi";
 const UPDATE_DELETE_ENQUIRY_PI = "transaction/enquiries-pi/{id}";
 
 // Receipt
-const GET_RECEIPT = "transaction/{startYear}/receipt";
+const GET_RECEIPT = "transaction/{fyear}/{invoice_no}/receipts";
 const ADD_UPDATE_DELETE_RECEIPT =
   "transaction/clients/{clientId}/{fYear}/{invoiceNo}/receipt";
 
