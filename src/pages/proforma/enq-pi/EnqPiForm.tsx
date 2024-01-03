@@ -55,6 +55,7 @@ import {
 import { useLocation, useParams } from "react-router-dom";
 import { usePagination } from "@hooks/usePagination";
 import { ColumnDef } from "@tanstack/react-table";
+import _ from "lodash";
 
 const priceMapper = {
   1: "price", // Normal
@@ -216,7 +217,9 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (fYearData) {
-      setFinYearOptions(Object.values(fYearData));
+      setFinYearOptions(
+        _.orderBy(Object.values(fYearData), ["finYear"], ["desc"])
+      );
     }
   }, [fYearData]);
 

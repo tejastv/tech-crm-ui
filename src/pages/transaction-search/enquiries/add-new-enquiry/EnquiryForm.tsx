@@ -49,6 +49,7 @@ import {
   selectOptionsMaker,
 } from "@utils/index";
 import { usePagination } from "@hooks/usePagination";
+import _ from "lodash";
 
 const priceMapper = {
   1: "price", // Normal
@@ -218,7 +219,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (fYearData) {
-      setFinYearOptions(Object.values(fYearData));
+      setFinYearOptions(
+        _.orderBy(Object.values(fYearData), ["finYear"], ["desc"])
+      );
     }
   }, [fYearData]);
 
