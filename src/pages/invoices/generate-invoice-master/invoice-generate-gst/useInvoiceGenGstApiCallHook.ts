@@ -2,6 +2,7 @@ import { useAxios } from "@hooks/useAxios";
 // import { IndustryType } from "@master/index";
 import { apiUrls } from "@constants/index";
 import { EnquiriesType } from "@transaction-search/index";
+import { EnqueryCalculatedDataType } from "@invoices/index";
 // import { ApiResponseType } from "@shared/index";
 // import {
 //   UseQueryResult,
@@ -18,6 +19,10 @@ export const useInvoiceGenGstApiCallHook = () => {
   // const queryClient = useQueryClient();
   // const navigate = useNavigate();
 
+  const headers = {
+    callFrom: "transaction",
+  };
+
   const getEnquires = async (
     queryParams: any
   ): Promise<EnquiriesType[] | undefined> => {
@@ -27,16 +32,34 @@ export const useInvoiceGenGstApiCallHook = () => {
       params: {
         ...queryParams,
       },
-      headers: {
-        callFrom: "transaction",
-      },
+      headers: headers,
     };
     const response = await instance.get(apiUrls.GET_ADD_ALL_ENQUIRY, params);
     const data = await response.data.data.records;
     return data;
   };
 
+  const getCalculatedDataBasedOnEnquires = async (
+    queryParams: any
+  ): Promise<EnqueryCalculatedDataType | undefined> => {
+    if (Object.values(queryParams).length == 0) return;
+    let params = {};
+    params = {
+      params: {
+        ...queryParams,
+      },
+      headers: headers,
+    };
+    const response = await instance.get(
+      apiUrls.GET_CALCULATED_DATA_BASED_ON_ENQUIRIES,
+      params
+    );
+    const data = await response.data.data.records;
+    return data;
+  };
+
   return {
     getEnquires,
+    getCalculatedDataBasedOnEnquires,
   };
 };

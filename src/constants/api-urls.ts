@@ -116,6 +116,8 @@ const ADD_UPDATE_DELETE_RECEIPT =
   "transaction/clients/{clientId}/{fYear}/{invoiceNo}/receipts";
 
 const GET_INVOICES = "transaction/invoices";
+const GET_CALCULATED_DATA_BASED_ON_ENQUIRIES =
+  "transaction/client/{clientId}/invoices/Preview";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -205,4 +207,5 @@ export const apiUrls = {
   ADD_UPDATE_DELETE_RECEIPT,
 
   GET_INVOICES,
+  GET_CALCULATED_DATA_BASED_ON_ENQUIRIES,
 };

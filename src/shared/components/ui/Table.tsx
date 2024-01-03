@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
+import React, { PropsWithChildren, useEffect, useRef } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -7,7 +7,6 @@ import {
   flexRender,
   SortingState,
   getSortedRowModel,
-  RowData,
 } from "@tanstack/react-table";
 import { Button, DebouncedInput, TableType } from "@shared/index";
 import * as XLSX from "xlsx";
@@ -16,38 +15,15 @@ import * as pdfMake from "pdfmake/build/pdfmake";
 import { Alignment, TDocumentDefinitions } from "pdfmake/interfaces";
 import { useToaster } from "@hooks/useToaster";
 
-declare module "@tanstack/react-table" {
-  interface TableMeta<TData extends RowData> {
-    updateData: (rowIndex: number, columnId: string, value: unknown) => void;
-  }
-}
-
-const useSkipper = () => {
-  const shouldSkipRef = React.useRef(true);
-  const shouldSkip = shouldSkipRef.current;
-
-  // Wrap a function with this to skip a pagination reset temporarily
-  const skip = React.useCallback(() => {
-    shouldSkipRef.current = false;
-  }, []);
-
-  React.useEffect(() => {
-    shouldSkipRef.current = true;
-  });
-
-  return [shouldSkip, skip] as const;
-};
-
 export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [autoResetPageIndex, skipAutoResetPageIndex] = useSkipper();
   const tableRef = useRef(null);
-  // const data = props.config.tableData;
-  const [data, setData] = useState<Array<any>>([]);
-  useEffect(() => {
-    setData([...props.config.tableData]);
-  }, [props.config.tableData]);
+  const data = props.config.tableData;
+  // const [data, setData] = useState<Array<any>>([]);
+  // useEffect(() => {
+  //   setData([...props.config.tableData]);
+  // }, [props.config.tableData]);
   const columns = props.config.columns;
   const pageSizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   const { errorMessageToaster, successMessageToaster } = useToaster();
@@ -64,24 +40,6 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     columns,
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setGlobalFilter,
-    autoResetPageIndex,
-    meta: {
-      updateData: (rowIndex, columnId, value) => {
-        // Skip page index reset until after next rerender
-        skipAutoResetPageIndex();
-        setData((old) =>
-          old.map((row, index) => {
-            if (index === rowIndex) {
-              return {
-                ...old[rowIndex]!,
-                [columnId]: value,
-              };
-            }
-            return row;
-          })
-        );
-      },
-    },
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     debugTable: true,
@@ -99,6 +57,15 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
   });
+
+  const filteredSelectedRows = table.getFilteredSelectedRowModel().flatRows;
+
+  useEffect(() => {
+    if (props.setSelectedRows) {
+      const originIds = filteredSelectedRows.map((row) => row.original);
+      props.setSelectedRows(originIds);
+    }
+  }, [props.setSelectedRows, filteredSelectedRows]);
 
   const onTableDeleteBtnClick = (data: any) => {
     props.config.onDeleteClick && props.config.onDeleteClick(data);

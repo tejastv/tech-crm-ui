@@ -39,5 +39,6 @@ export * from "./invoice-detail-master/invoice-list-tds/invoice-list-tds-type";
 export * from "./invoice-detail-master/invoice-list-perfoma/invoice-list-perfoma-type";
 export * from "./invoice-detail-master/invoice-list-exce-wise/invoice-list-exce-wise-type";
 export * from "./invoice-detail-master/invoice-setteld/invoice-setteld-type";
+export * from "./generate-invoice-master/invoice-generate-gst/EnqueryCalculatedDataType";
 
 export { useInvoiceGenGstApiCallHook } from "./generate-invoice-master/invoice-generate-gst/useInvoiceGenGstApiCallHook";

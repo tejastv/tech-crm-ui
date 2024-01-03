@@ -46,6 +46,12 @@ export const InvoiceGenerateGst: React.FC = () => {
     formState: { errors: fetchEnqErrors },
   } = useForm<InvoiceGenGstFormType>();
 
+  const {
+    register: displayDataFieldRegister,
+    control: displayDataFieldControl,
+    formState: { errors: displayDataFieldErrors },
+  } = useForm();
+
   const { getFinYear } = useFinYearApiCallHook();
   const { getClient } = useClientApiCallHook();
   const { getActualBuyerBasedOnClientId } = useActualBuyerApiCallHook();
@@ -54,7 +60,8 @@ export const InvoiceGenerateGst: React.FC = () => {
   type CalculateTotalObj = {
     finYear: string;
     actualBuyerId: string;
-    client_id: Array<number>;
+    client_id?: string;
+    enqIds?: Array<number>;
   };
   const [finYearOptions, setFinYearOptions] = useState<FinYearType[]>();
   const [clientOptions, setClientOptions] = useState<ClientType[]>();
@@ -70,9 +77,274 @@ export const InvoiceGenerateGst: React.FC = () => {
   const [selectedEnquiries, setSelectedEnquiries] = useState<EnquiriesType[]>(
     []
   );
+  const [selected, setSelected] = useState<EnquiriesType[]>([]);
+  const [tableData, setTableData] = useState<any>([]);
   // const [fetchEnqFormData, setFetchEnqFormData] = useState<any>();
 
   const { data: fYearData } = getFinYear();
+
+  useEffect(() => {
+    setTableData([
+      {
+        partyName: "sumitss",
+        clientName: "KSURE - Korea",
+        clientAddress:
+          "Korea Trade Insurance Corporation\r\n6F Seoul Central Building \r\n136 Seorin-Dong Jongno-Gu Seoul 110-729, \r\nRepublic of Korea",
+        stateName: "Maharashtra",
+        refNo: "14",
+        enqId: 11,
+        fyear: 2024,
+        bookNo: null,
+        dueDate: null,
+        serviceTypeId: 1,
+        clientRefNo: null,
+        sourceId: 3,
+        enqStatusId: 1,
+        notes: null,
+        pmtStatus: "Received",
+        creditAmount: "5000",
+        reportDate: "2023-12-30T20:49:17",
+        givenAddress: "TEST-1",
+        cityId: 1052,
+        zip: "4000 92",
+        stateId: 7,
+        countryId: 101,
+        cmie: null,
+        rockStatus: null,
+        records: null,
+        recFin: null,
+        phone: null,
+        fax: null,
+        email: null,
+        website: null,
+        contactPerson: null,
+        designation: null,
+        financialYear: null,
+        bankers: null,
+        requestNo: null,
+        instruction: null,
+        reportFilename: null,
+        reportPrice: 1500,
+        reportComission: 100,
+        typeofEnquiry: "new",
+        lineOfBusiness: null,
+        noteForComission: null,
+        industryId: null,
+        disPer: 5,
+        discount: 1000,
+        recdDate: "2023-12-06T00:00:00",
+        remarks: null,
+        companyID: 753172,
+        clientRef: "1",
+        adjustment: 100,
+        disType: null,
+        actualBuyerId: 1,
+        siteStatusId: null,
+        bulkEnquiryId: null,
+        locked: null,
+        clientId: 1,
+        enquiryStatus: "Pending",
+        enteredBy: null,
+        enteredDate: null,
+        modifiedBy: null,
+        modifiedDate: null,
+        sourceName: "Algeria",
+        industryName: null,
+        executiveId: "18",
+        cityName: "Mumbai",
+        countryName: "India",
+        groupName: null,
+        clientEmail: "bpcpstar@ksure.or.kr",
+        printStatus: null,
+        clientPrice: null,
+        localSource: "Eswar",
+        clientCityName: null,
+        clientCountryName: "Korea (South)",
+        clientState: null,
+        companyName: "TCS",
+        clientContactPerson: "",
+        clientFax: "+81-2-399-6832",
+        clientDesignation: "",
+        clientZip: "",
+        clientPhone: "+82-2-399-6800",
+        executiveName: "Foreign",
+        siteStatus: null,
+        serviceTypeName: "Normal",
+      },
+      {
+        partyName: "sumitss",
+        clientName: "KSURE - Korea 123",
+        clientAddress:
+          "Korea Trade Insurance Corporation\r\n6F Seoul Central Building \r\n136 Seorin-Dong Jongno-Gu Seoul 110-729, \r\nRepublic of Korea",
+        stateName: "Maharashtra",
+        refNo: "14",
+        enqId: 12,
+        fyear: 2024,
+        bookNo: null,
+        dueDate: null,
+        serviceTypeId: 1,
+        clientRefNo: null,
+        sourceId: 3,
+        enqStatusId: 1,
+        notes: null,
+        pmtStatus: "Received",
+        creditAmount: "5000",
+        reportDate: "2023-12-30T20:49:17",
+        givenAddress: "TEST-1",
+        cityId: 1052,
+        zip: "4000 92",
+        stateId: 7,
+        countryId: 101,
+        cmie: null,
+        rockStatus: null,
+        records: null,
+        recFin: null,
+        phone: null,
+        fax: null,
+        email: null,
+        website: null,
+        contactPerson: null,
+        designation: null,
+        financialYear: null,
+        bankers: null,
+        requestNo: null,
+        instruction: null,
+        reportFilename: null,
+        reportPrice: 1500,
+        reportComission: 100,
+        typeofEnquiry: "new",
+        lineOfBusiness: null,
+        noteForComission: null,
+        industryId: null,
+        disPer: 5,
+        discount: 1000,
+        recdDate: "2023-12-06T00:00:00",
+        remarks: null,
+        companyID: 753172,
+        clientRef: "1",
+        adjustment: 100,
+        disType: null,
+        actualBuyerId: 1,
+        siteStatusId: null,
+        bulkEnquiryId: null,
+        locked: null,
+        clientId: 1,
+        enquiryStatus: "Pending",
+        enteredBy: null,
+        enteredDate: null,
+        modifiedBy: null,
+        modifiedDate: null,
+        sourceName: "Algeria",
+        industryName: null,
+        executiveId: "18",
+        cityName: "Mumbai",
+        countryName: "India",
+        groupName: null,
+        clientEmail: "bpcpstar@ksure.or.kr",
+        printStatus: null,
+        clientPrice: null,
+        localSource: "Eswar",
+        clientCityName: null,
+        clientCountryName: "Korea (South)",
+        clientState: null,
+        companyName: "TCS",
+        clientContactPerson: "",
+        clientFax: "+81-2-399-6832",
+        clientDesignation: "",
+        clientZip: "",
+        clientPhone: "+82-2-399-6800",
+        executiveName: "Foreign",
+        siteStatus: null,
+        serviceTypeName: "Normal",
+      },
+      {
+        partyName: "sumitss",
+        clientName: "KSURE - Korea 456",
+        clientAddress:
+          "Korea Trade Insurance Corporation\r\n6F Seoul Central Building \r\n136 Seorin-Dong Jongno-Gu Seoul 110-729, \r\nRepublic of Korea",
+        stateName: "Maharashtra",
+        refNo: "14",
+        enqId: 14,
+        fyear: 2024,
+        bookNo: null,
+        dueDate: null,
+        serviceTypeId: 1,
+        clientRefNo: null,
+        sourceId: 3,
+        enqStatusId: 1,
+        notes: null,
+        pmtStatus: "Received",
+        creditAmount: "5000",
+        reportDate: "2023-12-30T20:49:17",
+        givenAddress: "TEST-1",
+        cityId: 1052,
+        zip: "4000 92",
+        stateId: 7,
+        countryId: 101,
+        cmie: null,
+        rockStatus: null,
+        records: null,
+        recFin: null,
+        phone: null,
+        fax: null,
+        email: null,
+        website: null,
+        contactPerson: null,
+        designation: null,
+        financialYear: null,
+        bankers: null,
+        requestNo: null,
+        instruction: null,
+        reportFilename: null,
+        reportPrice: 1500,
+        reportComission: 100,
+        typeofEnquiry: "new",
+        lineOfBusiness: null,
+        noteForComission: null,
+        industryId: null,
+        disPer: 5,
+        discount: 1000,
+        recdDate: "2023-12-06T00:00:00",
+        remarks: null,
+        companyID: 753172,
+        clientRef: "1",
+        adjustment: 100,
+        disType: null,
+        actualBuyerId: 1,
+        siteStatusId: null,
+        bulkEnquiryId: null,
+        locked: null,
+        clientId: 1,
+        enquiryStatus: "Pending",
+        enteredBy: null,
+        enteredDate: null,
+        modifiedBy: null,
+        modifiedDate: null,
+        sourceName: "Algeria",
+        industryName: null,
+        executiveId: "18",
+        cityName: "Mumbai",
+        countryName: "India",
+        groupName: null,
+        clientEmail: "bpcpstar@ksure.or.kr",
+        printStatus: null,
+        clientPrice: null,
+        localSource: "Eswar",
+        clientCityName: null,
+        clientCountryName: "Korea (South)",
+        clientState: null,
+        companyName: "TCS",
+        clientContactPerson: "",
+        clientFax: "+81-2-399-6832",
+        clientDesignation: "",
+        clientZip: "",
+        clientPhone: "+82-2-399-6800",
+        executiveName: "Foreign",
+        siteStatus: null,
+        serviceTypeName: "Normal",
+      },
+    ]);
+  }, []);
 
   useEffect(() => {
     if (fYearData) {
@@ -268,284 +540,11 @@ export const InvoiceGenerateGst: React.FC = () => {
     []
   );
 
-  const onTableChange = (tableData: any, callFrom: string) => {
-    if (callFrom == "table") {
-      let d = tableData.getSelectedRowModel().flatRows;
-      // if (d && d.length > 0)
-      // setSelectedEnquiries(d);
-      // setSelectedEnquiries((prevData: Array<any>) => {
-      //   let updatedData = [...prevData];
-      //   updatedData = [...d];
-      //   return updatedData;
-      // });
-      console.log(d);
-    }
-  };
-
   const tableConfig: TableType<any> = {
     config: {
       tableName: "Invocie List",
       columns: columns,
-      tableData: [
-        {
-          partyName: "sumitss",
-          clientName: "KSURE - Korea",
-          clientAddress:
-            "Korea Trade Insurance Corporation\r\n6F Seoul Central Building \r\n136 Seorin-Dong Jongno-Gu Seoul 110-729, \r\nRepublic of Korea",
-          stateName: "Maharashtra",
-          refNo: "14",
-          enqId: 11,
-          fyear: 2024,
-          bookNo: null,
-          dueDate: null,
-          serviceTypeId: 1,
-          clientRefNo: null,
-          sourceId: 3,
-          enqStatusId: 1,
-          notes: null,
-          pmtStatus: "Received",
-          creditAmount: "5000",
-          reportDate: "2023-12-30T20:49:17",
-          givenAddress: "TEST-1",
-          cityId: 1052,
-          zip: "4000 92",
-          stateId: 7,
-          countryId: 101,
-          cmie: null,
-          rockStatus: null,
-          records: null,
-          recFin: null,
-          phone: null,
-          fax: null,
-          email: null,
-          website: null,
-          contactPerson: null,
-          designation: null,
-          financialYear: null,
-          bankers: null,
-          requestNo: null,
-          instruction: null,
-          reportFilename: null,
-          reportPrice: 1500,
-          reportComission: 100,
-          typeofEnquiry: "new",
-          lineOfBusiness: null,
-          noteForComission: null,
-          industryId: null,
-          disPer: 5,
-          discount: 1000,
-          recdDate: "2023-12-06T00:00:00",
-          remarks: null,
-          companyID: 753172,
-          clientRef: "1",
-          adjustment: 100,
-          disType: null,
-          actualBuyerId: 1,
-          siteStatusId: null,
-          bulkEnquiryId: null,
-          locked: null,
-          clientID: 1,
-          enquiryStatus: "Pending",
-          enteredBy: null,
-          enteredDate: null,
-          modifiedBy: null,
-          modifiedDate: null,
-          sourceName: "Algeria",
-          industryName: null,
-          executiveId: "18",
-          cityName: "Mumbai",
-          countryName: "India",
-          groupName: null,
-          clientEmail: "bpcpstar@ksure.or.kr",
-          printStatus: null,
-          clientPrice: null,
-          localSource: "Eswar",
-          clientCityName: null,
-          clientCountryName: "Korea (South)",
-          clientState: null,
-          companyName: "TCS",
-          clientContactPerson: "",
-          clientFax: "+81-2-399-6832",
-          clientDesignation: "",
-          clientZip: "",
-          clientPhone: "+82-2-399-6800",
-          executiveName: "Foreign",
-          siteStatus: null,
-          serviceTypeName: "Normal",
-        },
-        {
-          partyName: "sumitss",
-          clientName: "KSURE - Korea 123",
-          clientAddress:
-            "Korea Trade Insurance Corporation\r\n6F Seoul Central Building \r\n136 Seorin-Dong Jongno-Gu Seoul 110-729, \r\nRepublic of Korea",
-          stateName: "Maharashtra",
-          refNo: "14",
-          enqId: 12,
-          fyear: 2024,
-          bookNo: null,
-          dueDate: null,
-          serviceTypeId: 1,
-          clientRefNo: null,
-          sourceId: 3,
-          enqStatusId: 1,
-          notes: null,
-          pmtStatus: "Received",
-          creditAmount: "5000",
-          reportDate: "2023-12-30T20:49:17",
-          givenAddress: "TEST-1",
-          cityId: 1052,
-          zip: "4000 92",
-          stateId: 7,
-          countryId: 101,
-          cmie: null,
-          rockStatus: null,
-          records: null,
-          recFin: null,
-          phone: null,
-          fax: null,
-          email: null,
-          website: null,
-          contactPerson: null,
-          designation: null,
-          financialYear: null,
-          bankers: null,
-          requestNo: null,
-          instruction: null,
-          reportFilename: null,
-          reportPrice: 1500,
-          reportComission: 100,
-          typeofEnquiry: "new",
-          lineOfBusiness: null,
-          noteForComission: null,
-          industryId: null,
-          disPer: 5,
-          discount: 1000,
-          recdDate: "2023-12-06T00:00:00",
-          remarks: null,
-          companyID: 753172,
-          clientRef: "1",
-          adjustment: 100,
-          disType: null,
-          actualBuyerId: 1,
-          siteStatusId: null,
-          bulkEnquiryId: null,
-          locked: null,
-          clientID: 1,
-          enquiryStatus: "Pending",
-          enteredBy: null,
-          enteredDate: null,
-          modifiedBy: null,
-          modifiedDate: null,
-          sourceName: "Algeria",
-          industryName: null,
-          executiveId: "18",
-          cityName: "Mumbai",
-          countryName: "India",
-          groupName: null,
-          clientEmail: "bpcpstar@ksure.or.kr",
-          printStatus: null,
-          clientPrice: null,
-          localSource: "Eswar",
-          clientCityName: null,
-          clientCountryName: "Korea (South)",
-          clientState: null,
-          companyName: "TCS",
-          clientContactPerson: "",
-          clientFax: "+81-2-399-6832",
-          clientDesignation: "",
-          clientZip: "",
-          clientPhone: "+82-2-399-6800",
-          executiveName: "Foreign",
-          siteStatus: null,
-          serviceTypeName: "Normal",
-        },
-        {
-          partyName: "sumitss",
-          clientName: "KSURE - Korea 456",
-          clientAddress:
-            "Korea Trade Insurance Corporation\r\n6F Seoul Central Building \r\n136 Seorin-Dong Jongno-Gu Seoul 110-729, \r\nRepublic of Korea",
-          stateName: "Maharashtra",
-          refNo: "14",
-          enqId: 14,
-          fyear: 2024,
-          bookNo: null,
-          dueDate: null,
-          serviceTypeId: 1,
-          clientRefNo: null,
-          sourceId: 3,
-          enqStatusId: 1,
-          notes: null,
-          pmtStatus: "Received",
-          creditAmount: "5000",
-          reportDate: "2023-12-30T20:49:17",
-          givenAddress: "TEST-1",
-          cityId: 1052,
-          zip: "4000 92",
-          stateId: 7,
-          countryId: 101,
-          cmie: null,
-          rockStatus: null,
-          records: null,
-          recFin: null,
-          phone: null,
-          fax: null,
-          email: null,
-          website: null,
-          contactPerson: null,
-          designation: null,
-          financialYear: null,
-          bankers: null,
-          requestNo: null,
-          instruction: null,
-          reportFilename: null,
-          reportPrice: 1500,
-          reportComission: 100,
-          typeofEnquiry: "new",
-          lineOfBusiness: null,
-          noteForComission: null,
-          industryId: null,
-          disPer: 5,
-          discount: 1000,
-          recdDate: "2023-12-06T00:00:00",
-          remarks: null,
-          companyID: 753172,
-          clientRef: "1",
-          adjustment: 100,
-          disType: null,
-          actualBuyerId: 1,
-          siteStatusId: null,
-          bulkEnquiryId: null,
-          locked: null,
-          clientID: 1,
-          enquiryStatus: "Pending",
-          enteredBy: null,
-          enteredDate: null,
-          modifiedBy: null,
-          modifiedDate: null,
-          sourceName: "Algeria",
-          industryName: null,
-          executiveId: "18",
-          cityName: "Mumbai",
-          countryName: "India",
-          groupName: null,
-          clientEmail: "bpcpstar@ksure.or.kr",
-          printStatus: null,
-          clientPrice: null,
-          localSource: "Eswar",
-          clientCityName: null,
-          clientCountryName: "Korea (South)",
-          clientState: null,
-          companyName: "TCS",
-          clientContactPerson: "",
-          clientFax: "+81-2-399-6832",
-          clientDesignation: "",
-          clientZip: "",
-          clientPhone: "+82-2-399-6800",
-          executiveName: "Foreign",
-          siteStatus: null,
-          serviceTypeName: "Normal",
-        },
-      ],
+      tableData: enquiryList,
       copyBtn: false,
       csvBtn: false,
       excelBtn: false,
@@ -584,6 +583,17 @@ export const InvoiceGenerateGst: React.FC = () => {
     console.log(requiredObjectToCalculateTotal);
   }, [requiredObjectToCalculateTotal]);
 
+  useEffect(() => {
+    // console.log(selected);
+    setRequiredObjectToCalculateTotal((prevData) => {
+      const updatedData = { ...prevData };
+      selected.length > 0
+        ? (updatedData.enqIds = selected.map((client) => client.clientId))
+        : delete updatedData.enqIds;
+      return updatedData;
+    });
+  }, [selected]);
+
   const mapEnqRequest = (enquiryForm: InvoiceGenGstFormType) => {
     let enqData: Partial<any> = {
       startDate: formatDateString(
@@ -599,215 +609,212 @@ export const InvoiceGenerateGst: React.FC = () => {
     return cleanupObject(enqData);
   };
 
-  const calculateHandler = () => {
-    console.log();
-  };
+  const calculateHandler = () => {};
 
   return (
     <Card config={cardConfig.formLayoutConfig}>
       <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
-        <>
-          <form
-            onSubmit={onFetchEnquirySubmit}
-            id="fetchEnquiryForm"
-            autoComplete="off"
-            className="p-t-20"
-          >
-            <div className="row">
-              <div className="col-md-4">
-                <NewSelect
-                  errors={fetchEnqErrors}
-                  register={fetchEnqRegister}
-                  control={fetchEnqControl}
-                  config={invoiceGenGstFormFields.fYearField}
-                  onChange={(e) =>
-                    setRequiredObjectToCalculateTotal((prevData) => {
-                      const updatedData = { ...prevData };
-                      updatedData.finYear = e.value;
-                      return updatedData;
-                    })
-                  }
-                />
-              </div>
-              <div className="col-md-4">
-                <NewSelect
-                  errors={fetchEnqErrors}
-                  register={fetchEnqRegister}
-                  control={fetchEnqControl}
-                  config={invoiceGenGstFormFields.client}
-                  onChange={(e) => {
-                    getClientValue(e.value);
-                    setRequiredObjectToCalculateTotal((prevData) => {
-                      const updatedData = { ...prevData };
-                      updatedData.client_id = e.value;
-                      return updatedData;
-                    });
-                  }}
-                  onInputChange={clientOnInputChangeHandler}
-                />
-              </div>
-              <div className="col-md-4">
-                <NewSelect
-                  errors={fetchEnqErrors}
-                  register={fetchEnqRegister}
-                  control={fetchEnqControl}
-                  config={invoiceGenGstFormFields.actualBuyreField}
-                  onChange={(e) =>
-                    setRequiredObjectToCalculateTotal((prevData) => {
-                      const updatedData = { ...prevData };
-                      updatedData.actualBuyerId = e.value;
-                      return updatedData;
-                    })
-                  }
-                />
-              </div>
+        <form id="fetchEnquiryForm" autoComplete="off" className="p-t-20">
+          <div className="row">
+            <div className="col-md-4">
+              <NewSelect
+                errors={fetchEnqErrors}
+                register={fetchEnqRegister}
+                control={fetchEnqControl}
+                config={invoiceGenGstFormFields.fYearField}
+                onChange={(e) =>
+                  setRequiredObjectToCalculateTotal((prevData) => {
+                    const updatedData = { ...prevData };
+                    updatedData.finYear = e.value;
+                    return updatedData;
+                  })
+                }
+              />
             </div>
-            <div className="row">
-              <div className="col-12">
-                <div className="row">
-                  <div className="col-md-4 col-xs-12">
-                    <NewDatePicker
-                      errors={fetchEnqErrors}
-                      control={fetchEnqControl}
-                      register={fetchEnqRegister}
-                      config={invoiceGenGstFormFields.fromDateField}
-                    />
-                  </div>
-                  <div className="col-md-4 col-xs-12">
-                    <NewDatePicker
-                      errors={fetchEnqErrors}
-                      register={fetchEnqRegister}
-                      control={fetchEnqControl}
-                      config={invoiceGenGstFormFields.toDateField}
-                    />
-                  </div>
-                  <div className="col-md-4 col-xs-12">
-                    <Button
-                      form={"fetchEnquiryForm"}
-                      type="submit"
-                      className={"btn btn-danger btn-sm"}
-                    >
-                      Get Inquires
-                    </Button>
-                  </div>
+            <div className="col-md-4">
+              <NewSelect
+                errors={fetchEnqErrors}
+                register={fetchEnqRegister}
+                control={fetchEnqControl}
+                config={invoiceGenGstFormFields.client}
+                onChange={(e) => {
+                  getClientValue(e.value);
+                  setRequiredObjectToCalculateTotal((prevData) => {
+                    const updatedData = { ...prevData };
+                    updatedData.client_id = e.value;
+                    return updatedData;
+                  });
+                }}
+                onInputChange={clientOnInputChangeHandler}
+              />
+            </div>
+            <div className="col-md-4">
+              <NewSelect
+                errors={fetchEnqErrors}
+                register={fetchEnqRegister}
+                control={fetchEnqControl}
+                config={invoiceGenGstFormFields.actualBuyreField}
+                onChange={(e) =>
+                  setRequiredObjectToCalculateTotal((prevData) => {
+                    const updatedData = { ...prevData };
+                    updatedData.actualBuyerId = e.value;
+                    return updatedData;
+                  })
+                }
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <div className="row">
+                <div className="col-md-4 col-xs-12">
+                  <NewDatePicker
+                    errors={fetchEnqErrors}
+                    control={fetchEnqControl}
+                    register={fetchEnqRegister}
+                    config={invoiceGenGstFormFields.fromDateField}
+                  />
+                </div>
+                <div className="col-md-4 col-xs-12">
+                  <NewDatePicker
+                    errors={fetchEnqErrors}
+                    register={fetchEnqRegister}
+                    control={fetchEnqControl}
+                    config={invoiceGenGstFormFields.toDateField}
+                  />
+                </div>
+                <div className="col-md-4 col-xs-12">
+                  <Button
+                    onClick={onFetchEnquirySubmit}
+                    form={"fetchEnquiryForm"}
+                    type="button"
+                    className={"btn btn-danger btn-sm"}
+                  >
+                    Get Inquires
+                  </Button>
                 </div>
               </div>
             </div>
-          </form>
-          <div className="row">
-            <div className="col-md-12 col-xs-12">
-              <Table config={tableConfig.config} />
-            </div>
-            <div className="mt-2 text-center">
-              <Button
-                type="button"
-                onClick={calculateHandler}
-                className={"btn btn-danger btn-sm"}
-              >
-                Calculate
-              </Button>
-            </div>
           </div>
-          <hr className="mt-4 mb-4" />
-          <div className="row">
-            <div className="col-3">
-              <NewInput
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                config={invoiceGenGstFormFields.invoiceNoField}
+        </form>
+        <div className="row">
+          <div className="col-md-12 col-xs-12">
+            {tableData.length > 0 && (
+              <Table
+                config={tableConfig.config}
+                setSelectedRows={setSelected}
               />
-            </div>
-            <div className="col-3">
-              <NewInput
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                config={invoiceGenGstFormFields.dateField}
-              />
-            </div>
+            )}
           </div>
-          <div className="row">
-            <div className="col-3">
-              <NewInput
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                config={invoiceGenGstFormFields.amountField}
-              />
-            </div>
-            <div className="col-3">
-              <NewInput
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                config={invoiceGenGstFormFields.disAmountField}
-              />
-            </div>
-            <div className="col-3">
-              <Button type="button" className={"btn btn-danger btn-sm"}>
-                Get Discount
-              </Button>
-            </div>
-            <div className="col-3">
-              <NewInput
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                config={invoiceGenGstFormFields.subtotalField}
-              />
-            </div>
+          <div className="mt-2 text-center">
+            <Button
+              type="button"
+              onClick={calculateHandler}
+              className={"btn btn-danger btn-sm"}
+            >
+              Calculate
+            </Button>
           </div>
-          <div className="row">
-            <div className="col-3">
-              <NewInput
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                config={invoiceGenGstFormFields.cgstField}
-              />
-            </div>
-            <div className="col-3">
-              <NewInput
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                config={invoiceGenGstFormFields.cgstPerField}
-              />
-            </div>
-            <div className="col-3">
-              <NewInput
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                config={invoiceGenGstFormFields.sgstField}
-              />
-            </div>
-            <div className="col-3">
-              <NewInput
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                config={invoiceGenGstFormFields.sGstPerField}
-              />
-            </div>
+        </div>
+        <hr className="mt-4 mb-4" />
+        <div className="row">
+          <div className="col-3">
+            <NewInput
+              errors={displayDataFieldErrors}
+              register={displayDataFieldRegister}
+              config={invoiceGenGstFormFields.invoiceNoField}
+            />
           </div>
-          <div className="row">
-            <div className="col-3">
-              <NewInput
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                config={invoiceGenGstFormFields.igstField}
-              />
-            </div>
-            <div className="col-3">
-              <NewInput
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                config={invoiceGenGstFormFields.iGstPerField}
-              />
-            </div>
-            <div className="col-3"></div>
-            <div className="col-3">
-              <NewInput
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                config={invoiceGenGstFormFields.totalField}
-              />
-            </div>
+          <div className="col-3">
+            <NewInput
+              errors={displayDataFieldErrors}
+              register={displayDataFieldRegister}
+              config={invoiceGenGstFormFields.dateField}
+            />
           </div>
-        </>
+        </div>
+        <div className="row">
+          <div className="col-3">
+            <NewInput
+              errors={displayDataFieldErrors}
+              register={displayDataFieldRegister}
+              config={invoiceGenGstFormFields.amountField}
+            />
+          </div>
+          <div className="col-3">
+            <NewInput
+              errors={displayDataFieldErrors}
+              register={displayDataFieldRegister}
+              config={invoiceGenGstFormFields.disAmountField}
+            />
+          </div>
+          <div className="col-3">
+            <Button type="button" className={"btn btn-danger btn-sm"}>
+              Get Discount
+            </Button>
+          </div>
+          <div className="col-3">
+            <NewInput
+              errors={displayDataFieldErrors}
+              register={displayDataFieldRegister}
+              config={invoiceGenGstFormFields.subtotalField}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-3">
+            <NewInput
+              errors={displayDataFieldErrors}
+              register={displayDataFieldRegister}
+              config={invoiceGenGstFormFields.cgstField}
+            />
+          </div>
+          <div className="col-3">
+            <NewInput
+              errors={displayDataFieldErrors}
+              register={displayDataFieldRegister}
+              config={invoiceGenGstFormFields.cgstPerField}
+            />
+          </div>
+          <div className="col-3">
+            <NewInput
+              errors={displayDataFieldErrors}
+              register={displayDataFieldRegister}
+              config={invoiceGenGstFormFields.sgstField}
+            />
+          </div>
+          <div className="col-3">
+            <NewInput
+              errors={displayDataFieldErrors}
+              register={displayDataFieldRegister}
+              config={invoiceGenGstFormFields.sGstPerField}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-3">
+            <NewInput
+              errors={displayDataFieldErrors}
+              register={displayDataFieldRegister}
+              config={invoiceGenGstFormFields.igstField}
+            />
+          </div>
+          <div className="col-3">
+            <NewInput
+              errors={displayDataFieldErrors}
+              register={displayDataFieldRegister}
+              config={invoiceGenGstFormFields.iGstPerField}
+            />
+          </div>
+          <div className="col-3"></div>
+          <div className="col-3">
+            <NewInput
+              errors={displayDataFieldErrors}
+              register={displayDataFieldRegister}
+              config={invoiceGenGstFormFields.totalField}
+            />
+          </div>
+        </div>
       </BorderLayout>
       {/* <div className="card-body">
         <BorderLayout heading={cardConfig.formActionsConfig.heading}>
