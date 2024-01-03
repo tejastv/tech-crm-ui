@@ -492,7 +492,7 @@ const fYearField: FormFieldType = {
 };
 
 const invoiceNoField: FormFieldType = createFormConfig(
-  "invoiceno",
+  "invoiceNo",
   "Invoice No.",
   "text",
   invoiceNoValidation,
@@ -518,7 +518,7 @@ const amountField: FormFieldType = createFormConfig(
   true
 );
 const disAmountField: FormFieldType = createFormConfig(
-  "disamt",
+  "discount",
   "Dis.Amt",
   "text",
   disAmountValidation,
@@ -536,7 +536,7 @@ const stField: FormFieldType = createFormConfig(
 );
 
 const cgstPerField: FormFieldType = createFormConfig(
-  "cgstper",
+  "cgstPer",
   "CGST%",
   "text",
   cgstPerValidation,
@@ -554,7 +554,7 @@ const stAmountField: FormFieldType = createFormConfig(
 );
 
 const cgstField: FormFieldType = createFormConfig(
-  "cgst",
+  "cgstAmount",
   "CGST",
   "text",
   cgstValidation,
@@ -581,7 +581,7 @@ const doNotField: FormFieldType = createFormConfig(
 );
 
 const subtotalField: FormFieldType = createFormConfig(
-  "subtotal",
+  "subTotal",
   "Sub Total",
   "text",
   subTotalValidation,
@@ -591,7 +591,7 @@ const subtotalField: FormFieldType = createFormConfig(
 );
 
 const sGstPerField: FormFieldType = createFormConfig(
-  "sgstper",
+  "sgstPer",
   "SGST%",
   "text",
   sgstPerValidation,
@@ -601,7 +601,7 @@ const sGstPerField: FormFieldType = createFormConfig(
 );
 
 const iGstPerField: FormFieldType = createFormConfig(
-  "igstper",
+  "igstPer",
   "IGST%",
   "text",
   igstPerValidation,
@@ -611,7 +611,7 @@ const iGstPerField: FormFieldType = createFormConfig(
 );
 
 const sgstField: FormFieldType = createFormConfig(
-  "sgst",
+  "sgstAmount",
   "SGST",
   "text",
   sgstValidation,
@@ -621,7 +621,7 @@ const sgstField: FormFieldType = createFormConfig(
 );
 
 const igstField: FormFieldType = createFormConfig(
-  "igst",
+  "igstAmount",
   "IGST",
   "text",
   igstValidation,

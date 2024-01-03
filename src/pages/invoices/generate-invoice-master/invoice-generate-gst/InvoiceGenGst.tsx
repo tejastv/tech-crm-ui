@@ -12,6 +12,7 @@ import {
   NewInput,
 } from "@shared/index";
 import {
+  EnqueryCalculatedDataType,
   InvoiceGenGstFormType,
   invoiceGenGstFormFields,
   // InvoiceGenGstTableType,
@@ -50,12 +51,14 @@ export const InvoiceGenerateGst: React.FC = () => {
     register: displayDataFieldRegister,
     control: displayDataFieldControl,
     formState: { errors: displayDataFieldErrors },
+    reset: displayDataFieldReset,
   } = useForm();
 
   const { getFinYear } = useFinYearApiCallHook();
   const { getClient } = useClientApiCallHook();
   const { getActualBuyerBasedOnClientId } = useActualBuyerApiCallHook();
-  const { getEnquires } = useInvoiceGenGstApiCallHook();
+  const { getEnquires, getCalculatedDataBasedOnEnquires } =
+    useInvoiceGenGstApiCallHook();
   // const { getEnquiries } = useEnquiriesApiCallHook();
   type CalculateTotalObj = {
     finYear: string;
@@ -609,7 +612,16 @@ export const InvoiceGenerateGst: React.FC = () => {
     return cleanupObject(enqData);
   };
 
-  const calculateHandler = () => {};
+  const calculateHandler = () => {
+    getCalculatedDataBasedOnEnquires(requiredObjectToCalculateTotal).then(
+      (data) => {
+        if (data && Object.values(data).length > 0) {
+          console.log(data);
+          displayDataFieldReset(data);
+        }
+      }
+    );
+  };
 
   return (
     <Card config={cardConfig.formLayoutConfig}>

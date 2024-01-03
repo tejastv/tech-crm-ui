@@ -46,15 +46,16 @@ export const useInvoiceGenGstApiCallHook = () => {
     let params = {};
     params = {
       params: {
-        ...queryParams,
+        finYear: queryParams.finYear,
       },
       headers: headers,
     };
-    const response = await instance.get(
-      apiUrls.GET_CALCULATED_DATA_BASED_ON_ENQUIRIES,
-      params
+    let url = apiUrls.GET_CALCULATED_DATA_BASED_ON_ENQUIRIES.replace(
+      "{clientId}",
+      queryParams.client_id
     );
-    const data = await response.data.data.records;
+    const response = await instance.post(url, queryParams.enqIds, params);
+    const data = await response.data.data;
     return data;
   };
 
