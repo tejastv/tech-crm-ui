@@ -624,9 +624,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
             </table>
           </div>
         </div>
-
         <div className="h-2" />
-
         {props.config.pagination?.tableMetaDataShow && (
           <div className="mt-3">
             <div className="row">

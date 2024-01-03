@@ -660,15 +660,16 @@ const totalField: FormFieldType = createFormConfig(
   true
 );
 
-export const fetchEnquiryFormFields = {
+// export const fetchEnquiryFormFields = {
+
+// };
+
+export const invoiceGenGstFormFields = {
   fYearField,
   client,
   actualBuyreField,
   fromDateField,
   toDateField,
-};
-
-export const invoiceGenGstFormFields = {
   currencyField,
   gstnField,
   gstnActualBuyreField,
