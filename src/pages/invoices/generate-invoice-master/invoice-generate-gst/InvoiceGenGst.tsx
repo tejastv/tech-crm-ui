@@ -12,12 +12,8 @@ import {
   NewInput,
 } from "@shared/index";
 import {
-  EnqueryCalculatedDataType,
   InvoiceGenGstFormType,
   invoiceGenGstFormFields,
-  // InvoiceGenGstTableType,
-  // InvoiceListType,
-  // invoiceGenGstFormFields,
   useInvoiceGenGstApiCallHook,
 } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
@@ -59,7 +55,6 @@ export const InvoiceGenerateGst: React.FC = () => {
   const { getActualBuyerBasedOnClientId } = useActualBuyerApiCallHook();
   const { getEnquires, getCalculatedDataBasedOnEnquires } =
     useInvoiceGenGstApiCallHook();
-  // const { getEnquiries } = useEnquiriesApiCallHook();
   type CalculateTotalObj = {
     finYear: string;
     actualBuyerId: string;
@@ -77,277 +72,10 @@ export const InvoiceGenerateGst: React.FC = () => {
   );
 
   const [enquiryList, setEnquiryList] = useState<EnquiriesType[]>([]);
-  const [selectedEnquiries, setSelectedEnquiries] = useState<EnquiriesType[]>(
-    []
-  );
   const [selected, setSelected] = useState<EnquiriesType[]>([]);
-  const [tableData, setTableData] = useState<any>([]);
   // const [fetchEnqFormData, setFetchEnqFormData] = useState<any>();
 
   const { data: fYearData } = getFinYear();
-
-  useEffect(() => {
-    setTableData([
-      {
-        partyName: "sumitss",
-        clientName: "KSURE - Korea",
-        clientAddress:
-          "Korea Trade Insurance Corporation\r\n6F Seoul Central Building \r\n136 Seorin-Dong Jongno-Gu Seoul 110-729, \r\nRepublic of Korea",
-        stateName: "Maharashtra",
-        refNo: "14",
-        enqId: 11,
-        fyear: 2024,
-        bookNo: null,
-        dueDate: null,
-        serviceTypeId: 1,
-        clientRefNo: null,
-        sourceId: 3,
-        enqStatusId: 1,
-        notes: null,
-        pmtStatus: "Received",
-        creditAmount: "5000",
-        reportDate: "2023-12-30T20:49:17",
-        givenAddress: "TEST-1",
-        cityId: 1052,
-        zip: "4000 92",
-        stateId: 7,
-        countryId: 101,
-        cmie: null,
-        rockStatus: null,
-        records: null,
-        recFin: null,
-        phone: null,
-        fax: null,
-        email: null,
-        website: null,
-        contactPerson: null,
-        designation: null,
-        financialYear: null,
-        bankers: null,
-        requestNo: null,
-        instruction: null,
-        reportFilename: null,
-        reportPrice: 1500,
-        reportComission: 100,
-        typeofEnquiry: "new",
-        lineOfBusiness: null,
-        noteForComission: null,
-        industryId: null,
-        disPer: 5,
-        discount: 1000,
-        recdDate: "2023-12-06T00:00:00",
-        remarks: null,
-        companyID: 753172,
-        clientRef: "1",
-        adjustment: 100,
-        disType: null,
-        actualBuyerId: 1,
-        siteStatusId: null,
-        bulkEnquiryId: null,
-        locked: null,
-        clientId: 1,
-        enquiryStatus: "Pending",
-        enteredBy: null,
-        enteredDate: null,
-        modifiedBy: null,
-        modifiedDate: null,
-        sourceName: "Algeria",
-        industryName: null,
-        executiveId: "18",
-        cityName: "Mumbai",
-        countryName: "India",
-        groupName: null,
-        clientEmail: "bpcpstar@ksure.or.kr",
-        printStatus: null,
-        clientPrice: null,
-        localSource: "Eswar",
-        clientCityName: null,
-        clientCountryName: "Korea (South)",
-        clientState: null,
-        companyName: "TCS",
-        clientContactPerson: "",
-        clientFax: "+81-2-399-6832",
-        clientDesignation: "",
-        clientZip: "",
-        clientPhone: "+82-2-399-6800",
-        executiveName: "Foreign",
-        siteStatus: null,
-        serviceTypeName: "Normal",
-      },
-      {
-        partyName: "sumitss",
-        clientName: "KSURE - Korea 123",
-        clientAddress:
-          "Korea Trade Insurance Corporation\r\n6F Seoul Central Building \r\n136 Seorin-Dong Jongno-Gu Seoul 110-729, \r\nRepublic of Korea",
-        stateName: "Maharashtra",
-        refNo: "14",
-        enqId: 12,
-        fyear: 2024,
-        bookNo: null,
-        dueDate: null,
-        serviceTypeId: 1,
-        clientRefNo: null,
-        sourceId: 3,
-        enqStatusId: 1,
-        notes: null,
-        pmtStatus: "Received",
-        creditAmount: "5000",
-        reportDate: "2023-12-30T20:49:17",
-        givenAddress: "TEST-1",
-        cityId: 1052,
-        zip: "4000 92",
-        stateId: 7,
-        countryId: 101,
-        cmie: null,
-        rockStatus: null,
-        records: null,
-        recFin: null,
-        phone: null,
-        fax: null,
-        email: null,
-        website: null,
-        contactPerson: null,
-        designation: null,
-        financialYear: null,
-        bankers: null,
-        requestNo: null,
-        instruction: null,
-        reportFilename: null,
-        reportPrice: 1500,
-        reportComission: 100,
-        typeofEnquiry: "new",
-        lineOfBusiness: null,
-        noteForComission: null,
-        industryId: null,
-        disPer: 5,
-        discount: 1000,
-        recdDate: "2023-12-06T00:00:00",
-        remarks: null,
-        companyID: 753172,
-        clientRef: "1",
-        adjustment: 100,
-        disType: null,
-        actualBuyerId: 1,
-        siteStatusId: null,
-        bulkEnquiryId: null,
-        locked: null,
-        clientId: 1,
-        enquiryStatus: "Pending",
-        enteredBy: null,
-        enteredDate: null,
-        modifiedBy: null,
-        modifiedDate: null,
-        sourceName: "Algeria",
-        industryName: null,
-        executiveId: "18",
-        cityName: "Mumbai",
-        countryName: "India",
-        groupName: null,
-        clientEmail: "bpcpstar@ksure.or.kr",
-        printStatus: null,
-        clientPrice: null,
-        localSource: "Eswar",
-        clientCityName: null,
-        clientCountryName: "Korea (South)",
-        clientState: null,
-        companyName: "TCS",
-        clientContactPerson: "",
-        clientFax: "+81-2-399-6832",
-        clientDesignation: "",
-        clientZip: "",
-        clientPhone: "+82-2-399-6800",
-        executiveName: "Foreign",
-        siteStatus: null,
-        serviceTypeName: "Normal",
-      },
-      {
-        partyName: "sumitss",
-        clientName: "KSURE - Korea 456",
-        clientAddress:
-          "Korea Trade Insurance Corporation\r\n6F Seoul Central Building \r\n136 Seorin-Dong Jongno-Gu Seoul 110-729, \r\nRepublic of Korea",
-        stateName: "Maharashtra",
-        refNo: "14",
-        enqId: 14,
-        fyear: 2024,
-        bookNo: null,
-        dueDate: null,
-        serviceTypeId: 1,
-        clientRefNo: null,
-        sourceId: 3,
-        enqStatusId: 1,
-        notes: null,
-        pmtStatus: "Received",
-        creditAmount: "5000",
-        reportDate: "2023-12-30T20:49:17",
-        givenAddress: "TEST-1",
-        cityId: 1052,
-        zip: "4000 92",
-        stateId: 7,
-        countryId: 101,
-        cmie: null,
-        rockStatus: null,
-        records: null,
-        recFin: null,
-        phone: null,
-        fax: null,
-        email: null,
-        website: null,
-        contactPerson: null,
-        designation: null,
-        financialYear: null,
-        bankers: null,
-        requestNo: null,
-        instruction: null,
-        reportFilename: null,
-        reportPrice: 1500,
-        reportComission: 100,
-        typeofEnquiry: "new",
-        lineOfBusiness: null,
-        noteForComission: null,
-        industryId: null,
-        disPer: 5,
-        discount: 1000,
-        recdDate: "2023-12-06T00:00:00",
-        remarks: null,
-        companyID: 753172,
-        clientRef: "1",
-        adjustment: 100,
-        disType: null,
-        actualBuyerId: 1,
-        siteStatusId: null,
-        bulkEnquiryId: null,
-        locked: null,
-        clientId: 1,
-        enquiryStatus: "Pending",
-        enteredBy: null,
-        enteredDate: null,
-        modifiedBy: null,
-        modifiedDate: null,
-        sourceName: "Algeria",
-        industryName: null,
-        executiveId: "18",
-        cityName: "Mumbai",
-        countryName: "India",
-        groupName: null,
-        clientEmail: "bpcpstar@ksure.or.kr",
-        printStatus: null,
-        clientPrice: null,
-        localSource: "Eswar",
-        clientCityName: null,
-        clientCountryName: "Korea (South)",
-        clientState: null,
-        companyName: "TCS",
-        clientContactPerson: "",
-        clientFax: "+81-2-399-6832",
-        clientDesignation: "",
-        clientZip: "",
-        clientPhone: "+82-2-399-6800",
-        executiveName: "Foreign",
-        siteStatus: null,
-        serviceTypeName: "Normal",
-      },
-    ]);
-  }, []);
 
   useEffect(() => {
     if (fYearData) {
@@ -388,7 +116,6 @@ export const InvoiceGenerateGst: React.FC = () => {
     getActualBuyerBasedOnClientId(clientId && { client_id: clientId }).then(
       (actualBuyer) => {
         if (actualBuyer) {
-          // console.log(actualBuyer);
           invoiceGenGstFormFields.actualBuyreField.config.options = actualBuyer;
         }
       }
@@ -398,7 +125,6 @@ export const InvoiceGenerateGst: React.FC = () => {
   useEffect(() => {
     getEnquires(enquiresObj).then((enquiries) => {
       if (enquiries && enquiries?.length > 0) {
-        // console.log(enquiries);
         setEnquiryList(enquiries);
       }
     });
@@ -587,7 +313,6 @@ export const InvoiceGenerateGst: React.FC = () => {
   }, [requiredObjectToCalculateTotal]);
 
   useEffect(() => {
-    // console.log(selected);
     setRequiredObjectToCalculateTotal((prevData) => {
       const updatedData = { ...prevData };
       selected.length > 0
@@ -613,10 +338,13 @@ export const InvoiceGenerateGst: React.FC = () => {
   };
 
   const calculateHandler = () => {
+    if (requiredObjectToCalculateTotal.enqIds == undefined) {
+      alert("Please Select Enquiry");
+      return;
+    }
     getCalculatedDataBasedOnEnquires(requiredObjectToCalculateTotal).then(
       (data) => {
         if (data && Object.values(data).length > 0) {
-          console.log(data);
           displayDataFieldReset(data);
         }
       }
@@ -711,12 +439,7 @@ export const InvoiceGenerateGst: React.FC = () => {
         </form>
         <div className="row">
           <div className="col-md-12 col-xs-12">
-            {tableData.length > 0 && (
-              <Table
-                config={tableConfig.config}
-                setSelectedRows={setSelected}
-              />
-            )}
+            <Table config={tableConfig.config} setSelectedRows={setSelected} />
           </div>
           <div className="mt-2 text-center">
             <Button
@@ -828,84 +551,21 @@ export const InvoiceGenerateGst: React.FC = () => {
           </div>
         </div>
       </BorderLayout>
-      {/* <div className="card-body">
-        <BorderLayout heading={cardConfig.formActionsConfig.heading}>
-          
-          <div className="row">
-            <div className="col-md-1 ">
-              <div className="mb-2">
-                <div className="col-md-14 col-xs-12 text-right">
-                  <Button type="button" className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>
-                    Currency Total
-                  </Button>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 ">
-              <div className="mb-2">
-                <div className="col-md-14 col-xs-12 text-right">
-                  <Button type="button" className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>
-                    Export Invoice With Detail to word
-                  </Button>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-2 ">
-              <div className="mb-2">
-                <div className="col-md-14 col-xs-12 text-right">
-                  <Button type="button" className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>
-                    Export Invoice With Detail to Excel
-                  </Button>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-2 ">
-              <div className="mb-2">
-                <div className="col-md-14 col-xs-12 text-right">
-                  <Button type="button" className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>
-                    Invoicein Excel
-                  </Button>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-1 ">
-              <div className="mb-2">
-                <div className="col-md-14 col-xs-12 text-right">
-                  <Button type="button" className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>
-                    Export Invoice List
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-2">
-              <div className="mb-2">
-                <div className="col-md-14 col-xs-12 text-right">
-                  <Button type="button" className={"btn btn-danger btn-sm"}>
-                    Print Preview
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-1 text-right">
-              <div className="mb-2">
-                <div className="col-sm-14 col-xs-12 text-right">
-                  <Button type="button" className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-window-close"></i>
-                    Cancel
-                  </Button>
-                </div>
-              </div>
-            </div>
+      <BorderLayout heading={cardConfig.formActionsConfig.heading}>
+        <div className="row justify-content-end">
+          <div className="col-md-5 text-right">
+            <Button type="button" className={"btn btn-danger btn-sm mr-2"}>
+              <i className="far fa-save"></i> Save Invoice
+            </Button>
+            <Button type="button" className={"btn btn-danger btn-sm mr-2"}>
+              <i className="far fa-save"></i> Save & Generate Invoice
+            </Button>
+            <Button type="button" className={"btn btn-danger btn-sm"}>
+              <i className="far fa-window-close"></i> Cancel
+            </Button>
           </div>
-        </BorderLayout>
-      </div> */}
+        </div>
+      </BorderLayout>
     </Card>
   );
 };
