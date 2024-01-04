@@ -45,7 +45,7 @@ export const InvoiceGenerateGst: React.FC = () => {
 
   const {
     register: displayDataFieldRegister,
-    control: displayDataFieldControl,
+    // control: displayDataFieldControl,
     formState: { errors: displayDataFieldErrors },
     reset: displayDataFieldReset,
   } = useForm();

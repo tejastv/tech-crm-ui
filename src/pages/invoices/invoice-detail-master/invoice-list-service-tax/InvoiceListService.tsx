@@ -157,7 +157,7 @@ export const InvoiceListService: React.FC = () => {
                 errors={errors}
                 register={register}
                 control={control}
-                config={invoiceGenGstFormFields.clientField}
+                config={invoiceGenGstFormFields.client}
               />
             </div>
             <div className="row">
