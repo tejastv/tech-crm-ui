@@ -24,7 +24,7 @@ import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 import Form from "react-bootstrap/esm/Form";
 
-export const AddUpdateUser: React.FC = () => {
+export const UserForm: React.FC = () => {
   const params = useParams();
   const { state: userData } = useLocation();
   const cardConfig = {

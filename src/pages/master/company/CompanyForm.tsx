@@ -73,6 +73,7 @@ export const CompanyForm: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
+      console.log(cityData);
       setCityOptions(Object.values(cityData));
     }
   }, [cityData]);

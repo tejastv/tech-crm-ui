@@ -30,6 +30,25 @@ export const useFinYearApiCallHook = () => {
     });
   };
 
+  // const getFormatedFinYear = (): UseQueryResult<Array<FinYearType>> => {
+  //   return useQuery<Array<FinYearType>>({
+  //     queryKey: [queryKeys.FORMATED_FIN_YEAR_DATA],
+  //     queryFn: async () => {
+  //       const response = await instance.get(apiUrls.GET_ADD_FIN_YEAR);
+  //       const data = await response.data.data.map((year: FinYearType) => ({
+  //         ...year,
+  //         finYear: year.finYear + "-" + (Number(year.finYear) + 1),
+  //       }));
+  //       console.log(data);
+
+  //       let mappedData = selectOptionsMapMaker(data, "finYear", "finYear");
+  //       // return data;
+  //       return mappedData;
+  //     },
+  //     staleTime: Infinity,
+  //   });
+  // };
+
   const getLastFinYear = (condition: any): UseQueryResult<string> => {
     return useQuery<string>({
       queryKey: [queryKeys.LAST_FIN_YEAR],
@@ -133,6 +152,7 @@ export const useFinYearApiCallHook = () => {
 
   return {
     getFinYear,
+    // getFormatedFinYear,
     getFinYearData,
     getLastFinYear,
     addFinYearMutation,

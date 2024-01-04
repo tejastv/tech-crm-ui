@@ -11,7 +11,7 @@ import {
 } from "@shared/index";
 import {
   InvoiceDetailGroupWiseType,
-  InvoiceGenGstType,
+  InvoiceGenGstTableType,
   invoiceDetailGroupWiseFormFields,
 } from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
@@ -62,7 +62,7 @@ export const InvoiceDetailGroupWise: React.FC = () => {
   //       methods.reset();
   //     }, []);
   //   }
-  const columns: ColumnDef<InvoiceGenGstType>[] = [
+  const columns: ColumnDef<InvoiceGenGstTableType>[] = [
     {
       id: "srNo",
       // cell: (info) => info.getValue(),

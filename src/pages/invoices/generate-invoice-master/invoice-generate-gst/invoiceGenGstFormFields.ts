@@ -44,16 +44,17 @@ const actualBuyreValidation = {
     message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
   },
 } as ValidationType;
+
 const fromDateValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message:
-      "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
-  },
+  // pattern: {
+  //   value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+  //   message:
+  //     "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
+  // },
 } as ValidationType;
 
 const countryValidation = {
@@ -83,7 +84,7 @@ const gstValidation = {
 
 const toDateValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
 } as ValidationType;
@@ -318,9 +319,9 @@ const actionOptiontwo: MapType<Options> = {
   new: { value: "y", label: "Do Not Compare Report with Invoice Date" },
 };
 
-const clientField: FormFieldType = {
+const client: FormFieldType = {
   config: {
-    name: "client",
+    name: "clientId",
     label: "Client ",
     id: "client",
     options: [],
@@ -329,6 +330,22 @@ const clientField: FormFieldType = {
       required: {
         value: true,
         message: "Select Client",
+      },
+    },
+  },
+};
+
+const actualBuyreField: FormFieldType = {
+  config: {
+    name: "actualBuyerId",
+    label: "Actual Buyer",
+    id: "actualBuyer",
+    options: [],
+    placeholder: "Select Actual Buyer ",
+    validation: {
+      required: {
+        value: true,
+        message: "Select Actual Buyer",
       },
     },
   },
@@ -355,13 +372,6 @@ const gstnActualBuyreField: FormFieldType = createFormConfig(
   gstnActualBuyreValidation,
   ""
 );
-const actualBuyreField: FormFieldType = createFormConfig(
-  "actualbuyre",
-  "Actual Buyre",
-  "text",
-  actualBuyreValidation,
-  ""
-);
 
 const myDate = new Date(); // Replace this with your actual date
 
@@ -373,8 +383,8 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
 const fromDateField: FormFieldType = createFormConfig(
-  "fromDate",
-  "From",
+  "startDate",
+  "From Date",
   "date",
   fromDateValidation,
   formattedDate
@@ -442,7 +452,7 @@ const gstActualBuyreField: FormFieldType = createFormConfig(
 );
 
 const toDateField: FormFieldType = createFormConfig(
-  "toDate",
+  "endDate",
   "To Date",
   "date",
   toDateValidation,
@@ -467,7 +477,7 @@ const currencyInwardField: FormFieldType = createFormConfig(
 
 const fYearField: FormFieldType = {
   config: {
-    name: "fyear",
+    name: "fYear",
     label: "F.Year ",
     id: "fyear",
     options: [],
@@ -482,7 +492,7 @@ const fYearField: FormFieldType = {
 };
 
 const invoiceNoField: FormFieldType = createFormConfig(
-  "invoiceno",
+  "invoiceNo",
   "Invoice No.",
   "text",
   invoiceNoValidation,
@@ -508,7 +518,7 @@ const amountField: FormFieldType = createFormConfig(
   true
 );
 const disAmountField: FormFieldType = createFormConfig(
-  "disamt",
+  "discount",
   "Dis.Amt",
   "text",
   disAmountValidation,
@@ -526,7 +536,7 @@ const stField: FormFieldType = createFormConfig(
 );
 
 const cgstPerField: FormFieldType = createFormConfig(
-  "cgstper",
+  "cgstPer",
   "CGST%",
   "text",
   cgstPerValidation,
@@ -544,7 +554,7 @@ const stAmountField: FormFieldType = createFormConfig(
 );
 
 const cgstField: FormFieldType = createFormConfig(
-  "cgst",
+  "cgstAmount",
   "CGST",
   "text",
   cgstValidation,
@@ -571,7 +581,7 @@ const doNotField: FormFieldType = createFormConfig(
 );
 
 const subtotalField: FormFieldType = createFormConfig(
-  "subtotal",
+  "subTotal",
   "Sub Total",
   "text",
   subTotalValidation,
@@ -581,7 +591,7 @@ const subtotalField: FormFieldType = createFormConfig(
 );
 
 const sGstPerField: FormFieldType = createFormConfig(
-  "sgstper",
+  "sgstPer",
   "SGST%",
   "text",
   sgstPerValidation,
@@ -591,7 +601,7 @@ const sGstPerField: FormFieldType = createFormConfig(
 );
 
 const iGstPerField: FormFieldType = createFormConfig(
-  "igstper",
+  "igstPer",
   "IGST%",
   "text",
   igstPerValidation,
@@ -601,7 +611,7 @@ const iGstPerField: FormFieldType = createFormConfig(
 );
 
 const sgstField: FormFieldType = createFormConfig(
-  "sgst",
+  "sgstAmount",
   "SGST",
   "text",
   sgstValidation,
@@ -611,7 +621,7 @@ const sgstField: FormFieldType = createFormConfig(
 );
 
 const igstField: FormFieldType = createFormConfig(
-  "igst",
+  "igstAmount",
   "IGST",
   "text",
   igstValidation,
@@ -650,23 +660,27 @@ const totalField: FormFieldType = createFormConfig(
   true
 );
 
+// export const fetchEnquiryFormFields = {
+
+// };
+
 export const invoiceGenGstFormFields = {
-  clientField,
+  fYearField,
+  client,
+  actualBuyreField,
+  fromDateField,
+  toDateField,
   currencyField,
   gstnField,
   gstnActualBuyreField,
-  actualBuyreField,
-  fromDateField,
   countryField,
   stateField,
   stateActualBuyreField,
   codeField,
   gstField,
   gstActualBuyreField,
-  toDateField,
   symbolField,
   currencyInwardField,
-  fYearField,
   invoiceNoField,
   manualField,
   amountField,
