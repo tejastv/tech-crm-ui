@@ -17,10 +17,10 @@ const gstnValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
-    message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
-  },
+  // pattern: {
+  //   value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+  //   message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
+  // },
 } as ValidationType;
 
 const gstnActualBuyreValidation = {
@@ -28,10 +28,10 @@ const gstnActualBuyreValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
-    message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
-  },
+  // pattern: {
+  //   value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+  //   message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
+  // },
 } as ValidationType;
 
 // const actualBuyreValidation = {
@@ -62,10 +62,10 @@ const countryValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message: "Please select a {label}",
-  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 
 const codeValidation = {
@@ -94,11 +94,11 @@ const symbolValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message:
-      "Invalid symbol format. Please use alphanumeric characters or hyphens only.",
-  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message:
+  //     "Invalid symbol format. Please use alphanumeric characters or hyphens only.",
+  // },
 } as ValidationType;
 
 const currencyInWordValidation = {
@@ -106,44 +106,44 @@ const currencyInWordValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[A-Za-z\s]+$/, // Allow only letters and spaces
-    message:
-      "Invalid Currency in Word format. Please enter a valid currency name (e.g., USD).",
-  },
+  // pattern: {
+  //   value: /^[A-Za-z\s]+$/, // Allow only letters and spaces
+  //   message:
+  //     "Invalid Currency in Word format. Please enter a valid currency name (e.g., USD).",
+  // },
 } as ValidationType;
 const invoiceNoValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[A-Za-z]{3}\d{3}$/, // Match three letters followed by three digits
-    message:
-      "Invalid Invoice Number format. Please enter a valid invoice number (e.g., ABC123).",
-  },
+  // pattern: {
+  //   value: /^[A-Za-z]{3}\d{3}$/, // Match three letters followed by three digits
+  //   message:
+  //     "Invalid Invoice Number format. Please enter a valid invoice number (e.g., ABC123).",
+  // },
 } as ValidationType;
 const amountValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{2})?$/, // Match digits with optional two decimal places
-    message:
-      "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{2})?$/, // Match digits with optional two decimal places
+  //   message:
+  //     "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
+  // },
 } as ValidationType;
 const disAmountValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{2})?$/, // Match digits with optional two decimal places
-    message:
-      "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{2})?$/, // Match digits with optional two decimal places
+  //   message:
+  //     "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
+  // },
 } as ValidationType;
 
 const manualValidation = {
@@ -151,11 +151,11 @@ const manualValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const stValidation = {
@@ -163,11 +163,11 @@ const stValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const stAmountValidation = {
@@ -175,11 +175,11 @@ const stAmountValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{2})?$/, // Match digits with optional two decimal places
-    message:
-      "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{2})?$/, // Match digits with optional two decimal places
+  //   message:
+  //     "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
+  // },
 } as ValidationType;
 
 const cgstPerValidation = {
@@ -187,11 +187,11 @@ const cgstPerValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const cgstValidation = {
@@ -199,11 +199,11 @@ const cgstValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const sgstPerValidation = {
@@ -211,11 +211,11 @@ const sgstPerValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid SGST% format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid SGST% format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const igstPerValidation = {
@@ -223,11 +223,11 @@ const igstPerValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid IGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid IGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const sgstValidation = {
@@ -235,11 +235,11 @@ const sgstValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid SGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid SGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const igstValidation = {
@@ -247,11 +247,11 @@ const igstValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid IGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid IGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const subTotalValidation = {
@@ -259,55 +259,55 @@ const subTotalValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[0-9]+(\.[0-9]+)?$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^[0-9]+(\.[0-9]+)?$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 const sTaxValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d+)?%$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d+)?%$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 const eCessValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d+)?%$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d+)?%$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 const krishiCessValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d+)?%$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d+)?%$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 const totalValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d*\.?\d+$/,
-    message:
-      "Invalid total format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d*\.?\d+$/,
+  //   message:
+  //     "Invalid total format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const actionOption: MapType<Options> = {

@@ -40,5 +40,6 @@ export * from "./invoice-detail-master/invoice-list-perfoma/invoice-list-perfoma
 export * from "./invoice-detail-master/invoice-list-exce-wise/invoice-list-exce-wise-type";
 export * from "./invoice-detail-master/invoice-setteld/invoice-setteld-type";
 export * from "./generate-invoice-master/invoice-generate-gst/EnqueryCalculatedDataType";
+export * from "./generate-invoice-master/invoice-generate-gst/SaveInvoiceFormRequestType";
 
 export { useInvoiceGenGstApiCallHook } from "./generate-invoice-master/invoice-generate-gst/useInvoiceGenGstApiCallHook";

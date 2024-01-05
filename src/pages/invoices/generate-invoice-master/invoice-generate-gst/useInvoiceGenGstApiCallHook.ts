@@ -2,7 +2,10 @@ import { useAxios } from "@hooks/useAxios";
 // import { IndustryType } from "@master/index";
 import { apiUrls } from "@constants/index";
 import { EnquiriesType } from "@transaction-search/index";
-import { EnqueryCalculatedDataType } from "@invoices/index";
+import {
+  EnqueryCalculatedDataType,
+  SaveInvoiceFormRequestType,
+} from "@invoices/index";
 // import { ApiResponseType } from "@shared/index";
 // import {
 //   UseQueryResult,
@@ -59,8 +62,30 @@ export const useInvoiceGenGstApiCallHook = () => {
     return data;
   };
 
+  const saveInoice = async (
+    queryParams: SaveInvoiceFormRequestType,
+    isPdfRequired: boolean
+  ): Promise<EnqueryCalculatedDataType | undefined> => {
+    if (Object.values(queryParams).length == 0) return;
+    let params = {};
+    params = {
+      params: {
+        isPdfRequired: isPdfRequired ? "true" : "false",
+      },
+      headers: headers,
+    };
+    let url = apiUrls.SAVE_INVOICE.replace(
+      "{clientId}",
+      queryParams.invoiceMasterDto.clientId
+    );
+    const response = await instance.post(url, queryParams, params);
+    const data = await response.data.data;
+    return data;
+  };
+
   return {
     getEnquires,
     getCalculatedDataBasedOnEnquires,
+    saveInoice,
   };
 };

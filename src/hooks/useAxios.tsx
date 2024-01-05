@@ -53,7 +53,7 @@ export const useAxios = () => {
         successMessageToaster("Deleted Successfully..!");
       }
       if (response.status == STATUS_CODES.CODE_201) {
-        successMessageToaster("Added Successfully..!");
+        successMessageToaster("Saved Successfully..!");
       }
       if (response.status == STATUS_CODES.CODE_202) {
         successMessageToaster("Updated Successfully..!");

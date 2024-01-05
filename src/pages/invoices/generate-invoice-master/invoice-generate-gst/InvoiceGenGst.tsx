@@ -12,7 +12,9 @@ import {
   NewInput,
 } from "@shared/index";
 import {
+  EnqueryCalculatedDataType,
   InvoiceGenGstFormType,
+  SaveInvoiceFormRequestType,
   invoiceGenGstFormFields,
   useInvoiceGenGstApiCallHook,
 } from "@invoices/index";
@@ -33,32 +35,33 @@ import { usePagination } from "@hooks/usePagination";
 
 import { EnquiriesType } from "@transaction-search/index";
 import _ from "lodash";
-// import { useEnquiriesApiCallHook } from "@pages/transaction-search";
 
 export const InvoiceGenerateGst: React.FC = () => {
   const {
     register: fetchEnqRegister,
     control: fetchEnqControl,
     handleSubmit: fetchEnqHandleSubmit,
+    trigger,
     formState: { errors: fetchEnqErrors },
   } = useForm<InvoiceGenGstFormType>();
 
   const {
     register: displayDataFieldRegister,
     // control: displayDataFieldControl,
+    handleSubmit: saveInvoice,
     formState: { errors: displayDataFieldErrors },
     reset: displayDataFieldReset,
-  } = useForm();
+  } = useForm<EnqueryCalculatedDataType>();
 
   const { getFinYear } = useFinYearApiCallHook();
   const { getClient } = useClientApiCallHook();
   const { getActualBuyerBasedOnClientId } = useActualBuyerApiCallHook();
-  const { getEnquires, getCalculatedDataBasedOnEnquires } =
+  const { getEnquires, getCalculatedDataBasedOnEnquires, saveInoice } =
     useInvoiceGenGstApiCallHook();
   type CalculateTotalObj = {
     finYear: string;
-    actualBuyerId: string;
-    client_id?: string;
+    actualBuyerId?: number;
+    client_id: string;
     enqIds?: Array<number>;
   };
   const [finYearOptions, setFinYearOptions] = useState<FinYearType[]>();
@@ -70,11 +73,9 @@ export const InvoiceGenerateGst: React.FC = () => {
   const [enquiresObj, setEnquiresObj] = useState<InvoiceGenGstFormType>(
     {} as InvoiceGenGstFormType
   );
-
   const [enquiryList, setEnquiryList] = useState<EnquiriesType[]>([]);
   const [selected, setSelected] = useState<EnquiriesType[]>([]);
-  // const [fetchEnqFormData, setFetchEnqFormData] = useState<any>();
-
+  const [isPdfRequired, setIsPdfRequired] = useState<boolean>();
   const { data: fYearData } = getFinYear();
 
   useEffect(() => {
@@ -129,15 +130,6 @@ export const InvoiceGenerateGst: React.FC = () => {
       }
     });
   }, [enquiresObj]);
-
-  // const { data: enquiryData } = getEnquiries(
-  //   fetchEnqFormData,
-  //   fetchEnqFormData != undefined
-  // );
-
-  // useEffect(() => {
-  //   setEnquiryList(enquiryData);
-  // }, [enquiryData]);
 
   const cardConfig = {
     formLayoutConfig: {
@@ -288,10 +280,6 @@ export const InvoiceGenerateGst: React.FC = () => {
     },
   };
 
-  const onFetchEnquirySubmit = fetchEnqHandleSubmit((data): void => {
-    setEnquiresObj(mapEnqRequest(data));
-  });
-
   const clientOnInputChangeHandler = (clientInputValue: any) => {
     if (clientInputValue.length === 3) {
       setSearchStringClient(clientInputValue);
@@ -307,10 +295,6 @@ export const InvoiceGenerateGst: React.FC = () => {
       setClientId(clientId);
     }
   };
-
-  useEffect(() => {
-    console.log(requiredObjectToCalculateTotal);
-  }, [requiredObjectToCalculateTotal]);
 
   useEffect(() => {
     setRequiredObjectToCalculateTotal((prevData) => {
@@ -350,6 +334,65 @@ export const InvoiceGenerateGst: React.FC = () => {
       }
     );
   };
+
+  const onFetchEnquirySubmit = fetchEnqHandleSubmit((data): void => {
+    setEnquiresObj(mapEnqRequest(data));
+  });
+
+  const onSaveInvoiceHandler = saveInvoice((data): void => {
+    // console.log(data, requiredObjectToCalculateTotal);
+    let reqObj: SaveInvoiceFormRequestType = {
+      invoiceMasterDto: {
+        invoiceNo: data.invoiceNo,
+        invoiceDate: new Date().toISOString(),
+        clientId: requiredObjectToCalculateTotal.client_id,
+        billAmt: data.amount,
+        subTotal: data.subTotal,
+        total: data.total,
+        currencyId: 0,
+        serviceTax: 0,
+        eduCess: 0,
+        edCessAmt: 0,
+        serviceTaxPer: 0,
+        edCessPer: 0,
+        lockedSTaxSubmitted: "s",
+        oldFormat: "s",
+        krishiCessPer: 0,
+        krishiCessAmt: 0,
+        actualBuyerId: requiredObjectToCalculateTotal.actualBuyerId,
+        crDays: 0,
+        locked: "s",
+        disAmt: data.discount,
+        stper: 0,
+        stamt: 0,
+        staxAmt: 0,
+        cgstper: data.cgstPer,
+        sgstper: data.sgstPer,
+        igstper: data.igstPer,
+        cgstamt: data.cgstAmount,
+        sgstamt: data.sgstAmount,
+        igstamt: data.igstAmount,
+        fyear: requiredObjectToCalculateTotal.finYear,
+      },
+      enquiryId: requiredObjectToCalculateTotal.enqIds?.length
+        ? requiredObjectToCalculateTotal.enqIds
+        : [],
+    };
+    saveInoice(reqObj, isPdfRequired != undefined && isPdfRequired).then(
+      (data) => {
+        if (data && Object.values(data).length > 0) {
+          console.log(data);
+        }
+      }
+    );
+  });
+
+  useEffect(() => {
+    if (isPdfRequired != undefined) {
+      onSaveInvoiceHandler();
+      trigger();
+    }
+  }, [isPdfRequired]);
 
   return (
     <Card config={cardConfig.formLayoutConfig}>
@@ -460,13 +503,13 @@ export const InvoiceGenerateGst: React.FC = () => {
               config={invoiceGenGstFormFields.invoiceNoField}
             />
           </div>
-          <div className="col-3">
+          {/* <div className="col-3">
             <NewInput
               errors={displayDataFieldErrors}
               register={displayDataFieldRegister}
               config={invoiceGenGstFormFields.dateField}
             />
-          </div>
+          </div> */}
         </div>
         <div className="row">
           <div className="col-3">
@@ -554,10 +597,22 @@ export const InvoiceGenerateGst: React.FC = () => {
       <BorderLayout heading={cardConfig.formActionsConfig.heading}>
         <div className="row justify-content-end">
           <div className="col-md-5 text-right">
-            <Button type="button" className={"btn btn-danger btn-sm mr-2"}>
+            <Button
+              type="button"
+              onClick={() => {
+                setIsPdfRequired(false);
+              }}
+              className={"btn btn-danger btn-sm mr-2"}
+            >
               <i className="far fa-save"></i> Save Invoice
             </Button>
-            <Button type="button" className={"btn btn-danger btn-sm mr-2"}>
+            <Button
+              type="button"
+              onClick={() => {
+                setIsPdfRequired(true);
+              }}
+              className={"btn btn-danger btn-sm mr-2"}
+            >
               <i className="far fa-save"></i> Save & Generate Invoice
             </Button>
             <Button type="button" className={"btn btn-danger btn-sm"}>
