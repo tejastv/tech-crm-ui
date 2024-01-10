@@ -22,6 +22,7 @@ import {
 import { useLocation, useParams } from "react-router-dom";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { cleanupObject } from "@utils/index";
+import _ from "lodash";
 
 export const ExecutiveForm: React.FC = () => {
   const { state: localExecutiveData } = useLocation();
@@ -55,7 +56,7 @@ export const ExecutiveForm: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
-      setCityOptions(Object.values(cityData));
+      setCityOptions(_.orderBy(Object.values(cityData), ["cityName"], ["asc"]));
     }
   }, [cityData]);
 
@@ -70,7 +71,9 @@ export const ExecutiveForm: React.FC = () => {
 
   useEffect(() => {
     if (stateData) {
-      setStateOptions(Object.values(stateData));
+      setStateOptions(
+        _.orderBy(Object.values(stateData), ["stateName"], ["asc"])
+      );
     }
   }, [stateData]);
 

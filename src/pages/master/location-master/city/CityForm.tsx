@@ -19,6 +19,7 @@ import {
 } from "@master/index";
 import { useParams } from "react-router-dom";
 import { returnObjectBasedOnID, selectOptionsMaker } from "@utils/index";
+import _ from "lodash";
 
 export const CityForm: React.FC = () => {
   const {
@@ -49,9 +50,11 @@ export const CityForm: React.FC = () => {
 
   useEffect(() => {
     if (stateData) {
-      setStateOptions(Object.values(stateData));
+      setStateOptions(
+        _.orderBy(Object.values(stateData), ["stateName"], ["asc"])
+      );
     }
-  }, [stateData && Object.values(stateData).length]);
+  }, [stateData]);
 
   if (stateOptions?.length) {
     let options = selectOptionsMaker(stateOptions, "stateId", "stateName");

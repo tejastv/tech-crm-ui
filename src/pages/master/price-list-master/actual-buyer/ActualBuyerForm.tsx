@@ -27,6 +27,7 @@ import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { cleanupObject } from "@utils/cleanUpObject";
 import { useLocation, useParams } from "react-router-dom";
 import { usePagination } from "@hooks/usePagination";
+import _ from "lodash";
 
 export const ActualBuyerForm: React.FC = () => {
   const params = useParams();
@@ -50,16 +51,13 @@ export const ActualBuyerForm: React.FC = () => {
 
   const { getClient } = useClientApiCallHook();
 
-  const {
-    limit,
-    offset,
-  } = usePagination();
+  const { limit, offset } = usePagination();
 
   const { data: clientData } = getClient({
     limit,
     offset,
   });
-  
+
   const {
     addActualBuyerMutation,
     updateActualBuyerMutation,
@@ -79,7 +77,7 @@ export const ActualBuyerForm: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
-      setCityOptions(Object.values(cityData));
+      setCityOptions(_.orderBy(Object.values(cityData), ["cityName"], ["asc"]));
     }
   }, [cityData]);
 
@@ -92,7 +90,9 @@ export const ActualBuyerForm: React.FC = () => {
 
   useEffect(() => {
     if (stateData) {
-      setStateOptions(Object.values(stateData));
+      setStateOptions(
+        _.orderBy(Object.values(stateData), ["stateName"], ["asc"])
+      );
     }
   }, [stateData]);
 
@@ -238,7 +238,8 @@ export const ActualBuyerForm: React.FC = () => {
 
   const onSubmit = handleSubmit(
     (actualBuyerData: ActualBuyerFormType): void => {
-      let reqObj: Partial<ActualBuyerType> = mapActualBuyerRequest(actualBuyerData);
+      let reqObj: Partial<ActualBuyerType> =
+        mapActualBuyerRequest(actualBuyerData);
       if (params.id && reqObj) {
         updateActualBuyer({ partyId: +params.id, ...reqObj });
       } else {

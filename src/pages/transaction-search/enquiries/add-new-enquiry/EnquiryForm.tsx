@@ -156,7 +156,7 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
-      setCityOptions(Object.values(cityData));
+      setCityOptions(_.orderBy(Object.values(cityData), ["cityName"], ["asc"]));
     }
   }, [cityData]);
 
@@ -168,7 +168,9 @@ export const EnquiryForm: React.FC = () => {
   const { data: stateData } = getState();
   useEffect(() => {
     if (stateData) {
-      setStateOptions(Object.values(stateData));
+      setStateOptions(
+        _.orderBy(Object.values(stateData), ["stateName"], ["asc"])
+      );
     }
   }, [stateData]);
 
@@ -181,7 +183,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (countryData) {
-      setCountryOptions(Object.values(Object.values(countryData)));
+      setCountryOptions(
+        _.orderBy(Object.values(countryData), ["countryName"], ["asc"])
+      );
     }
   }, [countryData]);
 
@@ -206,7 +210,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (clientData?.data) {
-      setClientOptions(Object.values(clientData.data));
+      setClientOptions(
+        _.orderBy(Object.values(clientData.data), ["clientName"], ["asc"])
+      );
     }
   }, [clientData?.data]);
 
@@ -234,7 +240,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (actualBuyerData) {
-      setActualBuyerOptions(Object.values(actualBuyerData));
+      setActualBuyerOptions(
+        _.orderBy(Object.values(actualBuyerData), ["partyName"], ["asc"])
+      );
     }
   }, [actualBuyerData]);
 
@@ -251,7 +259,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (sourceData) {
-      setSourceOptions(Object.values(sourceData));
+      setSourceOptions(
+        _.orderBy(Object.values(sourceData), ["source"], ["asc"])
+      );
     }
   }, [sourceData]);
 
@@ -265,7 +275,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (localSourceData) {
-      setLocalSourceOptions(Object.values(localSourceData));
+      setLocalSourceOptions(
+        _.orderBy(Object.values(localSourceData), ["localSource"], ["asc"])
+      );
     }
   }, [localSourceData]);
 
@@ -289,7 +301,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (companyData?.data) {
-      setCompanyOptions(Object.values(companyData.data));
+      setCompanyOptions(
+        _.orderBy(Object.values(companyData.data), ["companyName"], ["asc"])
+      );
     }
   }, [companyData?.data]);
 
@@ -307,7 +321,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (serviceData) {
-      setServiceOptions(Object.values(serviceData));
+      setServiceOptions(
+        _.orderBy(Object.values(serviceData), ["serviceType"], ["asc"])
+      );
     }
   }, [serviceData]);
 
@@ -324,7 +340,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (enqStatusData) {
-      setEnqStatusOptions(Object.values(enqStatusData));
+      setEnqStatusOptions(
+        _.orderBy(Object.values(enqStatusData), ["enquiryStatus"], ["asc"])
+      );
     }
   }, [enqStatusData]);
 

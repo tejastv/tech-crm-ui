@@ -22,6 +22,7 @@ import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { ColumnDef } from "@tanstack/react-table";
 import { useAxios } from "@hooks/useAxios";
 import { apiUrls } from "@constants/api-urls";
+import _ from "lodash";
 
 export const PriceListForClients: React.FC = () => {
   const {
@@ -68,9 +69,9 @@ export const PriceListForClients: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
-      setCityOptions(Object.values(cityData));
+      setCityOptions(_.orderBy(Object.values(cityData), ["cityName"], ["asc"]));
     }
-  }, [cityData && Object.values(cityData).length]);
+  }, [cityData]);
 
   if (cityOptions?.length) {
     let options = selectOptionsMaker(cityOptions, "cityId", "cityName");
