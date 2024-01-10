@@ -42,6 +42,8 @@ export const InvoiceGenerateGst: React.FC = () => {
     control: fetchEnqControl,
     handleSubmit: fetchEnqHandleSubmit,
     trigger,
+    getValues,
+    getFieldState,
     formState: { errors: fetchEnqErrors },
   } = useForm<InvoiceGenGstFormType>();
 
@@ -315,13 +317,13 @@ export const InvoiceGenerateGst: React.FC = () => {
       ),
       endDate: formatDateString(new Date(enquiryForm.endDate), "d-m-y", "-"),
       clientId: enquiryForm.clientId.value,
-      fYear: enquiryForm.fYear.value,
+      // fYear: enquiryForm.fYear.value,
       actualBuyerId: enquiryForm.actualBuyerId.value,
     };
     return cleanupObject(enqData);
   };
 
-  const calculateHandler = () => {
+  const calculateHandler = fetchEnqHandleSubmit(() => {
     if (requiredObjectToCalculateTotal.enqIds == undefined) {
       alert("Please Select Enquiry");
       return;
@@ -333,11 +335,26 @@ export const InvoiceGenerateGst: React.FC = () => {
         }
       }
     );
-  };
-
-  const onFetchEnquirySubmit = fetchEnqHandleSubmit((data): void => {
-    setEnquiresObj(mapEnqRequest(data));
   });
+
+  const onFetchEnquirySubmit = () => {
+    Promise.all([
+      trigger("clientId"),
+      trigger("actualBuyerId"),
+      trigger("startDate"),
+      trigger("endDate"),
+    ]).then(() => {
+      if (
+        !getFieldState("clientId").invalid &&
+        !getFieldState("actualBuyerId").invalid &&
+        !getFieldState("startDate").invalid &&
+        !getFieldState("endDate").invalid
+      ) {
+        let formValue = getValues();
+        setEnquiresObj(mapEnqRequest(formValue));
+      }
+    });
+  };
 
   const onSaveInvoiceHandler = saveInvoice((data): void => {
     // console.log(data, requiredObjectToCalculateTotal);
@@ -388,7 +405,7 @@ export const InvoiceGenerateGst: React.FC = () => {
   });
 
   useEffect(() => {
-    if (isPdfRequired != undefined) {
+    if (isPdfRequired != null) {
       onSaveInvoiceHandler();
       trigger();
     }
@@ -399,21 +416,6 @@ export const InvoiceGenerateGst: React.FC = () => {
       <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
         <form id="fetchEnquiryForm" autoComplete="off" className="p-t-20">
           <div className="row">
-            <div className="col-md-4">
-              <NewSelect
-                errors={fetchEnqErrors}
-                register={fetchEnqRegister}
-                control={fetchEnqControl}
-                config={invoiceGenGstFormFields.fYearField}
-                onChange={(e) =>
-                  setRequiredObjectToCalculateTotal((prevData) => {
-                    const updatedData = { ...prevData };
-                    updatedData.finYear = e.value;
-                    return updatedData;
-                  })
-                }
-              />
-            </div>
             <div className="col-md-4">
               <NewSelect
                 errors={fetchEnqErrors}
@@ -484,7 +486,24 @@ export const InvoiceGenerateGst: React.FC = () => {
           <div className="col-md-12 col-xs-12">
             <Table config={tableConfig.config} setSelectedRows={setSelected} />
           </div>
-          <div className="mt-2 text-center">
+        </div>
+        <div className="row">
+          <div className="col-md-3">
+            <NewSelect
+              errors={fetchEnqErrors}
+              register={fetchEnqRegister}
+              control={fetchEnqControl}
+              config={invoiceGenGstFormFields.fYearField}
+              onChange={(e) =>
+                setRequiredObjectToCalculateTotal((prevData) => {
+                  const updatedData = { ...prevData };
+                  updatedData.finYear = e.value;
+                  return updatedData;
+                })
+              }
+            />
+          </div>
+          <div className="col-md-3">
             <Button
               type="button"
               onClick={calculateHandler}

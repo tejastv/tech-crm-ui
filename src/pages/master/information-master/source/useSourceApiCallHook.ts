@@ -33,7 +33,10 @@ export const useSourceApiCallHook = () => {
     });
   };
 
-  const getSourceData = (id: string, condition: boolean): UseQueryResult<SourceType> => {
+  const getSourceData = (
+    id: string,
+    condition: boolean
+  ): UseQueryResult<SourceType> => {
     return useQuery<SourceType>({
       queryKey: [queryKeys.SOURCE_DATA, id],
       queryFn: async () => {

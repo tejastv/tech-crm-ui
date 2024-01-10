@@ -74,7 +74,16 @@ export const useAxios = () => {
         errorMessageToaster(error.response?.data.error, "single");
       }
       if (error.response?.status === STATUS_CODES.CODE_404) {
-        errorMessageToaster(error.response?.data.error, "single");
+        if (
+          error.response.data.informationMessage &&
+          error.response.data.informationMessage.length > 0
+        ) {
+          error.response.data.informationMessage.forEach((err: any) => {
+            errorMessageToaster(err.message, "single");
+          });
+        } else {
+          errorMessageToaster(error.response?.data.error, "single");
+        }
       }
       if (error.response?.status === STATUS_CODES.CODE_401) {
         removeItem("user");
