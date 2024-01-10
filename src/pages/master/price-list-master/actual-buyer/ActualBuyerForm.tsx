@@ -105,7 +105,9 @@ export const ActualBuyerForm: React.FC = () => {
 
   useEffect(() => {
     if (countryData) {
-      setCountryOptions(Object.values(countryData));
+      setCountryOptions(
+        _.orderBy(Object.values(countryData), ["countryName"], ["asc"])
+      );
     }
   }, [countryData]);
 

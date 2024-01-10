@@ -17,6 +17,7 @@ import {
 } from "@master/index";
 import { useLocation, useParams } from "react-router-dom";
 import { selectOptionsMaker } from "@utils/index";
+import _ from "lodash";
 
 export const StateForm: React.FC = () => {
   const {
@@ -54,9 +55,11 @@ export const StateForm: React.FC = () => {
 
   useEffect(() => {
     if (countryData) {
-      setCountryOptions(Object.values(countryData));
+      setCountryOptions(
+        _.orderBy(Object.values(countryData), ["countryName"], ["asc"])
+      );
     }
-  }, [countryData && Object.values(countryData).length]);
+  }, [countryData]);
 
   if (countryOptions?.length) {
     let options = selectOptionsMaker(

@@ -181,7 +181,9 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (countryData) {
-      setCountryOptions(Object.values(Object.values(countryData)));
+      setCountryOptions(
+        _.orderBy(Object.values(countryData), ["countryName"], ["asc"])
+      );
     }
   }, [countryData]);
 
