@@ -263,7 +263,9 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (sourceData) {
-      setSourceOptions(Object.values(sourceData));
+      setSourceOptions(
+        _.orderBy(Object.values(sourceData), ["source"], ["asc"])
+      );
     }
   }, [sourceData]);
 
@@ -277,7 +279,9 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (localSourceData) {
-      setLocalSourceOptions(Object.values(localSourceData));
+      setLocalSourceOptions(
+        _.orderBy(Object.values(localSourceData), ["localSource"], ["asc"])
+      );
     }
   }, [localSourceData]);
 
@@ -319,7 +323,9 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (serviceData) {
-      setServiceOptions(Object.values(serviceData));
+      setServiceOptions(
+        _.orderBy(Object.values(serviceData), ["serviceType"], ["asc"])
+      );
     }
   }, [serviceData]);
 
@@ -336,7 +342,9 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (enqStatusData) {
-      setEnqStatusOptions(Object.values(enqStatusData));
+      setEnqStatusOptions(
+        _.orderBy(Object.values(enqStatusData), ["enquiryStatus"], ["asc"])
+      );
     }
   }, [enqStatusData]);
 
