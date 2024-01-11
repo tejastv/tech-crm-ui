@@ -68,7 +68,7 @@ export const Source: React.FC = () => {
 
   const editSourceClick = (sourceData: any) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", sourceData.sourceId), {
-      state: null
+      state: null,
     });
   };
 
@@ -97,7 +97,7 @@ export const Source: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

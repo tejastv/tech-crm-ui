@@ -62,7 +62,7 @@ export const CreditDays: React.FC = () => {
 
   const editCreditDaysClick = (creditDaysData: any) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", creditDaysData.creditPeriodId), {
-      state: null
+      state: null,
     });
   };
 
@@ -91,7 +91,7 @@ export const CreditDays: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isFetching ? <Table config={tableConfig.config}/> :  <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

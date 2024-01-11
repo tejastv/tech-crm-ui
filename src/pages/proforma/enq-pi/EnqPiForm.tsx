@@ -11,6 +11,7 @@ import {
   NewDatePicker,
   TableType,
   Table,
+  Loader,
 } from "@shared/index";
 import {
   EnqPiType,
@@ -1131,7 +1132,10 @@ export const EnqPiForm: React.FC = () => {
                   register={register} config={enqPiFormFields.enqPrice} /> */}
               </div>
               <div className="col-md-6 col-xs-12">
-                {!isFetching && <Table config={tableConfig.config}></Table>}
+                <Table config={tableConfig.config}>
+                  {" "}
+                  {isFetching && <Loader />}
+                </Table>
               </div>
               {/* <div className="card-title">
                 <InputWithText

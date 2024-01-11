@@ -16,12 +16,9 @@ import { usePagination } from "@hooks/usePagination";
 
 export const PurchaseBills: React.FC = () => {
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
-  const {
-    limit,
-    offset,
-  } = usePagination();
-  
-  const { data: companyData, isLoading } = getCompany({
+  const { limit, offset } = usePagination();
+
+  const { data: companyData, isFetching } = getCompany({
     limit,
     offset,
   });
@@ -151,7 +148,7 @@ export const PurchaseBills: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

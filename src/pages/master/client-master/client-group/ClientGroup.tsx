@@ -111,7 +111,7 @@ export const GroupMaster: React.FC = () => {
     },
   ];
 
-  const { data: clientGroupData, isLoading } = getClientGroup();
+  const { data: clientGroupData, isFetching } = getClientGroup();
   const { mutateAsync: deleteClientGroup } = deleteClientGroupMutation();
 
   const deleteClientGroupClick = async (clientGroupData: any) => {
@@ -150,7 +150,7 @@ export const GroupMaster: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

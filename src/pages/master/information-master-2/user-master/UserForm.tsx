@@ -272,7 +272,9 @@ export const UserForm: React.FC = () => {
                 Login Id: {userData.username}
               </Form.Label>
             </div>
-            {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+            <Table config={tableConfig.config}>
+              {isFetching && <Loader />}
+            </Table>
           </BorderLayout>
         ) : null}
         <BorderLayout heading={cardConfig.formActionsConfig.heading}>

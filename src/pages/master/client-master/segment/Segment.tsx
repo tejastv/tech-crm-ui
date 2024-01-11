@@ -61,7 +61,7 @@ export const Segment: React.FC = () => {
 
   const editSegmentClick = (segmentData: any) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", segmentData.segmentId), {
-      state: null
+      state: null,
     });
   };
 
@@ -90,7 +90,7 @@ export const Segment: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

@@ -16,13 +16,10 @@ import { usePagination } from "@hooks/usePagination";
 
 export const SearchEnqPi: React.FC = () => {
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
- 
-  const {
-    limit,
-    offset,
-  } = usePagination();
 
-  const { data, isLoading } = getCompany({
+  const { limit, offset } = usePagination();
+
+  const { data, isFetching } = getCompany({
     limit,
     offset,
   });
@@ -314,7 +311,7 @@ export const SearchEnqPi: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        <Table config={tableConfig.config}>{isLoading && <Loader />}</Table>
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

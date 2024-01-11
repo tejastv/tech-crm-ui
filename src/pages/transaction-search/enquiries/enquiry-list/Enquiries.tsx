@@ -580,7 +580,7 @@ export const Enquiries: React.FC = () => {
             </div>
           </form>
         )}
-        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}> {isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

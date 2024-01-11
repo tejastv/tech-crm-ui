@@ -581,6 +581,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                       className="dataTables_empty text-left"
                       key={"no_data_found"}
                     >
+                      {props.children}
                       {props.children
                         ? props.children
                         : "No data available in table"}

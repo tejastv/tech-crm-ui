@@ -98,10 +98,10 @@ export const Supplier: React.FC = () => {
       id: "stateId",
       cell: (info) => info.getValue(),
       header: () => <>State</>,
-    }
+    },
   ];
 
-  const { data: supplierMasterData, isLoading } = getSupplierMaster();
+  const { data: supplierMasterData, isFetching } = getSupplierMaster();
   const { mutateAsync: deleteSupplierMaster } = deleteSupplierMasterMutation();
 
   const deleteSupplierMasterClick = async (supplierMasterData: any) => {
@@ -113,7 +113,7 @@ export const Supplier: React.FC = () => {
 
   const editSupplierMasterClick = (supplierMasterData: any) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", supplierMasterData.supplierId), {
-      state: null
+      state: null,
     });
   };
 
@@ -142,7 +142,7 @@ export const Supplier: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );
