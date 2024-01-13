@@ -55,7 +55,7 @@ export const InvoiceGenerateGst: React.FC = () => {
     reset: displayDataFieldReset,
   } = useForm<EnqueryCalculatedDataType>();
 
-  const { getFinYear } = useFinYearApiCallHook();
+  const { getFormatedFinYear } = useFinYearApiCallHook();
   const { getClient } = useClientApiCallHook();
   const { getActualBuyerBasedOnClientId } = useActualBuyerApiCallHook();
   const { getEnquires, getCalculatedDataBasedOnEnquires, saveInoice } =
@@ -78,7 +78,7 @@ export const InvoiceGenerateGst: React.FC = () => {
   const [enquiryList, setEnquiryList] = useState<EnquiriesType[]>([]);
   const [selected, setSelected] = useState<EnquiriesType[]>([]);
   const [isPdfRequired, setIsPdfRequired] = useState<boolean>();
-  const { data: fYearData } = getFinYear();
+  const { data: fYearData } = getFormatedFinYear();
 
   useEffect(() => {
     if (fYearData) {

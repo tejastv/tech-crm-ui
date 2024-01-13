@@ -37,8 +37,12 @@ export const useInvoiceGenGstApiCallHook = () => {
       },
       headers: headers,
     };
-    const response = await instance.get(apiUrls.GET_ADD_ALL_ENQUIRY, params);
-    const data = await response.data.data.records;
+    let url = apiUrls.GET_ENQ_INVOICE_BASED_ON_CLIENT.replace(
+      "{clientId}",
+      queryParams.clientId
+    );
+    const response = await instance.get(url, params);
+    const data = await response.data.data;
     return data;
   };
 

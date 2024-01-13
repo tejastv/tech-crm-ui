@@ -119,6 +119,8 @@ const GET_INVOICES = "transaction/invoices";
 const GET_CALCULATED_DATA_BASED_ON_ENQUIRIES =
   "transaction/client/{clientId}/invoices/preview";
 const SAVE_INVOICE = "transaction/client/{clientId}/invoices";
+const GET_ENQ_INVOICE_BASED_ON_CLIENT =
+  "transaction/client/{clientId}/invoice/enquiries";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -210,4 +212,5 @@ export const apiUrls = {
   GET_INVOICES,
   GET_CALCULATED_DATA_BASED_ON_ENQUIRIES,
   SAVE_INVOICE,
+  GET_ENQ_INVOICE_BASED_ON_CLIENT,
 };
