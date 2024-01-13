@@ -4,6 +4,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useAuth, useToaster } from ".";
 
 import { STATUS_CODES } from "@constants/util-constant";
+import { apiUrls } from "@constants/index";
 
 export const useAxios = () => {
   const navigate = useNavigate();
@@ -45,14 +46,14 @@ export const useAxios = () => {
 
   instance.interceptors.response.use(
     (response) => {
-      // console.log(response);
+      console.log(response);
       if (
         response.status == STATUS_CODES.CODE_200 &&
         response.config.method == "delete"
       ) {
         successMessageToaster("Deleted Successfully..!");
       }
-      if (response.status == STATUS_CODES.CODE_201) {
+      if (response.status == STATUS_CODES.CODE_201 && response.config.url !== apiUrls.POST_ALL_INVOICE_GST_ENQUIRES) {
         successMessageToaster("Saved Successfully..!");
       }
       if (response.status == STATUS_CODES.CODE_202) {
