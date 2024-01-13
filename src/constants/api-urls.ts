@@ -101,6 +101,8 @@ const GET_ADD_ALL_ENQUIRY_SEARCH = "transaction/enquiries";
 const GET_PRICE =
   "client/{client_id}/country/{country_id}/serviceType/{serviceTypeId}";
 
+const GET_ALL_INVOICE_GST_ENQUIRES = 'transaction/invoice/enquiries';
+const POST_ALL_INVOICE_GST_ENQUIRES = 'transaction/auto-bulk-invoices';
 const GET_ADD_SERVICETYPE = "transaction/serviceType";
 const GET_ADD_ENQTYPE = "transaction/enquiryStatus";
 const GET_ADD_ENQSTATUS = "transaction/enquiryStatus";
@@ -187,6 +189,8 @@ export const apiUrls = {
   GET_ADD_ACTUAL_BUYER,
   GET_UPDATE_DELETE_ACTUAL_BUYER,
   GET_ADD_ALL_ENQUIRY,
+  GET_ALL_INVOICE_GST_ENQUIRES,
+  POST_ALL_INVOICE_GST_ENQUIRES,
   GET_UPDATE_DELETE_ALL_ENQUIRY,
   GET_ADD_SERVICETYPE,
   GET_ADD_ENQTYPE,
