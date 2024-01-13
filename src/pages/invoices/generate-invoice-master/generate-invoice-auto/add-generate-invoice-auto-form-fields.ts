@@ -8,26 +8,26 @@ const actionValidation = {
   },
 } as ValidationType;
 
-// const clientValidation = {
-//   required: {
-//     value: true,
-//     message: "{label} field is rquired",
-//   },
-//   maxLength: {
-//     value: 30,
-//     message: "30 characters max",
-//   },
-// } as ValidationType;
+const fYearField: FormFieldType = {
+  config: {
+    name: "fYear",
+    label: "F.Year ",
+    id: "fyear",
+    options: [],
+    placeholder: "Select F.year ",
+    validation: {
+      required: {
+        value: true,
+        message: "Select F.Year",
+      },
+    },
+  },
+};
 
 const fromDateValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
-  },
-  pattern: {
-    value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message:
-      "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
   },
 } as ValidationType;
 const toDateValidation = {
@@ -38,33 +38,19 @@ const toDateValidation = {
 } as ValidationType;
 
 const actionOption: MapType<Options> = {
-  new: { value: "Y", label: "Daily" },
-  renew: { value: "N", label: "Monthly" },
-  rerenew: { value: "S", label: "All" },
+  new: { value: "N", label: "Daily" },
+  renew: { value: "Y", label: "Monthly" },
+  reRenew: { value: "A", label: "All" },
 };
 const action: FormFieldType = createFormConfig(
-  "action",
+  "type",
   "Action",
   "radio",
   actionValidation,
   "",
   actionOption
 );
-const client: FormFieldType = {
-  config: {
-    name: "client",
-    label: "Client ",
-    id: "client",
-    options: [],
-    placeholder: "Select Client ",
-    validation: {
-      required: {
-        value: true,
-        message: "Select Client",
-      },
-    },
-  },
-};
+
 const myDate = new Date(); // Replace this with your actual date
 
 // Extract year, month, and day components
@@ -75,7 +61,7 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
 const fromDateField: FormFieldType = createFormConfig(
-  "fromDate",
+  "startDate",
   "From",
   "date",
   fromDateValidation,
@@ -83,7 +69,7 @@ const fromDateField: FormFieldType = createFormConfig(
 );
 
 const toDateField: FormFieldType = createFormConfig(
-  "toDate",
+  "endDate",
   "To Date",
   "date",
   toDateValidation,
@@ -91,7 +77,7 @@ const toDateField: FormFieldType = createFormConfig(
 );
 
 export const generateInvoiceAutoFormFields = {
-  client,
+  fYearField,
   action,
   fromDateField,
   toDateField,
