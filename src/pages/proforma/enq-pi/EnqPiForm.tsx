@@ -756,22 +756,18 @@ export const EnqPiForm: React.FC = () => {
       cmie: enqData.cmie,
       email: enqData.email,
     };
-    if (companyData && enqData?.companyId) {
-      let data = companyData.data[enqData.companyId];
-      data &&
-        (enqFormData.companyId = {
-          label: data.companyName,
-          value: data.companyId,
-        });
+    if (enqData?.companyId) {
+      enqFormData.companyId = {
+        label: enqData.companyName,
+        value: enqData.companyId,
+      };
     }
-    if (clientData && enqData?.clientId) {
-      let data = clientData.data[enqData.clientId];
-      data &&
-        ((enqFormData.clientId = {
-          label: data.clientName,
-          value: data.clientId,
-        }),
-        getClientValue(data.clientId));
+    if (enqData?.clientId) {
+      enqFormData.clientId = {
+        label: enqData.clientName,
+        value: enqData.clientId,
+      };
+      getClientValue(enqData.clientId);
     }
     if (serviceData && enqData?.serviceTypeId) {
       let data = serviceData[enqData.serviceTypeId];

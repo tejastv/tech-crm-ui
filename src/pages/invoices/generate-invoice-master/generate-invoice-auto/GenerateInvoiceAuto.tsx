@@ -9,7 +9,6 @@ import {
   NewRadio,
   NewDatePicker,
   NewSelect,
-  Loader,
 } from "@shared/index";
 import {
   GenerateInvoiceAutoType,
@@ -226,7 +225,7 @@ export const InvoiceGenerateAuto: React.FC = () => {
   };
 
   const calculateHandler = fetchEnqHandleSubmit(() => {
-    console.log(requiredObjectToGetGenerateInvoiceAuto)
+    console.log(requiredObjectToGetGenerateInvoiceAuto);
     if (requiredObjectToGetGenerateInvoiceAuto.enqIds == undefined) {
       alert("Please Select Enquiry");
       return;
@@ -234,7 +233,7 @@ export const InvoiceGenerateAuto: React.FC = () => {
     postAllEnquiresToGenerateGst(requiredObjectToGetGenerateInvoiceAuto).then(
       (data) => {
         console.log(data);
-        successMessageToaster(data)
+        successMessageToaster(data);
       }
     );
   });
@@ -305,7 +304,7 @@ export const InvoiceGenerateAuto: React.FC = () => {
               <div className="col-md-12 col-xs-12">
                 <div className="card-body">
                   {/* <Table config={tableConfig.config}>null</Table> */}
-                  <Table config={tableConfig.config}/>
+                  <Table config={tableConfig.config} />
                 </div>
               </div>
               <div className="row">
