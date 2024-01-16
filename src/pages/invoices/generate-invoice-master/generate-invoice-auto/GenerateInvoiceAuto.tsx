@@ -46,7 +46,7 @@ export const InvoiceGenerateAuto: React.FC = () => {
     {} as GenerateAutoInvoicePostRequestType
   );
   const [enquiryList, setEnquiryList] = useState<EnquiriesType[]>([]);
-  const { getFinYear } = useFinYearApiCallHook();
+  const { getFormatedFinYear } = useFinYearApiCallHook();
   const { getAllEnquires, postAllEnquiresToGenerateGst } =
     useInvoiceGenAutoGstApiCallHook();
   const {
@@ -189,7 +189,7 @@ export const InvoiceGenerateAuto: React.FC = () => {
     },
   };
 
-  const { data: fYearData } = getFinYear();
+  const { data: fYearData } = getFormatedFinYear();
   useEffect(() => {
     if (fYearData) {
       setFinYearOptions(
@@ -224,8 +224,8 @@ export const InvoiceGenerateAuto: React.FC = () => {
     return cleanupObject(enqData);
   };
 
-  const calculateHandler = fetchEnqHandleSubmit(() => {
-    console.log(requiredObjectToGetGenerateInvoiceAuto);
+  const generateInvoice = fetchEnqHandleSubmit(() => {
+    // console.log(requiredObjectToGetGenerateInvoiceAuto);
     if (requiredObjectToGetGenerateInvoiceAuto.enqIds == undefined) {
       alert("Please Select Enquiry");
       return;
@@ -265,7 +265,7 @@ export const InvoiceGenerateAuto: React.FC = () => {
       >
         <BorderLayout heading={cardConfig.formLayoutConfig.heading}>
           <div className="row">
-            <div className="col-md-3 col-xs-12">
+            <div className="col-md-4 col-xs-12">
               <NewRadio
                 errors={fetchEnqErrors}
                 register={fetchEnqRegister}
@@ -273,7 +273,7 @@ export const InvoiceGenerateAuto: React.FC = () => {
                 config={generateInvoiceAutoFormFields.action}
               />
             </div>
-            <div className="col-md-3 col-xs-12">
+            <div className="col-md-4 col-xs-12">
               <NewDatePicker
                 errors={fetchEnqErrors}
                 control={fetchEnqControl}
@@ -281,7 +281,7 @@ export const InvoiceGenerateAuto: React.FC = () => {
                 config={generateInvoiceAutoFormFields.fromDateField}
               />
             </div>
-            <div className="col-md-3 col-xs-12">
+            <div className="col-md-4 col-xs-12">
               <NewDatePicker
                 errors={fetchEnqErrors}
                 control={fetchEnqControl}
@@ -289,6 +289,8 @@ export const InvoiceGenerateAuto: React.FC = () => {
                 config={generateInvoiceAutoFormFields.toDateField}
               />
             </div>
+          </div>
+          <div className="row justify-content-end mt-2">
             <div className="col-md-3 col-xs-12">
               <Button
                 type="button"
@@ -299,6 +301,8 @@ export const InvoiceGenerateAuto: React.FC = () => {
                 Get Inquires
               </Button>
             </div>
+          </div>
+          <div className="row">
             <BorderLayout heading={cardConfig.tableOneConfig.mainHeading}>
               {/* Table */}
               <div className="col-md-12 col-xs-12">
@@ -329,7 +333,7 @@ export const InvoiceGenerateAuto: React.FC = () => {
                 <div className="col-md-3">
                   <Button
                     type="button"
-                    onClick={calculateHandler}
+                    onClick={generateInvoice}
                     className={"btn btn-danger btn-sm"}
                   >
                     Generate

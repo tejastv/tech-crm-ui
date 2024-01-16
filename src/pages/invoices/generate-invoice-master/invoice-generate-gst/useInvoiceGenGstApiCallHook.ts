@@ -4,6 +4,7 @@ import { apiUrls } from "@constants/index";
 import { EnquiriesType } from "@transaction-search/index";
 import {
   EnqueryCalculatedDataType,
+  InvoiceMasterDto,
   SaveInvoiceFormRequestType,
 } from "@invoices/index";
 // import { ApiResponseType } from "@shared/index";
@@ -54,6 +55,7 @@ export const useInvoiceGenGstApiCallHook = () => {
     params = {
       params: {
         finYear: queryParams.finYear,
+        actualBuyerId: queryParams.actualBuyerId,
       },
       headers: headers,
     };
@@ -69,7 +71,7 @@ export const useInvoiceGenGstApiCallHook = () => {
   const saveInoice = async (
     queryParams: SaveInvoiceFormRequestType,
     isPdfRequired: boolean
-  ): Promise<EnqueryCalculatedDataType | undefined> => {
+  ): Promise<InvoiceMasterDto | undefined> => {
     if (Object.values(queryParams).length == 0) return;
     let params = {};
     params = {

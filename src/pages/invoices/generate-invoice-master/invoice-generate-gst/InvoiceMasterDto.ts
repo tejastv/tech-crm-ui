@@ -1,0 +1,33 @@
+export interface InvoiceMasterDto {
+  invoiceNo: string;
+  invoiceDate: string;
+  clientId: string;
+  billAmt: number;
+  subTotal: number;
+  total: number;
+  currencyId: number;
+  serviceTax: number;
+  eduCess: number;
+  edCessAmt: number;
+  serviceTaxPer: number;
+  edCessPer: number;
+  lockedSTaxSubmitted: string;
+  oldFormat: string;
+  krishiCessPer: number;
+  krishiCessAmt: number;
+  actualBuyerId?: number;
+  crDays: number;
+  locked: string;
+  invoiceLink?: string;
+  disAmt: number;
+  stper: number;
+  stamt: number;
+  staxAmt: number;
+  cgstper: number;
+  sgstper: number;
+  igstper: number;
+  cgstamt: number;
+  sgstamt: number;
+  igstamt: number;
+  fyear: string;
+}

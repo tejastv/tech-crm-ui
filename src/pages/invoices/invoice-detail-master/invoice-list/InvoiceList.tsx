@@ -265,6 +265,24 @@ export const InvoiceList: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>GSTYN</>,
     },
+    {
+      accessorFn: (row) => row.actualBuyerId,
+      id: "actualBuyerId",
+      cell: (info) => info.getValue(),
+      header: () => <>Actual Buyer ID</>,
+    },
+    {
+      accessorFn: (row) => row.partyName,
+      id: "partyName",
+      cell: (info) => info.getValue(),
+      header: () => <>Party Name</>,
+    },
+    {
+      // accessorFn: (row) => row.,
+      id: "stateId",
+      cell: (info) => info.getValue(),
+      header: () => <>State ID</>,
+    },
   ];
 
   const tableConfig: TableType<InvoiceListType> = {
@@ -419,8 +437,7 @@ export const InvoiceList: React.FC = () => {
               <div className="mb-2">
                 <div className="col-md-14 col-xs-12 text-right">
                   <Button type="button" className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>
-                    Currency Total
+                    <i className="far fa-save"></i> Currency Total
                   </Button>
                 </div>
               </div>
@@ -429,8 +446,8 @@ export const InvoiceList: React.FC = () => {
               <div className="mb-2">
                 <div className="col-md-14 col-xs-12 text-right">
                   <Button type="button" className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>
-                    Export Invoice With Detail to word
+                    <i className="far fa-save"></i> Export Invoice With Detail
+                    to word
                   </Button>
                 </div>
               </div>
@@ -440,7 +457,7 @@ export const InvoiceList: React.FC = () => {
                 <div className="col-md-14 col-xs-12 text-right">
                   <Button type="button" className={"btn btn-danger btn-sm"}>
                     <i className="far fa-save"></i>
-                    Export Invoice With Detail to Excel
+                    {""} Export Invoice With Detail to Excel
                   </Button>
                 </div>
               </div>
@@ -449,8 +466,7 @@ export const InvoiceList: React.FC = () => {
               <div className="mb-2">
                 <div className="col-md-14 col-xs-12 text-right">
                   <Button type="button" className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>
-                    Invoicein Excel
+                    <i className="far fa-save"></i> Invoicein Excel
                   </Button>
                 </div>
               </div>
@@ -459,8 +475,7 @@ export const InvoiceList: React.FC = () => {
               <div className="mb-2">
                 <div className="col-md-14 col-xs-12 text-right">
                   <Button type="button" className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i>
-                    Export Invoice List
+                    <i className="far fa-save"></i> Export Invoice List
                   </Button>
                 </div>
               </div>
@@ -470,6 +485,7 @@ export const InvoiceList: React.FC = () => {
               <div className="mb-2">
                 <div className="col-md-14 col-xs-12 text-right">
                   <Button type="button" className={"btn btn-danger btn-sm"}>
+                    {" "}
                     Print Preview
                   </Button>
                 </div>
@@ -480,8 +496,7 @@ export const InvoiceList: React.FC = () => {
               <div className="mb-2">
                 <div className="col-sm-14 col-xs-12 text-right">
                   <Button type="button" className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-window-close"></i>
-                    Cancel
+                    <i className="far fa-window-close"></i> Cancel
                   </Button>
                 </div>
               </div>

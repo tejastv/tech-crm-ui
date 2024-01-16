@@ -43,6 +43,7 @@ export * from "./invoice-detail-master/invoice-setteld/invoice-setteld-type";
 export * from "./generate-invoice-master/invoice-generate-gst/EnqueryCalculatedDataType";
 export * from "./generate-invoice-master/invoice-generate-gst/SaveInvoiceFormRequestType";
 export * from "./invoice-detail-master/invoice-list/InvoiceListType";
+export * from "./generate-invoice-master/invoice-generate-gst/InvoiceMasterDto";
 
 export { useInvoiceGenGstApiCallHook } from "./generate-invoice-master/invoice-generate-gst/useInvoiceGenGstApiCallHook";
 export { useInvoiceGenAutoGstApiCallHook } from "./generate-invoice-master/generate-invoice-auto/useInvoiceGenAutoGstApiCallHook";

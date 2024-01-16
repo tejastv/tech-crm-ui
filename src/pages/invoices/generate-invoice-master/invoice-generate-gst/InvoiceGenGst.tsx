@@ -47,6 +47,8 @@ export const InvoiceGenerateGst: React.FC = () => {
     formState: { errors: fetchEnqErrors },
   } = useForm<InvoiceGenGstFormType>();
 
+  const pdfBaseUrl = import.meta.env.VITE_BASE_URL_PDF;
+
   const {
     register: displayDataFieldRegister,
     // control: displayDataFieldControl,
@@ -77,7 +79,6 @@ export const InvoiceGenerateGst: React.FC = () => {
   );
   const [enquiryList, setEnquiryList] = useState<EnquiriesType[]>([]);
   const [selected, setSelected] = useState<EnquiriesType[]>([]);
-  const [isPdfRequired, setIsPdfRequired] = useState<boolean>();
   const { data: fYearData } = getFormatedFinYear();
 
   useEffect(() => {
@@ -317,7 +318,6 @@ export const InvoiceGenerateGst: React.FC = () => {
       ),
       endDate: formatDateString(new Date(enquiryForm.endDate), "d-m-y", "-"),
       clientId: enquiryForm.clientId.value,
-      // fYear: enquiryForm.fYear.value,
       actualBuyerId: enquiryForm.actualBuyerId.value,
     };
     return cleanupObject(enqData);
@@ -336,6 +336,10 @@ export const InvoiceGenerateGst: React.FC = () => {
       }
     );
   });
+
+  // useEffect(() => {
+  //   console.log(import.meta.env.VITE_BASE_URL_PDF);
+  // }, []);
 
   const onFetchEnquirySubmit = () => {
     Promise.all([
@@ -356,60 +360,73 @@ export const InvoiceGenerateGst: React.FC = () => {
     });
   };
 
-  const onSaveInvoiceHandler = saveInvoice((data): void => {
-    // console.log(data, requiredObjectToCalculateTotal);
-    let reqObj: SaveInvoiceFormRequestType = {
-      invoiceMasterDto: {
-        invoiceNo: data.invoiceNo,
-        invoiceDate: new Date().toISOString(),
-        clientId: requiredObjectToCalculateTotal.client_id,
-        billAmt: data.amount,
-        subTotal: data.subTotal,
-        total: data.total,
-        currencyId: 0,
-        serviceTax: 0,
-        eduCess: 0,
-        edCessAmt: 0,
-        serviceTaxPer: 0,
-        edCessPer: 0,
-        lockedSTaxSubmitted: "s",
-        oldFormat: "s",
-        krishiCessPer: 0,
-        krishiCessAmt: 0,
-        actualBuyerId: requiredObjectToCalculateTotal.actualBuyerId,
-        crDays: 0,
-        locked: "s",
-        disAmt: data.discount,
-        stper: 0,
-        stamt: 0,
-        staxAmt: 0,
-        cgstper: data.cgstPer,
-        sgstper: data.sgstPer,
-        igstper: data.igstPer,
-        cgstamt: data.cgstAmount,
-        sgstamt: data.sgstAmount,
-        igstamt: data.igstAmount,
-        fyear: requiredObjectToCalculateTotal.finYear,
-      },
-      enquiryId: requiredObjectToCalculateTotal.enqIds?.length
-        ? requiredObjectToCalculateTotal.enqIds
-        : [],
-    };
-    saveInoice(reqObj, isPdfRequired != undefined && isPdfRequired).then(
-      (data) => {
-        if (data && Object.values(data).length > 0) {
-          console.log(data);
-        }
-      }
-    );
-  });
-
-  useEffect(() => {
-    if (isPdfRequired != null) {
+  const saveApiCall = (flag: boolean) => {
+    if (flag != null) {
+      const onSaveInvoiceHandler = saveInvoice((data): void => {
+        // console.log(data, requiredObjectToCalculateTotal);
+        let reqObj: SaveInvoiceFormRequestType = {
+          invoiceMasterDto: {
+            invoiceNo: data.invoiceNo,
+            invoiceDate: new Date().toISOString(),
+            clientId: requiredObjectToCalculateTotal.client_id,
+            billAmt: data.amount,
+            subTotal: data.subTotal,
+            total: data.total,
+            currencyId: 0,
+            serviceTax: 0,
+            eduCess: 0,
+            edCessAmt: 0,
+            serviceTaxPer: 0,
+            edCessPer: 0,
+            lockedSTaxSubmitted: "s",
+            oldFormat: "s",
+            krishiCessPer: 0,
+            krishiCessAmt: 0,
+            actualBuyerId: requiredObjectToCalculateTotal.actualBuyerId,
+            crDays: 0,
+            locked: "s",
+            disAmt: data.discount,
+            stper: 0,
+            stamt: 0,
+            staxAmt: 0,
+            cgstper: data.cgstPer,
+            sgstper: data.sgstPer,
+            igstper: data.igstPer,
+            cgstamt: data.cgstAmount,
+            sgstamt: data.sgstAmount,
+            igstamt: data.igstAmount,
+            fyear: requiredObjectToCalculateTotal.finYear,
+          },
+          enquiryId: requiredObjectToCalculateTotal.enqIds?.length
+            ? requiredObjectToCalculateTotal.enqIds
+            : [],
+        };
+        saveInoice(reqObj, flag != undefined && flag).then((data) => {
+          if (data && Object.values(data).length > 0) {
+            console.log(data);
+            // window.open(, "_blank");
+            let downloadUrl = `${pdfBaseUrl}${data.invoiceLink}`;
+            const link = document.createElement("a");
+            link.href = downloadUrl;
+            link.target = "_blank";
+            // Set the download attribute for triggering download
+            link.setAttribute("download", downloadUrl);
+            link.download = `${
+              requiredObjectToCalculateTotal.finYear
+            }-${new Date().toLocaleDateString()}-invoice.pdf`;
+            // Append the link to the document body
+            document.body.appendChild(link);
+            // Trigger a click on the link to start the download
+            link.click();
+            // Remove the link from the document body after download
+            document.body.removeChild(link);
+          }
+        });
+      });
       onSaveInvoiceHandler();
       trigger();
     }
-  }, [isPdfRequired]);
+  };
 
   return (
     <Card config={cardConfig.formLayoutConfig}>
@@ -619,7 +636,8 @@ export const InvoiceGenerateGst: React.FC = () => {
             <Button
               type="button"
               onClick={() => {
-                setIsPdfRequired(false);
+                saveApiCall(false);
+                // setIsPdfRequired(false);
               }}
               className={"btn btn-danger btn-sm mr-2"}
             >
@@ -628,7 +646,8 @@ export const InvoiceGenerateGst: React.FC = () => {
             <Button
               type="button"
               onClick={() => {
-                setIsPdfRequired(true);
+                saveApiCall(true);
+                // setIsPdfRequired(true);
               }}
               className={"btn btn-danger btn-sm mr-2"}
             >

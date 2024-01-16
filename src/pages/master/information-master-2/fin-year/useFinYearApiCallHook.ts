@@ -39,8 +39,6 @@ export const useFinYearApiCallHook = () => {
           ...year,
           finYear: year.finYear + "-" + (Number(year.finYear) + 1),
         }));
-        console.log(data);
-
         let mappedData = selectOptionsMapMaker(data, "finYear", "finYear");
         // return data;
         return mappedData;
