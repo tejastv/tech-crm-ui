@@ -303,7 +303,7 @@ export const InvoiceGenerateGst: React.FC = () => {
     setRequiredObjectToCalculateTotal((prevData) => {
       const updatedData = { ...prevData };
       selected.length > 0
-        ? (updatedData.enqIds = selected.map((client) => client.clientId))
+        ? (updatedData.enqIds = selected.map((client) => client.enqId))
         : delete updatedData.enqIds;
       return updatedData;
     });
@@ -399,9 +399,11 @@ export const InvoiceGenerateGst: React.FC = () => {
         };
         saveInoice(reqObj, flag != undefined && flag).then((data) => {
           if (data && Object.values(data).length > 0) {
-            console.log(data);
-            let downloadUrl = `${pdfBaseUrl}${data.invoiceLink}`;
-            window.open(`${downloadUrl}`);
+            // console.log(data);
+            if (flag) {
+              let downloadUrl = `${pdfBaseUrl}${data.invoiceLink}`;
+              window.open(`${downloadUrl}`);
+            }
           }
         });
       });

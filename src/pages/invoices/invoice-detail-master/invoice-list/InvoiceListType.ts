@@ -27,7 +27,7 @@ export interface InvoiceListType {
   cgstAmount: number;
   sgstAmount: number;
   igstAmount: number;
-  actualBuyerId: number;
+  actualBuyerId: -1;
   crDays: number;
   locked: null;
   clientName: null;
@@ -39,6 +39,13 @@ export interface InvoiceListType {
   receivedAmount: null;
   expneses: null;
   tds: null;
+  countryId: number;
+  segmentId: number;
+  segmentName: string;
+  gst: string;
+  gstyn: string;
+  stateId: number;
+  actualBuyerGstn: null;
   client: {
     clientId: number;
     clientName: string;

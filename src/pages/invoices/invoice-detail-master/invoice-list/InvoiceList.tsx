@@ -28,6 +28,7 @@ import _ from "lodash";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { usePagination } from "@hooks/usePagination";
 import { downloadExcel } from "@utils/generateInvoice";
+import { formatDateString } from "@utils/dateFormatter";
 
 export const InvoiceList: React.FC = () => {
   const { getFormatedFinYear } = useFinYearApiCallHook();
@@ -207,7 +208,7 @@ export const InvoiceList: React.FC = () => {
       header: () => <>Total</>,
     },
     {
-      // accessorFn: (row) => row,
+      accessorFn: (row) => row.countryId,
       id: "countryId",
       cell: (info) => info.getValue(),
       header: () => <>Country ID</>,
@@ -231,14 +232,14 @@ export const InvoiceList: React.FC = () => {
       header: () => <>OLD Formate</>,
     },
     {
-      // accessorFn: (row) => row.s,
+      accessorFn: (row) => row.segmentId,
       id: "cgstAmount",
       cell: (info) => info.getValue(),
       header: () => <>Segment ID</>,
     },
     {
-      // accessorFn: (row) => row.s,
-      id: "cgstAmount",
+      accessorFn: (row) => row.segmentName,
+      id: "segmentName",
       cell: (info) => info.getValue(),
       header: () => <>Segment Name</>,
     },
@@ -261,13 +262,13 @@ export const InvoiceList: React.FC = () => {
       header: () => <>IGST Per</>,
     },
     {
-      // accessorFn: (row) => row.gs,
+      accessorFn: (row) => row.gst,
       id: "gst",
       cell: (info) => info.getValue(),
       header: () => <>GST</>,
     },
     {
-      // accessorFn: (row) => row.gs,
+      accessorFn: (row) => row.gstyn,
       id: "gstyn",
       cell: (info) => info.getValue(),
       header: () => <>GSTYN</>,
@@ -285,14 +286,14 @@ export const InvoiceList: React.FC = () => {
       header: () => <>Party Name</>,
     },
     {
-      // accessorFn: (row) => row.,
+      accessorFn: (row) => row.stateId,
       id: "stateId",
       cell: (info) => info.getValue(),
       header: () => <>State ID</>,
     },
     {
-      // accessorFn: (row) => row.,
-      id: "stateId",
+      accessorFn: (row) => row.actualBuyerGstn,
+      id: "actualBuyerGstn",
       cell: (info) => info.getValue(),
       header: () => <>Actual Buyer GSTN</>,
     },
@@ -335,8 +336,8 @@ export const InvoiceList: React.FC = () => {
   const onSubmit = handleSubmit((data): void => {
     let reqObj: InvoiceListFormType = {
       clientId: data.clientId.value,
-      startDate: data.startDate,
-      endDate: data.endDate,
+      startDate: formatDateString(new Date(data.startDate), "d-m-y", "-"),
+      endDate: formatDateString(new Date(data.endDate), "d-m-y", "-"),
       fYear: data.fYear.value,
     };
     getInvoiceList(reqObj).then((data) => {

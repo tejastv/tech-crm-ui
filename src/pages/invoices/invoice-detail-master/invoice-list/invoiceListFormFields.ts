@@ -140,7 +140,7 @@ const clientField: FormFieldType = {
     placeholder: "Select Client ",
     validation: {
       required: {
-        value: false,
+        value: true,
         message: "Select Client",
       },
     },
