@@ -18,6 +18,7 @@ export const NewDatePicker: React.FC<{
   errors: any;
   control: any;
   defaultValue?: any;
+  minDate?: any;
   onChange?: (value: string) => void; // Define an onChange prop
 }> = (props) => {
   const inputErrors = findInputError(props.errors, props.config.config.name);
@@ -63,6 +64,7 @@ export const NewDatePicker: React.FC<{
                   {...field}
                   id={props.config.config.id}
                   type="date"
+                  min={props.minDate}
                   placeholder={props.config.config.placeholder}
                   onChange={handleSelectChange} // Pass the onChange handler
                 />

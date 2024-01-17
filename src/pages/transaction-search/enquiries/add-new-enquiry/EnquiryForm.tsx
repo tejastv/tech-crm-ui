@@ -45,6 +45,7 @@ import {
   useStateApiCallHook,
 } from "@pages/master";
 import {
+  addDaysInDate,
   cleanupObject,
   returnFormatedObjectElseEmptyArray,
   selectOptionsMaker,
@@ -897,15 +898,9 @@ export const EnquiryForm: React.FC = () => {
     }
   });
 
-  const addDays = (date: any, days: any) => {
-    var result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return new Date(result).toISOString().split("T")[0];
-  };
-
   const onReceivedDateChangeHandler = (date: string) => {
     if (enquiryFormFields.enqDueOn.config.name === "dueDate") {
-      setValue(enquiryFormFields.enqDueOn.config.name, addDays(date, 4));
+      setValue(enquiryFormFields.enqDueOn.config.name, addDaysInDate(date, 4));
     }
   };
 
@@ -1106,7 +1101,7 @@ export const EnquiryForm: React.FC = () => {
                 control={control}
                 onChange={enqDueDateOnChange}
                 config={enquiryFormFields.enqDueOn}
-                defaultValue={addDays(new Date(), 4)}
+                defaultValue={addDaysInDate(new Date(), 4)}
               />
               <NewSelect
                 errors={errors}

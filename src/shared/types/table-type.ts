@@ -26,4 +26,5 @@ export interface TableType<T> {
   data?: any;
   selectedRows?: any;
   setSelectedRows?: any;
+  tableRef?: any;
 }

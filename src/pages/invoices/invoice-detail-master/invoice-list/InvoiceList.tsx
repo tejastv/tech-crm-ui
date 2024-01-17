@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   BorderLayout,
@@ -7,7 +7,7 @@ import {
   Table,
   TableType,
   NewSelect,
-  NewInput,
+  NewDatePicker,
 } from "@shared/index";
 import {
   InvoiceListFormType,
@@ -27,6 +27,7 @@ import {
 import _ from "lodash";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { usePagination } from "@hooks/usePagination";
+import { downloadExcel } from "@utils/generateInvoice";
 
 export const InvoiceList: React.FC = () => {
   const { getFormatedFinYear } = useFinYearApiCallHook();
@@ -36,12 +37,14 @@ export const InvoiceList: React.FC = () => {
   const { getClient } = useClientApiCallHook();
   const { getCity } = useCityApiCallHook();
   const { limit, offset } = usePagination();
+  const pdfBaseUrl = import.meta.env.VITE_BASE_URL_PDF;
   // const [cityId, setCityId] = useState();
   const [cityOptions, setCityOptions] = useState<CityType[]>();
   const [invoiceList, setInvoiceList] = useState<InvoiceListType[]>([]);
   const [clientOptions, setClientOptions] = useState<Partial<ClientType>[]>([
     { clientName: "All", clientId: -1 },
   ]);
+  const tableRef = useRef();
   const [searchStringClient, setSearchStringClient] = useState<string>("");
 
   const { data: clientData } = getClient(
@@ -132,7 +135,10 @@ export const InvoiceList: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>SRNO</>,
     },
-
+    {
+      id: "rowData",
+      header: () => <>Preview Invoice</>,
+    },
     {
       accessorFn: (row) => row.invoiceNo,
       id: "invoiceNo",
@@ -146,7 +152,7 @@ export const InvoiceList: React.FC = () => {
       header: () => <>Invoice Date</>,
     },
     {
-      accessorFn: (row) => row.clientName,
+      accessorFn: (row) => row.client.clientName,
       id: "clientName",
       cell: (info) => info.getValue(),
       header: () => <>Client Name</>,
@@ -285,6 +291,10 @@ export const InvoiceList: React.FC = () => {
     },
   ];
 
+  const editClientClick = (clientData: any) => {
+    window.open(`${pdfBaseUrl}${clientData.invoiceLink}`);
+  };
+
   const tableConfig: TableType<InvoiceListType> = {
     config: {
       tableName: "Invocie List",
@@ -296,6 +306,7 @@ export const InvoiceList: React.FC = () => {
       pdfBtn: false,
       printBtn: false,
       globalSearchBox: false,
+      onEditClick: editClientClick,
       pagination: {
         pageSize: 10,
         nextPreviousBtnShow: false,
@@ -327,7 +338,7 @@ export const InvoiceList: React.FC = () => {
         setInvoiceList(data);
       }
     });
-    console.log("value", data);
+    // console.log("value", data);
   });
 
   return (
@@ -358,16 +369,20 @@ export const InvoiceList: React.FC = () => {
             <div className="col-md-6">
               <div className="row">
                 <div className="col-md-6 col-xs-12">
-                  <NewInput
+                  <NewDatePicker
                     errors={errors}
                     register={register}
+                    control={control}
+                    // minDate={new Date().toISOString().split("T")[0]}
                     config={invoiceListFormFields.fromDateField}
                   />
                 </div>
                 <div className="col-md-6 col-xs-12">
-                  <NewInput
+                  <NewDatePicker
                     errors={errors}
                     register={register}
+                    control={control}
+                    // minDate={new Date().toISOString().split("T")[0]}
                     config={invoiceListFormFields.toDateField}
                   />
                 </div>
@@ -425,7 +440,7 @@ export const InvoiceList: React.FC = () => {
             {/* Table */}
             <div className="col-md-12 col-xs-12">
               <div className="card-body">
-                <Table config={tableConfig.config} />
+                <Table config={tableConfig.config} tableRef={tableRef} />
               </div>
             </div>
           </div>
@@ -433,7 +448,7 @@ export const InvoiceList: React.FC = () => {
         <BorderLayout heading={cardConfig.formActionsConfig.heading}>
           {/* <ActionButtons /> */}
           <div className="row">
-            <div className="col-md-1 ">
+            {/* <div className="col-md-1 ">
               <div className="mb-2">
                 <div className="col-md-14 col-xs-12 text-right">
                   <Button type="button" className={"btn btn-danger btn-sm"}>
@@ -466,15 +481,19 @@ export const InvoiceList: React.FC = () => {
               <div className="mb-2">
                 <div className="col-md-14 col-xs-12 text-right">
                   <Button type="button" className={"btn btn-danger btn-sm"}>
-                    <i className="far fa-save"></i> Invoicein Excel
+                    <i className="far fa-save"></i> Invoice in Excel
                   </Button>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="col-md-1 ">
               <div className="mb-2">
                 <div className="col-md-14 col-xs-12 text-right">
-                  <Button type="button" className={"btn btn-danger btn-sm"}>
+                  <Button
+                    type="button"
+                    onClick={() => downloadExcel(tableConfig, tableRef)}
+                    className={"btn btn-danger btn-sm"}
+                  >
                     <i className="far fa-save"></i> Export Invoice List
                   </Button>
                 </div>

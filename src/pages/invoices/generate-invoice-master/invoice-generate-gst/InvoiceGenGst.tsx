@@ -337,10 +337,6 @@ export const InvoiceGenerateGst: React.FC = () => {
     );
   });
 
-  // useEffect(() => {
-  //   console.log(import.meta.env.VITE_BASE_URL_PDF);
-  // }, []);
-
   const onFetchEnquirySubmit = () => {
     Promise.all([
       trigger("clientId"),
@@ -404,22 +400,8 @@ export const InvoiceGenerateGst: React.FC = () => {
         saveInoice(reqObj, flag != undefined && flag).then((data) => {
           if (data && Object.values(data).length > 0) {
             console.log(data);
-            // window.open(, "_blank");
             let downloadUrl = `${pdfBaseUrl}${data.invoiceLink}`;
-            const link = document.createElement("a");
-            link.href = downloadUrl;
-            link.target = "_blank";
-            // Set the download attribute for triggering download
-            link.setAttribute("download", downloadUrl);
-            link.download = `${
-              requiredObjectToCalculateTotal.finYear
-            }-${new Date().toLocaleDateString()}-invoice.pdf`;
-            // Append the link to the document body
-            document.body.appendChild(link);
-            // Trigger a click on the link to start the download
-            link.click();
-            // Remove the link from the document body after download
-            document.body.removeChild(link);
+            window.open(`${downloadUrl}`);
           }
         });
       });
