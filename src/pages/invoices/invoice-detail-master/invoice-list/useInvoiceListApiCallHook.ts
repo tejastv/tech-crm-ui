@@ -15,7 +15,9 @@ export const useInvoiceListApiCallHook = () => {
     if (Object.values(queryParams).length == 0) return;
     let params = {};
     params = {
-      ...queryParams,
+      params: {
+        ...queryParams,
+      },
       headers: headers,
     };
     console.log(params);

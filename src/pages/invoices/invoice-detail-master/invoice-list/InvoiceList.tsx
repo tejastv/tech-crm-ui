@@ -38,7 +38,7 @@ export const InvoiceList: React.FC = () => {
   const { getCity } = useCityApiCallHook();
   const { limit, offset } = usePagination();
   const pdfBaseUrl = import.meta.env.VITE_BASE_URL_PDF;
-  // const [cityId, setCityId] = useState();
+  const [cityId, setCityId] = useState();
   const [cityOptions, setCityOptions] = useState<CityType[]>();
   const [invoiceList, setInvoiceList] = useState<InvoiceListType[]>([]);
   const [clientOptions, setClientOptions] = useState<Partial<ClientType>[]>([
@@ -51,6 +51,7 @@ export const InvoiceList: React.FC = () => {
     {
       limit,
       offset,
+      cityId: cityId,
       searchString: searchStringClient,
     },
     searchStringClient.length === 3
@@ -103,17 +104,17 @@ export const InvoiceList: React.FC = () => {
     }
   }, [clientData]);
 
-  if (clientOptions) {
+  if (clientOptions.length) {
     let options = selectOptionsMaker(clientOptions, "clientId", "clientName");
     invoiceListFormFields.clientField.config.options = options;
   }
 
-  // const getCityIdHandler = (data: any) => {
-  //   console.log(data);
-  //   if (data) {
-  //     setCityId(data.value);
-  //   }
-  // };
+  const getCityIdHandler = (data: any) => {
+    console.log(data);
+    if (data) {
+      setCityId(data.value);
+    }
+  };
 
   const cardConfig = {
     formLayoutConfig: {
@@ -177,9 +178,9 @@ export const InvoiceList: React.FC = () => {
     },
     {
       accessorFn: (row) => row.total,
-      id: "Client Name",
+      id: "total",
       cell: (info) => info.getValue(),
-      header: () => <>Total</>,
+      header: () => <>Total Amt</>,
     },
     {
       accessorFn: (row) => row.igstAmount,
@@ -207,7 +208,7 @@ export const InvoiceList: React.FC = () => {
     },
     {
       // accessorFn: (row) => row,
-      id: "cgstAmount",
+      id: "countryId",
       cell: (info) => info.getValue(),
       header: () => <>Country ID</>,
     },
@@ -289,6 +290,12 @@ export const InvoiceList: React.FC = () => {
       cell: (info) => info.getValue(),
       header: () => <>State ID</>,
     },
+    {
+      // accessorFn: (row) => row.,
+      id: "stateId",
+      cell: (info) => info.getValue(),
+      header: () => <>Actual Buyer GSTN</>,
+    },
   ];
 
   const editClientClick = (clientData: any) => {
@@ -327,10 +334,10 @@ export const InvoiceList: React.FC = () => {
 
   const onSubmit = handleSubmit((data): void => {
     let reqObj: InvoiceListFormType = {
-      clientId: data.clientId,
+      clientId: data.clientId.value,
       startDate: data.startDate,
       endDate: data.endDate,
-      fYear: data.fYear,
+      fYear: data.fYear.value,
     };
     getInvoiceList(reqObj).then((data) => {
       if (data && data.length > 0) {
@@ -392,7 +399,7 @@ export const InvoiceList: React.FC = () => {
                     register={register}
                     control={control}
                     config={invoiceListFormFields.cityField}
-                    // onChange={getCityIdHandler}
+                    onChange={getCityIdHandler}
                   />
 
                   {/* <div className="col-md-14 col-xs-12 text-right">
@@ -426,7 +433,6 @@ export const InvoiceList: React.FC = () => {
                       config={invoiceListFormFields.bobField}
                     />
                   </div> */}
-
                 <div className="mb-2">
                   <div className="col-md-14 col-xs-12 ">
                     <Button type="submit" className={"btn btn-danger btn-sm"}>
