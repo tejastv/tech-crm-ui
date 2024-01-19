@@ -17,7 +17,7 @@ const callType: FormFieldType = createFormConfig(
   "Call Type",
   "text",
   callTypeValidation,
-  "Call Type"
+  ""
 );
 
 export const callTypeFormFields = {

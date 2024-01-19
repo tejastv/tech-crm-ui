@@ -80,21 +80,21 @@ const currencyField: FormFieldType = createFormConfig(
   "Currency ",
   "text",
   CurrencyValidation,
-  "Currency"
+  ""
 );
 const symbolField: FormFieldType = createFormConfig(
   "currencySymbol",
   "Symbol ",
   "text",
   SymbolValidation,
-  "Symbol"
+  ""
 );
 const currencyWordField: FormFieldType = createFormConfig(
   "currencyInWord",
   "Currency in Word ",
   "text",
   CurrencyWordValidation,
-  "Currency in word"
+  ""
 );
 
 // Purchase
@@ -103,14 +103,14 @@ const purchaseExchangeField: FormFieldType = createFormConfig(
   "Exchg. Rate(Rs.)",
   "text",
   purchaseExchangeValidation,
-  "Enter Exchg. Rate(Rs.)"
+  ""
 );
 const sellExchangeField: FormFieldType = createFormConfig(
   "exchangeRateRsSell",
   "Exchg. Rate(Rs.)",
   "text",
   sellExchangeValidation,
-  "Enter Exchg. Rate(Rs.) "
+  ""
 );
 const myDate = new Date(); // Replace this with your actual date
 

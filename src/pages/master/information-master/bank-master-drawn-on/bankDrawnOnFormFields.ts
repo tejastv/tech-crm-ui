@@ -16,7 +16,7 @@ const bankdrawn: FormFieldType = createFormConfig(
   "Bank",
   "text",
   BankDrawnValidation,
-  "Bank Drawn"
+  ""
 );
 
 export const bankDrawnOnFormFields = {

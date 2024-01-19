@@ -56,7 +56,7 @@ const client: FormFieldType = {
     label: "Client ",
     id: "client",
     options: [],
-    placeholder: "Select Client ",
+    placeholder: "",
     validation: {
       required: {
         value: true,

@@ -164,14 +164,14 @@ const nameSupplier: FormFieldType = createFormConfig(
   "Name",
   "text",
   NameSuppliervalidation,
-  "Enter Name"
+  ""
 );
 const nickname: FormFieldType = createFormConfig(
   "nickName",
   "Nick Name",
   "text",
   NickNamevalidation,
-  "Enter Nick Name"
+  ""
 );
 
 const addressSupplier: FormFieldType = createFormConfig(
@@ -179,28 +179,28 @@ const addressSupplier: FormFieldType = createFormConfig(
   "Address",
   "textarea",
   addressValidation,
-  "Enter Address"
+  ""
 );
 const telNoSupplier: FormFieldType = createFormConfig(
   "phone",
   "Tel No.",
   "number",
   telNoValidation,
-  "Enter Tel No."
+  ""
 );
 const faxNoSupplier: FormFieldType = createFormConfig(
   "fax",
   "Fax No.",
   "text",
   FaxNoValidation,
-  "Enter Fax No."
+  ""
 );
 const emailSupplier: FormFieldType = createFormConfig(
   "email",
   "E-Mail",
   "Email",
   EmailValidation,
-  "Enter E-mail"
+  ""
 );
 const websiteSupplier: FormFieldType = createFormConfig(
   "website",
@@ -214,14 +214,14 @@ const contactSupplier: FormFieldType = createFormConfig(
   "Contact person",
   "text",
   ContactValidation,
-  "Enter Contact Person"
+  ""
 );
 const designationSupplier: FormFieldType = createFormConfig(
   "designation",
   "Designation",
   "text",
   DesignationValidation,
-  "Enter Designation"
+  ""
 );
 
 // Right Side Fields
@@ -230,7 +230,7 @@ const citySupplier: FormFieldType = createFormConfig(
   "City",
   "select",
   CityValidation,
-  "Select City",
+  "",
   {}
 );
 const zipSupplier: FormFieldType = createFormConfig(
@@ -238,14 +238,14 @@ const zipSupplier: FormFieldType = createFormConfig(
   "Zip",
   "text",
   ZipValidation,
-  "Enter Zip"
+  ""
 );
 const stateSupplier: FormFieldType = createFormConfig(
   "stateId",
   "State",
   "select",
   StateValidation,
-  "Select State",
+  "",
   {}
 );
 const countrySupplier: FormFieldType = createFormConfig(
@@ -253,7 +253,7 @@ const countrySupplier: FormFieldType = createFormConfig(
   "Country",
   "select",
   CountryValidation,
-  "Select Country",
+  "",
   {}
 );
 const currencySupplier: FormFieldType = createFormConfig(
@@ -261,7 +261,7 @@ const currencySupplier: FormFieldType = createFormConfig(
   "Currency",
   "select",
   CurrencyValidation,
-  "Select Currency",
+  "",
   {}
 );
 

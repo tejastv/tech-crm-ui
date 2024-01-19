@@ -17,7 +17,7 @@ const stdcurrencey: FormFieldType = createFormConfig(
   "Currency",
   "select",
   StdCurrencyValidation,
-  "Select Currency",
+  "",
   {}
 );
 

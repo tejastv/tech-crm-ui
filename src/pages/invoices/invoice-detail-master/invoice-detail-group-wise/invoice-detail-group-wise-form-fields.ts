@@ -26,7 +26,7 @@ const groupField: FormFieldType = {
     label: "Group ",
     id: "group",
     options: [],
-    placeholder: "Select Group ",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -67,7 +67,7 @@ const fYearField: FormFieldType = {
     label: "F.Year ",
     id: "fyear",
     options: [],
-    placeholder: "Select F.year ",
+    placeholder: "",
     validation: {
       required: {
         value: false,

@@ -102,7 +102,7 @@ const localsourcecurrenceyField: FormFieldType = {
     label: "Currency",
     id: "currencyType",
     options: [],
-    placeholder: "Select Currency",
+    placeholder: "",
     validation: {
       required: {
         value: true,
@@ -117,7 +117,7 @@ const sourcecountryField: FormFieldType = {
     label: "Country",
     id: "countryName",
     options: [],
-    placeholder: "Select Country",
+    placeholder: "",
     validation: {
       required: {
         value: true,

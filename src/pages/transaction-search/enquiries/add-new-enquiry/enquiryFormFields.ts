@@ -570,7 +570,7 @@ const enqtype: FormFieldType = createFormConfig(
   "Enq. Type",
   "select",
   EnqValidation, // Replace with your validation function
-  "Select Enq. Type",
+  "",
   enqTypeData,
   true // Default value set to "NEW"
 );
@@ -580,7 +580,7 @@ const enqLocalSource: FormFieldType = createFormConfig(
   "Local Source",
   "select",
   localsourceenquiryValidation,
-  "Select Local Source",
+  "",
   {}
 );
 const enqServiceType: FormFieldType = createFormConfig(
@@ -588,7 +588,7 @@ const enqServiceType: FormFieldType = createFormConfig(
   "Service Type",
   "select",
   ServiceTypeValidation,
-  "Select Service",
+  "",
   {}
 );
 const enqDueOn: FormFieldType = createFormConfig(
@@ -596,7 +596,7 @@ const enqDueOn: FormFieldType = createFormConfig(
   "Due On",
   "date",
   DueOnValidation,
-  "date"
+  ""
 );
 
 const enqPrintStatusData: MapType<Options> = {
@@ -609,7 +609,7 @@ const enqPrintStatus: FormFieldType = createFormConfig(
   "Print Status",
   "select",
   PrintStatusValidationValidation,
-  "Select Print Status",
+  "",
   enqPrintStatusData
 );
 const enqStatus: FormFieldType = createFormConfig(
@@ -617,7 +617,7 @@ const enqStatus: FormFieldType = createFormConfig(
   "Enq. Status",
   "select",
   EnqStatusValidation,
-  "Select Enq. Status",
+  "",
   {}
 );
 
@@ -626,7 +626,7 @@ const enqSvisit: FormFieldType = createFormConfig(
   "S.Visit",
   "select",
   svisitValidation,
-  "Select S.Visit",
+  "",
   {
     0: { value: "0", label: "NA" },
     1: { value: "1", label: "Pending to Visit" },
@@ -638,28 +638,28 @@ const enqNotesForEnquiry: FormFieldType = createFormConfig(
   "Notes for Enquiry ",
   "textarea",
   NotesforEnqValidation,
-  "Notes For Enquiry"
+  ""
 );
 const enqNotesForAdj: FormFieldType = createFormConfig(
   "noteForComission",
   "Notes for Comma/Adj",
   "text",
   NotesForAdjValidation,
-  "Notes For Comma/Adj "
+  ""
 );
 const enqInstruction: FormFieldType = createFormConfig(
   "instruction",
   "Instruction ",
   "text",
   instructionEnquiryValidation,
-  "Instruction"
+  ""
 );
 const enqAdjust: FormFieldType = createFormConfig(
   "adjustment",
   "Adjust",
   "text",
   AdjustEnqValidation,
-  "Adjust",
+  "",
   {},
   true
 );
@@ -669,28 +669,28 @@ const enqClientRef: FormFieldType = createFormConfig(
   "Client Ref",
   "text",
   ClientRefEnquiryValidation,
-  "Client Ref"
+  ""
 );
 const enqClient: FormFieldType = createFormConfig(
   "clientId",
   "Client",
   "select",
   ClientEnquiryValidation,
-  "Select Client"
+  ""
 );
 const enqRequestNo: FormFieldType = createFormConfig(
   "requestNo",
   "Request No.",
   "text",
   RequestNoValidation,
-  "Request No."
+  ""
 );
 const enqClientId: FormFieldType = createFormConfig(
   "clientIdDisable",
   "Client Id",
   "text",
   ClientIdEnquiryValidation,
-  "Client Id",
+  "",
   {},
   true
 );
@@ -699,7 +699,7 @@ const enqActualBuyer: FormFieldType = createFormConfig(
   "Actual Buyer",
   "select",
   ActualBuyerEnquiryValidation,
-  "Actual Buyer",
+  "",
   { 1: { label: "Direct", value: "1" } }
 );
 const enqPrice: FormFieldType = createFormConfig(
@@ -707,7 +707,7 @@ const enqPrice: FormFieldType = createFormConfig(
   "Price",
   "text",
   PriceeEnquiryEnquiryValidation,
-  "Price",
+  "",
   {}
 );
 const enqDis: FormFieldType = createFormConfig(
@@ -715,7 +715,7 @@ const enqDis: FormFieldType = createFormConfig(
   "Dis.%",
   "text",
   DisEnquiryValidation,
-  "Dis.%",
+  "",
   {},
   true
 );
@@ -724,7 +724,7 @@ const enqDiscount: FormFieldType = createFormConfig(
   "Discount",
   "text",
   DiscountEnquiryValidation,
-  "Discount",
+  "",
   {},
   true
 );
@@ -733,7 +733,7 @@ const enqReportComm: FormFieldType = createFormConfig(
   "Comm.",
   "text",
   CommEnquiryValidation,
-  "Comm."
+  ""
 );
 
 const enqRefNote: Note = createNoteConfig("Note: Ref. No is Auto");

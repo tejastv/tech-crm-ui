@@ -16,7 +16,7 @@ const industry: FormFieldType = createFormConfig(
   "Industry",
   "text",
   industryValidation,
-  "Industry"
+  ""
 );
 
 export const industryFormFields = {
