@@ -207,7 +207,7 @@ export const EnquiryForm: React.FC = () => {
       offset,
       searchString: searchStringClient,
     },
-    searchStringClient.length === 3
+    searchStringClient.length > 3
   );
 
   useEffect(() => {
@@ -223,20 +223,20 @@ export const EnquiryForm: React.FC = () => {
     enquiryFormFields.enqClient.config.options = options;
   }
 
-  const { data: fYearData } = getFinYear();
+  // const { data: fYearData } = getFinYear();
 
-  useEffect(() => {
-    if (fYearData) {
-      setFinYearOptions(
-        _.orderBy(Object.values(fYearData), ["finYear"], ["desc"])
-      );
-    }
-  }, [fYearData]);
+  // useEffect(() => {
+  //   if (fYearData) {
+  //     setFinYearOptions(
+  //       _.orderBy(Object.values(fYearData), ["finYear"], ["desc"])
+  //     );
+  //   }
+  // }, [fYearData]);
 
-  if (finYearOptions?.length) {
-    let options = selectOptionsMaker(finYearOptions, "finYear", "finYear");
-    enquiryFormFields.enqFinYear.config.options = options;
-  }
+  // if (finYearOptions?.length) {
+  //   let options = selectOptionsMaker(finYearOptions, "finYear", "finYear");
+  //   enquiryFormFields.enqFinYear.config.options = options;
+  // }
 
   const { data: actualBuyerData } = getActualBuyer({ client_id: clientId });
 
@@ -298,7 +298,7 @@ export const EnquiryForm: React.FC = () => {
       offset,
       searchString: searchStringCompany,
     },
-    searchStringCompany.length === 3
+    searchStringCompany.length > 3
   );
 
   useEffect(() => {
@@ -374,23 +374,11 @@ export const EnquiryForm: React.FC = () => {
   }, [enqStatusOptions]);
 
   const companyOnInputChangeHandler = (companyInputValue: any) => {
-    if (companyInputValue.length === 3) {
-      setSearchStringCompany(companyInputValue);
-    }
-    if (companyInputValue.length === 0) {
-      setCompanyOptions([]);
-      enquiryFormFields.enqCompanyName.config.options = [];
-    }
+    setSearchStringCompany(companyInputValue);
   };
 
   const clientOnInputChangeHandler = (clientInputValue: any) => {
-    if (clientInputValue.length === 3) {
-      setSearchStringClient(clientInputValue);
-    }
-    if (clientInputValue.length === 0) {
-      setClientOptions([]);
-      enquiryFormFields.enqClient.config.options = [];
-    }
+    setSearchStringClient(clientInputValue);
   };
 
   const companyOnChangeHandler = (companyData: any) => {
@@ -719,9 +707,9 @@ export const EnquiryForm: React.FC = () => {
     if (enqFormData?.siteStatusId) {
       enqData.siteStatusId = enqFormData.siteStatusId.value;
     }
-    if (fYearData && enqFormData?.fYear) {
-      enqData.fyear = enqFormData.fYear.value;
-    }
+    // if (fYearData && enqFormData?.fYear) {
+    //   enqData.fyear = enqFormData.fYear.value;
+    // }
     if (enqFormData?.pmtStatus) {
       enqData.pmtStatus = enqFormData.pmtStatus.value;
     }
@@ -852,14 +840,14 @@ export const EnquiryForm: React.FC = () => {
           value: data.partyId,
         });
     }
-    if (fYearData && enqData?.fyear) {
-      let data = fYearData[enqData.fyear];
-      data &&
-        (enqFormData.fYear = {
-          label: data.finYear,
-          value: data.finYear,
-        });
-    }
+    // if (fYearData && enqData?.fyear) {
+    //   let data = fYearData[enqData.fyear];
+    //   data &&
+    //     (enqFormData.fYear = {
+    //       label: data.finYear,
+    //       value: data.finYear,
+    //     });
+    // }
     if (enqData?.pmtStatus) {
       let data = enquiryFormFields.enqPrintStatusData[enqData.pmtStatus];
       data &&

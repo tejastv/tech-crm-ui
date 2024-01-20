@@ -408,7 +408,7 @@ const enqCompanyName: FormFieldType = createFormConfig(
   "Company",
   "select",
   CompanyEnquiry,
-  "Select Company",
+  "",
   {}
 );
 const enqFinYear: FormFieldType = createFormConfig(
@@ -416,7 +416,7 @@ const enqFinYear: FormFieldType = createFormConfig(
   "Year",
   "year",
   YearEnquiry,
-  "Select Year"
+  ""
 );
 const enqRefNo: FormFieldType = createFormConfig(
   "refNo",
@@ -432,7 +432,7 @@ const enqSource: FormFieldType = createFormConfig(
   "Source",
   "select",
   SourceEnquiry,
-  "Select Source",
+  "",
   {}
 );
 
@@ -441,7 +441,7 @@ const enqGivenAddress: FormFieldType = createFormConfig(
   "Address",
   "textarea",
   GivenaddressValidation,
-  "Enter Address",
+  "",
   {},
   false,
   true
@@ -451,49 +451,49 @@ const enqTelePhone: FormFieldType = createFormConfig(
   "Tel No.",
   "text",
   telNoEnquiryValidation,
-  "Enter Tel No."
+  ""
 );
 const enqFax: FormFieldType = createFormConfig(
   "fax",
   "Fax No.",
   "text",
   FaxNoEnquiryValidation,
-  "Enter Fax No."
+  ""
 );
 const enqEmail: FormFieldType = createFormConfig(
   "email",
   "E-Mail",
   "Email",
   EmailEnquiryValidation,
-  "Enter E-mail"
+  ""
 );
 const enqWebsite: FormFieldType = createFormConfig(
   "website",
   "Website",
   "text",
   WebsiteEnquiryValidation,
-  "Enter WebSite"
+  ""
 );
 const enqContact: FormFieldType = createFormConfig(
   "contactPerson",
   "Contact",
   "text",
   ContactEnquiryValidation,
-  "Enter Contact"
+  ""
 );
 const enqDesignation: FormFieldType = createFormConfig(
   "designation",
   "Designation",
   "text",
   DesignationEnquiryValidation,
-  "Enter Designation"
+  ""
 );
 const enqCity: FormFieldType = createFormConfig(
   "cityId",
   "City",
   "select",
   CityEnquiryValidation,
-  "Select City",
+  "",
   {}
 );
 const enqZip: FormFieldType = createFormConfig(
@@ -501,14 +501,14 @@ const enqZip: FormFieldType = createFormConfig(
   "Zip",
   "text",
   ZipEnquiryValidation,
-  "Enter Zip"
+  ""
 );
 const enqState: FormFieldType = createFormConfig(
   "stateId",
   "State",
   "select",
   StateEnquiryValidation,
-  "Select State",
+  "",
   {}
 );
 const enqStateCode: FormFieldType = createFormConfig(
@@ -523,7 +523,7 @@ const enqCountry: FormFieldType = createFormConfig(
   "Country",
   "select",
   CountryEnquiryValidation,
-  "Select Country",
+  "",
   {}
 );
 
@@ -540,7 +540,7 @@ const enqGivenName: FormFieldType = createFormConfig(
   "Given Name",
   "text",
   GivenNameEnquiryValidation,
-  "Given Name"
+  ""
 );
 // const myDate = new Date(); // Replace this with your actual date
 
