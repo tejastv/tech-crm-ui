@@ -65,7 +65,6 @@ const priceMapper = {
   4: "priceSuperFlash", // Superflash
   6: "priceSME", // SME
 };
-import _ from "lodash";
 
 export const EnqPiForm: React.FC = () => {
   const {
