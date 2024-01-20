@@ -184,6 +184,7 @@ export const PriceListGroup: React.FC = () => {
       const data = response.data.data;
       if (data) {
         getGroupWisePrice(group);
+        setTableCellData({});
       }
     }
   };
