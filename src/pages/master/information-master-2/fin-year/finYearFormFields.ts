@@ -97,7 +97,7 @@ const finYear: FormFieldType = createFormConfig(
   "Fin. Year",
   "number",
   finYearValidation,
-  "FIn Year",
+  "",
   {},
   true
 );
@@ -106,56 +106,56 @@ const totalTax: FormFieldType = createFormConfig(
   "Total Tax",
   "number",
   totaltaxValidation,
-  "Total Tax"
+  ""
 );
 const stax: FormFieldType = createFormConfig(
   "stax",
   "S. Tax",
   "number",
   staXValidation,
-  "S. Tax"
+  ""
 );
 const edcess: FormFieldType = createFormConfig(
   "eduCess",
   "Ed.Cess",
   "number",
   eDcessValidation,
-  "Ed. Cess"
+  ""
 );
 const cgst: FormFieldType = createFormConfig(
   "cgstper",
   "CGST %",
   "number",
   cGstValidation,
-  "CGST %"
+  ""
 );
 const sgst: FormFieldType = createFormConfig(
   "sgstper",
   "SGST %",
   "number",
   sGstValidation,
-  "SGST %"
+  ""
 );
 const igst: FormFieldType = createFormConfig(
   "igstper",
   "IGST %",
   "number",
   iGstValidation,
-  "IGST %"
+  ""
 );
 const startInvNo: FormFieldType = createFormConfig(
   "startinno",
   "Start Inv. No.",
   "text",
   startInvNoValidation,
-  "Start Inv.No."
+  ""
 );
 const startRefNo: FormFieldType = createFormConfig(
   "startRefNo",
   "Start Ref. No.",
   "text",
   startRefNoValidation,
-  "Start Ref. No."
+  ""
 );
 
 export const finYearFormFields = {

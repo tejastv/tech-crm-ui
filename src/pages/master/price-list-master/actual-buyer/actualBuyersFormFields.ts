@@ -172,7 +172,7 @@ const clientActualBuyer: FormFieldType = createFormConfig(
   "Client",
   "select",
   clientActualBuyerValidation,
-  "Select Client",
+  "",
   {}
 );
 const nameActualBuyer: FormFieldType = createFormConfig(
@@ -180,14 +180,14 @@ const nameActualBuyer: FormFieldType = createFormConfig(
   "Name",
   "text",
   nameActualBuyerValidation,
-  "Name"
+  ""
 );
 const addressActualBuyer: FormFieldType = createFormConfig(
   "partyAddress",
   "Address",
   "textarea",
   addressValidation,
-  "Address"
+  ""
 );
 const telNoActualBuyer: FormFieldType = createFormConfig(
   "telNo",
@@ -201,21 +201,21 @@ const emailActualBuyer: FormFieldType = createFormConfig(
   "E-Mail",
   "Email",
   EmailValidation,
-  "Enter E-mail"
+  ""
 );
 const contactActualBuyer: FormFieldType = createFormConfig(
   "personResponsible",
   "Contact",
   "text",
   ContactValidation,
-  "Enter Contact"
+  ""
 );
 const designationActualBuyer: FormFieldType = createFormConfig(
   "personDesg",
   "Designation",
   "text",
   DesignationValidation,
-  "Enter Designation"
+  ""
 );
 //
 const cityActualBuyer: FormFieldType = createFormConfig(
@@ -223,7 +223,7 @@ const cityActualBuyer: FormFieldType = createFormConfig(
   "City",
   "select",
   CityValidation,
-  "Select City",
+  "",
   {}
 );
 const stateActualBuyer: FormFieldType = createFormConfig(
@@ -231,7 +231,7 @@ const stateActualBuyer: FormFieldType = createFormConfig(
   "State",
   "select",
   StateValidation,
-  "Select State",
+  "",
   {}
 );
 const pin: FormFieldType = createFormConfig(
@@ -239,14 +239,14 @@ const pin: FormFieldType = createFormConfig(
   "PIN",
   "text",
   pinValidation,
-  "PIN"
+  ""
 );
 const countryActualBuyer: FormFieldType = createFormConfig(
   "countryId",
   "Country",
   "select",
   CountryValidation,
-  "Select Country",
+  "",
   {}
 );
 const faxNoActualBuyer: FormFieldType = createFormConfig(
@@ -254,7 +254,7 @@ const faxNoActualBuyer: FormFieldType = createFormConfig(
   "Fax No.",
   "text",
   FaxNoValidation,
-  "Enter Fax No."
+  ""
 );
 const websiteActualBuyer: FormFieldType = createFormConfig(
   "website",
@@ -268,14 +268,14 @@ const cstActualBuyer: FormFieldType = createFormConfig(
   "CST/TIN No.",
   "text",
   cst,
-  "CST/TIN No."
+  ""
 );
 const gstnActualBuyer: FormFieldType = createFormConfig(
   "gstn",
   "GSTN",
   "text",
   GSTN,
-  "GSTN"
+  ""
 );
 const actualBuyerGstNote: Note = createNoteConfig(
   "don't know GST, write NOGST. Do not input any other number."

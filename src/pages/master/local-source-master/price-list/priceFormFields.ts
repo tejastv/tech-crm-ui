@@ -70,7 +70,7 @@ const priceLocalSource: FormFieldType = createFormConfig(
   "Local Source",
   "slelect",
   PriceLocalsourceValidation,
-  "Enter localSource",
+  "",
   {}
 );
 const priceCurrency: FormFieldType = createFormConfig(
@@ -78,7 +78,7 @@ const priceCurrency: FormFieldType = createFormConfig(
   "Currency",
   "select",
   PriceCurrencyValidation,
-  "Select Currency",
+  "",
   {}
 );
 const purchaseExchangeRate: FormFieldType = createFormConfig(
@@ -86,14 +86,14 @@ const purchaseExchangeRate: FormFieldType = createFormConfig(
   "Exchg. Rate(Rs.)",
   "text",
   purchaseExchangeRateValidation,
-  "Enter Exchg. Rate(Rs.)"
+  ""
 );
 const sellExchangeRate: FormFieldType = createFormConfig(
   "currencey",
   "Exchg. Rate(Rs.)",
   "text",
   sellExchangeRateValidation,
-  "Enter Exchg. Rate(Rs.) "
+  " "
 );
 const purchaseDate: FormFieldType = createFormConfig(
   "purchaseDate",

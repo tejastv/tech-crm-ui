@@ -325,7 +325,7 @@ const client: FormFieldType = {
     label: "Client ",
     id: "client",
     options: [],
-    placeholder: "Select Client ",
+    placeholder: "",
     validation: {
       required: {
         value: true,
@@ -341,7 +341,7 @@ const actualBuyreField: FormFieldType = {
     label: "Actual Buyer",
     id: "actualBuyer",
     options: [],
-    placeholder: "Select Actual Buyer ",
+    placeholder: "",
     validation: {
       required: {
         value: true,
@@ -403,7 +403,7 @@ const stateField: FormFieldType = {
     label: "State ",
     id: "state",
     options: [],
-    placeholder: "Select State ",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -419,7 +419,7 @@ const stateActualBuyreField: FormFieldType = {
     label: "State ",
     id: "stateActualBuyre",
     options: [],
-    placeholder: "Select State ",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -481,7 +481,7 @@ const fYearField: FormFieldType = {
     label: "F.Year ",
     id: "fyear",
     options: [],
-    placeholder: "Select F.year ",
+    placeholder: "",
     validation: {
       required: {
         value: true,

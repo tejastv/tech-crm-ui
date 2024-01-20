@@ -55,7 +55,7 @@ const continentCountryField: FormFieldType = {
     label: "Continent",
     id: "continent",
     options: [],
-    placeholder: "Select Continent",
+    placeholder: "",
     validation: {
       required: {
         value: true,

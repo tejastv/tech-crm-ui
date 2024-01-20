@@ -16,7 +16,7 @@ const paymentMode: FormFieldType = createFormConfig(
   "Payment Mode",
   "text",
   PaymentModeValidation,
-  "Payment Mode"
+  ""
 );
 
 export const paymentModeFormFields = {

@@ -16,7 +16,7 @@ const purpose: FormFieldType = createFormConfig(
   "Purpose",
   "text",
   PurposeValidation,
-  "Purpose"
+  ""
 );
 
 export const purposeFormFields = {

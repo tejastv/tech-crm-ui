@@ -293,7 +293,7 @@ const clientField: FormFieldType = {
     label: "Client ",
     id: "client",
     options: [],
-    placeholder: "Select Client ",
+    placeholder: "",
     validation: {
       required: {
         value: true,
@@ -348,7 +348,7 @@ const stateField: FormFieldType = {
     label: "State ",
     id: "state",
     options: [],
-    placeholder: "Select State ",
+    placeholder: "",
     validation: {
       required: {
         value: true,
@@ -403,7 +403,7 @@ const fyearField: FormFieldType = {
     label: "F.Year ",
     id: "fyear",
     options: [],
-    placeholder: "Select F.year ",
+    placeholder: "",
     validation: {
       required: {
         value: true,

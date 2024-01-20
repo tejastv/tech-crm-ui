@@ -39,7 +39,7 @@ const clientGroupName: FormFieldType = createFormConfig(
   "Group Name",
   "text",
   ClientGroup,
-  "Enter Client Name"
+  ""
 );
 
 const showBOBDetailsOption = {
@@ -121,7 +121,7 @@ const searchClient: FormFieldType = createFormConfig(
   "Client Name",
   "select:isMulti",
   SearchClient,
-  "Client Name",
+  "",
   {}
 );
 
@@ -130,7 +130,7 @@ const moveToClient: FormFieldType = createFormConfig(
   "Move to",
   "select",
   SearchClient,
-  "Move to",
+  "",
   {}
 );
 

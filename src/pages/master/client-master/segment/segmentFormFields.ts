@@ -17,7 +17,7 @@ const clientSegment: FormFieldType = createFormConfig(
   "Segment Name",
   "text",
   segmentValid,
-  "Enter Segment"
+  ""
 );
 
 export const segmentFormFields = {

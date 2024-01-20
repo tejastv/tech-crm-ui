@@ -22,14 +22,14 @@ const source: FormFieldType = createFormConfig(
   "Source",
   "text",
   SourceValidation,
-  "Source"
+  ""
 );
 const letterFile: FormFieldType = createFormConfig(
   "firstLetterFile",
   "First Letter File",
   "file:.doc,.docx",
   selectFileValidation,
-  "Source"
+  ""
 );
 
 export const sourceFormFields = {

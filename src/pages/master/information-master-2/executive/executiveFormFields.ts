@@ -59,7 +59,7 @@ const executiveInformation: FormFieldType = createFormConfig(
   "Executive",
   "text",
   ExecutiveValidation,
-  " Executive"
+  ""
 );
 const emailInformation: FormFieldType = createFormConfig(
   "email",
@@ -73,7 +73,7 @@ const cityInformation: FormFieldType = createFormConfig(
   "City",
   "select",
   CityValidation,
-  "Select City",
+  "",
   {}
 );
 const checkboxInformation: FormFieldType = createFormConfig(

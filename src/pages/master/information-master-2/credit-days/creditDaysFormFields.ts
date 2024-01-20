@@ -16,7 +16,7 @@ const creditDays: FormFieldType = createFormConfig(
   "Credit Days",
   "number",
   creditDayValidation,
-  "Credit Days"
+  ""
 );
 
 export const creditDaysFormFields = {

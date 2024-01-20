@@ -102,7 +102,7 @@ const fYearField: FormFieldType = {
     label: "F. Year",
     id: "fYear",
     options: [],
-    placeholder: "Select  ",
+    placeholder: "",
     validation: {
       required: {
         value: true,

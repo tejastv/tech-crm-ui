@@ -7,7 +7,7 @@ const nameField: FormFieldType = {
     label: "Name",
     type: "text",
     id: "name",
-    placeholder: "Enter name ...",
+    placeholder: "",
     validation: {
       required: {
         value: true,
@@ -27,7 +27,7 @@ const addressField: FormFieldType = {
     label: "Address",
     id: "Address",
     multiline: true,
-    placeholder: "Enter Address ...",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -47,7 +47,7 @@ const officeAddressField: FormFieldType = {
     label: "Regd. Office Address",
     id: "officeAddress",
     multiline: true,
-    placeholder: " Enter Regd. Office Address...",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -67,7 +67,7 @@ const telNo: FormFieldType = {
     label: "Tel no.",
     type: "text",
     id: "telNo",
-    placeholder: "Enter Tel No.",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -88,7 +88,7 @@ const faxNo: FormFieldType = {
     label: "Fax No.",
     type: "text",
     id: "name",
-    placeholder: "Enter Fax no ...",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -109,7 +109,7 @@ const emailField: FormFieldType = {
     label: "Email Address",
     type: "email",
     id: "email",
-    placeholder: "Enter email address",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -129,7 +129,7 @@ const website: FormFieldType = {
     label: "Website",
     type: "text",
     id: "website",
-    placeholder: "Enter Your Website",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -150,7 +150,7 @@ const contactPerson: FormFieldType = {
     label: "Contect Person",
     type: "text",
     id: "contectPerson",
-    placeholder: "Enter Your Contact Person",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -170,7 +170,7 @@ const designation: FormFieldType = {
     label: "Designation",
     type: "text",
     id: "designation",
-    placeholder: "Enter designation",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -190,7 +190,7 @@ const zip: FormFieldType = {
     label: "ZIP",
     type: "text",
     id: "zip",
-    placeholder: "Enter Zip",
+    placeholder: "",
     validation: {
       required: {
         value: true,
@@ -210,7 +210,7 @@ const city: FormFieldType = {
     label: "City",
     id: "city",
     options: [],
-    placeholder: "Select city",
+    placeholder: "",
     validation: {
       required: {
         value: true,
@@ -230,7 +230,7 @@ const state: FormFieldType = {
     label: "State",
     id: "state",
     options: [],
-    placeholder: "Select State",
+    placeholder: "",
     validation: {
       required: {
         value: true,
@@ -250,7 +250,7 @@ const country: FormFieldType = {
     label: "Country",
     id: "country",
     options: [],
-    placeholder: "Select Country",
+    placeholder: "",
     validation: {
       required: {
         value: true,
@@ -270,7 +270,7 @@ const hscode: FormFieldType = {
     label: "HS Code",
     type: "text",
     id: "Hs Code",
-    placeholder: "Enter Hs Code",
+    placeholder: "",
     validation: {
       required: {
         value: true,
@@ -290,7 +290,7 @@ const givenName: FormFieldType = {
     label: "GivenName",
     type: "text",
     id: "givenName",
-    placeholder: "Enter Given name...",
+    placeholder: "",
     validation: {
       required: {
         value: true,
@@ -310,7 +310,7 @@ const referenceno: FormFieldType = {
     label: "Reference no.",
     type: "text",
     id: "referenceNo",
-    placeholder: "Enter Reference number...",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -330,7 +330,7 @@ const financialyear: FormFieldType = {
     label: "Financial Year",
     type: "text",
     id: "fincialyear",
-    placeholder: "Enter Fincialyear...",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -350,7 +350,7 @@ const regno: FormFieldType = {
     label: "Reg. no.",
     type: "text",
     id: "regno",
-    placeholder: "Enter Reg. no...",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -394,7 +394,7 @@ const companyType: FormFieldType = {
     id: "companyType",
     className: "custom-control-input",
     options: companyOptions,
-    placeholder: "write a random Select Box",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -409,7 +409,7 @@ const incorporationDate: FormFieldType = {
     name: "incorporationDate",
     label: "Incorporation Date",
     id: "incorporationDate",
-    placeholder: "Select Date",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -426,7 +426,7 @@ const bankers: FormFieldType = {
     type: "textarea",
     id: "bankers",
     multiline: true,
-    placeholder: "Enter Bankers",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -446,7 +446,7 @@ const notes: FormFieldType = {
     type: "textarea",
     id: "notes",
     multiline: true,
-    placeholder: "Enter Notes",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -465,7 +465,7 @@ const cmie: FormFieldType = {
     label: "CMIE",
     type: "text",
     id: "cmie",
-    placeholder: "Enter CMIE",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -484,7 +484,7 @@ const rocStatus: FormFieldType = {
     label: "ROC Status",
     type: "text",
     id: "rocStatus",
-    placeholder: "Enter ROC Status",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -504,7 +504,7 @@ const recodes: FormFieldType = {
     label: "Recodes",
     type: "text",
     id: "recodes",
-    placeholder: "Enter Records",
+    placeholder: "",
     validation: {
       required: {
         value: false,
@@ -524,7 +524,7 @@ const recfin: FormFieldType = {
     label: "Rec Fin",
     type: "text",
     id: "recfin",
-    placeholder: "Enter Rec Fin",
+    placeholder: "",
     validation: {
       required: {
         value: false,

@@ -26,14 +26,14 @@ const bankdeposit: FormFieldType = createFormConfig(
   "Bank",
   "text",
   BankDepositValidation,
-  "Bank Deposit"
+  ""
 );
 const bankDepositAc: FormFieldType = createFormConfig(
   "accountNo",
   "A/c No.",
   "text",
   BankDepositACValidation,
-  "Bank Deposit A/C No."
+  ""
 );
 
 export const bankDepositeFormFields = {

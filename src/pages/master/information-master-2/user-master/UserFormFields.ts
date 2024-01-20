@@ -54,14 +54,14 @@ const userName: FormFieldType = createFormConfig(
   "User Name",
   "text",
   UserValidation,
-  "User Name"
+  ""
 );
 const userType: FormFieldType = createFormConfig(
   "userType",
   "User Type",
   "select",
   UserTypeValidation,
-  "User Type",
+  "",
   userTypeData
 );
 const login: FormFieldType = createFormConfig(
@@ -69,14 +69,14 @@ const login: FormFieldType = createFormConfig(
   "Login Id",
   "text",
   LoginValidation,
-  "Login Id"
+  ""
 );
 const password: FormFieldType = createFormConfig(
   "password",
   "Password",
   "password",
   PasswordValidation,
-  "Password"
+  ""
 );
 
 export const addUserFormFields = {
