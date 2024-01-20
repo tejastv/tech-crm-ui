@@ -101,6 +101,8 @@ const GET_ADD_ALL_ENQUIRY_SEARCH = "transaction/enquiries";
 const GET_PRICE =
   "client/{client_id}/country/{country_id}/serviceType/{serviceTypeId}";
 
+const GET_ALL_INVOICE_GST_ENQUIRES = "transaction/invoice/enquiries";
+const POST_ALL_INVOICE_GST_ENQUIRES = "transaction/auto-bulk-invoices";
 const GET_ADD_SERVICETYPE = "transaction/serviceType";
 const GET_ADD_ENQTYPE = "transaction/enquiryStatus";
 const GET_ADD_ENQSTATUS = "transaction/enquiryStatus";
@@ -113,7 +115,15 @@ const UPDATE_DELETE_ENQUIRY_PI = "transaction/enquiries-pi/{id}";
 // Receipt
 const GET_RECEIPT = "transaction/{fyear}/{invoice_no}/receipts";
 const ADD_UPDATE_DELETE_RECEIPT =
-  "transaction/clients/{clientId}/{fYear}/{invoiceNo}/receipt";
+  "transaction/clients/{clientId}/{fYear}/{invoiceNo}/receipts";
+
+const GET_INVOICES = "transaction/invoices";
+const GET_CALCULATED_DATA_BASED_ON_ENQUIRIES =
+  "transaction/client/{clientId}/invoices/preview";
+const SAVE_INVOICE = "transaction/client/{clientId}/invoices";
+const GET_INVOICE_LIST = "transaction/invoices";
+const GET_ENQ_INVOICE_BASED_ON_CLIENT =
+  "transaction/client/{clientId}/invoice/enquiries";
 
 export const apiUrls = {
   GET_ADD_CONTINENT,
@@ -180,6 +190,8 @@ export const apiUrls = {
   GET_ADD_ACTUAL_BUYER,
   GET_UPDATE_DELETE_ACTUAL_BUYER,
   GET_ADD_ALL_ENQUIRY,
+  GET_ALL_INVOICE_GST_ENQUIRES,
+  POST_ALL_INVOICE_GST_ENQUIRES,
   GET_UPDATE_DELETE_ALL_ENQUIRY,
   GET_ADD_SERVICETYPE,
   GET_ADD_ENQTYPE,
@@ -201,4 +213,10 @@ export const apiUrls = {
 
   GET_RECEIPT,
   ADD_UPDATE_DELETE_RECEIPT,
+
+  GET_INVOICES,
+  GET_CALCULATED_DATA_BASED_ON_ENQUIRIES,
+  SAVE_INVOICE,
+  GET_ENQ_INVOICE_BASED_ON_CLIENT,
+  GET_INVOICE_LIST,
 };

@@ -4,4 +4,5 @@ export interface ButtonType {
   className: string;
   disabled?: boolean;
   name?: string;
+  form?: string;
 }

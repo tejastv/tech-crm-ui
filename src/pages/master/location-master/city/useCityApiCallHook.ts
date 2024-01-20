@@ -21,10 +21,7 @@ export const useCityApiCallHook = () => {
       queryKey: [queryKeys.CITY_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CITY);
-        const data = response.data.data.sort(
-          (a: { cityName: string }, b: { cityName: any }) =>
-            a.cityName.localeCompare(b.cityName)
-        );
+        const data = response.data.data;
         let mapedData = selectOptionsMapMaker(data, "cityId", "cityName");
         return mapedData;
       },

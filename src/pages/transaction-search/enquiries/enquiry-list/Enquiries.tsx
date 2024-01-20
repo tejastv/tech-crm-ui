@@ -53,6 +53,7 @@ export const Enquiries: React.FC = () => {
   const category = queryParams.get("category");
   const [clientOptions, setClientOptions] = useState<ClientType[]>();
   const [enqSearch, setEnqSearch] = useState<EnquiriesSearchType>();
+  const [searchStringClient, setSearchStringClient] = useState<string>("");
   const { data: enquiriesObj, isFetching } = getEnquiries({
     limit: enqLimit,
     offset: enqOffset,
@@ -446,10 +447,14 @@ export const Enquiries: React.FC = () => {
   const { limit, offset } = usePagination();
 
   // client api call
-  const { data: clientData } = getClient({
-    limit,
-    offset,
-  });
+  const { data: clientData } = getClient(
+    {
+      limit,
+      offset,
+      searchString: searchStringClient,
+    },
+    searchStringClient.length === 3
+  );
 
   useEffect(() => {
     if (clientData?.data) {
@@ -527,12 +532,20 @@ export const Enquiries: React.FC = () => {
     }
   });
 
+  const clientOnInputChangeHandler = (clientInputValue: any) => {
+    if (clientInputValue.length === 3) {
+      setSearchStringClient(clientInputValue);
+    }
+    if (clientInputValue.length === 0) {
+      setClientOptions([]);
+      enqSearchFormFields.clientnameField.config.options = [];
+    }
+  };
+
   return (
     <>
       {category !== "search" && (
-        <>
-          <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
-        </>
+        <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       )}
       <BorderLayout heading={config.borderLayoutConfig.heading}>
         {category === "search" && ( // Conditional rendering
@@ -549,9 +562,9 @@ export const Enquiries: React.FC = () => {
                   register={register}
                   control={control}
                   config={enqSearchFormFields.clientnameField}
+                  onInputChange={clientOnInputChangeHandler}
                 />
               </div>
-
               <div className="col-md-4 col-xs-12">
                 <NewInput
                   errors={errors}
@@ -559,7 +572,6 @@ export const Enquiries: React.FC = () => {
                   config={enqSearchFormFields.fromdateField}
                 />
               </div>
-
               <div className="col-md-4 col-xs-12">
                 <NewInput
                   errors={errors}
@@ -580,7 +592,7 @@ export const Enquiries: React.FC = () => {
             </div>
           </form>
         )}
-        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}> {isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

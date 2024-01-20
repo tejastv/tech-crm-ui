@@ -3,19 +3,19 @@ import { createFormConfig } from "@utils/index";
 
 const fromDateValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message:
-      "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
-  },
+  // pattern: {
+  //   value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+  //   message:
+  //     "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
+  // },
 } as ValidationType;
 
 const toDateValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
 } as ValidationType;
@@ -54,14 +54,14 @@ const totalValidation = {
 
 const fYearField: FormFieldType = {
   config: {
-    name: "fyear",
+    name: "fYear",
     label: "F.Year ",
     id: "fyear",
     options: [],
     placeholder: "Select F.year ",
     validation: {
       required: {
-        value: false,
+        value: true,
         message: "Select F.Year",
       },
     },
@@ -69,8 +69,8 @@ const fYearField: FormFieldType = {
 };
 
 const actionOption: MapType<Options> = {
-  new: { value: "new", label: "All Client Datewise" },
-  renew: { value: "renew", label: "Specific Client Datewise" },
+  all: { value: "all", label: "All Client Datewise" },
+  client: { value: "client", label: "Specific Client Datewise" },
 };
 
 const actionOptiontwo: MapType<Options> = {
@@ -90,29 +90,30 @@ const allClientDatewiseField: FormFieldType = createFormConfig(
   actionOption
 );
 
-const myDate = new Date(); // Replace this with your actual date
+// const myDate = new Date(); // Replace this with your actual date
 
 // Extract year, month, and day components
-const year = myDate.getFullYear();
-const month = String(myDate.getMonth() + 1).padStart(2, "0");
-const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
+// const year = myDate.getFullYear();
+// const month = String(myDate.getMonth() + 1).padStart(2, "0");
+// const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 
 // Format the date as "year/mm/dd"
-const formattedDate = `${year}/${month}/${day}`;
+// const formattedDate = `${year}/${month}/${day}`;
 const fromDateField: FormFieldType = createFormConfig(
-  "fromDate",
+  "startDate",
   "From",
   "date",
   fromDateValidation,
-  formattedDate
+  // formattedDate
+  ""
 );
 
 const toDateField: FormFieldType = createFormConfig(
-  "toDate",
+  "endDate",
   "To Date",
   "date",
   toDateValidation,
-  formattedDate
+  ""
 );
 const cityField: FormFieldType = {
   config: {
@@ -132,14 +133,14 @@ const cityField: FormFieldType = {
 
 const clientField: FormFieldType = {
   config: {
-    name: "client",
+    name: "clientId",
     label: "Client ",
     id: "client",
     options: [],
     placeholder: "Select Client ",
     validation: {
       required: {
-        value: false,
+        value: true,
         message: "Select Client",
       },
     },
@@ -185,9 +186,7 @@ export const invoiceListFormFields = {
   cityField,
   clientField,
   allClientDatewiseField,
-
   bobField,
-
   billAmtField,
   stAmtField,
   totalField,

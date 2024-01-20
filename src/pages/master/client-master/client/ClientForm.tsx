@@ -40,6 +40,7 @@ import {
 } from "@utils/index";
 import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 import { useParams } from "react-router-dom";
+import _ from "lodash";
 
 export const ClientForm: React.FC = () => {
   const {
@@ -107,7 +108,7 @@ export const ClientForm: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
-      setCityOptions(Object.values(cityData));
+      setCityOptions(_.orderBy(Object.values(cityData), ["cityName"], ["asc"]));
     }
   }, [cityData]);
 
@@ -120,7 +121,9 @@ export const ClientForm: React.FC = () => {
 
   useEffect(() => {
     if (stateData) {
-      setStateOptions(Object.values(stateData));
+      setStateOptions(
+        _.orderBy(Object.values(stateData), ["stateName"], ["asc"])
+      );
     }
   }, [stateData]);
 
@@ -138,7 +141,9 @@ export const ClientForm: React.FC = () => {
 
   useEffect(() => {
     if (countryData) {
-      setCountryOptions(Object.values(countryData));
+      setCountryOptions(
+        _.orderBy(Object.values(countryData), ["countryName"], ["asc"])
+      );
     }
   }, [countryData]);
 
@@ -163,7 +168,9 @@ export const ClientForm: React.FC = () => {
   // }
   useEffect(() => {
     if (creditDaysData) {
-      setCreditOptions(Object.values(creditDaysData));
+      setCreditOptions(
+        _.orderBy(Object.values(creditDaysData), ["creditPeriod"], ["asc"])
+      );
     }
   }, [creditDaysData]);
 
@@ -180,7 +187,9 @@ export const ClientForm: React.FC = () => {
 
   useEffect(() => {
     if (currencyData) {
-      setCurrencyOptions(Object.values(currencyData));
+      setCurrencyOptions(
+        _.orderBy(Object.values(currencyData), ["currencyType"], ["asc"])
+      );
     }
   }, [currencyData]);
 
@@ -197,7 +206,9 @@ export const ClientForm: React.FC = () => {
 
   useEffect(() => {
     if (executiveData) {
-      setExecutiveOptions(Object.values(executiveData));
+      setExecutiveOptions(
+        _.orderBy(Object.values(executiveData), ["executive"], ["asc"])
+      );
     }
   }, [executiveData]);
 
@@ -214,7 +225,9 @@ export const ClientForm: React.FC = () => {
 
   useEffect(() => {
     if (clientGroupData) {
-      setClientGroupOptions(Object.values(clientGroupData));
+      setClientGroupOptions(
+        _.orderBy(Object.values(clientGroupData), ["groupName"], ["asc"])
+      );
     }
   }, [clientGroupData]);
 
@@ -231,7 +244,9 @@ export const ClientForm: React.FC = () => {
 
   useEffect(() => {
     if (segmentData) {
-      setSegmentOptions(Object.values(segmentData));
+      setSegmentOptions(
+        _.orderBy(Object.values(segmentData), ["segmentName"], ["asc"])
+      );
     }
   }, [segmentData]);
 

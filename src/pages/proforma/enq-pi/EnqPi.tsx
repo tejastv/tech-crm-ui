@@ -40,6 +40,11 @@ export const EnqPi: React.FC = () => {
 
   const columns: ColumnDef<GeneratePiType>[] = [
     {
+      id: "action",
+      cell: (info) => info.getValue(),
+      header: () => <>Action</>,
+    },
+    {
       id: "srNo",
       cell: (info) => info.getValue(),
       header: () => <>Sr no</>,
@@ -290,11 +295,6 @@ export const EnqPi: React.FC = () => {
       accessorFn: (row) => row.remarks,
       header: () => <>Remarks</>,
     },
-    {
-      id: "action",
-      cell: (info) => info.getValue(),
-      header: () => <>Action</>,
-    },
   ];
 
   const deleteProformaClick = (proformaData: GeneratePiType) => {
@@ -313,7 +313,7 @@ export const EnqPi: React.FC = () => {
     config: {
       tableName: "Proforma Master",
       columns: columns,
-      tableData: proformaData ? proformaData : [],
+      tableData: proformaData || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,
@@ -334,7 +334,7 @@ export const EnqPi: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}> {isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

@@ -11,6 +11,7 @@ import {
   NewDatePicker,
   TableType,
   Table,
+  Loader,
 } from "@shared/index";
 import {
   EnqPiType,
@@ -64,6 +65,7 @@ const priceMapper = {
   4: "priceSuperFlash", // Superflash
   6: "priceSME", // SME
 };
+import _ from "lodash";
 
 export const EnqPiForm: React.FC = () => {
   const {
@@ -154,7 +156,7 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
-      setCityOptions(Object.values(cityData));
+      setCityOptions(_.orderBy(Object.values(cityData), ["cityName"], ["asc"]));
     }
   }, [cityData]);
 
@@ -166,7 +168,9 @@ export const EnqPiForm: React.FC = () => {
   const { data: stateData } = getState();
   useEffect(() => {
     if (stateData) {
-      setStateOptions(Object.values(stateData));
+      setStateOptions(
+        _.orderBy(Object.values(stateData), ["stateName"], ["asc"])
+      );
     }
   }, [stateData]);
 
@@ -179,7 +183,9 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (countryData) {
-      setCountryOptions(Object.values(Object.values(countryData)));
+      setCountryOptions(
+        _.orderBy(Object.values(countryData), ["countryName"], ["asc"])
+      );
     }
   }, [countryData]);
 
@@ -259,7 +265,9 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (sourceData) {
-      setSourceOptions(Object.values(sourceData));
+      setSourceOptions(
+        _.orderBy(Object.values(sourceData), ["source"], ["asc"])
+      );
     }
   }, [sourceData]);
 
@@ -273,7 +281,9 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (localSourceData) {
-      setLocalSourceOptions(Object.values(localSourceData));
+      setLocalSourceOptions(
+        _.orderBy(Object.values(localSourceData), ["localSource"], ["asc"])
+      );
     }
   }, [localSourceData]);
 
@@ -315,7 +325,9 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (serviceData) {
-      setServiceOptions(Object.values(serviceData));
+      setServiceOptions(
+        _.orderBy(Object.values(serviceData), ["serviceType"], ["asc"])
+      );
     }
   }, [serviceData]);
 
@@ -332,7 +344,9 @@ export const EnqPiForm: React.FC = () => {
 
   useEffect(() => {
     if (enqStatusData) {
-      setEnqStatusOptions(Object.values(enqStatusData));
+      setEnqStatusOptions(
+        _.orderBy(Object.values(enqStatusData), ["enquiryStatus"], ["asc"])
+      );
     }
   }, [enqStatusData]);
 
@@ -743,22 +757,18 @@ export const EnqPiForm: React.FC = () => {
       cmie: enqData.cmie,
       email: enqData.email,
     };
-    if (companyData && enqData?.companyId) {
-      let data = companyData.data[enqData.companyId];
-      data &&
-        (enqFormData.companyId = {
-          label: data.companyName,
-          value: data.companyId,
-        });
+    if (enqData?.companyId) {
+      enqFormData.companyId = {
+        label: enqData.companyName,
+        value: enqData.companyId,
+      };
     }
-    if (clientData && enqData?.clientId) {
-      let data = clientData.data[enqData.clientId];
-      data &&
-        ((enqFormData.clientId = {
-          label: data.clientName,
-          value: data.clientId,
-        }),
-        getClientValue(data.clientId));
+    if (enqData?.clientId) {
+      enqFormData.clientId = {
+        label: enqData.clientName,
+        value: enqData.clientId,
+      };
+      getClientValue(enqData.clientId);
     }
     if (serviceData && enqData?.serviceTypeId) {
       let data = serviceData[enqData.serviceTypeId];
@@ -1119,7 +1129,10 @@ export const EnqPiForm: React.FC = () => {
                   register={register} config={enqPiFormFields.enqPrice} /> */}
               </div>
               <div className="col-md-6 col-xs-12">
-                {!isFetching && <Table config={tableConfig.config}></Table>}
+                <Table config={tableConfig.config}>
+                  {" "}
+                  {isFetching && <Loader />}
+                </Table>
               </div>
               {/* <div className="card-title">
                 <InputWithText

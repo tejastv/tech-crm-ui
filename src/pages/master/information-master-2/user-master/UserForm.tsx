@@ -24,7 +24,7 @@ import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 import Form from "react-bootstrap/esm/Form";
 
-export const AddUpdateUser: React.FC = () => {
+export const UserForm: React.FC = () => {
   const params = useParams();
   const { state: userData } = useLocation();
   const cardConfig = {
@@ -272,7 +272,9 @@ export const AddUpdateUser: React.FC = () => {
                 Login Id: {userData.username}
               </Form.Label>
             </div>
-            {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+            <Table config={tableConfig.config}>
+              {isFetching && <Loader />}
+            </Table>
           </BorderLayout>
         ) : null}
         <BorderLayout heading={cardConfig.formActionsConfig.heading}>

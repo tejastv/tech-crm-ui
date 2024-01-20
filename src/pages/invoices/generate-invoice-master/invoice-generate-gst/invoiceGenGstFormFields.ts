@@ -17,10 +17,10 @@ const gstnValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
-    message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
-  },
+  // pattern: {
+  //   value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+  //   message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
+  // },
 } as ValidationType;
 
 const gstnActualBuyreValidation = {
@@ -28,32 +28,33 @@ const gstnActualBuyreValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
-    message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
-  },
+  // pattern: {
+  //   value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+  //   message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
+  // },
 } as ValidationType;
 
-const actualBuyreValidation = {
-  required: {
-    value: false,
-    message: "{label} field is rquired",
-  },
-  pattern: {
-    value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
-    message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
-  },
-} as ValidationType;
+// const actualBuyreValidation = {
+//   required: {
+//     value: false,
+//     message: "{label} field is rquired",
+//   },
+//   pattern: {
+//     value: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+//     message: "Invalid GSTN format. The correct format is: 12ABCDE3456F7Z8",
+//   },
+// } as ValidationType;
+
 const fromDateValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-    message:
-      "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
-  },
+  // pattern: {
+  //   value: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+  //   message:
+  //     "Invalid date format. Please use a valid date format (dd/mm/yyyy).",
+  // },
 } as ValidationType;
 
 const countryValidation = {
@@ -61,10 +62,10 @@ const countryValidation = {
     value: false,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message: "Please select a {label}",
-  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message: "Please select a {label}",
+  // },
 } as ValidationType;
 
 const codeValidation = {
@@ -83,7 +84,7 @@ const gstValidation = {
 
 const toDateValidation = {
   required: {
-    value: false,
+    value: true,
     message: "{label} field is rquired",
   },
 } as ValidationType;
@@ -93,11 +94,11 @@ const symbolValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[a-zA-Z0-9\-]+$/,
-    message:
-      "Invalid symbol format. Please use alphanumeric characters or hyphens only.",
-  },
+  // pattern: {
+  //   value: /^[a-zA-Z0-9\-]+$/,
+  //   message:
+  //     "Invalid symbol format. Please use alphanumeric characters or hyphens only.",
+  // },
 } as ValidationType;
 
 const currencyInWordValidation = {
@@ -105,44 +106,44 @@ const currencyInWordValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[A-Za-z\s]+$/, // Allow only letters and spaces
-    message:
-      "Invalid Currency in Word format. Please enter a valid currency name (e.g., USD).",
-  },
+  // pattern: {
+  //   value: /^[A-Za-z\s]+$/, // Allow only letters and spaces
+  //   message:
+  //     "Invalid Currency in Word format. Please enter a valid currency name (e.g., USD).",
+  // },
 } as ValidationType;
 const invoiceNoValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[A-Za-z]{3}\d{3}$/, // Match three letters followed by three digits
-    message:
-      "Invalid Invoice Number format. Please enter a valid invoice number (e.g., ABC123).",
-  },
+  // pattern: {
+  //   value: /^[A-Za-z]{3}\d{3}$/, // Match three letters followed by three digits
+  //   message:
+  //     "Invalid Invoice Number format. Please enter a valid invoice number (e.g., ABC123).",
+  // },
 } as ValidationType;
 const amountValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{2})?$/, // Match digits with optional two decimal places
-    message:
-      "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{2})?$/, // Match digits with optional two decimal places
+  //   message:
+  //     "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
+  // },
 } as ValidationType;
 const disAmountValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{2})?$/, // Match digits with optional two decimal places
-    message:
-      "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{2})?$/, // Match digits with optional two decimal places
+  //   message:
+  //     "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
+  // },
 } as ValidationType;
 
 const manualValidation = {
@@ -150,11 +151,11 @@ const manualValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const stValidation = {
@@ -162,11 +163,11 @@ const stValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const stAmountValidation = {
@@ -174,11 +175,11 @@ const stAmountValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{2})?$/, // Match digits with optional two decimal places
-    message:
-      "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{2})?$/, // Match digits with optional two decimal places
+  //   message:
+  //     "Invalid amount format. Please enter a valid amount (e.g., 123.45).",
+  // },
 } as ValidationType;
 
 const cgstPerValidation = {
@@ -186,11 +187,11 @@ const cgstPerValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const cgstValidation = {
@@ -198,11 +199,11 @@ const cgstValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const sgstPerValidation = {
@@ -210,11 +211,11 @@ const sgstPerValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid SGST% format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid SGST% format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const igstPerValidation = {
@@ -222,11 +223,11 @@ const igstPerValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid IGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid IGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const sgstValidation = {
@@ -234,11 +235,11 @@ const sgstValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid SGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid SGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const igstValidation = {
@@ -246,11 +247,11 @@ const igstValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d{1,2})?$/,
-    message:
-      "Invalid IGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d{1,2})?$/,
+  //   message:
+  //     "Invalid IGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const subTotalValidation = {
@@ -258,55 +259,55 @@ const subTotalValidation = {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^[0-9]+(\.[0-9]+)?$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^[0-9]+(\.[0-9]+)?$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 const sTaxValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d+)?%$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d+)?%$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 const eCessValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d+)?%$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d+)?%$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 const krishiCessValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d+(\.\d+)?%$/,
-    message:
-      "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d+(\.\d+)?%$/,
+  //   message:
+  //     "Invalid CGST format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 const totalValidation = {
   required: {
     value: true,
     message: "{label} field is rquired",
   },
-  pattern: {
-    value: /^\d*\.?\d+$/,
-    message:
-      "Invalid total format. Please use a valid number format (e.g., 5 or 5.5).",
-  },
+  // pattern: {
+  //   value: /^\d*\.?\d+$/,
+  //   message:
+  //     "Invalid total format. Please use a valid number format (e.g., 5 or 5.5).",
+  // },
 } as ValidationType;
 
 const actionOption: MapType<Options> = {
@@ -318,9 +319,9 @@ const actionOptiontwo: MapType<Options> = {
   new: { value: "y", label: "Do Not Compare Report with Invoice Date" },
 };
 
-const clientField: FormFieldType = {
+const client: FormFieldType = {
   config: {
-    name: "client",
+    name: "clientId",
     label: "Client ",
     id: "client",
     options: [],
@@ -329,6 +330,22 @@ const clientField: FormFieldType = {
       required: {
         value: true,
         message: "Select Client",
+      },
+    },
+  },
+};
+
+const actualBuyreField: FormFieldType = {
+  config: {
+    name: "actualBuyerId",
+    label: "Actual Buyer",
+    id: "actualBuyer",
+    options: [],
+    placeholder: "Select Actual Buyer ",
+    validation: {
+      required: {
+        value: true,
+        message: "Select Actual Buyer",
       },
     },
   },
@@ -355,13 +372,6 @@ const gstnActualBuyreField: FormFieldType = createFormConfig(
   gstnActualBuyreValidation,
   ""
 );
-const actualBuyreField: FormFieldType = createFormConfig(
-  "actualbuyre",
-  "Actual Buyre",
-  "text",
-  actualBuyreValidation,
-  ""
-);
 
 const myDate = new Date(); // Replace this with your actual date
 
@@ -373,8 +383,8 @@ const day = String(myDate.getDate()).padStart(2, "0"); // Get the day (e.g., 07)
 // Format the date as "year/mm/dd"
 const formattedDate = `${year}/${month}/${day}`;
 const fromDateField: FormFieldType = createFormConfig(
-  "fromDate",
-  "From",
+  "startDate",
+  "From Date",
   "date",
   fromDateValidation,
   formattedDate
@@ -442,7 +452,7 @@ const gstActualBuyreField: FormFieldType = createFormConfig(
 );
 
 const toDateField: FormFieldType = createFormConfig(
-  "toDate",
+  "endDate",
   "To Date",
   "date",
   toDateValidation,
@@ -467,7 +477,7 @@ const currencyInwardField: FormFieldType = createFormConfig(
 
 const fYearField: FormFieldType = {
   config: {
-    name: "fyear",
+    name: "fYear",
     label: "F.Year ",
     id: "fyear",
     options: [],
@@ -482,7 +492,7 @@ const fYearField: FormFieldType = {
 };
 
 const invoiceNoField: FormFieldType = createFormConfig(
-  "invoiceno",
+  "invoiceNo",
   "Invoice No.",
   "text",
   invoiceNoValidation,
@@ -508,7 +518,7 @@ const amountField: FormFieldType = createFormConfig(
   true
 );
 const disAmountField: FormFieldType = createFormConfig(
-  "disamt",
+  "discount",
   "Dis.Amt",
   "text",
   disAmountValidation,
@@ -526,7 +536,7 @@ const stField: FormFieldType = createFormConfig(
 );
 
 const cgstPerField: FormFieldType = createFormConfig(
-  "cgstper",
+  "cgstPer",
   "CGST%",
   "text",
   cgstPerValidation,
@@ -544,7 +554,7 @@ const stAmountField: FormFieldType = createFormConfig(
 );
 
 const cgstField: FormFieldType = createFormConfig(
-  "cgst",
+  "cgstAmount",
   "CGST",
   "text",
   cgstValidation,
@@ -571,7 +581,7 @@ const doNotField: FormFieldType = createFormConfig(
 );
 
 const subtotalField: FormFieldType = createFormConfig(
-  "subtotal",
+  "subTotal",
   "Sub Total",
   "text",
   subTotalValidation,
@@ -581,7 +591,7 @@ const subtotalField: FormFieldType = createFormConfig(
 );
 
 const sGstPerField: FormFieldType = createFormConfig(
-  "sgstper",
+  "sgstPer",
   "SGST%",
   "text",
   sgstPerValidation,
@@ -591,7 +601,7 @@ const sGstPerField: FormFieldType = createFormConfig(
 );
 
 const iGstPerField: FormFieldType = createFormConfig(
-  "igstper",
+  "igstPer",
   "IGST%",
   "text",
   igstPerValidation,
@@ -601,7 +611,7 @@ const iGstPerField: FormFieldType = createFormConfig(
 );
 
 const sgstField: FormFieldType = createFormConfig(
-  "sgst",
+  "sgstAmount",
   "SGST",
   "text",
   sgstValidation,
@@ -611,7 +621,7 @@ const sgstField: FormFieldType = createFormConfig(
 );
 
 const igstField: FormFieldType = createFormConfig(
-  "igst",
+  "igstAmount",
   "IGST",
   "text",
   igstValidation,
@@ -650,23 +660,27 @@ const totalField: FormFieldType = createFormConfig(
   true
 );
 
+// export const fetchEnquiryFormFields = {
+
+// };
+
 export const invoiceGenGstFormFields = {
-  clientField,
+  fYearField,
+  client,
+  actualBuyreField,
+  fromDateField,
+  toDateField,
   currencyField,
   gstnField,
   gstnActualBuyreField,
-  actualBuyreField,
-  fromDateField,
   countryField,
   stateField,
   stateActualBuyreField,
   codeField,
   gstField,
   gstActualBuyreField,
-  toDateField,
   symbolField,
   currencyInwardField,
-  fYearField,
   invoiceNoField,
   manualField,
   amountField,

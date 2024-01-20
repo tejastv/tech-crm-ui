@@ -26,13 +26,10 @@ export const AddBulkEnquiries: React.FC = () => {
     formState: { errors },
   } = useForm<any>();
   const { getCompany, deleteCompanyMutation } = useCompanyApiCallHook();
-  
-  const {
-    limit,
-    offset,
-  } = usePagination();
-  
-  const { data: companyData, isLoading } = getCompany({
+
+  const { limit, offset } = usePagination();
+
+  const { data: companyData, isFetching } = getCompany({
     limit,
     offset,
   });
@@ -154,7 +151,7 @@ export const AddBulkEnquiries: React.FC = () => {
               </div>
             </div>
           </form>
-          {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+          <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
         </BorderLayout>
       </div>
     </>

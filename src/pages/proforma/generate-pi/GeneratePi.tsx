@@ -15,7 +15,7 @@ import { GeneratePiType, useProformaApiCallHook } from "..";
 
 export const GeneratePi: React.FC = () => {
   const { getEnquiryPi, deleteProformaMutation } = useProformaApiCallHook();
-  const { data: proformaData, isLoading } = getEnquiryPi();
+  const { data: proformaData, isFetching } = getEnquiryPi();
   const { mutateAsync: deleteProforma } = deleteProformaMutation();
   const navigate = useNavigate();
 
@@ -334,7 +334,7 @@ export const GeneratePi: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

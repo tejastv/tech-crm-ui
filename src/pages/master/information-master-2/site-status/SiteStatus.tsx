@@ -62,7 +62,7 @@ export const SiteStatus: React.FC = () => {
 
   const editSiteStatusClick = (siteStatusData: SiteStatusType) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", siteStatusData.id.toString()), {
-      state: null
+      state: null,
     });
   };
 
@@ -91,7 +91,7 @@ export const SiteStatus: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-      {!isFetching ? <Table config={tableConfig.config}/> :  <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

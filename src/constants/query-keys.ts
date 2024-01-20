@@ -8,6 +8,7 @@ const EXECUTIVE_DATA = "continent-data";
 const COMPANY_MASTER_DATA = "companyMaster-data";
 const PRICE_DATA = "price-data";
 const FIN_YEAR_DATA = "fin-year-data";
+const FORMATED_FIN_YEAR_DATA = "formated-fin-year-data";
 const INDUSTRY_DATA = "industry-data";
 const ACTUAL_BUYER_DATA = "actual-buyer-data";
 const CITY_WISE_GROUP_DATA = "city-wise-group-data";
@@ -97,4 +98,5 @@ export const queryKeys = {
   CURRENCY_WISE_PRICE,
   RECEIPT_DATA,
   PROFORMA_DATA,
+  FORMATED_FIN_YEAR_DATA,
 };

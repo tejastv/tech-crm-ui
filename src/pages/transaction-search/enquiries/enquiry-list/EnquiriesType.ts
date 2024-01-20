@@ -1,5 +1,6 @@
 export interface EnquiriesType {
   id?: number;
+  partyName: string;
   refNo: string;
   clientRef: string;
   enqId: number;
@@ -61,7 +62,6 @@ export interface EnquiriesType {
   clientAddress: string;
   companyName: string;
   industryName: string;
-  partyName: string;
   siteStatus: string;
   clientCityName: string;
   clientCountryName: string;

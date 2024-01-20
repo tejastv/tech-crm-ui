@@ -339,7 +339,7 @@ export const StdPriceListClient: React.FC = () => {
         </BorderLayout>
       </form>
       <BorderLayout heading={cardConfig.borderLayoutConfig.heading}>
-        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </Card>
   );

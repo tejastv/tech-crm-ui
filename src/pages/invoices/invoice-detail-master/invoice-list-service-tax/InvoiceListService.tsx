@@ -11,7 +11,10 @@ import {
   NewInput,
   NewCheckbox,
 } from "@shared/index";
-import { InvoiceGenGstType, invoiceGenGstFormFields } from "@invoices/index";
+import {
+  InvoiceGenGstTableType,
+  invoiceGenGstFormFields,
+} from "@invoices/index";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const InvoiceListService: React.FC = () => {
@@ -43,7 +46,7 @@ export const InvoiceListService: React.FC = () => {
     };
   }, []);
 
-  const columns: ColumnDef<InvoiceGenGstType>[] = [
+  const columns: ColumnDef<InvoiceGenGstTableType>[] = [
     {
       id: "srNo",
       // cell: (info) => info.getValue(),
@@ -110,7 +113,7 @@ export const InvoiceListService: React.FC = () => {
     },
   ];
 
-  const tableConfig: TableType<InvoiceGenGstType> = {
+  const tableConfig: TableType<InvoiceGenGstTableType> = {
     config: {
       tableName: "generate Pi",
       columns: columns,
@@ -154,7 +157,7 @@ export const InvoiceListService: React.FC = () => {
                 errors={errors}
                 register={register}
                 control={control}
-                config={invoiceGenGstFormFields.clientField}
+                config={invoiceGenGstFormFields.client}
               />
             </div>
             <div className="row">

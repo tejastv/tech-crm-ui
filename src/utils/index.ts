@@ -8,3 +8,5 @@ export * from "./createFormConfig";
 export * from "./titleCase";
 export * from "./dateFormatter.ts";
 export * from "./returnFormatedObjectElseEmptyArray.ts";
+export { addDaysInDate } from "./addDaysInDate.ts";
+export { downloadExcel } from "./generateInvoice.ts";

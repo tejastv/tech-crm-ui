@@ -11,6 +11,7 @@ import {
   NewSelect,
   NewInput,
   NewDatePicker,
+  Loader,
 } from "@shared/index";
 import {
   EnqueryFormType,
@@ -44,6 +45,7 @@ import {
   useStateApiCallHook,
 } from "@pages/master";
 import {
+  addDaysInDate,
   cleanupObject,
   returnFormatedObjectElseEmptyArray,
   selectOptionsMaker,
@@ -156,7 +158,7 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
-      setCityOptions(Object.values(cityData));
+      setCityOptions(_.orderBy(Object.values(cityData), ["cityName"], ["asc"]));
     }
   }, [cityData]);
 
@@ -168,7 +170,9 @@ export const EnquiryForm: React.FC = () => {
   const { data: stateData } = getState();
   useEffect(() => {
     if (stateData) {
-      setStateOptions(Object.values(stateData));
+      setStateOptions(
+        _.orderBy(Object.values(stateData), ["stateName"], ["asc"])
+      );
     }
   }, [stateData]);
 
@@ -181,7 +185,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (countryData) {
-      setCountryOptions(Object.values(Object.values(countryData)));
+      setCountryOptions(
+        _.orderBy(Object.values(countryData), ["countryName"], ["asc"])
+      );
     }
   }, [countryData]);
 
@@ -206,7 +212,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (clientData?.data) {
-      setClientOptions(Object.values(clientData.data));
+      setClientOptions(
+        _.orderBy(Object.values(clientData.data), ["clientName"], ["asc"])
+      );
     }
   }, [clientData?.data]);
 
@@ -234,7 +242,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (actualBuyerData) {
-      setActualBuyerOptions(Object.values(actualBuyerData));
+      setActualBuyerOptions(
+        _.orderBy(Object.values(actualBuyerData), ["partyName"], ["asc"])
+      );
     }
   }, [actualBuyerData]);
 
@@ -251,7 +261,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (sourceData) {
-      setSourceOptions(Object.values(sourceData));
+      setSourceOptions(
+        _.orderBy(Object.values(sourceData), ["source"], ["asc"])
+      );
     }
   }, [sourceData]);
 
@@ -265,7 +277,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (localSourceData) {
-      setLocalSourceOptions(Object.values(localSourceData));
+      setLocalSourceOptions(
+        _.orderBy(Object.values(localSourceData), ["localSource"], ["asc"])
+      );
     }
   }, [localSourceData]);
 
@@ -289,7 +303,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (companyData?.data) {
-      setCompanyOptions(Object.values(companyData.data));
+      setCompanyOptions(
+        _.orderBy(Object.values(companyData.data), ["companyName"], ["asc"])
+      );
     }
   }, [companyData?.data]);
 
@@ -307,7 +323,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (serviceData) {
-      setServiceOptions(Object.values(serviceData));
+      setServiceOptions(
+        _.orderBy(Object.values(serviceData), ["serviceType"], ["asc"])
+      );
     }
   }, [serviceData]);
 
@@ -324,7 +342,9 @@ export const EnquiryForm: React.FC = () => {
 
   useEffect(() => {
     if (enqStatusData) {
-      setEnqStatusOptions(Object.values(enqStatusData));
+      setEnqStatusOptions(
+        _.orderBy(Object.values(enqStatusData), ["enquiryStatus"], ["asc"])
+      );
     }
   }, [enqStatusData]);
 
@@ -754,22 +774,19 @@ export const EnquiryForm: React.FC = () => {
       cmie: enqData.cmie,
       email: enqData.email,
     };
-    if (companyData && enqData?.companyId) {
-      let data = companyData.data[enqData.companyId];
-      data &&
-        (enqFormData.companyId = {
-          label: data.companyName,
-          value: data.companyId,
-        });
+
+    if (enqData?.companyId) {
+      enqFormData.companyId = {
+        label: enqData.companyName,
+        value: enqData.companyId,
+      };
     }
-    if (clientData && enqData?.clientId) {
-      let data = clientData.data[enqData.clientId];
-      data &&
-        ((enqFormData.clientId = {
-          label: data.clientName,
-          value: data.clientId,
-        }),
-        getClientValue(data.clientId));
+    if (enqData?.clientId) {
+      enqFormData.clientId = {
+        label: enqData.clientName,
+        value: enqData.clientId,
+      };
+      getClientValue(enqData.clientId);
     }
     if (serviceData && enqData?.serviceTypeId) {
       let data = serviceData[enqData.serviceTypeId];
@@ -867,6 +884,7 @@ export const EnquiryForm: React.FC = () => {
           value: data.localSourceId,
         });
     }
+    console.log(enqData, enqFormData);
     return enqFormData;
   };
 
@@ -880,15 +898,9 @@ export const EnquiryForm: React.FC = () => {
     }
   });
 
-  const addDays = (date: any, days: any) => {
-    var result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return new Date(result).toISOString().split("T")[0];
-  };
-
   const onReceivedDateChangeHandler = (date: string) => {
     if (enquiryFormFields.enqDueOn.config.name === "dueDate") {
-      setValue(enquiryFormFields.enqDueOn.config.name, addDays(date, 4));
+      setValue(enquiryFormFields.enqDueOn.config.name, addDaysInDate(date, 4));
     }
   };
 
@@ -1089,7 +1101,7 @@ export const EnquiryForm: React.FC = () => {
                 control={control}
                 onChange={enqDueDateOnChange}
                 config={enquiryFormFields.enqDueOn}
-                defaultValue={addDays(new Date(), 4)}
+                defaultValue={addDaysInDate(new Date(), 4)}
               />
               <NewSelect
                 errors={errors}
@@ -1156,7 +1168,10 @@ export const EnquiryForm: React.FC = () => {
                   register={register} config={enquiryFormFields.enqPrice} /> */}
             </div>
             <div className="col-md-6 col-xs-12">
-              {!isFetching && <Table config={tableConfig.config}></Table>}
+              <Table config={tableConfig.config}>
+                {" "}
+                {isFetching && <Loader />}
+              </Table>
             </div>
             <div className="card-title">
               <InputWithText

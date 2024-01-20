@@ -4,6 +4,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useAuth, useToaster } from ".";
 
 import { STATUS_CODES } from "@constants/util-constant";
+import { apiUrls } from "@constants/index";
 
 export const useAxios = () => {
   const navigate = useNavigate();
@@ -52,8 +53,11 @@ export const useAxios = () => {
       ) {
         successMessageToaster("Deleted Successfully..!");
       }
-      if (response.status == STATUS_CODES.CODE_201) {
-        successMessageToaster("Added Successfully..!");
+      if (
+        response.status == STATUS_CODES.CODE_201 &&
+        response.config.url !== apiUrls.POST_ALL_INVOICE_GST_ENQUIRES
+      ) {
+        successMessageToaster("Saved Successfully..!");
       }
       if (response.status == STATUS_CODES.CODE_202) {
         successMessageToaster("Updated Successfully..!");
@@ -74,7 +78,16 @@ export const useAxios = () => {
         errorMessageToaster(error.response?.data.error, "single");
       }
       if (error.response?.status === STATUS_CODES.CODE_404) {
-        errorMessageToaster(error.response?.data.error, "single");
+        if (
+          error.response.data.informationMessage &&
+          error.response.data.informationMessage.length > 0
+        ) {
+          error.response.data.informationMessage.forEach((err: any) => {
+            errorMessageToaster(err.message, "single");
+          });
+        } else {
+          errorMessageToaster(error.response?.data.error, "single");
+        }
       }
       if (error.response?.status === STATUS_CODES.CODE_401) {
         removeItem("user");

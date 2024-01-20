@@ -28,6 +28,11 @@ export const useClientApiCallHook = () => {
           offset: queryObject.offset,
           searchString: "",
         } as any;
+        console.log(queryObject.cityId);
+
+        if (queryObject.cityId != undefined) {
+          params.cityId = queryObject.cityId;
+        }
         if (queryObject.searchString) {
           params.searchString = queryObject.searchString;
         } else {

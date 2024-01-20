@@ -30,7 +30,7 @@ export const useProformaApiCallHook = () => {
           apiUrls.GET_ADD_ENQUIRY_PI,
           callFormConfig
         );
-        return response.data.data;
+        return response.data.data.records;
       },
       staleTime: Infinity,
     });

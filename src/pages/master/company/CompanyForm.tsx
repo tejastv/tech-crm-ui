@@ -31,6 +31,7 @@ import {
   cleanupObject,
   returnFormatedObjectElseEmptyArray,
 } from "@utils/index";
+import _ from "lodash";
 
 export const CompanyForm: React.FC = () => {
   const {
@@ -73,7 +74,7 @@ export const CompanyForm: React.FC = () => {
 
   useEffect(() => {
     if (cityData) {
-      setCityOptions(Object.values(cityData));
+      setCityOptions(_.orderBy(Object.values(cityData), ["cityName"], ["asc"]));
     }
   }, [cityData]);
 
@@ -86,7 +87,9 @@ export const CompanyForm: React.FC = () => {
 
   useEffect(() => {
     if (stateData) {
-      setStateOptions(Object.values(stateData));
+      setStateOptions(
+        _.orderBy(Object.values(stateData), ["stateName"], ["asc"])
+      );
     }
   }, [stateData]);
 
@@ -104,7 +107,9 @@ export const CompanyForm: React.FC = () => {
 
   useEffect(() => {
     if (countryData) {
-      setCountryOptions(Object.values(countryData));
+      setCountryOptions(
+        _.orderBy(Object.values(countryData), ["countryName"], ["asc"])
+      );
     }
   }, [countryData]);
 

@@ -96,7 +96,7 @@ export const Currency: React.FC = () => {
 
   const editCurrencyClick = (currencyData: any) => {
     navigate(COMMON_ROUTES.EDIT.replace(":id", currencyData.currencyId), {
-      state: null
+      state: null,
     });
   };
 
@@ -125,7 +125,7 @@ export const Currency: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isFetching ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );

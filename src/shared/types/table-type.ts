@@ -23,4 +23,8 @@ export interface TableType<T> {
     onPrevButtonClick?: () => void;
     onRemoveRow?: (data: any) => void;
   };
+  data?: any;
+  selectedRows?: any;
+  setSelectedRows?: any;
+  tableRef?: any;
 }

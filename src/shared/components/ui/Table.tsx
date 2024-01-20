@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
+import React, { PropsWithChildren, useEffect, useRef } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -7,47 +7,24 @@ import {
   flexRender,
   SortingState,
   getSortedRowModel,
-  RowData,
 } from "@tanstack/react-table";
 import { Button, DebouncedInput, TableType } from "@shared/index";
-import * as XLSX from "xlsx";
+
 import * as pdfMake from "pdfmake/build/pdfmake";
 // import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { Alignment, TDocumentDefinitions } from "pdfmake/interfaces";
 import { useToaster } from "@hooks/useToaster";
-
-declare module "@tanstack/react-table" {
-  interface TableMeta<TData extends RowData> {
-    updateData: (rowIndex: number, columnId: string, value: unknown) => void;
-  }
-}
-
-const useSkipper = () => {
-  const shouldSkipRef = React.useRef(true);
-  const shouldSkip = shouldSkipRef.current;
-
-  // Wrap a function with this to skip a pagination reset temporarily
-  const skip = React.useCallback(() => {
-    shouldSkipRef.current = false;
-  }, []);
-
-  React.useEffect(() => {
-    shouldSkipRef.current = true;
-  });
-
-  return [shouldSkip, skip] as const;
-};
+import { downloadExcel } from "@utils/generateInvoice";
 
 export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [autoResetPageIndex, skipAutoResetPageIndex] = useSkipper();
-  const tableRef = useRef(null);
-  // const data = props.config.tableData;
-  const [data, setData] = useState<Array<any>>([]);
-  useEffect(() => {
-    setData([...props.config.tableData]);
-  }, [props.config.tableData]);
+  const internalTableRef = useRef(null);
+  const data = props.config.tableData;
+  // const [data, setData] = useState<Array<any>>([]);
+  // useEffect(() => {
+  //   setData([...props.config.tableData]);
+  // }, [props.config.tableData]);
   const columns = props.config.columns;
   const pageSizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   const { errorMessageToaster, successMessageToaster } = useToaster();
@@ -64,24 +41,6 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     columns,
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setGlobalFilter,
-    autoResetPageIndex,
-    meta: {
-      updateData: (rowIndex, columnId, value) => {
-        // Skip page index reset until after next rerender
-        skipAutoResetPageIndex();
-        setData((old) =>
-          old.map((row, index) => {
-            if (index === rowIndex) {
-              return {
-                ...old[rowIndex]!,
-                [columnId]: value,
-              };
-            }
-            return row;
-          })
-        );
-      },
-    },
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     debugTable: true,
@@ -99,6 +58,21 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
   });
+
+  const filteredSelectedRows = table.getFilteredSelectedRowModel().flatRows;
+
+  useEffect(() => {
+    if (props.setSelectedRows) {
+      const originIds = filteredSelectedRows.map((row) => row.original);
+      props.setSelectedRows(originIds);
+    }
+  }, [props.setSelectedRows, filteredSelectedRows]);
+
+  useEffect(() => {
+    if (props.tableRef) {
+      props.tableRef.current = internalTableRef.current;
+    }
+  }, [props.tableRef]);
 
   const onTableDeleteBtnClick = (data: any) => {
     props.config.onDeleteClick && props.config.onDeleteClick(data);
@@ -129,7 +103,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   };
 
   const copyTableToClipboard = async (): Promise<void> => {
-    const table: any = tableRef.current;
+    const table: any = internalTableRef.current;
     try {
       const tableText = table.innerText;
       const copiedText = `Mirainform - CRM Software - ${props.config.tableName}\n\n${tableText}`;
@@ -143,7 +117,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   };
 
   const downloadCSV = (): void => {
-    const table: any = tableRef.current;
+    const table: any = internalTableRef.current;
     const rows: any = Array.from(table.querySelectorAll("tr"));
     const headers: any = Array.from(rows[0].querySelectorAll("th")).map(
       (header: any) => header.textContent
@@ -167,33 +141,12 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
     URL.revokeObjectURL(url);
   };
 
-  const generateExcelData = () => {
-    const table = tableRef.current;
-    const ws = XLSX.utils.table_to_sheet(table);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-    return XLSX.write(wb, { bookType: "xlsx", type: "array" });
-  };
-
-  const downloadExcel = () => {
-    const excelData = generateExcelData();
-    const blob = new Blob([excelData], {
-      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `Mirainform-CRM Software-${props.config.tableName}.xlsx`;
-    a.click();
-    window.URL.revokeObjectURL(url);
-  };
-
   const downloadPDF = () => {
     if (pdfMake) {
       // (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
     }
     const companyName = `Mirainform - CRM Software - ${props.config.tableName}`;
-    const table: any = tableRef.current;
+    const table: any = internalTableRef.current;
     const rows: any = Array.from(table.querySelectorAll("tr"));
     const headers: any = Array.from(rows[0].querySelectorAll("th")).map(
       (header: any) => ({
@@ -264,7 +217,7 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
 
   const handlePrint = () => {
     const companyName = `Mirainform - CRM Software - ${props.config.tableName}`;
-    const table: any = tableRef.current;
+    const table: any = internalTableRef.current;
     const rows: any = Array.from(table.querySelectorAll("tr"));
     const headers: any = Array.from(rows[0].querySelectorAll("th")).map(
       (header: any) => header.textContent
@@ -335,399 +288,413 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   };
 
   const handleSearchChange = (value: any) => {
-    if(clientSideSearch) {
+    if (clientSideSearch) {
       setGlobalFilter(String(value));
     } else {
       props.config.onSearchChange && props.config.onSearchChange(value);
     }
   };
-  
+
   return (
-    <>
-      <div className="p-2">
-        <div className="h-2" />
-        <div className="table-responsive">
-          <div
-            id="file_export_wrapper"
-            className="dataTables_wrapper container-fluid dt-bootstrap4 no-footer"
-          >
-            {props.config.pagination?.showItemCountDropdown && (
-              <div className="dataTables_length">
-                <label>Show </label>
-                <select
-                  value={
-                    props.config.pagination?.pageSize ||
-                    table.getState().pagination.pageSize
-                  }
-                  onChange={(e) => {
-                    table.setPageSize(Number(e.target.value));
-                  }}
+    <div className="p-2">
+      <div className="h-2" />
+      <div className="table-responsive">
+        <div
+          id="file_export_wrapper"
+          className="dataTables_wrapper container-fluid dt-bootstrap4 no-footer"
+        >
+          {props.config.pagination?.showItemCountDropdown && (
+            <div className="dataTables_length">
+              <label>Show </label>
+              <select
+                value={
+                  props.config.pagination?.pageSize ||
+                  table.getState().pagination.pageSize
+                }
+                onChange={(e) => {
+                  table.setPageSize(Number(e.target.value));
+                }}
+              >
+                {pageSizes.map((pageSize) => (
+                  <option key={`pageSize_${pageSize}`} value={pageSize}>
+                    {pageSize}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+          {(props.config.copyBtn ||
+            props.config.csvBtn ||
+            props.config.excelBtn ||
+            props.config.pdfBtn ||
+            props.config.printBtn) && (
+            <div className="dt-buttons">
+              {props.config.copyBtn && (
+                <Button
+                  key="buttons-copy"
+                  className="dt-button buttons-copy buttons-html5 btn btn-danger btn-sm mr-1"
+                  aria-controls="file_export"
+                  type="button"
+                  onClick={copyTableToClipboard}
                 >
-                  {pageSizes.map((pageSize) => (
-                    <option key={`pageSize_${pageSize}`} value={pageSize}>
-                      {pageSize}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-            {(props.config.copyBtn ||
-              props.config.csvBtn ||
-              props.config.excelBtn ||
-              props.config.pdfBtn ||
-              props.config.printBtn) && (
-              <div className="dt-buttons">
-                {props.config.copyBtn && (
-                  <Button
-                    key="buttons-copy"
-                    className="dt-button buttons-copy buttons-html5 btn btn-danger btn-sm mr-1"
-                    aria-controls="file_export"
-                    type="button"
-                    onClick={copyTableToClipboard}
+                  <span>Copy</span>
+                </Button>
+              )}
+              {props.config.csvBtn && (
+                <Button
+                  key="buttons-csv"
+                  className="dt-button buttons-csv buttons-html5 btn btn-danger btn-sm mr-1"
+                  aria-controls="file_export"
+                  type="button"
+                  onClick={downloadCSV}
+                >
+                  <span>CSV</span>
+                </Button>
+              )}
+              {props.config.excelBtn && (
+                <Button
+                  key="buttons-excel"
+                  className="dt-button buttons-excel buttons-html5 btn btn-danger btn-sm mr-1"
+                  aria-controls="file_export"
+                  type="button"
+                  onClick={() => downloadExcel(props, internalTableRef)}
+                >
+                  <span>Excel</span>
+                </Button>
+              )}
+              {props.config.pdfBtn && (
+                <Button
+                  key="buttons-pdf"
+                  className="dt-button buttons-pdf buttons-html5 btn btn-danger btn-sm mr-1"
+                  aria-controls="file_export"
+                  type="button"
+                  onClick={downloadPDF}
+                >
+                  <span>PDF</span>
+                </Button>
+              )}
+              {props.config.printBtn && (
+                <Button
+                  key="buttons-print"
+                  className="dt-button buttons-print btn btn-danger btn-sm mr-1"
+                  aria-controls="file_export"
+                  type="button"
+                  onClick={handlePrint}
+                >
+                  <span>Print</span>
+                </Button>
+              )}
+            </div>
+          )}
+          {props.config.globalSearchBox && (
+            <div id="file_export_filter" className="dataTables_filter">
+              <label>
+                Search:
+                <DebouncedInput
+                  key="DebouncedInput"
+                  value={globalFilter ?? ""}
+                  onChange={(value) => handleSearchChange(value)}
+                />
+              </label>
+            </div>
+          )}
+          <table
+            id="file_export"
+            border={0}
+            className="table table-striped table-bordered display dataTable no-footer mt-2 mb-2"
+            width="100%"
+            role="grid"
+            aria-describedby="company-master-grid-data_info"
+            key="data-table"
+            ref={internalTableRef}
+          >
+            <thead>
+              {table.getHeaderGroups().map((headerGroup, index) => {
+                return (
+                  <tr
+                    role="row"
+                    key={`table_head_tr_${index + Math.random() * 19}`}
+                    id={`thead_tr_${headerGroup.id}`}
                   >
-                    <span>Copy</span>
-                  </Button>
-                )}
-                {props.config.csvBtn && (
-                  <Button
-                    key="buttons-csv"
-                    className="dt-button buttons-csv buttons-html5 btn btn-danger btn-sm mr-1"
-                    aria-controls="file_export"
-                    type="button"
-                    onClick={downloadCSV}
-                  >
-                    <span>CSV</span>
-                  </Button>
-                )}
-                {props.config.excelBtn && (
-                  <Button
-                    key="buttons-excel"
-                    className="dt-button buttons-excel buttons-html5 btn btn-danger btn-sm mr-1"
-                    aria-controls="file_export"
-                    type="button"
-                    onClick={downloadExcel}
-                  >
-                    <span>Excel</span>
-                  </Button>
-                )}
-                {props.config.pdfBtn && (
-                  <Button
-                    key="buttons-pdf"
-                    className="dt-button buttons-pdf buttons-html5 btn btn-danger btn-sm mr-1"
-                    aria-controls="file_export"
-                    type="button"
-                    onClick={downloadPDF}
-                  >
-                    <span>PDF</span>
-                  </Button>
-                )}
-                {props.config.printBtn && (
-                  <Button
-                    key="buttons-print"
-                    className="dt-button buttons-print btn btn-danger btn-sm mr-1"
-                    aria-controls="file_export"
-                    type="button"
-                    onClick={handlePrint}
-                  >
-                    <span>Print</span>
-                  </Button>
-                )}
-              </div>
-            )}
-            {props.config.globalSearchBox && (
-              <div id="file_export_filter" className="dataTables_filter">
-                <label>
-                  Search:
-                  <DebouncedInput
-                    key="DebouncedInput"
-                    value={globalFilter ?? ""}
-                    onChange={(value) => handleSearchChange(value)}
-                  />
-                </label>
-              </div>
-            )}
-            <table
-              id="file_export"
-              border={0}
-              className="table table-striped table-bordered display dataTable no-footer mt-2 mb-2"
-              width="100%"
-              role="grid"
-              aria-describedby="company-master-grid-data_info"
-              key="data-table"
-              ref={tableRef}
-            >
-              <thead>
-                {table.getHeaderGroups().map((headerGroup, index) => {
-                  return (
-                    <tr
-                      role="row"
-                      key={`table_head_tr_${index + Math.random() * 19}`}
-                      id={`thead_tr_${headerGroup.id}`}
-                    >
-                      {headerGroup.headers.map((header) => {
-                        return (
-                          <th
-                            className="sorting"
-                            aria-controls="company-master-grid-data"
-                            colSpan={header.colSpan}
-                            key={`table_head_th_${index + Math.random() * 16}`}
+                    {headerGroup.headers.map((header) => {
+                      return (
+                        <th
+                          className="sorting"
+                          aria-controls="company-master-grid-data"
+                          colSpan={header.colSpan}
+                          key={`table_head_th_${index + Math.random() * 16}`}
+                        >
+                          <div
+                            {...{
+                              className: header.column.getCanSort()
+                                ? "cursor-pointer select-none"
+                                : "",
+                              onClick: header.column.getToggleSortingHandler(),
+                            }}
                           >
-                            <div
-                              {...{
-                                className: header.column.getCanSort()
-                                  ? "cursor-pointer select-none"
-                                  : "",
-                                onClick:
-                                  header.column.getToggleSortingHandler(),
-                              }}
-                            >
-                              {header.isPlaceholder ? null : (
-                                <>
-                                  {flexRender(
-                                    header.column.columnDef.header,
-                                    header.getContext()
-                                  )}
-                                  {{
-                                    asc: " 🔼",
-                                    desc: " 🔽",
-                                  }[header.column.getIsSorted() as string] ??
-                                    null}
-                                </>
-                              )}
-                            </div>
-                          </th>
+                            {header.isPlaceholder ? null : (
+                              <>
+                                {flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
+                                {{
+                                  asc: " 🔼",
+                                  desc: " 🔽",
+                                }[header.column.getIsSorted() as string] ??
+                                  null}
+                              </>
+                            )}
+                          </div>
+                        </th>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </thead>
+            {data && data.length ? (
+              <tbody>
+                {table.getRowModel().rows.map((row, index) => {
+                  return (
+                    <tr key={`row_${index}`}>
+                      {row.getVisibleCells().map((cell) => {
+                        return (
+                          <>
+                            {cell.column.id == "srNo" ? (
+                              <td
+                                key={`cell_action_${
+                                  cell.column.id + Math.random() * 15
+                                }`}
+                              >
+                                {index + 1}
+                              </td>
+                            ) : cell.column.id.startsWith("action") ? (
+                              <td
+                                key={`cell_action_${
+                                  cell.column.id + Math.random() * 17
+                                }`}
+                              >
+                                <a
+                                  className="icon"
+                                  data-toggle="tooltip"
+                                  data-original-title="Edit"
+                                  onClick={() =>
+                                    onTableEditBtnClick(row.original)
+                                  }
+                                >
+                                  <span className="badge badge-danger m-r-10">
+                                    <i className="ti-pencil"></i>
+                                  </span>
+                                </a>
+                                <a
+                                  className="icon"
+                                  data-toggle="tooltip"
+                                  data-original-title="Delete"
+                                  onClick={() =>
+                                    onTableDeleteBtnClick(row.original)
+                                  }
+                                >
+                                  <span className="badge badge-danger m-r-10">
+                                    <i className="ti-trash"></i>
+                                  </span>
+                                </a>
+                                {cell.column.id.split(":")[1] === "rights" && (
+                                  <a
+                                    className="icon"
+                                    data-toggle="tooltip"
+                                    data-original-title="Edit Rights"
+                                    onClick={() =>
+                                      onTableEditBtnClick(
+                                        row.original,
+                                        "rights"
+                                      )
+                                    }
+                                  >
+                                    <span className="badge badge-danger m-r-10">
+                                      <i className="ti-settings"></i>
+                                    </span>
+                                  </a>
+                                )}
+                              </td>
+                            ) : cell.column.id == "remove" ? (
+                              <td
+                                key={`cell_action_${
+                                  cell.column.id + Math.random() * 17
+                                }`}
+                              >
+                                <a
+                                  className="icon"
+                                  data-toggle="tooltip"
+                                  data-original-title="Delete"
+                                  onClick={() =>
+                                    onRemoveRowHandler(row.original)
+                                  }
+                                >
+                                  <span className="badge badge-danger m-r-10">
+                                    <i className="ti-trash"></i>
+                                  </span>
+                                </a>
+                              </td>
+                            ) : cell.column.id == "rowData" ? (
+                              <td
+                                key={`cell_action_${
+                                  cell.column.id + Math.random() * 17
+                                }`}
+                              >
+                                <a
+                                  className="icon"
+                                  data-toggle="tooltip"
+                                  data-original-title="Invoice Preview"
+                                  onClick={() =>
+                                    onTableEditBtnClick(row.original)
+                                  }
+                                >
+                                  <span className="badge badge-danger m-r-10">
+                                    <i className="ti-file"></i>
+                                  </span>
+                                </a>
+                              </td>
+                            ) : (
+                              <td
+                                key={`cell_data_${
+                                  cell.column.id + Math.random() * 13
+                                }`}
+                              >
+                                {flexRender(
+                                  cell.column.columnDef.cell,
+                                  cell.getContext()
+                                )}
+                              </td>
+                            )}
+                          </>
                         );
                       })}
                     </tr>
                   );
                 })}
-              </thead>
-              {data && data.length ? (
-                <tbody>
-                  {table.getRowModel().rows.map((row, index) => {
-                    return (
-                      <tr key={`row_${index}`}>
-                        {row.getVisibleCells().map((cell) => {
-                          return (
-                            <>
-                              {cell.column.id == "srNo" ? (
-                                <td
-                                  key={`cell_action_${
-                                    cell.column.id + Math.random() * 15
-                                  }`}
-                                >
-                                  {index + 1}
-                                </td>
-                              ) : cell.column.id.startsWith("action") ? (
-                                <td
-                                  key={`cell_action_${
-                                    cell.column.id + Math.random() * 17
-                                  }`}
-                                >
-                                  <a
-                                    className="icon"
-                                    data-toggle="tooltip"
-                                    data-original-title="Edit"
-                                    onClick={() =>
-                                      onTableEditBtnClick(row.original)
-                                    }
-                                  >
-                                    <span className="badge badge-danger m-r-10">
-                                      <i className="ti-pencil"></i>
-                                    </span>
-                                  </a>
-                                  <a
-                                    className="icon"
-                                    data-toggle="tooltip"
-                                    data-original-title="Delete"
-                                    onClick={() =>
-                                      onTableDeleteBtnClick(row.original)
-                                    }
-                                  >
-                                    <span className="badge badge-danger m-r-10">
-                                      <i className="ti-trash"></i>
-                                    </span>
-                                  </a>
-                                  {cell.column.id.split(":")[1] ===
-                                    "rights" && (
-                                    <a
-                                      className="icon"
-                                      data-toggle="tooltip"
-                                      data-original-title="Edit Rights"
-                                      onClick={() =>
-                                        onTableEditBtnClick(
-                                          row.original,
-                                          "rights"
-                                        )
-                                      }
-                                    >
-                                      <span className="badge badge-danger m-r-10">
-                                        <i className="ti-settings"></i>
-                                      </span>
-                                    </a>
-                                  )}
-                                </td>
-                              ) : cell.column.id == "remove" ? (
-                                <td
-                                  key={`cell_action_${
-                                    cell.column.id + Math.random() * 17
-                                  }`}
-                                >
-                                  <a
-                                    className="icon"
-                                    data-toggle="tooltip"
-                                    data-original-title="Delete"
-                                    onClick={() =>
-                                      onRemoveRowHandler(row.original)
-                                    }
-                                  >
-                                    <span className="badge badge-danger m-r-10">
-                                      <i className="ti-trash"></i>
-                                    </span>
-                                  </a>
-                                </td>
-                              ) : (
-                                <td
-                                  key={`cell_data_${
-                                    cell.column.id + Math.random() * 13
-                                  }`}
-                                >
-                                  {flexRender(
-                                    cell.column.columnDef.cell,
-                                    cell.getContext()
-                                  )}
-                                </td>
-                              )}
-                            </>
-                          );
-                        })}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              ) : (
-                <tbody>
-                  <tr className="odd">
-                    <td
-                      valign="top"
-                      colSpan={columns.length}
-                      className="dataTables_empty text-left"
-                      key={"no_data_found"}
-                    >
-                      {props.children
-                        ? props.children
-                        : "No data available in table"}
-                    </td>
-                  </tr>
-                </tbody>
-              )}
-            </table>
-          </div>
+              </tbody>
+            ) : (
+              <tbody>
+                <tr className="odd">
+                  <td
+                    valign="top"
+                    colSpan={columns.length}
+                    className="dataTables_empty text-left"
+                    key={"no_data_found"}
+                  >
+                    {props.children}
+                    {props.children
+                      ? props.children
+                      : "No data available in table"}
+                  </td>
+                </tr>
+              </tbody>
+            )}
+          </table>
         </div>
-
-        <div className="h-2" />
-
-        {props.config.pagination?.tableMetaDataShow && (
-          <div className="mt-3">
-            <div className="row">
-              <div className="col-sm-12 col-md-5">
-                {clientSidePagination ? (
-                  <div
-                    className="dataTables_info"
-                    id="zero_config_info"
-                    role="status"
-                    aria-live="polite"
-                  >
-                    Showing{" "}
-                    {table.getState().pagination.pageIndex *
-                      table.getState().pagination.pageSize +
-                      1}{" "}
-                    to{" "}
-                    {(table.getState().pagination.pageIndex + 1) *
-                      table.getState().pagination.pageSize}{" "}
-                    of {table.getTotalSize()} entries
-                  </div>
-                ) : (
-                  <div
-                    className="dataTables_info"
-                    id="zero_config_info"
-                    role="status"
-                    aria-live="polite"
-                  >
-                    Showing {props?.config?.pagination?.offset! + 1} to
-                    {props?.config?.pagination?.offset! +
-                      props?.config?.pagination?.pageSize!}{" "}
-                    of {props?.config?.pagination?.total} entries
-                  </div>
-                )}
-              </div>
-              {props.config.pagination.nextPreviousBtnShow && (
-                <div className="col-sm-12 col-md-7">
-                  <div
-                    className="dataTables_paginate paging_simple_numbers"
-                    id="zero_config_paginate"
-                  >
-                    <ul className="pagination">
-                      <li
-                        className="paginate_button page-item previous"
-                        id="zero_config_previous"
-                      >
-                        <Button
-                          key="zero_config-pri"
-                          onClick={onPrevClick}
-                          type="button"
-                          disabled={
-                            clientSidePagination
-                              ? !table.getCanPreviousPage()
-                              : !props.config.pagination.isPrevButtonEnabled
-                          }
-                          aria-controls="zero_config"
-                          data-dt-idx="0"
-                          className={`page-link ${
-                            (clientSidePagination
-                              ? !table.getCanPreviousPage()
-                              : !props.config.pagination.isPrevButtonEnabled) &&
-                            "disabled"
-                          }`}
-                        >
-                          Previous
-                        </Button>
-                      </li>
-                      <li
-                        className="paginate_button page-item next"
-                        id="zero_config_next"
-                      >
-                        <Button
-                          key="zero_config-next"
-                          aria-controls="zero_config"
-                          data-dt-idx="1"
-                          type="button"
-                          className={`page-link ${
-                            (clientSidePagination
-                              ? !table.getCanNextPage()
-                              : !props.config.pagination.isNextButtonEnabled) &&
-                            "disabled"
-                          }`}
-                          onClick={onNextClick}
-                          disabled={
-                            clientSidePagination
-                              ? !table.getCanNextPage()
-                              : !props.config.pagination.isNextButtonEnabled
-                          }
-                        >
-                          Next
-                        </Button>
-                      </li>
-                    </ul>
-                  </div>
+      </div>
+      <div className="h-2" />
+      {props.config.pagination?.tableMetaDataShow && (
+        <div className="mt-3">
+          <div className="row">
+            <div className="col-sm-12 col-md-5">
+              {clientSidePagination ? (
+                <div
+                  className="dataTables_info"
+                  id="zero_config_info"
+                  role="status"
+                  aria-live="polite"
+                >
+                  Showing{" "}
+                  {table.getState().pagination.pageIndex *
+                    table.getState().pagination.pageSize +
+                    1}{" "}
+                  to{" "}
+                  {(table.getState().pagination.pageIndex + 1) *
+                    table.getState().pagination.pageSize}{" "}
+                  of {table.getTotalSize()} entries
+                </div>
+              ) : (
+                <div
+                  className="dataTables_info"
+                  id="zero_config_info"
+                  role="status"
+                  aria-live="polite"
+                >
+                  Showing {props?.config?.pagination?.offset! + 1} to
+                  {props?.config?.pagination?.offset! +
+                    props?.config?.pagination?.pageSize!}{" "}
+                  of {props?.config?.pagination?.total} entries
                 </div>
               )}
             </div>
+            {props.config.pagination.nextPreviousBtnShow && (
+              <div className="col-sm-12 col-md-7">
+                <div
+                  className="dataTables_paginate paging_simple_numbers"
+                  id="zero_config_paginate"
+                >
+                  <ul className="pagination">
+                    <li
+                      className="paginate_button page-item previous"
+                      id="zero_config_previous"
+                    >
+                      <Button
+                        key="zero_config-pri"
+                        onClick={onPrevClick}
+                        type="button"
+                        disabled={
+                          clientSidePagination
+                            ? !table.getCanPreviousPage()
+                            : !props.config.pagination.isPrevButtonEnabled
+                        }
+                        aria-controls="zero_config"
+                        data-dt-idx="0"
+                        className={`page-link ${
+                          (clientSidePagination
+                            ? !table.getCanPreviousPage()
+                            : !props.config.pagination.isPrevButtonEnabled) &&
+                          "disabled"
+                        }`}
+                      >
+                        Previous
+                      </Button>
+                    </li>
+                    <li
+                      className="paginate_button page-item next"
+                      id="zero_config_next"
+                    >
+                      <Button
+                        key="zero_config-next"
+                        aria-controls="zero_config"
+                        data-dt-idx="1"
+                        type="button"
+                        className={`page-link ${
+                          (clientSidePagination
+                            ? !table.getCanNextPage()
+                            : !props.config.pagination.isNextButtonEnabled) &&
+                          "disabled"
+                        }`}
+                        onClick={onNextClick}
+                        disabled={
+                          clientSidePagination
+                            ? !table.getCanNextPage()
+                            : !props.config.pagination.isNextButtonEnabled
+                        }
+                      >
+                        Next
+                      </Button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            )}
           </div>
-        )}
-        {/* <div>{table.getRowModel().rows.length} Rows</div> */}
-        {/* <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre> */}
-      </div>
-    </>
+        </div>
+      )}
+      {/* <div>{table.getRowModel().rows.length} Rows</div> */}
+      {/* <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre> */}
+    </div>
   );
 };

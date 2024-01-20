@@ -19,7 +19,7 @@ export const User: React.FC = () => {
       buttons: [
         {
           btnTitle: "Add User",
-          btnRoute: COMMON_ROUTES.ADD + '?isAdd=true',
+          btnRoute: COMMON_ROUTES.ADD + "?isAdd=true",
         },
       ],
     },
@@ -67,7 +67,7 @@ export const User: React.FC = () => {
     },
   ];
 
-  const { data: userData, isLoading } = getUser();
+  const { data: userData, isFetching } = getUser();
   const { mutateAsync: deleteUser } = deleteUserMutation();
 
   const deleteUserClick = async (userData: any) => {
@@ -122,7 +122,7 @@ export const User: React.FC = () => {
     <>
       <PageBreadcrumb config={config.breadcrumbConfig}></PageBreadcrumb>
       <BorderLayout heading={config.borderLayoutConfig.heading}>
-        {!isLoading ? <Table config={tableConfig.config} /> : <Loader />}
+        <Table config={tableConfig.config}>{isFetching && <Loader />}</Table>
       </BorderLayout>
     </>
   );
