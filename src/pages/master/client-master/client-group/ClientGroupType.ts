@@ -1,5 +1,6 @@
 export interface ClientGroupType {
   groupId: number;
+  clientIds: Array<any>;
   groupName: string;
   showBOBDetails: boolean;
   showUnionBankDetails: boolean;

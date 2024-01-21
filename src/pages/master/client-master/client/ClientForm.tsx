@@ -363,6 +363,8 @@ export const ClientForm: React.FC = () => {
     }
     if (creditDaysData && clientData?.crDays) {
       let data = creditDaysData[clientData.crDays];
+      console.log(data, clientData?.crDays, creditDaysData);
+
       data &&
         (clientFormData.crDays = {
           label: data.creditPeriod,
@@ -505,19 +507,8 @@ export const ClientForm: React.FC = () => {
     }
   });
 
-  // const myInlineStyles: React.CSSProperties = {
-  //   position: "absolute",
-  //   top: "0",
-  //   left: "0",
-  //   width: " 100%",
-  //   color: "#000",
-  //   height: " 100%",
-  //   display: "block",
-  // };
-
   return (
     <Card config={cardConfig.formLayoutConfig}>
-      {/* <div style={myInlineStyles}></div> */}
       <form
         onSubmit={onSubmit}
         noValidate

@@ -70,7 +70,7 @@ export const CreditDays: React.FC = () => {
     config: {
       tableName: "Credit Period",
       columns: columns,
-      tableData: creditDaysData || [],
+      tableData: (creditDaysData && Object.values(creditDaysData)) || [],
       copyBtn: true,
       csvBtn: true,
       excelBtn: true,

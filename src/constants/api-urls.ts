@@ -90,7 +90,7 @@ const GET_LAST_FIN_YEAR = "utility/finYear/lastFinYear";
 
 const GET_ADD_CLIENT = "client";
 const GET_UPDATE_DELETE_CLIENT = "client/{id}";
-const GET_CLIENT_GROUP_BASED_ON_ID = "/clientGroup/{id}";
+const GET_CLIENT_GROUP_BASED_ON_ID = "client/clientGroup/{id}";
 const GET_CITY_WISE_CLIENT_GROUP = "client/clientGroup/city/{id}";
 
 // Transaction Master

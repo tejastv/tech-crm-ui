@@ -135,7 +135,8 @@ export const useClientGroupApiCallHook = () => {
   };
 
   const getClientGroupBasedOnIdData = (
-    id: string
+    id: string,
+    condition: boolean
   ): UseQueryResult<ClientBasedOnClientId[]> => {
     return useQuery<ClientBasedOnClientId[]>({
       queryKey: [queryKeys.CLIENT_GROUP_BASED_ON_ID_DATA, id],
@@ -145,7 +146,7 @@ export const useClientGroupApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };

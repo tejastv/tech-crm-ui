@@ -56,7 +56,6 @@ export const NewRadio: React.FC<{
                           onChange={(e) => {
                             let value: any = e.target.value;
                             let result;
-
                             if (value === "true" || value === "false") {
                               result = e.target.checked;
                             } else if (!isNaN(Number(value))) {

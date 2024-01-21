@@ -71,7 +71,7 @@ export const NewCheckbox: React.FC<{
                             props.onChange(result);
                           }
                         }}
-                        checked={field.value === option.value}
+                        checked={field.value}
                       />
                     )}
                   ></Controller>

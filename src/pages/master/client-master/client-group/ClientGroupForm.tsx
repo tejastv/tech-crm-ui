@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import {
@@ -17,6 +17,8 @@ import {
   useClientGroupApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
+import { selectOptionsMaker } from "@utils/selectOptionsMaker";
+import _ from "lodash";
 // import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
 export const ClientGroupForm: React.FC = () => {
@@ -31,20 +33,22 @@ export const ClientGroupForm: React.FC = () => {
     },
   };
 
+  const [clientGroupOption, setClientGroupOption] =
+    useState<ClientGroupType[]>();
+
   const {
     register,
     control,
     formState: { errors },
     handleSubmit,
-    // reset,
-    setValue,
+    reset,
   } = useForm<ClientGroupFormType>();
   const {
     // addClientGroupMutation,
     getClientGroupData,
     // updateClientGroupMutation,
+    getClientGroup,
     // getClientGroupBasedOnIdData,
-    // getClientGroup,
   } = useClientGroupApiCallHook();
   // const { mutateAsync: addClientGroup } = addClientGroupMutation();
   // const { mutateAsync: updateClientGroup } = updateClientGroupMutation();
@@ -53,14 +57,34 @@ export const ClientGroupForm: React.FC = () => {
     params.id != undefined
   );
 
+  const { data: clientGroupListData } = getClientGroup();
+
+  useEffect(() => {
+    if (clientGroupListData) {
+      setClientGroupOption(
+        _.orderBy(Object.values(clientGroupListData), ["groupName"], ["asc"])
+      );
+    }
+  }, [clientGroupListData]);
+
+  if (clientGroupOption?.length) {
+    let options = selectOptionsMaker(clientGroupOption, "groupId", "groupName");
+    addClientGroupFormFields.moveToClient.config.options = options;
+  }
+
+  // const { data: clientGroupBasedOnIdData } = getClientGroupBasedOnIdData(
+  //   "" + params.id,
+  //   params.id != undefined
+  // );
+
+  // console.log(clientGroupBasedOnIdData);
+
   // if (params.id) {
   //   // const { data: clientGroupBasedOnIdData } = getClientGroupBasedOnIdData(
   //   //   "" + params.id
   //   // );
   //   console.log(clientGroupData);
 
-  //   // const { data: clientGroupListData } = getClientGroup();
-  //   // getClientGroupBasedOnIdData("" + params.id);
   //   // if (clientGroupBasedOnIdData) {
   //   //   addClientGroupFormFields.searchClient.config.options,
   //   //     (addClientGroupFormFields.searchClient.config.setData =
@@ -102,15 +126,32 @@ export const ClientGroupForm: React.FC = () => {
   ) => {
     let clientFormData: Partial<ClientGroupFormType> = {
       // clintGroupIdToMove?: number;
-      // clientIds: Array<any>;
+      clientIds:
+        clientGroupData.clientIds && clientGroupData.clientIds.length
+          ? clientGroupData.clientIds
+          : [],
       groupName: clientGroupData.groupName,
-      showBOBDetails: clientGroupData.showBOBDetails,
-      showUnionBankDetails: clientGroupData.showUnionBankDetails,
-      showBOIDetails: clientGroupData.showBOIDetails,
-      showSouthIndianBankDetails: clientGroupData.showSouthIndianBankDetails,
-      showIOBDetails: clientGroupData.showIOBDetails,
-      showIDBIDetails: clientGroupData.showIDBIDetails,
-      showSBIDetails: clientGroupData.showSBIDetails,
+      showBOBDetails: clientGroupData.showBOBDetails
+        ? clientGroupData.showBOBDetails
+        : false,
+      showUnionBankDetails: clientGroupData.showUnionBankDetails
+        ? clientGroupData.showUnionBankDetails
+        : false,
+      showBOIDetails: clientGroupData.showBOIDetails
+        ? clientGroupData.showBOIDetails
+        : false,
+      showSouthIndianBankDetails: clientGroupData.showSouthIndianBankDetails
+        ? clientGroupData.showSouthIndianBankDetails
+        : false,
+      showIOBDetails: clientGroupData.showIOBDetails
+        ? clientGroupData.showIOBDetails
+        : false,
+      showIDBIDetails: clientGroupData.showIDBIDetails
+        ? clientGroupData.showIDBIDetails
+        : false,
+      showSBIDetails: clientGroupData.showSBIDetails
+        ? clientGroupData.showSBIDetails
+        : false,
     };
     return clientFormData;
   };
@@ -118,9 +159,8 @@ export const ClientGroupForm: React.FC = () => {
   useEffect(() => {
     if (params.id) {
       if (clientGroupData && Object.values(clientGroupData).length > 0) {
-        console.log(mapClientGroupDataToClientGroupForm(clientGroupData));
-        setValue("showBOBDetails", true);
-        // reset(mapClientGroupDataToClientGroupForm(clientGroupData));
+        // console.log(mapClientGroupDataToClientGroupForm(clientGroupData));
+        reset(mapClientGroupDataToClientGroupForm(clientGroupData));
       }
     }
   }, [params.id, clientGroupData]);

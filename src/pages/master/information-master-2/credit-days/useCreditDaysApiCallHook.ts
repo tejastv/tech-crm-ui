@@ -9,22 +9,27 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
 
 export const useCreditDaysApiCallHook = () => {
   const { instance } = useAxios();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const getCreditDays = (): UseQueryResult<Array<CreditDaysType>> => {
-    return useQuery<Array<CreditDaysType>>({
+  const getCreditDays = (): UseQueryResult<{
+    [key: string | number]: CreditDaysType;
+  }> => {
+    return useQuery<{ [key: string | number]: CreditDaysType }>({
       queryKey: [queryKeys.CREDIT_DAYS_DATA],
       queryFn: async () => {
         const response = await instance.get(apiUrls.GET_ADD_CREDIT_DAYS);
-        const data = response.data.data.sort(
-          (a: { creditPeriod: number }, b: { creditPeriod: number }) =>
-            a.creditPeriod - b.creditPeriod
+        const data = response.data.data;
+        let mapedData = selectOptionsMapMaker(
+          data,
+          "creditPeriodId",
+          "creditPeriod"
         );
-        return data;
+        return mapedData;
       },
       staleTime: Infinity,
     });
