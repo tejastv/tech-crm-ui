@@ -232,6 +232,7 @@ export const PriceListForClients: React.FC = () => {
       const data = response.data.data;
       if (data) {
         getClientWisePrice(client);
+        setTableCellData({});
       }
     }
   };

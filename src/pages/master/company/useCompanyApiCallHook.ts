@@ -4,7 +4,10 @@ import { apiUrls, queryKeys } from "@constants/index";
 import { ApiResponseType } from "@shared/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { selectOptionsMapMaker } from "@utils/selectOptionsMaker";
+import {
+  selectOptionsMaker,
+  selectOptionsMapMaker,
+} from "@utils/selectOptionsMaker";
 
 export const useCompanyApiCallHook = () => {
   const { instance } = useAxios();
@@ -46,6 +49,28 @@ export const useCompanyApiCallHook = () => {
       enabled: condition,
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
+  };
+
+  const getCompanyOnDemand = async (
+    queryObject: any
+  ): Promise<any | undefined> => {
+    if (Object.values(queryObject).length <= 2) return;
+    let params = {
+      limit: queryObject.searchString ? 500 : queryObject.limit,
+      offset: queryObject.offset,
+      searchString: "",
+    } as any;
+    if (queryObject.searchString) {
+      params.searchString = queryObject.searchString;
+    } else {
+      delete params.searchString;
+    }
+    const response = await instance.get(apiUrls.GET_ADD_COMPANY_MASTER, {
+      params: params,
+    });
+    const data = response.data.data.records;
+    let mappedData = selectOptionsMaker(data, "companyId", "companyName");
+    return { data: mappedData };
   };
 
   const getCompanyData = (id: string, condition: any) => {
@@ -135,6 +160,7 @@ export const useCompanyApiCallHook = () => {
 
   return {
     getCompany,
+    getCompanyOnDemand,
     getCompanyData,
     addCompanyMutation,
     updateCompanyMutation,

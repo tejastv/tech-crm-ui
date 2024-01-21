@@ -56,6 +56,7 @@ import {
 import { useLocation, useParams } from "react-router-dom";
 import { usePagination } from "@hooks/usePagination";
 import { ColumnDef } from "@tanstack/react-table";
+import _ from "lodash";
 
 const priceMapper = {
   1: "price", // Normal
@@ -64,7 +65,6 @@ const priceMapper = {
   4: "priceSuperFlash", // Superflash
   6: "priceSME", // SME
 };
-import _ from "lodash";
 
 export const EnqPiForm: React.FC = () => {
   const {

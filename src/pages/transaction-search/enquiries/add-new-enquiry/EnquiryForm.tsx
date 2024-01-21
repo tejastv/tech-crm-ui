@@ -207,7 +207,7 @@ export const EnquiryForm: React.FC = () => {
       offset,
       searchString: searchStringClient,
     },
-    searchStringClient.length === 3
+    searchStringClient.length > 3
   );
 
   useEffect(() => {
@@ -298,7 +298,7 @@ export const EnquiryForm: React.FC = () => {
       offset,
       searchString: searchStringCompany,
     },
-    searchStringCompany.length === 3
+    searchStringCompany.length > 3
   );
 
   useEffect(() => {
@@ -374,23 +374,11 @@ export const EnquiryForm: React.FC = () => {
   }, [enqStatusOptions]);
 
   const companyOnInputChangeHandler = (companyInputValue: any) => {
-    if (companyInputValue.length === 3) {
-      setSearchStringCompany(companyInputValue);
-    }
-    if (companyInputValue.length === 0) {
-      setCompanyOptions([]);
-      enquiryFormFields.enqCompanyName.config.options = [];
-    }
+    setSearchStringCompany(companyInputValue);
   };
 
   const clientOnInputChangeHandler = (clientInputValue: any) => {
-    if (clientInputValue.length === 3) {
-      setSearchStringClient(clientInputValue);
-    }
-    if (clientInputValue.length === 0) {
-      setClientOptions([]);
-      enquiryFormFields.enqClient.config.options = [];
-    }
+    setSearchStringClient(clientInputValue);
   };
 
   const companyOnChangeHandler = (companyData: any) => {
