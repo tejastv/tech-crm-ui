@@ -29,7 +29,8 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
   const pageSizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   const { errorMessageToaster, successMessageToaster } = useToaster();
   let clientSidePagination =
-    props.config.pagination?.isClientSidePagination === undefined
+    props.config.pagination?.isClientSidePagination === undefined ||
+    props.config.pagination?.isClientSidePagination
       ? true
       : false;
 
@@ -467,7 +468,15 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                                   cell.column.id + Math.random() * 15
                                 }`}
                               >
-                                {index + 1}
+                                {/* {index + 1} */}
+                                {clientSidePagination
+                                  ? table.getState().pagination.pageIndex *
+                                      table.getState().pagination.pageSize +
+                                    index +
+                                    1
+                                  : props?.config?.pagination?.offset! +
+                                    index +
+                                    1}
                               </td>
                             ) : cell.column.id.startsWith("action") ? (
                               <td
@@ -612,8 +621,12 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                     1}{" "}
                   to{" "}
                   {(table.getState().pagination.pageIndex + 1) *
-                    table.getState().pagination.pageSize}{" "}
-                  of {table.getTotalSize()} entries
+                    table.getState().pagination.pageSize <
+                  data.length
+                    ? (table.getState().pagination.pageIndex + 1) *
+                      table.getState().pagination.pageSize
+                    : data.length}{" "}
+                  of {data.length} entries
                 </div>
               ) : (
                 <div
@@ -622,9 +635,13 @@ export const Table = <T extends {}>(props: PropsWithChildren<TableType<T>>) => {
                   role="status"
                   aria-live="polite"
                 >
-                  Showing {props?.config?.pagination?.offset! + 1} to
+                  Showing {props?.config?.pagination?.offset! + 1} to{" "}
                   {props?.config?.pagination?.offset! +
-                    props?.config?.pagination?.pageSize!}{" "}
+                    props?.config?.pagination?.pageSize! <
+                  props?.config?.pagination?.total!
+                    ? props?.config?.pagination?.offset! +
+                      props?.config?.pagination?.pageSize!
+                    : props?.config?.pagination?.total}{" "}
                   of {props?.config?.pagination?.total} entries
                 </div>
               )}

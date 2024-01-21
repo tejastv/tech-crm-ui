@@ -102,7 +102,7 @@ export const InvoiceGenerateGst: React.FC = () => {
       offset,
       searchString: searchStringClient,
     },
-    searchStringClient.length === 3
+    searchStringClient.length > 3
   );
 
   useEffect(() => {
@@ -284,13 +284,7 @@ export const InvoiceGenerateGst: React.FC = () => {
   };
 
   const clientOnInputChangeHandler = (clientInputValue: any) => {
-    if (clientInputValue.length === 3) {
-      setSearchStringClient(clientInputValue);
-    }
-    if (clientInputValue.length === 0) {
-      setClientOptions([]);
-      invoiceGenGstFormFields.client.config.options = [];
-    }
+    setSearchStringClient(clientInputValue);
   };
 
   const getClientValue = (clientId: number) => {

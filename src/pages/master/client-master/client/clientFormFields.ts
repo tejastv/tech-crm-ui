@@ -481,7 +481,7 @@ const crDay: FormFieldType = createFormConfig(
 );
 
 const billonactual: FormFieldType = createFormConfig(
-  "billONActualBuyer",
+  "billOnActualBuyer",
   "",
   "checkbox",
   billonactualValidation, //CrDayValidation,

@@ -784,7 +784,7 @@ export const EnquiryForm: React.FC = () => {
           value: data.serviceTypeId,
         });
     }
-    if (countryData && clientData?.data?.clientId) {
+    if (clientData && clientData?.data?.clientId) {
       let data = clientData.data[enqData.clientId];
       data &&
         (enqFormData.clientId = {
@@ -872,7 +872,7 @@ export const EnquiryForm: React.FC = () => {
           value: data.localSourceId,
         });
     }
-    console.log(enqData, enqFormData);
+    // console.log(enqData, enqFormData);
     return enqFormData;
   };
 

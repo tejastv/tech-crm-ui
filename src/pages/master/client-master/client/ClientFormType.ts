@@ -43,7 +43,7 @@ export interface ClientFormType {
   crDays: Options;
   gstn: string;
   gstyn: string;
-  billONActualBuyer: string | boolean;
+  billOnActualBuyer: string | boolean;
   autoSendOutstanding: string;
   locked: string;
   email: string;

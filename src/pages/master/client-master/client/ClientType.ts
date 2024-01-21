@@ -48,7 +48,7 @@ export interface ClientType {
   crDays: any;
   gstn: string;
   gstyn: string;
-  billONActualBuyer: string | boolean;
+  billOnActualBuyer: string | boolean;
   autoSendOutstanding: string;
   locked: string;
   email: string;

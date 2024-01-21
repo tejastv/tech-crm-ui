@@ -55,7 +55,7 @@ export const InvoiceList: React.FC = () => {
       cityId: cityId,
       searchString: searchStringClient,
     },
-    searchStringClient.length === 3
+    searchStringClient.length > 3
   );
 
   const {
@@ -324,13 +324,7 @@ export const InvoiceList: React.FC = () => {
   };
 
   const clientOnInputChangeHandler = (clientInputValue: any) => {
-    if (clientInputValue.length === 3) {
-      setSearchStringClient(clientInputValue);
-    }
-    if (clientInputValue.length === 0) {
-      setClientOptions([]);
-      invoiceListFormFields.fYearField.config.options = [];
-    }
+    setSearchStringClient(clientInputValue);
   };
 
   const onSubmit = handleSubmit((data): void => {

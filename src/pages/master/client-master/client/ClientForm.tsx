@@ -298,7 +298,7 @@ export const ClientForm: React.FC = () => {
       adjustPerEnqPI: clientData.adjustPerEnqPI,
       gstn: clientData.gstn,
       gstyn: clientData.gstyn,
-      billONActualBuyer: clientData.billONActualBuyer ? true : false,
+      billOnActualBuyer: clientData.billOnActualBuyer ? true : false,
       autoSendOutstanding: clientData.autoSendOutstanding,
       locked: clientData.locked,
       email: clientData.email,
@@ -315,11 +315,11 @@ export const ClientForm: React.FC = () => {
     if (stateData && clientData?.stateId) {
       let data = stateData[clientData.stateId];
       data &&
-        (clientFormData.stateId = {
+        ((clientFormData.stateId = {
           label: data.stateName,
           value: data.stateId,
         }),
-        stateChangeHandler(data.stateCodeN);
+        stateChangeHandler(data.stateCodeN));
     }
     if (countryData && clientData?.countryId) {
       let data = countryData[clientData.countryId];
@@ -406,7 +406,7 @@ export const ClientForm: React.FC = () => {
       adjustPerEnqPI: clientFormData.adjustPerEnqPI,
       gstn: clientFormData.gstn,
       gstyn: clientFormData.gstyn,
-      billONActualBuyer: clientFormData.billONActualBuyer ? "Y" : "N",
+      billOnActualBuyer: clientFormData.billOnActualBuyer ? "Y" : "N",
       autoSendOutstanding: "Y",
       locked: "Y",
       email: clientFormData.email,

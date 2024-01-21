@@ -62,6 +62,12 @@ export const Client: React.FC = () => {
       header: () => <>Client Name</>,
     },
     {
+      accessorFn: (row) => row.groupName,
+      id: "groupId",
+      cell: (info) => info.getValue(),
+      header: () => <>group Name</>,
+    },
+    {
       accessorFn: (row) => row.address,
       id: "address",
       cell: (info) => info.getValue(),
@@ -168,12 +174,6 @@ export const Client: React.FC = () => {
       id: "instruction",
       cell: (info) => info.getValue(),
       header: () => <>Instruction</>,
-    },
-    {
-      accessorFn: (row) => row.groupName,
-      id: "groupId",
-      cell: (info) => info.getValue(),
-      header: () => <>group Name</>,
     },
     {
       accessorFn: (row) => row.executiveId,

@@ -41,7 +41,10 @@ export const useClientGroupApiCallHook = () => {
     });
   };
 
-  const getClientGroupData = (id: string): UseQueryResult<ClientGroupType> => {
+  const getClientGroupData = (
+    id: string,
+    condition: boolean
+  ): UseQueryResult<ClientGroupType> => {
     return useQuery<ClientGroupType>({
       queryKey: [queryKeys.CLIENT_GROUP_DATA, id],
       queryFn: async () => {
@@ -50,7 +53,7 @@ export const useClientGroupApiCallHook = () => {
         );
         return response.data.data;
       },
-      enabled: true, // Query is initially enabled
+      enabled: condition, // Query is initially enabled
       refetchOnWindowFocus: false, // Prevent automatic refetch on window focus
     });
   };
@@ -130,6 +133,7 @@ export const useClientGroupApiCallHook = () => {
     });
     return mutation;
   };
+
   const getClientGroupBasedOnIdData = (
     id: string
   ): UseQueryResult<ClientBasedOnClientId[]> => {
