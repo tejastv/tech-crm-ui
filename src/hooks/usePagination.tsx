@@ -22,7 +22,7 @@ export const usePagination = (
     setTotal(total);
   };
 
-  const isNextEnabled = total > offset;
+  const isNextEnabled = total > offset + limit;
   const isPrevEnabled = offset > 0;
 
   return {
