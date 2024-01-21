@@ -204,7 +204,7 @@ export const EnqPiForm: React.FC = () => {
       offset,
       searchString: searchStringClient,
     },
-    searchStringClient.length === 3
+    searchStringClient.length > 3
   );
 
   useEffect(() => {
@@ -369,13 +369,7 @@ export const EnqPiForm: React.FC = () => {
   };
 
   const clientOnInputChangeHandler = (clientInputValue: any) => {
-    if (clientInputValue.length === 3) {
-      setSearchStringClient(clientInputValue);
-    }
-    if (clientInputValue.length === 0) {
-      setClientOptions([]);
-      enqPiFormFields.enqClient.config.options = [];
-    }
+    setSearchStringClient(clientInputValue);
   };
 
   const companyOnChangeHandler = (companyData: any) => {

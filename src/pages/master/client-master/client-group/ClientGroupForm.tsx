@@ -12,11 +12,12 @@ import {
 } from "@shared/index";
 import {
   ClientGroupFormType,
+  ClientGroupType,
   addClientGroupFormFields,
   useClientGroupApiCallHook,
 } from "@master/index";
 import { useParams } from "react-router-dom";
-import { selectOptionsMaker } from "@utils/selectOptionsMaker";
+// import { selectOptionsMaker } from "@utils/selectOptionsMaker";
 
 export const ClientGroupForm: React.FC = () => {
   const params = useParams();
@@ -35,80 +36,116 @@ export const ClientGroupForm: React.FC = () => {
     control,
     formState: { errors },
     handleSubmit,
+    // reset,
+    setValue,
   } = useForm<ClientGroupFormType>();
   const {
-    addClientGroupMutation,
+    // addClientGroupMutation,
     getClientGroupData,
-    updateClientGroupMutation,
-    getClientGroupBasedOnIdData,
-    getClientGroup,
+    // updateClientGroupMutation,
+    // getClientGroupBasedOnIdData,
+    // getClientGroup,
   } = useClientGroupApiCallHook();
-  const { mutateAsync: addClientGroup } = addClientGroupMutation();
-  const { mutateAsync: updateClientGroup } = updateClientGroupMutation();
+  // const { mutateAsync: addClientGroup } = addClientGroupMutation();
+  // const { mutateAsync: updateClientGroup } = updateClientGroupMutation();
+  const { data: clientGroupData } = getClientGroupData(
+    "" + params.id,
+    params.id != undefined
+  );
 
-  if (params.id) {
-    const { data: clientGroupData, isSuccess: clientGroupDataSuccess } =
-      getClientGroupData("" + params.id);
-    const { data: clientGroupBasedOnIdData } = getClientGroupBasedOnIdData(
-      "" + params.id
-    );
-    const { data: clientGroupListData } = getClientGroup();
-    getClientGroupBasedOnIdData("" + params.id);
-    if (clientGroupBasedOnIdData) {
-      addClientGroupFormFields.searchClient.config.options,
-        (addClientGroupFormFields.searchClient.config.setData =
-          selectOptionsMaker(
-            clientGroupBasedOnIdData,
-            "clientId",
-            "clientName"
-          ));
+  // if (params.id) {
+  //   // const { data: clientGroupBasedOnIdData } = getClientGroupBasedOnIdData(
+  //   //   "" + params.id
+  //   // );
+  //   console.log(clientGroupData);
+
+  //   // const { data: clientGroupListData } = getClientGroup();
+  //   // getClientGroupBasedOnIdData("" + params.id);
+  //   // if (clientGroupBasedOnIdData) {
+  //   //   addClientGroupFormFields.searchClient.config.options,
+  //   //     (addClientGroupFormFields.searchClient.config.setData =
+  //   //       selectOptionsMaker(
+  //   //         clientGroupBasedOnIdData,
+  //   //         "clientId",
+  //   //         "clientName"
+  //   //       ));
+  //   // }
+  //   // if (clientGroupListData) {
+  //   //   addClientGroupFormFields.moveToClient.config.options = selectOptionsMaker(
+  //   //     Object.values(clientGroupListData),
+  //   //     "groupId",
+  //   //     "groupName"
+  //   //   );
+  //   // }
+  //   if (clientGroupDataSuccess) {
+  //     addClientGroupFormFields.clientGroupName.config.setData =
+  //       clientGroupData.groupName;
+  //     addClientGroupFormFields.showBOBDetails.config.setData =
+  //       clientGroupData.showBOBDetails;
+  //     addClientGroupFormFields.showBOIDetails.config.setData =
+  //       clientGroupData.showBOIDetails;
+  //     addClientGroupFormFields.showIOBDetails.config.setData =
+  //       clientGroupData.showIOBDetails;
+  //     addClientGroupFormFields.showSouthIndianBankDetails.config.setData =
+  //       clientGroupData.showSouthIndianBankDetails;
+  //     addClientGroupFormFields.showUnionBankDetails.config.setData =
+  //       clientGroupData.showUnionBankDetails;
+  //   }
+  // } else {
+  //   // useEffect(() => {
+  //   //   reset();
+  //   // }, []);
+  // }
+
+  const mapClientGroupDataToClientGroupForm = (
+    clientGroupData: ClientGroupType
+  ) => {
+    let clientFormData: Partial<ClientGroupFormType> = {
+      // clintGroupIdToMove?: number;
+      // clientIds: Array<any>;
+      groupName: clientGroupData.groupName,
+      showBOBDetails: clientGroupData.showBOBDetails,
+      showUnionBankDetails: clientGroupData.showUnionBankDetails,
+      showBOIDetails: clientGroupData.showBOIDetails,
+      showSouthIndianBankDetails: clientGroupData.showSouthIndianBankDetails,
+      showIOBDetails: clientGroupData.showIOBDetails,
+      showIDBIDetails: clientGroupData.showIDBIDetails,
+      showSBIDetails: clientGroupData.showSBIDetails,
+    };
+    return clientFormData;
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      if (clientGroupData && Object.values(clientGroupData).length > 0) {
+        console.log(mapClientGroupDataToClientGroupForm(clientGroupData));
+        setValue("showBOBDetails", true);
+        // reset(mapClientGroupDataToClientGroupForm(clientGroupData));
+      }
     }
-    if (clientGroupListData) {
-      addClientGroupFormFields.moveToClient.config.options = selectOptionsMaker(
-        Object.values(clientGroupListData),
-        "groupId",
-        "groupName"
-      );
-    }
-    if (clientGroupDataSuccess) {
-      addClientGroupFormFields.clientGroupName.config.setData =
-        clientGroupData.groupName;
-      addClientGroupFormFields.showBOBDetails.config.setData =
-        clientGroupData.showBOBDetails;
-      addClientGroupFormFields.showBOIDetails.config.setData =
-        clientGroupData.showBOIDetails;
-      addClientGroupFormFields.showIOBDetails.config.setData =
-        clientGroupData.showIOBDetails;
-      addClientGroupFormFields.showSouthIndianBankDetails.config.setData =
-        clientGroupData.showSouthIndianBankDetails;
-      addClientGroupFormFields.showUnionBankDetails.config.setData =
-        clientGroupData.showUnionBankDetails;
-    }
-  } else {
-    // useEffect(() => {
-    //   reset();
-    // }, []);
-  }
+  }, [params.id, clientGroupData]);
 
   const onSubmit = handleSubmit((clientGroupData): void => {
     let data: any = { ...clientGroupData };
-    if (params.id && clientGroupData) {
-      let ids = [];
-      let updateClientGroupObj = {
-        ...data,
-      };
-      if (data.clientIds.length > 0) {
-        ids = data.clientIds.map((data: any) => data.value);
-        updateClientGroupObj["clientIds"] = ids;
-      }
-      updateClientGroup({
-        id: +params.id,
-        ...updateClientGroupObj,
-        clintGroupIdToMove: data.clintGroupIdToMove.value,
-      });
-    } else {
-      addClientGroup(data);
-    }
+    console.log(data);
+
+    // if (params.id && clientGroupData) {
+    //   let ids = [];
+    //   let updateClientGroupObj = {
+    //     ...data,
+    //   };
+    //   if (data.clientIds.length > 0) {
+    //     ids = data.clientIds.map((data: any) => data.value);
+    //     updateClientGroupObj["clientIds"] = ids;
+    //   }
+    //   updateClientGroup({
+    //     id: +params.id,
+    //     ...updateClientGroupObj,
+    //     clintGroupIdToMove: data.clintGroupIdToMove.value,
+    //   });
+    // } else {
+    //   addClientGroup(data);
+    // }
   });
 
   return (
@@ -151,7 +188,7 @@ export const ClientGroupForm: React.FC = () => {
                   control={control}
                   config={addClientGroupFormFields.showBOBDetails}
                 />
-                {/* <NewCheckbox
+                <NewCheckbox
                   errors={errors}
                   register={register}
                   control={control}
@@ -174,7 +211,7 @@ export const ClientGroupForm: React.FC = () => {
                   register={register}
                   control={control}
                   config={addClientGroupFormFields.showUnionBankDetails}
-                /> */}
+                />
               </div>
             </div>
           </div>
