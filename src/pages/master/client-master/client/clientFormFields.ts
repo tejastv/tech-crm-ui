@@ -364,7 +364,7 @@ const clientName: FormFieldType = createFormConfig(
 );
 
 const clientGst: FormFieldType = createFormConfig(
-  "gstYN",
+  "gstyn",
   "GST",
   "radio",
   GSTClient,

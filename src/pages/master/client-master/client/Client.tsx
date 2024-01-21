@@ -248,10 +248,10 @@ export const Client: React.FC = () => {
       header: () => <>State Code N</>,
     },
     {
-      accessorFn: (row) => row.gstYN,
-      id: "gstYN",
+      accessorFn: (row) => row.gstyn,
+      id: "gstyn",
       cell: (info) => info.getValue(),
-      header: () => <>GSTYN</>,
+      header: () => <>gstyn</>,
     },
   ];
 
