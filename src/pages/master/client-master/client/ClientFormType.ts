@@ -42,7 +42,7 @@ export interface ClientFormType {
   adjustPerEnqPI: number;
   crDays: Options;
   gstn: string;
-  gstYN: string;
+  gstyn: string;
   billOnActualBuyer: string | boolean;
   autoSendOutstanding: string;
   locked: string;

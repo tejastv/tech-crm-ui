@@ -771,7 +771,7 @@ export const EnqPiForm: React.FC = () => {
           value: data.serviceTypeId,
         });
     }
-    if (countryData && clientData?.data?.clientId) {
+    if (clientData && clientData?.data?.clientId) {
       let data = clientData.data[enqData.clientId];
       data &&
         (enqFormData.clientId = {

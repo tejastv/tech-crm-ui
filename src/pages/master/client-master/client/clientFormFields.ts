@@ -364,7 +364,7 @@ const clientName: FormFieldType = createFormConfig(
 );
 
 const clientGst: FormFieldType = createFormConfig(
-  "gstYN",
+  "gstyn",
   "GST",
   "radio",
   GSTClient,
@@ -481,7 +481,7 @@ const crDay: FormFieldType = createFormConfig(
 );
 
 const billonactual: FormFieldType = createFormConfig(
-  "billONActualBuyer",
+  "billOnActualBuyer",
   "",
   "checkbox",
   billonactualValidation, //CrDayValidation,
